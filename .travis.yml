@@ -1,0 +1,85 @@
+# -*- coding: utf-8 -*-
+#
+# Copyright (C) 2019 CERN.
+# Copyright (C) 2019 Northwestern University.
+#
+# Invenio App RDM is free software; you can redistribute it and/or modify it
+# under the terms of the MIT License; see LICENSE file for more details.
+
+dist: trusty
+
+addons:
+  postgresql: 9.5
+
+notifications:
+  email: false
+
+sudo: false
+
+language: python
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - env: REQUIREMENTS=devel EXTRAS=all,postgresql,elasticsearch7 ES_URL=$ES7_DOWNLOAD_URL
+
+cache:
+  - pip
+
+services:
+  - postgresql
+  - redis
+
+env:
+  global:
+    - ES6_DOWNLOAD_URL="https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.8.2.tar.gz"
+    - ES7_DOWNLOAD_URL="https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.3.0-linux-x86_64.tar.gz"
+    - ES_HOST=127.0.0.1
+    - SQLALCHEMY_DATABASE_URI="postgresql+psycopg2://postgres@localhost:5432/invenio"
+  matrix:
+    - REQUIREMENTS=lowest EXTRAS=all,postgresql,elasticsearch6 ES_URL=$ES6_DOWNLOAD_URL
+    - REQUIREMENTS=release EXTRAS=all,postgresql,elasticsearch6 ES_URL=$ES6_DOWNLOAD_URL
+    - REQUIREMENTS=release EXTRAS=all,postgresql,elasticsearch7 ES_URL=$ES7_DOWNLOAD_URL DEPLOY=true
+    - REQUIREMENTS=devel EXTRAS=all,postgresql,elasticsearch6 ES_URL=$ES6_DOWNLOAD_URL
+    - REQUIREMENTS=devel EXTRAS=all,postgresql,elasticsearch7 ES_URL=$ES7_DOWNLOAD_URL
+
+python:
+  - "3.5"
+
+before_install:
+  - "mkdir /tmp/elasticsearch"
+  - "wget -O - $ES_URL | tar xz --directory=/tmp/elasticsearch --strip-components=1"
+  - "/tmp/elasticsearch/bin/elasticsearch > /tmp/local-es.log &"
+  - "travis_retry pip install --upgrade pip setuptools py"
+  - "travis_retry pip install twine wheel coveralls requirements-builder"
+  - "requirements-builder -e $EXTRAS --level=min setup.py > .travis-lowest-requirements.txt"
+  - "requirements-builder -e $EXTRAS --level=pypi setup.py > .travis-release-requirements.txt"
+  - "requirements-builder -e $EXTRAS --level=dev --req requirements-devel.txt setup.py > .travis-devel-requirements.txt"
+
+install:
+  - "travis_retry pip install -r .travis-${REQUIREMENTS}-requirements.txt"
+  - "travis_retry pip install -e .[all]"
+  - "pip freeze"
+
+before_script:
+  # Allow ES to start
+  - sleep 5
+  - curl http://127.0.0.1:9200 && echo "Elasticsearch is up!" || cat /tmp/local-es.log
+
+script:
+  - "./run-tests.sh"
+
+after_success:
+  - coveralls
+
+deploy:
+  provider: pypi
+  user: inveniosoftware
+  password:
+    secure: xd8nM7Uve/Q5dfs8jD8DlOlULfBKAXobHd1Fdd0PhdOeWOdb6Qgbm90cdyc9E6iBe4I6jURRcX4HmMZz+nP9O7e1OSer2EcpfUGtdhsGgeHfvzCak+adLc8TPGrYWItxNwoLAg0BuuA37jd9nHyQelNb2bB1Y3tEEAZQlFgYWHcU4Q3GgZRrgE0ys1Bx8eOozPJu6eFXkM4aee5mpS1TsIsXF3kYsyKBEwdeG0uKyX9TDQC92Yf4/2itJpd+u7YOcySp/AYJw7CN3BYiy/SLbOcEmh8eGTaBzPhIKTE4zE8SOAbGYjVS+884AAbChVfpdwGWSbiq3yXkFQinvdDjwBtWWc+npDx+1JqRKjvqmNfp71Zc/1ZRiS0QhV0x92n02Bz94dgvr10WE04fJ0Y3uKFOX9OfaqpfRmlCIRmltRshsasUtjEXVH+SBvofSIOtT/uQjA8foLikhtj6cmXO0tSy9/xHNcaoC8kemUdRvwFiNzP7c4tfT+DEd2jqeMUcwKudaJBr/I5Mh2JU13k1mlsiPM/PRanb3on6bx75xbVwRY/5FLZO8Hebj3RBrxnUo0jwDYwybgT9Cxp7geOrlPP+nU0G5+Lp5VzWH/2FNyMgQarzffcUtyUplzCbj5d7SCxlFCBHUxr+2XVGD2zRQUuZ0FyhvFQCMI2p5547eiY=
+  distributions: "compile_catalog sdist bdist_wheel"
+  on:
+    tags: true
+    python: "3.5"
+    repo: inveniosoftware/invenio-app-rdm
+    condition: $DEPLOY = true
