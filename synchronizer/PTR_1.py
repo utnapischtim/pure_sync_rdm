@@ -63,7 +63,7 @@ class pureToInvenio:
 
             self.cnt_resp = {}
 
-        print('\n\n-- -- Finito! -- --\n\n')
+        print('\n-- -- Finito -- --\n')
 
     #   ---         ---         ---
     def get_pure_by_id(self, uuid):
@@ -97,24 +97,33 @@ class pureToInvenio:
             
                                 # invenio field name                  # PURE json path
             self.add_field(item, 'title',                             ['title'])
+            self.add_field(item, 'publicationDatePure',               ['publicationStatuses', 0, 'publicationDate', 'year'])
+            self.add_field(item, 'createdDatePure',                   ['info', 'createdDate'])
+            self.add_field(item, 'modifiedDatePure',                  ['info', 'modifiedDate'])
             self.add_field(item, 'pureId',                            ['pureId'])                                                              
             self.add_field(item, 'uuid',                              ['uuid'])                                                                   
             self.add_field(item, 'type_p',                            ['types', 0, 'value'])                                                     
             self.add_field(item, 'category',                          ['categories', 0, 'value'])                                              
             self.add_field(item, 'peerReview',                        ['peerReview'])                                                         
-            self.add_field(item, 'publicationStatus',                 ['publicationStatuses', 0, 'publicationStatuses', 0, 'value'])     
-            self.add_field(item, 'publicationDate',                   ['publicationStatuses', 0, 'publicationDate', 'year'])            
-            self.add_field(item, 'language',                          ['languages', 0, 'value'])                                            
-            self.add_field(item, 'totalNumberOfAuthors',              ['totalNumberOfAuthors'])                             
-            self.add_field(item, 'managingOrganisationalUnit',        ['managingOrganisationalUnit', 'names', 0, 'value'])   
-            self.add_field(item, 'workflow',                          ['workflows', 0, 'value'])                                   
-            self.add_field(item, 'confidential',                      ['confidential'])                                                     
-            self.add_field(item, 'publisherName',                     ['publisher', 'names', 0, 'value'])                                  
+            self.add_field(item, 'publicationStatus',                 ['publicationStatuses', 0, 'publicationStatuses', 0, 'value'])
+            self.add_field(item, 'language',                          ['languages', 0, 'value'])
+            self.add_field(item, 'totalNumberOfAuthors',              ['totalNumberOfAuthors'])
+            self.add_field(item, 'managingOrganisationalUnit',        ['managingOrganisationalUnit', 'names', 0, 'value'])
+            self.add_field(item, 'workflow',                          ['workflows', 0, 'value'])
+            self.add_field(item, 'confidential',                      ['confidential'])
+            self.add_field(item, 'publisherName',                     ['publisher', 'names', 0, 'value'])
             self.add_field(item, 'accessType',                        ['openAccessPermissions', 0, 'value'])                                
             self.add_field(item, 'pages',                             ['info','pages'])                                                     
             self.add_field(item, 'volume',                            ['info','volume'])                                                         
             self.add_field(item, 'versionType',                       ['electronicVersions', 0, 'versionType', 'value'])                     
             self.add_field(item, 'licenseType',                       ['electronicVersions', 0, 'licenseType', 'value'])
+            self.add_field(item, 'journalTitle',                      ['info', 'journalAssociation', 'title', 'value'])
+            self.add_field(item, 'journalNumber',                     ['info', 'journalNumber'])
+            self.add_field(item, 'fileTitle',                         ['electronicVersions', ''])
+            self.add_field(item, 'fileSize',                          ['electronicVersions', ''])
+            self.add_field(item, 'fileURL',                           ['electronicVersions', ''])
+            self.add_field(item, 'fileAccessType',                    ['electronicVersions', ''])
+            self.add_field(item, 'fileVersion',                       ['electronicVersions', ''])
 
             # --- personAssociations ---
             if 'personAssociations' in item:

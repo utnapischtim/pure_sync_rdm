@@ -3,7 +3,7 @@
     "access_right": {
       "buckets": [
         {
-          "doc_count": 900, 
+          "doc_count": 60, 
           "key": "open"
         }
       ], 
@@ -19,2722 +19,11 @@
   "hits": {
     "hits": [
       {
-        "created": "2020-01-31T13:33:50.282546+00:00", 
-        "id": "zzd4m-s9d05", 
+        "created": "2020-02-03T07:35:34.783786+00:00", 
+        "id": "xgqh1-tfr35", 
         "links": {
-          "files": "https://localhost:5000/api/records/zzd4m-s9d05/files", 
-          "self": "https://localhost:5000/api/records/zzd4m-s9d05"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/3ec0744c-34f9-43ff-aa41-6f4d5af6fc21", 
-              "name": "Benigni, Helmut", 
-              "organisationalUnit": "Institute of Hydraulic Fluidmachinery (3170)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Institute of Hydraulic Fluidmachinery (3170)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/0d4708ea-6f87-4818-8557-8867852ba941", 
-              "name": "Institute of Hydraulic Fluidmachinery (3170)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "publicationDate": "2005", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1067540, 
-          "recid": "zzd4m-s9d05", 
-          "title": "Optimierung von hydraulischen Maschinen", 
-          "totalNumberOfAuthors": 1, 
-          "type_p": "Doctoral Thesis", 
-          "uuid": "7ca13133-37a4-42f4-9a67-2e212d025cb6", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:50.282557+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:48.683872+00:00", 
-        "id": "capzw-ver38", 
-        "links": {
-          "files": "https://localhost:5000/api/records/capzw-ver38/files", 
-          "self": "https://localhost:5000/api/records/capzw-ver38"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "name": "Flicker, Karlheinz", 
-              "organisationalUnit": "Institute of Biochemistry (6480)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/3fe6dfaa-6050-4fb5-948a-38788a4b4994", 
-              "name": "Pointner, Eva Maria", 
-              "organisationalUnit": "Institute of Biochemistry (6480)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/00c631b9-4b33-47bf-afb9-7e9a3a436c08", 
-              "name": "Gengenbacher, Martin", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/d4108734-ce90-4a1b-8945-9fc22bea4411", 
-              "name": "Kappes, Barbara", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/0cda6963-de79-4f7a-9c61-33f4cd4ed30d", 
-              "name": "Macheroux, Peter", 
-              "organisationalUnit": "Institute of Biochemistry (6480)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Biochemistry (6480)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/fb9be9af-1e7a-41c1-b2de-12b0089ed14d", 
-              "name": "Institute of Biochemistry (6480)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDate": "2004", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1067522, 
-          "recid": "capzw-ver38", 
-          "title": "Proteins of a novel vitamin B6 biosynthetic pathway", 
-          "totalNumberOfAuthors": 5, 
-          "type_p": "Poster", 
-          "uuid": "e989eebe-ecd1-4e72-b4b7-5718780ae748", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:48.683882+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:47.113699+00:00", 
-        "id": "1yyew-2z927", 
-        "links": {
-          "files": "https://localhost:5000/api/records/1yyew-2z927/files", 
-          "self": "https://localhost:5000/api/records/1yyew-2z927"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "Indeterminate", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f2697a11-8dde-40bb-b8ce-db264d87aa5d", 
-              "name": "Allmaier, Hannes", 
-              "organisationalUnit": "Virtual Vehicle Research Center (ViF) (98830)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/8619d5c5-862c-4801-8a83-f08e03a762ac", 
-              "name": "Sander, David Emanuel", 
-              "organisationalUnit": "Virtual Vehicle Research Center (ViF) (98830)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/80cf3122-cf92-461d-a3f3-faa649418f9e", 
-              "name": "Knauder, Christoph", 
-              "organisationalUnit": "Virtual Vehicle Research Center (ViF) (98830)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/1181f098-c772-492a-a921-3f1c35679158", 
-              "name": "Reich, Franz Markus", 
-              "organisationalUnit": "Virtual Vehicle Research Center (ViF) (98830)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Virtual Vehicle Research Center (ViF) (98830)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/f1d52104-18a3-483c-ba3a-2754e36b50bb", 
-              "name": "Virtual Vehicle Research Center (ViF) (98830)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDate": "2014", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1067499, 
-          "recid": "1yyew-2z927", 
-          "title": "Investigation of friction power losses in automotive journal bearings", 
-          "totalNumberOfAuthors": 4, 
-          "type_p": "Article", 
-          "uuid": "5db914a1-dcc0-4fc6-b668-c18bd3063cd2", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:47.113710+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:45.538408+00:00", 
-        "id": "kyt3s-td828", 
-        "links": {
-          "files": "https://localhost:5000/api/records/kyt3s-td828/files", 
-          "self": "https://localhost:5000/api/records/kyt3s-td828"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/626cd041-9847-4a78-8337-b2a125e5cf7f", 
-              "name": "Meile, Walter", 
-              "organisationalUnit": "Institute of Fluid Mechanics and Heat Transfer (3210)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f0240095-1921-4edc-8662-502daac5d222", 
-              "name": "Brenn, G\u00fcnter", 
-              "organisationalUnit": "Institute of Fluid Mechanics and Heat Transfer (3210)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Institute of Fluid Mechanics and Heat Transfer (3210)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/593818b6-e21d-4848-bc9c-a076384588ac", 
-              "name": "Institute of Fluid Mechanics and Heat Transfer (3210)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDate": "2005", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "publisherName": ".", 
-          "pureId": 1067471, 
-          "recid": "kyt3s-td828", 
-          "title": "Innovationen an Lackdrahtmaschinen zur Leistungssteigerung durch Str\u00f6mungsf\u00fchrung", 
-          "totalNumberOfAuthors": 2, 
-          "type_p": "Commissioned report", 
-          "uuid": "d04e3de7-48f3-4191-9e2c-a2c1011ae32a", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:45.538419+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:43.993171+00:00", 
-        "id": "jnqgs-6h895", 
-        "links": {
-          "files": "https://localhost:5000/api/records/jnqgs-6h895/files", 
-          "self": "https://localhost:5000/api/records/jnqgs-6h895"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/4c11aed7-ef70-4afb-bc14-678ccc3cb836", 
-              "name": "Svensson, Mats", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/95496f77-269a-4a8e-a8b2-0d8bf4a9620c", 
-              "name": "Carlsson, Anna", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/4ccdb4c7-7f09-421c-bb71-0852a3b1832a", 
-              "name": "Linder, Astrid", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/45f20d58-3b0c-41bc-8293-b25adaef446b", 
-              "name": "Schick, Sylvia", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/e8c45ca1-40af-42f2-bbe6-1d4e20ee7f2b", 
-              "name": "Hell, Wolfram", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/debb1e91-74c1-465d-b74a-aa4083d1f796", 
-              "name": "Gales, Nathalie", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/022e0f24-3ef6-49f5-b594-c54b6fcd3885", 
-              "name": "Kullgren, Anders", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/197e40aa-f8d1-4adc-a654-9af8370451b3", 
-              "name": "Tomasch, Ernst", 
-              "organisationalUnit": "Vehicle Safety Institute (3330)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Vehicle Safety Institute (3330)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/24e3a479-e4f1-4882-8298-8c1966e3239f", 
-              "name": "Vehicle Safety Institute (3330)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDate": "2012", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "publisherName": ".", 
-          "pureId": 1067440, 
-          "recid": "jnqgs-6h895", 
-          "title": "Preliminary Report Biological Test", 
-          "totalNumberOfAuthors": 8, 
-          "type_p": "Other report", 
-          "uuid": "3e2ecbba-a7c6-42f0-b09f-176b517c1dad", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:43.993180+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:42.444116+00:00", 
-        "id": "61685-4t513", 
-        "links": {
-          "files": "https://localhost:5000/api/records/61685-4t513/files", 
-          "self": "https://localhost:5000/api/records/61685-4t513"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/14264670-bbd7-4eea-ba4b-4733db3b57e8", 
-              "name": "Mollay, B.", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "name": "Besenhard, J\u00fcrgen", 
-              "organisationalUnit": "Institute for Chemistry and Technology of Materials (6380)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/45d6fb07-5668-4847-8e3f-02c9def014ea", 
-              "name": "Fafilek, G\u00fcnther", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/04184eb5-0868-4556-88ef-23cc5e6f912a", 
-              "name": "Kronberger, Hermann", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/6f8b601c-0524-4247-b9a8-a7c316962485", 
-              "name": "Nauer, Gerhard", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Chemistry and Technology of Inorganic Materials (6370)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/c6f1f168-8b91-403a-afdc-8fae31d3125e", 
-              "name": "Institute for Chemistry and Technology of Materials (6380)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDate": "2005", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "publisherName": "Gesellschaft Deutscher Chemiker", 
-          "pureId": 1067409, 
-          "recid": "61685-4t513", 
-          "title": "Modeling of electrode processes", 
-          "totalNumberOfAuthors": 5, 
-          "type_p": "Chapter", 
-          "uuid": "cf1c28b1-9593-4405-a654-1e009de60a80", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:42.444125+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:40.857274+00:00", 
-        "id": "zqsmz-s3917", 
-        "links": {
-          "files": "https://localhost:5000/api/records/zqsmz-s3917/files", 
-          "self": "https://localhost:5000/api/records/zqsmz-s3917"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/bcc040bd-c417-4f56-a514-23f0c50c7a2c", 
-              "name": "Heuberger, Clemens", 
-              "organisationalUnit": "Institute of Discrete Mathematics (5050)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Optimization and Discrete Mathematics (Math B) (5020)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/15d662f6-ed41-4498-bed0-8351c5267cc7", 
-              "name": "Institute of Discrete Mathematics (5050)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "publicationDate": "2001", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1067230, 
-          "recid": "zqsmz-s3917", 
-          "title": "Graphen und Minimale Ziffernentwicklungen", 
-          "totalNumberOfAuthors": 1, 
-          "type_p": "Habilitation", 
-          "uuid": "2658cd09-b9ec-42e4-9e31-ef4f1df0825f", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:40.857284+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:39.248383+00:00", 
-        "id": "vdcp3-96v44", 
-        "links": {
-          "files": "https://localhost:5000/api/records/vdcp3-96v44/files", 
-          "self": "https://localhost:5000/api/records/vdcp3-96v44"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/5afdc293-fc80-4891-a5bd-58fbf34b9a53", 
-              "name": "Habersack, Helmut", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/5e53db46-24eb-421f-9d68-74d30b2b46ec", 
-              "name": "Bogner, Konrad", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/7e3bf3c3-adc7-46e1-8899-91a9109b1b62", 
-              "name": "Schneider, Josef", 
-              "organisationalUnit": "Institute of Hydraulic Engineering and Water Resources Management (2130)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/74d352db-9847-45be-839d-2eaa02c46180", 
-              "name": "Brauner, Michael", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Hydraulic Engineering and Water Resources Management (2130)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/44910890-f7b4-465c-9d69-f0d050a06680", 
-              "name": "Institute of Hydraulic Engineering and Water Resources Management (2130)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDate": "2000", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1067192, 
-          "recid": "vdcp3-96v44", 
-          "title": "Catchment-Wide Analysis of the Sediment Regime with Respect to Reservoir Sedimentation", 
-          "totalNumberOfAuthors": 4, 
-          "type_p": "Article", 
-          "uuid": "2c5826ac-678b-4d8f-aa50-0a1243b722fb", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:39.248392+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:37.657398+00:00", 
-        "id": "1fkpr-yp448", 
-        "links": {
-          "files": "https://localhost:5000/api/records/1fkpr-yp448/files", 
-          "self": "https://localhost:5000/api/records/1fkpr-yp448"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/20e31eac-11dd-43bb-b098-60129e9c74cc", 
-              "name": "Samanidou, Victoria", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/6574bd14-4708-4762-b5b4-b44f9f67e3e9", 
-              "name": "Evaggelopoulou, Evaggelia", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "name": "Tr\u00f6tzm\u00fcller, Martin", 
-              "organisationalUnit": "Institute of Analytical Chemistry and Food Chemistry (6450)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/2dd34fe2-cc53-457d-95ab-c76d2c6361c5", 
-              "name": "Guo, Xinghua", 
-              "organisationalUnit": "Institute of Analytical Chemistry and Food Chemistry (6450)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/16457fc9-9529-4624-924d-a8d4b23ee689", 
-              "name": "Lankmayr, Ernst", 
-              "organisationalUnit": "Institute of Analytical Chemistry and Food Chemistry (6450)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Analytical Chemistry and Food Chemistry (6450)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/95389b7a-4be9-4f64-8491-0dd9b3e5f041", 
-              "name": "Institute of Analytical Chemistry and Food Chemistry (6450)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDate": "2008", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1067162, 
-          "recid": "1fkpr-yp448", 
-          "title": "Multi-residue determination of seven quinolones antibiotics in gilthead seabream using liquid chromatography\u2013tandem mass spectrometry", 
-          "totalNumberOfAuthors": 5, 
-          "type_p": "Article", 
-          "uuid": "7d61f516-b58a-45fb-ac46-18ad72f5273c", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:37.657406+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:36.056455+00:00", 
-        "id": "mfh6z-jhd40", 
-        "links": {
-          "files": "https://localhost:5000/api/records/mfh6z-jhd40/files", 
-          "self": "https://localhost:5000/api/records/mfh6z-jhd40"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/706c8ade-74ad-45e9-acc0-6a5b4b4afa7d", 
-              "name": "Zenz, Gerald", 
-              "organisationalUnit": "Institute of Hydraulic Engineering and Water Resources Management (2130)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/db5e60ad-8306-4977-96f9-b8218ec633d7", 
-              "name": "Dorfmann, Clemens", 
-              "organisationalUnit": "Institute of Hydraulic Engineering and Water Resources Management (2130)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/e82e0068-7a8c-4351-9c8e-7e27247ab7f1", 
-              "name": "Knoll, Michael", 
-              "organisationalUnit": "Institute of Hydraulic Engineering and Water Resources Management (2130)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/94c76bf6-19fc-4815-949b-8b9c307598e4", 
-              "name": "Gegenleithner, Sebastian", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }
-          ], 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Institute of Hydraulic Engineering and Water Resources Management (2130)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/44910890-f7b4-465c-9d69-f0d050a06680", 
-              "name": "Institute of Hydraulic Engineering and Water Resources Management (2130)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDate": "2015", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "publisherName": "Eigenverlag", 
-          "pureId": 1067110, 
-          "recid": "mfh6z-jhd40", 
-          "title": "Ausgiessversuch - Monitoring Plabutschtunnel", 
-          "totalNumberOfAuthors": 4, 
-          "type_p": "Commissioned report", 
-          "uuid": "adcd5d78-fffe-40de-8e2d-b408bc5f4a56", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:36.056470+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:34.395514+00:00", 
-        "id": "x9cd6-qj110", 
-        "links": {
-          "files": "https://localhost:5000/api/records/x9cd6-qj110/files", 
-          "self": "https://localhost:5000/api/records/x9cd6-qj110"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/9658f98d-61a0-4764-a887-56e68b7fbdd2", 
-              "name": "Dransfeld, Alk", 
-              "organisationalUnit": "Institute of Inorganic Chemistry (6330)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/e218e5d4-6ef7-4416-a005-9aeb1ea792b9", 
-              "name": "Flock, Michaela", 
-              "organisationalUnit": "Institute of Inorganic Chemistry (6330)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Inorganic Chemistry (6330)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/b40fb8ca-1608-4e0e-9caa-cf0e95d28e13", 
-              "name": "Institute of Inorganic Chemistry (6330)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDate": "2002", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1067086, 
-          "recid": "x9cd6-qj110", 
-          "title": "Effect of organosilicon substituents on tricoordinate phosphorus in rings and cages", 
-          "totalNumberOfAuthors": 2, 
-          "type_p": "Poster", 
-          "uuid": "ea98cbe6-16a5-49c6-903f-c227b90bd085", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:34.395532+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:32.773360+00:00", 
-        "id": "5y6p9-97x52", 
-        "links": {
-          "files": "https://localhost:5000/api/records/5y6p9-97x52/files", 
-          "self": "https://localhost:5000/api/records/5y6p9-97x52"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "Open", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "name": "Fr\u00f6hlich, Christian", 
-              "organisationalUnit": "Institute of Architecture and Media (1610)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Institute of Architecture and Media (1610)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/ea5549cd-4797-41a9-827e-ce751c6f6038", 
-              "name": "Institute of Architecture and Media (1610)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDate": "2007", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "publisherName": ".", 
-          "pureId": 1067058, 
-          "recid": "5y6p9-97x52", 
-          "title": "Top Down", 
-          "totalNumberOfAuthors": 1, 
-          "type_p": "Chapter", 
-          "uuid": "6abd8949-639e-4768-a879-959d76a719bc", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:32.773367+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:31.257978+00:00", 
-        "id": "enhxq-63f35", 
-        "links": {
-          "files": "https://localhost:5000/api/records/enhxq-63f35/files", 
-          "self": "https://localhost:5000/api/records/enhxq-63f35"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/405171cd-53fb-4612-be07-8dbdba1976f1", 
-              "name": "Forche, G\u00fcnther", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/740c0102-f912-4b9f-b7e5-30a2b43ddbf2", 
-              "name": "Stadlober, Ernst", 
-              "organisationalUnit": "Institute of Statistics (5060)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/4bf62b7b-e65d-466c-a8bc-04a5d191c5fb", 
-              "name": "Harnoncourt, Karl", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }
-          ], 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Institute of Statistics (5060)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/2c006066-78c7-4c19-a286-d6b513458000", 
-              "name": "Institute of Statistics (5060)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDate": "1988", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1067043, 
-          "recid": "enhxq-63f35", 
-          "title": "Neue spirometrische Bezugswerte f\u00fcr Kinder, Jugendliche und Erwachsene", 
-          "totalNumberOfAuthors": 3, 
-          "type_p": "Article", 
-          "uuid": "12bdb12c-538d-42ab-81dd-4da8e6f0c4f1", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:31.258014+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:29.705348+00:00", 
-        "id": "d6kxz-0tt80", 
-        "links": {
-          "files": "https://localhost:5000/api/records/d6kxz-0tt80/files", 
-          "self": "https://localhost:5000/api/records/d6kxz-0tt80"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "name": "Altenstrasser, Harald", 
-              "organisationalUnit": "Institute of Automation and Control (4430)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/ffd63454-fd5d-42d2-8c49-9d78b4b7edbc", 
-              "name": "Bittermann, Andreas", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/57b26ef5-bd97-4494-a66d-6155d97bf232", 
-              "name": "Ebner, Thomas", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/f22133dc-efa1-44a4-813f-2f3e8ba3bcda", 
-              "name": "Gschweitl, Kurt", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/1cd013e9-417a-49a5-aef2-81cc859859b8", 
-              "name": "K\u00f6geler, Hans-Michael", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/4ed68bf4-86fd-4696-89a3-ba032ba7aefb", 
-              "name": "Kranawetter, Erwin", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/de1ff1cc-ca03-4512-a69b-03a512267828", 
-              "name": "Krenn, Johann", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/f01da000-2457-49f3-8991-b973f1dc7512", 
-              "name": "Ladein, Bernhard", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }
-          ], 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Institute of Automation and Control (4430)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/877c7fb4-1f50-4207-ada4-5f3a49e4ae15", 
-              "name": "Institute of Automation and Control (4430)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDate": "2004", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1067005, 
-          "recid": "d6kxz-0tt80", 
-          "title": "Emissionsauslegung des dieselmotorischen Fahrzeugantriebs mittels DoE und Simulationsrechnung", 
-          "totalNumberOfAuthors": 8, 
-          "type_p": "Article", 
-          "uuid": "8eacb676-6a62-4a70-bde4-4c618eaaf2a0", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:29.705355+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:28.196321+00:00", 
-        "id": "w5qye-qkp18", 
-        "links": {
-          "files": "https://localhost:5000/api/records/w5qye-qkp18/files", 
-          "self": "https://localhost:5000/api/records/w5qye-qkp18"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "Open", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "name": "Rath, Christof", 
-              "organisationalUnit": "Institute of Applied Information Processing and Communications (7050)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Applied Information Processing and Communications (7050)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/77857978-adc4-4d9d-877c-1283cbd9199f", 
-              "name": "Institute of Applied Information Processing and Communications (7050)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "publicationDate": "2010", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1066952, 
-          "recid": "w5qye-qkp18", 
-          "title": "Self-localization of a biped robot in the RoboCup Standard Platform League domain", 
-          "totalNumberOfAuthors": 1, 
-          "type_p": "Master's Thesis", 
-          "uuid": "4bacc992-90dd-4d7e-9bf7-1093ac9dc6a4", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:28.196331+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:26.677622+00:00", 
-        "id": "g83hp-7ey09", 
-        "links": {
-          "files": "https://localhost:5000/api/records/g83hp-7ey09/files", 
-          "self": "https://localhost:5000/api/records/g83hp-7ey09"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "name": "St\u00f6hr, Thomas", 
-              "organisationalUnit": "Institute of Logistics Engineering (3090)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Institute of Logistics Engineering (3090)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/b21f8c78-37bd-444b-a677-56a0e6dd0400", 
-              "name": "Institute of Logistics Engineering (3090)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "publicationDate": "2014", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1066941, 
-          "recid": "g83hp-7ey09", 
-          "title": "Optimierte Packordnung modularer Boxen", 
-          "totalNumberOfAuthors": 1, 
-          "type_p": "Diploma Thesis", 
-          "uuid": "863f07c4-18be-4c61-ab2a-90ae71924e83", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:26.677630+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:25.147295+00:00", 
-        "id": "asyew-sqs44", 
-        "links": {
-          "files": "https://localhost:5000/api/records/asyew-sqs44/files", 
-          "self": "https://localhost:5000/api/records/asyew-sqs44"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "name": "Wohlmuth, Dominik", 
-              "organisationalUnit": "Institute for Chemistry and Technology of Materials (6380)", 
-              "personRole": "Author"
-            }, 
-            {
-              "name": "Epp, Viktor", 
-              "organisationalUnit": "Institute for Chemistry and Technology of Materials (6380)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/6234e741-b32a-4081-8ba4-9643fa5f61f3", 
-              "name": "Wilkening, Martin", 
-              "organisationalUnit": "Institute for Chemistry and Technology of Materials (6380)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute for Chemistry and Technology of Materials (6380)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/c6f1f168-8b91-403a-afdc-8fae31d3125e", 
-              "name": "Institute for Chemistry and Technology of Materials (6380)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDate": "2013", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1066916, 
-          "recid": "asyew-sqs44", 
-          "title": "Li ION DYNAMICS IN ISOTOPE-DILUTED GLASSY Li2Si3O7 \u2015 THE GENERATION OF PURE SPIN-3/2 JEENER-BROEKAERT NMR ECHOES", 
-          "totalNumberOfAuthors": 3, 
-          "type_p": "Poster", 
-          "uuid": "753f9dc3-19e9-4fd9-9021-ad66fc8f9c69", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:25.147302+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:23.608957+00:00", 
-        "id": "yfbqz-9vc44", 
-        "links": {
-          "files": "https://localhost:5000/api/records/yfbqz-9vc44/files", 
-          "self": "https://localhost:5000/api/records/yfbqz-9vc44"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "name": "Emso, Sanid", 
-              "organisationalUnit": "Vehicle Safety Institute (3330)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/f54f2984-fc80-4447-b69f-f39b3b545302", 
-              "name": "Stuhlbacher, Franz", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/4fcb77ea-45ce-4ea2-bee6-66d2d41eb585", 
-              "name": "Mayrhofer, Erich", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/5b0c7f62-a2fa-49ca-916b-d9fdc4034056", 
-              "name": "Siwek, Richard", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Vehicle Safety Institute (3330)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/24e3a479-e4f1-4882-8298-8c1966e3239f", 
-              "name": "Vehicle Safety Institute (3330)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDate": "2005", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "publisherName": ".", 
-          "pureId": 1066883, 
-          "recid": "yfbqz-9vc44", 
-          "title": "Progress Report 3", 
-          "totalNumberOfAuthors": 4, 
-          "type_p": "Commissioned report", 
-          "uuid": "82a8a6db-bacd-4ebd-9e6e-4594721bb0cd", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:23.608969+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:22.121737+00:00", 
-        "id": "4cwey-apw60", 
-        "links": {
-          "files": "https://localhost:5000/api/records/4cwey-apw60/files", 
-          "self": "https://localhost:5000/api/records/4cwey-apw60"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/e2e85efc-6f33-417c-8674-c64de7b14378", 
-              "name": "Stelter, M.", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f0240095-1921-4edc-8662-502daac5d222", 
-              "name": "Brenn, G\u00fcnter", 
-              "organisationalUnit": "Institute of Fluid Mechanics and Heat Transfer (3210)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Institute of Fluid Mechanics and Heat Transfer (3210)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/593818b6-e21d-4848-bc9c-a076384588ac", 
-              "name": "Institute of Fluid Mechanics and Heat Transfer (3210)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDate": "2001", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1066823, 
-          "recid": "4cwey-apw60", 
-          "title": "Verfahren zur dehnrheometrischen Untersuchung viskoelastischer Fl\u00fcssigkeiten", 
-          "totalNumberOfAuthors": 2, 
-          "type_p": "Article", 
-          "uuid": "4774e120-53b5-49ea-b0ec-b25fd44dcc7a", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:22.121746+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:20.625049+00:00", 
-        "id": "5jq3n-q2437", 
-        "links": {
-          "files": "https://localhost:5000/api/records/5jq3n-q2437/files", 
-          "self": "https://localhost:5000/api/records/5jq3n-q2437"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/2e935ee3-36d1-4981-a8c7-d3fe243bcb88", 
-              "name": "Holzinger, Andreas", 
-              "organisationalUnit": "Institute of Interactive Systems and Data Science (7060)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Institute of Interactive Systems and Data Science (7060)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/5a3f13f5-2fdf-48d7-a4ee-d6faaf8aa934", 
-              "name": "Institute of Interactive Systems and Data Science (7060)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "publicationDate": "1997", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1066809, 
-          "recid": "5jq3n-q2437", 
-          "title": "Development of the Problem Solving Behavior in Physics Education. A sectional and longitudinal study in Thermodynamics", 
-          "totalNumberOfAuthors": 1, 
-          "type_p": "Doctoral Thesis", 
-          "uuid": "c3a64f8b-d39d-48ba-ac6f-d4b9f728c69e", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:20.625058+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:19.114987+00:00", 
-        "id": "74htg-6am88", 
-        "links": {
-          "files": "https://localhost:5000/api/records/74htg-6am88/files", 
-          "self": "https://localhost:5000/api/records/74htg-6am88"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/3042fa65-8449-44d9-911a-d06f77ecf923", 
-              "name": "Zirkl, Martin", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/01d97c54-048f-47be-8160-f6202c2edbd1", 
-              "name": "Haase, Anja", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/a98dddc5-6a21-472f-acf9-48508bda590b", 
-              "name": "Fian, Alexander", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/cc499248-9a2d-4269-a16e-80fd20df8370", 
-              "name": "Sch\u00f6n, Helmut", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/ba8f673f-5b29-407e-b5ce-82d773dbbb20", 
-              "name": "Sommer, Christian", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/446f0e1b-166f-4444-bb32-c387120c4c23", 
-              "name": "Jakopic, Georg", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/6a7e1c0f-4ff2-4ad0-9194-be7da67fc462", 
-              "name": "Leising, G\u00fcnther", 
-              "organisationalUnit": "Institute of Solid State Physics (5130)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/e3936809-1855-4034-b1a0-6c69471a4e1e", 
-              "name": "Stadlober, Barbara", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/be8daebc-19d4-45de-9448-176a86024c08", 
-              "name": "Graz, Ingrid", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/f90ae88f-a512-4872-8b48-ea62a50dcf78", 
-              "name": "Gaar, Norbert", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/f5f047f4-1f4a-4af5-927b-f4ed007cb034", 
-              "name": "Schw\u00f6diauer, Reinhard", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/460999b8-2d25-4e42-971e-8dca5e57c055", 
-              "name": "Bauer-Gononea, Simona", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/c60e3c30-631b-4474-b772-66cca1e4c649", 
-              "name": "Bauer, Siegfried", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Solid State Physics (5130)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/6e579a90-2f2e-47eb-b7a0-054dd2be6623", 
-              "name": "Institute of Solid State Physics (5130)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDate": "2007", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1066773, 
-          "recid": "74htg-6am88", 
-          "title": "Low-Voltage Organic Thin-Film Transistors with High-k Nanocomposite Gate Dielectrics for Flexible Electronics and Optothermal Sensors", 
-          "totalNumberOfAuthors": 13, 
-          "type_p": "Article", 
-          "uuid": "a1aa0be9-e106-487f-a3a0-756795575237", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:19.114996+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:17.623519+00:00", 
-        "id": "a9heq-m6w27", 
-        "links": {
-          "files": "https://localhost:5000/api/records/a9heq-m6w27/files", 
-          "self": "https://localhost:5000/api/records/a9heq-m6w27"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "name": "Voura, Christine", 
-              "organisationalUnit": "Research Center Pharmaceutical Engineering (RCPE) (98888)", 
-              "personRole": "Author"
-            }, 
-            {
-              "name": "Posch, Andreas", 
-              "organisationalUnit": "Research Center Pharmaceutical Engineering (RCPE) (98888)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/0305903f-427f-4793-874b-441fdcbd52d0", 
-              "name": "H\u00f6rl, Gudrun", 
-              "organisationalUnit": "Research Center Pharmaceutical Engineering (RCPE) (98888)", 
-              "personRole": "Author"
-            }, 
-            {
-              "name": "Koller, Daniel", 
-              "organisationalUnit": "Research Center Pharmaceutical Engineering (RCPE) (98888)", 
-              "personRole": "Author"
-            }, 
-            {
-              "name": "Fraser, Simon", 
-              "organisationalUnit": "Research Center Pharmaceutical Engineering (RCPE) (98888)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/3d9b2b78-cf2e-4bc0-a484-010f14c82040", 
-              "name": "Reiter, Franz", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/0670e4bc-0ffb-4482-8fc9-84b3b7b6e3dd", 
-              "name": "Walter, Tritthart", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/895abe4f-50d8-46dc-99b9-ec6284b22f29", 
-              "name": "Khinast, Johannes", 
-              "organisationalUnit": "Research Center Pharmaceutical Engineering (RCPE) (98888)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Research Center Pharmaceutical Engineering (RCPE) (98888)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/12b0acd3-052b-464d-9d92-7aed54a0c297", 
-              "name": "Research Center Pharmaceutical Engineering (RCPE) (98888)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDate": "2009", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1066709, 
-          "recid": "a9heq-m6w27", 
-          "title": "Robust monitoring of pharmaceutical manufacturing operations based on combined NIR and Raman spectroscopy", 
-          "totalNumberOfAuthors": 8, 
-          "type_p": "Poster", 
-          "uuid": "2a02291e-455f-4b33-bf6b-e4d178443bca", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:17.623526+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:16.145429+00:00", 
-        "id": "gb51g-dzt06", 
-        "links": {
-          "files": "https://localhost:5000/api/records/gb51g-dzt06/files", 
-          "self": "https://localhost:5000/api/records/gb51g-dzt06"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "name": "Wru\u00df, Elisabeth", 
-              "organisationalUnit": "Institute of Solid State Physics (5130)", 
-              "personRole": "Author"
-            }, 
-            {
-              "name": "Egger, David", 
-              "organisationalUnit": "Institute of Solid State Physics (5130)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/9e770579-c443-4e5d-a536-1462aed4b67c", 
-              "name": "Huang, Yuli", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/b0fafe63-81a8-482b-b255-3debc806ce1d", 
-              "name": "Saidi, Wissam A.", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/da33e24b-c4d4-4690-a22e-8b2711009678", 
-              "name": "Bucko, Tomas", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/73b0becb-47cf-4bd1-b706-73d9b55b858c", 
-              "name": "Kera, Satoshi", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/212ac50f-508e-4be4-9505-1fb0b457e852", 
-              "name": "Zojer, Egbert", 
-              "organisationalUnit": "Institute of Solid State Physics (5130)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Solid State Physics (5130)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/6e579a90-2f2e-47eb-b7a0-054dd2be6623", 
-              "name": "Institute of Solid State Physics (5130)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDate": "2013", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1066703, 
-          "recid": "gb51g-dzt06", 
-          "title": "Investigating the influence of van der Waals interactions on the adsorption of flat-lying molecules on metallic surfaces", 
-          "totalNumberOfAuthors": 7, 
-          "type_p": "Poster", 
-          "uuid": "6149f910-cdec-4a6d-9712-63c2cf141aea", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:16.145435+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:14.644390+00:00", 
-        "id": "ae5w9-hdn33", 
-        "links": {
-          "files": "https://localhost:5000/api/records/ae5w9-hdn33/files", 
-          "self": "https://localhost:5000/api/records/ae5w9-hdn33"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/ddf0139b-4fde-4978-93e3-2e69e31a034a", 
-              "name": "Winkler, Margit", 
-              "organisationalUnit": "Institute of Organic Chemistry (6410)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/da6bea57-1233-4630-95aa-4df53c38cef7", 
-              "name": "Kulterer, Martin R.", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/720c8844-288c-4051-9d79-6b70d06064cf", 
-              "name": "Stickler, Benjamin", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/a12d2605-2152-49ab-b24c-6a9874c4ac43", 
-              "name": "Klempier, Norbert", 
-              "organisationalUnit": "Institute of Organic Chemistry (6410)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Organic Chemistry (6410)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/ccd1e5d0-9ee0-45fd-a0c0-1c685b44dcb4", 
-              "name": "Institute of Organic Chemistry (6410)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDate": "2007", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1066600, 
-          "recid": "ae5w9-hdn33", 
-          "title": "Nitrilase catalyzes key step to gamma-amino acids in high optical purity", 
-          "totalNumberOfAuthors": 4, 
-          "type_p": "Poster", 
-          "uuid": "6cca2b60-2cca-4a2b-9a06-7d76cbb9ab4f", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:14.644398+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:13.053980+00:00", 
-        "id": "7xzfy-vvx89", 
-        "links": {
-          "files": "https://localhost:5000/api/records/7xzfy-vvx89/files", 
-          "self": "https://localhost:5000/api/records/7xzfy-vvx89"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/e5744f4b-e085-4398-a13e-7c3cc9d86d3a", 
-              "name": "Hermetter, Albin", 
-              "organisationalUnit": "Institute of Biochemistry (6480)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Biochemistry (6480)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/fb9be9af-1e7a-41c1-b2de-12b0089ed14d", 
-              "name": "Institute of Biochemistry (6480)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDate": "2010", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1066533, 
-          "recid": "7xzfy-vvx89", 
-          "title": "Apoptotic signalling of oxidized phospholipids in cultured macrophages: Role of sphingolipid metabolizing enzymes", 
-          "totalNumberOfAuthors": 1, 
-          "type_p": "Poster", 
-          "uuid": "c89f658b-a942-4b36-aba7-f36487c87dbb", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:13.053996+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:11.448989+00:00", 
-        "id": "qxs11-beh39", 
-        "links": {
-          "files": "https://localhost:5000/api/records/qxs11-beh39/files", 
-          "self": "https://localhost:5000/api/records/qxs11-beh39"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/8e9c98df-ece8-4168-a7e7-829af1c85ff6", 
-              "name": "Wascher, T. .C.", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/1a51ad9c-620b-413f-9f6b-9ecb334c775c", 
-              "name": "Bammer, R.", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/455d47d5-1dcc-4238-9780-ae5ebafdad68", 
-              "name": "Stollberger, Rudolf", 
-              "organisationalUnit": "Institute of Medical Engineering (7170)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/17af9c96-f08b-440c-8659-564419d440a7", 
-              "name": "Bahadori, B.", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/d80d7b64-7932-4ace-8656-f99ad61cb368", 
-              "name": "Wallner, S.", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/fe40c644-7c1b-4dee-8f75-630e8bf40200", 
-              "name": "Toplak, H.", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Medical Engineering (7170)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/1638005f-8cbc-4c2a-83e7-af30e8d30d72", 
-              "name": "Institute of Medical Engineering (7170)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDate": "1998", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1066531, 
-          "recid": "qxs11-beh39", 
-          "title": "Forearm composition contributes to differences in reactive hyperaemia between healthy men and women.", 
-          "totalNumberOfAuthors": 6, 
-          "type_p": "Article", 
-          "uuid": "958f54b3-12f1-46cc-bf25-2b00e46c7347", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:11.449006+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:09.881721+00:00", 
-        "id": "atr01-3zz26", 
-        "links": {
-          "files": "https://localhost:5000/api/records/atr01-3zz26/files", 
-          "self": "https://localhost:5000/api/records/atr01-3zz26"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "name": "Achleitner, Georg", 
-              "organisationalUnit": "Institute of Electrical Power Systems (4320)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/b6fe38d5-7328-4a13-929d-65d9336a168c", 
-              "name": "Fickert, Lothar", 
-              "organisationalUnit": "Institute of Electrical Power Systems (4320)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/d084a168-b445-4e2f-befd-8f68561afad9", 
-              "name": "Obkircher, Clemens", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/55bdd54d-59cb-4b0e-9fb4-5599bf4b4547", 
-              "name": "Sakulin, Manfred", 
-              "organisationalUnit": "Institute of Electrical Power Systems (4320)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Electrical Power Systems (4320)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/7be2cb0d-6b22-438e-a31d-44f3fdaab66e", 
-              "name": "Institute of Electrical Power Systems (4320)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDate": "2009", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1066494, 
-          "recid": "atr01-3zz26", 
-          "title": "EARTH FAULT DISTANCE PROTECTION", 
-          "totalNumberOfAuthors": 4, 
-          "type_p": "Poster", 
-          "uuid": "9a3fcf68-00dd-4f9f-be66-6de66d6de104", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:09.881734+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:08.389785+00:00", 
-        "id": "pp0zy-yfz08", 
-        "links": {
-          "files": "https://localhost:5000/api/records/pp0zy-yfz08/files", 
-          "self": "https://localhost:5000/api/records/pp0zy-yfz08"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "name": "Franzen, Brigitte", 
-              "organisationalUnit": "Institute of Architectural Theory, Art History and Cultural Studies (1430)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Institute of Architectural Theory, Art History and Cultural Studies (1430)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/27dada06-a086-4da6-a4ad-96b650d5c9b8", 
-              "name": "Institute of Architectural Theory, Art History and Cultural Studies (1430)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDate": "1993", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "publisherName": "Jonas", 
-          "pureId": 1066476, 
-          "recid": "pp0zy-yfz08", 
-          "title": "Die Siedlung Dammerstock in Karlsruhe 1929. Zur Vermittlung des Neuen Bauens", 
-          "totalNumberOfAuthors": 1, 
-          "type_p": "Book", 
-          "uuid": "55b196e7-90d6-4085-b2a4-6b2361f81976", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:08.389793+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:06.860781+00:00", 
-        "id": "pn9f9-nsc64", 
-        "links": {
-          "files": "https://localhost:5000/api/records/pn9f9-nsc64/files", 
-          "self": "https://localhost:5000/api/records/pn9f9-nsc64"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/3160820a-b575-4077-a942-dc88e837966a", 
-              "name": "Tschuchnigg, Franz", 
-              "organisationalUnit": "Institute of Soil Mechanics, Foundation Engineering and Computational Geotechnics (2170)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Institute of Soil Mechanics, Foundation Engineering and Computational Geotechnics (2170)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/1088d0f5-7866-47f3-a081-f1de98ff9fcb", 
-              "name": "Institute of Soil Mechanics, Foundation Engineering and Computational Geotechnics (2170)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "publicationDate": "2006", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1066427, 
-          "recid": "pn9f9-nsc64", 
-          "title": "3D FE-Berechnungen einer Plattengr\u00fcndung auf R\u00fcttelstopfverdichtung", 
-          "totalNumberOfAuthors": 1, 
-          "type_p": "Diploma Thesis", 
-          "uuid": "056ff12e-8552-465f-98fe-8c8e5e093d8c", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:06.860789+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:05.311119+00:00", 
-        "id": "4d2hp-7e851", 
-        "links": {
-          "files": "https://localhost:5000/api/records/4d2hp-7e851/files", 
-          "self": "https://localhost:5000/api/records/4d2hp-7e851"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "Open", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "name": "Mayrhofer, Reinhard", 
-              "organisationalUnit": "Working Group Navigation (5221)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Working Group Navigation (5221)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/5f00613a-3d17-4815-b562-2198bd2d8485", 
-              "name": "Working Group Navigation (5221)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "publicationDate": "2008", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1066420, 
-          "recid": "4d2hp-7e851", 
-          "title": "External Calibration of Satellite Gravity Gradient Observations", 
-          "totalNumberOfAuthors": 1, 
-          "type_p": "Diploma Thesis", 
-          "uuid": "e22b8d98-892e-4dde-9b2d-cdc0624630c2", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:05.311130+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:03.830858+00:00", 
-        "id": "96j0g-ddh84", 
-        "links": {
-          "files": "https://localhost:5000/api/records/96j0g-ddh84/files", 
-          "self": "https://localhost:5000/api/records/96j0g-ddh84"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "name": "Hasmann, Andrea", 
-              "organisationalUnit": "Institute of Environmental Biotechnology (6530)", 
-              "personRole": "Author"
-            }, 
-            {
-              "name": "Wehrsch\u00fctz-Sigl, Eva", 
-              "organisationalUnit": "ACIB \u2013 Austrian Center of Industrial Biotechnology (98730)", 
-              "personRole": "Author"
-            }, 
-            {
-              "name": "Kanzler, Gertraud", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/3c586220-2450-4864-be4e-74ec35f805fc", 
-              "name": "Binder, B.", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "name": "Hulla, Elisabeth", 
-              "organisationalUnit": "ACIB \u2013 Austrian Center of Industrial Biotechnology (98730)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/dc773811-a07d-4cd4-9b04-d1436e54441f", 
-              "name": "G\u00fcbitz, Georg", 
-              "organisationalUnit": "Institute of Environmental Biotechnology (6530)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Environmental Biotechnology (6530)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/7c66c0e6-2ac0-44a6-a1ff-c3d24540986b", 
-              "name": "Institute of Environmental Biotechnology (6530)"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/ad10f127-59ca-4977-9cd6-781d6d2b7db7", 
-              "name": "ACIB \u2013 Austrian Center of Industrial Biotechnology (98730)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDate": "2011", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1066390, 
-          "recid": "96j0g-ddh84", 
-          "title": "Novel Peptidoglycan Based Diagnostic Devices for Detection of Wound Infection", 
-          "totalNumberOfAuthors": 6, 
-          "type_p": "Article", 
-          "uuid": "5878574b-6f92-4a1c-8e36-9a511fa5bb3c", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:03.830865+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:02.335233+00:00", 
-        "id": "1samg-p3382", 
-        "links": {
-          "files": "https://localhost:5000/api/records/1samg-p3382/files", 
-          "self": "https://localhost:5000/api/records/1samg-p3382"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "Indeterminate", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "name": "Pacher, Peter", 
-              "organisationalUnit": "Institute of Solid State Physics (5130)", 
-              "personRole": "Author"
-            }, 
-            {
-              "name": "Lex, Alexandra", 
-              "organisationalUnit": "Institute for Chemistry and Technology of Materials (6380)", 
-              "personRole": "Author"
-            }, 
-            {
-              "name": "Proschek, Veronika", 
-              "organisationalUnit": "Institute of Solid State Physics (5130)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f7737224-edec-4770-a370-72d901c08c22", 
-              "name": "Werzer, Oliver", 
-              "organisationalUnit": "Institute of Solid State Physics (5130)", 
-              "personRole": "Author"
-            }, 
-            {
-              "name": "Frank, Paul", 
-              "organisationalUnit": "Institute of Solid State Physics (5130)", 
-              "personRole": "Author"
-            }, 
-            {
-              "name": "Temmel, Susanne", 
-              "organisationalUnit": "Institute for Chemistry and Technology of Materials (6380)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/0b638119-dd2d-434f-be4a-3bad93228505", 
-              "name": "Kern, Wolfgang", 
-              "organisationalUnit": "Institute for Chemistry and Technology of Materials (6380)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/83120b89-f86e-4d72-ab41-24035e4c867a", 
-              "name": "Resel, Roland", 
-              "organisationalUnit": "Institute of Solid State Physics (5130)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/41d2b042-804d-499e-b1bf-71dc2165f9bf", 
-              "name": "Winkler, Adolf", 
-              "organisationalUnit": "Institute of Solid State Physics (5130)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/626a0c0e-2c6b-42bc-a5ce-179325d43603", 
-              "name": "Slugovc, Christian", 
-              "organisationalUnit": "Institute for Chemistry and Technology of Materials (6380)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/25ac3e2e-fba6-42e1-9b28-3e9f79002e16", 
-              "name": "Schennach, Robert", 
-              "organisationalUnit": "Institute of Solid State Physics (5130)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/3b91bcbe-bdbe-4e25-accd-adf7857a884c", 
-              "name": "Trimmel, Gregor", 
-              "organisationalUnit": "Institute for Chemistry and Technology of Materials (6380)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/212ac50f-508e-4be4-9505-1fb0b457e852", 
-              "name": "Zojer, Egbert", 
-              "organisationalUnit": "Institute of Solid State Physics (5130)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Solid State Physics (5130)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/6e579a90-2f2e-47eb-b7a0-054dd2be6623", 
-              "name": "Institute of Solid State Physics (5130)"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/c6f1f168-8b91-403a-afdc-8fae31d3125e", 
-              "name": "Institute for Chemistry and Technology of Materials (6380)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDate": "2007", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1066327, 
-          "recid": "1samg-p3382", 
-          "title": "Characterizing Chemically Reactive Thin Layers: Surface Reaction of [2-[4-(Chlorosulfonyl)phenyl]ethyl]trichlorosilane with Ammonia", 
-          "totalNumberOfAuthors": 13, 
-          "type_p": "Article", 
-          "uuid": "a9f82150-eb08-43dd-bbdd-84ceebc26ace", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:02.335243+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:33:00.853206+00:00", 
-        "id": "mpzj7-b0530", 
-        "links": {
-          "files": "https://localhost:5000/api/records/mpzj7-b0530/files", 
-          "self": "https://localhost:5000/api/records/mpzj7-b0530"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/2dd34fe2-cc53-457d-95ab-c76d2c6361c5", 
-              "name": "Guo, Xinghua", 
-              "organisationalUnit": "Institute of Analytical Chemistry and Food Chemistry (6450)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/1626581e-9f48-4c22-8f5c-618d6ebba97d", 
-              "name": "Al-Khalili, A.", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/36596a32-776d-48dd-a5e4-e68b1d56c996", 
-              "name": "Duursma, M.", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/37a4a3e5-33ce-4622-84c7-1afce1ad96fd", 
-              "name": "Heeren, R.", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Analytical Chemistry and Food Chemistry (6450)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/95389b7a-4be9-4f64-8491-0dd9b3e5f041", 
-              "name": "Institute of Analytical Chemistry and Food Chemistry (6450)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDate": "2002", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1066296, 
-          "recid": "mpzj7-b0530", 
-          "title": "Probing internal energy deposition resulting from SORI activation in ESI-FTICR mass spectrometry with pump-probe experiments.", 
-          "totalNumberOfAuthors": 4, 
-          "type_p": "Poster", 
-          "uuid": "e34465bb-c254-4c61-aef7-73ba41de90df", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:33:00.853213+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:32:59.369913+00:00", 
-        "id": "kb3nf-v3662", 
-        "links": {
-          "files": "https://localhost:5000/api/records/kb3nf-v3662/files", 
-          "self": "https://localhost:5000/api/records/kb3nf-v3662"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/13d6a631-3da9-4789-9a65-2fa908981ed7", 
-              "name": "Kranzelbinder, G.", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/eb937413-33fa-4b45-97ff-8464c0622afd", 
-              "name": "Toussaere, E.", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/1a88a60f-5027-47a5-8490-eded2aeb6cf5", 
-              "name": "Zyss, J.", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "name": "Pogantsch, Alexander", 
-              "organisationalUnit": "Institute of Solid State Physics (5130)", 
-              "personRole": "Author"
-            }, 
-            {
-              "name": "List, Emil", 
-              "organisationalUnit": "Institute of Solid State Physics (5130)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/7b5ad674-4e14-41b3-b0f7-38d94dc2c2a9", 
-              "name": "Tillmann, H.", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/980de575-1e48-4f78-805e-4cc4efd129d3", 
-              "name": "H\u00f6rhold, H.H.", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Solid State Physics (5130)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/6e579a90-2f2e-47eb-b7a0-054dd2be6623", 
-              "name": "Institute of Solid State Physics (5130)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDate": "2002", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1066275, 
-          "recid": "kb3nf-v3662", 
-          "title": "Optically written solid-state lasers with broadly tunable mode emission based on improved poly(2,5-dialkoxy-phenylene-vinylene)", 
-          "totalNumberOfAuthors": 7, 
-          "type_p": "Article", 
-          "uuid": "25414e6b-3093-442e-8eb2-d7016c2f62d8", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:32:59.369922+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:32:57.845207+00:00", 
-        "id": "f3h59-bgv14", 
-        "links": {
-          "files": "https://localhost:5000/api/records/f3h59-bgv14/files", 
-          "self": "https://localhost:5000/api/records/f3h59-bgv14"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/dccd9343-6e4b-4022-a7d7-94d5a827678f", 
-              "name": "Oppeneder, Johannes", 
-              "organisationalUnit": "Institute of Structural Concrete (2030)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Institute of Structural Concrete (2030)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/15192654-21a0-40ec-a233-160681191191", 
-              "name": "Institute of Structural Concrete (2030)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "publicationDate": "2013", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1066247, 
-          "recid": "f3h59-bgv14", 
-          "title": "Untersuchung eines Knotendetails einer Hochbaudecke mit nichtlinearer FE-Methode", 
-          "totalNumberOfAuthors": 1, 
-          "type_p": "Master's Thesis", 
-          "uuid": "2229d262-7cee-46ea-af84-708537a2a964", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:32:57.845215+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:32:56.388228+00:00", 
-        "id": "bnjz4-vvj52", 
-        "links": {
-          "files": "https://localhost:5000/api/records/bnjz4-vvj52/files", 
-          "self": "https://localhost:5000/api/records/bnjz4-vvj52"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/95d15e06-1114-4686-b2c2-b83e18f9d673", 
-              "name": "Berg, Gabriele", 
-              "organisationalUnit": "Institute of Environmental Biotechnology (6530)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/f443e532-8d67-4471-bea7-87ac309a603b", 
-              "name": "Hallmann, J.", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Environmental Biotechnology (6530)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/7c66c0e6-2ac0-44a6-a1ff-c3d24540986b", 
-              "name": "Institute of Environmental Biotechnology (6530)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDate": "2006", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "publisherName": "Springer", 
-          "pureId": 1066214, 
-          "recid": "bnjz4-vvj52", 
-          "title": "Control of plant pathogenic fungi with bacterial endophytes", 
-          "totalNumberOfAuthors": 2, 
-          "type_p": "Chapter", 
-          "uuid": "350beb5f-4e7d-4a96-957d-ab680ccacada", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:32:56.388235+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:32:54.897497+00:00", 
-        "id": "cqfz9-zfs40", 
-        "links": {
-          "files": "https://localhost:5000/api/records/cqfz9-zfs40/files", 
-          "self": "https://localhost:5000/api/records/cqfz9-zfs40"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/8000cb9a-b88d-4471-8a78-7ce4038ddd7a", 
-              "name": "Fuchs, Anton", 
-              "organisationalUnit": "Institute of (*) Electrical Measurement and Measurement Signal Processing (4380)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/3f96101d-2adc-41d3-b057-28452d9832f9", 
-              "name": "Zangl, Hubert", 
-              "organisationalUnit": "Institute of (*) Electrical Measurement and Measurement Signal Processing (4380)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/1c0d8871-cfbd-4d63-97c8-cbed3bf77162", 
-              "name": "Brasseur, Georg", 
-              "organisationalUnit": "Institute of (*) Electrical Measurement and Measurement Signal Processing (4380)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Institute of (*) Electrical Measurement and Measurement Signal Processing (4380)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/f630bf94-4970-48d9-8d25-a0ccfbf9c430", 
-              "name": "Institute of (*) Electrical Measurement and Measurement Signal Processing (4380)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDate": "2007", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1066179, 
-          "recid": "cqfz9-zfs40", 
-          "title": "F\u00f6rderparameterbestimmung in Pneumatischen D\u00fcnnstrom Transportanwendungen", 
-          "totalNumberOfAuthors": 3, 
-          "type_p": "Article", 
-          "uuid": "a8ca8680-2f1f-45cc-a1f5-9d2db17e004f", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:32:54.897509+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:32:53.369603+00:00", 
-        "id": "j5pgr-hf635", 
-        "links": {
-          "files": "https://localhost:5000/api/records/j5pgr-hf635/files", 
-          "self": "https://localhost:5000/api/records/j5pgr-hf635"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "None", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "name": "Woisetschl\u00e4ger, Dieter", 
-              "organisationalUnit": "Institute of Chemical Engineering and Environmental Technology (6670)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/15a77d98-fb4b-4b86-a3bf-76d6b966643f", 
-              "name": "Berger, Thomas", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/a78376dc-0021-4b97-9c0a-36f719052eb7", 
-              "name": "Zelenka, Julia", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/89439182-e0a7-4a8d-aa76-c7ba06c930ec", 
-              "name": "Humpl, Bernd", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/49ba28ea-9a9f-4a80-b0e5-162bb1fd299a", 
-              "name": "Siebenhofer, Matth\u00e4us", 
-              "organisationalUnit": "Institute of Chemical Engineering and Environmental Technology (6670)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Institute of Chemical Engineering and Environmental Technology (6670)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/beb13bea-aa04-4138-8c7c-2b3b98113c2d", 
-              "name": "Institute of Chemical Engineering and Environmental Technology (6670)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDate": "2010", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1066139, 
-          "recid": "j5pgr-hf635", 
-          "title": "Degradation von 1,4-Dioxan in Abwasser mittels Electrochemical Advanced Oxidation Processes (EAOP)", 
-          "totalNumberOfAuthors": 5, 
-          "type_p": "Article", 
-          "uuid": "7bc30890-4a81-49d7-b025-fd38a1db1376", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:32:53.369611+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:32:51.892043+00:00", 
-        "id": "09t6z-5n528", 
-        "links": {
-          "files": "https://localhost:5000/api/records/09t6z-5n528/files", 
-          "self": "https://localhost:5000/api/records/09t6z-5n528"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "Indeterminate", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "name": "Matsko, Nadejda", 
-              "organisationalUnit": "Institute of Electron Microscopy and Nanoanalysis (5190)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/494ed7d3-4b8f-4a0e-bfff-602001bca574", 
-              "name": "Znidarsic, Nada", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/6f3eeb74-5efa-46b0-91b4-78424503b61c", 
-              "name": "Letofsky-Papst, Ilse", 
-              "organisationalUnit": "Institute of Electron Microscopy and Nanoanalysis (5190)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/33fdf367-0154-4e52-b4fd-292216d029cf", 
-              "name": "Dittrich, Maria", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/d6a24773-8e1e-4511-8f8f-6a211a5e8715", 
-              "name": "Grogger, Werner", 
-              "organisationalUnit": "Institute of Electron Microscopy and Nanoanalysis (5190)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/29fd0b04-c4f1-4f35-a656-9be15c682f24", 
-              "name": "Strus, Jasna", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/6ec5771d-a606-4892-ba8f-2bb95283d6e5", 
-              "name": "Hofer, Ferdinand", 
-              "organisationalUnit": "Institute of Electron Microscopy and Nanoanalysis (5190)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Electron Microscopy and Nanoanalysis (5190)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/1ac43399-62a2-4e74-b4ad-ad893185f244", 
-              "name": "Institute of Electron Microscopy and Nanoanalysis (5190)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDate": "2010", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1066080, 
-          "recid": "09t6z-5n528", 
-          "title": "Silicon: The key element in early stages of biocalcification", 
-          "totalNumberOfAuthors": 7, 
-          "type_p": "Article", 
-          "uuid": "a9a966b9-e44b-4c43-ae59-1a3b4840f40a", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:32:51.892053+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:32:50.426444+00:00", 
-        "id": "5xqhn-7tg15", 
-        "links": {
-          "files": "https://localhost:5000/api/records/5xqhn-7tg15/files", 
-          "self": "https://localhost:5000/api/records/5xqhn-7tg15"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "accessType": "Indeterminate", 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/71e2b8cb-543d-4e47-a013-865ff434b5c2", 
-              "name": "Borisov, Sergey", 
-              "organisationalUnit": "Institute of Analytical Chemistry and Food Chemistry (6450)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/5df12b30-e0f6-4241-83a9-a02c33751611", 
-              "name": "Gatterer, Karl", 
-              "organisationalUnit": "Institute of Physical and Theoretical Chemistry (6350)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f661d36c-be32-4b8e-be74-3dd0fa657b6c", 
-              "name": "Klimant, Ingo", 
-              "organisationalUnit": "Institute of Analytical Chemistry and Food Chemistry (6450)", 
-              "personRole": "Author"
-            }
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Analytical Chemistry and Food Chemistry (6450)", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/95389b7a-4be9-4f64-8491-0dd9b3e5f041", 
-              "name": "Institute of Analytical Chemistry and Food Chemistry (6450)"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/7f6fe494-0817-4e10-8ee3-614db5b0872b", 
-              "name": "Institute of Physical and Theoretical Chemistry (6350)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDate": "2010", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
-          "pureId": 1066042, 
-          "recid": "5xqhn-7tg15", 
-          "title": "Red light-excitable dual lifetime referenced optical pH sensors with intrinsic temperature compensation", 
-          "totalNumberOfAuthors": 3, 
-          "type_p": "Article", 
-          "uuid": "c8819fc6-b354-46ef-ae65-11a80d146690", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-01-31T13:32:50.426451+00:00"
-      }, 
-      {
-        "created": "2020-01-31T13:32:48.963299+00:00", 
-        "id": "cmf79-60417", 
-        "links": {
-          "files": "https://localhost:5000/api/records/cmf79-60417/files", 
-          "self": "https://localhost:5000/api/records/cmf79-60417"
+          "files": "https://localhost:5000/api/records/xgqh1-tfr35/files", 
+          "self": "https://localhost:5000/api/records/xgqh1-tfr35"
         }, 
         "metadata": {
           "_access": {
@@ -2766,9 +55,9 @@
           ], 
           "publicationDate": "2005", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1066006, 
-          "recid": "cmf79-60417", 
+          "recid": "xgqh1-tfr35", 
           "title": "Simulation des Aufrei\u00dfverhaltens unsichtbarer Airbagklappen", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Diploma Thesis", 
@@ -2776,14 +65,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:48.963305+00:00"
+        "updated": "2020-02-03T07:35:34.783802+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:47.450316+00:00", 
-        "id": "kd7pc-jn135", 
+        "created": "2020-02-03T07:35:33.266599+00:00", 
+        "id": "ha8gv-m3754", 
         "links": {
-          "files": "https://localhost:5000/api/records/kd7pc-jn135/files", 
-          "self": "https://localhost:5000/api/records/kd7pc-jn135"
+          "files": "https://localhost:5000/api/records/ha8gv-m3754/files", 
+          "self": "https://localhost:5000/api/records/ha8gv-m3754"
         }, 
         "metadata": {
           "_access": {
@@ -2816,9 +105,9 @@
           "peerReview": false, 
           "publicationDate": "1999", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1065998, 
-          "recid": "kd7pc-jn135", 
+          "recid": "ha8gv-m3754", 
           "title": "Baustelle Mitteleuropa", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Article", 
@@ -2826,14 +115,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:47.450326+00:00"
+        "updated": "2020-02-03T07:35:33.266607+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:45.961873+00:00", 
-        "id": "81eyz-6nj88", 
+        "created": "2020-02-03T07:35:31.773520+00:00", 
+        "id": "pd624-y1x45", 
         "links": {
-          "files": "https://localhost:5000/api/records/81eyz-6nj88/files", 
-          "self": "https://localhost:5000/api/records/81eyz-6nj88"
+          "files": "https://localhost:5000/api/records/pd624-y1x45/files", 
+          "self": "https://localhost:5000/api/records/pd624-y1x45"
         }, 
         "metadata": {
           "_access": {
@@ -2884,9 +173,9 @@
           "peerReview": true, 
           "publicationDate": "1996", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1065976, 
-          "recid": "81eyz-6nj88", 
+          "recid": "pd624-y1x45", 
           "title": "Evaluation of the effect of droplet collisions on spray mixing", 
           "totalNumberOfAuthors": 4, 
           "type_p": "Article", 
@@ -2894,14 +183,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:45.961880+00:00"
+        "updated": "2020-02-03T07:35:31.773527+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:44.489107+00:00", 
-        "id": "0x9j0-f8r89", 
+        "created": "2020-02-03T07:35:30.288541+00:00", 
+        "id": "teqwv-ygh35", 
         "links": {
-          "files": "https://localhost:5000/api/records/0x9j0-f8r89/files", 
-          "self": "https://localhost:5000/api/records/0x9j0-f8r89"
+          "files": "https://localhost:5000/api/records/teqwv-ygh35/files", 
+          "self": "https://localhost:5000/api/records/teqwv-ygh35"
         }, 
         "metadata": {
           "_access": {
@@ -2961,10 +250,10 @@
           "peerReview": false, 
           "publicationDate": "2014", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "publisherName": "Elsevier BV", 
           "pureId": 1065953, 
-          "recid": "0x9j0-f8r89", 
+          "recid": "teqwv-ygh35", 
           "title": "WeeVis", 
           "totalNumberOfAuthors": 6, 
           "type_p": "Chapter", 
@@ -2972,14 +261,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:44.489114+00:00"
+        "updated": "2020-02-03T07:35:30.288548+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:43.019180+00:00", 
-        "id": "8d8cn-j5428", 
+        "created": "2020-02-03T07:35:28.808807+00:00", 
+        "id": "r9m70-5y086", 
         "links": {
-          "files": "https://localhost:5000/api/records/8d8cn-j5428/files", 
-          "self": "https://localhost:5000/api/records/8d8cn-j5428"
+          "files": "https://localhost:5000/api/records/r9m70-5y086/files", 
+          "self": "https://localhost:5000/api/records/r9m70-5y086"
         }, 
         "metadata": {
           "_access": {
@@ -3025,9 +314,9 @@
           "peerReview": false, 
           "publicationDate": "2008", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1065889, 
-          "recid": "8d8cn-j5428", 
+          "recid": "r9m70-5y086", 
           "title": "Asymmetrically End-Group Modified Ring Opening Metathesis Polymers.", 
           "totalNumberOfAuthors": 4, 
           "type_p": "Poster", 
@@ -3035,14 +324,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:43.019191+00:00"
+        "updated": "2020-02-03T07:35:28.808815+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:41.527742+00:00", 
-        "id": "91f7g-x1k56", 
+        "created": "2020-02-03T07:35:27.347888+00:00", 
+        "id": "e2gh9-gny14", 
         "links": {
-          "files": "https://localhost:5000/api/records/91f7g-x1k56/files", 
-          "self": "https://localhost:5000/api/records/91f7g-x1k56"
+          "files": "https://localhost:5000/api/records/e2gh9-gny14/files", 
+          "self": "https://localhost:5000/api/records/e2gh9-gny14"
         }, 
         "metadata": {
           "_access": {
@@ -3087,9 +376,9 @@
           "peerReview": false, 
           "publicationDate": "2010", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1065847, 
-          "recid": "91f7g-x1k56", 
+          "recid": "e2gh9-gny14", 
           "title": "Digermenes and Related Structures Embedded in Oligosilanes", 
           "totalNumberOfAuthors": 3, 
           "type_p": "Poster", 
@@ -3097,14 +386,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:41.527750+00:00"
+        "updated": "2020-02-03T07:35:27.347896+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:39.984340+00:00", 
-        "id": "egtx2-s0v19", 
+        "created": "2020-02-03T07:35:25.890157+00:00", 
+        "id": "vf6rq-12578", 
         "links": {
-          "files": "https://localhost:5000/api/records/egtx2-s0v19/files", 
-          "self": "https://localhost:5000/api/records/egtx2-s0v19"
+          "files": "https://localhost:5000/api/records/vf6rq-12578/files", 
+          "self": "https://localhost:5000/api/records/vf6rq-12578"
         }, 
         "metadata": {
           "_access": {
@@ -3137,10 +426,10 @@
           "peerReview": false, 
           "publicationDate": "2005", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "publisherName": "Eigenverlag", 
           "pureId": 1065833, 
-          "recid": "egtx2-s0v19", 
+          "recid": "vf6rq-12578", 
           "title": "Die Orgel in der Leobner Redemptoristenkirche", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Chapter", 
@@ -3148,14 +437,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:39.984347+00:00"
+        "updated": "2020-02-03T07:35:25.890164+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:38.406211+00:00", 
-        "id": "jrz88-y2m80", 
+        "created": "2020-02-03T07:35:24.418757+00:00", 
+        "id": "d44dg-eqb59", 
         "links": {
-          "files": "https://localhost:5000/api/records/jrz88-y2m80/files", 
-          "self": "https://localhost:5000/api/records/jrz88-y2m80"
+          "files": "https://localhost:5000/api/records/d44dg-eqb59/files", 
+          "self": "https://localhost:5000/api/records/d44dg-eqb59"
         }, 
         "metadata": {
           "_access": {
@@ -3212,9 +501,9 @@
           "peerReview": true, 
           "publicationDate": "2012", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1065801, 
-          "recid": "jrz88-y2m80", 
+          "recid": "d44dg-eqb59", 
           "title": "Using sol-gel replications to assess the porosity of block-copolymer derived thin films", 
           "totalNumberOfAuthors": 5, 
           "type_p": "Article", 
@@ -3222,14 +511,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:38.406219+00:00"
+        "updated": "2020-02-03T07:35:24.418765+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:36.921574+00:00", 
-        "id": "395fg-pye40", 
+        "created": "2020-02-03T07:35:22.957778+00:00", 
+        "id": "jhnvs-jcc66", 
         "links": {
-          "files": "https://localhost:5000/api/records/395fg-pye40/files", 
-          "self": "https://localhost:5000/api/records/395fg-pye40"
+          "files": "https://localhost:5000/api/records/jhnvs-jcc66/files", 
+          "self": "https://localhost:5000/api/records/jhnvs-jcc66"
         }, 
         "metadata": {
           "_access": {
@@ -3262,9 +551,9 @@
           "peerReview": false, 
           "publicationDate": "2012", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1065788, 
-          "recid": "395fg-pye40", 
+          "recid": "jhnvs-jcc66", 
           "title": "Schall und L\u00e4rm im Focus von Regelungen", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Article", 
@@ -3272,14 +561,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:36.921581+00:00"
+        "updated": "2020-02-03T07:35:22.957784+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:35.440248+00:00", 
-        "id": "43c8y-gnb41", 
+        "created": "2020-02-03T07:35:21.498703+00:00", 
+        "id": "5jsy1-9v885", 
         "links": {
-          "files": "https://localhost:5000/api/records/43c8y-gnb41/files", 
-          "self": "https://localhost:5000/api/records/43c8y-gnb41"
+          "files": "https://localhost:5000/api/records/5jsy1-9v885/files", 
+          "self": "https://localhost:5000/api/records/5jsy1-9v885"
         }, 
         "metadata": {
           "_access": {
@@ -3342,9 +631,9 @@
           "peerReview": false, 
           "publicationDate": "2012", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1065737, 
-          "recid": "43c8y-gnb41", 
+          "recid": "5jsy1-9v885", 
           "title": "Medical plant associated microbial communities and their potential for biocontrol in desert agriculture", 
           "totalNumberOfAuthors": 6, 
           "type_p": "Poster", 
@@ -3352,14 +641,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:35.440256+00:00"
+        "updated": "2020-02-03T07:35:21.498709+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:33.882330+00:00", 
-        "id": "nzqeg-8f198", 
+        "created": "2020-02-03T07:35:19.527012+00:00", 
+        "id": "9vdpn-pyr73", 
         "links": {
-          "files": "https://localhost:5000/api/records/nzqeg-8f198/files", 
-          "self": "https://localhost:5000/api/records/nzqeg-8f198"
+          "files": "https://localhost:5000/api/records/9vdpn-pyr73/files", 
+          "self": "https://localhost:5000/api/records/9vdpn-pyr73"
         }, 
         "metadata": {
           "_access": {
@@ -3422,10 +711,10 @@
           "peerReview": false, 
           "publicationDate": "1996", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "publisherName": "Facultas Universit\u00e4tsverlag", 
           "pureId": 1065731, 
-          "recid": "nzqeg-8f198", 
+          "recid": "9vdpn-pyr73", 
           "title": "Optimizing the production of aldose reductase from Candida tenuis by statistically designed experiments", 
           "totalNumberOfAuthors": 6, 
           "type_p": "Chapter", 
@@ -3433,14 +722,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:33.882338+00:00"
+        "updated": "2020-02-03T07:35:19.527018+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:32.344582+00:00", 
-        "id": "9g785-ygr77", 
+        "created": "2020-02-03T07:35:18.058882+00:00", 
+        "id": "s59yp-fkq08", 
         "links": {
-          "files": "https://localhost:5000/api/records/9g785-ygr77/files", 
-          "self": "https://localhost:5000/api/records/9g785-ygr77"
+          "files": "https://localhost:5000/api/records/s59yp-fkq08/files", 
+          "self": "https://localhost:5000/api/records/s59yp-fkq08"
         }, 
         "metadata": {
           "_access": {
@@ -3503,9 +792,9 @@
           "peerReview": true, 
           "publicationDate": "2009", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1065651, 
-          "recid": "9g785-ygr77", 
+          "recid": "s59yp-fkq08", 
           "title": "Exploring the Anion-Cation Interaction in m-Terphenyltetrafluorosilicates using multinuclear NMR spectroscopy, X-Ray diffraction and ICR-FT-MS.", 
           "totalNumberOfAuthors": 6, 
           "type_p": "Article", 
@@ -3513,14 +802,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:32.344592+00:00"
+        "updated": "2020-02-03T07:35:18.058890+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:30.768553+00:00", 
-        "id": "01x9r-c7a19", 
+        "created": "2020-02-03T07:35:16.571774+00:00", 
+        "id": "305pn-ns692", 
         "links": {
-          "files": "https://localhost:5000/api/records/01x9r-c7a19/files", 
-          "self": "https://localhost:5000/api/records/01x9r-c7a19"
+          "files": "https://localhost:5000/api/records/305pn-ns692/files", 
+          "self": "https://localhost:5000/api/records/305pn-ns692"
         }, 
         "metadata": {
           "_access": {
@@ -3590,9 +879,9 @@
           "peerReview": false, 
           "publicationDate": "2010", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1065565, 
-          "recid": "01x9r-c7a19", 
+          "recid": "305pn-ns692", 
           "title": "Polymer - CuInS2 hybrid solar cells obtained by an in-situ formation route", 
           "totalNumberOfAuthors": 7, 
           "type_p": "Poster", 
@@ -3600,14 +889,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:30.768562+00:00"
+        "updated": "2020-02-03T07:35:16.571781+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:29.206044+00:00", 
-        "id": "9bqqs-1x247", 
+        "created": "2020-02-03T07:35:15.122818+00:00", 
+        "id": "wqhse-fvq76", 
         "links": {
-          "files": "https://localhost:5000/api/records/9bqqs-1x247/files", 
-          "self": "https://localhost:5000/api/records/9bqqs-1x247"
+          "files": "https://localhost:5000/api/records/wqhse-fvq76/files", 
+          "self": "https://localhost:5000/api/records/wqhse-fvq76"
         }, 
         "metadata": {
           "_access": {
@@ -3645,9 +934,9 @@
           "peerReview": true, 
           "publicationDate": "2005", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1065538, 
-          "recid": "9bqqs-1x247", 
+          "recid": "wqhse-fvq76", 
           "title": "Unwirksamkeit von Elektrosmog-Abschirmmatten. Teil 2: Hochfrequenzbereich", 
           "totalNumberOfAuthors": 2, 
           "type_p": "Article", 
@@ -3655,14 +944,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:29.206050+00:00"
+        "updated": "2020-02-03T07:35:15.122827+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:27.660947+00:00", 
-        "id": "c1qd4-a5743", 
+        "created": "2020-02-03T07:35:13.658693+00:00", 
+        "id": "qqqdz-b0413", 
         "links": {
-          "files": "https://localhost:5000/api/records/c1qd4-a5743/files", 
-          "self": "https://localhost:5000/api/records/c1qd4-a5743"
+          "files": "https://localhost:5000/api/records/qqqdz-b0413/files", 
+          "self": "https://localhost:5000/api/records/qqqdz-b0413"
         }, 
         "metadata": {
           "_access": {
@@ -3706,9 +995,9 @@
           "peerReview": false, 
           "publicationDate": "2005", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1065480, 
-          "recid": "c1qd4-a5743", 
+          "recid": "qqqdz-b0413", 
           "title": "Influence of sulfhydril-specific modification on the stability of D-amino acid oxydase from Trigonopsis variabilis", 
           "totalNumberOfAuthors": 3, 
           "type_p": "Poster", 
@@ -3716,14 +1005,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:27.660961+00:00"
+        "updated": "2020-02-03T07:35:13.658700+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:26.080925+00:00", 
-        "id": "0v3hx-vm266", 
+        "created": "2020-02-03T07:35:12.181608+00:00", 
+        "id": "577s1-hj457", 
         "links": {
-          "files": "https://localhost:5000/api/records/0v3hx-vm266/files", 
-          "self": "https://localhost:5000/api/records/0v3hx-vm266"
+          "files": "https://localhost:5000/api/records/577s1-hj457/files", 
+          "self": "https://localhost:5000/api/records/577s1-hj457"
         }, 
         "metadata": {
           "_access": {
@@ -3756,10 +1045,10 @@
           "peerReview": false, 
           "publicationDate": "2002", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "publisherName": "Pro Business GmbH", 
           "pureId": 1065477, 
-          "recid": "0v3hx-vm266", 
+          "recid": "577s1-hj457", 
           "title": "DNA-Array-Technologie: Entwicklung von DNA-Arrays mit 13000 cDNA-Klonen des Modellorganismus Arabidopsis thaliana und Anwendung in der Genexpressionsanalyse pflanzlicher Pathogenabwehr", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Book", 
@@ -3767,14 +1056,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:26.080933+00:00"
+        "updated": "2020-02-03T07:35:12.181616+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:24.558097+00:00", 
-        "id": "z0vgq-ckz25", 
+        "created": "2020-02-03T07:35:10.722058+00:00", 
+        "id": "vjckw-bhg91", 
         "links": {
-          "files": "https://localhost:5000/api/records/z0vgq-ckz25/files", 
-          "self": "https://localhost:5000/api/records/z0vgq-ckz25"
+          "files": "https://localhost:5000/api/records/vjckw-bhg91/files", 
+          "self": "https://localhost:5000/api/records/vjckw-bhg91"
         }, 
         "metadata": {
           "_access": {
@@ -3805,9 +1094,9 @@
           ], 
           "publicationDate": "2013", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1065424, 
-          "recid": "z0vgq-ckz25", 
+          "recid": "vjckw-bhg91", 
           "title": "Sourcing of axle boxes for railway bogies", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Master's Thesis", 
@@ -3815,14 +1104,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:24.558105+00:00"
+        "updated": "2020-02-03T07:35:10.722066+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:23.022907+00:00", 
-        "id": "66zdf-daa84", 
+        "created": "2020-02-03T07:35:09.261930+00:00", 
+        "id": "znfjv-kfp47", 
         "links": {
-          "files": "https://localhost:5000/api/records/66zdf-daa84/files", 
-          "self": "https://localhost:5000/api/records/66zdf-daa84"
+          "files": "https://localhost:5000/api/records/znfjv-kfp47/files", 
+          "self": "https://localhost:5000/api/records/znfjv-kfp47"
         }, 
         "metadata": {
           "_access": {
@@ -3861,10 +1150,10 @@
           "peerReview": false, 
           "publicationDate": "1977", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "publisherName": ".", 
           "pureId": 1065420, 
-          "recid": "66zdf-daa84", 
+          "recid": "znfjv-kfp47", 
           "title": "Science and Radargrammetry", 
           "totalNumberOfAuthors": 2, 
           "type_p": "Chapter", 
@@ -3872,14 +1161,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:23.022913+00:00"
+        "updated": "2020-02-03T07:35:09.261937+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:21.544831+00:00", 
-        "id": "hxdvs-88k04", 
+        "created": "2020-02-03T07:35:07.807636+00:00", 
+        "id": "dgawc-xwh52", 
         "links": {
-          "files": "https://localhost:5000/api/records/hxdvs-88k04/files", 
-          "self": "https://localhost:5000/api/records/hxdvs-88k04"
+          "files": "https://localhost:5000/api/records/dgawc-xwh52/files", 
+          "self": "https://localhost:5000/api/records/dgawc-xwh52"
         }, 
         "metadata": {
           "_access": {
@@ -3922,9 +1211,9 @@
           "peerReview": false, 
           "publicationDate": "2013", 
           "publicationStatus": "Accepted/In press", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1065358, 
-          "recid": "hxdvs-88k04", 
+          "recid": "dgawc-xwh52", 
           "title": "Estudio de un sistema reversible de refrigeraci\u00f3n y calefacci\u00f3n que utiliza CO2 como refrigerante para veh\u00edcolos el\u00e9ctricos, bajo condiciones de heladas", 
           "totalNumberOfAuthors": 2, 
           "type_p": "Article", 
@@ -3932,14 +1221,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:21.544840+00:00"
+        "updated": "2020-02-03T07:35:07.807679+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:20.067368+00:00", 
-        "id": "ptv6e-fhd03", 
+        "created": "2020-02-03T07:35:06.340035+00:00", 
+        "id": "0eymc-0e940", 
         "links": {
-          "files": "https://localhost:5000/api/records/ptv6e-fhd03/files", 
-          "self": "https://localhost:5000/api/records/ptv6e-fhd03"
+          "files": "https://localhost:5000/api/records/0eymc-0e940/files", 
+          "self": "https://localhost:5000/api/records/0eymc-0e940"
         }, 
         "metadata": {
           "_access": {
@@ -3983,10 +1272,10 @@
           "peerReview": false, 
           "publicationDate": "2010", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "publisherName": "Woodhead Publishing", 
           "pureId": 1065302, 
-          "recid": "ptv6e-fhd03", 
+          "recid": "0eymc-0e940", 
           "title": "Smart Materials containing Enzymes or Enzyme Substrates", 
           "totalNumberOfAuthors": 3, 
           "type_p": "Chapter", 
@@ -3994,14 +1283,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:20.067374+00:00"
+        "updated": "2020-02-03T07:35:06.340043+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:18.608859+00:00", 
-        "id": "kpfx9-w6861", 
+        "created": "2020-02-03T07:35:04.260383+00:00", 
+        "id": "kvj9b-tpa95", 
         "links": {
-          "files": "https://localhost:5000/api/records/kpfx9-w6861/files", 
-          "self": "https://localhost:5000/api/records/kpfx9-w6861"
+          "files": "https://localhost:5000/api/records/kvj9b-tpa95/files", 
+          "self": "https://localhost:5000/api/records/kvj9b-tpa95"
         }, 
         "metadata": {
           "_access": {
@@ -4050,9 +1339,9 @@
           "peerReview": false, 
           "publicationDate": "2011", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1065301, 
-          "recid": "kpfx9-w6861", 
+          "recid": "kvj9b-tpa95", 
           "title": "Characterization of Multicomponent Mixtures Based On Real Surrogate Components", 
           "totalNumberOfAuthors": 4, 
           "type_p": "Poster", 
@@ -4060,14 +1349,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:18.608871+00:00"
+        "updated": "2020-02-03T07:35:04.260400+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:17.109668+00:00", 
-        "id": "b5skz-nvf65", 
+        "created": "2020-02-03T07:35:02.780956+00:00", 
+        "id": "vcxne-z3t09", 
         "links": {
-          "files": "https://localhost:5000/api/records/b5skz-nvf65/files", 
-          "self": "https://localhost:5000/api/records/b5skz-nvf65"
+          "files": "https://localhost:5000/api/records/vcxne-z3t09/files", 
+          "self": "https://localhost:5000/api/records/vcxne-z3t09"
         }, 
         "metadata": {
           "_access": {
@@ -4098,9 +1387,9 @@
           ], 
           "publicationDate": "2011", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1065282, 
-          "recid": "b5skz-nvf65", 
+          "recid": "vcxne-z3t09", 
           "title": "Dieselbrennverfahren mit Wasserstoff f\u00fcr PKW-Anwendungen", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Doctoral Thesis", 
@@ -4108,14 +1397,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:17.109675+00:00"
+        "updated": "2020-02-03T07:35:02.780963+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:15.619067+00:00", 
-        "id": "fqqnq-06j46", 
+        "created": "2020-02-03T07:35:01.299512+00:00", 
+        "id": "nwqzv-zfe22", 
         "links": {
-          "files": "https://localhost:5000/api/records/fqqnq-06j46/files", 
-          "self": "https://localhost:5000/api/records/fqqnq-06j46"
+          "files": "https://localhost:5000/api/records/nwqzv-zfe22/files", 
+          "self": "https://localhost:5000/api/records/nwqzv-zfe22"
         }, 
         "metadata": {
           "_access": {
@@ -4180,9 +1469,9 @@
           "peerReview": true, 
           "publicationDate": "2014", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1065246, 
-          "recid": "fqqnq-06j46", 
+          "recid": "nwqzv-zfe22", 
           "title": "Two commercially available initiators for the retarded Ring Opening Metathesis Polymerization of dicyclopentadiene", 
           "totalNumberOfAuthors": 7, 
           "type_p": "Article", 
@@ -4190,14 +1479,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:15.619079+00:00"
+        "updated": "2020-02-03T07:35:01.299518+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:14.038349+00:00", 
-        "id": "mrbzp-q1y16", 
+        "created": "2020-02-03T07:34:59.839481+00:00", 
+        "id": "wefq3-bh813", 
         "links": {
-          "files": "https://localhost:5000/api/records/mrbzp-q1y16/files", 
-          "self": "https://localhost:5000/api/records/mrbzp-q1y16"
+          "files": "https://localhost:5000/api/records/wefq3-bh813/files", 
+          "self": "https://localhost:5000/api/records/wefq3-bh813"
         }, 
         "metadata": {
           "_access": {
@@ -4230,9 +1519,9 @@
           "peerReview": false, 
           "publicationDate": "2015", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1065218, 
-          "recid": "mrbzp-q1y16", 
+          "recid": "wefq3-bh813", 
           "title": "Accurate and frequent deformation monitoring using Fibre-Optic cables: Micrometre-level Deformation Monitoring of a Concrete Dam", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Article", 
@@ -4240,14 +1529,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:14.038360+00:00"
+        "updated": "2020-02-03T07:34:59.839488+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:12.472195+00:00", 
-        "id": "259mz-0gy90", 
+        "created": "2020-02-03T07:34:58.388732+00:00", 
+        "id": "xcd1v-9t244", 
         "links": {
-          "files": "https://localhost:5000/api/records/259mz-0gy90/files", 
-          "self": "https://localhost:5000/api/records/259mz-0gy90"
+          "files": "https://localhost:5000/api/records/xcd1v-9t244/files", 
+          "self": "https://localhost:5000/api/records/xcd1v-9t244"
         }, 
         "metadata": {
           "_access": {
@@ -4279,9 +1568,9 @@
           ], 
           "publicationDate": "2006", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1065206, 
-          "recid": "259mz-0gy90", 
+          "recid": "xcd1v-9t244", 
           "title": "Direct Numerical Simulation of Reactive Deformable Bubbles in non-Newtonian Fluids", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Diploma Thesis", 
@@ -4289,14 +1578,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:12.472209+00:00"
+        "updated": "2020-02-03T07:34:58.388739+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:10.905984+00:00", 
-        "id": "hjkkn-1k513", 
+        "created": "2020-02-03T07:34:56.928870+00:00", 
+        "id": "m4p2z-q1w69", 
         "links": {
-          "files": "https://localhost:5000/api/records/hjkkn-1k513/files", 
-          "self": "https://localhost:5000/api/records/hjkkn-1k513"
+          "files": "https://localhost:5000/api/records/m4p2z-q1w69/files", 
+          "self": "https://localhost:5000/api/records/m4p2z-q1w69"
         }, 
         "metadata": {
           "_access": {
@@ -4329,9 +1618,9 @@
           "peerReview": false, 
           "publicationDate": "2009", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1065171, 
-          "recid": "hjkkn-1k513", 
+          "recid": "m4p2z-q1w69", 
           "title": "Rezension von Gerhard Stilz (ed.) Territorial Terrors: Contested Spaces in Colonial and Postcolonial Writing", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Article", 
@@ -4339,14 +1628,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:10.905993+00:00"
+        "updated": "2020-02-03T07:34:56.928878+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:09.360876+00:00", 
-        "id": "rmte6-vwz34", 
+        "created": "2020-02-03T07:34:55.459213+00:00", 
+        "id": "gdpaj-27e98", 
         "links": {
-          "files": "https://localhost:5000/api/records/rmte6-vwz34/files", 
-          "self": "https://localhost:5000/api/records/rmte6-vwz34"
+          "files": "https://localhost:5000/api/records/gdpaj-27e98/files", 
+          "self": "https://localhost:5000/api/records/gdpaj-27e98"
         }, 
         "metadata": {
           "_access": {
@@ -4379,9 +1668,9 @@
           "peerReview": false, 
           "publicationDate": "2009", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1065152, 
-          "recid": "rmte6-vwz34", 
+          "recid": "gdpaj-27e98", 
           "title": "Graphen, Ziffern und Kryptographie", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Article", 
@@ -4389,14 +1678,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:09.360883+00:00"
+        "updated": "2020-02-03T07:34:55.459220+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:07.750262+00:00", 
-        "id": "yw00y-eng66", 
+        "created": "2020-02-03T07:34:53.979849+00:00", 
+        "id": "22t26-rhy38", 
         "links": {
-          "files": "https://localhost:5000/api/records/yw00y-eng66/files", 
-          "self": "https://localhost:5000/api/records/yw00y-eng66"
+          "files": "https://localhost:5000/api/records/22t26-rhy38/files", 
+          "self": "https://localhost:5000/api/records/22t26-rhy38"
         }, 
         "metadata": {
           "_access": {
@@ -4447,9 +1736,9 @@
           "peerReview": true, 
           "publicationDate": "2014", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1065128, 
-          "recid": "yw00y-eng66", 
+          "recid": "22t26-rhy38", 
           "title": "Study on instability and forming limit of sheet metal under stretch-bending", 
           "totalNumberOfAuthors": 4, 
           "type_p": "Article", 
@@ -4457,14 +1746,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:07.750269+00:00"
+        "updated": "2020-02-03T07:34:53.979856+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:06.151801+00:00", 
-        "id": "bcgx8-r4051", 
+        "created": "2020-02-03T07:34:52.512603+00:00", 
+        "id": "nj0yy-gne95", 
         "links": {
-          "files": "https://localhost:5000/api/records/bcgx8-r4051/files", 
-          "self": "https://localhost:5000/api/records/bcgx8-r4051"
+          "files": "https://localhost:5000/api/records/nj0yy-gne95/files", 
+          "self": "https://localhost:5000/api/records/nj0yy-gne95"
         }, 
         "metadata": {
           "_access": {
@@ -4496,9 +1785,9 @@
           "peerReview": true, 
           "publicationDate": "2009", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1065109, 
-          "recid": "bcgx8-r4051", 
+          "recid": "nj0yy-gne95", 
           "title": "Many-body position operator in lattice fermionic systems with periodic boundary conditions", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Article", 
@@ -4506,14 +1795,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:06.151807+00:00"
+        "updated": "2020-02-03T07:34:52.512609+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:04.681861+00:00", 
-        "id": "cp12s-gb547", 
+        "created": "2020-02-03T07:34:51.016424+00:00", 
+        "id": "v4p5n-3dy42", 
         "links": {
-          "files": "https://localhost:5000/api/records/cp12s-gb547/files", 
-          "self": "https://localhost:5000/api/records/cp12s-gb547"
+          "files": "https://localhost:5000/api/records/v4p5n-3dy42/files", 
+          "self": "https://localhost:5000/api/records/v4p5n-3dy42"
         }, 
         "metadata": {
           "_access": {
@@ -4546,10 +1835,10 @@
           "peerReview": false, 
           "publicationDate": "2015", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "publisherName": "Av Akademikerverlag", 
           "pureId": 1065079, 
-          "recid": "cp12s-gb547", 
+          "recid": "v4p5n-3dy42", 
           "title": "pH Sensitive Responsive Gels: Investigations on the structural change of liquid crystal phases, with SAXS", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Book", 
@@ -4557,14 +1846,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:04.681868+00:00"
+        "updated": "2020-02-03T07:34:51.016432+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:03.204628+00:00", 
-        "id": "7pyt1-gne57", 
+        "created": "2020-02-03T07:34:48.775498+00:00", 
+        "id": "hf5kx-04h90", 
         "links": {
-          "files": "https://localhost:5000/api/records/7pyt1-gne57/files", 
-          "self": "https://localhost:5000/api/records/7pyt1-gne57"
+          "files": "https://localhost:5000/api/records/hf5kx-04h90/files", 
+          "self": "https://localhost:5000/api/records/hf5kx-04h90"
         }, 
         "metadata": {
           "_access": {
@@ -4603,9 +1892,9 @@
           "peerReview": false, 
           "publicationDate": "2008", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1065042, 
-          "recid": "7pyt1-gne57", 
+          "recid": "hf5kx-04h90", 
           "title": "Ionic Liquids as humidification independend electrolytes for fuel cells", 
           "totalNumberOfAuthors": 2, 
           "type_p": "Poster", 
@@ -4613,14 +1902,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:03.204636+00:00"
+        "updated": "2020-02-03T07:34:48.775507+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:01.714778+00:00", 
-        "id": "yb95e-ghp18", 
+        "created": "2020-02-03T07:34:47.251658+00:00", 
+        "id": "dg1km-v1a37", 
         "links": {
-          "files": "https://localhost:5000/api/records/yb95e-ghp18/files", 
-          "self": "https://localhost:5000/api/records/yb95e-ghp18"
+          "files": "https://localhost:5000/api/records/dg1km-v1a37/files", 
+          "self": "https://localhost:5000/api/records/dg1km-v1a37"
         }, 
         "metadata": {
           "_access": {
@@ -4663,9 +1952,9 @@
           "peerReview": true, 
           "publicationDate": "2010", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1064989, 
-          "recid": "yb95e-ghp18", 
+          "recid": "dg1km-v1a37", 
           "title": "Non-saturating magnetic behaviour of a ferromagnetic semiconductor/metal nanocomposite", 
           "totalNumberOfAuthors": 3, 
           "type_p": "Article", 
@@ -4673,14 +1962,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:01.714785+00:00"
+        "updated": "2020-02-03T07:34:47.251665+00:00"
       }, 
       {
-        "created": "2020-01-31T13:32:00.216347+00:00", 
-        "id": "hg92h-m0r94", 
+        "created": "2020-02-03T07:34:45.765126+00:00", 
+        "id": "wbx53-z6j56", 
         "links": {
-          "files": "https://localhost:5000/api/records/hg92h-m0r94/files", 
-          "self": "https://localhost:5000/api/records/hg92h-m0r94"
+          "files": "https://localhost:5000/api/records/wbx53-z6j56/files", 
+          "self": "https://localhost:5000/api/records/wbx53-z6j56"
         }, 
         "metadata": {
           "_access": {
@@ -4712,9 +2001,9 @@
           "peerReview": false, 
           "publicationDate": "1981", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1064937, 
-          "recid": "hg92h-m0r94", 
+          "recid": "wbx53-z6j56", 
           "title": "... want overal loert het gezag. Kijk uit, om je heen. Architectural strip as a social story", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Article", 
@@ -4722,14 +2011,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:32:00.216354+00:00"
+        "updated": "2020-02-03T07:34:45.765136+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:58.719815+00:00", 
-        "id": "37evt-6q236", 
+        "created": "2020-02-03T07:34:44.247885+00:00", 
+        "id": "n54fc-ayb45", 
         "links": {
-          "files": "https://localhost:5000/api/records/37evt-6q236/files", 
-          "self": "https://localhost:5000/api/records/37evt-6q236"
+          "files": "https://localhost:5000/api/records/n54fc-ayb45/files", 
+          "self": "https://localhost:5000/api/records/n54fc-ayb45"
         }, 
         "metadata": {
           "_access": {
@@ -4784,9 +2073,9 @@
           "peerReview": true, 
           "publicationDate": "2010", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1064859, 
-          "recid": "37evt-6q236", 
+          "recid": "n54fc-ayb45", 
           "title": "Aerial Computer Vision for a 3D Virtual Habitat", 
           "totalNumberOfAuthors": 5, 
           "type_p": "Article", 
@@ -4794,14 +2083,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:58.719833+00:00"
+        "updated": "2020-02-03T07:34:44.247898+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:57.244447+00:00", 
-        "id": "b578c-xth57", 
+        "created": "2020-02-03T07:34:42.739913+00:00", 
+        "id": "q4v9j-fef39", 
         "links": {
-          "files": "https://localhost:5000/api/records/b578c-xth57/files", 
-          "self": "https://localhost:5000/api/records/b578c-xth57"
+          "files": "https://localhost:5000/api/records/q4v9j-fef39/files", 
+          "self": "https://localhost:5000/api/records/q4v9j-fef39"
         }, 
         "metadata": {
           "_access": {
@@ -4858,10 +2147,10 @@
           "peerReview": false, 
           "publicationDate": "1999", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "publisherName": "Springer", 
           "pureId": 1064842, 
-          "recid": "b578c-xth57", 
+          "recid": "q4v9j-fef39", 
           "title": "Molten metal atomization by inert gases: off-line and on-line characterization by PDA", 
           "totalNumberOfAuthors": 5, 
           "type_p": "Chapter", 
@@ -4869,14 +2158,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:57.244454+00:00"
+        "updated": "2020-02-03T07:34:42.739919+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:55.731262+00:00", 
-        "id": "ewrb8-dgz57", 
+        "created": "2020-02-03T07:34:41.252919+00:00", 
+        "id": "y943v-9ed45", 
         "links": {
-          "files": "https://localhost:5000/api/records/ewrb8-dgz57/files", 
-          "self": "https://localhost:5000/api/records/ewrb8-dgz57"
+          "files": "https://localhost:5000/api/records/y943v-9ed45/files", 
+          "self": "https://localhost:5000/api/records/y943v-9ed45"
         }, 
         "metadata": {
           "_access": {
@@ -4954,9 +2243,9 @@
           "peerReview": false, 
           "publicationDate": "2015", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1064841, 
-          "recid": "ewrb8-dgz57", 
+          "recid": "y943v-9ed45", 
           "title": "Defects and structural anisotropy of HPT- and ECAP-deformed metals studied by differential dilatometry", 
           "totalNumberOfAuthors": 9, 
           "type_p": "Lecture or Presentation", 
@@ -4964,14 +2253,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:55.731270+00:00"
+        "updated": "2020-02-03T07:34:41.252926+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:54.250020+00:00", 
-        "id": "bpp6b-wmb75", 
+        "created": "2020-02-03T07:34:39.759922+00:00", 
+        "id": "ery85-fc243", 
         "links": {
-          "files": "https://localhost:5000/api/records/bpp6b-wmb75/files", 
-          "self": "https://localhost:5000/api/records/bpp6b-wmb75"
+          "files": "https://localhost:5000/api/records/ery85-fc243/files", 
+          "self": "https://localhost:5000/api/records/ery85-fc243"
         }, 
         "metadata": {
           "_access": {
@@ -5015,9 +2304,9 @@
           "peerReview": false, 
           "publicationDate": "2013", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1064840, 
-          "recid": "bpp6b-wmb75", 
+          "recid": "ery85-fc243", 
           "title": "Alkali metal \u2013 alkaline earth metal molecules on helium droplets \u2013 spectroscopy of LiCa and RbSr", 
           "totalNumberOfAuthors": 3, 
           "type_p": "Poster", 
@@ -5025,14 +2314,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:54.250029+00:00"
+        "updated": "2020-02-03T07:34:39.759928+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:52.758240+00:00", 
-        "id": "jnpfa-7ax35", 
+        "created": "2020-02-03T07:34:38.309348+00:00", 
+        "id": "xjbxw-xhg62", 
         "links": {
-          "files": "https://localhost:5000/api/records/jnpfa-7ax35/files", 
-          "self": "https://localhost:5000/api/records/jnpfa-7ax35"
+          "files": "https://localhost:5000/api/records/xjbxw-xhg62/files", 
+          "self": "https://localhost:5000/api/records/xjbxw-xhg62"
         }, 
         "metadata": {
           "_access": {
@@ -5078,9 +2367,9 @@
           "peerReview": false, 
           "publicationDate": "2010", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1064793, 
-          "recid": "jnpfa-7ax35", 
+          "recid": "xjbxw-xhg62", 
           "title": "Antagonistic endophytes from mistletoes as bio-resource to control clean room pathogens", 
           "totalNumberOfAuthors": 4, 
           "type_p": "Article", 
@@ -5088,14 +2377,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:52.758247+00:00"
+        "updated": "2020-02-03T07:34:38.309354+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:51.276464+00:00", 
-        "id": "4e8sh-pa559", 
+        "created": "2020-02-03T07:34:36.825667+00:00", 
+        "id": "20vk4-j1w14", 
         "links": {
-          "files": "https://localhost:5000/api/records/4e8sh-pa559/files", 
-          "self": "https://localhost:5000/api/records/4e8sh-pa559"
+          "files": "https://localhost:5000/api/records/20vk4-j1w14/files", 
+          "self": "https://localhost:5000/api/records/20vk4-j1w14"
         }, 
         "metadata": {
           "_access": {
@@ -5157,9 +2446,9 @@
           "peerReview": true, 
           "publicationDate": "2014", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1064755, 
-          "recid": "4e8sh-pa559", 
+          "recid": "20vk4-j1w14", 
           "title": "Investigation of the suitability of aqueous sodium glycinate as a solvent for post combustion carbon dioxide capture on the basis of pilot plant studies and screening methods", 
           "totalNumberOfAuthors": 6, 
           "type_p": "Article", 
@@ -5167,14 +2456,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:51.276477+00:00"
+        "updated": "2020-02-03T07:34:36.825674+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:49.779929+00:00", 
-        "id": "30m0p-26896", 
+        "created": "2020-02-03T07:34:35.370241+00:00", 
+        "id": "n026m-s8z65", 
         "links": {
-          "files": "https://localhost:5000/api/records/30m0p-26896/files", 
-          "self": "https://localhost:5000/api/records/30m0p-26896"
+          "files": "https://localhost:5000/api/records/n026m-s8z65/files", 
+          "self": "https://localhost:5000/api/records/n026m-s8z65"
         }, 
         "metadata": {
           "_access": {
@@ -5207,10 +2496,10 @@
           "peerReview": false, 
           "publicationDate": "1993", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "publisherName": ".", 
           "pureId": 1064743, 
-          "recid": "30m0p-26896", 
+          "recid": "n026m-s8z65", 
           "title": "Zur Hydrogeologie des H\u00f6llengebirges", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Chapter", 
@@ -5218,14 +2507,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:49.779936+00:00"
+        "updated": "2020-02-03T07:34:35.370248+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:48.304070+00:00", 
-        "id": "ps4pm-pg650", 
+        "created": "2020-02-03T07:34:33.303969+00:00", 
+        "id": "pz382-a5k42", 
         "links": {
-          "files": "https://localhost:5000/api/records/ps4pm-pg650/files", 
-          "self": "https://localhost:5000/api/records/ps4pm-pg650"
+          "files": "https://localhost:5000/api/records/pz382-a5k42/files", 
+          "self": "https://localhost:5000/api/records/pz382-a5k42"
         }, 
         "metadata": {
           "_access": {
@@ -5269,9 +2558,9 @@
           "peerReview": false, 
           "publicationDate": "2000", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1064722, 
-          "recid": "ps4pm-pg650", 
+          "recid": "pz382-a5k42", 
           "title": "Computer simulation of the brittle temperature range (BTR) for hot cracking in steels", 
           "totalNumberOfAuthors": 3, 
           "type_p": "Article", 
@@ -5279,14 +2568,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:48.304077+00:00"
+        "updated": "2020-02-03T07:34:33.303975+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:46.828736+00:00", 
-        "id": "r2c6d-2jc46", 
+        "created": "2020-02-03T07:34:31.832145+00:00", 
+        "id": "y86gf-4f803", 
         "links": {
-          "files": "https://localhost:5000/api/records/r2c6d-2jc46/files", 
-          "self": "https://localhost:5000/api/records/r2c6d-2jc46"
+          "files": "https://localhost:5000/api/records/y86gf-4f803/files", 
+          "self": "https://localhost:5000/api/records/y86gf-4f803"
         }, 
         "metadata": {
           "_access": {
@@ -5319,9 +2608,9 @@
           "peerReview": true, 
           "publicationDate": "2014", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1064699, 
-          "recid": "r2c6d-2jc46", 
+          "recid": "y86gf-4f803", 
           "title": "Regelungstechnische Aspekte bei der nicht-iterativen Co-Simulation", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Article", 
@@ -5329,14 +2618,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:46.828744+00:00"
+        "updated": "2020-02-03T07:34:31.832154+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:45.329652+00:00", 
-        "id": "q68gp-p2t93", 
+        "created": "2020-02-03T07:34:30.329447+00:00", 
+        "id": "cd71p-90m65", 
         "links": {
-          "files": "https://localhost:5000/api/records/q68gp-p2t93/files", 
-          "self": "https://localhost:5000/api/records/q68gp-p2t93"
+          "files": "https://localhost:5000/api/records/cd71p-90m65/files", 
+          "self": "https://localhost:5000/api/records/cd71p-90m65"
         }, 
         "metadata": {
           "_access": {
@@ -5368,9 +2657,9 @@
           ], 
           "publicationDate": "1994", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1064672, 
-          "recid": "q68gp-p2t93", 
+          "recid": "cd71p-90m65", 
           "title": "Analyse und Algorithmen von fokusierten Assumption Based Truth Maintenance Systemen", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Diploma Thesis", 
@@ -5378,14 +2667,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:45.329672+00:00"
+        "updated": "2020-02-03T07:34:30.329454+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:43.853366+00:00", 
-        "id": "rdz2p-n3s86", 
+        "created": "2020-02-03T07:34:28.877684+00:00", 
+        "id": "ahfc4-9tz26", 
         "links": {
-          "files": "https://localhost:5000/api/records/rdz2p-n3s86/files", 
-          "self": "https://localhost:5000/api/records/rdz2p-n3s86"
+          "files": "https://localhost:5000/api/records/ahfc4-9tz26/files", 
+          "self": "https://localhost:5000/api/records/ahfc4-9tz26"
         }, 
         "metadata": {
           "_access": {
@@ -5429,10 +2718,10 @@
           "peerReview": false, 
           "publicationDate": "2008", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "publisherName": ".", 
           "pureId": 1064647, 
-          "recid": "rdz2p-n3s86", 
+          "recid": "ahfc4-9tz26", 
           "title": "Report on new designs considering newest technologies including a cost benefit analysis", 
           "totalNumberOfAuthors": 3, 
           "type_p": "Commissioned report", 
@@ -5440,14 +2729,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:43.853373+00:00"
+        "updated": "2020-02-03T07:34:28.877693+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:42.378867+00:00", 
-        "id": "zxypw-hw118", 
+        "created": "2020-02-03T07:34:27.393747+00:00", 
+        "id": "1g71z-sm677", 
         "links": {
-          "files": "https://localhost:5000/api/records/zxypw-hw118/files", 
-          "self": "https://localhost:5000/api/records/zxypw-hw118"
+          "files": "https://localhost:5000/api/records/1g71z-sm677/files", 
+          "self": "https://localhost:5000/api/records/1g71z-sm677"
         }, 
         "metadata": {
           "_access": {
@@ -5490,9 +2779,9 @@
           "peerReview": true, 
           "publicationDate": "1989", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1064600, 
-          "recid": "zxypw-hw118", 
+          "recid": "1g71z-sm677", 
           "title": "Approximation of convex curves with application to the bicriterial min cost flow problem", 
           "totalNumberOfAuthors": 3, 
           "type_p": "Article", 
@@ -5500,14 +2789,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:42.378875+00:00"
+        "updated": "2020-02-03T07:34:27.393754+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:40.886174+00:00", 
-        "id": "1p06w-crd17", 
+        "created": "2020-02-03T07:34:25.949298+00:00", 
+        "id": "2apb6-b1c40", 
         "links": {
-          "files": "https://localhost:5000/api/records/1p06w-crd17/files", 
-          "self": "https://localhost:5000/api/records/1p06w-crd17"
+          "files": "https://localhost:5000/api/records/2apb6-b1c40/files", 
+          "self": "https://localhost:5000/api/records/2apb6-b1c40"
         }, 
         "metadata": {
           "_access": {
@@ -5545,9 +2834,9 @@
           "peerReview": true, 
           "publicationDate": "2006", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1064591, 
-          "recid": "1p06w-crd17", 
+          "recid": "2apb6-b1c40", 
           "title": "Heterogene photokatalytische Gasreinigung mit nanokristallinen Halbleiterschichten.", 
           "totalNumberOfAuthors": 2, 
           "type_p": "Article", 
@@ -5555,14 +2844,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:40.886182+00:00"
+        "updated": "2020-02-03T07:34:25.949305+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:39.385828+00:00", 
-        "id": "fx253-8g018", 
+        "created": "2020-02-03T07:34:24.458577+00:00", 
+        "id": "g1ew2-27092", 
         "links": {
-          "files": "https://localhost:5000/api/records/fx253-8g018/files", 
-          "self": "https://localhost:5000/api/records/fx253-8g018"
+          "files": "https://localhost:5000/api/records/g1ew2-27092/files", 
+          "self": "https://localhost:5000/api/records/g1ew2-27092"
         }, 
         "metadata": {
           "_access": {
@@ -5595,9 +2884,9 @@
           "peerReview": true, 
           "publicationDate": "1975", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1064589, 
-          "recid": "fx253-8g018", 
+          "recid": "g1ew2-27092", 
           "title": "Photogrammetric Interpolation", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Article", 
@@ -5605,14 +2894,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:39.385839+00:00"
+        "updated": "2020-02-03T07:34:24.458583+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:37.894238+00:00", 
-        "id": "exmhc-hzn21", 
+        "created": "2020-02-03T07:34:23.010178+00:00", 
+        "id": "xc5n9-hha51", 
         "links": {
-          "files": "https://localhost:5000/api/records/exmhc-hzn21/files", 
-          "self": "https://localhost:5000/api/records/exmhc-hzn21"
+          "files": "https://localhost:5000/api/records/xc5n9-hha51/files", 
+          "self": "https://localhost:5000/api/records/xc5n9-hha51"
         }, 
         "metadata": {
           "_access": {
@@ -5649,9 +2938,9 @@
           "peerReview": false, 
           "publicationDate": "2010", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1064572, 
-          "recid": "exmhc-hzn21", 
+          "recid": "xc5n9-hha51", 
           "title": "Auf dem Holzweg", 
           "totalNumberOfAuthors": 2, 
           "type_p": "Article", 
@@ -5659,14 +2948,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:37.894246+00:00"
+        "updated": "2020-02-03T07:34:23.010184+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:36.372924+00:00", 
-        "id": "yngg5-1yj65", 
+        "created": "2020-02-03T07:34:21.569595+00:00", 
+        "id": "yq7pg-e9651", 
         "links": {
-          "files": "https://localhost:5000/api/records/yngg5-1yj65/files", 
-          "self": "https://localhost:5000/api/records/yngg5-1yj65"
+          "files": "https://localhost:5000/api/records/yq7pg-e9651/files", 
+          "self": "https://localhost:5000/api/records/yq7pg-e9651"
         }, 
         "metadata": {
           "_access": {
@@ -5699,9 +2988,9 @@
           "peerReview": true, 
           "publicationDate": "2003", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1064534, 
-          "recid": "yngg5-1yj65", 
+          "recid": "yq7pg-e9651", 
           "title": "Why it is Difficult to Introduce e-Learning into Schools And Some New Solutions", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Article", 
@@ -5709,14 +2998,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:36.372935+00:00"
+        "updated": "2020-02-03T07:34:21.569601+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:34.701283+00:00", 
-        "id": "v2kkj-dyz45", 
+        "created": "2020-02-03T07:34:20.115433+00:00", 
+        "id": "88q22-y2645", 
         "links": {
-          "files": "https://localhost:5000/api/records/v2kkj-dyz45/files", 
-          "self": "https://localhost:5000/api/records/v2kkj-dyz45"
+          "files": "https://localhost:5000/api/records/88q22-y2645/files", 
+          "self": "https://localhost:5000/api/records/88q22-y2645"
         }, 
         "metadata": {
           "_access": {
@@ -5766,9 +3055,9 @@
           "peerReview": false, 
           "publicationDate": "2009", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1064513, 
-          "recid": "v2kkj-dyz45", 
+          "recid": "88q22-y2645", 
           "title": "Combining eye tracking, key logging, and electroencephalographic data: towards an integrated tool for translators", 
           "totalNumberOfAuthors": 4, 
           "type_p": "Poster", 
@@ -5776,14 +3065,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:34.701295+00:00"
+        "updated": "2020-02-03T07:34:20.115442+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:33.114010+00:00", 
-        "id": "y5gcs-x4233", 
+        "created": "2020-02-03T07:34:17.968501+00:00", 
+        "id": "ebst9-gkn10", 
         "links": {
-          "files": "https://localhost:5000/api/records/y5gcs-x4233/files", 
-          "self": "https://localhost:5000/api/records/y5gcs-x4233"
+          "files": "https://localhost:5000/api/records/ebst9-gkn10/files", 
+          "self": "https://localhost:5000/api/records/ebst9-gkn10"
         }, 
         "metadata": {
           "_access": {
@@ -5844,9 +3133,9 @@
           "peerReview": true, 
           "publicationDate": "1999", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1064460, 
-          "recid": "y5gcs-x4233", 
+          "recid": "ebst9-gkn10", 
           "title": "Device characteristics of nanostructured poly(p-phenylenevinylene", 
           "totalNumberOfAuthors": 6, 
           "type_p": "Article", 
@@ -5854,14 +3143,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:33.114024+00:00"
+        "updated": "2020-02-03T07:34:17.968509+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:31.488218+00:00", 
-        "id": "f104g-ttb74", 
+        "created": "2020-02-03T07:34:16.496423+00:00", 
+        "id": "n86fy-bfp37", 
         "links": {
-          "files": "https://localhost:5000/api/records/f104g-ttb74/files", 
-          "self": "https://localhost:5000/api/records/f104g-ttb74"
+          "files": "https://localhost:5000/api/records/n86fy-bfp37/files", 
+          "self": "https://localhost:5000/api/records/n86fy-bfp37"
         }, 
         "metadata": {
           "_access": {
@@ -5893,9 +3182,9 @@
           ], 
           "publicationDate": "1961", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1064398, 
-          "recid": "f104g-ttb74", 
+          "recid": "n86fy-bfp37", 
           "title": "Gemischbildungsfragen im Dieselmotor unter besonderer Ber\u00fccksichtigung des Vierstoffproblems", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Doctoral Thesis", 
@@ -5903,14 +3192,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:31.488232+00:00"
+        "updated": "2020-02-03T07:34:16.496430+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:29.890616+00:00", 
-        "id": "7z85w-9kp38", 
+        "created": "2020-02-03T07:34:15.028407+00:00", 
+        "id": "ekwwv-jkb72", 
         "links": {
-          "files": "https://localhost:5000/api/records/7z85w-9kp38/files", 
-          "self": "https://localhost:5000/api/records/7z85w-9kp38"
+          "files": "https://localhost:5000/api/records/ekwwv-jkb72/files", 
+          "self": "https://localhost:5000/api/records/ekwwv-jkb72"
         }, 
         "metadata": {
           "_access": {
@@ -5996,9 +3285,9 @@
           "peerReview": true, 
           "publicationDate": "2015", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1064349, 
-          "recid": "7z85w-9kp38", 
+          "recid": "ekwwv-jkb72", 
           "title": "Engineering high-performance Pd core\u2013MgO porous shell nanocatalysts via heterogeneous gas-phase synthesis\u2020", 
           "totalNumberOfAuthors": 10, 
           "type_p": "Article", 
@@ -6006,14 +3295,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:29.890625+00:00"
+        "updated": "2020-02-03T07:34:15.028414+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:28.318003+00:00", 
-        "id": "jqn7v-gt896", 
+        "created": "2020-02-03T07:34:13.551664+00:00", 
+        "id": "s4663-n6g83", 
         "links": {
-          "files": "https://localhost:5000/api/records/jqn7v-gt896/files", 
-          "self": "https://localhost:5000/api/records/jqn7v-gt896"
+          "files": "https://localhost:5000/api/records/s4663-n6g83/files", 
+          "self": "https://localhost:5000/api/records/s4663-n6g83"
         }, 
         "metadata": {
           "_access": {
@@ -6067,9 +3356,9 @@
           "peerReview": true, 
           "publicationDate": "2012", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1064282, 
-          "recid": "jqn7v-gt896", 
+          "recid": "s4663-n6g83", 
           "title": "Combining different analytical approaches to identify odor formation mechanisms in polyethylene and polypropylene", 
           "totalNumberOfAuthors": 5, 
           "type_p": "Article", 
@@ -6077,14 +3366,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:28.318014+00:00"
+        "updated": "2020-02-03T07:34:13.551672+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:26.708248+00:00", 
-        "id": "edne4-yjm87", 
+        "created": "2020-02-03T07:34:12.088189+00:00", 
+        "id": "eccwx-dve34", 
         "links": {
-          "files": "https://localhost:5000/api/records/edne4-yjm87/files", 
-          "self": "https://localhost:5000/api/records/edne4-yjm87"
+          "files": "https://localhost:5000/api/records/eccwx-dve34/files", 
+          "self": "https://localhost:5000/api/records/eccwx-dve34"
         }, 
         "metadata": {
           "_access": {
@@ -6117,10 +3406,10 @@
           "peerReview": false, 
           "publicationDate": "2002", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "publisherName": ".", 
           "pureId": 1064258, 
-          "recid": "edne4-yjm87", 
+          "recid": "eccwx-dve34", 
           "title": "Die Wechselwirkung Wasser - Mineralkorn und seine Bedeutung f\u00fcr das Frosteindringverhalten von ungebundenen Tragschichten", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Chapter", 
@@ -6128,14 +3417,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:26.708256+00:00"
+        "updated": "2020-02-03T07:34:12.088197+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:25.101616+00:00", 
-        "id": "99a4n-xvs51", 
+        "created": "2020-02-03T07:34:10.600949+00:00", 
+        "id": "yhqes-dk397", 
         "links": {
-          "files": "https://localhost:5000/api/records/99a4n-xvs51/files", 
-          "self": "https://localhost:5000/api/records/99a4n-xvs51"
+          "files": "https://localhost:5000/api/records/yhqes-dk397/files", 
+          "self": "https://localhost:5000/api/records/yhqes-dk397"
         }, 
         "metadata": {
           "_access": {
@@ -6168,10 +3457,10 @@
           "peerReview": false, 
           "publicationDate": "1995", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "publisherName": "Expert-Verlag, Renningen", 
           "pureId": 1064227, 
-          "recid": "99a4n-xvs51", 
+          "recid": "yhqes-dk397", 
           "title": "Sicherheit in der Medizintechnik", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Book", 
@@ -6179,14 +3468,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:25.101631+00:00"
+        "updated": "2020-02-03T07:34:10.600960+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:23.511841+00:00", 
-        "id": "jp9zn-3wh90", 
+        "created": "2020-02-03T07:34:09.072782+00:00", 
+        "id": "khtq8-9e585", 
         "links": {
-          "files": "https://localhost:5000/api/records/jp9zn-3wh90/files", 
-          "self": "https://localhost:5000/api/records/jp9zn-3wh90"
+          "files": "https://localhost:5000/api/records/khtq8-9e585/files", 
+          "self": "https://localhost:5000/api/records/khtq8-9e585"
         }, 
         "metadata": {
           "_access": {
@@ -6249,9 +3538,9 @@
           "peerReview": true, 
           "publicationDate": "2014", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "pureId": 1064179, 
-          "recid": "jp9zn-3wh90", 
+          "recid": "khtq8-9e585", 
           "title": "A function of the major quinolone resistance determinant of Stenotrophomonas maltophilia SmeDEF is the colonization of the roots of the plants.", 
           "totalNumberOfAuthors": 6, 
           "type_p": "Article", 
@@ -6259,14 +3548,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:23.511856+00:00"
+        "updated": "2020-02-03T07:34:09.072788+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:21.946694+00:00", 
-        "id": "fvr58-ab289", 
+        "created": "2020-02-03T07:34:07.605188+00:00", 
+        "id": "jgx23-sn132", 
         "links": {
-          "files": "https://localhost:5000/api/records/fvr58-ab289/files", 
-          "self": "https://localhost:5000/api/records/fvr58-ab289"
+          "files": "https://localhost:5000/api/records/jgx23-sn132/files", 
+          "self": "https://localhost:5000/api/records/jgx23-sn132"
         }, 
         "metadata": {
           "_access": {
@@ -6299,10 +3588,10 @@
           "peerReview": false, 
           "publicationDate": "2005", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "publisherName": ".", 
           "pureId": 1064153, 
-          "recid": "fvr58-ab289", 
+          "recid": "jgx23-sn132", 
           "title": "Im gleichen Schritt und Tritt. Die Geschichte des \u00d6KB-Ortsverbandes St. Radegund 1865-2005", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Book", 
@@ -6310,14 +3599,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:21.946707+00:00"
+        "updated": "2020-02-03T07:34:07.605195+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:20.364460+00:00", 
-        "id": "88r86-6q109", 
+        "created": "2020-02-03T07:34:06.144611+00:00", 
+        "id": "jx6f8-6ne33", 
         "links": {
-          "files": "https://localhost:5000/api/records/88r86-6q109/files", 
-          "self": "https://localhost:5000/api/records/88r86-6q109"
+          "files": "https://localhost:5000/api/records/jx6f8-6ne33/files", 
+          "self": "https://localhost:5000/api/records/jx6f8-6ne33"
         }, 
         "metadata": {
           "_access": {
@@ -6374,10 +3663,10 @@
           "peerReview": false, 
           "publicationDate": "2015", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "publisherName": "Institut f\u00fcr Computer Graphik und Wissensvisualisierung, Technische Universit\u00e4t Graz", 
           "pureId": 1064135, 
-          "recid": "88r86-6q109", 
+          "recid": "jx6f8-6ne33", 
           "title": "The History of Mobile Augmented Reality", 
           "totalNumberOfAuthors": 6, 
           "type_p": "Other report", 
@@ -6385,14 +3674,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:20.364470+00:00"
+        "updated": "2020-02-03T07:34:06.144619+00:00"
       }, 
       {
-        "created": "2020-01-31T13:31:18.714886+00:00", 
-        "id": "zpn33-qzk81", 
+        "created": "2020-02-03T07:34:04.565732+00:00", 
+        "id": "6m114-bh538", 
         "links": {
-          "files": "https://localhost:5000/api/records/zpn33-qzk81/files", 
-          "self": "https://localhost:5000/api/records/zpn33-qzk81"
+          "files": "https://localhost:5000/api/records/6m114-bh538/files", 
+          "self": "https://localhost:5000/api/records/6m114-bh538"
         }, 
         "metadata": {
           "_access": {
@@ -6443,10 +3732,10 @@
           "peerReview": false, 
           "publicationDate": "1997", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-01-31", 
+          "publication_date": "2020-02-03", 
           "publisherName": ".", 
           "pureId": 1064125, 
-          "recid": "zpn33-qzk81", 
+          "recid": "6m114-bh538", 
           "title": "Beurteilung der Umweltvertr\u00e4glichkeit des Einsatzes von Einjahresganzpflanzen und Stroh zur Fernw\u00e4rmeerzeugung, Endbericht", 
           "totalNumberOfAuthors": 4, 
           "type_p": "Other report", 
@@ -6454,13 +3743,12 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-01-31T13:31:18.714894+00:00"
+        "updated": "2020-02-03T07:34:04.565739+00:00"
       }
     ], 
-    "total": 900
+    "total": 60
   }, 
   "links": {
-    "prev": "https://localhost:5000/api/records/?sort=mostrecent&size=100&page=8", 
-    "self": "https://localhost:5000/api/records/?sort=mostrecent&size=100&page=9"
+    "self": "https://localhost:5000/api/records/?sort=mostrecent&size=100&page=1"
   }
 }

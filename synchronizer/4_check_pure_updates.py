@@ -5,7 +5,7 @@ import os
 from pprint import pprint     
             
 pag = 1
-pag_size = 100
+pag_size = 500
 
 headers = {
     'Accept': 'application/json',
@@ -20,6 +20,7 @@ params = (
 response = requests.get('https://pure01.tugraz.at/ws/api/514/research-outputs', headers=headers, params=params)
 dirpath = os.path.dirname(os.path.abspath(__file__))
 open(dirpath + "/reports/resp_pure.json", 'wb').write(response.content)
+exit()
 resp_json = json.loads(response.content)
 
 # resp_json = open(self.dirpath + '/reports/resp_pure.json', 'r')             # -- TEMPORARY -- 

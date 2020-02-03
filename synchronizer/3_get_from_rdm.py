@@ -1,13 +1,17 @@
 import requests
 import json
 import time
+import os
 from pprint import pprint
 
+dirpath = os.path.dirname(os.path.abspath(__file__))
 params = (('prettyprint', '1'),)
 
 go_on = True
 pag = 1
-uuid_rdm = []
+
+
+uuid_str = ''
 
 while go_on == True:
 
@@ -16,7 +20,7 @@ while go_on == True:
         params=params, 
         verify=False
         )
-    open("./reports/resp_rdm.json", 'wb').write(response.content)
+    open(dirpath + "/reports/resp_rdm.json", 'wb').write(response.content)
     print(response)
 
     if response.status_code >= 300:
@@ -27,15 +31,14 @@ while go_on == True:
 
     for i in resp_json['hits']['hits']:
         pprint(i['metadata']['uuid'])
-        uuid_rdm.append(i['metadata']['uuid'])
+        uuid_str += i['metadata']['uuid'] + '\n'
 
     if 'next' not in resp_json['links']:
-        print('\nNo pore pages available..\n')
+        print('\n- End - No more pages available\n')
         go_on = False
 
     time.sleep(3)
     pag += 1
     
-
-print('\n- All uuids -\n')
-pprint(uuid_rdm)
+    
+open(dirpath + "/reports/all_rdm_records.txt", 'w+').write(uuid_str)
