@@ -1,8 +1,8 @@
 import os
 from PTR_1 import pureToInvenio
 
-dirpath = os.path.dirname(os.path.abspath(__file__))
-retrans_data = open(dirpath + '/reports/to_re_transfer.log', 'r')
+# dirpath = os.path.dirname(os.path.abspath(__file__))
+# retrans_data = open(dirpath + '/reports/to_re_transfer.log', 'r')
 
 # Create instance
 inst_pti = pureToInvenio()
@@ -20,5 +20,7 @@ inst_pti = pureToInvenio()
 # if cnt == 0:    print('\n- Nothing to re-transmit -\n')
 
 
+
 uuid = '3e5bc032-716b-4e4b-8e59-fe202e9e9596'       # TEMP
+# uuid = '06f9e00f-ca16-4db5-bdf8-d13bb3235788'       # TEMP
 inst_pti.get_pure_by_id(uuid)                       # TEMP

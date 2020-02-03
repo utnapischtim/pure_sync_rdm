@@ -5,7 +5,7 @@ import os
 from pprint import pprint     
             
 pag = 1
-pag_size = 500
+pag_size = 100
 
 headers = {
     'Accept': 'application/json',

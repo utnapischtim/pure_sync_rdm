@@ -1,0 +1,532 @@
+{
+  "pureId" : 19239080,
+  "uuid" : "3e5bc032-716b-4e4b-8e59-fe202e9e9596",
+  "title" : "Drucksachetr",
+  "subTitle" : "unter drunter",
+  "peerReview" : false,
+  "managingOrganisationalUnit" : {
+    "uuid" : "fdb7051b-0b7d-4cc1-936f-94232f231381",
+    "link" : {
+      "ref" : "content",
+      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/fdb7051b-0b7d-4cc1-936f-94232f231381"
+    },
+    "externalId" : "1420",
+    "externalIdSource" : "synchronisedUnifiedOrganisation",
+    "externallyManaged" : true,
+    "names" : [ {
+      "locale" : "en_GB",
+      "value" : "Serials Management, Open Access and Digitisation (95023)"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Zeitschriftenmanagement, Open Access und Digitalisierung (95023)"
+    } ],
+    "types" : [ {
+      "locale" : "en_GB",
+      "value" : "Department",
+      "pureId" : 5488,
+      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Abteilung-DLE",
+      "pureId" : 5488,
+      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
+    } ]
+  },
+  "confidential" : false,
+  "info" : {
+    "createdBy" : "chrlad",
+    "createdDate" : "2019-01-29T09:58:49.835+0000",
+    "modifiedBy" : "brantner",
+    "modifiedDate" : "2019-05-14T09:51:12.079+0000",
+    "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/drucksachetr(3e5bc032-716b-4e4b-8e59-fe202e9e9596).html"
+  },
+  "pages" : "3-5",
+  "volume" : "10",
+  "journalAssociation" : {
+    "pureId" : 19239081,
+    "title" : {
+      "value" : "Physical review applied",
+      "startDate" : "2014"
+    },
+    "journal" : {
+      "uuid" : "52cef218-970a-4d97-a40f-fa5c0d1de627",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/journals/52cef218-970a-4d97-a40f-fa5c0d1de627"
+      },
+      "externalId" : "6645",
+      "externalIdSource" : "researchoutputwizard",
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Physical review applied"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Physical review applied"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Journal",
+        "pureId" : 989,
+        "uri" : "/dk/atira/pure/journal/journaltypes/journal/journal"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Zeitschrift",
+        "pureId" : 989,
+        "uri" : "/dk/atira/pure/journal/journaltypes/journal/journal"
+      } ]
+    }
+  },
+  "journalNumber" : "3",
+  "totalNumberOfAuthors" : 2,
+  "types" : [ {
+    "locale" : "en_GB",
+    "value" : "Article",
+    "pureId" : 4490,
+    "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontojournal/article"
+  }, {
+    "locale" : "de_DE",
+    "value" : "Artikel",
+    "pureId" : 4490,
+    "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontojournal/article"
+  } ],
+  "categories" : [ {
+    "locale" : "en_GB",
+    "value" : "Research",
+    "pureId" : 4454,
+    "uri" : "/dk/atira/pure/researchoutput/category/research"
+  }, {
+    "locale" : "de_DE",
+    "value" : "Forschung",
+    "pureId" : 4454,
+    "uri" : "/dk/atira/pure/researchoutput/category/research"
+  } ],
+  "publicationStatuses" : [ {
+    "pureId" : 19239080,
+    "current" : true,
+    "publicationDate" : {
+      "year" : 2019,
+      "month" : 1,
+      "day" : 1
+    },
+    "publicationStatuses" : [ {
+      "locale" : "en_GB",
+      "value" : "Published",
+      "pureId" : 869,
+      "uri" : "/dk/atira/pure/researchoutput/status/published"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Veröffentlicht",
+      "pureId" : 869,
+      "uri" : "/dk/atira/pure/researchoutput/status/published"
+    } ]
+  } ],
+  "languages" : [ {
+    "locale" : "en_GB",
+    "value" : "German",
+    "pureId" : 4898,
+    "uri" : "/dk/atira/pure/core/languages/de_DE"
+  }, {
+    "locale" : "de_DE",
+    "value" : "deutsch",
+    "pureId" : 4898,
+    "uri" : "/dk/atira/pure/core/languages/de_DE"
+  } ],
+  "abstracts" : [ {
+    "locale" : "de_DE",
+    "formatted" : true,
+    "value" : "lorem ipsum"
+  } ],
+  "personAssociations" : [ {
+    "pureId" : 19239086,
+    "person" : {
+      "uuid" : "14a293cd-8642-471e-814e-e00a4c9c4929",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/14a293cd-8642-471e-814e-e00a4c9c4929"
+      },
+      "externalId" : "-45306",
+      "externalIdSource" : "synchronisedUnifiedPerson",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Christoph Ladurner"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Christoph Ladurner"
+      } ]
+    },
+    "name" : {
+      "firstName" : "Christoph",
+      "lastName" : "Ladurner"
+    },
+    "personRoles" : [ {
+      "locale" : "en_GB",
+      "value" : "Author",
+      "pureId" : 5146,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Autor",
+      "pureId" : 5146,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+    } ],
+    "organisationalUnits" : [ {
+      "uuid" : "fdb7051b-0b7d-4cc1-936f-94232f231381",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/fdb7051b-0b7d-4cc1-936f-94232f231381"
+      },
+      "externalId" : "1420",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Serials Management, Open Access and Digitisation (95023)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Zeitschriftenmanagement, Open Access und Digitalisierung (95023)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Department",
+        "pureId" : 5488,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Abteilung-DLE",
+        "pureId" : 5488,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
+      } ]
+    }, {
+      "uuid" : "649cf008-b5a6-4f15-a669-32bad271995a",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/649cf008-b5a6-4f15-a669-32bad271995a"
+      },
+      "externalId" : "1296",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "University Library and Archives (95020)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Bibliothek und Archiv (95020)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Department",
+        "pureId" : 5440,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_714"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Einrichtung",
+        "pureId" : 5440,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_714"
+      } ]
+    } ]
+  }, {
+    "pureId" : 19241397,
+    "person" : {
+      "uuid" : "f0f60b8b-a7cb-41e9-ad36-606d3e890a3b",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b"
+      },
+      "externalId" : "53779",
+      "externalIdSource" : "synchronisedUnifiedPerson",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Maria Wruß"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Maria Wruß"
+      } ]
+    },
+    "name" : {
+      "firstName" : "Maria",
+      "lastName" : "Wruß"
+    },
+    "personRoles" : [ {
+      "locale" : "en_GB",
+      "value" : "Author",
+      "pureId" : 5146,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Autor",
+      "pureId" : 5146,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+    } ],
+    "organisationalUnits" : [ {
+      "uuid" : "650fb44b-f9dd-490c-b6e0-4b3e77b55c26",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26"
+      },
+      "externalId" : "1416",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Administration (95021)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "EDV/ Verwaltung (95021)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Department",
+        "pureId" : 5488,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Abteilung-DLE",
+        "pureId" : 5488,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
+      } ]
+    } ]
+  } ],
+  "organisationalUnits" : [ {
+    "uuid" : "fdb7051b-0b7d-4cc1-936f-94232f231381",
+    "link" : {
+      "ref" : "content",
+      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/fdb7051b-0b7d-4cc1-936f-94232f231381"
+    },
+    "externalId" : "1420",
+    "externalIdSource" : "synchronisedUnifiedOrganisation",
+    "externallyManaged" : true,
+    "names" : [ {
+      "locale" : "en_GB",
+      "value" : "Serials Management, Open Access and Digitisation (95023)"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Zeitschriftenmanagement, Open Access und Digitalisierung (95023)"
+    } ],
+    "types" : [ {
+      "locale" : "en_GB",
+      "value" : "Department",
+      "pureId" : 5488,
+      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Abteilung-DLE",
+      "pureId" : 5488,
+      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
+    } ]
+  }, {
+    "uuid" : "649cf008-b5a6-4f15-a669-32bad271995a",
+    "link" : {
+      "ref" : "content",
+      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/649cf008-b5a6-4f15-a669-32bad271995a"
+    },
+    "externalId" : "1296",
+    "externalIdSource" : "synchronisedUnifiedOrganisation",
+    "externallyManaged" : true,
+    "names" : [ {
+      "locale" : "en_GB",
+      "value" : "University Library and Archives (95020)"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Bibliothek und Archiv (95020)"
+    } ],
+    "types" : [ {
+      "locale" : "en_GB",
+      "value" : "Department",
+      "pureId" : 5440,
+      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_714"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Einrichtung",
+      "pureId" : 5440,
+      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_714"
+    } ]
+  }, {
+    "uuid" : "650fb44b-f9dd-490c-b6e0-4b3e77b55c26",
+    "link" : {
+      "ref" : "content",
+      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26"
+    },
+    "externalId" : "1416",
+    "externalIdSource" : "synchronisedUnifiedOrganisation",
+    "externallyManaged" : true,
+    "names" : [ {
+      "locale" : "en_GB",
+      "value" : "Administration (95021)"
+    }, {
+      "locale" : "de_DE",
+      "value" : "EDV/ Verwaltung (95021)"
+    } ],
+    "types" : [ {
+      "locale" : "en_GB",
+      "value" : "Department",
+      "pureId" : 5488,
+      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Abteilung-DLE",
+      "pureId" : 5488,
+      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
+    } ]
+  } ],
+  "openAccessPermissions" : [ {
+    "locale" : "en_GB",
+    "value" : "Open",
+    "pureId" : 2920,
+    "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/open"
+  }, {
+    "locale" : "de_DE",
+    "value" : "Offen",
+    "pureId" : 2920,
+    "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/open"
+  } ],
+  "electronicVersions" : [ {
+    "pureId" : 19277748,
+    "visibleOnPortalDate" : "2019-02-20T12:00:22.061+0000",
+    "doi" : "https://doi.org/10.1000/182",
+    "accessTypes" : [ {
+      "locale" : "en_GB",
+      "value" : "Open",
+      "pureId" : 105,
+      "uri" : "/dk/atira/pure/core/openaccesspermission/open"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Offen",
+      "pureId" : 105,
+      "uri" : "/dk/atira/pure/core/openaccesspermission/open"
+    } ],
+    "versionTypes" : [ {
+      "locale" : "en_GB",
+      "value" : "Final published version",
+      "pureId" : 23264,
+      "uri" : "/dk/atira/pure/researchoutput/electronicversion/versiontype/publishersversion"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Endgültige, publizierte Fassung",
+      "pureId" : 23264,
+      "uri" : "/dk/atira/pure/researchoutput/electronicversion/versiontype/publishersversion"
+    } ],
+    "licenseTypes" : [ {
+      "locale" : "en_GB",
+      "value" : "CC BY",
+      "pureId" : 23276,
+      "uri" : "/dk/atira/pure/core/document/licenses/cc_by"
+    }, {
+      "locale" : "de_DE",
+      "value" : "CC BY",
+      "pureId" : 23276,
+      "uri" : "/dk/atira/pure/core/document/licenses/cc_by"
+    } ]
+  }, {
+    "pureId" : 19239107,
+    "visibleOnPortalDate" : "2019-02-20T12:00:31.535+0000",
+    "creator" : "chrlad",
+    "created" : "2019-01-29T11:15:46.243+0000",
+    "title" : "test",
+    "file" : {
+      "fileName" : "test.txt",
+      "mimeType" : "text/plain",
+      "size" : 2,
+      "fileURL" : "https://pure01.tugraz.at/ws/files/19239108/test.txt",
+      "digestAlgorithm" : "SHA1",
+      "digest" : "E5FA44F2B31C1FB553B6021E7360D07D5D91FF5E"
+    },
+    "accessTypes" : [ {
+      "locale" : "en_GB",
+      "value" : "Open",
+      "pureId" : 105,
+      "uri" : "/dk/atira/pure/core/openaccesspermission/open"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Offen",
+      "pureId" : 105,
+      "uri" : "/dk/atira/pure/core/openaccesspermission/open"
+    } ],
+    "licenseTypes" : [ {
+      "locale" : "en_GB",
+      "value" : "CC BY",
+      "pureId" : 23276,
+      "uri" : "/dk/atira/pure/core/document/licenses/cc_by"
+    }, {
+      "locale" : "de_DE",
+      "value" : "CC BY",
+      "pureId" : 23276,
+      "uri" : "/dk/atira/pure/core/document/licenses/cc_by"
+    } ]
+  } ],
+  "keywordGroups" : [ {
+    "pureId" : 19239082,
+    "logicalName" : "/dk/atira/pure/core/oefos2012",
+    "types" : [ {
+      "locale" : "en_GB",
+      "value" : "Austrian Fields of Study 2012 (6-stellig)",
+      "uri" : "/dk/atira/pure/core/oefos2012"
+    }, {
+      "locale" : "de_DE",
+      "value" : "ÖFOS 2012 (6-stellig)",
+      "uri" : "/dk/atira/pure/core/oefos2012"
+    } ],
+    "keywordContainers" : [ {
+      "pureId" : 19239083,
+      "structuredKeyword" : {
+        "pureId" : 13310,
+        "uri" : "/dk/atira/pure/core/oefos2012/107/107001",
+        "disabled" : false,
+        "terms" : [ {
+          "locale" : "en_GB",
+          "value" : "107001 Archaeometry"
+        }, {
+          "locale" : "de_DE",
+          "value" : "107001 Archäometrie"
+        } ],
+        "descriptions" : [ {
+          "locale" : "en_GB",
+          "value" : "107001 Archaeometry"
+        }, {
+          "locale" : "de_DE",
+          "value" : "107001 Archäometrie"
+        } ]
+      }
+    }, {
+      "pureId" : 19241399,
+      "structuredKeyword" : {
+        "pureId" : 13724,
+        "uri" : "/dk/atira/pure/core/oefos2012/209/209005",
+        "disabled" : false,
+        "terms" : [ {
+          "locale" : "en_GB",
+          "value" : "209005 Fermentation"
+        }, {
+          "locale" : "de_DE",
+          "value" : "209005 Fermentation"
+        } ],
+        "descriptions" : [ {
+          "locale" : "en_GB",
+          "value" : "209005 Fermentation"
+        }, {
+          "locale" : "de_DE",
+          "value" : "209005 Fermentation"
+        } ]
+      }
+    } ]
+  } ],
+  "visibilities" : [ {
+    "locale" : "en_GB",
+    "value" : "Public - No restriction",
+    "key" : "FREE"
+  }, {
+    "locale" : "de_DE",
+    "value" : "Öffentlich - Keine Einschränkungen",
+    "key" : "FREE"
+  } ],
+  "workflows" : [ {
+    "locale" : "en_GB",
+    "value" : "For validation",
+    "workflowStep" : "forApproval"
+  }, {
+    "locale" : "de_DE",
+    "value" : "Zur Validierung",
+    "workflowStep" : "forApproval"
+  } ]
+}

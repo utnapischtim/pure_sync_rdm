@@ -119,11 +119,18 @@ class pureToInvenio:
             self.add_field(item, 'licenseType',                       ['electronicVersions', 0, 'licenseType', 'value'])
             self.add_field(item, 'journalTitle',                      ['info', 'journalAssociation', 'title', 'value'])
             self.add_field(item, 'journalNumber',                     ['info', 'journalNumber'])
-            self.add_field(item, 'fileTitle',                         ['electronicVersions', ''])
-            self.add_field(item, 'fileSize',                          ['electronicVersions', ''])
-            self.add_field(item, 'fileURL',                           ['electronicVersions', ''])
-            self.add_field(item, 'fileAccessType',                    ['electronicVersions', ''])
-            self.add_field(item, 'fileVersion',                       ['electronicVersions', ''])
+
+            self.add_field(item, 'fileAccessType',                    ['electronicVersions', 0, 'accessTypes', 0, 'value'])
+            self.add_field(item, 'fileCreator',                       ['electronicVersions', 0, 'creator'])
+            self.add_field(item, 'fileCreationDate',                  ['electronicVersions', 0, 'created'])
+            self.add_field(item, 'fileTitle',                         ['electronicVersions', 0, 'title'])
+            self.add_field(item, 'fileDigest',                        ['electronicVersions', 0, 'file', 'digest'])
+            self.add_field(item, 'fileDigestAlgorithm',               ['electronicVersions', 0, 'file', 'digestAlgorithm'])
+            self.add_field(item, 'fileName',                          ['electronicVersions', 0, 'file', 'fileName'])
+            self.add_field(item, 'fileURL',                           ['electronicVersions', 0, 'file', 'fileURL'])
+            self.add_field(item, 'fileType',                          ['electronicVersions', 0, 'file', 'mimeType'])
+            self.add_field(item, 'fileSize',                          ['electronicVersions', 0, 'file', 'size'])
+
 
             # --- personAssociations ---
             if 'personAssociations' in item:
@@ -171,7 +178,14 @@ class pureToInvenio:
             filename = self.dirpath + "/reports/last_push.json"
             open(filename, "w+").write(self.data)
 
-            self.post_to_invenio()
+
+            if 'electronicVersions' in item:
+                if 'file' in item['electronicVersions'][0]:
+                    self.post_to_invenio()
+                else:
+                    print('skip')
+
+            
 
 
     #   ---         ---         ---
