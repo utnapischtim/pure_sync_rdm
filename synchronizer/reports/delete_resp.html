@@ -1,0 +1,535 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>AttributeError: 'dict' object has no attribute 'startswith' // Werkzeug Debugger</title>
+    <link rel="stylesheet" href="?__debugger__=yes&amp;cmd=resource&amp;f=style.css"
+        type="text/css">
+    <!-- We need to make sure this has a favicon so that the debugger does
+         not by accident trigger a request to /favicon.ico which might
+         change the application state. -->
+    <link rel="shortcut icon"
+        href="?__debugger__=yes&amp;cmd=resource&amp;f=console.png">
+    <script src="?__debugger__=yes&amp;cmd=resource&amp;f=jquery.js"></script>
+    <script src="?__debugger__=yes&amp;cmd=resource&amp;f=debugger.js"></script>
+    <script type="text/javascript">
+      var TRACEBACK = 139820524416360,
+          CONSOLE_MODE = false,
+          EVALEX = true,
+          EVALEX_TRUSTED = false,
+          SECRET = "JwRc9QgreH6EPic9pMLN";
+    </script>
+  </head>
+  <body style="background-color: #fff">
+    <div class="debugger">
+<h1>AttributeError</h1>
+<div class="detail">
+  <p class="errormsg">AttributeError: 'dict' object has no attribute 'startswith'</p>
+</div>
+<h2 class="traceback">Traceback <em>(most recent call last)</em></h2>
+<div class="traceback">
+  
+  <ul><li><div class="frame" id="frame-139820249632952">
+  <h4>File <cite class="filename">"/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py"</cite>,
+      line <em class="line">2463</em>,
+      in <code class="function">__call__</code></h4>
+  <div class="source "><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>def __call__(self, environ, start_response):</pre>
+<pre class="line before"><span class="ws">        </span>&quot;&quot;&quot;The WSGI server calls the Flask application object as the</pre>
+<pre class="line before"><span class="ws">        </span>WSGI application. This calls :meth:`wsgi_app` which can be</pre>
+<pre class="line before"><span class="ws">        </span>wrapped to applying middleware.&quot;&quot;&quot;</pre>
+<pre class="line current"><span class="ws">        </span>return self.wsgi_app(environ, start_response)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def __repr__(self):</pre>
+<pre class="line after"><span class="ws">        </span>return &quot;&lt;%s %r&gt;&quot; % (self.__class__.__name__, self.name)</pre></div>
+</div>
+
+<li><div class="frame" id="frame-139820249724800">
+  <h4>File <cite class="filename">"/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/werkzeug/middleware/proxy_fix.py"</cite>,
+      line <em class="line">232</em>,
+      in <code class="function">__call__</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">            </span>self.x_prefix, environ_get(&quot;HTTP_X_FORWARDED_PREFIX&quot;)</pre>
+<pre class="line before"><span class="ws">        </span>)</pre>
+<pre class="line before"><span class="ws">        </span>if x_prefix:</pre>
+<pre class="line before"><span class="ws">            </span>environ[&quot;SCRIPT_NAME&quot;] = x_prefix</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line current"><span class="ws">        </span>return self.app(environ, start_response)</pre></div>
+</div>
+
+<li><div class="frame" id="frame-139820249726648">
+  <h4>File <cite class="filename">"/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/werkzeug/middleware/dispatcher.py"</cite>,
+      line <em class="line">66</em>,
+      in <code class="function">__call__</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">            </span>app = self.mounts.get(script, self.app)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>original_script_name = environ.get(&quot;SCRIPT_NAME&quot;, &quot;&quot;)</pre>
+<pre class="line before"><span class="ws">        </span>environ[&quot;SCRIPT_NAME&quot;] = original_script_name + script</pre>
+<pre class="line before"><span class="ws">        </span>environ[&quot;PATH_INFO&quot;] = path_info</pre>
+<pre class="line current"><span class="ws">        </span>return app(environ, start_response)</pre></div>
+</div>
+
+<li><div class="frame" id="frame-139820249723736">
+  <h4>File <cite class="filename">"/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py"</cite>,
+      line <em class="line">2463</em>,
+      in <code class="function">__call__</code></h4>
+  <div class="source "><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>def __call__(self, environ, start_response):</pre>
+<pre class="line before"><span class="ws">        </span>&quot;&quot;&quot;The WSGI server calls the Flask application object as the</pre>
+<pre class="line before"><span class="ws">        </span>WSGI application. This calls :meth:`wsgi_app` which can be</pre>
+<pre class="line before"><span class="ws">        </span>wrapped to applying middleware.&quot;&quot;&quot;</pre>
+<pre class="line current"><span class="ws">        </span>return self.wsgi_app(environ, start_response)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def __repr__(self):</pre>
+<pre class="line after"><span class="ws">        </span>return &quot;&lt;%s %r&gt;&quot; % (self.__class__.__name__, self.name)</pre></div>
+</div>
+
+<li><div class="frame" id="frame-139820249724296">
+  <h4>File <cite class="filename">"/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/werkzeug/middleware/proxy_fix.py"</cite>,
+      line <em class="line">232</em>,
+      in <code class="function">__call__</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">            </span>self.x_prefix, environ_get(&quot;HTTP_X_FORWARDED_PREFIX&quot;)</pre>
+<pre class="line before"><span class="ws">        </span>)</pre>
+<pre class="line before"><span class="ws">        </span>if x_prefix:</pre>
+<pre class="line before"><span class="ws">            </span>environ[&quot;SCRIPT_NAME&quot;] = x_prefix</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line current"><span class="ws">        </span>return self.app(environ, start_response)</pre></div>
+</div>
+
+<li><div class="frame" id="frame-139820249724912">
+  <h4>File <cite class="filename">"/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py"</cite>,
+      line <em class="line">2449</em>,
+      in <code class="function">wsgi_app</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">            </span>try:</pre>
+<pre class="line before"><span class="ws">                </span>ctx.push()</pre>
+<pre class="line before"><span class="ws">                </span>response = self.full_dispatch_request()</pre>
+<pre class="line before"><span class="ws">            </span>except Exception as e:</pre>
+<pre class="line before"><span class="ws">                </span>error = e</pre>
+<pre class="line current"><span class="ws">                </span>response = self.handle_exception(e)</pre>
+<pre class="line after"><span class="ws">            </span>except:  # noqa: B001</pre>
+<pre class="line after"><span class="ws">                </span>error = sys.exc_info()[1]</pre>
+<pre class="line after"><span class="ws">                </span>raise</pre>
+<pre class="line after"><span class="ws">            </span>return response(environ, start_response)</pre>
+<pre class="line after"><span class="ws">        </span>finally:</pre></div>
+</div>
+
+<li><div class="frame" id="frame-139820249724240">
+  <h4>File <cite class="filename">"/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask_restful/__init__.py"</cite>,
+      line <em class="line">269</em>,
+      in <code class="function">error_router</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">        </span>if self._has_fr_route():</pre>
+<pre class="line before"><span class="ws">            </span>try:</pre>
+<pre class="line before"><span class="ws">                </span>return self.handle_error(e)</pre>
+<pre class="line before"><span class="ws">            </span>except Exception:</pre>
+<pre class="line before"><span class="ws">                </span>pass  # Fall through to original handler</pre>
+<pre class="line current"><span class="ws">        </span>return original_handler(e)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def handle_error(self, e):</pre>
+<pre class="line after"><span class="ws">        </span>&quot;&quot;&quot;Error handler for the API transforms a raised exception into a Flask</pre>
+<pre class="line after"><span class="ws">        </span>response, with the appropriate HTTP status code and body.</pre>
+<pre class="line after"><span class="ws"></span> </pre></div>
+</div>
+
+<li><div class="frame" id="frame-139820249725528">
+  <h4>File <cite class="filename">"/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py"</cite>,
+      line <em class="line">1866</em>,
+      in <code class="function">handle_exception</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">            </span># if we want to repropagate the exception, we can attempt to</pre>
+<pre class="line before"><span class="ws">            </span># raise it with the whole traceback in case we can do that</pre>
+<pre class="line before"><span class="ws">            </span># (the function was actually called from the except part)</pre>
+<pre class="line before"><span class="ws">            </span># otherwise, we just raise the error again</pre>
+<pre class="line before"><span class="ws">            </span>if exc_value is e:</pre>
+<pre class="line current"><span class="ws">                </span>reraise(exc_type, exc_value, tb)</pre>
+<pre class="line after"><span class="ws">            </span>else:</pre>
+<pre class="line after"><span class="ws">                </span>raise e</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">        </span>self.log_exception((exc_type, exc_value, tb))</pre>
+<pre class="line after"><span class="ws">        </span>server_error = InternalServerError()</pre></div>
+</div>
+
+<li><div class="frame" id="frame-139820249724968">
+  <h4>File <cite class="filename">"/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/_compat.py"</cite>,
+      line <em class="line">39</em>,
+      in <code class="function">reraise</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">    </span>import collections.abc as collections_abc</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>def reraise(tp, value, tb=None):</pre>
+<pre class="line before"><span class="ws">        </span>if value.__traceback__ is not tb:</pre>
+<pre class="line before"><span class="ws">            </span>raise value.with_traceback(tb)</pre>
+<pre class="line current"><span class="ws">        </span>raise value</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>implements_to_string = _identity</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws"></span>else:</pre>
+<pre class="line after"><span class="ws">    </span>iterkeys = lambda d: d.iterkeys()</pre></div>
+</div>
+
+<li><div class="frame" id="frame-139820249726760">
+  <h4>File <cite class="filename">"/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py"</cite>,
+      line <em class="line">2446</em>,
+      in <code class="function">wsgi_app</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">        </span>ctx = self.request_context(environ)</pre>
+<pre class="line before"><span class="ws">        </span>error = None</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>try:</pre>
+<pre class="line before"><span class="ws">                </span>ctx.push()</pre>
+<pre class="line current"><span class="ws">                </span>response = self.full_dispatch_request()</pre>
+<pre class="line after"><span class="ws">            </span>except Exception as e:</pre>
+<pre class="line after"><span class="ws">                </span>error = e</pre>
+<pre class="line after"><span class="ws">                </span>response = self.handle_exception(e)</pre>
+<pre class="line after"><span class="ws">            </span>except:  # noqa: B001</pre>
+<pre class="line after"><span class="ws">                </span>error = sys.exc_info()[1]</pre></div>
+</div>
+
+<li><div class="frame" id="frame-139820249723568">
+  <h4>File <cite class="filename">"/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py"</cite>,
+      line <em class="line">1951</em>,
+      in <code class="function">full_dispatch_request</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">            </span>request_started.send(self)</pre>
+<pre class="line before"><span class="ws">            </span>rv = self.preprocess_request()</pre>
+<pre class="line before"><span class="ws">            </span>if rv is None:</pre>
+<pre class="line before"><span class="ws">                </span>rv = self.dispatch_request()</pre>
+<pre class="line before"><span class="ws">        </span>except Exception as e:</pre>
+<pre class="line current"><span class="ws">            </span>rv = self.handle_user_exception(e)</pre>
+<pre class="line after"><span class="ws">        </span>return self.finalize_request(rv)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def finalize_request(self, rv, from_error_handler=False):</pre>
+<pre class="line after"><span class="ws">        </span>&quot;&quot;&quot;Given the return value from a view function this finalizes</pre>
+<pre class="line after"><span class="ws">        </span>the request by converting it into a response and invoking the</pre></div>
+</div>
+
+<li><div class="frame" id="frame-139820249723512">
+  <h4>File <cite class="filename">"/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask_restful/__init__.py"</cite>,
+      line <em class="line">269</em>,
+      in <code class="function">error_router</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">        </span>if self._has_fr_route():</pre>
+<pre class="line before"><span class="ws">            </span>try:</pre>
+<pre class="line before"><span class="ws">                </span>return self.handle_error(e)</pre>
+<pre class="line before"><span class="ws">            </span>except Exception:</pre>
+<pre class="line before"><span class="ws">                </span>pass  # Fall through to original handler</pre>
+<pre class="line current"><span class="ws">        </span>return original_handler(e)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def handle_error(self, e):</pre>
+<pre class="line after"><span class="ws">        </span>&quot;&quot;&quot;Error handler for the API transforms a raised exception into a Flask</pre>
+<pre class="line after"><span class="ws">        </span>response, with the appropriate HTTP status code and body.</pre>
+<pre class="line after"><span class="ws"></span> </pre></div>
+</div>
+
+<li><div class="frame" id="frame-139820249723400">
+  <h4>File <cite class="filename">"/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py"</cite>,
+      line <em class="line">1820</em>,
+      in <code class="function">handle_user_exception</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">            </span>return self.handle_http_exception(e)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>handler = self._find_error_handler(e)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>if handler is None:</pre>
+<pre class="line current"><span class="ws">            </span>reraise(exc_type, exc_value, tb)</pre>
+<pre class="line after"><span class="ws">        </span>return handler(e)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def handle_exception(self, e):</pre>
+<pre class="line after"><span class="ws">        </span>&quot;&quot;&quot;Handle an exception that did not have an error handler</pre>
+<pre class="line after"><span class="ws">        </span>associated with it, or that was raised from an error handler.</pre></div>
+</div>
+
+<li><div class="frame" id="frame-139820249725696">
+  <h4>File <cite class="filename">"/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/_compat.py"</cite>,
+      line <em class="line">39</em>,
+      in <code class="function">reraise</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">    </span>import collections.abc as collections_abc</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>def reraise(tp, value, tb=None):</pre>
+<pre class="line before"><span class="ws">        </span>if value.__traceback__ is not tb:</pre>
+<pre class="line before"><span class="ws">            </span>raise value.with_traceback(tb)</pre>
+<pre class="line current"><span class="ws">        </span>raise value</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>implements_to_string = _identity</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws"></span>else:</pre>
+<pre class="line after"><span class="ws">    </span>iterkeys = lambda d: d.iterkeys()</pre></div>
+</div>
+
+<li><div class="frame" id="frame-139820249724688">
+  <h4>File <cite class="filename">"/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py"</cite>,
+      line <em class="line">1947</em>,
+      in <code class="function">full_dispatch_request</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">        </span>.. versionadded:: 0.7</pre>
+<pre class="line before"><span class="ws">        </span>&quot;&quot;&quot;</pre>
+<pre class="line before"><span class="ws">        </span>self.try_trigger_before_first_request_functions()</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>request_started.send(self)</pre>
+<pre class="line current"><span class="ws">            </span>rv = self.preprocess_request()</pre>
+<pre class="line after"><span class="ws">            </span>if rv is None:</pre>
+<pre class="line after"><span class="ws">                </span>rv = self.dispatch_request()</pre>
+<pre class="line after"><span class="ws">        </span>except Exception as e:</pre>
+<pre class="line after"><span class="ws">            </span>rv = self.handle_user_exception(e)</pre>
+<pre class="line after"><span class="ws">        </span>return self.finalize_request(rv)</pre></div>
+</div>
+
+<li><div class="frame" id="frame-139820249726816">
+  <h4>File <cite class="filename">"/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py"</cite>,
+      line <em class="line">2241</em>,
+      in <code class="function">preprocess_request</code></h4>
+  <div class="source "><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>funcs = self.before_request_funcs.get(None, ())</pre>
+<pre class="line before"><span class="ws">        </span>if bp is not None and bp in self.before_request_funcs:</pre>
+<pre class="line before"><span class="ws">            </span>funcs = chain(funcs, self.before_request_funcs[bp])</pre>
+<pre class="line before"><span class="ws">        </span>for func in funcs:</pre>
+<pre class="line current"><span class="ws">            </span>rv = func()</pre>
+<pre class="line after"><span class="ws">            </span>if rv is not None:</pre>
+<pre class="line after"><span class="ws">                </span>return rv</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def process_response(self, response):</pre>
+<pre class="line after"><span class="ws">        </span>&quot;&quot;&quot;Can be overridden in order to modify the response object</pre></div>
+</div>
+
+<li><div class="frame" id="frame-139820249726872">
+  <h4>File <cite class="filename">"/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/invenio_oauth2server/ext.py"</cite>,
+      line <em class="line">180</em>,
+      in <code class="function">verify_oauth_token_and_set_current_user</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">        </span>func()</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>if not hasattr(request, 'oauth') or not request.oauth:</pre>
+<pre class="line before"><span class="ws">        </span>scopes = []</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line current"><span class="ws">            </span>valid, req = oauth2.verify_request(scopes)</pre>
+<pre class="line after"><span class="ws">        </span>except ValueError:</pre>
+<pre class="line after"><span class="ws">            </span>abort(400, 'Error trying to decode a non urlencoded string.')</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">        </span>for func in oauth2._after_request_funcs:</pre>
+<pre class="line after"><span class="ws">            </span>valid, req = func(valid, req)</pre></div>
+</div>
+
+<li><div class="frame" id="frame-139820249725752">
+  <h4>File <cite class="filename">"/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask_oauthlib/provider/oauth2.py"</cite>,
+      line <em class="line">476</em>,
+      in <code class="function">verify_request</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">                    </span>return jsonify(user=req.user)</pre>
+<pre class="line before"><span class="ws">                </span>return jsonify(status='error')</pre>
+<pre class="line before"><span class="ws">        </span>&quot;&quot;&quot;</pre>
+<pre class="line before"><span class="ws">        </span>uri, http_method, body, headers = extract_params()</pre>
+<pre class="line before"><span class="ws">        </span>return self.server.verify_request(</pre>
+<pre class="line current"><span class="ws">            </span>uri, http_method, body, headers, scopes</pre>
+<pre class="line after"><span class="ws">        </span>)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def token_handler(self, f):</pre>
+<pre class="line after"><span class="ws">        </span>&quot;&quot;&quot;Access/refresh token handler decorator.</pre>
+<pre class="line after"><span class="ws"></span> </pre></div>
+</div>
+
+<li><div class="frame" id="frame-139820249722952">
+  <h4>File <cite class="filename">"/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/oauthlib/oauth2/rfc6749/endpoints/base.py"</cite>,
+      line <em class="line">64</em>,
+      in <code class="function">wrapper</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">                </span>error = ServerError()</pre>
+<pre class="line before"><span class="ws">                </span>log.warning(</pre>
+<pre class="line before"><span class="ws">                    </span>'Exception caught while processing request, %s.' % e)</pre>
+<pre class="line before"><span class="ws">                </span>return {}, error.json, 500</pre>
+<pre class="line before"><span class="ws">        </span>else:</pre>
+<pre class="line current"><span class="ws">            </span>return f(endpoint, uri, *args, **kwargs)</pre>
+<pre class="line after"><span class="ws">    </span>return wrapper</pre></div>
+</div>
+
+<li><div class="frame" id="frame-139820249725808">
+  <h4>File <cite class="filename">"/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/oauthlib/oauth2/rfc6749/endpoints/resource.py"</cite>,
+      line <em class="line">69</em>,
+      in <code class="function">verify_request</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">    </span>@catch_errors_and_unavailability</pre>
+<pre class="line before"><span class="ws">    </span>def verify_request(self, uri, http_method='GET', body=None, headers=None,</pre>
+<pre class="line before"><span class="ws">                       </span>scopes=None):</pre>
+<pre class="line before"><span class="ws">        </span>&quot;&quot;&quot;Validate client, code etc, return body + headers&quot;&quot;&quot;</pre>
+<pre class="line before"><span class="ws">        </span>request = Request(uri, http_method, body, headers)</pre>
+<pre class="line current"><span class="ws">        </span>request.token_type = self.find_token_type(request)</pre>
+<pre class="line after"><span class="ws">        </span>request.scopes = scopes</pre>
+<pre class="line after"><span class="ws">        </span>token_type_handler = self.tokens.get(request.token_type,</pre>
+<pre class="line after"><span class="ws">                                             </span>self.default_token_type_handler)</pre>
+<pre class="line after"><span class="ws">        </span>log.debug('Dispatching token_type %s request to %r.',</pre>
+<pre class="line after"><span class="ws">                  </span>request.token_type, token_type_handler)</pre></div>
+</div>
+
+<li><div class="frame" id="frame-139820249726144">
+  <h4>File <cite class="filename">"/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/oauthlib/oauth2/rfc6749/endpoints/resource.py"</cite>,
+      line <em class="line">86</em>,
+      in <code class="function">find_token_type</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">        </span>different token types during protected resource access. We estimate</pre>
+<pre class="line before"><span class="ws">        </span>the most likely token type (if any) by asking each known token type</pre>
+<pre class="line before"><span class="ws">        </span>to give an estimation based on the request.</pre>
+<pre class="line before"><span class="ws">        </span>&quot;&quot;&quot;</pre>
+<pre class="line before"><span class="ws">        </span>estimates = sorted(((t.estimate_type(request), n)</pre>
+<pre class="line current"><span class="ws">                            </span>for n, t in self.tokens.items()))</pre>
+<pre class="line after"><span class="ws">        </span>return estimates[0][1] if len(estimates) else None</pre></div>
+</div>
+
+<li><div class="frame" id="frame-139820249725024">
+  <h4>File <cite class="filename">"/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/oauthlib/oauth2/rfc6749/endpoints/resource.py"</cite>,
+      line <em class="line">86</em>,
+      in <code class="function">&lt;genexpr&gt;</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">        </span>different token types during protected resource access. We estimate</pre>
+<pre class="line before"><span class="ws">        </span>the most likely token type (if any) by asking each known token type</pre>
+<pre class="line before"><span class="ws">        </span>to give an estimation based on the request.</pre>
+<pre class="line before"><span class="ws">        </span>&quot;&quot;&quot;</pre>
+<pre class="line before"><span class="ws">        </span>estimates = sorted(((t.estimate_type(request), n)</pre>
+<pre class="line current"><span class="ws">                            </span>for n, t in self.tokens.items()))</pre>
+<pre class="line after"><span class="ws">        </span>return estimates[0][1] if len(estimates) else None</pre></div>
+</div>
+
+<li><div class="frame" id="frame-139820249723848">
+  <h4>File <cite class="filename">"/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/oauthlib/oauth2/rfc6749/tokens.py"</cite>,
+      line <em class="line">300</em>,
+      in <code class="function">estimate_type</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">            </span>token = request.access_token</pre>
+<pre class="line before"><span class="ws">        </span>return self.request_validator.validate_bearer_token(</pre>
+<pre class="line before"><span class="ws">            </span>token, request.scopes, request)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>def estimate_type(self, request):</pre>
+<pre class="line current"><span class="ws">        </span>if request.headers.get('Authorization', '').startswith('Bearer'):</pre>
+<pre class="line after"><span class="ws">            </span>return 9</pre>
+<pre class="line after"><span class="ws">        </span>elif request.access_token is not None:</pre>
+<pre class="line after"><span class="ws">            </span>return 5</pre>
+<pre class="line after"><span class="ws">        </span>else:</pre>
+<pre class="line after"><span class="ws">            </span>return 0</pre></div>
+</div>
+</ul>
+  <blockquote>AttributeError: 'dict' object has no attribute 'startswith'</blockquote>
+</div>
+
+<div class="plain">
+  <form action="/?__debugger__=yes&amp;cmd=paste" method="post">
+    <p>
+      <input type="hidden" name="language" value="pytb">
+      This is the Copy/Paste friendly version of the traceback.  <span
+      class="pastemessage">You can also paste this traceback into
+      a <a href="https://gist.github.com/">gist</a>:
+      <input type="submit" value="create paste"></span>
+    </p>
+    <textarea cols="50" rows="10" name="code" readonly>Traceback (most recent call last):
+  File &quot;/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py&quot;, line 2463, in __call__
+    return self.wsgi_app(environ, start_response)
+  File &quot;/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/werkzeug/middleware/proxy_fix.py&quot;, line 232, in __call__
+    return self.app(environ, start_response)
+  File &quot;/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/werkzeug/middleware/dispatcher.py&quot;, line 66, in __call__
+    return app(environ, start_response)
+  File &quot;/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py&quot;, line 2463, in __call__
+    return self.wsgi_app(environ, start_response)
+  File &quot;/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/werkzeug/middleware/proxy_fix.py&quot;, line 232, in __call__
+    return self.app(environ, start_response)
+  File &quot;/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py&quot;, line 2449, in wsgi_app
+    response = self.handle_exception(e)
+  File &quot;/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask_restful/__init__.py&quot;, line 269, in error_router
+    return original_handler(e)
+  File &quot;/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py&quot;, line 1866, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File &quot;/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/_compat.py&quot;, line 39, in reraise
+    raise value
+  File &quot;/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py&quot;, line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File &quot;/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py&quot;, line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File &quot;/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask_restful/__init__.py&quot;, line 269, in error_router
+    return original_handler(e)
+  File &quot;/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py&quot;, line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File &quot;/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/_compat.py&quot;, line 39, in reraise
+    raise value
+  File &quot;/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py&quot;, line 1947, in full_dispatch_request
+    rv = self.preprocess_request()
+  File &quot;/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py&quot;, line 2241, in preprocess_request
+    rv = func()
+  File &quot;/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/invenio_oauth2server/ext.py&quot;, line 180, in verify_oauth_token_and_set_current_user
+    valid, req = oauth2.verify_request(scopes)
+  File &quot;/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask_oauthlib/provider/oauth2.py&quot;, line 476, in verify_request
+    uri, http_method, body, headers, scopes
+  File &quot;/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/oauthlib/oauth2/rfc6749/endpoints/base.py&quot;, line 64, in wrapper
+    return f(endpoint, uri, *args, **kwargs)
+  File &quot;/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/oauthlib/oauth2/rfc6749/endpoints/resource.py&quot;, line 69, in verify_request
+    request.token_type = self.find_token_type(request)
+  File &quot;/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/oauthlib/oauth2/rfc6749/endpoints/resource.py&quot;, line 86, in find_token_type
+    for n, t in self.tokens.items()))
+  File &quot;/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/oauthlib/oauth2/rfc6749/endpoints/resource.py&quot;, line 86, in &lt;genexpr&gt;
+    for n, t in self.tokens.items()))
+  File &quot;/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/oauthlib/oauth2/rfc6749/tokens.py&quot;, line 300, in estimate_type
+    if request.headers.get('Authorization', '').startswith('Bearer'):
+AttributeError: 'dict' object has no attribute 'startswith'</textarea>
+  </form>
+</div>
+<div class="explanation">
+  The debugger caught an exception in your WSGI application.  You can now
+  look at the traceback which led to the error.  <span class="nojavascript">
+  If you enable JavaScript you can also use additional features such as code
+  execution (if the evalex feature is enabled), automatic pasting of the
+  exceptions and much more.</span>
+</div>
+      <div class="footer">
+        Brought to you by <strong class="arthur">DON'T PANIC</strong>, your
+        friendly Werkzeug powered traceback interpreter.
+      </div>
+    </div>
+
+    <div class="pin-prompt">
+      <div class="inner">
+        <h3>Console Locked</h3>
+        <p>
+          The console is locked and needs to be unlocked by entering the PIN.
+          You can find the PIN printed out on the standard output of your
+          shell that runs the server.
+        <form>
+          <p>PIN:
+            <input type=text name=pin size=14>
+            <input type=submit name=btn value="Confirm Pin">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+
+<!--
+
+Traceback (most recent call last):
+  File "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py", line 2463, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/werkzeug/middleware/proxy_fix.py", line 232, in __call__
+    return self.app(environ, start_response)
+  File "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/werkzeug/middleware/dispatcher.py", line 66, in __call__
+    return app(environ, start_response)
+  File "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py", line 2463, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/werkzeug/middleware/proxy_fix.py", line 232, in __call__
+    return self.app(environ, start_response)
+  File "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py", line 2449, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask_restful/__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py", line 1866, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask_restful/__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py", line 1947, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask/app.py", line 2241, in preprocess_request
+    rv = func()
+  File "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/invenio_oauth2server/ext.py", line 180, in verify_oauth_token_and_set_current_user
+    valid, req = oauth2.verify_request(scopes)
+  File "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/flask_oauthlib/provider/oauth2.py", line 476, in verify_request
+    uri, http_method, body, headers, scopes
+  File "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/oauthlib/oauth2/rfc6749/endpoints/base.py", line 64, in wrapper
+    return f(endpoint, uri, *args, **kwargs)
+  File "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/oauthlib/oauth2/rfc6749/endpoints/resource.py", line 69, in verify_request
+    request.token_type = self.find_token_type(request)
+  File "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/oauthlib/oauth2/rfc6749/endpoints/resource.py", line 86, in find_token_type
+    for n, t in self.tokens.items()))
+  File "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/oauthlib/oauth2/rfc6749/endpoints/resource.py", line 86, in <genexpr>
+    for n, t in self.tokens.items()))
+  File "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/oauthlib/oauth2/rfc6749/tokens.py", line 300, in estimate_type
+    if request.headers.get('Authorization', '').startswith('Bearer'):
+AttributeError: 'dict' object has no attribute 'startswith'
+
+-->

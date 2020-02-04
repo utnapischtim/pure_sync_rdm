@@ -41,21 +41,21 @@ class PersonIdsSchemaV1(StrictKeysMixin):
 class ContributorSchemaV1(StrictKeysMixin):
     """Contributor schema."""
 
-    ROLES = [
-        "ContactPerson",
-        "Researcher",
-        "Other"
-    ]
+    ids = fields.Nested(PersonIdsSchemaV1, many=True)
+    name = SanitizedUnicode(required=True)
+    authorCollaboratorName = fields.Str()
+    personRole = fields.Str()
+    organisationalUnit = fields.Str()
+    link = fields.Str()
+    type_p = fields.Str()
+
+
+class organisationalUnitsSchemaV1(StrictKeysMixin):
+    """organisationalUnits schema."""
 
     ids = fields.Nested(PersonIdsSchemaV1, many=True)
     name = SanitizedUnicode(required=True)
-    role = SanitizedUnicode(
-        validate=validate.OneOf(
-            choices=ROLES,
-            error=_('Invalid role. {input} not one of {choices}.')
-        ))
-    affiliations = fields.List(SanitizedUnicode())
-    email = fields.Email()
+    link = fields.Str()
 
 
 class ResourceTypeSchemaV1(StrictKeysMixin):
@@ -161,13 +161,11 @@ class MetadataSchemaV1(StrictKeysMixin):
     _access = fields.Nested(AccessSchemaV1, required=True)
     additional_descriptions = fields.List(fields.Nested(DescriptionSchemaV1))
     additional_titles = fields.List(fields.Nested(TitleSchemaV1))
-    contributors = Nested(ContributorSchemaV1, many=True, required=True)
     dates = fields.List(
         fields.Nested(DateSchemaV1), validate=validate.Length(min=1))
     description = SanitizedUnicode()
     embargo_date = DateString()
     keywords = fields.List(SanitizedUnicode(), many=True)
-    language = SanitizedUnicode(validate=validate_iso639_3)
     owners = fields.List(fields.Integer(),
                          validate=validate.Length(min=1),
                          required=True)
@@ -175,8 +173,48 @@ class MetadataSchemaV1(StrictKeysMixin):
     recid = PersistentIdentifier()
     resource_type = fields.Nested(ResourceTypeSchemaV1)
     rights = fields.List(fields.Nested(RightSchemaV1))
+    contributors = Nested(ContributorSchemaV1, many=True, required=True)
+
+    # ADDED
     title = SanitizedUnicode(required=True, validate=validate.Length(min=3))
     version = SanitizedUnicode()
+    publicationDatePure = fields.Str()
+    createdDatePure = fields.Str()
+    modifiedDatePure = fields.Str()
+    pureId = fields.Str()
+    uuid = fields.Str()
+    type_p = fields.Str()
+    category = fields.Str()
+    peerReview = fields.Bool()
+    publicationStatus = fields.Str()
+    language = SanitizedUnicode(validate=validate_iso639_3)
+    totalNumberOfAuthors = fields.Integer()
+    managingOrganisationalUnit = fields.Str()
+    workflow = fields.Str()
+    confidential = fields.Bool()
+    publisherName = fields.Str()
+    accessType = fields.Str()
+    pages = fields.Str()
+    volume = fields.Str()
+    versionType = fields.Str()
+    licenseType = fields.Str()
+    journalTitle = fields.Str()
+    journalNumber = fields.Str()
+    fileAccessType = fields.Str()
+    fileCreator = fields.Str()
+    fileCreationDate = fields.Str()
+    fileTitle = fields.Str()
+    fileDigest = fields.Str()
+    fileDigestAlgorithm = fields.Str()
+    fileName = fields.Str()
+    fileURL = fields.Str()
+    fileType = fields.Str()
+    fileSize = fields.Integer()
+    organisationalUnits = Nested(organisationalUnitsSchemaV1, many=True)
+
+
+    # END ADDED
+
 
     @pre_load()
     def preload_publicationdate(self, data):
