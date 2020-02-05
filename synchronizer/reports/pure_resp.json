@@ -1,67 +1,66 @@
 {
-  "pureId" : 19239080,
-  "uuid" : "3e5bc032-716b-4e4b-8e59-fe202e9e9596",
-  "title" : "Drucksachetr",
-  "subTitle" : "unter drunter",
-  "peerReview" : false,
+  "pureId" : 1064589,
+  "externalId" : "74045",
+  "externalIdSource" : "researchoutputwizard",
+  "uuid" : "06f9e00f-ca16-4db5-bdf8-d13bb3235788",
+  "title" : "Photogrammetric Interpolation",
+  "peerReview" : true,
   "managingOrganisationalUnit" : {
-    "uuid" : "fdb7051b-0b7d-4cc1-936f-94232f231381",
+    "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
     "link" : {
       "ref" : "content",
-      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/fdb7051b-0b7d-4cc1-936f-94232f231381"
+      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
     },
-    "externalId" : "1420",
+    "externalId" : "2376",
     "externalIdSource" : "synchronisedUnifiedOrganisation",
     "externallyManaged" : true,
     "names" : [ {
       "locale" : "en_GB",
-      "value" : "Serials Management, Open Access and Digitisation (95023)"
+      "value" : "Institute of Computer Graphics and Vision (7100)"
     }, {
       "locale" : "de_DE",
-      "value" : "Zeitschriftenmanagement, Open Access und Digitalisierung (95023)"
+      "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
     } ],
     "types" : [ {
       "locale" : "en_GB",
-      "value" : "Department",
-      "pureId" : 5488,
-      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
+      "value" : "Institute",
+      "pureId" : 5431,
+      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
     }, {
       "locale" : "de_DE",
-      "value" : "Abteilung-DLE",
-      "pureId" : 5488,
-      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
+      "value" : "Institut",
+      "pureId" : 5431,
+      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
     } ]
   },
   "confidential" : false,
   "info" : {
-    "createdBy" : "chrlad",
-    "createdDate" : "2019-01-29T09:58:49.835+0000",
-    "modifiedBy" : "brantner",
-    "modifiedDate" : "2019-05-14T09:51:12.079+0000",
-    "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/drucksachetr(3e5bc032-716b-4e4b-8e59-fe202e9e9596).html"
+    "createdBy" : "root",
+    "createdDate" : "2016-02-25T21:48:16.870+0000",
+    "modifiedBy" : "root",
+    "modifiedDate" : "2018-09-06T07:28:36.251+0000",
+    "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/photogrammetric-interpolation(06f9e00f-ca16-4db5-bdf8-d13bb3235788).html"
   },
-  "pages" : "3-5",
-  "volume" : "10",
+  "pages" : "205-229",
   "journalAssociation" : {
-    "pureId" : 19239081,
+    "pureId" : 1064590,
     "title" : {
-      "value" : "Physical review applied",
-      "startDate" : "2014"
+      "value" : "The ITC journal = Bulletin de l'ITC"
     },
     "journal" : {
-      "uuid" : "52cef218-970a-4d97-a40f-fa5c0d1de627",
+      "uuid" : "8e08e9ef-c643-4ae6-833c-89f2e9e742f0",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/journals/52cef218-970a-4d97-a40f-fa5c0d1de627"
+        "href" : "https://pure01.tugraz.at/ws/api/514/journals/8e08e9ef-c643-4ae6-833c-89f2e9e742f0"
       },
-      "externalId" : "6645",
+      "externalId" : "5974",
       "externalIdSource" : "researchoutputwizard",
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Physical review applied"
+        "value" : "The ITC journal = Bulletin de l'ITC"
       }, {
         "locale" : "de_DE",
-        "value" : "Physical review applied"
+        "value" : "The ITC journal = Bulletin de l'ITC"
       } ],
       "types" : [ {
         "locale" : "en_GB",
@@ -76,8 +75,8 @@
       } ]
     }
   },
-  "journalNumber" : "3",
-  "totalNumberOfAuthors" : 2,
+  "journalNumber" : "2",
+  "totalNumberOfAuthors" : 1,
   "types" : [ {
     "locale" : "en_GB",
     "value" : "Article",
@@ -101,12 +100,12 @@
     "uri" : "/dk/atira/pure/researchoutput/category/research"
   } ],
   "publicationStatuses" : [ {
-    "pureId" : 19239080,
+    "pureId" : 1064589,
+    "externalId" : "74045",
+    "externalIdSource" : "researchoutputwizard",
     "current" : true,
     "publicationDate" : {
-      "year" : 2019,
-      "month" : 1,
-      "day" : 1
+      "year" : 1975
     },
     "publicationStatuses" : [ {
       "locale" : "en_GB",
@@ -122,42 +121,37 @@
   } ],
   "languages" : [ {
     "locale" : "en_GB",
-    "value" : "German",
-    "pureId" : 4898,
-    "uri" : "/dk/atira/pure/core/languages/de_DE"
+    "value" : "English",
+    "pureId" : 4900,
+    "uri" : "/dk/atira/pure/core/languages/en_GB"
   }, {
     "locale" : "de_DE",
-    "value" : "deutsch",
-    "pureId" : 4898,
-    "uri" : "/dk/atira/pure/core/languages/de_DE"
-  } ],
-  "abstracts" : [ {
-    "locale" : "de_DE",
-    "formatted" : true,
-    "value" : "lorem ipsum"
+    "value" : "englisch",
+    "pureId" : 4900,
+    "uri" : "/dk/atira/pure/core/languages/en_GB"
   } ],
   "personAssociations" : [ {
-    "pureId" : 19239086,
+    "pureId" : 1064604,
     "person" : {
-      "uuid" : "14a293cd-8642-471e-814e-e00a4c9c4929",
+      "uuid" : "1198b8c9-eea7-41dd-8861-30c8d066fb27",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/persons/14a293cd-8642-471e-814e-e00a4c9c4929"
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/1198b8c9-eea7-41dd-8861-30c8d066fb27"
       },
-      "externalId" : "-45306",
+      "externalId" : "3261",
       "externalIdSource" : "synchronisedUnifiedPerson",
       "externallyManaged" : true,
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Christoph Ladurner"
+        "value" : "Franz Leberl"
       }, {
         "locale" : "de_DE",
-        "value" : "Christoph Ladurner"
+        "value" : "Franz Leberl"
       } ]
     },
     "name" : {
-      "firstName" : "Christoph",
-      "lastName" : "Ladurner"
+      "firstName" : "Franz",
+      "lastName" : "Leberl"
     },
     "personRoles" : [ {
       "locale" : "en_GB",
@@ -171,203 +165,60 @@
       "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
     } ],
     "organisationalUnits" : [ {
-      "uuid" : "fdb7051b-0b7d-4cc1-936f-94232f231381",
+      "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/fdb7051b-0b7d-4cc1-936f-94232f231381"
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
       },
-      "externalId" : "1420",
+      "externalId" : "2376",
       "externalIdSource" : "synchronisedUnifiedOrganisation",
       "externallyManaged" : true,
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Serials Management, Open Access and Digitisation (95023)"
+        "value" : "Institute of Computer Graphics and Vision (7100)"
       }, {
         "locale" : "de_DE",
-        "value" : "Zeitschriftenmanagement, Open Access und Digitalisierung (95023)"
+        "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
       } ],
       "types" : [ {
         "locale" : "en_GB",
-        "value" : "Department",
-        "pureId" : 5488,
-        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
       }, {
         "locale" : "de_DE",
-        "value" : "Abteilung-DLE",
-        "pureId" : 5488,
-        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
-      } ]
-    }, {
-      "uuid" : "649cf008-b5a6-4f15-a669-32bad271995a",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/649cf008-b5a6-4f15-a669-32bad271995a"
-      },
-      "externalId" : "1296",
-      "externalIdSource" : "synchronisedUnifiedOrganisation",
-      "externallyManaged" : true,
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "University Library and Archives (95020)"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Bibliothek und Archiv (95020)"
-      } ],
-      "types" : [ {
-        "locale" : "en_GB",
-        "value" : "Department",
-        "pureId" : 5440,
-        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_714"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Einrichtung",
-        "pureId" : 5440,
-        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_714"
-      } ]
-    } ]
-  }, {
-    "pureId" : 19241397,
-    "person" : {
-      "uuid" : "f0f60b8b-a7cb-41e9-ad36-606d3e890a3b",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b"
-      },
-      "externalId" : "53779",
-      "externalIdSource" : "synchronisedUnifiedPerson",
-      "externallyManaged" : true,
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "Maria Wruß"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Maria Wruß"
-      } ]
-    },
-    "name" : {
-      "firstName" : "Maria",
-      "lastName" : "Wruß"
-    },
-    "personRoles" : [ {
-      "locale" : "en_GB",
-      "value" : "Author",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Autor",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
-    } ],
-    "organisationalUnits" : [ {
-      "uuid" : "650fb44b-f9dd-490c-b6e0-4b3e77b55c26",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26"
-      },
-      "externalId" : "1416",
-      "externalIdSource" : "synchronisedUnifiedOrganisation",
-      "externallyManaged" : true,
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "Administration (95021)"
-      }, {
-        "locale" : "de_DE",
-        "value" : "EDV/ Verwaltung (95021)"
-      } ],
-      "types" : [ {
-        "locale" : "en_GB",
-        "value" : "Department",
-        "pureId" : 5488,
-        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Abteilung-DLE",
-        "pureId" : 5488,
-        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
       } ]
     } ]
   } ],
   "organisationalUnits" : [ {
-    "uuid" : "fdb7051b-0b7d-4cc1-936f-94232f231381",
+    "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
     "link" : {
       "ref" : "content",
-      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/fdb7051b-0b7d-4cc1-936f-94232f231381"
+      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
     },
-    "externalId" : "1420",
+    "externalId" : "2376",
     "externalIdSource" : "synchronisedUnifiedOrganisation",
     "externallyManaged" : true,
     "names" : [ {
       "locale" : "en_GB",
-      "value" : "Serials Management, Open Access and Digitisation (95023)"
+      "value" : "Institute of Computer Graphics and Vision (7100)"
     }, {
       "locale" : "de_DE",
-      "value" : "Zeitschriftenmanagement, Open Access und Digitalisierung (95023)"
+      "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
     } ],
     "types" : [ {
       "locale" : "en_GB",
-      "value" : "Department",
-      "pureId" : 5488,
-      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
+      "value" : "Institute",
+      "pureId" : 5431,
+      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
     }, {
       "locale" : "de_DE",
-      "value" : "Abteilung-DLE",
-      "pureId" : 5488,
-      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
-    } ]
-  }, {
-    "uuid" : "649cf008-b5a6-4f15-a669-32bad271995a",
-    "link" : {
-      "ref" : "content",
-      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/649cf008-b5a6-4f15-a669-32bad271995a"
-    },
-    "externalId" : "1296",
-    "externalIdSource" : "synchronisedUnifiedOrganisation",
-    "externallyManaged" : true,
-    "names" : [ {
-      "locale" : "en_GB",
-      "value" : "University Library and Archives (95020)"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Bibliothek und Archiv (95020)"
-    } ],
-    "types" : [ {
-      "locale" : "en_GB",
-      "value" : "Department",
-      "pureId" : 5440,
-      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_714"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Einrichtung",
-      "pureId" : 5440,
-      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_714"
-    } ]
-  }, {
-    "uuid" : "650fb44b-f9dd-490c-b6e0-4b3e77b55c26",
-    "link" : {
-      "ref" : "content",
-      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26"
-    },
-    "externalId" : "1416",
-    "externalIdSource" : "synchronisedUnifiedOrganisation",
-    "externallyManaged" : true,
-    "names" : [ {
-      "locale" : "en_GB",
-      "value" : "Administration (95021)"
-    }, {
-      "locale" : "de_DE",
-      "value" : "EDV/ Verwaltung (95021)"
-    } ],
-    "types" : [ {
-      "locale" : "en_GB",
-      "value" : "Department",
-      "pureId" : 5488,
-      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Abteilung-DLE",
-      "pureId" : 5488,
-      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
+      "value" : "Institut",
+      "pureId" : 5431,
+      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
     } ]
   } ],
   "openAccessPermissions" : [ {
@@ -382,9 +233,19 @@
     "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/open"
   } ],
   "electronicVersions" : [ {
-    "pureId" : 19277748,
-    "visibleOnPortalDate" : "2019-02-20T12:00:22.061+0000",
-    "doi" : "https://doi.org/10.1000/182",
+    "pureId" : 1064592,
+    "visibleOnPortalDate" : "2016-02-25T21:48:16.870+0000",
+    "creator" : "root",
+    "created" : "2016-02-25T21:48:16.867+0000",
+    "title" : "20 - Photogrammetric Interpolation, ITC-Journal 1975.pdf",
+    "file" : {
+      "fileName" : "20%20-%20Photogrammetric%20Interpolation,%20ITC-Journal%201975.pdf",
+      "mimeType" : "20 - Photogrammetric Interpolation, ITC-Journal 1975.pdf",
+      "size" : 885061,
+      "fileURL" : "https://pure01.tugraz.at/ws/files/1064594/20%2520-%2520Photogrammetric%2520Interpolation,%2520ITC-Journal%25201975.pdf",
+      "digestAlgorithm" : "SHA1",
+      "digest" : "FF74800705D836C05E448FF046E3C83B1DEA56BF"
+    },
     "accessTypes" : [ {
       "locale" : "en_GB",
       "value" : "Open",
@@ -406,107 +267,32 @@
       "value" : "Endgültige, publizierte Fassung",
       "pureId" : 23264,
       "uri" : "/dk/atira/pure/researchoutput/electronicversion/versiontype/publishersversion"
-    } ],
-    "licenseTypes" : [ {
-      "locale" : "en_GB",
-      "value" : "CC BY",
-      "pureId" : 23276,
-      "uri" : "/dk/atira/pure/core/document/licenses/cc_by"
-    }, {
-      "locale" : "de_DE",
-      "value" : "CC BY",
-      "pureId" : 23276,
-      "uri" : "/dk/atira/pure/core/document/licenses/cc_by"
-    } ]
-  }, {
-    "pureId" : 19239107,
-    "visibleOnPortalDate" : "2019-02-20T12:00:31.535+0000",
-    "creator" : "chrlad",
-    "created" : "2019-01-29T11:15:46.243+0000",
-    "title" : "test",
-    "file" : {
-      "fileName" : "test.txt",
-      "mimeType" : "text/plain",
-      "size" : 2,
-      "fileURL" : "https://pure01.tugraz.at/ws/files/19239108/test.txt",
-      "digestAlgorithm" : "SHA1",
-      "digest" : "E5FA44F2B31C1FB553B6021E7360D07D5D91FF5E"
-    },
-    "accessTypes" : [ {
-      "locale" : "en_GB",
-      "value" : "Open",
-      "pureId" : 105,
-      "uri" : "/dk/atira/pure/core/openaccesspermission/open"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Offen",
-      "pureId" : 105,
-      "uri" : "/dk/atira/pure/core/openaccesspermission/open"
-    } ],
-    "licenseTypes" : [ {
-      "locale" : "en_GB",
-      "value" : "CC BY",
-      "pureId" : 23276,
-      "uri" : "/dk/atira/pure/core/document/licenses/cc_by"
-    }, {
-      "locale" : "de_DE",
-      "value" : "CC BY",
-      "pureId" : 23276,
-      "uri" : "/dk/atira/pure/core/document/licenses/cc_by"
     } ]
   } ],
   "keywordGroups" : [ {
-    "pureId" : 19239082,
-    "logicalName" : "/dk/atira/pure/core/oefos2012",
+    "pureId" : 1064597,
+    "logicalName" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise",
     "types" : [ {
       "locale" : "en_GB",
-      "value" : "Austrian Fields of Study 2012 (6-stellig)",
-      "uri" : "/dk/atira/pure/core/oefos2012"
+      "value" : "Fields of Expertise",
+      "uri" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise"
     }, {
       "locale" : "de_DE",
-      "value" : "ÖFOS 2012 (6-stellig)",
-      "uri" : "/dk/atira/pure/core/oefos2012"
+      "value" : "Fields of Expertise",
+      "uri" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise"
     } ],
     "keywordContainers" : [ {
-      "pureId" : 19239083,
+      "pureId" : 1064599,
       "structuredKeyword" : {
-        "pureId" : 13310,
-        "uri" : "/dk/atira/pure/core/oefos2012/107/107001",
+        "pureId" : 26401,
+        "uri" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise/so",
         "disabled" : false,
         "terms" : [ {
           "locale" : "en_GB",
-          "value" : "107001 Archaeometry"
+          "value" : "Sonstiges"
         }, {
           "locale" : "de_DE",
-          "value" : "107001 Archäometrie"
-        } ],
-        "descriptions" : [ {
-          "locale" : "en_GB",
-          "value" : "107001 Archaeometry"
-        }, {
-          "locale" : "de_DE",
-          "value" : "107001 Archäometrie"
-        } ]
-      }
-    }, {
-      "pureId" : 19241399,
-      "structuredKeyword" : {
-        "pureId" : 13724,
-        "uri" : "/dk/atira/pure/core/oefos2012/209/209005",
-        "disabled" : false,
-        "terms" : [ {
-          "locale" : "en_GB",
-          "value" : "209005 Fermentation"
-        }, {
-          "locale" : "de_DE",
-          "value" : "209005 Fermentation"
-        } ],
-        "descriptions" : [ {
-          "locale" : "en_GB",
-          "value" : "209005 Fermentation"
-        }, {
-          "locale" : "de_DE",
-          "value" : "209005 Fermentation"
+          "value" : "Sonstiges"
         } ]
       }
     } ]

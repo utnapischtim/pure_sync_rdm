@@ -95,6 +95,8 @@ class pureToInvenio:
     def create_invenio_data(self):
 
         try:
+            self.record_files = []
+
             item = self.item
             self.data = '{'
 
@@ -127,16 +129,39 @@ class pureToInvenio:
             self.add_field(item, 'journalTitle',                      ['info', 'journalAssociation', 'title', 'value'])
             self.add_field(item, 'journalNumber',                     ['info', 'journalNumber'])
 
-            self.add_field(item, 'fileAccessType',                    ['electronicVersions', 0, 'accessTypes', 0, 'value'])
-            self.add_field(item, 'fileCreator',                       ['electronicVersions', 0, 'creator'])
-            self.add_field(item, 'fileCreationDate',                  ['electronicVersions', 0, 'created'])
-            self.add_field(item, 'fileTitle',                         ['electronicVersions', 0, 'title'])
-            self.add_field(item, 'fileDigest',                        ['electronicVersions', 0, 'file', 'digest'])
-            self.add_field(item, 'fileDigestAlgorithm',               ['electronicVersions', 0, 'file', 'digestAlgorithm'])
-            self.add_field(item, 'fileName',                          ['electronicVersions', 0, 'file', 'fileName'])
-            self.add_field(item, 'fileURL',                           ['electronicVersions', 0, 'file', 'fileURL'])
-            self.add_field(item, 'fileType',                          ['electronicVersions', 0, 'file', 'mimeType'])
-            self.add_field(item, 'fileSize',                          ['electronicVersions', 0, 'file', 'size'])
+            if 'electronicVersions' in item:
+
+                self.add_field(item, 'fileAccessType',                    ['electronicVersions', 0, 'accessTypes', 0, 'value'])
+                self.add_field(item, 'fileCreator',                       ['electronicVersions', 0, 'creator'])
+                self.add_field(item, 'fileCreationDate',                  ['electronicVersions', 0, 'created'])
+                self.add_field(item, 'fileTitle',                         ['electronicVersions', 0, 'title'])
+                self.add_field(item, 'fileDigest',                        ['electronicVersions', 0, 'file', 'digest'])
+                self.add_field(item, 'fileDigestAlgorithm',               ['electronicVersions', 0, 'file', 'digestAlgorithm'])
+                self.add_field(item, 'fileName',                          ['electronicVersions', 0, 'file', 'fileName'])
+                self.add_field(item, 'fileURL',                           ['electronicVersions', 0, 'file', 'fileURL'])
+                self.add_field(item, 'fileType',                          ['electronicVersions', 0, 'file', 'mimeType'])
+                self.add_field(item, 'fileSize',                          ['electronicVersions', 0, 'file', 'size'])
+
+                for EV in item['electronicVersions']:
+                    if 'file' in EV:
+
+                        if 'fileURL' in EV['file'] and 'fileName' in EV['file']:    
+
+                            file_url  = EV['file']['fileURL']
+                            file_name = EV['file']['fileName']
+
+                            file_url = 'https://i.pinimg.com/originals/4e/ac/dd/4eacddcee7df2abb374211d0475ba904.jpg'   # TEMPORARY
+
+
+                            # DOWNLOAD FILE FROM PURE
+                            response = requests.get(file_url)
+                            print(f'Download response - {fileName}: {response}')
+
+                            # SAVE FILE
+                            if response.status_code < 300:
+
+                                open(str(self.dirpath) + '/tmp_files/' + file_name, 'wb').write(response.content)
+                                self.record_files.append(file_name)
 
 
             # --- personAssociations ---
@@ -185,6 +210,7 @@ class pureToInvenio:
             filename = self.dirpath + "/reports/last_push.json"
             open(filename, "w+").write(self.data)
 
+            ## PUSH ONLY RECORDS WITH 'file'
             # if 'electronicVersions' in item:
             #     if 'file' in item['electronicVersions'][0]:
             #         self.post_to_invenio()
@@ -228,6 +254,7 @@ class pureToInvenio:
                     if i['name'] == element:
                         element = i['iso6393']
 
+            # Adding field
             self.data += '"' + inv_field + '": "' + element + '", '
 
         except:
@@ -289,9 +316,52 @@ class pureToInvenio:
                 
                 # error description from invenioRDM
                 report += str(response.content) + '\n'
-                
+            
+            # - Upload record FILES to RDM -
+            if len(self.record_files) > 0:
+
+                file_path = self.dirpath + '/tmp_files/'
+
+                for file_name in self.record_files:
+                    headers = {
+                        'Content-Type': 'application/octet-stream',
+                    }
+                    data = open(file_path + file_name, 'rb').read()
+                    response = requests.put('https://127.0.0.1:5000/api/records/' + record_id + '/files/' + file_name, headers=headers, data=data, verify=False)
+                    
+                    report += 'Upload file ' + file_name + ' - Response: ' + response + '\n'
+                    if response.status_code >= 300:
+                        report += str(response.content) + '\n'
+                    else:
+                        # if the upload was successful then delete file from /tmp_files
+                        os.remove(file_path + file_name) 
+
             filename = self.dirpath + "/reports/" + str(date.today()) + "_report.log"
             open(filename, "a").write(report)
 
         except:
             print('\n- Error in post_to_invenio method -\n')
+
+
+    #   ---         ---         ---
+    def file_transfer_test(self, file_name, url, record_id):
+        print('\nin file_transfer_test\n')
+
+        
+    #   ---         ---         ---
+    def file_transfer(self, file_name, url, record_id):
+        try:
+
+
+            # - PUT FILE TO RDM -
+            headers = {
+                'Content-Type': 'application/octet-stream',
+            }
+            data = open(file_path + file_name, 'rb').read()
+            response = requests.put('https://127.0.0.1:5000/api/records/' + record_id + '/files/' + file_name, headers=headers, data=data, verify=False)
+            print('RDM: ', response)
+
+            # DELETE FILE
+            os.remove(file_path + file_name) 
+        except:
+            print('\n- Error in file_transfer method -\n')

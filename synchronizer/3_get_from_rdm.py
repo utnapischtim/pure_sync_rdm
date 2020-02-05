@@ -9,14 +9,15 @@ params = (('prettyprint', '1'),)
 
 go_on = True
 pag = 1
-
+pag_size = 250
 
 uuid_str = ''
+recid_str = ''
 
 while go_on == True:
 
     response = requests.get(
-        f'https://localhost:5000/api/records/?sort=mostrecent&size=100&page={pag}', 
+        f'https://localhost:5000/api/records/?sort=mostrecent&size={pag_size}&page={pag}', 
         params=params, 
         verify=False
         )
@@ -32,6 +33,7 @@ while go_on == True:
     for i in resp_json['hits']['hits']:
         pprint(i['metadata']['uuid'])
         uuid_str += i['metadata']['uuid'] + '\n'
+        recid_str += i['metadata']['recid'] + '\n'
 
     if 'next' not in resp_json['links']:
         print('\n- End - No more pages available\n')
@@ -41,4 +43,5 @@ while go_on == True:
     pag += 1
     
     
-open(dirpath + "/reports/all_rdm_records.txt", 'w+').write(uuid_str)
+open(dirpath + "/reports/all_rdm_uuids.log", 'w+').write(uuid_str)
+open(dirpath + "/reports/all_rdm_recids.log", 'w+').write(recid_str)

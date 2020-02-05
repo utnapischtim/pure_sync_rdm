@@ -2,7 +2,7 @@
   "count" : 65295,
   "pageInformation" : {
     "offset" : 0,
-    "size" : 10
+    "size" : 20
   },
   "items" : [ {
     "pureId" : 1064125,
@@ -4398,9 +4398,3347 @@
       "value" : 0,
       "year" : 1999
     } ]
+  }, {
+    "pureId" : 1064513,
+    "externalId" : "43544",
+    "externalIdSource" : "researchoutputwizard",
+    "uuid" : "c6b9900a-25c6-4db9-84c1-4cadbb2296de",
+    "title" : "Combining eye tracking, key logging, and electroencephalographic data: towards an integrated tool for translators",
+    "peerReview" : false,
+    "managingOrganisationalUnit" : {
+      "uuid" : "c4ac7114-85ab-45ad-8d9e-1e9e92e311f3",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/c4ac7114-85ab-45ad-8d9e-1e9e92e311f3"
+      },
+      "externalId" : "19428",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Neural Engineering (7090)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Neurotechnologie (7090)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    },
+    "confidential" : false,
+    "info" : {
+      "createdBy" : "root",
+      "createdDate" : "2016-02-25T21:48:14.127+0000",
+      "modifiedBy" : "root",
+      "modifiedDate" : "2018-09-06T07:28:36.180+0000",
+      "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/combining-eye-tracking-key-logging-and-electroencephalographic-data-towards-an-integrated-tool-for-translators(c6b9900a-25c6-4db9-84c1-4cadbb2296de).html"
+    },
+    "event" : {
+      "uuid" : "19c5d6bf-0283-4771-93be-c57e313c1265",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/events/19c5d6bf-0283-4771-93be-c57e313c1265"
+      },
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Eye-to-IT conference on translation processes"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Eye-to-IT conference on translation processes"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Conference",
+        "pureId" : 1128,
+        "uri" : "/dk/atira/pure/event/eventtypes/event/conference"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Konferenz",
+        "pureId" : 1128,
+        "uri" : "/dk/atira/pure/event/eventtypes/event/conference"
+      } ]
+    },
+    "totalNumberOfAuthors" : 4,
+    "types" : [ {
+      "locale" : "en_GB",
+      "value" : "Poster",
+      "pureId" : 4550,
+      "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontoconference/poster"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Poster",
+      "pureId" : 4550,
+      "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontoconference/poster"
+    } ],
+    "categories" : [ {
+      "locale" : "en_GB",
+      "value" : "Research",
+      "pureId" : 4454,
+      "uri" : "/dk/atira/pure/researchoutput/category/research"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Forschung",
+      "pureId" : 4454,
+      "uri" : "/dk/atira/pure/researchoutput/category/research"
+    } ],
+    "publicationStatuses" : [ {
+      "pureId" : 1064513,
+      "externalId" : "43544",
+      "externalIdSource" : "researchoutputwizard",
+      "current" : true,
+      "publicationDate" : {
+        "year" : 2009
+      },
+      "publicationStatuses" : [ {
+        "locale" : "en_GB",
+        "value" : "Published",
+        "pureId" : 869,
+        "uri" : "/dk/atira/pure/researchoutput/status/published"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Veröffentlicht",
+        "pureId" : 869,
+        "uri" : "/dk/atira/pure/researchoutput/status/published"
+      } ]
+    } ],
+    "languages" : [ {
+      "locale" : "en_GB",
+      "value" : "English",
+      "pureId" : 4900,
+      "uri" : "/dk/atira/pure/core/languages/en_GB"
+    }, {
+      "locale" : "de_DE",
+      "value" : "englisch",
+      "pureId" : 4900,
+      "uri" : "/dk/atira/pure/core/languages/en_GB"
+    } ],
+    "personAssociations" : [ {
+      "pureId" : 1064522,
+      "externalPerson" : {
+        "uuid" : "92722b63-8efc-4edf-8f6b-d6ea6f29b723",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/external-persons/92722b63-8efc-4edf-8f6b-d6ea6f29b723"
+        },
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Oleg Špakov"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Oleg Špakov"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "External person",
+          "pureId" : 5089,
+          "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Externe Person",
+          "pureId" : 5089,
+          "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
+        } ]
+      },
+      "name" : {
+        "firstName" : "Oleg",
+        "lastName" : "Špakov"
+      },
+      "personRoles" : [ {
+        "locale" : "en_GB",
+        "value" : "Author",
+        "pureId" : 5190,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Autor",
+        "pureId" : 5190,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
+      } ]
+    }, {
+      "pureId" : 1064525,
+      "name" : {
+        "firstName" : "Clemens",
+        "lastName" : "Brunner"
+      },
+      "personRoles" : [ {
+        "locale" : "en_GB",
+        "value" : "Author",
+        "pureId" : 5190,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Autor",
+        "pureId" : 5190,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
+      } ],
+      "organisationalUnits" : [ {
+        "uuid" : "c4ac7114-85ab-45ad-8d9e-1e9e92e311f3",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/c4ac7114-85ab-45ad-8d9e-1e9e92e311f3"
+        },
+        "externalId" : "19428",
+        "externalIdSource" : "synchronisedUnifiedOrganisation",
+        "externallyManaged" : true,
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute of Neural Engineering (7090)"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut für Neurotechnologie (7090)"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        } ]
+      } ]
+    }, {
+      "pureId" : 1064527,
+      "externalPerson" : {
+        "uuid" : "b41193dc-cc23-4058-a7e1-8e8501a88253",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/external-persons/b41193dc-cc23-4058-a7e1-8e8501a88253"
+        },
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Lasse Schou"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Lasse Schou"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "External person",
+          "pureId" : 5089,
+          "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Externe Person",
+          "pureId" : 5089,
+          "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
+        } ]
+      },
+      "name" : {
+        "firstName" : "Lasse",
+        "lastName" : "Schou"
+      },
+      "personRoles" : [ {
+        "locale" : "en_GB",
+        "value" : "Author",
+        "pureId" : 5190,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Autor",
+        "pureId" : 5190,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
+      } ]
+    }, {
+      "pureId" : 1064528,
+      "externalPerson" : {
+        "uuid" : "94225343-3a23-4d8e-b358-3230fe8380bf",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/external-persons/94225343-3a23-4d8e-b358-3230fe8380bf"
+        },
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Alexander Gerganov"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Alexander Gerganov"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "External person",
+          "pureId" : 5089,
+          "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Externe Person",
+          "pureId" : 5089,
+          "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
+        } ]
+      },
+      "name" : {
+        "firstName" : "Alexander",
+        "lastName" : "Gerganov"
+      },
+      "personRoles" : [ {
+        "locale" : "en_GB",
+        "value" : "Author",
+        "pureId" : 5190,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Autor",
+        "pureId" : 5190,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
+      } ]
+    } ],
+    "organisationalUnits" : [ {
+      "uuid" : "c4ac7114-85ab-45ad-8d9e-1e9e92e311f3",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/c4ac7114-85ab-45ad-8d9e-1e9e92e311f3"
+      },
+      "externalId" : "19428",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Neural Engineering (7090)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Neurotechnologie (7090)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    } ],
+    "openAccessPermissions" : [ {
+      "locale" : "en_GB",
+      "value" : "None",
+      "pureId" : 2928,
+      "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/none"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Keine Angabe",
+      "pureId" : 2928,
+      "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/none"
+    } ],
+    "visibilities" : [ {
+      "locale" : "en_GB",
+      "value" : "Public - No restriction",
+      "key" : "FREE"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Öffentlich - Keine Einschränkungen",
+      "key" : "FREE"
+    } ],
+    "workflows" : [ {
+      "locale" : "en_GB",
+      "value" : "For validation",
+      "workflowStep" : "forApproval"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Zur Validierung",
+      "workflowStep" : "forApproval"
+    } ]
+  }, {
+    "pureId" : 1064534,
+    "externalId" : "3603",
+    "externalIdSource" : "researchoutputwizard",
+    "uuid" : "45832186-4075-4db8-9eb5-53661e032ec5",
+    "title" : "Why it is Difficult to Introduce e-Learning into Schools And Some New Solutions",
+    "peerReview" : true,
+    "managingOrganisationalUnit" : {
+      "uuid" : "5a3f13f5-2fdf-48d7-a4ee-d6faaf8aa934",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/5a3f13f5-2fdf-48d7-a4ee-d6faaf8aa934"
+      },
+      "externalId" : "2367",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Interactive Systems and Data Science (7060)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institute of Interactive Systems and Data Science (7060)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    },
+    "confidential" : false,
+    "info" : {
+      "createdBy" : "root",
+      "createdDate" : "2016-02-25T21:48:15.237+0000",
+      "modifiedBy" : "sync_user",
+      "modifiedDate" : "2020-01-05T00:00:27.828+0000",
+      "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/why-it-is-difficult-to-introduce-elearning-into-schools-and-some-new-solutions(45832186-4075-4db8-9eb5-53661e032ec5).html",
+      "additionalExternalIds" : [ {
+        "value" : "23844499976",
+        "idSource" : "Scopus"
+      } ]
+    },
+    "totalScopusCitations" : 10,
+    "pages" : "1244-1257",
+    "volume" : "9",
+    "journalAssociation" : {
+      "pureId" : 1064535,
+      "title" : {
+        "value" : "Journal of universal computer science ",
+        "startDate" : "1994"
+      },
+      "journal" : {
+        "uuid" : "495068eb-d1a9-47a7-b21c-d200c550e44d",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/journals/495068eb-d1a9-47a7-b21c-d200c550e44d"
+        },
+        "externalId" : "336",
+        "externalIdSource" : "researchoutputwizard",
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Journal of universal computer science "
+        }, {
+          "locale" : "de_DE",
+          "value" : "Journal of universal computer science "
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "Journal",
+          "pureId" : 989,
+          "uri" : "/dk/atira/pure/journal/journaltypes/journal/journal"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Zeitschrift",
+          "pureId" : 989,
+          "uri" : "/dk/atira/pure/journal/journaltypes/journal/journal"
+        } ]
+      }
+    },
+    "journalNumber" : "10",
+    "totalNumberOfAuthors" : 1,
+    "types" : [ {
+      "locale" : "en_GB",
+      "value" : "Article",
+      "pureId" : 4490,
+      "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontojournal/article"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Artikel",
+      "pureId" : 4490,
+      "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontojournal/article"
+    } ],
+    "categories" : [ {
+      "locale" : "en_GB",
+      "value" : "Research",
+      "pureId" : 4454,
+      "uri" : "/dk/atira/pure/researchoutput/category/research"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Forschung",
+      "pureId" : 4454,
+      "uri" : "/dk/atira/pure/researchoutput/category/research"
+    } ],
+    "publicationStatuses" : [ {
+      "pureId" : 1064534,
+      "externalId" : "3603",
+      "externalIdSource" : "researchoutputwizard",
+      "current" : true,
+      "publicationDate" : {
+        "year" : 2003
+      },
+      "publicationStatuses" : [ {
+        "locale" : "en_GB",
+        "value" : "Published",
+        "pureId" : 869,
+        "uri" : "/dk/atira/pure/researchoutput/status/published"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Veröffentlicht",
+        "pureId" : 869,
+        "uri" : "/dk/atira/pure/researchoutput/status/published"
+      } ]
+    } ],
+    "languages" : [ {
+      "locale" : "en_GB",
+      "value" : "English",
+      "pureId" : 4900,
+      "uri" : "/dk/atira/pure/core/languages/en_GB"
+    }, {
+      "locale" : "de_DE",
+      "value" : "englisch",
+      "pureId" : 4900,
+      "uri" : "/dk/atira/pure/core/languages/en_GB"
+    } ],
+    "personAssociations" : [ {
+      "pureId" : 1064538,
+      "person" : {
+        "uuid" : "e4b5cb1a-509c-481e-9c0f-363d62a80b73",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/persons/e4b5cb1a-509c-481e-9c0f-363d62a80b73"
+        },
+        "externalId" : "3175",
+        "externalIdSource" : "synchronisedUnifiedPerson",
+        "externallyManaged" : true,
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Hermann Maurer"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Hermann Maurer"
+        } ]
+      },
+      "name" : {
+        "firstName" : "Hermann",
+        "lastName" : "Maurer"
+      },
+      "personRoles" : [ {
+        "locale" : "en_GB",
+        "value" : "Author",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Autor",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      } ],
+      "organisationalUnits" : [ {
+        "uuid" : "5a3f13f5-2fdf-48d7-a4ee-d6faaf8aa934",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/5a3f13f5-2fdf-48d7-a4ee-d6faaf8aa934"
+        },
+        "externalId" : "2367",
+        "externalIdSource" : "synchronisedUnifiedOrganisation",
+        "externallyManaged" : true,
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute of Interactive Systems and Data Science (7060)"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institute of Interactive Systems and Data Science (7060)"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        } ]
+      } ]
+    } ],
+    "organisationalUnits" : [ {
+      "uuid" : "5a3f13f5-2fdf-48d7-a4ee-d6faaf8aa934",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/5a3f13f5-2fdf-48d7-a4ee-d6faaf8aa934"
+      },
+      "externalId" : "2367",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Interactive Systems and Data Science (7060)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institute of Interactive Systems and Data Science (7060)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    } ],
+    "openAccessPermissions" : [ {
+      "locale" : "en_GB",
+      "value" : "None",
+      "pureId" : 2928,
+      "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/none"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Keine Angabe",
+      "pureId" : 2928,
+      "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/none"
+    } ],
+    "additionalLinks" : [ {
+      "pureId" : 1064536,
+      "url" : "http://www.jucs.org"
+    } ],
+    "visibilities" : [ {
+      "locale" : "en_GB",
+      "value" : "Public - No restriction",
+      "key" : "FREE"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Öffentlich - Keine Einschränkungen",
+      "key" : "FREE"
+    } ],
+    "workflows" : [ {
+      "locale" : "en_GB",
+      "value" : "For validation",
+      "workflowStep" : "forApproval"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Zur Validierung",
+      "workflowStep" : "forApproval"
+    } ],
+    "scopusMetrics" : [ {
+      "value" : 0,
+      "year" : 2020
+    }, {
+      "value" : 1,
+      "year" : 2019
+    }, {
+      "value" : 1,
+      "year" : 2018
+    }, {
+      "value" : 0,
+      "year" : 2017
+    }, {
+      "value" : 1,
+      "year" : 2016
+    }, {
+      "value" : 1,
+      "year" : 2015
+    }, {
+      "value" : 0,
+      "year" : 2014
+    }, {
+      "value" : 0,
+      "year" : 2013
+    }, {
+      "value" : 1,
+      "year" : 2012
+    }, {
+      "value" : 2,
+      "year" : 2011
+    }, {
+      "value" : 0,
+      "year" : 2010
+    }, {
+      "value" : 0,
+      "year" : 2009
+    }, {
+      "value" : 0,
+      "year" : 2008
+    }, {
+      "value" : 0,
+      "year" : 2007
+    }, {
+      "value" : 2,
+      "year" : 2006
+    }, {
+      "value" : 0,
+      "year" : 2005
+    }, {
+      "value" : 1,
+      "year" : 2004
+    }, {
+      "value" : 0,
+      "year" : 2003
+    } ]
+  }, {
+    "pureId" : 1064572,
+    "externalId" : "53033",
+    "externalIdSource" : "researchoutputwizard",
+    "uuid" : "1c74c1ef-9b61-4c4f-94ea-bbf2ea466b1a",
+    "title" : "Auf dem Holzweg",
+    "peerReview" : false,
+    "managingOrganisationalUnit" : {
+      "uuid" : "3423acc4-ff55-4f0f-88bd-978d80bdeccf",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/3423acc4-ff55-4f0f-88bd-978d80bdeccf"
+      },
+      "externalId" : "2267",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Thermal Engineering (3070)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Wärmetechnik (3070)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    },
+    "confidential" : false,
+    "info" : {
+      "createdBy" : "root",
+      "createdDate" : "2016-02-25T21:48:16.553+0000",
+      "modifiedBy" : "sync_user",
+      "modifiedDate" : "2020-01-05T00:00:28.690+0000",
+      "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/auf-dem-holzweg(1c74c1ef-9b61-4c4f-94ea-bbf2ea466b1a).html",
+      "additionalExternalIds" : [ {
+        "value" : "78651247597",
+        "idSource" : "Scopus"
+      } ]
+    },
+    "totalScopusCitations" : 0,
+    "pages" : "170-174",
+    "volume" : "20",
+    "journalAssociation" : {
+      "pureId" : 1064573,
+      "title" : {
+        "value" : "Erneuerbare Energie"
+      },
+      "journal" : {
+        "uuid" : "8d0b66a5-40a6-410e-ae45-0b3b6ecd58a8",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/journals/8d0b66a5-40a6-410e-ae45-0b3b6ecd58a8"
+        },
+        "externalId" : "955",
+        "externalIdSource" : "researchoutputwizard",
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Erneuerbare Energie"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Erneuerbare Energie"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "Journal",
+          "pureId" : 989,
+          "uri" : "/dk/atira/pure/journal/journaltypes/journal/journal"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Zeitschrift",
+          "pureId" : 989,
+          "uri" : "/dk/atira/pure/journal/journaltypes/journal/journal"
+        } ]
+      }
+    },
+    "journalNumber" : "9",
+    "totalNumberOfAuthors" : 2,
+    "types" : [ {
+      "locale" : "en_GB",
+      "value" : "Article",
+      "pureId" : 4490,
+      "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontojournal/article"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Artikel",
+      "pureId" : 4490,
+      "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontojournal/article"
+    } ],
+    "categories" : [ {
+      "locale" : "en_GB",
+      "value" : "Research",
+      "pureId" : 4454,
+      "uri" : "/dk/atira/pure/researchoutput/category/research"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Forschung",
+      "pureId" : 4454,
+      "uri" : "/dk/atira/pure/researchoutput/category/research"
+    } ],
+    "publicationStatuses" : [ {
+      "pureId" : 1064572,
+      "externalId" : "53033",
+      "externalIdSource" : "researchoutputwizard",
+      "current" : true,
+      "publicationDate" : {
+        "year" : 2010
+      },
+      "publicationStatuses" : [ {
+        "locale" : "en_GB",
+        "value" : "Published",
+        "pureId" : 869,
+        "uri" : "/dk/atira/pure/researchoutput/status/published"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Veröffentlicht",
+        "pureId" : 869,
+        "uri" : "/dk/atira/pure/researchoutput/status/published"
+      } ]
+    } ],
+    "languages" : [ {
+      "locale" : "en_GB",
+      "value" : "German",
+      "pureId" : 4898,
+      "uri" : "/dk/atira/pure/core/languages/de_DE"
+    }, {
+      "locale" : "de_DE",
+      "value" : "deutsch",
+      "pureId" : 4898,
+      "uri" : "/dk/atira/pure/core/languages/de_DE"
+    } ],
+    "personAssociations" : [ {
+      "pureId" : 1064575,
+      "name" : {
+        "firstName" : "Jürgen",
+        "lastName" : "Karl"
+      },
+      "personRoles" : [ {
+        "locale" : "en_GB",
+        "value" : "Author",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Autor",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      } ],
+      "organisationalUnits" : [ {
+        "uuid" : "3423acc4-ff55-4f0f-88bd-978d80bdeccf",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/3423acc4-ff55-4f0f-88bd-978d80bdeccf"
+        },
+        "externalId" : "2267",
+        "externalIdSource" : "synchronisedUnifiedOrganisation",
+        "externallyManaged" : true,
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute of Thermal Engineering (3070)"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut für Wärmetechnik (3070)"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        } ]
+      } ]
+    }, {
+      "pureId" : 1064577,
+      "name" : {
+        "firstName" : "Thomas",
+        "lastName" : "Kienberger"
+      },
+      "personRoles" : [ {
+        "locale" : "en_GB",
+        "value" : "Author",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Autor",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      } ],
+      "organisationalUnits" : [ {
+        "uuid" : "3423acc4-ff55-4f0f-88bd-978d80bdeccf",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/3423acc4-ff55-4f0f-88bd-978d80bdeccf"
+        },
+        "externalId" : "2267",
+        "externalIdSource" : "synchronisedUnifiedOrganisation",
+        "externallyManaged" : true,
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute of Thermal Engineering (3070)"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut für Wärmetechnik (3070)"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        } ]
+      } ]
+    } ],
+    "organisationalUnits" : [ {
+      "uuid" : "3423acc4-ff55-4f0f-88bd-978d80bdeccf",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/3423acc4-ff55-4f0f-88bd-978d80bdeccf"
+      },
+      "externalId" : "2267",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Thermal Engineering (3070)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Wärmetechnik (3070)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    } ],
+    "openAccessPermissions" : [ {
+      "locale" : "en_GB",
+      "value" : "None",
+      "pureId" : 2928,
+      "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/none"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Keine Angabe",
+      "pureId" : 2928,
+      "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/none"
+    } ],
+    "visibilities" : [ {
+      "locale" : "en_GB",
+      "value" : "Public - No restriction",
+      "key" : "FREE"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Öffentlich - Keine Einschränkungen",
+      "key" : "FREE"
+    } ],
+    "workflows" : [ {
+      "locale" : "en_GB",
+      "value" : "For validation",
+      "workflowStep" : "forApproval"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Zur Validierung",
+      "workflowStep" : "forApproval"
+    } ],
+    "scopusMetrics" : [ {
+      "value" : 0,
+      "year" : 2020
+    }, {
+      "value" : 0,
+      "year" : 2019
+    }, {
+      "value" : 0,
+      "year" : 2018
+    }, {
+      "value" : 0,
+      "year" : 2017
+    }, {
+      "value" : 0,
+      "year" : 2016
+    }, {
+      "value" : 0,
+      "year" : 2015
+    }, {
+      "value" : 0,
+      "year" : 2014
+    }, {
+      "value" : 0,
+      "year" : 2013
+    }, {
+      "value" : 0,
+      "year" : 2012
+    }, {
+      "value" : 0,
+      "year" : 2011
+    }, {
+      "value" : 0,
+      "year" : 2010
+    } ]
+  }, {
+    "pureId" : 1064589,
+    "externalId" : "74045",
+    "externalIdSource" : "researchoutputwizard",
+    "uuid" : "06f9e00f-ca16-4db5-bdf8-d13bb3235788",
+    "title" : "Photogrammetric Interpolation",
+    "peerReview" : true,
+    "managingOrganisationalUnit" : {
+      "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
+      },
+      "externalId" : "2376",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Computer Graphics and Vision (7100)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    },
+    "confidential" : false,
+    "info" : {
+      "createdBy" : "root",
+      "createdDate" : "2016-02-25T21:48:16.870+0000",
+      "modifiedBy" : "root",
+      "modifiedDate" : "2018-09-06T07:28:36.251+0000",
+      "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/photogrammetric-interpolation(06f9e00f-ca16-4db5-bdf8-d13bb3235788).html"
+    },
+    "pages" : "205-229",
+    "journalAssociation" : {
+      "pureId" : 1064590,
+      "title" : {
+        "value" : "The ITC journal = Bulletin de l'ITC"
+      },
+      "journal" : {
+        "uuid" : "8e08e9ef-c643-4ae6-833c-89f2e9e742f0",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/journals/8e08e9ef-c643-4ae6-833c-89f2e9e742f0"
+        },
+        "externalId" : "5974",
+        "externalIdSource" : "researchoutputwizard",
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "The ITC journal = Bulletin de l'ITC"
+        }, {
+          "locale" : "de_DE",
+          "value" : "The ITC journal = Bulletin de l'ITC"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "Journal",
+          "pureId" : 989,
+          "uri" : "/dk/atira/pure/journal/journaltypes/journal/journal"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Zeitschrift",
+          "pureId" : 989,
+          "uri" : "/dk/atira/pure/journal/journaltypes/journal/journal"
+        } ]
+      }
+    },
+    "journalNumber" : "2",
+    "totalNumberOfAuthors" : 1,
+    "types" : [ {
+      "locale" : "en_GB",
+      "value" : "Article",
+      "pureId" : 4490,
+      "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontojournal/article"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Artikel",
+      "pureId" : 4490,
+      "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontojournal/article"
+    } ],
+    "categories" : [ {
+      "locale" : "en_GB",
+      "value" : "Research",
+      "pureId" : 4454,
+      "uri" : "/dk/atira/pure/researchoutput/category/research"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Forschung",
+      "pureId" : 4454,
+      "uri" : "/dk/atira/pure/researchoutput/category/research"
+    } ],
+    "publicationStatuses" : [ {
+      "pureId" : 1064589,
+      "externalId" : "74045",
+      "externalIdSource" : "researchoutputwizard",
+      "current" : true,
+      "publicationDate" : {
+        "year" : 1975
+      },
+      "publicationStatuses" : [ {
+        "locale" : "en_GB",
+        "value" : "Published",
+        "pureId" : 869,
+        "uri" : "/dk/atira/pure/researchoutput/status/published"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Veröffentlicht",
+        "pureId" : 869,
+        "uri" : "/dk/atira/pure/researchoutput/status/published"
+      } ]
+    } ],
+    "languages" : [ {
+      "locale" : "en_GB",
+      "value" : "English",
+      "pureId" : 4900,
+      "uri" : "/dk/atira/pure/core/languages/en_GB"
+    }, {
+      "locale" : "de_DE",
+      "value" : "englisch",
+      "pureId" : 4900,
+      "uri" : "/dk/atira/pure/core/languages/en_GB"
+    } ],
+    "personAssociations" : [ {
+      "pureId" : 1064604,
+      "person" : {
+        "uuid" : "1198b8c9-eea7-41dd-8861-30c8d066fb27",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/persons/1198b8c9-eea7-41dd-8861-30c8d066fb27"
+        },
+        "externalId" : "3261",
+        "externalIdSource" : "synchronisedUnifiedPerson",
+        "externallyManaged" : true,
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Franz Leberl"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Franz Leberl"
+        } ]
+      },
+      "name" : {
+        "firstName" : "Franz",
+        "lastName" : "Leberl"
+      },
+      "personRoles" : [ {
+        "locale" : "en_GB",
+        "value" : "Author",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Autor",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      } ],
+      "organisationalUnits" : [ {
+        "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
+        },
+        "externalId" : "2376",
+        "externalIdSource" : "synchronisedUnifiedOrganisation",
+        "externallyManaged" : true,
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute of Computer Graphics and Vision (7100)"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        } ]
+      } ]
+    } ],
+    "organisationalUnits" : [ {
+      "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
+      },
+      "externalId" : "2376",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Computer Graphics and Vision (7100)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    } ],
+    "openAccessPermissions" : [ {
+      "locale" : "en_GB",
+      "value" : "Open",
+      "pureId" : 2920,
+      "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/open"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Offen",
+      "pureId" : 2920,
+      "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/open"
+    } ],
+    "electronicVersions" : [ {
+      "pureId" : 1064592,
+      "visibleOnPortalDate" : "2016-02-25T21:48:16.870+0000",
+      "creator" : "root",
+      "created" : "2016-02-25T21:48:16.867+0000",
+      "title" : "20 - Photogrammetric Interpolation, ITC-Journal 1975.pdf",
+      "file" : {
+        "fileName" : "20%20-%20Photogrammetric%20Interpolation,%20ITC-Journal%201975.pdf",
+        "mimeType" : "20 - Photogrammetric Interpolation, ITC-Journal 1975.pdf",
+        "size" : 885061,
+        "fileURL" : "https://pure01.tugraz.at/ws/files/1064594/20%2520-%2520Photogrammetric%2520Interpolation,%2520ITC-Journal%25201975.pdf",
+        "digestAlgorithm" : "SHA1",
+        "digest" : "FF74800705D836C05E448FF046E3C83B1DEA56BF"
+      },
+      "accessTypes" : [ {
+        "locale" : "en_GB",
+        "value" : "Open",
+        "pureId" : 105,
+        "uri" : "/dk/atira/pure/core/openaccesspermission/open"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Offen",
+        "pureId" : 105,
+        "uri" : "/dk/atira/pure/core/openaccesspermission/open"
+      } ],
+      "versionTypes" : [ {
+        "locale" : "en_GB",
+        "value" : "Final published version",
+        "pureId" : 23264,
+        "uri" : "/dk/atira/pure/researchoutput/electronicversion/versiontype/publishersversion"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Endgültige, publizierte Fassung",
+        "pureId" : 23264,
+        "uri" : "/dk/atira/pure/researchoutput/electronicversion/versiontype/publishersversion"
+      } ]
+    } ],
+    "keywordGroups" : [ {
+      "pureId" : 1064597,
+      "logicalName" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise",
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Fields of Expertise",
+        "uri" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Fields of Expertise",
+        "uri" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise"
+      } ],
+      "keywordContainers" : [ {
+        "pureId" : 1064599,
+        "structuredKeyword" : {
+          "pureId" : 26401,
+          "uri" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise/so",
+          "disabled" : false,
+          "terms" : [ {
+            "locale" : "en_GB",
+            "value" : "Sonstiges"
+          }, {
+            "locale" : "de_DE",
+            "value" : "Sonstiges"
+          } ]
+        }
+      } ]
+    } ],
+    "visibilities" : [ {
+      "locale" : "en_GB",
+      "value" : "Public - No restriction",
+      "key" : "FREE"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Öffentlich - Keine Einschränkungen",
+      "key" : "FREE"
+    } ],
+    "workflows" : [ {
+      "locale" : "en_GB",
+      "value" : "For validation",
+      "workflowStep" : "forApproval"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Zur Validierung",
+      "workflowStep" : "forApproval"
+    } ]
+  }, {
+    "pureId" : 1064591,
+    "externalId" : "25397",
+    "externalIdSource" : "researchoutputwizard",
+    "uuid" : "4698f793-c92c-4712-b179-7a368f26d514",
+    "title" : "Heterogene photokatalytische Gasreinigung mit nanokristallinen Halbleiterschichten.",
+    "peerReview" : true,
+    "managingOrganisationalUnit" : {
+      "uuid" : "bd046cff-3849-4cc1-90b3-28e49fed8fc6",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/bd046cff-3849-4cc1-90b3-28e49fed8fc6"
+      },
+      "externalId" : "9187",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Chemical Apparatus Design, Particle Technology and Combustion (6650)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Mechanische Verfahrenstechnik (6650)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    },
+    "confidential" : false,
+    "info" : {
+      "createdBy" : "root",
+      "createdDate" : "2016-02-25T21:48:16.877+0000",
+      "modifiedBy" : "root",
+      "modifiedDate" : "2018-09-06T07:28:36.288+0000",
+      "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/heterogene-photokatalytische-gasreinigung-mit-nanokristallinen-halbleiterschichten(4698f793-c92c-4712-b179-7a368f26d514).html"
+    },
+    "pages" : "1278-1279",
+    "volume" : "78",
+    "journalAssociation" : {
+      "pureId" : 1064593,
+      "title" : {
+        "value" : "Chemie-Ingenieur-Technik"
+      },
+      "journal" : {
+        "uuid" : "3452ab1f-c58f-44bd-8891-980f98113303",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/journals/3452ab1f-c58f-44bd-8891-980f98113303"
+        },
+        "externalId" : "225",
+        "externalIdSource" : "researchoutputwizard",
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Chemie-Ingenieur-Technik"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Chemie-Ingenieur-Technik"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "Journal",
+          "pureId" : 989,
+          "uri" : "/dk/atira/pure/journal/journaltypes/journal/journal"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Zeitschrift",
+          "pureId" : 989,
+          "uri" : "/dk/atira/pure/journal/journaltypes/journal/journal"
+        } ]
+      }
+    },
+    "journalNumber" : "-;9",
+    "totalNumberOfAuthors" : 2,
+    "types" : [ {
+      "locale" : "en_GB",
+      "value" : "Article",
+      "pureId" : 4490,
+      "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontojournal/article"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Artikel",
+      "pureId" : 4490,
+      "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontojournal/article"
+    } ],
+    "categories" : [ {
+      "locale" : "en_GB",
+      "value" : "Research",
+      "pureId" : 4454,
+      "uri" : "/dk/atira/pure/researchoutput/category/research"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Forschung",
+      "pureId" : 4454,
+      "uri" : "/dk/atira/pure/researchoutput/category/research"
+    } ],
+    "publicationStatuses" : [ {
+      "pureId" : 1064591,
+      "externalId" : "25397",
+      "externalIdSource" : "researchoutputwizard",
+      "current" : true,
+      "publicationDate" : {
+        "year" : 2006
+      },
+      "publicationStatuses" : [ {
+        "locale" : "en_GB",
+        "value" : "Published",
+        "pureId" : 869,
+        "uri" : "/dk/atira/pure/researchoutput/status/published"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Veröffentlicht",
+        "pureId" : 869,
+        "uri" : "/dk/atira/pure/researchoutput/status/published"
+      } ]
+    } ],
+    "languages" : [ {
+      "locale" : "en_GB",
+      "value" : "German",
+      "pureId" : 4898,
+      "uri" : "/dk/atira/pure/core/languages/de_DE"
+    }, {
+      "locale" : "de_DE",
+      "value" : "deutsch",
+      "pureId" : 4898,
+      "uri" : "/dk/atira/pure/core/languages/de_DE"
+    } ],
+    "personAssociations" : [ {
+      "pureId" : 1064614,
+      "name" : {
+        "firstName" : "Peter",
+        "lastName" : "Pucher"
+      },
+      "personRoles" : [ {
+        "locale" : "en_GB",
+        "value" : "Author",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Autor",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      } ],
+      "organisationalUnits" : [ {
+        "uuid" : "44dff43c-2d42-4974-98d8-b249db092dbc",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/44dff43c-2d42-4974-98d8-b249db092dbc"
+        },
+        "externalId" : "13866",
+        "externalIdSource" : "synchronisedUnifiedOrganisation",
+        "externallyManaged" : true,
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute of Process and Particle Engineering (6690)"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut für Prozess- und Partikeltechnik (6690)"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        } ]
+      } ]
+    }, {
+      "pureId" : 1064619,
+      "person" : {
+        "uuid" : "cc180bec-e85c-4065-be6d-d73351727f38",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/persons/cc180bec-e85c-4065-be6d-d73351727f38"
+        },
+        "externalId" : "2898",
+        "externalIdSource" : "synchronisedUnifiedPerson",
+        "externallyManaged" : true,
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Gernot Krammer"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Gernot Krammer"
+        } ]
+      },
+      "name" : {
+        "firstName" : "Gernot",
+        "lastName" : "Krammer"
+      },
+      "personRoles" : [ {
+        "locale" : "en_GB",
+        "value" : "Author",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Autor",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      } ],
+      "organisationalUnits" : [ {
+        "uuid" : "44dff43c-2d42-4974-98d8-b249db092dbc",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/44dff43c-2d42-4974-98d8-b249db092dbc"
+        },
+        "externalId" : "13866",
+        "externalIdSource" : "synchronisedUnifiedOrganisation",
+        "externallyManaged" : true,
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute of Process and Particle Engineering (6690)"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut für Prozess- und Partikeltechnik (6690)"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        } ]
+      } ]
+    } ],
+    "organisationalUnits" : [ {
+      "uuid" : "44dff43c-2d42-4974-98d8-b249db092dbc",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/44dff43c-2d42-4974-98d8-b249db092dbc"
+      },
+      "externalId" : "13866",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Process and Particle Engineering (6690)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Prozess- und Partikeltechnik (6690)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    } ],
+    "openAccessPermissions" : [ {
+      "locale" : "en_GB",
+      "value" : "None",
+      "pureId" : 2928,
+      "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/none"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Keine Angabe",
+      "pureId" : 2928,
+      "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/none"
+    } ],
+    "keywordGroups" : [ {
+      "pureId" : 1064605,
+      "logicalName" : "/dk/atira/pure/researchoutput/keywords/treatmentcode",
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Treatment code (Nähere Zuordnung)",
+        "uri" : "/dk/atira/pure/researchoutput/keywords/treatmentcode"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Treatment code (Nähere Zuordnung)",
+        "uri" : "/dk/atira/pure/researchoutput/keywords/treatmentcode"
+      } ],
+      "keywordContainers" : [ {
+        "pureId" : 1064607,
+        "structuredKeyword" : {
+          "pureId" : 26415,
+          "uri" : "/dk/atira/pure/researchoutput/keywords/treatmentcode/experimental",
+          "disabled" : false,
+          "terms" : [ {
+            "locale" : "en_GB",
+            "value" : "Experimental"
+          }, {
+            "locale" : "de_DE",
+            "value" : "Experimental"
+          } ]
+        }
+      } ]
+    } ],
+    "visibilities" : [ {
+      "locale" : "en_GB",
+      "value" : "Public - No restriction",
+      "key" : "FREE"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Öffentlich - Keine Einschränkungen",
+      "key" : "FREE"
+    } ],
+    "workflows" : [ {
+      "locale" : "en_GB",
+      "value" : "For validation",
+      "workflowStep" : "forApproval"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Zur Validierung",
+      "workflowStep" : "forApproval"
+    } ]
+  }, {
+    "pureId" : 1064600,
+    "externalId" : "4467",
+    "externalIdSource" : "researchoutputwizard",
+    "uuid" : "1ff62a26-081d-4b0d-b0f2-4ac944a8e035",
+    "title" : "Approximation of convex curves with application to the bicriterial min cost flow problem",
+    "peerReview" : true,
+    "managingOrganisationalUnit" : {
+      "uuid" : "f5c55594-df76-4221-bf9e-3eafbf4b8950",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/f5c55594-df76-4221-bf9e-3eafbf4b8950"
+      },
+      "externalId" : "7307",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Optimization and Discrete Mathematics (Math B) (5020)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für (*)Optimierung und Diskrete Mathematik (Math B) (5020)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    },
+    "confidential" : false,
+    "info" : {
+      "createdBy" : "root",
+      "createdDate" : "2016-02-25T21:48:16.927+0000",
+      "modifiedBy" : "root",
+      "modifiedDate" : "2018-09-06T07:28:36.308+0000",
+      "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/approximation-of-convex-curves-with-application-to-the-bicriterial-min-cost-flow-problem(1ff62a26-081d-4b0d-b0f2-4ac944a8e035).html"
+    },
+    "pages" : "326-338",
+    "volume" : "42",
+    "journalAssociation" : {
+      "pureId" : 1064603,
+      "title" : {
+        "value" : "European journal of operational research"
+      },
+      "journal" : {
+        "uuid" : "aeb2bc18-d2e6-41f2-97b2-770c7916f9f9",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/journals/aeb2bc18-d2e6-41f2-97b2-770c7916f9f9"
+        },
+        "externalId" : "1193",
+        "externalIdSource" : "researchoutputwizard",
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "European journal of operational research"
+        }, {
+          "locale" : "de_DE",
+          "value" : "European journal of operational research"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "Journal",
+          "pureId" : 989,
+          "uri" : "/dk/atira/pure/journal/journaltypes/journal/journal"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Zeitschrift",
+          "pureId" : 989,
+          "uri" : "/dk/atira/pure/journal/journaltypes/journal/journal"
+        } ]
+      }
+    },
+    "totalNumberOfAuthors" : 3,
+    "types" : [ {
+      "locale" : "en_GB",
+      "value" : "Article",
+      "pureId" : 4490,
+      "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontojournal/article"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Artikel",
+      "pureId" : 4490,
+      "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontojournal/article"
+    } ],
+    "categories" : [ {
+      "locale" : "en_GB",
+      "value" : "Research",
+      "pureId" : 4454,
+      "uri" : "/dk/atira/pure/researchoutput/category/research"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Forschung",
+      "pureId" : 4454,
+      "uri" : "/dk/atira/pure/researchoutput/category/research"
+    } ],
+    "publicationStatuses" : [ {
+      "pureId" : 1064600,
+      "externalId" : "4467",
+      "externalIdSource" : "researchoutputwizard",
+      "current" : true,
+      "publicationDate" : {
+        "year" : 1989
+      },
+      "publicationStatuses" : [ {
+        "locale" : "en_GB",
+        "value" : "Published",
+        "pureId" : 869,
+        "uri" : "/dk/atira/pure/researchoutput/status/published"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Veröffentlicht",
+        "pureId" : 869,
+        "uri" : "/dk/atira/pure/researchoutput/status/published"
+      } ]
+    } ],
+    "languages" : [ {
+      "locale" : "en_GB",
+      "value" : "English",
+      "pureId" : 4900,
+      "uri" : "/dk/atira/pure/core/languages/en_GB"
+    }, {
+      "locale" : "de_DE",
+      "value" : "englisch",
+      "pureId" : 4900,
+      "uri" : "/dk/atira/pure/core/languages/en_GB"
+    } ],
+    "personAssociations" : [ {
+      "pureId" : 1064609,
+      "name" : {
+        "firstName" : "Bernd",
+        "lastName" : "Fruhwirth"
+      },
+      "personRoles" : [ {
+        "locale" : "en_GB",
+        "value" : "Author",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Autor",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      } ]
+    }, {
+      "pureId" : 1064612,
+      "person" : {
+        "uuid" : "147e8916-1351-461d-9d95-ca050ecd9a6c",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/persons/147e8916-1351-461d-9d95-ca050ecd9a6c"
+        },
+        "externalId" : "3608",
+        "externalIdSource" : "synchronisedUnifiedPerson",
+        "externallyManaged" : true,
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Rainer Burkard"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Rainer Burkard"
+        } ]
+      },
+      "name" : {
+        "firstName" : "Rainer Ernst",
+        "lastName" : "Burkard"
+      },
+      "personRoles" : [ {
+        "locale" : "en_GB",
+        "value" : "Author",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Autor",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      } ],
+      "organisationalUnits" : [ {
+        "uuid" : "15d662f6-ed41-4498-bed0-8351c5267cc7",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/15d662f6-ed41-4498-bed0-8351c5267cc7"
+        },
+        "externalId" : "34265",
+        "externalIdSource" : "synchronisedUnifiedOrganisation",
+        "externallyManaged" : true,
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute of Discrete Mathematics (5050)"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut für Diskrete Mathematik (5050)"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        } ]
+      } ]
+    }, {
+      "pureId" : 1064617,
+      "externalPerson" : {
+        "uuid" : "96270c1c-fae7-4cbe-a3d9-8f492dd84757",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/external-persons/96270c1c-fae7-4cbe-a3d9-8f492dd84757"
+        },
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "G. Rote"
+        }, {
+          "locale" : "de_DE",
+          "value" : "G. Rote"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "External person",
+          "pureId" : 5089,
+          "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Externe Person",
+          "pureId" : 5089,
+          "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
+        } ]
+      },
+      "name" : {
+        "firstName" : "G.",
+        "lastName" : "Rote"
+      },
+      "personRoles" : [ {
+        "locale" : "en_GB",
+        "value" : "Author",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Autor",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      } ]
+    } ],
+    "organisationalUnits" : [ {
+      "uuid" : "15d662f6-ed41-4498-bed0-8351c5267cc7",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/15d662f6-ed41-4498-bed0-8351c5267cc7"
+      },
+      "externalId" : "34265",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Discrete Mathematics (5050)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Diskrete Mathematik (5050)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    } ],
+    "openAccessPermissions" : [ {
+      "locale" : "en_GB",
+      "value" : "None",
+      "pureId" : 2928,
+      "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/none"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Keine Angabe",
+      "pureId" : 2928,
+      "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/none"
+    } ],
+    "visibilities" : [ {
+      "locale" : "en_GB",
+      "value" : "Public - No restriction",
+      "key" : "FREE"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Öffentlich - Keine Einschränkungen",
+      "key" : "FREE"
+    } ],
+    "workflows" : [ {
+      "locale" : "en_GB",
+      "value" : "For validation",
+      "workflowStep" : "forApproval"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Zur Validierung",
+      "workflowStep" : "forApproval"
+    } ]
+  }, {
+    "pureId" : 1064647,
+    "externalId" : "41111",
+    "externalIdSource" : "researchoutputwizard",
+    "uuid" : "54a5dfbc-9b3d-45ea-9b81-93f434e11159",
+    "title" : "Report on new designs considering newest technologies including a cost benefit analysis",
+    "peerReview" : false,
+    "managingOrganisationalUnit" : {
+      "uuid" : "24e3a479-e4f1-4882-8298-8c1966e3239f",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/24e3a479-e4f1-4882-8298-8c1966e3239f"
+      },
+      "externalId" : "14268",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Vehicle Safety Institute (3330)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Fahrzeugsicherheit (3330)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    },
+    "confidential" : false,
+    "info" : {
+      "createdBy" : "root",
+      "createdDate" : "2016-02-25T21:48:17.473+0000",
+      "modifiedBy" : "root",
+      "modifiedDate" : "2018-09-06T07:28:36.338+0000",
+      "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/report-on-new-designs-considering-newest-technologies-including-a-cost-benefit-analysis(54a5dfbc-9b3d-45ea-9b81-93f434e11159).html"
+    },
+    "publisher" : {
+      "uuid" : "7731fe92-e366-4f98-93ce-1a5abac3afc9",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/publishers/7731fe92-e366-4f98-93ce-1a5abac3afc9"
+      },
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "."
+      }, {
+        "locale" : "de_DE",
+        "value" : "."
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Publisher",
+        "pureId" : 1000,
+        "uri" : "/dk/atira/pure/publisher/publishertypes/publisher/publisher"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Herausgeber (Verlag)",
+        "pureId" : 1000,
+        "uri" : "/dk/atira/pure/publisher/publishertypes/publisher/publisher"
+      } ]
+    },
+    "totalNumberOfAuthors" : 3,
+    "types" : [ {
+      "locale" : "en_GB",
+      "value" : "Commissioned report",
+      "pureId" : 4622,
+      "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/bookanthology/commissioned"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Bericht für Auftraggeber",
+      "pureId" : 4622,
+      "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/bookanthology/commissioned"
+    } ],
+    "categories" : [ {
+      "locale" : "en_GB",
+      "value" : "Research",
+      "pureId" : 4454,
+      "uri" : "/dk/atira/pure/researchoutput/category/research"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Forschung",
+      "pureId" : 4454,
+      "uri" : "/dk/atira/pure/researchoutput/category/research"
+    } ],
+    "publicationStatuses" : [ {
+      "pureId" : 1064647,
+      "externalId" : "41111",
+      "externalIdSource" : "researchoutputwizard",
+      "current" : true,
+      "publicationDate" : {
+        "year" : 2008
+      },
+      "publicationStatuses" : [ {
+        "locale" : "en_GB",
+        "value" : "Published",
+        "pureId" : 869,
+        "uri" : "/dk/atira/pure/researchoutput/status/published"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Veröffentlicht",
+        "pureId" : 869,
+        "uri" : "/dk/atira/pure/researchoutput/status/published"
+      } ]
+    } ],
+    "languages" : [ {
+      "locale" : "en_GB",
+      "value" : "English",
+      "pureId" : 4900,
+      "uri" : "/dk/atira/pure/core/languages/en_GB"
+    }, {
+      "locale" : "de_DE",
+      "value" : "englisch",
+      "pureId" : 4900,
+      "uri" : "/dk/atira/pure/core/languages/en_GB"
+    } ],
+    "personAssociations" : [ {
+      "pureId" : 1064650,
+      "person" : {
+        "uuid" : "625bb16c-40ee-4632-959d-2138473a2345",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/persons/625bb16c-40ee-4632-959d-2138473a2345"
+        },
+        "externalId" : "52491",
+        "externalIdSource" : "synchronisedUnifiedPerson",
+        "externallyManaged" : true,
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Florian Feist"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Florian Feist"
+        } ]
+      },
+      "name" : {
+        "firstName" : "Florian",
+        "lastName" : "Feist"
+      },
+      "personRoles" : [ {
+        "locale" : "en_GB",
+        "value" : "Author",
+        "pureId" : 5176,
+        "uri" : "/dk/atira/pure/researchoutput/roles/bookanthology/author"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Autor",
+        "pureId" : 5176,
+        "uri" : "/dk/atira/pure/researchoutput/roles/bookanthology/author"
+      } ],
+      "organisationalUnits" : [ {
+        "uuid" : "24e3a479-e4f1-4882-8298-8c1966e3239f",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/24e3a479-e4f1-4882-8298-8c1966e3239f"
+        },
+        "externalId" : "14268",
+        "externalIdSource" : "synchronisedUnifiedOrganisation",
+        "externallyManaged" : true,
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Vehicle Safety Institute (3330)"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut für Fahrzeugsicherheit (3330)"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        } ]
+      } ]
+    }, {
+      "pureId" : 1064652,
+      "name" : {
+        "firstName" : "Jürgen",
+        "lastName" : "Gugler"
+      },
+      "personRoles" : [ {
+        "locale" : "en_GB",
+        "value" : "Author",
+        "pureId" : 5176,
+        "uri" : "/dk/atira/pure/researchoutput/roles/bookanthology/author"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Autor",
+        "pureId" : 5176,
+        "uri" : "/dk/atira/pure/researchoutput/roles/bookanthology/author"
+      } ],
+      "organisationalUnits" : [ {
+        "uuid" : "24e3a479-e4f1-4882-8298-8c1966e3239f",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/24e3a479-e4f1-4882-8298-8c1966e3239f"
+        },
+        "externalId" : "14268",
+        "externalIdSource" : "synchronisedUnifiedOrganisation",
+        "externallyManaged" : true,
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Vehicle Safety Institute (3330)"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut für Fahrzeugsicherheit (3330)"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        } ]
+      } ]
+    }, {
+      "pureId" : 1064654,
+      "externalPerson" : {
+        "uuid" : "a61dba2c-066d-4d30-a78c-22891ef68847",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/external-persons/a61dba2c-066d-4d30-a78c-22891ef68847"
+        },
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Tanya Smith"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Tanya Smith"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "External person",
+          "pureId" : 5089,
+          "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Externe Person",
+          "pureId" : 5089,
+          "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
+        } ]
+      },
+      "name" : {
+        "firstName" : "Tanya",
+        "lastName" : "Smith"
+      },
+      "personRoles" : [ {
+        "locale" : "en_GB",
+        "value" : "Author",
+        "pureId" : 5176,
+        "uri" : "/dk/atira/pure/researchoutput/roles/bookanthology/author"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Autor",
+        "pureId" : 5176,
+        "uri" : "/dk/atira/pure/researchoutput/roles/bookanthology/author"
+      } ],
+      "externalOrganisations" : [ {
+        "uuid" : "98fb46b1-b7c2-420a-9800-daecd8ba922b",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/external-organisations/98fb46b1-b7c2-420a-9800-daecd8ba922b"
+        },
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "TRL"
+        }, {
+          "locale" : "de_DE",
+          "value" : "TRL"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "Unknown",
+          "pureId" : 908,
+          "uri" : "/dk/atira/pure/ueoexternalorganisation/ueoexternalorganisationtypes/ueoexternalorganisation/unknown"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Unbekannt",
+          "pureId" : 908,
+          "uri" : "/dk/atira/pure/ueoexternalorganisation/ueoexternalorganisationtypes/ueoexternalorganisation/unknown"
+        } ]
+      } ]
+    } ],
+    "organisationalUnits" : [ {
+      "uuid" : "24e3a479-e4f1-4882-8298-8c1966e3239f",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/24e3a479-e4f1-4882-8298-8c1966e3239f"
+      },
+      "externalId" : "14268",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Vehicle Safety Institute (3330)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Fahrzeugsicherheit (3330)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    } ],
+    "externalOrganisations" : [ {
+      "uuid" : "98fb46b1-b7c2-420a-9800-daecd8ba922b",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/external-organisations/98fb46b1-b7c2-420a-9800-daecd8ba922b"
+      },
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "TRL"
+      }, {
+        "locale" : "de_DE",
+        "value" : "TRL"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Unknown",
+        "pureId" : 908,
+        "uri" : "/dk/atira/pure/ueoexternalorganisation/ueoexternalorganisationtypes/ueoexternalorganisation/unknown"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Unbekannt",
+        "pureId" : 908,
+        "uri" : "/dk/atira/pure/ueoexternalorganisation/ueoexternalorganisationtypes/ueoexternalorganisation/unknown"
+      } ]
+    } ],
+    "openAccessPermissions" : [ {
+      "locale" : "en_GB",
+      "value" : "None",
+      "pureId" : 2928,
+      "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/none"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Keine Angabe",
+      "pureId" : 2928,
+      "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/none"
+    } ],
+    "additionalLinks" : [ {
+      "pureId" : 1064648,
+      "url" : "http://www.aprosys.com"
+    } ],
+    "bibliographicalNotes" : [ {
+      "locale" : "de_DE",
+      "value" : "Reportnr.: AP-SP22-0022 D222C"
+    } ],
+    "visibilities" : [ {
+      "locale" : "en_GB",
+      "value" : "Public - No restriction",
+      "key" : "FREE"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Öffentlich - Keine Einschränkungen",
+      "key" : "FREE"
+    } ],
+    "workflows" : [ {
+      "locale" : "en_GB",
+      "value" : "For validation",
+      "workflowStep" : "forApproval"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Zur Validierung",
+      "workflowStep" : "forApproval"
+    } ]
+  }, {
+    "pureId" : 1064672,
+    "externalId" : "29984",
+    "externalIdSource" : "researchoutputwizard",
+    "uuid" : "a128b4da-b9fb-4149-a162-727b2d955c92",
+    "title" : "Analyse und Algorithmen von fokusierten Assumption Based Truth Maintenance Systemen",
+    "managingOrganisationalUnit" : {
+      "uuid" : "c43a5652-7ed7-441f-8576-9737220860a9",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/c43a5652-7ed7-441f-8576-9737220860a9"
+      },
+      "externalId" : "13586",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Software Technology (7160)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Softwaretechnologie (7160)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    },
+    "confidential" : false,
+    "info" : {
+      "createdBy" : "root",
+      "createdDate" : "2016-02-25T21:48:18.717+0000",
+      "modifiedBy" : "root",
+      "modifiedDate" : "2018-09-06T07:28:36.382+0000",
+      "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/analyse-und-algorithmen-von-fokusierten-assumption-based-truth-maintenance-systemen(a128b4da-b9fb-4149-a162-727b2d955c92).html"
+    },
+    "totalNumberOfAuthors" : 1,
+    "types" : [ {
+      "locale" : "en_GB",
+      "value" : "Diploma Thesis",
+      "pureId" : 4688,
+      "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/thesis/diplom"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Diplomarbeit",
+      "pureId" : 4688,
+      "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/thesis/diplom"
+    } ],
+    "categories" : [ {
+      "locale" : "en_GB",
+      "value" : "Research",
+      "pureId" : 4454,
+      "uri" : "/dk/atira/pure/researchoutput/category/research"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Forschung",
+      "pureId" : 4454,
+      "uri" : "/dk/atira/pure/researchoutput/category/research"
+    } ],
+    "publicationStatuses" : [ {
+      "pureId" : 1064672,
+      "externalId" : "29984",
+      "externalIdSource" : "researchoutputwizard",
+      "current" : true,
+      "publicationDate" : {
+        "year" : 1994
+      },
+      "publicationStatuses" : [ {
+        "locale" : "en_GB",
+        "value" : "Published",
+        "pureId" : 869,
+        "uri" : "/dk/atira/pure/researchoutput/status/published"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Veröffentlicht",
+        "pureId" : 869,
+        "uri" : "/dk/atira/pure/researchoutput/status/published"
+      } ]
+    } ],
+    "languages" : [ {
+      "locale" : "en_GB",
+      "value" : "German",
+      "pureId" : 4898,
+      "uri" : "/dk/atira/pure/core/languages/de_DE"
+    }, {
+      "locale" : "de_DE",
+      "value" : "deutsch",
+      "pureId" : 4898,
+      "uri" : "/dk/atira/pure/core/languages/de_DE"
+    } ],
+    "personAssociations" : [ {
+      "pureId" : 1064683,
+      "person" : {
+        "uuid" : "c13aba7b-eb27-412a-a60a-ac651c48800e",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/persons/c13aba7b-eb27-412a-a60a-ac651c48800e"
+        },
+        "externalId" : "38308",
+        "externalIdSource" : "synchronisedUnifiedPerson",
+        "externallyManaged" : true,
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Franz Wotawa"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Franz Wotawa"
+        } ]
+      },
+      "name" : {
+        "firstName" : "Franz",
+        "lastName" : "Wotawa"
+      },
+      "personRoles" : [ {
+        "locale" : "en_GB",
+        "value" : "Author",
+        "pureId" : 5260,
+        "uri" : "/dk/atira/pure/researchoutput/roles/thesis/author"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Autor",
+        "pureId" : 5260,
+        "uri" : "/dk/atira/pure/researchoutput/roles/thesis/author"
+      } ],
+      "organisationalUnits" : [ {
+        "uuid" : "c43a5652-7ed7-441f-8576-9737220860a9",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/c43a5652-7ed7-441f-8576-9737220860a9"
+        },
+        "externalId" : "13586",
+        "externalIdSource" : "synchronisedUnifiedOrganisation",
+        "externallyManaged" : true,
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute of Software Technology (7160)"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut für Softwaretechnologie (7160)"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        } ]
+      } ]
+    } ],
+    "organisationalUnits" : [ {
+      "uuid" : "c43a5652-7ed7-441f-8576-9737220860a9",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/c43a5652-7ed7-441f-8576-9737220860a9"
+      },
+      "externalId" : "13586",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Software Technology (7160)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Softwaretechnologie (7160)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    } ],
+    "openAccessPermissions" : [ {
+      "locale" : "en_GB",
+      "value" : "None",
+      "pureId" : 2928,
+      "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/none"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Keine Angabe",
+      "pureId" : 2928,
+      "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/none"
+    } ],
+    "keywordGroups" : [ {
+      "pureId" : 1064678,
+      "logicalName" : "/dk/atira/pure/researchoutput/keywords/treatmentcode",
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Treatment code (Nähere Zuordnung)",
+        "uri" : "/dk/atira/pure/researchoutput/keywords/treatmentcode"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Treatment code (Nähere Zuordnung)",
+        "uri" : "/dk/atira/pure/researchoutput/keywords/treatmentcode"
+      } ],
+      "keywordContainers" : [ {
+        "pureId" : 1064680,
+        "structuredKeyword" : {
+          "pureId" : 26413,
+          "uri" : "/dk/atira/pure/researchoutput/keywords/treatmentcode/theoretical",
+          "disabled" : false,
+          "terms" : [ {
+            "locale" : "en_GB",
+            "value" : "Theoretical"
+          }, {
+            "locale" : "de_DE",
+            "value" : "Theoretical"
+          } ]
+        }
+      } ]
+    } ],
+    "visibilities" : [ {
+      "locale" : "en_GB",
+      "value" : "Public - No restriction",
+      "key" : "FREE"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Öffentlich - Keine Einschränkungen",
+      "key" : "FREE"
+    } ],
+    "workflows" : [ {
+      "locale" : "en_GB",
+      "value" : "For validation",
+      "workflowStep" : "forApproval"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Zur Validierung",
+      "workflowStep" : "forApproval"
+    } ]
+  }, {
+    "pureId" : 1064699,
+    "externalId" : "79751",
+    "externalIdSource" : "researchoutputwizard",
+    "uuid" : "45275722-0fed-4f3b-bdcf-acfc931166b5",
+    "title" : "Regelungstechnische Aspekte bei der nicht-iterativen Co-Simulation",
+    "peerReview" : true,
+    "managingOrganisationalUnit" : {
+      "uuid" : "f1d52104-18a3-483c-ba3a-2754e36b50bb",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/f1d52104-18a3-483c-ba3a-2754e36b50bb"
+      },
+      "externalId" : "13272",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Virtual Vehicle Research Center (ViF) (98830)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Kompetenzzentrum - Das virtuelle Fahrzeug, Forschungsgesellschaft mbH (ViF) (98830)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Shareholdings in Corporations",
+        "pureId" : 5536,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_25064"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Beteiligungen an Kapitalgesellschaften",
+        "pureId" : 5536,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_25064"
+      } ]
+    },
+    "confidential" : false,
+    "info" : {
+      "createdBy" : "root",
+      "createdDate" : "2016-02-25T21:48:18.893+0000",
+      "modifiedBy" : "sync_user",
+      "modifiedDate" : "2020-01-05T00:00:28.289+0000",
+      "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/regelungstechnische-aspekte-bei-der-nichtiterativen-cosimulation(45275722-0fed-4f3b-bdcf-acfc931166b5).html",
+      "additionalExternalIds" : [ {
+        "value" : "84905006747",
+        "idSource" : "Scopus"
+      } ]
+    },
+    "totalScopusCitations" : 0,
+    "pages" : "598-606",
+    "volume" : "62",
+    "journalAssociation" : {
+      "pureId" : 1064701,
+      "title" : {
+        "value" : "Automatisierungstechnik"
+      },
+      "journal" : {
+        "uuid" : "dc1b0aa5-1f47-473f-9f99-66010050e227",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/journals/dc1b0aa5-1f47-473f-9f99-66010050e227"
+        },
+        "externalId" : "638",
+        "externalIdSource" : "researchoutputwizard",
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Automatisierungstechnik"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Automatisierungstechnik"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "Journal",
+          "pureId" : 989,
+          "uri" : "/dk/atira/pure/journal/journaltypes/journal/journal"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Zeitschrift",
+          "pureId" : 989,
+          "uri" : "/dk/atira/pure/journal/journaltypes/journal/journal"
+        } ]
+      }
+    },
+    "journalNumber" : "8",
+    "totalNumberOfAuthors" : 1,
+    "types" : [ {
+      "locale" : "en_GB",
+      "value" : "Article",
+      "pureId" : 4490,
+      "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontojournal/article"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Artikel",
+      "pureId" : 4490,
+      "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontojournal/article"
+    } ],
+    "categories" : [ {
+      "locale" : "en_GB",
+      "value" : "Research",
+      "pureId" : 4454,
+      "uri" : "/dk/atira/pure/researchoutput/category/research"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Forschung",
+      "pureId" : 4454,
+      "uri" : "/dk/atira/pure/researchoutput/category/research"
+    } ],
+    "publicationStatuses" : [ {
+      "pureId" : 1064699,
+      "externalId" : "79751",
+      "externalIdSource" : "researchoutputwizard",
+      "current" : true,
+      "publicationDate" : {
+        "year" : 2014
+      },
+      "publicationStatuses" : [ {
+        "locale" : "en_GB",
+        "value" : "Published",
+        "pureId" : 869,
+        "uri" : "/dk/atira/pure/researchoutput/status/published"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Veröffentlicht",
+        "pureId" : 869,
+        "uri" : "/dk/atira/pure/researchoutput/status/published"
+      } ]
+    } ],
+    "languages" : [ {
+      "locale" : "en_GB",
+      "value" : "German",
+      "pureId" : 4898,
+      "uri" : "/dk/atira/pure/core/languages/de_DE"
+    }, {
+      "locale" : "de_DE",
+      "value" : "deutsch",
+      "pureId" : 4898,
+      "uri" : "/dk/atira/pure/core/languages/de_DE"
+    } ],
+    "personAssociations" : [ {
+      "pureId" : 1064709,
+      "person" : {
+        "uuid" : "fefbf164-7e15-46ab-a44f-4dd4765cbc8d",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/persons/fefbf164-7e15-46ab-a44f-4dd4765cbc8d"
+        },
+        "externalId" : "-38728",
+        "externalIdSource" : "synchronisedUnifiedPerson",
+        "externallyManaged" : true,
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Martin Benedikt"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Martin Benedikt"
+        } ]
+      },
+      "name" : {
+        "firstName" : "Martin",
+        "lastName" : "Benedikt"
+      },
+      "personRoles" : [ {
+        "locale" : "en_GB",
+        "value" : "Author",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Autor",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      } ],
+      "organisationalUnits" : [ {
+        "uuid" : "f1d52104-18a3-483c-ba3a-2754e36b50bb",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/f1d52104-18a3-483c-ba3a-2754e36b50bb"
+        },
+        "externalId" : "13272",
+        "externalIdSource" : "synchronisedUnifiedOrganisation",
+        "externallyManaged" : true,
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Virtual Vehicle Research Center (ViF) (98830)"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Kompetenzzentrum - Das virtuelle Fahrzeug, Forschungsgesellschaft mbH (ViF) (98830)"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "Shareholdings in Corporations",
+          "pureId" : 5536,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_25064"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Beteiligungen an Kapitalgesellschaften",
+          "pureId" : 5536,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_25064"
+        } ]
+      } ]
+    } ],
+    "organisationalUnits" : [ {
+      "uuid" : "f1d52104-18a3-483c-ba3a-2754e36b50bb",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/f1d52104-18a3-483c-ba3a-2754e36b50bb"
+      },
+      "externalId" : "13272",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Virtual Vehicle Research Center (ViF) (98830)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Kompetenzzentrum - Das virtuelle Fahrzeug, Forschungsgesellschaft mbH (ViF) (98830)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Shareholdings in Corporations",
+        "pureId" : 5536,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_25064"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Beteiligungen an Kapitalgesellschaften",
+        "pureId" : 5536,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_25064"
+      } ]
+    } ],
+    "openAccessPermissions" : [ {
+      "locale" : "en_GB",
+      "value" : "Indeterminate",
+      "pureId" : 2926,
+      "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/indeterminate"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Undefiniert",
+      "pureId" : 2926,
+      "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/indeterminate"
+    } ],
+    "electronicVersions" : [ {
+      "pureId" : 1064704,
+      "visibleOnPortalDate" : "2016-02-25T21:48:18.893+0000",
+      "doi" : "https://doi.org/10.1515/auto-2014-1106",
+      "accessTypes" : [ {
+        "locale" : "en_GB",
+        "value" : "Unknown",
+        "pureId" : 8205924,
+        "uri" : "/dk/atira/pure/core/openaccesspermission/unknown"
+      }, {
+        "locale" : "de_DE",
+        "value" : "!!Unknown",
+        "pureId" : 8205924,
+        "uri" : "/dk/atira/pure/core/openaccesspermission/unknown"
+      } ],
+      "versionTypes" : [ {
+        "locale" : "en_GB",
+        "value" : "Final published version",
+        "pureId" : 23264,
+        "uri" : "/dk/atira/pure/researchoutput/electronicversion/versiontype/publishersversion"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Endgültige, publizierte Fassung",
+        "pureId" : 23264,
+        "uri" : "/dk/atira/pure/researchoutput/electronicversion/versiontype/publishersversion"
+      } ]
+    } ],
+    "keywordGroups" : [ {
+      "pureId" : 1064706,
+      "logicalName" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise",
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Fields of Expertise",
+        "uri" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Fields of Expertise",
+        "uri" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise"
+      } ],
+      "keywordContainers" : [ {
+        "pureId" : 1064707,
+        "structuredKeyword" : {
+          "pureId" : 26397,
+          "uri" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise/mp",
+          "disabled" : false,
+          "terms" : [ {
+            "locale" : "en_GB",
+            "value" : "Mobility & Production"
+          }, {
+            "locale" : "de_DE",
+            "value" : "Mobility & Production"
+          } ]
+        }
+      } ]
+    } ],
+    "visibilities" : [ {
+      "locale" : "en_GB",
+      "value" : "Public - No restriction",
+      "key" : "FREE"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Öffentlich - Keine Einschränkungen",
+      "key" : "FREE"
+    } ],
+    "workflows" : [ {
+      "locale" : "en_GB",
+      "value" : "For validation",
+      "workflowStep" : "forApproval"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Zur Validierung",
+      "workflowStep" : "forApproval"
+    } ],
+    "scopusMetrics" : [ {
+      "value" : 0,
+      "year" : 2020
+    }, {
+      "value" : 0,
+      "year" : 2019
+    }, {
+      "value" : 0,
+      "year" : 2018
+    }, {
+      "value" : 0,
+      "year" : 2017
+    }, {
+      "value" : 0,
+      "year" : 2016
+    }, {
+      "value" : 0,
+      "year" : 2015
+    }, {
+      "value" : 0,
+      "year" : 2014
+    } ]
+  }, {
+    "pureId" : 1064722,
+    "externalId" : "323",
+    "externalIdSource" : "researchoutputwizard",
+    "uuid" : "d1af747b-ad01-4cde-b26b-56e1a12e5ffe",
+    "title" : "Computer simulation of the brittle temperature range (BTR) for hot cracking in steels",
+    "peerReview" : false,
+    "managingOrganisationalUnit" : {
+      "uuid" : "f83c8643-c93d-4163-9196-574cafbcbede",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/f83c8643-c93d-4163-9196-574cafbcbede"
+      },
+      "externalId" : "2256",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Materials Science, Joining and Forming (3030)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Werkstoffkunde, Fügetechnik und Umformtechnik (3030)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    },
+    "confidential" : false,
+    "info" : {
+      "createdBy" : "root",
+      "createdDate" : "2016-02-25T21:48:19.097+0000",
+      "modifiedBy" : "sync_user",
+      "modifiedDate" : "2020-01-05T00:00:26.150+0000",
+      "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/computer-simulation-of-the-brittle-temperature-range-btr-for-hot-cracking-in-steels(d1af747b-ad01-4cde-b26b-56e1a12e5ffe).html",
+      "additionalExternalIds" : [ {
+        "value" : "0034314009",
+        "idSource" : "Scopus"
+      } ]
+    },
+    "totalScopusCitations" : 21,
+    "pages" : "460-465",
+    "volume" : "71",
+    "journalAssociation" : {
+      "pureId" : 1064723,
+      "title" : {
+        "value" : "Steel research"
+      },
+      "journal" : {
+        "uuid" : "76f53749-f7d5-4fcd-bdb6-1bace48e5a39",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/journals/76f53749-f7d5-4fcd-bdb6-1bace48e5a39"
+        },
+        "externalId" : "113",
+        "externalIdSource" : "researchoutputwizard",
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Steel research"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Steel research"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "Journal",
+          "pureId" : 989,
+          "uri" : "/dk/atira/pure/journal/journaltypes/journal/journal"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Zeitschrift",
+          "pureId" : 989,
+          "uri" : "/dk/atira/pure/journal/journaltypes/journal/journal"
+        } ]
+      }
+    },
+    "journalNumber" : "11",
+    "totalNumberOfAuthors" : 3,
+    "types" : [ {
+      "locale" : "en_GB",
+      "value" : "Article",
+      "pureId" : 4490,
+      "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontojournal/article"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Artikel",
+      "pureId" : 4490,
+      "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontojournal/article"
+    } ],
+    "categories" : [ {
+      "locale" : "en_GB",
+      "value" : "Research",
+      "pureId" : 4454,
+      "uri" : "/dk/atira/pure/researchoutput/category/research"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Forschung",
+      "pureId" : 4454,
+      "uri" : "/dk/atira/pure/researchoutput/category/research"
+    } ],
+    "publicationStatuses" : [ {
+      "pureId" : 1064722,
+      "externalId" : "323",
+      "externalIdSource" : "researchoutputwizard",
+      "current" : true,
+      "publicationDate" : {
+        "year" : 2000
+      },
+      "publicationStatuses" : [ {
+        "locale" : "en_GB",
+        "value" : "Published",
+        "pureId" : 869,
+        "uri" : "/dk/atira/pure/researchoutput/status/published"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Veröffentlicht",
+        "pureId" : 869,
+        "uri" : "/dk/atira/pure/researchoutput/status/published"
+      } ]
+    } ],
+    "languages" : [ {
+      "locale" : "en_GB",
+      "value" : "English",
+      "pureId" : 4900,
+      "uri" : "/dk/atira/pure/core/languages/en_GB"
+    }, {
+      "locale" : "de_DE",
+      "value" : "englisch",
+      "pureId" : 4900,
+      "uri" : "/dk/atira/pure/core/languages/en_GB"
+    } ],
+    "personAssociations" : [ {
+      "pureId" : 1064725,
+      "name" : {
+        "firstName" : "Wolfgang",
+        "lastName" : "Rindler"
+      },
+      "personRoles" : [ {
+        "locale" : "en_GB",
+        "value" : "Author",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Autor",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      } ],
+      "organisationalUnits" : [ {
+        "uuid" : "f83c8643-c93d-4163-9196-574cafbcbede",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/f83c8643-c93d-4163-9196-574cafbcbede"
+        },
+        "externalId" : "2256",
+        "externalIdSource" : "synchronisedUnifiedOrganisation",
+        "externallyManaged" : true,
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute of Materials Science, Joining and Forming (3030)"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut für Werkstoffkunde, Fügetechnik und Umformtechnik (3030)"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        } ]
+      } ]
+    }, {
+      "pureId" : 1064727,
+      "person" : {
+        "uuid" : "62c69306-3be1-4b92-8623-e1e5065ee4c0",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/persons/62c69306-3be1-4b92-8623-e1e5065ee4c0"
+        },
+        "externalId" : "337",
+        "externalIdSource" : "synchronisedUnifiedPerson",
+        "externallyManaged" : true,
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Ernst Kozeschnik"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Ernst Kozeschnik"
+        } ]
+      },
+      "name" : {
+        "firstName" : "Ernst",
+        "lastName" : "Kozeschnik"
+      },
+      "personRoles" : [ {
+        "locale" : "en_GB",
+        "value" : "Author",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Autor",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      } ],
+      "organisationalUnits" : [ {
+        "uuid" : "f83c8643-c93d-4163-9196-574cafbcbede",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/f83c8643-c93d-4163-9196-574cafbcbede"
+        },
+        "externalId" : "2256",
+        "externalIdSource" : "synchronisedUnifiedOrganisation",
+        "externallyManaged" : true,
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute of Materials Science, Joining and Forming (3030)"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut für Werkstoffkunde, Fügetechnik und Umformtechnik (3030)"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        } ]
+      } ]
+    }, {
+      "pureId" : 1064729,
+      "person" : {
+        "uuid" : "22ac596f-f9be-4a11-b2d4-5bb404c8deb3",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/persons/22ac596f-f9be-4a11-b2d4-5bb404c8deb3"
+        },
+        "externalId" : "2231",
+        "externalIdSource" : "synchronisedUnifiedPerson",
+        "externallyManaged" : true,
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Bruno Buchmayr"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Bruno Buchmayr"
+        } ]
+      },
+      "name" : {
+        "firstName" : "Bruno",
+        "lastName" : "Buchmayr"
+      },
+      "personRoles" : [ {
+        "locale" : "en_GB",
+        "value" : "Author",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Autor",
+        "pureId" : 5146,
+        "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      } ],
+      "organisationalUnits" : [ {
+        "uuid" : "f83c8643-c93d-4163-9196-574cafbcbede",
+        "link" : {
+          "ref" : "content",
+          "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/f83c8643-c93d-4163-9196-574cafbcbede"
+        },
+        "externalId" : "2256",
+        "externalIdSource" : "synchronisedUnifiedOrganisation",
+        "externallyManaged" : true,
+        "names" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute of Materials Science, Joining and Forming (3030)"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut für Werkstoffkunde, Fügetechnik und Umformtechnik (3030)"
+        } ],
+        "types" : [ {
+          "locale" : "en_GB",
+          "value" : "Institute",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Institut",
+          "pureId" : 5431,
+          "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        } ]
+      } ]
+    } ],
+    "organisationalUnits" : [ {
+      "uuid" : "f83c8643-c93d-4163-9196-574cafbcbede",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/f83c8643-c93d-4163-9196-574cafbcbede"
+      },
+      "externalId" : "2256",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Materials Science, Joining and Forming (3030)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Werkstoffkunde, Fügetechnik und Umformtechnik (3030)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    } ],
+    "openAccessPermissions" : [ {
+      "locale" : "en_GB",
+      "value" : "None",
+      "pureId" : 2928,
+      "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/none"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Keine Angabe",
+      "pureId" : 2928,
+      "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/none"
+    } ],
+    "visibilities" : [ {
+      "locale" : "en_GB",
+      "value" : "Public - No restriction",
+      "key" : "FREE"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Öffentlich - Keine Einschränkungen",
+      "key" : "FREE"
+    } ],
+    "workflows" : [ {
+      "locale" : "en_GB",
+      "value" : "For validation",
+      "workflowStep" : "forApproval"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Zur Validierung",
+      "workflowStep" : "forApproval"
+    } ],
+    "scopusMetrics" : [ {
+      "value" : 0,
+      "year" : 2020
+    }, {
+      "value" : 0,
+      "year" : 2019
+    }, {
+      "value" : 0,
+      "year" : 2018
+    }, {
+      "value" : 1,
+      "year" : 2017
+    }, {
+      "value" : 2,
+      "year" : 2016
+    }, {
+      "value" : 1,
+      "year" : 2015
+    }, {
+      "value" : 1,
+      "year" : 2014
+    }, {
+      "value" : 1,
+      "year" : 2013
+    }, {
+      "value" : 1,
+      "year" : 2012
+    }, {
+      "value" : 0,
+      "year" : 2011
+    }, {
+      "value" : 3,
+      "year" : 2010
+    }, {
+      "value" : 1,
+      "year" : 2009
+    }, {
+      "value" : 4,
+      "year" : 2008
+    }, {
+      "value" : 2,
+      "year" : 2007
+    }, {
+      "value" : 1,
+      "year" : 2006
+    }, {
+      "value" : 2,
+      "year" : 2005
+    }, {
+      "value" : 0,
+      "year" : 2004
+    }, {
+      "value" : 1,
+      "year" : 2003
+    }, {
+      "value" : 0,
+      "year" : 2002
+    }, {
+      "value" : 0,
+      "year" : 2001
+    }, {
+      "value" : 0,
+      "year" : 2000
+    } ]
   } ],
   "navigationLinks" : [ {
     "ref" : "next",
-    "href" : "https://pure01.tugraz.at/ws/api/514/research-outputs?page=2&pageSize=10"
+    "href" : "https://pure01.tugraz.at/ws/api/514/research-outputs?page=2&pageSize=20"
   } ]
 }

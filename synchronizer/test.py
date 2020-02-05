@@ -1,13 +1,6 @@
-import json
-import os
-from pprint import pprint
+a = 5
+a += 3
+# if a < 9:
+#     b = 5/0
 
-dirpath = os.path.dirname(os.path.abspath(__file__))
-file_name = dirpath + '/reports/to_delete.log'
-
-with open(file_name, "r") as f:
-    lines = f.readlines()
-with open(file_name, "w") as f:
-    for line in lines:
-        if line.strip("\n") != "pa1eh-6c419":
-            f.write(line)
+print(a)
