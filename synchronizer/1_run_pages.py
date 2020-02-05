@@ -1,4 +1,4 @@
-from PTR_2 import pureToInvenio
+from PTR_1 import pureToInvenio
 
 inst_pti = pureToInvenio()
 
