@@ -1,25 +1,25 @@
 {
-  "pureId" : 1064589,
-  "externalId" : "74045",
+  "pureId" : 1091005,
+  "externalId" : "70317",
   "externalIdSource" : "researchoutputwizard",
-  "uuid" : "06f9e00f-ca16-4db5-bdf8-d13bb3235788",
-  "title" : "Photogrammetric Interpolation",
-  "peerReview" : true,
+  "uuid" : "235bb348-c64c-41e7-a8bc-d76a129ec9d9",
+  "title" : "Fast Refinement Checking for Test Case Generation",
+  "peerReview" : false,
   "managingOrganisationalUnit" : {
-    "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
+    "uuid" : "c43a5652-7ed7-441f-8576-9737220860a9",
     "link" : {
       "ref" : "content",
-      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
+      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/c43a5652-7ed7-441f-8576-9737220860a9"
     },
-    "externalId" : "2376",
+    "externalId" : "13586",
     "externalIdSource" : "synchronisedUnifiedOrganisation",
     "externallyManaged" : true,
     "names" : [ {
       "locale" : "en_GB",
-      "value" : "Institute of Computer Graphics and Vision (7100)"
+      "value" : "Institute of Software Technology (7160)"
     }, {
       "locale" : "de_DE",
-      "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
+      "value" : "Institut für Softwaretechnologie (7160)"
     } ],
     "types" : [ {
       "locale" : "en_GB",
@@ -36,57 +36,47 @@
   "confidential" : false,
   "info" : {
     "createdBy" : "root",
-    "createdDate" : "2016-02-25T21:48:16.870+0000",
+    "createdDate" : "2016-02-25T21:54:40.473+0000",
     "modifiedBy" : "root",
-    "modifiedDate" : "2018-09-06T07:28:36.251+0000",
-    "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/photogrammetric-interpolation(06f9e00f-ca16-4db5-bdf8-d13bb3235788).html"
+    "modifiedDate" : "2018-09-06T07:29:39.789+0000",
+    "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/fast-refinement-checking-for-test-case-generation(235bb348-c64c-41e7-a8bc-d76a129ec9d9).html"
   },
-  "pages" : "205-229",
-  "journalAssociation" : {
-    "pureId" : 1064590,
-    "title" : {
-      "value" : "The ITC journal = Bulletin de l'ITC"
+  "publisher" : {
+    "uuid" : "7731fe92-e366-4f98-93ce-1a5abac3afc9",
+    "link" : {
+      "ref" : "content",
+      "href" : "https://pure01.tugraz.at/ws/api/514/publishers/7731fe92-e366-4f98-93ce-1a5abac3afc9"
     },
-    "journal" : {
-      "uuid" : "8e08e9ef-c643-4ae6-833c-89f2e9e742f0",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/journals/8e08e9ef-c643-4ae6-833c-89f2e9e742f0"
-      },
-      "externalId" : "5974",
-      "externalIdSource" : "researchoutputwizard",
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "The ITC journal = Bulletin de l'ITC"
-      }, {
-        "locale" : "de_DE",
-        "value" : "The ITC journal = Bulletin de l'ITC"
-      } ],
-      "types" : [ {
-        "locale" : "en_GB",
-        "value" : "Journal",
-        "pureId" : 989,
-        "uri" : "/dk/atira/pure/journal/journaltypes/journal/journal"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Zeitschrift",
-        "pureId" : 989,
-        "uri" : "/dk/atira/pure/journal/journaltypes/journal/journal"
-      } ]
-    }
+    "names" : [ {
+      "locale" : "en_GB",
+      "value" : "."
+    }, {
+      "locale" : "de_DE",
+      "value" : "."
+    } ],
+    "types" : [ {
+      "locale" : "en_GB",
+      "value" : "Publisher",
+      "pureId" : 1000,
+      "uri" : "/dk/atira/pure/publisher/publishertypes/publisher/publisher"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Herausgeber (Verlag)",
+      "pureId" : 1000,
+      "uri" : "/dk/atira/pure/publisher/publishertypes/publisher/publisher"
+    } ]
   },
-  "journalNumber" : "2",
-  "totalNumberOfAuthors" : 1,
+  "totalNumberOfAuthors" : 3,
   "types" : [ {
     "locale" : "en_GB",
-    "value" : "Article",
-    "pureId" : 4490,
-    "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontojournal/article"
+    "value" : "Other report",
+    "pureId" : 4626,
+    "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/bookanthology/other"
   }, {
     "locale" : "de_DE",
-    "value" : "Artikel",
-    "pureId" : 4490,
-    "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontojournal/article"
+    "value" : "Sonstiger Bericht",
+    "pureId" : 4626,
+    "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/bookanthology/other"
   } ],
   "categories" : [ {
     "locale" : "en_GB",
@@ -100,12 +90,12 @@
     "uri" : "/dk/atira/pure/researchoutput/category/research"
   } ],
   "publicationStatuses" : [ {
-    "pureId" : 1064589,
-    "externalId" : "74045",
+    "pureId" : 1091005,
+    "externalId" : "70317",
     "externalIdSource" : "researchoutputwizard",
     "current" : true,
     "publicationDate" : {
-      "year" : 1975
+      "year" : 2013
     },
     "publicationStatuses" : [ {
       "locale" : "en_GB",
@@ -131,54 +121,54 @@
     "uri" : "/dk/atira/pure/core/languages/en_GB"
   } ],
   "personAssociations" : [ {
-    "pureId" : 1064604,
+    "pureId" : 1091026,
     "person" : {
-      "uuid" : "1198b8c9-eea7-41dd-8861-30c8d066fb27",
+      "uuid" : "8259af27-0a1f-4fc7-83d6-98a4cb8559bb",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/persons/1198b8c9-eea7-41dd-8861-30c8d066fb27"
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/8259af27-0a1f-4fc7-83d6-98a4cb8559bb"
       },
-      "externalId" : "3261",
+      "externalId" : "3844",
       "externalIdSource" : "synchronisedUnifiedPerson",
       "externallyManaged" : true,
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Franz Leberl"
+        "value" : "Bernhard Aichernig"
       }, {
         "locale" : "de_DE",
-        "value" : "Franz Leberl"
+        "value" : "Bernhard Aichernig"
       } ]
     },
     "name" : {
-      "firstName" : "Franz",
-      "lastName" : "Leberl"
+      "firstName" : "Bernhard",
+      "lastName" : "Aichernig"
     },
     "personRoles" : [ {
       "locale" : "en_GB",
       "value" : "Author",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      "pureId" : 5176,
+      "uri" : "/dk/atira/pure/researchoutput/roles/bookanthology/author"
     }, {
       "locale" : "de_DE",
       "value" : "Autor",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      "pureId" : 5176,
+      "uri" : "/dk/atira/pure/researchoutput/roles/bookanthology/author"
     } ],
     "organisationalUnits" : [ {
-      "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
+      "uuid" : "c43a5652-7ed7-441f-8576-9737220860a9",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/c43a5652-7ed7-441f-8576-9737220860a9"
       },
-      "externalId" : "2376",
+      "externalId" : "13586",
       "externalIdSource" : "synchronisedUnifiedOrganisation",
       "externallyManaged" : true,
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Institute of Computer Graphics and Vision (7100)"
+        "value" : "Institute of Software Technology (7160)"
       }, {
         "locale" : "de_DE",
-        "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
+        "value" : "Institut für Softwaretechnologie (7160)"
       } ],
       "types" : [ {
         "locale" : "en_GB",
@@ -192,22 +182,109 @@
         "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
       } ]
     } ]
+  }, {
+    "pureId" : 1091029,
+    "name" : {
+      "firstName" : "Elisabeth",
+      "lastName" : "Jöbstl"
+    },
+    "personRoles" : [ {
+      "locale" : "en_GB",
+      "value" : "Author",
+      "pureId" : 5176,
+      "uri" : "/dk/atira/pure/researchoutput/roles/bookanthology/author"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Autor",
+      "pureId" : 5176,
+      "uri" : "/dk/atira/pure/researchoutput/roles/bookanthology/author"
+    } ],
+    "organisationalUnits" : [ {
+      "uuid" : "c43a5652-7ed7-441f-8576-9737220860a9",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/c43a5652-7ed7-441f-8576-9737220860a9"
+      },
+      "externalId" : "13586",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Software Technology (7160)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Softwaretechnologie (7160)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    } ]
+  }, {
+    "pureId" : 1091032,
+    "externalPerson" : {
+      "uuid" : "826342ab-3b02-4a9e-b8fb-478d83f23f8a",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/external-persons/826342ab-3b02-4a9e-b8fb-478d83f23f8a"
+      },
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Matthias Kegele"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Matthias Kegele"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "External person",
+        "pureId" : 5089,
+        "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Externe Person",
+        "pureId" : 5089,
+        "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
+      } ]
+    },
+    "name" : {
+      "firstName" : "Matthias",
+      "lastName" : "Kegele"
+    },
+    "personRoles" : [ {
+      "locale" : "en_GB",
+      "value" : "Author",
+      "pureId" : 5176,
+      "uri" : "/dk/atira/pure/researchoutput/roles/bookanthology/author"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Autor",
+      "pureId" : 5176,
+      "uri" : "/dk/atira/pure/researchoutput/roles/bookanthology/author"
+    } ]
   } ],
   "organisationalUnits" : [ {
-    "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
+    "uuid" : "c43a5652-7ed7-441f-8576-9737220860a9",
     "link" : {
       "ref" : "content",
-      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
+      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/c43a5652-7ed7-441f-8576-9737220860a9"
     },
-    "externalId" : "2376",
+    "externalId" : "13586",
     "externalIdSource" : "synchronisedUnifiedOrganisation",
     "externallyManaged" : true,
     "names" : [ {
       "locale" : "en_GB",
-      "value" : "Institute of Computer Graphics and Vision (7100)"
+      "value" : "Institute of Software Technology (7160)"
     }, {
       "locale" : "de_DE",
-      "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
+      "value" : "Institut für Softwaretechnologie (7160)"
     } ],
     "types" : [ {
       "locale" : "en_GB",
@@ -233,18 +310,18 @@
     "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/open"
   } ],
   "electronicVersions" : [ {
-    "pureId" : 1064592,
-    "visibleOnPortalDate" : "2016-02-25T21:48:16.870+0000",
+    "pureId" : 1091006,
+    "visibleOnPortalDate" : "2016-02-25T21:54:40.473+0000",
     "creator" : "root",
-    "created" : "2016-02-25T21:48:16.867+0000",
-    "title" : "20 - Photogrammetric Interpolation, ITC-Journal 1975.pdf",
+    "created" : "2016-02-25T21:54:40.473+0000",
+    "title" : "tr_ist-mbt-2013-01.pdf",
     "file" : {
-      "fileName" : "20%20-%20Photogrammetric%20Interpolation,%20ITC-Journal%201975.pdf",
-      "mimeType" : "20 - Photogrammetric Interpolation, ITC-Journal 1975.pdf",
-      "size" : 885061,
-      "fileURL" : "https://pure01.tugraz.at/ws/files/1064594/20%2520-%2520Photogrammetric%2520Interpolation,%2520ITC-Journal%25201975.pdf",
+      "fileName" : "tr_ist-mbt-2013-01.pdf",
+      "mimeType" : "tr_ist-mbt-2013-01.pdf",
+      "size" : 463021,
+      "fileURL" : "https://pure01.tugraz.at/ws/files/1091008/tr_ist-mbt-2013-01.pdf",
       "digestAlgorithm" : "SHA1",
-      "digest" : "FF74800705D836C05E448FF046E3C83B1DEA56BF"
+      "digest" : "1CD8636A3A442AFC2D6EDDAA4D0CD23B30BC4DEA"
     },
     "accessTypes" : [ {
       "locale" : "en_GB",
@@ -270,7 +347,7 @@
     } ]
   } ],
   "keywordGroups" : [ {
-    "pureId" : 1064597,
+    "pureId" : 1091019,
     "logicalName" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise",
     "types" : [ {
       "locale" : "en_GB",
@@ -282,20 +359,65 @@
       "uri" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise"
     } ],
     "keywordContainers" : [ {
-      "pureId" : 1064599,
+      "pureId" : 1091020,
       "structuredKeyword" : {
-        "pureId" : 26401,
-        "uri" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise/so",
+        "pureId" : 26395,
+        "uri" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise/icc",
         "disabled" : false,
         "terms" : [ {
           "locale" : "en_GB",
-          "value" : "Sonstiges"
+          "value" : "Information, Communication & Computing"
         }, {
           "locale" : "de_DE",
-          "value" : "Sonstiges"
+          "value" : "Information, Communication & Computing"
         } ]
       }
     } ]
+  }, {
+    "pureId" : 1091021,
+    "logicalName" : "/dk/atira/pure/researchoutput/keywords/treatmentcode",
+    "types" : [ {
+      "locale" : "en_GB",
+      "value" : "Treatment code (Nähere Zuordnung)",
+      "uri" : "/dk/atira/pure/researchoutput/keywords/treatmentcode"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Treatment code (Nähere Zuordnung)",
+      "uri" : "/dk/atira/pure/researchoutput/keywords/treatmentcode"
+    } ],
+    "keywordContainers" : [ {
+      "pureId" : 1091022,
+      "structuredKeyword" : {
+        "pureId" : 26411,
+        "uri" : "/dk/atira/pure/researchoutput/keywords/treatmentcode/application",
+        "disabled" : false,
+        "terms" : [ {
+          "locale" : "en_GB",
+          "value" : "Application"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Application"
+        } ]
+      }
+    }, {
+      "pureId" : 1091023,
+      "structuredKeyword" : {
+        "pureId" : 26415,
+        "uri" : "/dk/atira/pure/researchoutput/keywords/treatmentcode/experimental",
+        "disabled" : false,
+        "terms" : [ {
+          "locale" : "en_GB",
+          "value" : "Experimental"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Experimental"
+        } ]
+      }
+    } ]
+  } ],
+  "bibliographicalNotes" : [ {
+    "locale" : "de_DE",
+    "value" : "Reportnr.: IST-MBT-2013-01"
   } ],
   "visibilities" : [ {
     "locale" : "en_GB",

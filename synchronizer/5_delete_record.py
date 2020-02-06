@@ -24,7 +24,7 @@ record_id = toDel_recordss.readline()
 cnt = 0
 
 while record_id:
-    time.sleep(0.1)
+    time.sleep(1)
     r_id = record_id.strip()
 
     response = requests.delete('https://127.0.0.1:5000/api/records/' + r_id, headers=headers, verify=False)

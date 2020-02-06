@@ -98,6 +98,8 @@ class pureToInvenio:
             self.record_files = []
 
             item = self.item
+            self.uuid = item['uuid']
+
             self.data = '{'
 
             self.data += '"access_right": "open", '
@@ -131,31 +133,31 @@ class pureToInvenio:
 
             if 'electronicVersions' in item:
 
-                self.add_field(item, 'fileAccessType',                    ['electronicVersions', 0, 'accessTypes', 0, 'value'])
-                self.add_field(item, 'fileCreator',                       ['electronicVersions', 0, 'creator'])
-                self.add_field(item, 'fileCreationDate',                  ['electronicVersions', 0, 'created'])
-                self.add_field(item, 'fileTitle',                         ['electronicVersions', 0, 'title'])
-                self.add_field(item, 'fileDigest',                        ['electronicVersions', 0, 'file', 'digest'])
-                self.add_field(item, 'fileDigestAlgorithm',               ['electronicVersions', 0, 'file', 'digestAlgorithm'])
-                self.add_field(item, 'fileName',                          ['electronicVersions', 0, 'file', 'fileName'])
-                self.add_field(item, 'fileURL',                           ['electronicVersions', 0, 'file', 'fileURL'])
-                self.add_field(item, 'fileType',                          ['electronicVersions', 0, 'file', 'mimeType'])
-                self.add_field(item, 'fileSize',                          ['electronicVersions', 0, 'file', 'size'])
+                # self.add_field(item, 'fileAccessType',                    ['electronicVersions', 0, 'accessTypes', 0, 'value'])
+                # self.add_field(item, 'fileCreator',                       ['electronicVersions', 0, 'creator'])
+                # self.add_field(item, 'fileCreationDate',                  ['electronicVersions', 0, 'created'])
+                # self.add_field(item, 'fileTitle',                         ['electronicVersions', 0, 'title'])
+                # self.add_field(item, 'fileDigest',                        ['electronicVersions', 0, 'file', 'digest'])
+                # self.add_field(item, 'fileDigestAlgorithm',               ['electronicVersions', 0, 'file', 'digestAlgorithm'])
+                # self.add_field(item, 'fileName',                          ['electronicVersions', 0, 'file', 'fileName'])
+                # self.add_field(item, 'fileURL',                           ['electronicVersions', 0, 'file', 'fileURL'])
+                # self.add_field(item, 'fileType',                          ['electronicVersions', 0, 'file', 'mimeType'])
+                # self.add_field(item, 'fileSize',                          ['electronicVersions', 0, 'file', 'size'])
 
                 for EV in item['electronicVersions']:
                     if 'file' in EV:
 
                         if 'fileURL' in EV['file'] and 'fileName' in EV['file']:    
 
-                            file_url  = EV['file']['fileURL']
                             file_name = EV['file']['fileName']
+                            file_url  = EV['file']['fileURL']
 
-                            file_url = 'http://hydrologie.org/redbooks/a264/iahs_264_0227.pdf'   # TEMPORARY
-
+                            file_name += '.jpg'                                                     # TEMPORARY
+                            file_url = 'https://www.haeuserlimwald.at/media/img/slides/weblication/wThumbnails/d857049b-0c6daa2a@1920w.jpg'      # TEMPORARY
 
                             # DOWNLOAD FILE FROM PURE
                             response = requests.get(file_url)
-                            print(f'Download response - {file_name}: {response}')
+                            print(f'Download response - {file_name}: {response}\n')
 
                             # SAVE FILE
                             if response.status_code < 300:
@@ -210,13 +212,6 @@ class pureToInvenio:
             filename = self.dirpath + "/reports/last_push.json"
             open(filename, "w+").write(self.data)
 
-            ## PUSH ONLY RECORDS WITH 'file'
-            # if 'electronicVersions' in item:
-            #     if 'file' in item['electronicVersions'][0]:
-            #         self.post_to_invenio()
-            #     else:
-            #         print('skip')
-
             self.post_to_invenio()
 
         except:
@@ -264,7 +259,7 @@ class pureToInvenio:
     def post_to_invenio(self):
 
         try:
-            time.sleep(1.3)                                 # ~ 5000 records per hour
+            time.sleep(1)                                 # ~ 5000 records per hour
 
             data_utf8 = self.data.encode('utf-8')
             headers = {
@@ -277,16 +272,13 @@ class pureToInvenio:
             response = requests.post('https://localhost:5000/api/records/', headers=headers, params=params, data=data_utf8, verify=False)
 
             # RESPONSE
-            print(response)
+            print('\nMetadata post: ', response, '\n')
             if response.status_code > 300:
                 print(response.content)
 
             # adds all response http codes into array
             if response.status_code in self.cnt_resp:       self.cnt_resp[response.status_code] += 1
             else:                                           self.cnt_resp[response.status_code] =  1
-
-            if response.status_code == 429:     
-                time.sleep(900)                     # 429 too many requests, wait 15 min
 
             uuid = self.item["uuid"]
 
@@ -317,39 +309,73 @@ class pureToInvenio:
                 # error description from invenioRDM
                 report += str(response.content) + '\n'
             
-            # - Upload record FILES to RDM -
-            if len(self.record_files) > 0:
-
-                for file_name in self.record_files:
-                    
-                    response = self.put_file_to_rdm(file_name, 'y9je5-sn562') # TEMPORARY!!!!!!!!!!!!1
-
-                    if response.status_code >= 300:
-                        report += str(response.content) + '\n'
-
             filename = self.dirpath + "/reports/" + str(date.today()) + "_report.log"
             open(filename, "a").write(report)
+
+            if response.status_code == 429:
+                print('Waiting 15 min')
+                time.sleep(900)                     # 429 too many requests, wait 15 min
+
+            # - Upload record FILES to RDM -
+            if len(self.record_files) > 0:
+                for file_name in self.record_files:
+                    self.put_file_to_rdm(file_name)
 
         except:
             print('\n- Error in post_to_invenio method -\n')
 
         
     #   ---         ---         ---
-    def put_file_to_rdm(self, file_name, record_id):
+    def put_file_to_rdm(self, file_name):
         try:
+            file_path = self.dirpath + '/tmp_files/'
+
+            print('\nAdding FILE\n')
+
+            # GET record_id of last added record
+            cnt = 0
+            
+            while True:
+                time.sleep(2)
+                cnt += 1
+                response = requests.get(
+                    'https://localhost:5000/api/records/?sort=mostrecent&size=1&page=1', 
+                    params=(('prettyprint', '1'),), 
+                    verify=False
+                    )
+                resp_json = json.loads(response.content)
+
+                for i in resp_json['hits']['hits']:
+                    record_rdm_id   = i['metadata']['recid']
+                    record_uuid     = i['metadata']['uuid']
+                    print(f'\n{cnt} - record_rdm_id: {record_rdm_id}\n')
+                
+                if self.uuid == record_uuid or cnt > 10:
+                    break
+            if cnt > 10:    print('Having troubles getting the recid of the newly added record\n')
+            else:           print('Recid found!\n')
 
 
             # - PUT FILE TO RDM -
             headers = {
                 'Content-Type': 'application/octet-stream',
             }
-            data = open(self.dirpath + '/tmp_files/' + file_name, 'rb').read()
-            response = requests.put('https://127.0.0.1:5000/api/records/' + record_id + '/files/' + file_name, headers=headers, data=data, verify=False)
-            print('File transfer RDM: ', response)
+            data = open(file_path + file_name, 'rb').read()
+            response = requests.put('https://127.0.0.1:5000/api/records/' + record_rdm_id + '/files/' + file_name, headers=headers, data=data, verify=False)
 
-            # if the upload was successful then delete file from /tmp_files
+            # Report
+            report = ''
+            print('\nFile transfer RDM: ', response)
+            report += 'FileTransf ' + str(response) + ' - ' + str(record_rdm_id) + '\n'
+
+            if response.status_code >= 300:
+                report += str(response.content) + '\n'
+
+            filename = self.dirpath + "/reports/" + str(date.today()) + "_report.log"
+            open(filename, "a").write(report)
+
+            # # if the upload was successful then delete file from /tmp_files
             os.remove(file_path + file_name) 
 
-            return response
         except:
             print('\n- Error in put_file_to_rdm method -\n')

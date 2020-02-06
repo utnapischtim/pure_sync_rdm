@@ -1,6 +1,12 @@
-a = 5
-a += 3
-# if a < 9:
-#     b = 5/0
+import requests
+import json
 
-print(a)
+response = requests.get(
+    'https://localhost:5000/api/records/?sort=mostrecent&size=1&page=1', 
+    params=(('prettyprint', '1'),), 
+    verify=False
+    )
+resp_json = json.loads(response.content)
+
+for i in resp_json['hits']['hits']:
+    print(i['metadata']['recid'])
