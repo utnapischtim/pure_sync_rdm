@@ -326,10 +326,6 @@
       "description": "",
       "type": "string"
     },
-    "accessType": {
-      "description": "",
-      "type": "string"
-    },
     "pages": {
       "description": "",
       "type": "string"

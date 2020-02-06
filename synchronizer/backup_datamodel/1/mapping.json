@@ -221,9 +221,6 @@
       "publisherName": {
         "type": "text"
       },
-      "accessType": {
-        "type": "text"
-      },
       "pages": {
         "type": "text"
       },

@@ -123,7 +123,6 @@ class pureToInvenio:
             self.add_field(item, 'workflow',                          ['workflows', 0, 'value'])
             self.add_field(item, 'confidential',                      ['confidential'])
             self.add_field(item, 'publisherName',                     ['publisher', 'names', 0, 'value'])
-            # self.add_field(item, 'accessType',                        ['openAccessPermissions', 0, 'value'])      # REMOVE accesType ??
             self.add_field(item, 'access_right',                      ['openAccessPermissions', 0, 'value'])
             self.add_field(item, 'pages',                             ['info','pages'])                                                     
             self.add_field(item, 'volume',                            ['info','volume'])                                                         
@@ -250,17 +249,22 @@ class pureToInvenio:
                     if i['name'] == element:
                         element = i['iso6393']
 
-            # ACCESS_RIGHT      ->      'open', 'embargoed', 'restricted', 'closed'     (accepted by RDM)
+            # - ACCESS_RIGHT -
+            #   RDM access right (https://github.com/inveniosoftware/invenio-rdm-records/issues/37):
+            #   open        ->  metadata available              files available
+            #   embargoed   ->  metadata available              files available after embargo date      (unless user has permission)
+            #   restricted  ->  metadata available              files restricted                        (unless user has permission)
+            #   closed      ->  metadata restricted             files restricted                        (unless user has permission)
+            accessRight_Pure_to_RDM = {
+                'Open':             'open',
+                'Indeterminate':    'restricted',          # REVIEW!!!!
+                'None':             'closed',
+                'Closed':           'closed'
+                }
             if inv_field == 'access_right':
                 if 'openAccessPermissions' in item:
                     pure_value = item['openAccessPermissions'][0]['value']
-                    if pure_value == 'Indeterminate' or pure_value == 'None' or pure_value == 'Open':
-                        element = 'open'
-                    elif pure_value == 'Closed':
-                        element = 'closed'
-                    else:
-                        element = 'restricted'          # REVIEW!!!!
-                        print('\n--- NEW PURE ACCESS_RIGHT ---\n' + pure_value + ' - ' + item['uuid'] + '\n\n')
+                    element  = accessRight_Pure_to_RDM[pure_value]
 
             # Adding field
             self.data += '"' + inv_field + '": "' + element + '", '
@@ -329,10 +333,11 @@ class pureToInvenio:
                 print('Waiting 15 min')
                 time.sleep(900)                     # 429 too many requests, wait 15 min
 
-            # - Upload record FILES to RDM -
-            if len(self.record_files) > 0:
-                for file_name in self.record_files:
-                    self.put_file_to_rdm(file_name)
+            if response.status_code < 300:
+                # - Upload record FILES to RDM -
+                if len(self.record_files) > 0:
+                    for file_name in self.record_files:
+                        self.put_file_to_rdm(file_name)
 
         except:
             print('\n- Error in post_to_invenio method -\n')

@@ -193,7 +193,6 @@ class MetadataSchemaV1(StrictKeysMixin):
     workflow = fields.Str()
     confidential = fields.Bool()
     publisherName = fields.Str()
-    accessType = fields.Str()
     pages = fields.Str()
     volume = fields.Str()
     versionType = fields.Str()

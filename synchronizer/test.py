@@ -7,7 +7,7 @@ from pprint import pprint
 
 dirpath = os.path.dirname(os.path.abspath(__file__))
 
-pag = 3
+pag = 2
 pag_size = 500
 
 headers = {
