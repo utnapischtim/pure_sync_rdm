@@ -1,15 +1,35 @@
 import requests
+import json
+import time
+import os
+from datetime import date
+from pprint import pprint     
 
-bearer = 'eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI4SjdpSEphWnhRUTJQblBpWE5KWGowZnZLOUZkX0NfZFpTbFcxUnRwRUdFIn0.eyJqdGkiOiI0Y2Y1NjE4MS1kM2IxLTQwODctODQ2Zi02ZGU1YzdkZWJhNGUiLCJleHAiOjE1ODA5ODE5MzUsIm5iZiI6MCwiaWF0IjoxNTgwOTgxNjM1LCJpc3MiOiJodHRwczovL2F1dGgudHVncmF6LmF0L2F1dGgvcmVhbG1zL3R1Z3JheiIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJkYzkyOWViZS0wZmMzLTQ0YjItYTlhMS04ZWM1NTU0YmM5OTciLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhcGlfdHVncmF6X2F0LUFQSV9Eb2MiLCJub25jZSI6ImZlYzNiZmZmLWI1NzAtNGQzNC05NDFlLTA1YjU3Nzk3MmEzZCIsImF1dGhfdGltZSI6MTU4MDk4MTYzNCwic2Vzc2lvbl9zdGF0ZSI6IjlkNGJiYWU2LTVmOGMtNDdmMi04YjY0LTRkNDUzMTI0M2Q2OCIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJNYXRpYXMgR3Jvc3NvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoibWF0Z3JvIiwibG9jYWxlIjoiZW4iLCJnaXZlbl9uYW1lIjoiTWF0aWFzIiwiZmFtaWx5X25hbWUiOiJHcm9zc28iLCJlbWFpbCI6Im0uZ3Jvc3NvQHR1Z3Jhei5hdCJ9.mu-9QGmLbM71XHhYB4X-B7GP1fHuSEiell_5k5hQLj-Y1AwjNLeG4fclkQ-l9qV1szOOZPt8DNiP9BvftWdSM0quQCaDypZw_raDaEj9lKVr7yS5a_uaEqOS1fNxfkggjh2htorcsPQfz4xsfBjq7mPXx4u1HSB45QMFNEsWjcJNZA8zd0Ur6l7WuS5_wXmd9ImM4A_FwNm01pwXyXqeipDVG9YISp94vPDs0OrybV042CCZQG0j9XVfLl9p3gihreNCxoNyc7DtQevdyKpCTducR0dIt93WH4GXiwrpbjcpKT8TYBwqVzQK1IsI1z6KuFYOky49y_SMVhXqhn-9Bg'
+dirpath = os.path.dirname(os.path.abspath(__file__))
+
+pag = 3
+pag_size = 500
 
 headers = {
-    'accept': 'application/ld+json',
-    'Authorization': 'Bearer ' + bearer,
+    'Accept': 'application/json',
 }
-
 params = (
+    ('page', pag),
+    ('pageSize', pag_size),
+    ('apiKey', 'ca2f08c5-8b33-454a-adc4-8215cfb3e088'),
 )
+# PURE get request
+response = requests.get('https://pure01.tugraz.at/ws/api/514/research-outputs', headers=headers, params=params)
+open(dirpath + "/reports/resp_pure.json", 'wb').write(response.content)
+resp_json = json.loads(response.content)
 
-response = requests.get('https://api.tugraz.at/books/library_books', headers=headers, params=params)
-print(response)
-print(response.content)
+data = ''
+
+for item in resp_json['items']:
+    if 'openAccessPermissions' in item:
+        pure_value =    item['openAccessPermissions'][0]['value']
+        uuid =          item['uuid']
+        print(uuid + '\t' + pure_value)
+        data += str(uuid + '\t' + pure_value + '\n')
+
+open(dirpath + "/reports/OAP.log", 'a').write(data)

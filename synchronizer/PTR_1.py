@@ -123,7 +123,8 @@ class pureToInvenio:
             self.add_field(item, 'workflow',                          ['workflows', 0, 'value'])
             self.add_field(item, 'confidential',                      ['confidential'])
             self.add_field(item, 'publisherName',                     ['publisher', 'names', 0, 'value'])
-            self.add_field(item, 'accessType',                        ['openAccessPermissions', 0, 'value'])                                
+            # self.add_field(item, 'accessType',                        ['openAccessPermissions', 0, 'value'])      # REMOVE accesType ??
+            self.add_field(item, 'access_right',                      ['openAccessPermissions', 0, 'value'])
             self.add_field(item, 'pages',                             ['info','pages'])                                                     
             self.add_field(item, 'volume',                            ['info','volume'])                                                         
             self.add_field(item, 'versionType',                       ['electronicVersions', 0, 'versionType', 'value'])                     
@@ -249,6 +250,18 @@ class pureToInvenio:
                     if i['name'] == element:
                         element = i['iso6393']
 
+            # ACCESS_RIGHT      ->      'open', 'embargoed', 'restricted', 'closed'     (accepted by RDM)
+            if inv_field == 'access_right':
+                if 'openAccessPermissions' in item:
+                    pure_value = item['openAccessPermissions'][0]['value']
+                    if pure_value == 'Indeterminate' or pure_value == 'None' or pure_value == 'Open':
+                        element = 'open'
+                    elif pure_value == 'Closed':
+                        element = 'closed'
+                    else:
+                        element = 'restricted'          # REVIEW!!!!
+                        print('\n--- NEW PURE ACCESS_RIGHT ---\n' + pure_value + ' - ' + item['uuid'] + '\n\n')
+
             # Adding field
             self.data += '"' + inv_field + '": "' + element + '", '
 
@@ -273,7 +286,7 @@ class pureToInvenio:
 
             # RESPONSE
             print('\nMetadata post: ', response, '\n')
-            if response.status_code > 300:
+            if response.status_code >= 300:
                 print(response.content)
 
             # adds all response http codes into array
@@ -336,8 +349,8 @@ class pureToInvenio:
             cnt = 0
             
             while True:
-                time.sleep(2)
                 cnt += 1
+                time.sleep(cnt * 2)
                 response = requests.get(
                     'https://localhost:5000/api/records/?sort=mostrecent&size=1&page=1', 
                     params=(('prettyprint', '1'),), 
