@@ -3,6 +3,8 @@ import json
 import time
 import os
 from datetime import datetime, date
+from setup import *
+from requests.auth import HTTPBasicAuth
 
 class pureToInvenio:
     
@@ -51,8 +53,8 @@ class pureToInvenio:
                     report_text += str(key) + ": " + str(self.cnt_resp[key]) + "\n"
                 open(report_file, "a").write(report_text)
 
-                # add http reponse codes to d_http_resp_code.log
-                report_file = self.dirpath + "/reports/d_http_resp_code.log"
+                # add http reponse codes to d_rdm_push_report.log
+                report_file = self.dirpath + "/reports/d_rdm_push_report.log"
                 now = datetime.now()
                 current_time = now.strftime("%H:%M:%S")
                 report_text = f'\n{str(date.today())} {current_time}, pag {pag}, size {pag_size}, codes: \t'
@@ -139,11 +141,9 @@ class pureToInvenio:
                             file_name = EV['file']['fileName']
                             file_url  = EV['file']['fileURL']
 
-                            file_name += '.jpg'                                                     # TEMPORARY
-                            file_url = 'https://www.haeuserlimwald.at/media/img/slides/weblication/wThumbnails/d857049b-0c6daa2a@1920w.jpg'      # TEMPORARY
-
                             # DOWNLOAD FILE FROM PURE
-                            response = requests.get(file_url)
+                            response = requests.get(file_url, auth=HTTPBasicAuth('ws_grosso', 'U+0n0#yI'))
+
                             print(f'Download response - {file_name}: {response}\n')
 
                             # SAVE FILE
