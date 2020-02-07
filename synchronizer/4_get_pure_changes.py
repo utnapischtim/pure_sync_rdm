@@ -29,6 +29,6 @@ for item in resp_json['items']:
     if item['changeType'] == 'UPDATE':
         uuids += item['uuid'] + '\n'
 
-open(dirpath + "/reports/to_re_transfer.log", "a").write(uuids)
+open(dirpath + "/reports/to_transfer.log", "a").write(uuids)
 
 # os.system('/usr/bin/python /home/bootcamp/src/pure_sync_rdm/synchronizer/2_reTransmit.py')

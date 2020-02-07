@@ -56,6 +56,6 @@ print(cntstr)
 report += cntstr
 
 open(dirpath + '/reports/check_pure_updates.log', "w+").write(report)
-open(dirpath + "/reports/to_re_transfer.log", "a").write(to_re_trans)
+open(dirpath + "/reports/to_transfer.log", "a").write(to_re_trans)
 
 # os.system('/usr/bin/python /home/bootcamp/src/pure_sync_rdm/synchronizer/2_reTransmit.py')

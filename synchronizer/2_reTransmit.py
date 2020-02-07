@@ -2,7 +2,7 @@ import os
 from PTR_1 import pureToInvenio
 
 dirpath = os.path.dirname(os.path.abspath(__file__))
-retrans_data = open(dirpath + '/reports/to_re_transfer.log', 'r')
+retrans_data = open(dirpath + '/reports/to_transfer.log', 'r')
 
 # Create instance
 inst_pti = pureToInvenio()
@@ -17,8 +17,8 @@ while uuid:
 
     uuid = retrans_data.readline()
 
-if cnt == 0:    print('\n- Nothing to re-transmit -\n')
-else:           print(f'\n{cnt} records re-transmitted\n')
+if cnt == 0:    print('\n- Nothing to transmit -\n')
+else:           print(f'\n{cnt} records transmitted\n')
 
 
 # uuid = '3e5bc032-716b-4e4b-8e59-fe202e9e9596'       # TEMP

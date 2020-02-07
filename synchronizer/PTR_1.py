@@ -51,8 +51,8 @@ class pureToInvenio:
                     report_text += str(key) + ": " + str(self.cnt_resp[key]) + "\n"
                 open(report_file, "a").write(report_text)
 
-                # add http reponse codes to http_resp_code.log
-                report_file = self.dirpath + "/reports/http_resp_code.log"
+                # add http reponse codes to d_http_resp_code.log
+                report_file = self.dirpath + "/reports/d_http_resp_code.log"
                 now = datetime.now()
                 current_time = now.strftime("%H:%M:%S")
                 report_text = f'\n{str(date.today())} {current_time}, pag {pag}, size {pag_size}, codes: \t'
@@ -132,21 +132,8 @@ class pureToInvenio:
             self.add_field(item, 'journalNumber',                     ['info', 'journalNumber'])
 
             if 'electronicVersions' in item:
-
-                # self.add_field(item, 'fileAccessType',                    ['electronicVersions', 0, 'accessTypes', 0, 'value'])
-                # self.add_field(item, 'fileCreator',                       ['electronicVersions', 0, 'creator'])
-                # self.add_field(item, 'fileCreationDate',                  ['electronicVersions', 0, 'created'])
-                # self.add_field(item, 'fileTitle',                         ['electronicVersions', 0, 'title'])
-                # self.add_field(item, 'fileDigest',                        ['electronicVersions', 0, 'file', 'digest'])
-                # self.add_field(item, 'fileDigestAlgorithm',               ['electronicVersions', 0, 'file', 'digestAlgorithm'])
-                # self.add_field(item, 'fileName',                          ['electronicVersions', 0, 'file', 'fileName'])
-                # self.add_field(item, 'fileURL',                           ['electronicVersions', 0, 'file', 'fileURL'])
-                # self.add_field(item, 'fileType',                          ['electronicVersions', 0, 'file', 'mimeType'])
-                # self.add_field(item, 'fileSize',                          ['electronicVersions', 0, 'file', 'size'])
-
                 for EV in item['electronicVersions']:
                     if 'file' in EV:
-
                         if 'fileURL' in EV['file'] and 'fileName' in EV['file']:    
 
                             file_name = EV['file']['fileName']
@@ -220,7 +207,7 @@ class pureToInvenio:
 
     #   ---         ---         ---
     def add_field(self, item, inv_field, path):
-
+    
         try:
             child = item
             cnt = 0
@@ -257,14 +244,18 @@ class pureToInvenio:
             #   closed      ->  metadata restricted             files restricted                        (unless user has permission)
             accessRight_Pure_to_RDM = {
                 'Open':             'open',
-                'Indeterminate':    'restricted',          # REVIEW!!!!
+                'Indeterminate':    'closed',          # REVIEW!!!!
                 'None':             'closed',
                 'Closed':           'closed'
                 }
             if inv_field == 'access_right':
                 if 'openAccessPermissions' in item:
                     pure_value = item['openAccessPermissions'][0]['value']
-                    element  = accessRight_Pure_to_RDM[pure_value]
+
+                    if pure_value in accessRight_Pure_to_RDM:
+                        element  = accessRight_Pure_to_RDM[pure_value]
+                    else:
+                        print('\n--- new access_right ---> not in accessRight_Pure_to_RDM array\n\n')
 
             # Adding field
             self.data += '"' + inv_field + '": "' + element + '", '
@@ -304,7 +295,7 @@ class pureToInvenio:
 
             report = f'{current_time} - {str(response)} - {uuid} - {self.item["title"]}\n'
 
-            file_toReTransfer = self.dirpath + "/reports/to_re_transfer.log"
+            file_toReTransfer = self.dirpath + "/reports/to_transfer.log"
 
             if self.exec_type == 'by_id':
                 # Removes last submitted uuid.
@@ -372,7 +363,6 @@ class pureToInvenio:
                     break
             if cnt > 10:    print('Having troubles getting the recid of the newly added record\n')
             else:           print('Recid found!\n')
-
 
             # - PUT FILE TO RDM -
             headers = {
