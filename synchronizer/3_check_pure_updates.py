@@ -74,7 +74,7 @@ def check_pure_updates(days_span):
         # if the last record is older then the date_limit then it stops
         if record_date < date_limit:
             break
-
+    
     # os.system('/usr/bin/python /home/bootcamp/src/pure_sync_rdm/synchronizer/2_uuid_transmit.py')
 
 

@@ -215,7 +215,7 @@ class PureToRdm:
             filename = self.dirpath + "/reports/last_push.json"
             open(filename, "w+").write(self.data)
 
-            self.post_to_invenio()
+            return self.post_to_invenio()
 
         except:
             print('\n- Error in create_invenio_data method -\n')
@@ -296,45 +296,35 @@ class PureToRdm:
             response = requests.post('https://localhost:5000/api/records/', headers=headers, params=params, data=data_utf8, verify=False)
 
             # RESPONSE CHECK
-            print('\nMetadata post: ', response, '\n')
-            if response.status_code >= 300:
-                print(response.content)
+            print('\nMetadata post: ', response, '\n')                
 
             # adds all response http codes into array
             if response.status_code in self.cnt_resp:       self.cnt_resp[response.status_code] += 1
             else:                                           self.cnt_resp[response.status_code] =  1
 
             uuid = self.item["uuid"]
-
-            now = datetime.now()
-            current_time = now.strftime("%H:%M:%S")
+            current_time = datetime.now().strftime("%H:%M:%S")
 
             report = f'{current_time} - {str(response)} - {uuid} - {self.item["title"]}\n'
 
-            file_toReTransfer = self.dirpath + "/reports/to_transfer.log"
-
-            if self.exec_type == 'by_id':
-                # Removes last submitted uuid from to_transfer.log
-                # If the transmission doesnt work then it will be added next
-                with open(file_toReTransfer, 'r') as fin:
-                    data = fin.read().splitlines(True)
-                with open(file_toReTransfer, 'w') as fout:
-                    fout.writelines(data[1:])
-
             if response.status_code >= 300:
+
+                print(response.content)
+
                 # metadata transmission success flag
                 self.metadata_success = False
 
-                # append records to re-transfer
-                open(file_toReTransfer, "a").write(uuid + "\n")
-            
                 # post json error_jsons
                 filename = self.dirpath + "/reports/error_jsons/" + uuid + ".json"
                 open(filename, "w").write(str(self.data))
                 
                 # error description from invenioRDM
                 report += str(response.content) + '\n'
-            
+
+                # append records to re-transfer
+                if self.exec_type != 'by_id':
+                    open(self.dirpath + "/reports/to_transfer.log", "a").write(uuid + "\n")
+
             filename = self.dirpath + "/reports/full_reports/" + str(date.today()) + "_report.log"
             open(filename, "a").write(report)
 
@@ -342,7 +332,9 @@ class PureToRdm:
                 print('Waiting 15 min')
                 time.sleep(900)                     # 429 too many requests, wait 15 min
 
+            # Successful transmition
             if response.status_code < 300:
+
                 # metadata transmission success flag
                 self.metadata_success = True
 
@@ -350,6 +342,27 @@ class PureToRdm:
                 if len(self.record_files) > 0:
                     for file_name in self.record_files:
                         self.put_file_to_rdm(file_name)
+
+
+
+
+            # FINALL SUCCESS CHECK
+            print(f'metadata: {self.metadata_success} - file: {self.file_success}')
+
+            if(self.metadata_success == False or self.file_success == False):
+                
+                return False
+            else:
+                # if uuid in to_transfer then removes it
+                file_name = dirpath + "/reports/to_transfer.log"
+                with open(file_name, "r") as f:
+                    lines = f.readlines()
+                with open(file_name, "w") as f:
+                    for line in lines:
+                        if line.strip("\n") != uuid:
+                            f.write(line)
+
+                return True
 
         except:
             print('\n- Error in post_to_invenio method -\n')

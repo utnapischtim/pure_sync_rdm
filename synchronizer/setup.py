@@ -15,3 +15,5 @@ log_files = [                   # d_ files
 log_lines = 15                  # number of lines in d_ log files
 log_days = 2                    # days of age for /full_reports files
 
+# Percentage of updated items to considere the upload task successful
+upload_percent_accept = 90
