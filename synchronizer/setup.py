@@ -5,7 +5,9 @@ pure_username = 'ws_grosso'
 pure_password = 'U+0n0#yI'
 
 log_files = [
-    '/reports/d_daily_updates.log', 
+    'd_daily_updates.log', 
     'd_rdm_push_report.log', 
     'd_check_pure_updates.log'
     ]
+log_lines = 15
+log_days = 2        # full_reports

@@ -6,7 +6,7 @@ from datetime import datetime, date
 from setup import *
 from requests.auth import HTTPBasicAuth
 
-class fromPureToRdm:
+class PureToRdm:
     
     def __init__(self):
         # directory path
@@ -24,7 +24,7 @@ class fromPureToRdm:
 
                 report_text = f'\nPag {str(pag)} - pag_size {str(pag_size)}\n'
                 # add page to report file
-                report_file = self.dirpath + "/reports/" + str(date.today()) + "_report.log"     
+                report_file = self.dirpath + "/reports/full_reports/" + str(date.today()) + "_report.log"     
                 open(report_file, "a").write(report_text)                       # 'a' -> append
 
                 headers = {
@@ -112,6 +112,7 @@ class fromPureToRdm:
             
                                 # invenio field name                  # PURE json path
             self.add_field(item, 'title',                             ['title'])
+            # self.add_field(item, 'versionMetadata',                   [])
             self.add_field(item, 'publicationDatePure',               ['publicationStatuses', 0, 'publicationDate', 'year'])
             self.add_field(item, 'createdDatePure',                   ['info', 'createdDate'])
             self.add_field(item, 'modifiedDatePure',                  ['info', 'modifiedDate'])
@@ -134,23 +135,36 @@ class fromPureToRdm:
             self.add_field(item, 'licenseType',                       ['electronicVersions', 0, 'licenseType', 'value'])
             self.add_field(item, 'journalTitle',                      ['info', 'journalAssociation', 'title', 'value'])
             self.add_field(item, 'journalNumber',                     ['info', 'journalNumber'])
+            # versionType:          e.g. Final published version, Accepted author manuscript (rare)
+            # versionMetadata:      ???
+            # versionFiles:         ???
 
             if 'electronicVersions' in item:
+                self.data += '"versionFiles": ['
                 for EV in item['electronicVersions']:
                     if 'file' in EV:
-                        if 'fileURL' in EV['file'] and 'fileName' in EV['file']:    
+                        if 'fileURL' in EV['file'] and 'fileName' in EV['file']:   
 
                             file_name = EV['file']['fileName']
                             file_url  = EV['file']['fileURL']
 
+                            self.data += '{'
+                            self.data += f'"fileName": "{file_name}", '
+                            self.data += f'"version": "1??", '
+                            self.data = self.data[:-2]                          # removes last 2 characters
+                            self.data += '}, '
+
                             # DOWNLOAD FILE FROM PURE
                             response = requests.get(file_url, auth=HTTPBasicAuth(pure_username, pure_password))
-                            print(f'Download response - {file_name}: {response}\n')
+                            print(f'--  --  --\nDownload file from Pure response: {response} - file name: {file_name} \n')
 
                             # SAVE FILE
                             if response.status_code < 300:
                                 open(str(self.dirpath) + '/tmp_files/' + file_name, 'wb').write(response.content)
                                 self.record_files.append(file_name)
+
+                self.data = self.data[:-2]       
+                self.data += '], '
 
 
             # --- personAssociations ---
@@ -317,7 +331,7 @@ class fromPureToRdm:
                 # error description from invenioRDM
                 report += str(response.content) + '\n'
             
-            filename = self.dirpath + "/reports/" + str(date.today()) + "_report.log"
+            filename = self.dirpath + "/reports/full_reports/" + str(date.today()) + "_report.log"
             open(filename, "a").write(report)
 
             if response.status_code == 429:
@@ -338,7 +352,7 @@ class fromPureToRdm:
     def put_file_to_rdm(self, file_name):
         try:
             file_path = self.dirpath + '/tmp_files/'
-            print('\nAdding FILE\n')
+            print('- Adding FILE -\n')
             cnt = 0
             
             # GET record_id of last added record
@@ -371,13 +385,13 @@ class fromPureToRdm:
 
             # Report
             report = ''
-            print('\nFile transfer RDM: ', response)
+            print('\nFile transfer RDM: ', response, '\n')
             report += 'FileTransf ' + str(response) + ' - ' + str(record_rdm_id) + '\n'
 
             if response.status_code >= 300:
                 report += str(response.content) + '\n'
 
-            filename = self.dirpath + "/reports/" + str(date.today()) + "_report.log"
+            filename = self.dirpath + "/reports/full_reports/" + str(date.today()) + "_report.log"
             open(filename, "a").write(report)
 
             # # if the upload was successful then delete file from /tmp_files

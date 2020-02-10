@@ -1,11 +1,11 @@
 import os
-from PTR_1 import pureToInvenio
+from PTR_1 import PureToRdm
 
 dirpath = os.path.dirname(os.path.abspath(__file__))
 retrans_data = open(dirpath + '/reports/to_transfer.log', 'r')
 
 # Create instance
-inst_pti = pureToInvenio()
+inst_pti = PureToRdm()
 
 uuid = retrans_data.readline()
 cnt = 0
