@@ -1,5 +1,6 @@
 from cmd import Cmd
 import os
+dirpath = os.path.dirname(os.path.abspath(__file__))
     
 class MyPrompt(Cmd):
 
@@ -15,13 +16,17 @@ class MyPrompt(Cmd):
         print('Type "exit"')
     
 
+    def do_Test(self, inp):
+        print(type(inp))
+
     # GET UPDATES FROM PURE
     def do_Pure_get_updates(self, inp):
-        """Help -> Gets from Pure API all records that have the current date as 'modifiedDate'.\n"""
+        """
+        Help -> Gets from Pure API all records that have the current date as 'modifiedDate'.\n
+                Parameters: days span
+        """
         from functions.pure_get_updates import pure_get_updates
         pure_get_updates()
-
-        # ws_grosso U+0n0#yI
 
     
     # GET CHANGES FROM PURE

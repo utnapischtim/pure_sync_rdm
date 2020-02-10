@@ -6,7 +6,7 @@ from datetime import datetime, date
 from setup import *
 from requests.auth import HTTPBasicAuth
 
-class pureToInvenio:
+class fromPureToRdm:
     
     def __init__(self):
         # directory path
@@ -37,15 +37,17 @@ class pureToInvenio:
                     ('apiKey', 'ca2f08c5-8b33-454a-adc4-8215cfb3e088'),
                 )
                 # PURE get request
-                response = requests.get('https://pure01.tugraz.at/ws/api/514/research-outputs', headers=headers, params=params)
+                response = requests.get(pure_rest_api_url + 'research-outputs', headers=headers, params=params)
                 open(self.dirpath + "/reports/resp_pure.json", 'wb').write(response.content)
                 resp_json = json.loads(response.content)
 
                 # resp_json = open(self.dirpath + '/reports/resp_pure.json', 'r')             # -- TEMPORARY -- 
                 # resp_json = json.load(resp_json)                                            # -- TEMPORARY -- 
 
+                #       ---         ---         ---
                 for self.item in resp_json['items']:
                     self.create_invenio_data()          # Creates data to push to InvenioRDM
+                #       ---         ---         ---
                     
                 # view total number of http respone codes in report.log
                 report_text = ''
@@ -142,13 +144,11 @@ class pureToInvenio:
                             file_url  = EV['file']['fileURL']
 
                             # DOWNLOAD FILE FROM PURE
-                            response = requests.get(file_url, auth=HTTPBasicAuth('ws_grosso', 'U+0n0#yI'))
-
+                            response = requests.get(file_url, auth=HTTPBasicAuth(pure_username, pure_password))
                             print(f'Download response - {file_name}: {response}\n')
 
                             # SAVE FILE
                             if response.status_code < 300:
-
                                 open(str(self.dirpath) + '/tmp_files/' + file_name, 'wb').write(response.content)
                                 self.record_files.append(file_name)
 
@@ -298,7 +298,7 @@ class pureToInvenio:
             file_toReTransfer = self.dirpath + "/reports/to_transfer.log"
 
             if self.exec_type == 'by_id':
-                # Removes last submitted uuid.
+                # Removes last submitted uuid from to_transfer.log
                 # If the transmission doesnt work then it will be added next
                 with open(file_toReTransfer, 'r') as fin:
                     data = fin.read().splitlines(True)
@@ -338,12 +338,10 @@ class pureToInvenio:
     def put_file_to_rdm(self, file_name):
         try:
             file_path = self.dirpath + '/tmp_files/'
-
             print('\nAdding FILE\n')
-
-            # GET record_id of last added record
             cnt = 0
             
+            # GET record_id of last added record
             while True:
                 cnt += 1
                 time.sleep(cnt * 2)
