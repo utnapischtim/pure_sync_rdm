@@ -9,18 +9,28 @@ dirpath = os.path.dirname(os.path.abspath(__file__))
 
 def check_pure_updates(days_span):
     
+    date_today = date.today()
+    date_limit = str(date_today - timedelta(days=days_span))
+
+    report = '\n   ---\n   ---   ---\n   ---   ---   ---'
+    report += f"\nToday: {date_today}\nDays span: {days_span}\nDate limit: {date_limit}\n\n"
+
+    print(f"\nToday: {date_today}\nDays span: {days_span}\nDate limit: {date_limit}\n")
+    print(f"See file '/records/full_reports/{date_today}_pure_updates.log'\n")
+
     pag = 1
     while True:
-
+        report += f'- Pag: {pag} -\n'
+        print(f'Pag: {pag}')
         headers = {
             'Accept': 'application/json',
         }
         params = (
-            ('order', 'modified'),
-            ('orderBy', 'descending'),
-            ('page', pag),                      # page
-            ('pageSize', 250),                  # records per page
-            ('apiKey', 'ca2f08c5-8b33-454a-adc4-8215cfb3e088'),
+            ('order',      'modified'),
+            ('orderBy',    'descending'),
+            ('page',        pag),                  # page
+            ('pageSize',    250),                  # records per page
+            ('apiKey',     'ca2f08c5-8b33-454a-adc4-8215cfb3e088'),
         )
         # PURE get request
         response = requests.get('https://pure01.tugraz.at/ws/api/514/research-outputs', headers=headers, params=params)
@@ -31,11 +41,6 @@ def check_pure_updates(days_span):
         # resp_json = open(dirpath + '/reports/resp_pure.json', 'r')                  # -- TEMPORARY --
         # resp_json = json.load(resp_json)                                            # -- TEMPORARY --
 
-        date_today = date.today()
-        date_limit = str(date_today - timedelta(days=days_span))
-
-        report = f"Today: {date_today}\nDays span: {days_span}\nDate limit: {date_limit}\n"
-        print(report)
         to_re_trans = ''
 
         cnt  = 0
@@ -50,17 +55,16 @@ def check_pure_updates(days_span):
                 record_date = str(record_date_time.split('T')[0])
                 
                 if record_date >= date_limit:
-                    report += item['uuid'] + ' - To update ---\n'
+                    report += item['uuid'] + ' - ' + record_date + ' - To update ---\n'
                     to_re_trans += item['uuid'] + '\n'
                     cntu += 1
                 else:
-                    report += item['uuid'] + ' - ' + record_date + '\n'
+                    report += item['uuid'] + ' - ' + record_date + ' - ok\n'
 
-        print('\nTot: ' + str(cnt) + ' - To update: ' + str(cntu))
-        print("See file '/records/d_check_pure_updates.log'\n")
+        print('Tot: ' + str(cnt) + ' - To update: ' + str(cntu) + '\n')
         report += 'Tot: ' + str(cnt) + ' - To update: ' + str(cntu) + '\n\n'
 
-        open(dirpath + '/reports/d_check_pure_updates.log', "a").write(report)
+        open(dirpath + '/reports/full_reports/' + str(date_today) + '_pure_updates.log', "a").write(report)
         open(dirpath + '/reports/to_transfer.log', "a").write(to_re_trans)
 
         pag += 1
@@ -71,8 +75,8 @@ def check_pure_updates(days_span):
         if record_date < date_limit:
             break
 
-    # os.system('/usr/bin/python /home/bootcamp/src/pure_sync_rdm/synchronizer/2_reTransmit.py')
+    # os.system('/usr/bin/python /home/bootcamp/src/pure_sync_rdm/synchronizer/2_uuid_transmit.py')
 
 
-days_span = 6
+days_span = 4
 check_pure_updates(days_span)

@@ -12,6 +12,8 @@ class PureToRdm:
         # directory path
         self.dirpath = os.path.dirname(os.path.abspath(__file__))
         self.cnt_resp = {}
+        self.metadata_success = None
+        self.file_success =     None
 
 
     #   ---         ---         ---
@@ -90,7 +92,7 @@ class PureToRdm:
             self.item = json.loads(response.content)
             
             # Creates data to push to InvenioRDM
-            self.create_invenio_data()
+            return self.create_invenio_data()
 
         except:
             print('\n- Error in get_pure_by_id method -\n')
@@ -148,11 +150,11 @@ class PureToRdm:
                             file_name = EV['file']['fileName']
                             file_url  = EV['file']['fileURL']
 
-                            self.data += '{'
+                            self.data += '{'                                    # TO REVIEW !!!
                             self.data += f'"fileName": "{file_name}", '
                             self.data += f'"version": "1??", '
-                            self.data = self.data[:-2]                          # removes last 2 characters
-                            self.data += '}, '
+                            self.data = self.data[:-2]
+                            self.data += '}, '                                  # end review
 
                             # DOWNLOAD FILE FROM PURE
                             response = requests.get(file_url, auth=HTTPBasicAuth(pure_username, pure_password))
@@ -293,7 +295,7 @@ class PureToRdm:
             # POST REQUEST
             response = requests.post('https://localhost:5000/api/records/', headers=headers, params=params, data=data_utf8, verify=False)
 
-            # RESPONSE
+            # RESPONSE CHECK
             print('\nMetadata post: ', response, '\n')
             if response.status_code >= 300:
                 print(response.content)
@@ -320,11 +322,13 @@ class PureToRdm:
                     fout.writelines(data[1:])
 
             if response.status_code >= 300:
+                # metadata transmission success flag
+                self.metadata_success = False
 
                 # append records to re-transfer
                 open(file_toReTransfer, "a").write(uuid + "\n")
             
-                # post json
+                # post json error_jsons
                 filename = self.dirpath + "/reports/error_jsons/" + uuid + ".json"
                 open(filename, "w").write(str(self.data))
                 
@@ -339,6 +343,9 @@ class PureToRdm:
                 time.sleep(900)                     # 429 too many requests, wait 15 min
 
             if response.status_code < 300:
+                # metadata transmission success flag
+                self.metadata_success = True
+
                 # - Upload record FILES to RDM -
                 if len(self.record_files) > 0:
                     for file_name in self.record_files:
@@ -391,11 +398,17 @@ class PureToRdm:
             if response.status_code >= 300:
                 report += str(response.content) + '\n'
 
+                # metadata transmission success flag
+                self.file_success = False
+            else:
+                self.file_success = True
+
+                # # if the upload was successful then delete file from /tmp_files
+                os.remove(file_path + file_name) 
+
             filename = self.dirpath + "/reports/full_reports/" + str(date.today()) + "_report.log"
             open(filename, "a").write(report)
 
-            # # if the upload was successful then delete file from /tmp_files
-            os.remove(file_path + file_name) 
 
         except:
             print('\n- Error in put_file_to_rdm method -\n')
