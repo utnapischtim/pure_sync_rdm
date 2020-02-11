@@ -32,6 +32,7 @@ for log_name in log_files:
 print('\n# DELETE OLD full_reports FILES')
 folder = '/reports/full_reports/'
 
+# Get file names from folder
 isfile = os.path.isfile
 join = os.path.join
 onlyfiles = [f for f in os.listdir(dirpath + folder) if isfile(join(dirpath + folder, f))]

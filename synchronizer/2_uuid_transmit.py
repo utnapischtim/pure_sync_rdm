@@ -1,5 +1,5 @@
 import os
-from datetime   import date
+from datetime   import date, time
 from PTR_1      import PureToRdm
 from setup      import upload_percent_accept
 
@@ -30,8 +30,8 @@ try:
 
     lines_end = sum(1 for line in open(file_name))
 
-    
-    report = f"\n{date.today()} - "
+    print('\n---------------------')
+    report = f"\n@ {date.today()} - "
 
     if cnt_tot == 0:
         report += "success\nNothing to trasmit\n"
@@ -43,7 +43,8 @@ try:
         else:
             report += "error\n"
 
-        report += f"Tot records: {cnt_tot}\nSuccessfuly transmitted: {cnt_true}\nLines start: {lines_start} - Lines end: {lines_end}\n\n"
+        current_time = now.strftime("%H:%M:%S")
+        report += f"{current_time} - Tot records: {cnt_tot} - Successfuly transmitted: {cnt_true}\nLines start: {lines_start} - Lines end: {lines_end}\n\n"
     
     open(dirpath + '/reports/d_daily_updates.log', "a").write(report)
     print(report)

@@ -12,8 +12,6 @@ class PureToRdm:
         # directory path
         self.dirpath = os.path.dirname(os.path.abspath(__file__))
         self.cnt_resp = {}
-        self.metadata_success = None
-        self.file_success =     None
 
 
     #   ---         ---         ---
@@ -88,6 +86,11 @@ class PureToRdm:
                 ('apiKey', 'ca2f08c5-8b33-454a-adc4-8215cfb3e088'),
             )
             response = requests.get('https://pure01.tugraz.at/ws/api/514/research-outputs/' + uuid, headers=headers, params=params)
+            print('\nPure response: ', response)
+            if response.status_code >= 300:
+                print(response.content)
+                raise Exception
+
             open(self.dirpath + "/reports/pure_resp.json", 'wb').write(response.content)
             self.item = json.loads(response.content)
             
@@ -107,8 +110,6 @@ class PureToRdm:
             self.uuid = item['uuid']
 
             self.data = '{'
-
-            self.data += '"access_right": "open", '
             self.data += '"owners": [1], '
             self.data += '"_access": {"metadata_restricted": false, "files_restricted": false}, '
             
@@ -142,10 +143,14 @@ class PureToRdm:
             # versionFiles:         ???
 
             if 'electronicVersions' in item:
-                self.data += '"versionFiles": ['
+                cnt = 0
                 for EV in item['electronicVersions']:
                     if 'file' in EV:
-                        if 'fileURL' in EV['file'] and 'fileName' in EV['file']:   
+                        if 'fileURL' in EV['file'] and 'fileName' in EV['file']:
+                            
+                            if cnt == 0:
+                                self.data += '"versionFiles": ['
+                            cnt += 1
 
                             file_name = EV['file']['fileName']
                             file_url  = EV['file']['fileURL']
@@ -158,15 +163,15 @@ class PureToRdm:
 
                             # DOWNLOAD FILE FROM PURE
                             response = requests.get(file_url, auth=HTTPBasicAuth(pure_username, pure_password))
-                            print(f'--  --  --\nDownload file from Pure response: {response} - file name: {file_name} \n')
+                            print(f'\n--  --  --\nDownload file from Pure response: {response} - file name: {file_name} \n')
 
                             # SAVE FILE
                             if response.status_code < 300:
                                 open(str(self.dirpath) + '/tmp_files/' + file_name, 'wb').write(response.content)
                                 self.record_files.append(file_name)
-
-                self.data = self.data[:-2]       
-                self.data += '], '
+                if cnt > 0:
+                    self.data = self.data[:-2]       
+                    self.data += '], '
 
 
             # --- personAssociations ---
@@ -181,7 +186,11 @@ class PureToRdm:
                             full_name += i['name']['firstName']
                             self.data += f'"name": "{full_name}", '
                         else:   
-                            self.data += f'"name": "Name not specified", '
+                            self.data += '"name": "Name not specified", '
+                    elif 'authorCollaboratorName' in i:
+                        self.data += '"name": "See authorCollaboratorName", '
+                    else:   
+                        self.data += '"name": "Name not specified", '
 
                     self.add_field(i, 'authorCollaboratorName',         ['authorCollaboration', 'names', 0, 'value'])    
                     self.add_field(i, 'personRole',                     ['personRoles', 0, 'value'])    
@@ -247,10 +256,13 @@ class PureToRdm:
 
             # Language translation to iso 369-3
             if inv_field == 'language':
-                resp_json = json.load(open(self.dirpath + '/iso6393.json', 'r'))
-                for i in resp_json:
-                    if i['name'] == element:
-                        element = i['iso6393']
+                if element == 'Undefined/Unknown':
+                    return
+                else:
+                    resp_json = json.load(open(self.dirpath + '/iso6393.json', 'r'))
+                    for i in resp_json:
+                        if i['name'] == element:
+                            element = i['iso6393']
 
             # - ACCESS_RIGHT -
             #   RDM access right (https://github.com/inveniosoftware/invenio-rdm-records/issues/37):
@@ -258,23 +270,25 @@ class PureToRdm:
             #   embargoed   ->  metadata available              files available after embargo date      (unless user has permission)
             #   restricted  ->  metadata available              files restricted                        (unless user has permission)
             #   closed      ->  metadata restricted             files restricted                        (unless user has permission)
-            accessRight_Pure_to_RDM = {
-                'Open':             'open',
-                'Indeterminate':    'closed',          # REVIEW!!!!
-                'None':             'closed',
-                'Closed':           'closed'
-                }
+
             if inv_field == 'access_right':
                 if 'openAccessPermissions' in item:
                     pure_value = item['openAccessPermissions'][0]['value']
-
+                    accessRight_Pure_to_RDM = {
+                        'Open':             'open',
+                        'Indeterminate':    'closed',          # REVIEW!!!!
+                        'None':             'closed',
+                        'Closed':           'closed'
+                        }
                     if pure_value in accessRight_Pure_to_RDM:
+
                         element  = accessRight_Pure_to_RDM[pure_value]
                     else:
                         print('\n--- new access_right ---> not in accessRight_Pure_to_RDM array\n\n')
 
             # Adding field
             self.data += '"' + inv_field + '": "' + element + '", '
+            return
 
         except:
             print('\n- Error in add_field method -\n')
@@ -283,6 +297,8 @@ class PureToRdm:
     def post_to_invenio(self):
 
         try:
+            self.metadata_success = None
+            self.file_success =     None
             time.sleep(1)                                 # ~ 5000 records per hour
 
             data_utf8 = self.data.encode('utf-8')
@@ -344,30 +360,47 @@ class PureToRdm:
                         self.put_file_to_rdm(file_name)
 
 
-
-
             # FINALL SUCCESS CHECK
-            print(f'metadata: {self.metadata_success} - file: {self.file_success}')
+            # print(f'Success check -> metadata: {self.metadata_success} - file: {self.file_success}')
 
             if(self.metadata_success == False or self.file_success == False):
                 
                 return False
             else:
-                # if uuid in to_transfer then removes it
-                file_name = dirpath + "/reports/to_transfer.log"
-                with open(file_name, "r") as f:
-                    lines = f.readlines()
-                with open(file_name, "w") as f:
-                    for line in lines:
-                        if line.strip("\n") != uuid:
-                            f.write(line)
-
+                self.delete_errorJson_and_toTransfer(uuid)
                 return True
 
         except:
             print('\n- Error in post_to_invenio method -\n')
 
+
+
+    #   ---         ---         ---
+    def delete_errorJson_and_toTransfer(self, uuid):
+
+        # if uuid in to_transfer then removes it
+        file_name = self.dirpath + "/reports/to_transfer.log"
+        with open(file_name, "r") as f:
+            lines = f.readlines()
+        with open(file_name, "w") as f:
+            for line in lines:
+                if line.strip("\n") != uuid:
+                    f.write(line)
+
+        # Get file names from folder
+        isfile = os.path.isfile
+        join = os.path.join
+        folder = '/reports/error_jsons/'
+        onlyfiles = [f for f in os.listdir(self.dirpath + folder) if isfile(join(self.dirpath + folder, f))]
+
+        for file_name in onlyfiles:
+            file_uuid = file_name.split('.')[0]
+            
+            if file_uuid == uuid:
+                os.remove(self.dirpath + folder + file_name)
+                print(f'\nRecord {uuid} correctly transmitted.\n/reports/error_jsons/{file_name} has been deleted.')
         
+
     #   ---         ---         ---
     def put_file_to_rdm(self, file_name):
         try:
@@ -394,7 +427,6 @@ class PureToRdm:
                 if self.uuid == record_uuid or cnt > 10:
                     break
             if cnt > 10:    print('Having troubles getting the recid of the newly added record\n')
-            else:           print('Recid found!\n')
 
             # - PUT FILE TO RDM -
             headers = {
