@@ -1,25 +1,25 @@
 {
-  "pureId" : 1069278,
-  "externalId" : "56455",
+  "pureId" : 1083612,
+  "externalId" : "52843",
   "externalIdSource" : "researchoutputwizard",
-  "uuid" : "917e5d09-a398-4c06-ada0-f55445fe81e6",
-  "title" : "Copper and nickel derivatives of functionalized pyridyloximate ligands",
-  "peerReview" : true,
+  "uuid" : "0f1d01e8-fd22-41e6-b449-131a5207b72f",
+  "title" : "Synthesis and characterization of meso-substituted tetrabenzoporphyrin complexes with Pt(II) and Pd(II) for optical oxygen sensing",
+  "peerReview" : false,
   "managingOrganisationalUnit" : {
-    "uuid" : "7f6fe494-0817-4e10-8ee3-614db5b0872b",
+    "uuid" : "95389b7a-4be9-4f64-8491-0dd9b3e5f041",
     "link" : {
       "ref" : "content",
-      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/7f6fe494-0817-4e10-8ee3-614db5b0872b"
+      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/95389b7a-4be9-4f64-8491-0dd9b3e5f041"
     },
-    "externalId" : "2391",
+    "externalId" : "2403",
     "externalIdSource" : "synchronisedUnifiedOrganisation",
     "externallyManaged" : true,
     "names" : [ {
       "locale" : "en_GB",
-      "value" : "Institute of Physical and Theoretical Chemistry (6350)"
+      "value" : "Institute of Analytical Chemistry and Food Chemistry (6450)"
     }, {
       "locale" : "de_DE",
-      "value" : "Institut für Physikalische und Theoretische Chemie (6350)"
+      "value" : "Institut für Analytische Chemie und Lebensmittelchemie (6450)"
     } ],
     "types" : [ {
       "locale" : "en_GB",
@@ -36,21 +36,20 @@
   "confidential" : false,
   "info" : {
     "createdBy" : "root",
-    "createdDate" : "2016-02-25T21:49:32.477+0000",
+    "createdDate" : "2016-02-25T21:52:49.273+0000",
     "modifiedBy" : "root",
-    "modifiedDate" : "2018-09-06T07:28:48.979+0000",
-    "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/copper-and-nickel-derivatives-of-functionalized-pyridyloximate-ligands(917e5d09-a398-4c06-ada0-f55445fe81e6).html",
-    "previousUuids" : [ "1dc1a1bf-12a2-47a5-a4b2-adb070ff5e87" ]
+    "modifiedDate" : "2018-09-06T07:29:19.657+0000",
+    "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/synthesis-and-characterization-of-mesosubstituted-tetrabenzoporphyrin-complexes-with-ptii-and-pdii-for-optical-oxygen-sensing(0f1d01e8-fd22-41e6-b449-131a5207b72f).html"
   },
   "event" : {
-    "uuid" : "07bcf275-9a3d-40ce-a422-c048d8018556",
+    "uuid" : "494c8781-45f2-4218-91af-1d2aeaadfb8b",
     "link" : {
       "ref" : "content",
-      "href" : "https://pure01.tugraz.at/ws/api/514/events/07bcf275-9a3d-40ce-a422-c048d8018556"
+      "href" : "https://pure01.tugraz.at/ws/api/514/events/494c8781-45f2-4218-91af-1d2aeaadfb8b"
     },
     "names" : [ {
-      "locale" : "en_GB",
-      "value" : "12th International Conference on Molecule-Based Magnets"
+      "locale" : "de_DE",
+      "value" : "ACS National Meeting "
     } ],
     "types" : [ {
       "locale" : "en_GB",
@@ -88,12 +87,12 @@
     "uri" : "/dk/atira/pure/researchoutput/category/research"
   } ],
   "publicationStatuses" : [ {
-    "pureId" : 1069278,
-    "externalId" : "56455",
+    "pureId" : 1083612,
+    "externalId" : "52843",
     "externalIdSource" : "researchoutputwizard",
     "current" : true,
     "publicationDate" : {
-      "year" : 2010
+      "year" : 2009
     },
     "publicationStatuses" : [ {
       "locale" : "en_GB",
@@ -119,111 +118,27 @@
     "uri" : "/dk/atira/pure/core/languages/en_GB"
   } ],
   "personAssociations" : [ {
-    "pureId" : 1069284,
-    "externalPerson" : {
-      "uuid" : "0bef7e71-0899-4ab7-bc51-86a765767bcb",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/external-persons/0bef7e71-0899-4ab7-bc51-86a765767bcb"
-      },
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "Albert Escuer"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Albert Escuer"
-      } ],
-      "types" : [ {
-        "locale" : "en_GB",
-        "value" : "External person",
-        "pureId" : 5089,
-        "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Externe Person",
-        "pureId" : 5089,
-        "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
-      } ]
-    },
-    "name" : {
-      "firstName" : "A.",
-      "lastName" : "Escuer"
-    },
-    "personRoles" : [ {
-      "locale" : "en_GB",
-      "value" : "Author",
-      "pureId" : 5190,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Autor",
-      "pureId" : 5190,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
-    } ]
-  }, {
-    "pureId" : 1069285,
-    "externalPerson" : {
-      "uuid" : "2946aae2-7843-4803-8cc4-b6ae5c883573",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/external-persons/2946aae2-7843-4803-8cc4-b6ae5c883573"
-      },
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "G. Vlahopoulou"
-      }, {
-        "locale" : "de_DE",
-        "value" : "G. Vlahopoulou"
-      } ],
-      "types" : [ {
-        "locale" : "en_GB",
-        "value" : "External person",
-        "pureId" : 5089,
-        "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Externe Person",
-        "pureId" : 5089,
-        "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
-      } ]
-    },
-    "name" : {
-      "firstName" : "G.",
-      "lastName" : "Vlahopoulou"
-    },
-    "personRoles" : [ {
-      "locale" : "en_GB",
-      "value" : "Author",
-      "pureId" : 5190,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Autor",
-      "pureId" : 5190,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
-    } ]
-  }, {
-    "pureId" : 1069286,
+    "pureId" : 1083616,
     "person" : {
-      "uuid" : "0d9a0a30-d927-4d9c-b7c1-bc7eaa93481b",
+      "uuid" : "71e2b8cb-543d-4e47-a013-865ff434b5c2",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/persons/0d9a0a30-d927-4d9c-b7c1-bc7eaa93481b"
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/71e2b8cb-543d-4e47-a013-865ff434b5c2"
       },
-      "externalId" : "3189",
+      "externalId" : "59562",
       "externalIdSource" : "synchronisedUnifiedPerson",
       "externallyManaged" : true,
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Franz-Andreas Mautner"
+        "value" : "Sergey Borisov"
       }, {
         "locale" : "de_DE",
-        "value" : "Franz-Andreas Mautner"
+        "value" : "Sergey Borisov"
       } ]
     },
     "name" : {
-      "firstName" : "Franz-Andreas",
-      "lastName" : "Mautner"
+      "firstName" : "Sergey",
+      "lastName" : "Borisov"
     },
     "personRoles" : [ {
       "locale" : "en_GB",
@@ -237,20 +152,124 @@
       "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
     } ],
     "organisationalUnits" : [ {
-      "uuid" : "7f6fe494-0817-4e10-8ee3-614db5b0872b",
+      "uuid" : "95389b7a-4be9-4f64-8491-0dd9b3e5f041",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/7f6fe494-0817-4e10-8ee3-614db5b0872b"
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/95389b7a-4be9-4f64-8491-0dd9b3e5f041"
       },
-      "externalId" : "2391",
+      "externalId" : "2403",
       "externalIdSource" : "synchronisedUnifiedOrganisation",
       "externallyManaged" : true,
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Institute of Physical and Theoretical Chemistry (6350)"
+        "value" : "Institute of Analytical Chemistry and Food Chemistry (6450)"
       }, {
         "locale" : "de_DE",
-        "value" : "Institut für Physikalische und Theoretische Chemie (6350)"
+        "value" : "Institut für Analytische Chemie und Lebensmittelchemie (6450)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    } ]
+  }, {
+    "pureId" : 1083620,
+    "externalPerson" : {
+      "uuid" : "0e434ef6-86ea-4f3b-8aab-3f7cee7cd396",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/external-persons/0e434ef6-86ea-4f3b-8aab-3f7cee7cd396"
+      },
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Alaina S DeToma"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Alaina S DeToma"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "External person",
+        "pureId" : 5089,
+        "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Externe Person",
+        "pureId" : 5089,
+        "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
+      } ]
+    },
+    "name" : {
+      "firstName" : "Alaina S",
+      "lastName" : "DeToma"
+    },
+    "personRoles" : [ {
+      "locale" : "en_GB",
+      "value" : "Author",
+      "pureId" : 5190,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Autor",
+      "pureId" : 5190,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
+    } ]
+  }, {
+    "pureId" : 1083622,
+    "person" : {
+      "uuid" : "f661d36c-be32-4b8e-be74-3dd0fa657b6c",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/f661d36c-be32-4b8e-be74-3dd0fa657b6c"
+      },
+      "externalId" : "27449",
+      "externalIdSource" : "synchronisedUnifiedPerson",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Ingo Klimant"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Ingo Klimant"
+      } ]
+    },
+    "name" : {
+      "firstName" : "Ingo",
+      "lastName" : "Klimant"
+    },
+    "personRoles" : [ {
+      "locale" : "en_GB",
+      "value" : "Author",
+      "pureId" : 5190,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Autor",
+      "pureId" : 5190,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
+    } ],
+    "organisationalUnits" : [ {
+      "uuid" : "95389b7a-4be9-4f64-8491-0dd9b3e5f041",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/95389b7a-4be9-4f64-8491-0dd9b3e5f041"
+      },
+      "externalId" : "2403",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Analytical Chemistry and Food Chemistry (6450)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Analytische Chemie und Lebensmittelchemie (6450)"
       } ],
       "types" : [ {
         "locale" : "en_GB",
@@ -266,20 +285,20 @@
     } ]
   } ],
   "organisationalUnits" : [ {
-    "uuid" : "7f6fe494-0817-4e10-8ee3-614db5b0872b",
+    "uuid" : "95389b7a-4be9-4f64-8491-0dd9b3e5f041",
     "link" : {
       "ref" : "content",
-      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/7f6fe494-0817-4e10-8ee3-614db5b0872b"
+      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/95389b7a-4be9-4f64-8491-0dd9b3e5f041"
     },
-    "externalId" : "2391",
+    "externalId" : "2403",
     "externalIdSource" : "synchronisedUnifiedOrganisation",
     "externallyManaged" : true,
     "names" : [ {
       "locale" : "en_GB",
-      "value" : "Institute of Physical and Theoretical Chemistry (6350)"
+      "value" : "Institute of Analytical Chemistry and Food Chemistry (6450)"
     }, {
       "locale" : "de_DE",
-      "value" : "Institut für Physikalische und Theoretische Chemie (6350)"
+      "value" : "Institut für Analytische Chemie und Lebensmittelchemie (6450)"
     } ],
     "types" : [ {
       "locale" : "en_GB",
@@ -305,7 +324,7 @@
     "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/none"
   } ],
   "keywordGroups" : [ {
-    "pureId" : 1069281,
+    "pureId" : 1083613,
     "logicalName" : "/dk/atira/pure/researchoutput/keywords/treatmentcode",
     "types" : [ {
       "locale" : "en_GB",
@@ -317,17 +336,17 @@
       "uri" : "/dk/atira/pure/researchoutput/keywords/treatmentcode"
     } ],
     "keywordContainers" : [ {
-      "pureId" : 1069282,
+      "pureId" : 1083614,
       "structuredKeyword" : {
-        "pureId" : 26407,
-        "uri" : "/dk/atira/pure/researchoutput/keywords/treatmentcode/basic_fundamental",
+        "pureId" : 26415,
+        "uri" : "/dk/atira/pure/researchoutput/keywords/treatmentcode/experimental",
         "disabled" : false,
         "terms" : [ {
           "locale" : "en_GB",
-          "value" : "Basic - Fundamental (Grundlagenforschung)"
+          "value" : "Experimental"
         }, {
           "locale" : "de_DE",
-          "value" : "Basic - Fundamental (Grundlagenforschung)"
+          "value" : "Experimental"
         } ]
       }
     } ]

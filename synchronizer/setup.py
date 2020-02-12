@@ -6,6 +6,9 @@ pure_api_key =          'ca2f08c5-8b33-454a-adc4-8215cfb3e088'
 pure_username = 'ws_grosso'     # credentials for pure files download
 pure_password = 'U+0n0#yI'
 
+# Invenio RDM
+token_rdm = 'ZfIgTOgAWv6PFmq3AaFgIjRE7VAqO9yyda4kOmxn3e9hmukSyEOiql4lqFsg'
+
 # -   -   -
 # LOG FILES
 log_files = [                   # d_ files

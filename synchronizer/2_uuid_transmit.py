@@ -22,6 +22,10 @@ try:
         cnt_tot += 1
         print('\nuuid: ' + uuid.strip())
         
+        if (len(uuid.strip()) < 36):
+            print('Invalid uuid. Too short\n')
+            continue
+
         response = inst_pti.get_pure_by_id(uuid.strip())
 
         if response == True:        cnt_true += 1
