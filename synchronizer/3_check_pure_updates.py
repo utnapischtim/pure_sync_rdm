@@ -11,7 +11,6 @@ days_span = 4
 # Get date of last update
 file_name = dirpath + "/reports/d_daily_updates.log"
 
-
 # Finds last date when the update successfully happened
 with open(file_name, 'r') as f:
     lines = f.read().splitlines()

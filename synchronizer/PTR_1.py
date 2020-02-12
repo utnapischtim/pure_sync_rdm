@@ -50,7 +50,7 @@ class PureToRdm:
                 #       ---         ---         ---
                     
                 # view total number of http respone codes in report.log
-                report_text = ''
+                report_text = 'HTTP response codes:\n'
                 for key in self.cnt_resp:
                     report_text += str(key) + ": " + str(self.cnt_resp[key]) + "\n"
                 open(report_file, "a").write(report_text)
@@ -100,6 +100,7 @@ class PureToRdm:
         except:
             print('\n- Error in get_pure_by_id method -\n')
 
+
     #   ---         ---         ---
     def create_invenio_data(self):
 
@@ -115,7 +116,7 @@ class PureToRdm:
             
                                 # invenio field name                  # PURE json path
             self.add_field(item, 'title',                             ['title'])
-            # self.add_field(item, 'versionMetadata',                   [])
+            # self.add_field(item, 'metadataVersion',                   [])
             self.add_field(item, 'publicationDatePure',               ['publicationStatuses', 0, 'publicationDate', 'year'])
             self.add_field(item, 'createdDatePure',                   ['info', 'createdDate'])
             self.add_field(item, 'modifiedDatePure',                  ['info', 'modifiedDate'])
@@ -139,8 +140,14 @@ class PureToRdm:
             self.add_field(item, 'journalTitle',                      ['info', 'journalAssociation', 'title', 'value'])
             self.add_field(item, 'journalNumber',                     ['info', 'journalNumber'])
             # versionType:          e.g. Final published version, Accepted author manuscript (rare)
-            # versionMetadata:      ???
+            # metadataVersion:      ???
             # versionFiles:         ???
+
+            # Test invenio RDM fields
+            self.data += '"description": "TEST DESCRIPTION", '
+            self.data += '"additional_descriptions": [{"description": "this is my additional description"}], '
+            self.data += '"additional_titles": [{"title": "this is my additional title"}], '
+
 
             if 'electronicVersions' in item:
                 cnt = 0
@@ -155,9 +162,10 @@ class PureToRdm:
                             file_name = EV['file']['fileName']
                             file_url  = EV['file']['fileURL']
 
-                            self.data += '{'                                    # TO REVIEW !!!
+                            self.data += '{'                                    # TO REVIEW !!! 
                             self.data += f'"fileName": "{file_name}", '
-                            self.data += f'"version": "1??", '
+                            self.data += f'"fileModifBy": "Markus??", '
+                            self.data += f'"fileVersion": "1??", '
                             self.data = self.data[:-2]
                             self.data += '}, '                                  # end review
 

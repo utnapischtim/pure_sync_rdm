@@ -1,5 +1,5 @@
 import os
-from datetime   import date, time
+from datetime   import date, time, datetime
 from PTR_1      import PureToRdm
 from setup      import upload_percent_accept
 
@@ -43,14 +43,11 @@ try:
         else:
             report += "error\n"
 
-        current_time = now.strftime("%H:%M:%S")
-        report += f"{current_time} - Tot records: {cnt_tot} - Successfuly transmitted: {cnt_true}\nLines start: {lines_start} - Lines end: {lines_end}\n\n"
+        current_time = datetime.now().strftime("%H:%M:%S")
+        report += f"{current_time}\nTot records: {cnt_tot} - Success transfer: {cnt_true}\nLines start: {lines_start} - Lines end: {lines_end}\n\n"
     
     open(dirpath + '/reports/d_daily_updates.log', "a").write(report)
     print(report)
-
-    
-    
 
 except:
     print('\n- Error in 2_uuid_transmit.py -\n')

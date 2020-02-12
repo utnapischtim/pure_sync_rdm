@@ -1,4 +1,361 @@
 {
-  "code" : 404,
-  "title" : "Content with id 'e8b65a5b-b73a-48c5-8a90-6d366b0126c8' not found"
+  "pureId" : 1110697,
+  "externalId" : "74016",
+  "externalIdSource" : "researchoutputwizard",
+  "uuid" : "5ab3d450-35ff-4d83-9361-f686e367d522",
+  "title" : "Übersicht über den gegenwärtigen Stand der digitalen Bildverarbeitung",
+  "peerReview" : false,
+  "managingOrganisationalUnit" : {
+    "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
+    "link" : {
+      "ref" : "content",
+      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
+    },
+    "externalId" : "2376",
+    "externalIdSource" : "synchronisedUnifiedOrganisation",
+    "externallyManaged" : true,
+    "names" : [ {
+      "locale" : "en_GB",
+      "value" : "Institute of Computer Graphics and Vision (7100)"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
+    } ],
+    "types" : [ {
+      "locale" : "en_GB",
+      "value" : "Institute",
+      "pureId" : 5431,
+      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Institut",
+      "pureId" : 5431,
+      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+    } ]
+  },
+  "confidential" : false,
+  "info" : {
+    "createdBy" : "root",
+    "createdDate" : "2016-02-25T23:21:59.183+0000",
+    "modifiedBy" : "root",
+    "modifiedDate" : "2018-09-06T07:30:16.710+0000",
+    "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/ubersicht-uber-den-gegenwartigen-stand-der-digitalen-bildverarbeitung(5ab3d450-35ff-4d83-9361-f686e367d522).html"
+  },
+  "pages" : "104-126",
+  "volume" : "63",
+  "journalAssociation" : {
+    "pureId" : 1110698,
+    "title" : {
+      "value" : "Österreichische Zeitschrift für Vermessungswesen und Photogrammetrie"
+    },
+    "journal" : {
+      "uuid" : "0d9e5555-6757-433e-a29a-ebf9ed0fe06e",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/journals/0d9e5555-6757-433e-a29a-ebf9ed0fe06e"
+      },
+      "externalId" : "5963",
+      "externalIdSource" : "researchoutputwizard",
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Österreichische Zeitschrift für Vermessungswesen und Photogrammetrie"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Österreichische Zeitschrift für Vermessungswesen und Photogrammetrie"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Journal",
+        "pureId" : 989,
+        "uri" : "/dk/atira/pure/journal/journaltypes/journal/journal"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Zeitschrift",
+        "pureId" : 989,
+        "uri" : "/dk/atira/pure/journal/journaltypes/journal/journal"
+      } ]
+    }
+  },
+  "journalNumber" : "3",
+  "totalNumberOfAuthors" : 2,
+  "types" : [ {
+    "locale" : "en_GB",
+    "value" : "Article",
+    "pureId" : 4490,
+    "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontojournal/article"
+  }, {
+    "locale" : "de_DE",
+    "value" : "Artikel",
+    "pureId" : 4490,
+    "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontojournal/article"
+  } ],
+  "categories" : [ {
+    "locale" : "en_GB",
+    "value" : "Research",
+    "pureId" : 4454,
+    "uri" : "/dk/atira/pure/researchoutput/category/research"
+  }, {
+    "locale" : "de_DE",
+    "value" : "Forschung",
+    "pureId" : 4454,
+    "uri" : "/dk/atira/pure/researchoutput/category/research"
+  } ],
+  "publicationStatuses" : [ {
+    "pureId" : 1110697,
+    "externalId" : "74016",
+    "externalIdSource" : "researchoutputwizard",
+    "current" : true,
+    "publicationDate" : {
+      "year" : 1976
+    },
+    "publicationStatuses" : [ {
+      "locale" : "en_GB",
+      "value" : "Published",
+      "pureId" : 869,
+      "uri" : "/dk/atira/pure/researchoutput/status/published"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Veröffentlicht",
+      "pureId" : 869,
+      "uri" : "/dk/atira/pure/researchoutput/status/published"
+    } ]
+  } ],
+  "languages" : [ {
+    "locale" : "en_GB",
+    "value" : "German",
+    "pureId" : 4898,
+    "uri" : "/dk/atira/pure/core/languages/de_DE"
+  }, {
+    "locale" : "de_DE",
+    "value" : "deutsch",
+    "pureId" : 4898,
+    "uri" : "/dk/atira/pure/core/languages/de_DE"
+  } ],
+  "personAssociations" : [ {
+    "pureId" : 1110704,
+    "person" : {
+      "uuid" : "1198b8c9-eea7-41dd-8861-30c8d066fb27",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/1198b8c9-eea7-41dd-8861-30c8d066fb27"
+      },
+      "externalId" : "3261",
+      "externalIdSource" : "synchronisedUnifiedPerson",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Franz Leberl"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Franz Leberl"
+      } ]
+    },
+    "name" : {
+      "firstName" : "Franz",
+      "lastName" : "Leberl"
+    },
+    "personRoles" : [ {
+      "locale" : "en_GB",
+      "value" : "Author",
+      "pureId" : 5146,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Autor",
+      "pureId" : 5146,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+    } ],
+    "organisationalUnits" : [ {
+      "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
+      },
+      "externalId" : "2376",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Computer Graphics and Vision (7100)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    } ]
+  }, {
+    "pureId" : 1110706,
+    "externalPerson" : {
+      "uuid" : "39103d35-090b-41bf-abfe-6d8349adba89",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/external-persons/39103d35-090b-41bf-abfe-6d8349adba89"
+      },
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Alexander F. H. Götz"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Alexander F. H. Götz"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "External person",
+        "pureId" : 5089,
+        "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Externe Person",
+        "pureId" : 5089,
+        "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
+      } ]
+    },
+    "name" : {
+      "firstName" : "Alexander F. H.",
+      "lastName" : "Götz"
+    },
+    "personRoles" : [ {
+      "locale" : "en_GB",
+      "value" : "Author",
+      "pureId" : 5146,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Autor",
+      "pureId" : 5146,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+    } ]
+  } ],
+  "organisationalUnits" : [ {
+    "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
+    "link" : {
+      "ref" : "content",
+      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
+    },
+    "externalId" : "2376",
+    "externalIdSource" : "synchronisedUnifiedOrganisation",
+    "externallyManaged" : true,
+    "names" : [ {
+      "locale" : "en_GB",
+      "value" : "Institute of Computer Graphics and Vision (7100)"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
+    } ],
+    "types" : [ {
+      "locale" : "en_GB",
+      "value" : "Institute",
+      "pureId" : 5431,
+      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Institut",
+      "pureId" : 5431,
+      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+    } ]
+  } ],
+  "openAccessPermissions" : [ {
+    "locale" : "en_GB",
+    "value" : "Open",
+    "pureId" : 2920,
+    "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/open"
+  }, {
+    "locale" : "de_DE",
+    "value" : "Offen",
+    "pureId" : 2920,
+    "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/open"
+  } ],
+  "electronicVersions" : [ {
+    "pureId" : 1110699,
+    "visibleOnPortalDate" : "2016-02-25T23:21:59.183+0000",
+    "creator" : "root",
+    "created" : "2016-02-25T23:21:59.180+0000",
+    "title" : "24 - Uebersicht ueber Bildverarbeitung, OeZfV 1976, Leberl-Goetz.pdf",
+    "file" : {
+      "fileName" : "24%20-%20Uebersicht%20ueber%20Bildverarbeitung,%20OeZfV%201976,%20Leberl-Goetz.pdf",
+      "mimeType" : "24 - Uebersicht ueber Bildverarbeitung, OeZfV 1976, Leberl-Goetz.pdf",
+      "size" : 1769446,
+      "fileURL" : "https://pure01.tugraz.at/ws/files/1110700/24%2520-%2520Uebersicht%2520ueber%2520Bildverarbeitung,%2520OeZfV%25201976,%2520Leberl-Goetz.pdf",
+      "digestAlgorithm" : "SHA1",
+      "digest" : "7F2995259FBE00A74CB8040DBC410E9687A2BEF8"
+    },
+    "accessTypes" : [ {
+      "locale" : "en_GB",
+      "value" : "Open",
+      "pureId" : 105,
+      "uri" : "/dk/atira/pure/core/openaccesspermission/open"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Offen",
+      "pureId" : 105,
+      "uri" : "/dk/atira/pure/core/openaccesspermission/open"
+    } ],
+    "versionTypes" : [ {
+      "locale" : "en_GB",
+      "value" : "Final published version",
+      "pureId" : 23264,
+      "uri" : "/dk/atira/pure/researchoutput/electronicversion/versiontype/publishersversion"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Endgültige, publizierte Fassung",
+      "pureId" : 23264,
+      "uri" : "/dk/atira/pure/researchoutput/electronicversion/versiontype/publishersversion"
+    } ]
+  } ],
+  "keywordGroups" : [ {
+    "pureId" : 1110701,
+    "logicalName" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise",
+    "types" : [ {
+      "locale" : "en_GB",
+      "value" : "Fields of Expertise",
+      "uri" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Fields of Expertise",
+      "uri" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise"
+    } ],
+    "keywordContainers" : [ {
+      "pureId" : 1110702,
+      "structuredKeyword" : {
+        "pureId" : 26401,
+        "uri" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise/so",
+        "disabled" : false,
+        "terms" : [ {
+          "locale" : "en_GB",
+          "value" : "Sonstiges"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Sonstiges"
+        } ]
+      }
+    } ]
+  } ],
+  "visibilities" : [ {
+    "locale" : "en_GB",
+    "value" : "Public - No restriction",
+    "key" : "FREE"
+  }, {
+    "locale" : "de_DE",
+    "value" : "Öffentlich - Keine Einschränkungen",
+    "key" : "FREE"
+  } ],
+  "workflows" : [ {
+    "locale" : "en_GB",
+    "value" : "For validation",
+    "workflowStep" : "forApproval"
+  }, {
+    "locale" : "de_DE",
+    "value" : "Zur Validierung",
+    "workflowStep" : "forApproval"
+  } ]
 }
