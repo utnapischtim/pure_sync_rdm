@@ -1,25 +1,25 @@
 {
-  "pureId" : 1110697,
-  "externalId" : "74016",
+  "pureId" : 1069278,
+  "externalId" : "56455",
   "externalIdSource" : "researchoutputwizard",
-  "uuid" : "5ab3d450-35ff-4d83-9361-f686e367d522",
-  "title" : "Übersicht über den gegenwärtigen Stand der digitalen Bildverarbeitung",
-  "peerReview" : false,
+  "uuid" : "917e5d09-a398-4c06-ada0-f55445fe81e6",
+  "title" : "Copper and nickel derivatives of functionalized pyridyloximate ligands",
+  "peerReview" : true,
   "managingOrganisationalUnit" : {
-    "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
+    "uuid" : "7f6fe494-0817-4e10-8ee3-614db5b0872b",
     "link" : {
       "ref" : "content",
-      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
+      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/7f6fe494-0817-4e10-8ee3-614db5b0872b"
     },
-    "externalId" : "2376",
+    "externalId" : "2391",
     "externalIdSource" : "synchronisedUnifiedOrganisation",
     "externallyManaged" : true,
     "names" : [ {
       "locale" : "en_GB",
-      "value" : "Institute of Computer Graphics and Vision (7100)"
+      "value" : "Institute of Physical and Theoretical Chemistry (6350)"
     }, {
       "locale" : "de_DE",
-      "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
+      "value" : "Institut für Physikalische und Theoretische Chemie (6350)"
     } ],
     "types" : [ {
       "locale" : "en_GB",
@@ -36,58 +36,45 @@
   "confidential" : false,
   "info" : {
     "createdBy" : "root",
-    "createdDate" : "2016-02-25T23:21:59.183+0000",
+    "createdDate" : "2016-02-25T21:49:32.477+0000",
     "modifiedBy" : "root",
-    "modifiedDate" : "2018-09-06T07:30:16.710+0000",
-    "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/ubersicht-uber-den-gegenwartigen-stand-der-digitalen-bildverarbeitung(5ab3d450-35ff-4d83-9361-f686e367d522).html"
+    "modifiedDate" : "2018-09-06T07:28:48.979+0000",
+    "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/copper-and-nickel-derivatives-of-functionalized-pyridyloximate-ligands(917e5d09-a398-4c06-ada0-f55445fe81e6).html",
+    "previousUuids" : [ "1dc1a1bf-12a2-47a5-a4b2-adb070ff5e87" ]
   },
-  "pages" : "104-126",
-  "volume" : "63",
-  "journalAssociation" : {
-    "pureId" : 1110698,
-    "title" : {
-      "value" : "Österreichische Zeitschrift für Vermessungswesen und Photogrammetrie"
+  "event" : {
+    "uuid" : "07bcf275-9a3d-40ce-a422-c048d8018556",
+    "link" : {
+      "ref" : "content",
+      "href" : "https://pure01.tugraz.at/ws/api/514/events/07bcf275-9a3d-40ce-a422-c048d8018556"
     },
-    "journal" : {
-      "uuid" : "0d9e5555-6757-433e-a29a-ebf9ed0fe06e",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/journals/0d9e5555-6757-433e-a29a-ebf9ed0fe06e"
-      },
-      "externalId" : "5963",
-      "externalIdSource" : "researchoutputwizard",
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "Österreichische Zeitschrift für Vermessungswesen und Photogrammetrie"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Österreichische Zeitschrift für Vermessungswesen und Photogrammetrie"
-      } ],
-      "types" : [ {
-        "locale" : "en_GB",
-        "value" : "Journal",
-        "pureId" : 989,
-        "uri" : "/dk/atira/pure/journal/journaltypes/journal/journal"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Zeitschrift",
-        "pureId" : 989,
-        "uri" : "/dk/atira/pure/journal/journaltypes/journal/journal"
-      } ]
-    }
+    "names" : [ {
+      "locale" : "en_GB",
+      "value" : "12th International Conference on Molecule-Based Magnets"
+    } ],
+    "types" : [ {
+      "locale" : "en_GB",
+      "value" : "Conference",
+      "pureId" : 1128,
+      "uri" : "/dk/atira/pure/event/eventtypes/event/conference"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Konferenz",
+      "pureId" : 1128,
+      "uri" : "/dk/atira/pure/event/eventtypes/event/conference"
+    } ]
   },
-  "journalNumber" : "3",
-  "totalNumberOfAuthors" : 2,
+  "totalNumberOfAuthors" : 3,
   "types" : [ {
     "locale" : "en_GB",
-    "value" : "Article",
-    "pureId" : 4490,
-    "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontojournal/article"
+    "value" : "Poster",
+    "pureId" : 4550,
+    "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontoconference/poster"
   }, {
     "locale" : "de_DE",
-    "value" : "Artikel",
-    "pureId" : 4490,
-    "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontojournal/article"
+    "value" : "Poster",
+    "pureId" : 4550,
+    "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontoconference/poster"
   } ],
   "categories" : [ {
     "locale" : "en_GB",
@@ -101,12 +88,12 @@
     "uri" : "/dk/atira/pure/researchoutput/category/research"
   } ],
   "publicationStatuses" : [ {
-    "pureId" : 1110697,
-    "externalId" : "74016",
+    "pureId" : 1069278,
+    "externalId" : "56455",
     "externalIdSource" : "researchoutputwizard",
     "current" : true,
     "publicationDate" : {
-      "year" : 1976
+      "year" : 2010
     },
     "publicationStatuses" : [ {
       "locale" : "en_GB",
@@ -122,91 +109,29 @@
   } ],
   "languages" : [ {
     "locale" : "en_GB",
-    "value" : "German",
-    "pureId" : 4898,
-    "uri" : "/dk/atira/pure/core/languages/de_DE"
+    "value" : "English",
+    "pureId" : 4900,
+    "uri" : "/dk/atira/pure/core/languages/en_GB"
   }, {
     "locale" : "de_DE",
-    "value" : "deutsch",
-    "pureId" : 4898,
-    "uri" : "/dk/atira/pure/core/languages/de_DE"
+    "value" : "englisch",
+    "pureId" : 4900,
+    "uri" : "/dk/atira/pure/core/languages/en_GB"
   } ],
   "personAssociations" : [ {
-    "pureId" : 1110704,
-    "person" : {
-      "uuid" : "1198b8c9-eea7-41dd-8861-30c8d066fb27",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/persons/1198b8c9-eea7-41dd-8861-30c8d066fb27"
-      },
-      "externalId" : "3261",
-      "externalIdSource" : "synchronisedUnifiedPerson",
-      "externallyManaged" : true,
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "Franz Leberl"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Franz Leberl"
-      } ]
-    },
-    "name" : {
-      "firstName" : "Franz",
-      "lastName" : "Leberl"
-    },
-    "personRoles" : [ {
-      "locale" : "en_GB",
-      "value" : "Author",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Autor",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
-    } ],
-    "organisationalUnits" : [ {
-      "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
-      },
-      "externalId" : "2376",
-      "externalIdSource" : "synchronisedUnifiedOrganisation",
-      "externallyManaged" : true,
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "Institute of Computer Graphics and Vision (7100)"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
-      } ],
-      "types" : [ {
-        "locale" : "en_GB",
-        "value" : "Institute",
-        "pureId" : 5431,
-        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Institut",
-        "pureId" : 5431,
-        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
-      } ]
-    } ]
-  }, {
-    "pureId" : 1110706,
+    "pureId" : 1069284,
     "externalPerson" : {
-      "uuid" : "39103d35-090b-41bf-abfe-6d8349adba89",
+      "uuid" : "0bef7e71-0899-4ab7-bc51-86a765767bcb",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/external-persons/39103d35-090b-41bf-abfe-6d8349adba89"
+        "href" : "https://pure01.tugraz.at/ws/api/514/external-persons/0bef7e71-0899-4ab7-bc51-86a765767bcb"
       },
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Alexander F. H. Götz"
+        "value" : "Albert Escuer"
       }, {
         "locale" : "de_DE",
-        "value" : "Alexander F. H. Götz"
+        "value" : "Albert Escuer"
       } ],
       "types" : [ {
         "locale" : "en_GB",
@@ -221,36 +146,140 @@
       } ]
     },
     "name" : {
-      "firstName" : "Alexander F. H.",
-      "lastName" : "Götz"
+      "firstName" : "A.",
+      "lastName" : "Escuer"
     },
     "personRoles" : [ {
       "locale" : "en_GB",
       "value" : "Author",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      "pureId" : 5190,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
     }, {
       "locale" : "de_DE",
       "value" : "Autor",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+      "pureId" : 5190,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
+    } ]
+  }, {
+    "pureId" : 1069285,
+    "externalPerson" : {
+      "uuid" : "2946aae2-7843-4803-8cc4-b6ae5c883573",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/external-persons/2946aae2-7843-4803-8cc4-b6ae5c883573"
+      },
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "G. Vlahopoulou"
+      }, {
+        "locale" : "de_DE",
+        "value" : "G. Vlahopoulou"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "External person",
+        "pureId" : 5089,
+        "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Externe Person",
+        "pureId" : 5089,
+        "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
+      } ]
+    },
+    "name" : {
+      "firstName" : "G.",
+      "lastName" : "Vlahopoulou"
+    },
+    "personRoles" : [ {
+      "locale" : "en_GB",
+      "value" : "Author",
+      "pureId" : 5190,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Autor",
+      "pureId" : 5190,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
+    } ]
+  }, {
+    "pureId" : 1069286,
+    "person" : {
+      "uuid" : "0d9a0a30-d927-4d9c-b7c1-bc7eaa93481b",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/0d9a0a30-d927-4d9c-b7c1-bc7eaa93481b"
+      },
+      "externalId" : "3189",
+      "externalIdSource" : "synchronisedUnifiedPerson",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Franz-Andreas Mautner"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Franz-Andreas Mautner"
+      } ]
+    },
+    "name" : {
+      "firstName" : "Franz-Andreas",
+      "lastName" : "Mautner"
+    },
+    "personRoles" : [ {
+      "locale" : "en_GB",
+      "value" : "Author",
+      "pureId" : 5190,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Autor",
+      "pureId" : 5190,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
+    } ],
+    "organisationalUnits" : [ {
+      "uuid" : "7f6fe494-0817-4e10-8ee3-614db5b0872b",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/7f6fe494-0817-4e10-8ee3-614db5b0872b"
+      },
+      "externalId" : "2391",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Physical and Theoretical Chemistry (6350)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Physikalische und Theoretische Chemie (6350)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
     } ]
   } ],
   "organisationalUnits" : [ {
-    "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
+    "uuid" : "7f6fe494-0817-4e10-8ee3-614db5b0872b",
     "link" : {
       "ref" : "content",
-      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
+      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/7f6fe494-0817-4e10-8ee3-614db5b0872b"
     },
-    "externalId" : "2376",
+    "externalId" : "2391",
     "externalIdSource" : "synchronisedUnifiedOrganisation",
     "externallyManaged" : true,
     "names" : [ {
       "locale" : "en_GB",
-      "value" : "Institute of Computer Graphics and Vision (7100)"
+      "value" : "Institute of Physical and Theoretical Chemistry (6350)"
     }, {
       "locale" : "de_DE",
-      "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
+      "value" : "Institut für Physikalische und Theoretische Chemie (6350)"
     } ],
     "types" : [ {
       "locale" : "en_GB",
@@ -266,76 +295,39 @@
   } ],
   "openAccessPermissions" : [ {
     "locale" : "en_GB",
-    "value" : "Open",
-    "pureId" : 2920,
-    "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/open"
+    "value" : "None",
+    "pureId" : 2928,
+    "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/none"
   }, {
     "locale" : "de_DE",
-    "value" : "Offen",
-    "pureId" : 2920,
-    "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/open"
-  } ],
-  "electronicVersions" : [ {
-    "pureId" : 1110699,
-    "visibleOnPortalDate" : "2016-02-25T23:21:59.183+0000",
-    "creator" : "root",
-    "created" : "2016-02-25T23:21:59.180+0000",
-    "title" : "24 - Uebersicht ueber Bildverarbeitung, OeZfV 1976, Leberl-Goetz.pdf",
-    "file" : {
-      "fileName" : "24%20-%20Uebersicht%20ueber%20Bildverarbeitung,%20OeZfV%201976,%20Leberl-Goetz.pdf",
-      "mimeType" : "24 - Uebersicht ueber Bildverarbeitung, OeZfV 1976, Leberl-Goetz.pdf",
-      "size" : 1769446,
-      "fileURL" : "https://pure01.tugraz.at/ws/files/1110700/24%2520-%2520Uebersicht%2520ueber%2520Bildverarbeitung,%2520OeZfV%25201976,%2520Leberl-Goetz.pdf",
-      "digestAlgorithm" : "SHA1",
-      "digest" : "7F2995259FBE00A74CB8040DBC410E9687A2BEF8"
-    },
-    "accessTypes" : [ {
-      "locale" : "en_GB",
-      "value" : "Open",
-      "pureId" : 105,
-      "uri" : "/dk/atira/pure/core/openaccesspermission/open"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Offen",
-      "pureId" : 105,
-      "uri" : "/dk/atira/pure/core/openaccesspermission/open"
-    } ],
-    "versionTypes" : [ {
-      "locale" : "en_GB",
-      "value" : "Final published version",
-      "pureId" : 23264,
-      "uri" : "/dk/atira/pure/researchoutput/electronicversion/versiontype/publishersversion"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Endgültige, publizierte Fassung",
-      "pureId" : 23264,
-      "uri" : "/dk/atira/pure/researchoutput/electronicversion/versiontype/publishersversion"
-    } ]
+    "value" : "Keine Angabe",
+    "pureId" : 2928,
+    "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/none"
   } ],
   "keywordGroups" : [ {
-    "pureId" : 1110701,
-    "logicalName" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise",
+    "pureId" : 1069281,
+    "logicalName" : "/dk/atira/pure/researchoutput/keywords/treatmentcode",
     "types" : [ {
       "locale" : "en_GB",
-      "value" : "Fields of Expertise",
-      "uri" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise"
+      "value" : "Treatment code (Nähere Zuordnung)",
+      "uri" : "/dk/atira/pure/researchoutput/keywords/treatmentcode"
     }, {
       "locale" : "de_DE",
-      "value" : "Fields of Expertise",
-      "uri" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise"
+      "value" : "Treatment code (Nähere Zuordnung)",
+      "uri" : "/dk/atira/pure/researchoutput/keywords/treatmentcode"
     } ],
     "keywordContainers" : [ {
-      "pureId" : 1110702,
+      "pureId" : 1069282,
       "structuredKeyword" : {
-        "pureId" : 26401,
-        "uri" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise/so",
+        "pureId" : 26407,
+        "uri" : "/dk/atira/pure/researchoutput/keywords/treatmentcode/basic_fundamental",
         "disabled" : false,
         "terms" : [ {
           "locale" : "en_GB",
-          "value" : "Sonstiges"
+          "value" : "Basic - Fundamental (Grundlagenforschung)"
         }, {
           "locale" : "de_DE",
-          "value" : "Sonstiges"
+          "value" : "Basic - Fundamental (Grundlagenforschung)"
         } ]
       }
     } ]

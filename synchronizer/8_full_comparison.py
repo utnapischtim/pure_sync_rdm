@@ -13,56 +13,58 @@ class FullComparison:
         self.dirpath = os.path.dirname(os.path.abspath(__file__))
 
     def get_from_rdm(self):
+        try:
+            params = (('prettyprint', '1'),)
 
-        params = (('prettyprint', '1'),)
+            pag = 1
+            pag_size = 500
+            print(f'\n---   ---   ---\nGET FROM RDM\n\nPag size: {pag_size}\n')
 
-        pag = 1
-        pag_size = 250
+            cnt = 0
+            go_on = True
+            uuid_str = ''
 
-        cnt = 0
-        go_on = True
-        uuid_str = ''
-        recid_str = ''
+            while go_on == True:
 
-        while go_on == True:
+                response = requests.get(
+                    f'https://localhost:5000/api/records/?sort=mostrecent&size={pag_size}&page={pag}', 
+                    params=params, 
+                    verify=False
+                    )
+                print(response)
+                open(self.dirpath + "/reports/resp_rdm.json", 'wb').write(response.content)
 
-            response = requests.get(
-                f'https://localhost:5000/api/records/?sort=mostrecent&size={pag_size}&page={pag}', 
-                params=params, 
-                verify=False
-                )
-            open(self.dirpath + "/reports/resp_rdm.json", 'wb').write(response.content)
-            print(response)
+                if response.status_code >= 300:
+                    print(response.content)
+                    exit()
 
-            if response.status_code >= 300:
-                print(response.content)
-                exit()
+                resp_json = json.loads(response.content)
 
-            resp_json = json.loads(response.content)
+                for i in resp_json['hits']['hits']:
+                    uuid_str += i['metadata']['uuid'] + '\n'
+                    cnt += 1
 
-            for i in resp_json['hits']['hits']:
-                pprint(i['metadata']['uuid'])
-                uuid_str += i['metadata']['uuid'] + '\n'
-                recid_str += i['metadata']['recid'] + '\n'
-                cnt += 1
+                print(f'Pag {str(pag)} - Records {cnt}')
 
-            if 'next' not in resp_json['links']:
-                print('\n- End\nNo more pages available')
-                print(f'- Total records: {cnt}\n')
-                go_on = False
+                if 'next' not in resp_json['links']:
+                    go_on = False
 
-            time.sleep(3)
-            pag += 1
-            
-        open(self.dirpath + "/reports/full_comparison/all_rdm_uuids.log", 'w+').write(uuid_str)
-        open(self.dirpath + "/reports/full_comparison/all_rdm_recids.log", 'w+').write(recid_str)
+                # go_on = False   # TEMP!!
+                time.sleep(3)
+                pag += 1
+                
+            print(f'\n- Tot items: {cnt} -')
+            open(self.dirpath + "/reports/full_comparison/all_rdm_uuids.log", 'w+').write(uuid_str)
+
+        except:
+            print('\nError in get_from_rdm\n')
 
 
     def get_from_pure(self):
         try:
-            pag = 1
+            pag = 3
             pag_size = 50
-            print(f'Pag size: {pag_size}\n')
+            print(f'\n---   ---   ---\nGET FROM PURE\n\nPag size: {pag_size}\n')
 
             cnt = 0
             go_on = True
@@ -96,6 +98,8 @@ class FullComparison:
 
                 print(f'Pag {str(pag)} - Records {cnt}')
 
+                go_on = False   # TEMP!!
+
                 time.sleep(3)
                 pag += 1
 
@@ -107,27 +111,34 @@ class FullComparison:
 
 
     def find_missing(self):
-
+        print('\n---   ---   ---\nFIND MISSING\n')
         # Read Pure
-        file_name = self.dirpath + '/reports/full_comparison/t_pure.log'
-        uuid_pure = open(file_name, 'r').readlines()
+        file_name = self.dirpath + '/reports/full_comparison/all_rdm_uuids.log'
+        uuid_rdm = open(file_name, 'r').readlines()
 
         # Read RDM
-        file_name = self.dirpath + '/reports/full_comparison/t_rdm.log'
-        uuid_rdm = open(file_name, 'r').readlines()
+        file_name = self.dirpath + '/reports/full_comparison/all_pure_uuids.log'
+        uuid_pure = open(file_name, 'r').readlines()
             
         # Find missing records
-        cnt = 0
+        cnt_m = 0
+        cnt_t = 0
         missing_in_rdm = ''
         for i in uuid_pure:
             if i not in uuid_rdm:
-                cnt += 1
+                cnt_m += 1
                 missing_in_rdm += i
+            else:
+                cnt_t += 1
 
         file_name = self.dirpath + '/reports/to_transfer.log'
         open(file_name, "a").write(missing_in_rdm)
-        print(f'\n{cnt} records added to to_transfer.log\n')
+        print(f'{cnt_t}\trecords intersect')
+        print(f'{cnt_m}\trecords added to to_transfer.log\n')
 
 
 inst_fc = FullComparison()
+inst_fc.get_from_rdm()
+inst_fc.get_from_pure()
 inst_fc.find_missing()
+os.system('/usr/bin/python /home/bootcamp/src/pure_sync_rdm/synchronizer/2_uuid_transmit.py')

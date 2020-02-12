@@ -59,13 +59,11 @@ while True:
     # resp_json = json.load(resp_json)                                            # -- TEMPORARY --
 
     to_re_trans = ''
-
     cnt  = 0
     cntu = 0
 
     for item in resp_json['items']:
         if 'info' in item:
-
             cnt += 1
 
             record_date_time = item['info']['modifiedDate']
