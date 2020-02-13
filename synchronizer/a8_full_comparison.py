@@ -70,7 +70,7 @@ class FullComparison:
     def get_from_pure(self):
         try:
             pag = 1
-            pag_size = 570
+            pag_size = 15
             print(f'\n---   ---   ---\nGET FROM PURE\n\nPag size: {pag_size}\n')
 
             cnt = 0
@@ -181,9 +181,13 @@ class FullComparison:
                     dup_recid += recid
                     cnt += 1
 
-            print(f'Tot {cnt} duplicates\n')
+            print(f'\nTot {cnt} duplicates\n')
+
             file_name = self.dirpath + '/reports/to_delete.log'
             open(file_name, "a").write(dup_recid)
+
+            # if cnt > 0:
+            #     self.delete_record()
 
         except:
             print('\nError in find_rdm_duplicates\n')
@@ -191,6 +195,7 @@ class FullComparison:
     
     def delete_record(self):
         # NOTE: the user ACCOUNT related to the used TOKEN must be ADMIN
+        # pipenv run invenio roles add admin@invenio.org admin
         try:
             print('\n---   ---   ---\nDELETE RECORDS\n\n')
 
@@ -235,12 +240,12 @@ class FullComparison:
             print('\nError in delete_record\n')
 
 
-inst_fc = FullComparison()
+# inst_fc = FullComparison()
 
-inst_fc.get_from_rdm()
-inst_fc.get_from_pure()
-inst_fc.find_missing()
-os.system('/usr/bin/python /home/bootcamp/src/pure_sync_rdm/synchronizer/2_uuid_transmit.py')
+# inst_fc.get_from_rdm()
+# inst_fc.get_from_pure()
+# inst_fc.find_missing()
+# os.system('/usr/bin/python /home/bootcamp/src/pure_sync_rdm/synchronizer/2_uuid_transmit.py')
 
-inst_fc.find_rdm_duplicates()
-inst_fc.delete_record()
+# inst_fc.find_rdm_duplicates()
+# inst_fc.delete_record()

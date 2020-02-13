@@ -143,11 +143,10 @@ class PureToRdm:
             # metadataVersion:      ???
             # versionFiles:         ???
 
-            # Test invenio RDM fields
-            self.data += '"description": "TEST DESCRIPTION", '
-            self.data += '"additional_descriptions": [{"description": "this is my additional description"}], '
-            self.data += '"additional_titles": [{"title": "this is my additional title"}], '
-
+            # # Test invenio RDM fields
+            # self.data += '"description": "TEST DESCRIPTION", '
+            # self.data += '"additional_descriptions": [{"description": "this is my additional description"}], '
+            # self.data += '"additional_titles": [{"title": "this is my additional title"}], '
 
             if 'electronicVersions' in item:
                 cnt = 0

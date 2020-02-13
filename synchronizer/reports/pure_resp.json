@@ -1,79 +1,88 @@
 {
-  "pureId" : 1083612,
-  "externalId" : "52843",
-  "externalIdSource" : "researchoutputwizard",
-  "uuid" : "0f1d01e8-fd22-41e6-b449-131a5207b72f",
-  "title" : "Synthesis and characterization of meso-substituted tetrabenzoporphyrin complexes with Pt(II) and Pd(II) for optical oxygen sensing",
+  "pureId" : 19530666,
+  "uuid" : "5f8e8d34-d3f2-4695-9e82-c35783cb0316",
+  "title" : "test",
   "peerReview" : false,
   "managingOrganisationalUnit" : {
-    "uuid" : "95389b7a-4be9-4f64-8491-0dd9b3e5f041",
+    "uuid" : "650fb44b-f9dd-490c-b6e0-4b3e77b55c26",
     "link" : {
       "ref" : "content",
-      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/95389b7a-4be9-4f64-8491-0dd9b3e5f041"
+      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26"
     },
-    "externalId" : "2403",
+    "externalId" : "1416",
     "externalIdSource" : "synchronisedUnifiedOrganisation",
     "externallyManaged" : true,
     "names" : [ {
       "locale" : "en_GB",
-      "value" : "Institute of Analytical Chemistry and Food Chemistry (6450)"
+      "value" : "Administration (95021)"
     }, {
       "locale" : "de_DE",
-      "value" : "Institut für Analytische Chemie und Lebensmittelchemie (6450)"
+      "value" : "EDV/ Verwaltung (95021)"
     } ],
     "types" : [ {
       "locale" : "en_GB",
-      "value" : "Institute",
-      "pureId" : 5431,
-      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      "value" : "Department",
+      "pureId" : 5488,
+      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
     }, {
       "locale" : "de_DE",
-      "value" : "Institut",
-      "pureId" : 5431,
-      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      "value" : "Abteilung-DLE",
+      "pureId" : 5488,
+      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
     } ]
   },
   "confidential" : false,
   "info" : {
-    "createdBy" : "root",
-    "createdDate" : "2016-02-25T21:52:49.273+0000",
-    "modifiedBy" : "root",
-    "modifiedDate" : "2018-09-06T07:29:19.657+0000",
-    "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/synthesis-and-characterization-of-mesosubstituted-tetrabenzoporphyrin-complexes-with-ptii-and-pdii-for-optical-oxygen-sensing(0f1d01e8-fd22-41e6-b449-131a5207b72f).html"
+    "createdBy" : "pure_wruss",
+    "createdDate" : "2019-08-07T06:15:21.946+0000",
+    "modifiedBy" : "pure_wruss",
+    "modifiedDate" : "2019-08-07T06:15:21.946+0000",
+    "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/test(5f8e8d34-d3f2-4695-9e82-c35783cb0316).html"
   },
-  "event" : {
-    "uuid" : "494c8781-45f2-4218-91af-1d2aeaadfb8b",
-    "link" : {
-      "ref" : "content",
-      "href" : "https://pure01.tugraz.at/ws/api/514/events/494c8781-45f2-4218-91af-1d2aeaadfb8b"
+  "journalAssociation" : {
+    "pureId" : 19530667,
+    "title" : {
+      "value" : "Test-Kompendium"
     },
-    "names" : [ {
-      "locale" : "de_DE",
-      "value" : "ACS National Meeting "
-    } ],
-    "types" : [ {
-      "locale" : "en_GB",
-      "value" : "Conference",
-      "pureId" : 1128,
-      "uri" : "/dk/atira/pure/event/eventtypes/event/conference"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Konferenz",
-      "pureId" : 1128,
-      "uri" : "/dk/atira/pure/event/eventtypes/event/conference"
-    } ]
+    "journal" : {
+      "uuid" : "05a5778a-1c02-4a23-8a3c-8e4c0ad62e8d",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/journals/05a5778a-1c02-4a23-8a3c-8e4c0ad62e8d"
+      },
+      "externalId" : "1366",
+      "externalIdSource" : "researchoutputwizard",
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Test-Kompendium"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Test-Kompendium"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Journal",
+        "pureId" : 989,
+        "uri" : "/dk/atira/pure/journal/journaltypes/journal/journal"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Zeitschrift",
+        "pureId" : 989,
+        "uri" : "/dk/atira/pure/journal/journaltypes/journal/journal"
+      } ]
+    }
   },
-  "totalNumberOfAuthors" : 3,
+  "totalNumberOfAuthors" : 1,
   "types" : [ {
     "locale" : "en_GB",
-    "value" : "Poster",
-    "pureId" : 4550,
-    "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontoconference/poster"
+    "value" : "Article",
+    "pureId" : 4490,
+    "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontojournal/article"
   }, {
     "locale" : "de_DE",
-    "value" : "Poster",
-    "pureId" : 4550,
-    "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontoconference/poster"
+    "value" : "Artikel",
+    "pureId" : 4490,
+    "uri" : "/dk/atira/pure/researchoutput/researchoutputtypes/contributiontojournal/article"
   } ],
   "categories" : [ {
     "locale" : "en_GB",
@@ -87,12 +96,10 @@
     "uri" : "/dk/atira/pure/researchoutput/category/research"
   } ],
   "publicationStatuses" : [ {
-    "pureId" : 1083612,
-    "externalId" : "52843",
-    "externalIdSource" : "researchoutputwizard",
+    "pureId" : 19530666,
     "current" : true,
     "publicationDate" : {
-      "year" : 2009
+      "year" : 2019
     },
     "publicationStatuses" : [ {
       "locale" : "en_GB",
@@ -118,198 +125,94 @@
     "uri" : "/dk/atira/pure/core/languages/en_GB"
   } ],
   "personAssociations" : [ {
-    "pureId" : 1083616,
+    "pureId" : 19530671,
     "person" : {
-      "uuid" : "71e2b8cb-543d-4e47-a013-865ff434b5c2",
+      "uuid" : "f0f60b8b-a7cb-41e9-ad36-606d3e890a3b",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/persons/71e2b8cb-543d-4e47-a013-865ff434b5c2"
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b"
       },
-      "externalId" : "59562",
+      "externalId" : "53779",
       "externalIdSource" : "synchronisedUnifiedPerson",
       "externallyManaged" : true,
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Sergey Borisov"
+        "value" : "Maria Wruß"
       }, {
         "locale" : "de_DE",
-        "value" : "Sergey Borisov"
+        "value" : "Maria Wruß"
       } ]
     },
     "name" : {
-      "firstName" : "Sergey",
-      "lastName" : "Borisov"
+      "firstName" : "Maria",
+      "lastName" : "Wruß"
     },
     "personRoles" : [ {
       "locale" : "en_GB",
       "value" : "Author",
-      "pureId" : 5190,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
+      "pureId" : 5146,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
     }, {
       "locale" : "de_DE",
       "value" : "Autor",
-      "pureId" : 5190,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
+      "pureId" : 5146,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
     } ],
     "organisationalUnits" : [ {
-      "uuid" : "95389b7a-4be9-4f64-8491-0dd9b3e5f041",
+      "uuid" : "650fb44b-f9dd-490c-b6e0-4b3e77b55c26",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/95389b7a-4be9-4f64-8491-0dd9b3e5f041"
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26"
       },
-      "externalId" : "2403",
+      "externalId" : "1416",
       "externalIdSource" : "synchronisedUnifiedOrganisation",
       "externallyManaged" : true,
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Institute of Analytical Chemistry and Food Chemistry (6450)"
+        "value" : "Administration (95021)"
       }, {
         "locale" : "de_DE",
-        "value" : "Institut für Analytische Chemie und Lebensmittelchemie (6450)"
+        "value" : "EDV/ Verwaltung (95021)"
       } ],
       "types" : [ {
         "locale" : "en_GB",
-        "value" : "Institute",
-        "pureId" : 5431,
-        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        "value" : "Department",
+        "pureId" : 5488,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
       }, {
         "locale" : "de_DE",
-        "value" : "Institut",
-        "pureId" : 5431,
-        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
-      } ]
-    } ]
-  }, {
-    "pureId" : 1083620,
-    "externalPerson" : {
-      "uuid" : "0e434ef6-86ea-4f3b-8aab-3f7cee7cd396",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/external-persons/0e434ef6-86ea-4f3b-8aab-3f7cee7cd396"
-      },
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "Alaina S DeToma"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Alaina S DeToma"
-      } ],
-      "types" : [ {
-        "locale" : "en_GB",
-        "value" : "External person",
-        "pureId" : 5089,
-        "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Externe Person",
-        "pureId" : 5089,
-        "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
-      } ]
-    },
-    "name" : {
-      "firstName" : "Alaina S",
-      "lastName" : "DeToma"
-    },
-    "personRoles" : [ {
-      "locale" : "en_GB",
-      "value" : "Author",
-      "pureId" : 5190,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Autor",
-      "pureId" : 5190,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
-    } ]
-  }, {
-    "pureId" : 1083622,
-    "person" : {
-      "uuid" : "f661d36c-be32-4b8e-be74-3dd0fa657b6c",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/persons/f661d36c-be32-4b8e-be74-3dd0fa657b6c"
-      },
-      "externalId" : "27449",
-      "externalIdSource" : "synchronisedUnifiedPerson",
-      "externallyManaged" : true,
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "Ingo Klimant"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Ingo Klimant"
-      } ]
-    },
-    "name" : {
-      "firstName" : "Ingo",
-      "lastName" : "Klimant"
-    },
-    "personRoles" : [ {
-      "locale" : "en_GB",
-      "value" : "Author",
-      "pureId" : 5190,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Autor",
-      "pureId" : 5190,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontoconference/author"
-    } ],
-    "organisationalUnits" : [ {
-      "uuid" : "95389b7a-4be9-4f64-8491-0dd9b3e5f041",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/95389b7a-4be9-4f64-8491-0dd9b3e5f041"
-      },
-      "externalId" : "2403",
-      "externalIdSource" : "synchronisedUnifiedOrganisation",
-      "externallyManaged" : true,
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "Institute of Analytical Chemistry and Food Chemistry (6450)"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Institut für Analytische Chemie und Lebensmittelchemie (6450)"
-      } ],
-      "types" : [ {
-        "locale" : "en_GB",
-        "value" : "Institute",
-        "pureId" : 5431,
-        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Institut",
-        "pureId" : 5431,
-        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        "value" : "Abteilung-DLE",
+        "pureId" : 5488,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
       } ]
     } ]
   } ],
   "organisationalUnits" : [ {
-    "uuid" : "95389b7a-4be9-4f64-8491-0dd9b3e5f041",
+    "uuid" : "650fb44b-f9dd-490c-b6e0-4b3e77b55c26",
     "link" : {
       "ref" : "content",
-      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/95389b7a-4be9-4f64-8491-0dd9b3e5f041"
+      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26"
     },
-    "externalId" : "2403",
+    "externalId" : "1416",
     "externalIdSource" : "synchronisedUnifiedOrganisation",
     "externallyManaged" : true,
     "names" : [ {
       "locale" : "en_GB",
-      "value" : "Institute of Analytical Chemistry and Food Chemistry (6450)"
+      "value" : "Administration (95021)"
     }, {
       "locale" : "de_DE",
-      "value" : "Institut für Analytische Chemie und Lebensmittelchemie (6450)"
+      "value" : "EDV/ Verwaltung (95021)"
     } ],
     "types" : [ {
       "locale" : "en_GB",
-      "value" : "Institute",
-      "pureId" : 5431,
-      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      "value" : "Department",
+      "pureId" : 5488,
+      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
     }, {
       "locale" : "de_DE",
-      "value" : "Institut",
-      "pureId" : 5431,
-      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      "value" : "Abteilung-DLE",
+      "pureId" : 5488,
+      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
     } ]
   } ],
   "openAccessPermissions" : [ {
@@ -322,34 +225,6 @@
     "value" : "Keine Angabe",
     "pureId" : 2928,
     "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/none"
-  } ],
-  "keywordGroups" : [ {
-    "pureId" : 1083613,
-    "logicalName" : "/dk/atira/pure/researchoutput/keywords/treatmentcode",
-    "types" : [ {
-      "locale" : "en_GB",
-      "value" : "Treatment code (Nähere Zuordnung)",
-      "uri" : "/dk/atira/pure/researchoutput/keywords/treatmentcode"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Treatment code (Nähere Zuordnung)",
-      "uri" : "/dk/atira/pure/researchoutput/keywords/treatmentcode"
-    } ],
-    "keywordContainers" : [ {
-      "pureId" : 1083614,
-      "structuredKeyword" : {
-        "pureId" : 26415,
-        "uri" : "/dk/atira/pure/researchoutput/keywords/treatmentcode/experimental",
-        "disabled" : false,
-        "terms" : [ {
-          "locale" : "en_GB",
-          "value" : "Experimental"
-        }, {
-          "locale" : "de_DE",
-          "value" : "Experimental"
-        } ]
-      }
-    } ]
   } ],
   "visibilities" : [ {
     "locale" : "en_GB",

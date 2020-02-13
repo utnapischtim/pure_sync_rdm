@@ -1,2 +1,3 @@
-s = 'oiu qwe'
-print(s.split(' '))
+from a2_uuid_transmit import *
+
+uuid_transfer()

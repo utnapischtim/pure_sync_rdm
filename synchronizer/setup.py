@@ -7,7 +7,7 @@ pure_username = 'ws_grosso'     # credentials for pure files download
 pure_password = 'U+0n0#yI'
 
 # Invenio RDM
-token_rdm = 'ZfIgTOgAWv6PFmq3AaFgIjRE7VAqO9yyda4kOmxn3e9hmukSyEOiql4lqFsg'
+token_rdm = 'rDPTu0oINctF1QSwjnDXY3g4vjSIXOxPI3GOAc6lrHf6rxZmi6igUcqncL2a'
 
 # -   -   -
 # LOG FILES
@@ -15,8 +15,8 @@ log_files = [                   # d_ files
     'd_daily_updates.log', 
     'd_rdm_push_report.log', 
     ]
-log_lines = 15                  # number of lines in d_ log files
-log_days = 2                    # days of age for /full_reports files
+log_lines = 80                  # number of lines in d_ log files
+log_days = 2                    # days to keep /full_reports files
 
 # Percentage of updated items to considere the upload task successful
 upload_percent_accept = 90
