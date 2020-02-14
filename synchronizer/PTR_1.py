@@ -134,30 +134,10 @@ class PureToRdm:
             self.add_field(item, 'access_right',                      ['openAccessPermissions', 0, 'value'])
             self.add_field(item, 'pages',                             ['info','pages'])                                                     
             self.add_field(item, 'volume',                            ['info','volume'])                                                         
-            self.add_field(item, 'versionType',                       ['electronicVersions', 0, 'versionType', 'value'])                     
-            self.add_field(item, 'licenseType',                       ['electronicVersions', 0, 'licenseType', 'value'])
+            self.add_field(item, 'versionType',                       ['electronicVersions', 0, 'versionType', 'value'])    # review                
+            self.add_field(item, 'licenseType',                       ['electronicVersions', 0, 'licenseType', 'value'])    # review
             self.add_field(item, 'journalTitle',                      ['info', 'journalAssociation', 'title', 'value'])
             self.add_field(item, 'journalNumber',                     ['info', 'journalNumber'])
-            # versionType:          e.g. Final published version, Accepted author manuscript (rare)
-            # metadataVersion:      ???
-            # versionFiles:         ???
-
-            # # Test invenio RDM fields
-            # self.data += '"description": "TEST DESCRIPTION", '
-            # self.data += '"additional_descriptions": [{"description": "this is my additional description"}], '
-            # self.data += '"additional_titles": [{"title": "this is my additional title"}], '
-            
-            # TEST TITLE2
-            self.data += '"title2": ['
-            self.data += '{'
-            self.add_field(item, 'value',                               ['title'])
-            self.add_field(item, 'version',                             ['title'])
-            self.add_field(item, 'createdBy',                           ['title'])
-            self.add_field(item, 'createdDate',                         ['title'])
-            self.data = self.data[:-2]
-            self.data += '}, '
-            self.data = self.data[:-2]       
-            self.data += '], '
 
             if 'electronicVersions' in item:
                 cnt = 0
@@ -169,17 +149,23 @@ class PureToRdm:
                                 self.data += '"versionFiles": ['
                             cnt += 1
 
-                            file_name = EV['file']['fileName']
-                            file_url  = EV['file']['fileURL']
+                            self.data += '{'
+                            self.add_field(EV, 'fileName',                          ['file', 'fileName'])
+                            self.add_field(EV, 'fileModifBy',                       ['creator'])
+                            self.add_field(EV, 'fileModifDate',                     ['created'])
+                            self.add_field(EV, 'fileType',                          ['file', 'mimeType'])
+                            self.add_field(EV, 'fileAccessType',                    ['accessTypes', 0, 'value'])
+                            self.add_field(EV, 'fileSize',                          ['file', 'size'])
+                            self.add_field(EV, 'fileDigest',                        ['file', 'digest'])
+                            self.add_field(EV, 'fileDigestAlgorithm',               ['file', 'digestAlgorithm'])
 
-                            self.data += '{'                                    # TO REVIEW !!! 
-                            self.data += f'"fileName": "{file_name}", '
-                            self.data += f'"fileModifBy": "Markus??", '
                             self.data += f'"fileVersion": "1??", '
                             self.data = self.data[:-2]
                             self.data += '}, '                                  # end review
 
                             # DOWNLOAD FILE FROM PURE
+                            file_name = EV['file']['fileName']
+                            file_url  = EV['file']['fileURL']
                             response = requests.get(file_url, auth=HTTPBasicAuth(pure_username, pure_password))
                             print(f'\n--- Download file from Pure. {response}\nFile name:\t{file_name}')
 
@@ -416,7 +402,7 @@ class PureToRdm:
             
             if file_uuid == uuid:
                 os.remove(self.dirpath + folder + file_name)
-                print(f'\nRecord {uuid} correctly transmitted.\n/reports/error_jsons/{file_name} has been deleted.')
+                print(f'Correct transmission -> The file /reports/error_jsons/{file_name} has been deleted.\n')
         
 
     #   ---         ---         ---

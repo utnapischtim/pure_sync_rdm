@@ -80,4 +80,4 @@ def uuid_transfer(transfer_type):
     except:
         print('\n---   !!!   Error in 2_uuid_transmit.py   !!!   ---\n')
 
-# uuid_transfer('')
+uuid_transfer('')
