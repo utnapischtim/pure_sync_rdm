@@ -4,7 +4,6 @@ import os
 import time
 from datetime   import date, datetime
 from setup import *
-from pprint import pprint
 
 class FullComparison:
     """     
@@ -15,7 +14,7 @@ class FullComparison:
     """    
     def __init__(self):
         # directory path
-        self.dirpath = os.path.dirname(os.path.abspath(__file__))
+        self.dirpath = dirpath
 
 
     # -- GET FROM RDM --
@@ -74,7 +73,7 @@ class FullComparison:
     def get_from_pure(self):
         try:
             pag = 2
-            pag_size = 250
+            pag_size = 15
             print(f'\n---   ---   ---\nGET FROM PURE\n\nPag size: {pag_size}\n')
 
             cnt = 0
@@ -166,7 +165,7 @@ class FullComparison:
             uuidRecid_rdm = open(file_name, 'r').readlines()
             # empty to_delete.log
             toDel_fileName = self.dirpath + '/reports/to_delete.log'
-            # open(toDel_fileName, 'w').close()                         
+            open(toDel_fileName, 'w').close()                         
 
             temp_arr = []
             cnt = 0

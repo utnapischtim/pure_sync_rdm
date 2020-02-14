@@ -4,10 +4,9 @@ def get_pure_changes():
         import requests
         import json
         import os
+        from setup import dirpath
         from datetime import date
         from pprint import pprint  
-
-        dirpath = os.path.dirname(os.path.abspath(__file__))
 
         date = str(date.today())
 
@@ -38,7 +37,7 @@ def get_pure_changes():
 
         open(dirpath + "/reports/to_transfer.log", "a").write(uuids)
 
-        from a2_uuid_transfer import uuid_transfer
+        from f_uuid_transfer import uuid_transfer
         uuid_transfer('changes')
 
     except:

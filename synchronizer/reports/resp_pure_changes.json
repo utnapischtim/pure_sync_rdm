@@ -1,52 +1,64 @@
 {
-  "count" : 7,
-  "lastId" : 19652349,
+  "count" : 9,
+  "lastId" : 19652565,
   "moreChanges" : false,
   "items" : [ {
     "uuid" : "3e5bc032-716b-4e4b-8e59-fe202e9e9596",
     "changeType" : "UPDATE",
     "family" : "dk.atira.pure.api.shared.model.researchoutput.ResearchOutput",
     "familySystemName" : "ResearchOutput",
-    "version" : 292
+    "version" : 293
   }, {
     "uuid" : "735d870d-cbfb-4c00-8615-330819e0bf11",
     "changeType" : "UPDATE",
     "family" : "dk.atira.pure.api.shared.model.researchoutput.ResearchOutput",
     "familySystemName" : "ResearchOutput",
-    "version" : 270
+    "version" : 271
   }, {
     "uuid" : "ff4b3bea-5104-4d6c-9367-1a7ac035a0b8",
     "changeType" : "UPDATE",
     "family" : "dk.atira.pure.api.shared.model.researchoutput.ResearchOutput",
     "familySystemName" : "ResearchOutput",
-    "version" : 275
+    "version" : 276
   }, {
     "uuid" : "a75f158e-13c2-435a-8241-6584dc8ff2d8",
     "changeType" : "UPDATE",
     "family" : "dk.atira.pure.api.shared.model.researchoutput.ResearchOutput",
     "familySystemName" : "ResearchOutput",
-    "version" : 291
+    "version" : 292
   }, {
     "uuid" : "7e91f3ad-5913-407d-95b1-8ffdf6d18f59",
     "changeType" : "UPDATE",
     "family" : "dk.atira.pure.api.shared.model.researchoutput.ResearchOutput",
     "familySystemName" : "ResearchOutput",
-    "version" : 237
+    "version" : 238
   }, {
     "uuid" : "31dc78d0-c5c2-4839-b6da-6513b4179f54",
     "changeType" : "UPDATE",
     "family" : "dk.atira.pure.api.shared.model.researchoutput.ResearchOutput",
     "familySystemName" : "ResearchOutput",
-    "version" : 197
+    "version" : 198
   }, {
     "uuid" : "5f8e8d34-d3f2-4695-9e82-c35783cb0316",
     "changeType" : "UPDATE",
     "family" : "dk.atira.pure.api.shared.model.researchoutput.ResearchOutput",
     "familySystemName" : "ResearchOutput",
-    "version" : 189
+    "version" : 190
+  }, {
+    "uuid" : "8dae7f68-1f64-4ee8-9240-3a27070a63f3",
+    "changeType" : "UPDATE",
+    "family" : "dk.atira.pure.api.shared.model.UserProfile",
+    "familySystemName" : "UserProfile",
+    "version" : 269
+  }, {
+    "uuid" : "3044c168-f97b-4838-a885-1623a852e10c",
+    "changeType" : "UPDATE",
+    "family" : "dk.atira.pure.api.shared.model.system.User",
+    "familySystemName" : "User",
+    "version" : 258
   } ],
   "navigationLinks" : [ {
     "ref" : "next",
-    "href" : "https://pure01.tugraz.at/ws/api/514/changes/19652349"
+    "href" : "https://pure01.tugraz.at/ws/api/514/changes/19652565"
   } ]
 }

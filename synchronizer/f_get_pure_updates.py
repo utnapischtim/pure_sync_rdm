@@ -4,12 +4,13 @@ import time
 import os
 from setup import dirpath
 from datetime import date, datetime, timedelta
-from pprint import pprint     
 
 def get_pure_updates():
     try:
         # Get date of last update
         file_name = dirpath + "/reports/d_daily_updates.log"
+
+        date_today = date.today()
 
         # Finds last date when the update successfully happened
         with open(file_name, 'r') as f:
@@ -22,8 +23,11 @@ def get_pure_updates():
                     result =            line[1]
                     if result !=        'success':  continue
                     else:                           break
+                else:
+                    # if 'Update - ' is not found then it starts updating from 3 days before
+                    date_last_update = str(date_today + timedelta(days = 3))
 
-        date_today = date.today()
+        
         date_object = datetime.strptime(date_last_update, '%Y-%m-%d').date()
 
         # date_limit = str(date_object + timedelta(days=1))         # one day after the last update
@@ -75,10 +79,16 @@ def get_pure_updates():
                     else:
                         report += item['uuid'] + ' - ' + record_date + ' - ok\n'
 
-            print('Tot: ' + str(cnt) + ' - To update: ' + str(cntu) + '\n')
-            report += 'Tot: ' + str(cnt) + ' - To update: ' + str(cntu) + '\n\n'
+            line = f'Tot: {cnt} - To update: {cntu}\n'
+            print(line)
+            report += line
 
             open(dirpath + '/reports/full_reports/' + str(date_today) + '_pure_updates.log', "a").write(report)
+
+            if cntu == 0:
+                print('There are no records to be updated\n')
+                return
+
             open(dirpath + '/reports/to_transfer.log', "a").write(to_re_trans)
 
             pag += 1
@@ -89,10 +99,10 @@ def get_pure_updates():
             if record_date < date_limit:
                 break
 
-        from a2_uuid_transfer import uuid_transfer
+        from f_uuid_transfer import uuid_transfer
         uuid_transfer('update')
 
     except:
-        print('Error in get_pure_updates function')
+        print('\n   !!!   !!!   Error in get_pure_updates function   !!!   !!!   \n')
 
 # get_pure_updates()

@@ -20,14 +20,14 @@ class MyPrompt(Cmd):
         """\nHelp -> 
                 Gets from Pure API all records that have been modified
                 after the last update       """
-        from functions.get_pure_updates import get_pure_updates
+        from f_get_pure_updates import get_pure_updates
         get_pure_updates()
 
     
     # GET CHANGES FROM PURE
     def do_Changes_check(self, inp):
         """Help -> Gets from Pure API endpoint 'changes' all the records that have been modified.\n"""
-        from functions.get_pure_changes import get_pure_changes
+        from f_get_pure_changes import get_pure_changes
         get_pure_changes()
 
 
@@ -35,7 +35,7 @@ class MyPrompt(Cmd):
     def do_Duplicates_delete_RDM(self, inp):
         """Help -> Deletes all duplicate records from RDM.\n"""
         print("do_RDM_delete_duplicates")
-        from functions.full_comparison import FullComparison
+        from f_full_comparison import FullComparison
 
         inst_fc = FullComparison()
         inst_fc.get_from_rdm()
@@ -50,8 +50,8 @@ class MyPrompt(Cmd):
                 Finally it checks for duplicate records in RDM and removes them.
         """
         print("do_RDM_delete_duplicates")
-        from functions.uuid_transfer   import uuid_transfer
-        from functions.full_comparison import FullComparison
+        from f_uuid_transfer   import uuid_transfer
+        from f_full_comparison import FullComparison
 
         inst_fc = FullComparison()
         inst_fc.get_from_rdm()
@@ -65,14 +65,14 @@ class MyPrompt(Cmd):
     # UUID TRANSFER
     def do_Transfer_uuid(self, inp):
         """\nHelp -> Only uuid transfer"""
-        from functions.uuid_transfer   import uuid_transfer
+        from f_uuid_transfer   import uuid_transfer
         uuid_transfer('')
 
     
     # REDUCE LENGTH LOGS
     def do_Shorten_logs(self, inp):
         """Reduce length of log files"""
-        from functions.shorten_log_files   import shorten_log_files
+        from f_shorten_log_files   import shorten_log_files
         shorten_log_files()
 
     # to exit
