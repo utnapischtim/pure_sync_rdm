@@ -1,3 +1,5 @@
+import os
+dirpath = os.path.dirname(os.path.abspath(__file__))
 
 # Pure REST API references
 pure_rest_api_url =     'https://pure01.tugraz.at/ws/api/514/'

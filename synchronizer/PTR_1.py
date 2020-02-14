@@ -3,14 +3,14 @@ import json
 import time
 import os
 from datetime import datetime, date
-from setup import *
+from setup import pure_api_key, pure_rest_api_url, pure_username, pure_password, dirpath
 from requests.auth import HTTPBasicAuth
 
 class PureToRdm:
     
     def __init__(self):
         # directory path
-        self.dirpath = os.path.dirname(os.path.abspath(__file__))
+        self.dirpath = dirpath
         self.cnt_resp = {}
 
 
@@ -29,12 +29,12 @@ class PureToRdm:
 
                 headers = {
                     'Accept': 'application/json',
-                    'api-key': 'ca2f08c5-8b33-454a-adc4-8215cfb3e088',
+                    'api-key': pure_api_key,
                 }
                 params = (
                     ('page', pag),
                     ('pageSize', pag_size),
-                    ('apiKey', 'ca2f08c5-8b33-454a-adc4-8215cfb3e088'),
+                    ('apiKey', pure_api_key),
                 )
                 # PURE get request
                 response = requests.get(pure_rest_api_url + 'research-outputs', headers=headers, params=params)
@@ -80,13 +80,13 @@ class PureToRdm:
             
             headers = {
                 'Accept': 'application/json',
-                'api-key': 'ca2f08c5-8b33-454a-adc4-8215cfb3e088',
+                'api-key': pure_api_key,
             }
             params = (
-                ('apiKey', 'ca2f08c5-8b33-454a-adc4-8215cfb3e088'),
+                ('apiKey', pure_api_key),
             )
-            response = requests.get('https://pure01.tugraz.at/ws/api/514/research-outputs/' + uuid, headers=headers, params=params)
-            print('\nPure response: ', response)
+            response = requests.get(pure_rest_api_url + 'research-outputs/' + uuid, headers=headers, params=params)
+            print('Pure response: ', response)
             if response.status_code >= 300:
                 print(response.content)
                 raise Exception
@@ -116,7 +116,6 @@ class PureToRdm:
             
                                 # invenio field name                  # PURE json path
             self.add_field(item, 'title',                             ['title'])
-            # self.add_field(item, 'metadataVersion',                   [])
             self.add_field(item, 'publicationDatePure',               ['publicationStatuses', 0, 'publicationDate', 'year'])
             self.add_field(item, 'createdDatePure',                   ['info', 'createdDate'])
             self.add_field(item, 'modifiedDatePure',                  ['info', 'modifiedDate'])
@@ -147,6 +146,18 @@ class PureToRdm:
             # self.data += '"description": "TEST DESCRIPTION", '
             # self.data += '"additional_descriptions": [{"description": "this is my additional description"}], '
             # self.data += '"additional_titles": [{"title": "this is my additional title"}], '
+            
+            # TEST TITLE2
+            self.data += '"title2": ['
+            self.data += '{'
+            self.add_field(item, 'value',                               ['title'])
+            self.add_field(item, 'version',                             ['title'])
+            self.add_field(item, 'createdBy',                           ['title'])
+            self.add_field(item, 'createdDate',                         ['title'])
+            self.data = self.data[:-2]
+            self.data += '}, '
+            self.data = self.data[:-2]       
+            self.data += '], '
 
             if 'electronicVersions' in item:
                 cnt = 0
@@ -170,7 +181,7 @@ class PureToRdm:
 
                             # DOWNLOAD FILE FROM PURE
                             response = requests.get(file_url, auth=HTTPBasicAuth(pure_username, pure_password))
-                            print(f'\n--  --  --\nDownload file from Pure response: {response} - file name: {file_name} \n')
+                            print(f'\n--- Download file from Pure. {response}\nFile name:\t{file_name}')
 
                             # SAVE FILE
                             if response.status_code < 300:
@@ -319,7 +330,7 @@ class PureToRdm:
             response = requests.post('https://localhost:5000/api/records/', headers=headers, params=params, data=data_utf8, verify=False)
 
             # RESPONSE CHECK
-            print('\nMetadata post: ', response, '\n')                
+            print('Metadata post: ', response)                
 
             # adds all response http codes into array
             if response.status_code in self.cnt_resp:       self.cnt_resp[response.status_code] += 1
@@ -412,10 +423,9 @@ class PureToRdm:
     def put_file_to_rdm(self, file_name):
         try:
             file_path = self.dirpath + '/tmp_files/'
-            print('- Adding FILE -\n')
             cnt = 0
             
-            # GET record_id of last added record
+            # GET from RDM recid of last added record
             while True:
                 cnt += 1
                 time.sleep(cnt * 2)
@@ -427,9 +437,9 @@ class PureToRdm:
                 resp_json = json.loads(response.content)
 
                 for i in resp_json['hits']['hits']:
-                    record_rdm_id   = i['metadata']['recid']
-                    record_uuid     = i['metadata']['uuid']
-                    print(f'\n{cnt} - record_rdm_id: {record_rdm_id}\n')
+                    recid       = i['metadata']['recid']
+                    record_uuid = i['metadata']['uuid']
+                    print(f'Adding FILE number {cnt} to recid {recid}')
                 
                 if self.uuid == record_uuid or cnt > 10:
                     break
@@ -440,12 +450,12 @@ class PureToRdm:
                 'Content-Type': 'application/octet-stream',
             }
             data = open(file_path + file_name, 'rb').read()
-            response = requests.put('https://127.0.0.1:5000/api/records/' + record_rdm_id + '/files/' + file_name, headers=headers, data=data, verify=False)
+            response = requests.put('https://127.0.0.1:5000/api/records/' + recid + '/files/' + file_name, headers=headers, data=data, verify=False)
 
             # Report
             report = ''
-            print('\nFile transfer RDM: ', response, '\n')
-            report += 'FileTransf ' + str(response) + ' - ' + str(record_rdm_id) + '\n'
+            print(f'Transf to RDM: {response}\n')
+            report += 'FileTransf ' + str(response) + ' - ' + str(recid) + '\n'
 
             if response.status_code >= 300:
                 report += str(response.content) + '\n'

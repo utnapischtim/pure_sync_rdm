@@ -8,20 +8,16 @@ params = (
     ('prettyprint', '1'),
 )
 
-title = 'some "title3'
-title = title.replace('"', '\\"')       # adds \ before "
-
-
-data = '{"title": "Some title2", "access_right": "open", "owners": [1], "contributors": [{"name": "Doe, John"}], "_access": {"metadata_restricted": false, "files_restricted": false}}'
+data = '{"language": "eng"}'
 
 print(data, '\n')
 
 data = data.encode('utf-8')
 
-response = requests.post('https://localhost:5000/api/records/', headers=headers, params=params, data=data, verify=False)
+response = requests.post('https://localhost:5000/api/records/g7ywb-mg665/', headers=headers, params=params, data=data, verify=False)
 
 print("\n", response)
-if response.status_code == 400:
+if response.status_code >= 300:
     print(response.content)
 
 

@@ -1,11 +1,11 @@
-from setup import log_files, log_lines, log_days
+from setup import *
 import os
 
 def shorten_log_files():
     try:
 
         from datetime import date, timedelta
-        dirpath = os.path.dirname(os.path.abspath(__file__))
+        
 
         # SHORTEN LOG FILES
         print('\n---   ---   ---\nSHORTEN LOG FILES')

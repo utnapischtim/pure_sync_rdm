@@ -1,11 +1,10 @@
 import os
 from datetime   import date, time, datetime
 from PTR_1      import PureToRdm
-from setup      import upload_percent_accept
+from setup      import upload_percent_accept, dirpath
 
 def uuid_transfer(transfer_type):
     try:
-        dirpath = os.path.dirname(os.path.abspath(__file__))
 
         # Create instance
         inst_pti = PureToRdm()

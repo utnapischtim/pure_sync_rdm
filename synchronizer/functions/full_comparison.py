@@ -15,7 +15,7 @@ class FullComparison:
     """    
     def __init__(self):
         # directory path
-        self.dirpath = os.path.dirname(os.path.abspath(__file__))
+        self.dirpath = dirpath
 
 
     # -- GET FROM RDM --
