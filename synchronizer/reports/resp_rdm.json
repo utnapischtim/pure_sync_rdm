@@ -3,12 +3,8 @@
     "access_right": {
       "buckets": [
         {
-          "doc_count": 15, 
+          "doc_count": 2, 
           "key": "closed"
-        }, 
-        {
-          "doc_count": 6, 
-          "key": "open"
         }
       ], 
       "doc_count_error_upper_bound": 0, 
@@ -23,11 +19,11 @@
   "hits": {
     "hits": [
       {
-        "created": "2020-02-17T09:03:03.798111+00:00", 
-        "id": "xqj88-fsk10", 
+        "created": "2020-02-17T10:28:02.896764+00:00", 
+        "id": "jdpey-gz672", 
         "links": {
-          "files": "https://localhost:5000/api/records/xqj88-fsk10/files", 
-          "self": "https://localhost:5000/api/records/xqj88-fsk10"
+          "files": "https://localhost:5000/api/records/jdpey-gz672/files", 
+          "self": "https://localhost:5000/api/records/jdpey-gz672"
         }, 
         "metadata": {
           "_access": {
@@ -39,634 +35,71 @@
           "confidential": false, 
           "contributors": [
             {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b", 
-              "name": "Wru\u00df, Maria", 
-              "organisationalUnit": "Administration (95021)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2019-08-07T06:15:21.946+0000", 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Administration (95021)", 
-          "modifiedDatePure": "2019-08-07T06:15:21.946+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26", 
-              "name": "Administration (95021)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDatePure": "2019", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-17", 
-          "pureId": "19530666", 
-          "recid": "xqj88-fsk10", 
-          "title": "test", 
-          "totalNumberOfAuthors": 1, 
-          "type_p": "Article", 
-          "uuid": "5f8e8d34-d3f2-4695-9e82-c35783cb0316", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-17T09:03:03.798123+00:00"
-      }, 
-      {
-        "created": "2020-02-17T09:03:00.055805+00:00", 
-        "id": "p797s-xdm59", 
-        "links": {
-          "files": "https://localhost:5000/api/records/p797s-xdm59/files", 
-          "self": "https://localhost:5000/api/records/p797s-xdm59"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/d5c827b6-076b-48fb-b842-f72df3cec7f0", 
-              "name": "K\u00f6nighofer, Philip", 
-              "organisationalUnit": "Institute of Applied Information Processing and Communications (7050)", 
+              "link": "https://pure01.tugraz.at/ws/api/514/persons/63f479a2-1851-458b-aebd-4f333e95b29e", 
+              "name": "Arth, Clemens", 
+              "organisationalUnit": "Institute of Computer Graphics and Vision (7100)", 
               "personRole": "Author"
             }, 
             {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/e6f30b9e-0f1e-469b-b13c-993da9dc9540", 
-              "name": "Bubba, Hubba", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }
-          ], 
-          "createdDatePure": "2019-07-15T12:53:01.449+0000", 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Applied Information Processing and Communications (7050)", 
-          "modifiedDatePure": "2019-07-15T12:53:01.449+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/77857978-adc4-4d9d-877c-1283cbd9199f", 
-              "name": "Institute of Applied Information Processing and Communications (7050)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDatePure": "2018", 
-          "publicationStatus": "In preparation", 
-          "publication_date": "2020-02-17", 
-          "publisherName": "Best Publishers", 
-          "pureId": "19528264", 
-          "recid": "p797s-xdm59", 
-          "title": "Originalsprache Titel", 
-          "totalNumberOfAuthors": 2, 
-          "type_p": "Conference contribution", 
-          "uuid": "31dc78d0-c5c2-4839-b6da-6513b4179f54", 
-          "versionFiles": [
-            {
-              "fileAccessType": "Open", 
-              "fileDigest": "838F57049CED88AE01BB78354AB94FD62000ECEC", 
-              "fileDigestAlgorithm": "SHA1", 
-              "fileModifBy": "weberp", 
-              "fileModifDate": "2019-07-15T12:53:01.448+0000", 
-              "fileName": "dreimobilesfestnetz_eb.pdf", 
-              "fileSize": 220190, 
-              "fileType": "application/pdf", 
-              "fileVersion": "1??"
-            }
-          ], 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-17T09:03:00.055814+00:00"
-      }, 
-      {
-        "created": "2020-02-17T09:02:58.568051+00:00", 
-        "id": "achx2-emg27", 
-        "links": {
-          "files": "https://localhost:5000/api/records/achx2-emg27/files", 
-          "self": "https://localhost:5000/api/records/achx2-emg27"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b", 
-              "name": "Wru\u00df, Maria", 
-              "organisationalUnit": "Administration (95021)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2019-06-05T11:53:04.014+0000", 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Administration (95021)", 
-          "modifiedDatePure": "2019-06-05T11:53:04.014+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26", 
-              "name": "Administration (95021)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDatePure": "2019", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-17", 
-          "pureId": "19434264", 
-          "recid": "achx2-emg27", 
-          "title": "test", 
-          "totalNumberOfAuthors": 1, 
-          "type_p": "Article", 
-          "uuid": "7e91f3ad-5913-407d-95b1-8ffdf6d18f59", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-17T09:02:58.568060+00:00"
-      }, 
-      {
-        "created": "2020-02-17T09:02:57.306184+00:00", 
-        "id": "za0e6-chc83", 
-        "links": {
-          "files": "https://localhost:5000/api/records/za0e6-chc83/files", 
-          "self": "https://localhost:5000/api/records/za0e6-chc83"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/70826100-2c6b-4ca9-947f-e8fdd66b36ae", 
-              "name": "Dummler, Max", 
+              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/4ef382a6-807d-4655-9821-b9c2a7b4bfd4", 
+              "name": "Grasset, Raphael", 
               "personRole": "Author", 
               "type_p": "External person"
             }, 
             {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f18c9390-4845-44ad-a790-c15fc83f8e79", 
-              "name": "Brantner, Brigitte M.", 
-              "organisationalUnit": "Service und Information (95022)", 
+              "name": "Gruber, Lukas", 
               "personRole": "Author"
             }, 
             {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/14a293cd-8642-471e-814e-e00a4c9c4929", 
-              "name": "Ladurner, Christoph", 
-              "organisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2019-02-28T12:17:37.867+0000", 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Service und Information (95022)", 
-          "modifiedDatePure": "2019-04-10T10:17:19.146+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/766e6980-a6cd-45dd-a946-2b0f74ca8213", 
-              "name": "Service und Information (95022)"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/fdb7051b-0b7d-4cc1-936f-94232f231381", 
-              "name": "Serials Management, Open Access and Digitisation (95023)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDatePure": "2019", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-17", 
-          "pureId": "19303480", 
-          "recid": "za0e6-chc83", 
-          "title": "Testtitel", 
-          "totalNumberOfAuthors": 3, 
-          "type_p": "Article", 
-          "uuid": "a75f158e-13c2-435a-8241-6584dc8ff2d8", 
-          "workflow": "Validated"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-17T09:02:57.306193+00:00"
-      }, 
-      {
-        "created": "2020-02-17T09:02:53.743719+00:00", 
-        "id": "c0dyw-ce875", 
-        "links": {
-          "files": "https://localhost:5000/api/records/c0dyw-ce875/files", 
-          "self": "https://localhost:5000/api/records/c0dyw-ce875"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/14a293cd-8642-471e-814e-e00a4c9c4929", 
-              "name": "Ladurner, Christoph", 
-              "organisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
+              "name": "Langlotz, Tobias", 
               "personRole": "Author"
             }, 
             {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b", 
-              "name": "Wru\u00df, Maria", 
-              "organisationalUnit": "Administration (95021)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2019-02-28T11:56:16.628+0000", 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-          "modifiedDatePure": "2019-04-01T06:52:36.316+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/fdb7051b-0b7d-4cc1-936f-94232f231381", 
-              "name": "Serials Management, Open Access and Digitisation (95023)"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26", 
-              "name": "Administration (95021)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDatePure": "2019", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-17", 
-          "pureId": "19303359", 
-          "recid": "c0dyw-ce875", 
-          "title": "der unglaublich wichtige titel 2", 
-          "totalNumberOfAuthors": 2, 
-          "type_p": "Conference contribution", 
-          "uuid": "ff4b3bea-5104-4d6c-9367-1a7ac035a0b8", 
-          "versionFiles": [
-            {
-              "fileAccessType": "Open", 
-              "fileDigest": "E5FA44F2B31C1FB553B6021E7360D07D5D91FF5E", 
-              "fileDigestAlgorithm": "SHA1", 
-              "fileModifBy": "chrlad", 
-              "fileModifDate": "2019-02-14T13:14:47.895+0000", 
-              "fileName": "test.txt", 
-              "fileSize": 2, 
-              "fileType": "text/plain", 
-              "fileVersion": "1??"
-            }
-          ], 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-17T09:02:53.743726+00:00"
-      }, 
-      {
-        "created": "2020-02-17T09:02:50.091786+00:00", 
-        "id": "p12r3-86z54", 
-        "links": {
-          "files": "https://localhost:5000/api/records/p12r3-86z54/files", 
-          "self": "https://localhost:5000/api/records/p12r3-86z54"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/14a293cd-8642-471e-814e-e00a4c9c4929", 
-              "name": "Ladurner, Christoph", 
-              "organisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
+              "name": "Mulloni, Alessandro", 
               "personRole": "Author"
             }, 
             {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b", 
-              "name": "Wru\u00df, Maria", 
-              "organisationalUnit": "Administration (95021)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2019-02-14T13:14:47.899+0000", 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-          "modifiedDatePure": "2019-02-14T13:14:47.899+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/fdb7051b-0b7d-4cc1-936f-94232f231381", 
-              "name": "Serials Management, Open Access and Digitisation (95023)"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26", 
-              "name": "Administration (95021)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDatePure": "2019", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-17", 
-          "pureId": "19273766", 
-          "recid": "p12r3-86z54", 
-          "title": "der unglaublich wichtige titel", 
-          "totalNumberOfAuthors": 2, 
-          "type_p": "Conference contribution", 
-          "uuid": "735d870d-cbfb-4c00-8615-330819e0bf11", 
-          "versionFiles": [
-            {
-              "fileAccessType": "Open", 
-              "fileDigest": "E5FA44F2B31C1FB553B6021E7360D07D5D91FF5E", 
-              "fileDigestAlgorithm": "SHA1", 
-              "fileModifBy": "chrlad", 
-              "fileModifDate": "2019-02-14T13:14:47.895+0000", 
-              "fileName": "test.txt", 
-              "fileSize": 2, 
-              "fileType": "text/plain", 
-              "fileVersion": "1??"
-            }
-          ], 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-17T09:02:50.091794+00:00"
-      }, 
-      {
-        "created": "2020-02-17T09:02:46.190187+00:00", 
-        "id": "962ax-7rm29", 
-        "links": {
-          "files": "https://localhost:5000/api/records/962ax-7rm29/files", 
-          "self": "https://localhost:5000/api/records/962ax-7rm29"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/14a293cd-8642-471e-814e-e00a4c9c4929", 
-              "name": "Ladurner, Christoph", 
-              "organisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b", 
-              "name": "Wru\u00df, Maria", 
-              "organisationalUnit": "Administration (95021)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2019-01-29T09:58:49.835+0000", 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-          "modifiedDatePure": "2019-05-14T09:51:12.079+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/fdb7051b-0b7d-4cc1-936f-94232f231381", 
-              "name": "Serials Management, Open Access and Digitisation (95023)"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/649cf008-b5a6-4f15-a669-32bad271995a", 
-              "name": "University Library and Archives (95020)"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26", 
-              "name": "Administration (95021)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDatePure": "2019", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-17", 
-          "pureId": "19239080", 
-          "recid": "962ax-7rm29", 
-          "title": "Drucksachetr", 
-          "totalNumberOfAuthors": 2, 
-          "type_p": "Article", 
-          "uuid": "3e5bc032-716b-4e4b-8e59-fe202e9e9596", 
-          "versionFiles": [
-            {
-              "fileAccessType": "Open", 
-              "fileDigest": "E5FA44F2B31C1FB553B6021E7360D07D5D91FF5E", 
-              "fileDigestAlgorithm": "SHA1", 
-              "fileModifBy": "chrlad", 
-              "fileModifDate": "2019-01-29T11:15:46.243+0000", 
-              "fileName": "test.txt", 
-              "fileSize": 2, 
-              "fileType": "text/plain", 
-              "fileVersion": "1??"
-            }
-          ], 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-17T09:02:46.190196+00:00"
-      }, 
-      {
-        "created": "2020-02-17T09:02:44.729777+00:00", 
-        "id": "mmdkg-mhj78", 
-        "links": {
-          "files": "https://localhost:5000/api/records/mmdkg-mhj78/files", 
-          "self": "https://localhost:5000/api/records/mmdkg-mhj78"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b", 
-              "name": "Wru\u00df, Maria", 
-              "organisationalUnit": "Administration (95021)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2019-08-07T06:15:21.946+0000", 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Administration (95021)", 
-          "modifiedDatePure": "2019-08-07T06:15:21.946+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26", 
-              "name": "Administration (95021)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDatePure": "2019", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-17", 
-          "pureId": "19530666", 
-          "recid": "mmdkg-mhj78", 
-          "title": "test", 
-          "totalNumberOfAuthors": 1, 
-          "type_p": "Article", 
-          "uuid": "5f8e8d34-d3f2-4695-9e82-c35783cb0316", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-17T09:02:44.729787+00:00"
-      }, 
-      {
-        "created": "2020-02-17T09:02:41.144508+00:00", 
-        "id": "m9xhk-66f41", 
-        "links": {
-          "files": "https://localhost:5000/api/records/m9xhk-66f41/files", 
-          "self": "https://localhost:5000/api/records/m9xhk-66f41"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/d5c827b6-076b-48fb-b842-f72df3cec7f0", 
-              "name": "K\u00f6nighofer, Philip", 
-              "organisationalUnit": "Institute of Applied Information Processing and Communications (7050)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/e6f30b9e-0f1e-469b-b13c-993da9dc9540", 
-              "name": "Bubba, Hubba", 
+              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/41727a55-3613-43cb-943b-9bc84eb86f27", 
+              "name": "Wagner, Daniel", 
               "personRole": "Author", 
               "type_p": "External person"
             }
           ], 
-          "createdDatePure": "2019-07-15T12:53:01.449+0000", 
+          "createdDatePure": "2016-02-25T21:47:56.953+0000", 
           "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Applied Information Processing and Communications (7050)", 
-          "modifiedDatePure": "2019-07-15T12:53:01.449+0000", 
+          "managingOrganisationalUnit": "Institute of Computer Graphics and Vision (7100)", 
+          "modifiedDatePure": "2018-09-06T07:28:35.386+0000", 
           "organisationalUnits": [
             {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/77857978-adc4-4d9d-877c-1283cbd9199f", 
-              "name": "Institute of Applied Information Processing and Communications (7050)"
+              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87", 
+              "name": "Institute of Computer Graphics and Vision (7100)"
             }
           ], 
           "owners": [
             1
           ], 
-          "peerReview": true, 
-          "publicationDatePure": "2018", 
-          "publicationStatus": "In preparation", 
-          "publication_date": "2020-02-17", 
-          "publisherName": "Best Publishers", 
-          "pureId": "19528264", 
-          "recid": "m9xhk-66f41", 
-          "title": "Originalsprache Titel", 
-          "totalNumberOfAuthors": 2, 
-          "type_p": "Conference contribution", 
-          "uuid": "31dc78d0-c5c2-4839-b6da-6513b4179f54", 
-          "versionFiles": [
-            {
-              "fileAccessType": "Open", 
-              "fileDigest": "838F57049CED88AE01BB78354AB94FD62000ECEC", 
-              "fileDigestAlgorithm": "SHA1", 
-              "fileModifBy": "weberp", 
-              "fileModifDate": "2019-07-15T12:53:01.448+0000", 
-              "fileName": "dreimobilesfestnetz_eb.pdf", 
-              "fileSize": 220190, 
-              "fileType": "application/pdf", 
-              "fileVersion": "1??"
-            }
-          ], 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-17T09:02:41.144514+00:00"
-      }, 
-      {
-        "created": "2020-02-17T09:02:39.725696+00:00", 
-        "id": "ea6v6-hkv23", 
-        "links": {
-          "files": "https://localhost:5000/api/records/ea6v6-hkv23/files", 
-          "self": "https://localhost:5000/api/records/ea6v6-hkv23"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b", 
-              "name": "Wru\u00df, Maria", 
-              "organisationalUnit": "Administration (95021)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2019-06-05T11:53:04.014+0000", 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Administration (95021)", 
-          "modifiedDatePure": "2019-06-05T11:53:04.014+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26", 
-              "name": "Administration (95021)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDatePure": "2019", 
+          "peerReview": false, 
+          "publicationDatePure": "2015", 
           "publicationStatus": "Published", 
           "publication_date": "2020-02-17", 
-          "pureId": "19434264", 
-          "recid": "ea6v6-hkv23", 
-          "title": "test", 
-          "totalNumberOfAuthors": 1, 
-          "type_p": "Article", 
-          "uuid": "7e91f3ad-5913-407d-95b1-8ffdf6d18f59", 
+          "publisherName": "Institut f\u00fcr Computer Graphik und Wissensvisualisierung, Technische Universit\u00e4t Graz", 
+          "pureId": "1064135", 
+          "recid": "jdpey-gz672", 
+          "title": "The History of Mobile Augmented Reality", 
+          "totalNumberOfAuthors": 6, 
+          "type_p": "Other report", 
+          "uuid": "64cd98bd-29b3-4cc2-9189-9c2cb71bcc98", 
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-02-17T09:02:39.725703+00:00"
+        "updated": "2020-02-17T10:28:02.896770+00:00"
       }, 
       {
-        "created": "2020-02-17T09:02:38.428440+00:00", 
-        "id": "wsgkh-9n498", 
+        "created": "2020-02-17T10:28:01.721047+00:00", 
+        "id": "3nc9z-6jm46", 
         "links": {
-          "files": "https://localhost:5000/api/records/wsgkh-9n498/files", 
-          "self": "https://localhost:5000/api/records/wsgkh-9n498"
+          "files": "https://localhost:5000/api/records/3nc9z-6jm46/files", 
+          "self": "https://localhost:5000/api/records/3nc9z-6jm46"
         }, 
         "metadata": {
           "_access": {
@@ -678,750 +111,61 @@
           "confidential": false, 
           "contributors": [
             {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/70826100-2c6b-4ca9-947f-e8fdd66b36ae", 
-              "name": "Dummler, Max", 
+              "link": "https://pure01.tugraz.at/ws/api/514/persons/5295ba8b-5bc3-48b7-b704-dfabceea4eab", 
+              "name": "Obernberger, Ingwald", 
+              "organisationalUnit": "Institute of Process and Particle Engineering (6690)", 
+              "personRole": "Author"
+            }, 
+            {
+              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/221f7374-bfd1-4634-a6f3-17887c66cc99", 
+              "name": "Widmann, Walter", 
               "personRole": "Author", 
               "type_p": "External person"
             }, 
             {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f18c9390-4845-44ad-a790-c15fc83f8e79", 
-              "name": "Brantner, Brigitte M.", 
-              "organisationalUnit": "Service und Information (95022)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/14a293cd-8642-471e-814e-e00a4c9c4929", 
-              "name": "Ladurner, Christoph", 
-              "organisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2019-02-28T12:17:37.867+0000", 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Service und Information (95022)", 
-          "modifiedDatePure": "2019-04-10T10:17:19.146+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/766e6980-a6cd-45dd-a946-2b0f74ca8213", 
-              "name": "Service und Information (95022)"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/fdb7051b-0b7d-4cc1-936f-94232f231381", 
-              "name": "Serials Management, Open Access and Digitisation (95023)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDatePure": "2019", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-17", 
-          "pureId": "19303480", 
-          "recid": "wsgkh-9n498", 
-          "title": "Testtitel", 
-          "totalNumberOfAuthors": 3, 
-          "type_p": "Article", 
-          "uuid": "a75f158e-13c2-435a-8241-6584dc8ff2d8", 
-          "workflow": "Validated"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-17T09:02:38.428447+00:00"
-      }, 
-      {
-        "created": "2020-02-17T09:02:34.828760+00:00", 
-        "id": "qs5d4-v0713", 
-        "links": {
-          "files": "https://localhost:5000/api/records/qs5d4-v0713/files", 
-          "self": "https://localhost:5000/api/records/qs5d4-v0713"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/14a293cd-8642-471e-814e-e00a4c9c4929", 
-              "name": "Ladurner, Christoph", 
-              "organisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b", 
-              "name": "Wru\u00df, Maria", 
-              "organisationalUnit": "Administration (95021)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2019-02-28T11:56:16.628+0000", 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-          "modifiedDatePure": "2019-04-01T06:52:36.316+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/fdb7051b-0b7d-4cc1-936f-94232f231381", 
-              "name": "Serials Management, Open Access and Digitisation (95023)"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26", 
-              "name": "Administration (95021)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDatePure": "2019", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-17", 
-          "pureId": "19303359", 
-          "recid": "qs5d4-v0713", 
-          "title": "der unglaublich wichtige titel 2", 
-          "totalNumberOfAuthors": 2, 
-          "type_p": "Conference contribution", 
-          "uuid": "ff4b3bea-5104-4d6c-9367-1a7ac035a0b8", 
-          "versionFiles": [
-            {
-              "fileAccessType": "Open", 
-              "fileDigest": "E5FA44F2B31C1FB553B6021E7360D07D5D91FF5E", 
-              "fileDigestAlgorithm": "SHA1", 
-              "fileModifBy": "chrlad", 
-              "fileModifDate": "2019-02-14T13:14:47.895+0000", 
-              "fileName": "test.txt", 
-              "fileSize": 2, 
-              "fileType": "text/plain", 
-              "fileVersion": "1??"
-            }
-          ], 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-17T09:02:34.828770+00:00"
-      }, 
-      {
-        "created": "2020-02-17T09:02:30.963722+00:00", 
-        "id": "y0ar3-pej87", 
-        "links": {
-          "files": "https://localhost:5000/api/records/y0ar3-pej87/files", 
-          "self": "https://localhost:5000/api/records/y0ar3-pej87"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/14a293cd-8642-471e-814e-e00a4c9c4929", 
-              "name": "Ladurner, Christoph", 
-              "organisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b", 
-              "name": "Wru\u00df, Maria", 
-              "organisationalUnit": "Administration (95021)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2019-02-14T13:14:47.899+0000", 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-          "modifiedDatePure": "2019-02-14T13:14:47.899+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/fdb7051b-0b7d-4cc1-936f-94232f231381", 
-              "name": "Serials Management, Open Access and Digitisation (95023)"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26", 
-              "name": "Administration (95021)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDatePure": "2019", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-17", 
-          "pureId": "19273766", 
-          "recid": "y0ar3-pej87", 
-          "title": "der unglaublich wichtige titel", 
-          "totalNumberOfAuthors": 2, 
-          "type_p": "Conference contribution", 
-          "uuid": "735d870d-cbfb-4c00-8615-330819e0bf11", 
-          "versionFiles": [
-            {
-              "fileAccessType": "Open", 
-              "fileDigest": "E5FA44F2B31C1FB553B6021E7360D07D5D91FF5E", 
-              "fileDigestAlgorithm": "SHA1", 
-              "fileModifBy": "chrlad", 
-              "fileModifDate": "2019-02-14T13:14:47.895+0000", 
-              "fileName": "test.txt", 
-              "fileSize": 2, 
-              "fileType": "text/plain", 
-              "fileVersion": "1??"
-            }
-          ], 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-17T09:02:30.963731+00:00"
-      }, 
-      {
-        "created": "2020-02-17T09:02:27.146676+00:00", 
-        "id": "2wdev-zzy94", 
-        "links": {
-          "files": "https://localhost:5000/api/records/2wdev-zzy94/files", 
-          "self": "https://localhost:5000/api/records/2wdev-zzy94"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/14a293cd-8642-471e-814e-e00a4c9c4929", 
-              "name": "Ladurner, Christoph", 
-              "organisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b", 
-              "name": "Wru\u00df, Maria", 
-              "organisationalUnit": "Administration (95021)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2019-01-29T09:58:49.835+0000", 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-          "modifiedDatePure": "2019-05-14T09:51:12.079+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/fdb7051b-0b7d-4cc1-936f-94232f231381", 
-              "name": "Serials Management, Open Access and Digitisation (95023)"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/649cf008-b5a6-4f15-a669-32bad271995a", 
-              "name": "University Library and Archives (95020)"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26", 
-              "name": "Administration (95021)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDatePure": "2019", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-17", 
-          "pureId": "19239080", 
-          "recid": "2wdev-zzy94", 
-          "title": "Drucksachetr", 
-          "totalNumberOfAuthors": 2, 
-          "type_p": "Article", 
-          "uuid": "3e5bc032-716b-4e4b-8e59-fe202e9e9596", 
-          "versionFiles": [
-            {
-              "fileAccessType": "Open", 
-              "fileDigest": "E5FA44F2B31C1FB553B6021E7360D07D5D91FF5E", 
-              "fileDigestAlgorithm": "SHA1", 
-              "fileModifBy": "chrlad", 
-              "fileModifDate": "2019-01-29T11:15:46.243+0000", 
-              "fileName": "test.txt", 
-              "fileSize": 2, 
-              "fileType": "text/plain", 
-              "fileVersion": "1??"
-            }
-          ], 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-17T09:02:27.146683+00:00"
-      }, 
-      {
-        "created": "2020-02-17T09:02:25.717379+00:00", 
-        "id": "eqcem-3t081", 
-        "links": {
-          "files": "https://localhost:5000/api/records/eqcem-3t081/files", 
-          "self": "https://localhost:5000/api/records/eqcem-3t081"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b", 
-              "name": "Wru\u00df, Maria", 
-              "organisationalUnit": "Administration (95021)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2019-08-07T06:15:21.946+0000", 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Administration (95021)", 
-          "modifiedDatePure": "2019-08-07T06:15:21.946+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26", 
-              "name": "Administration (95021)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDatePure": "2019", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-17", 
-          "pureId": "19530666", 
-          "recid": "eqcem-3t081", 
-          "title": "test", 
-          "totalNumberOfAuthors": 1, 
-          "type_p": "Article", 
-          "uuid": "5f8e8d34-d3f2-4695-9e82-c35783cb0316", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-17T09:02:25.717386+00:00"
-      }, 
-      {
-        "created": "2020-02-17T09:02:22.058014+00:00", 
-        "id": "zjjey-9qd20", 
-        "links": {
-          "files": "https://localhost:5000/api/records/zjjey-9qd20/files", 
-          "self": "https://localhost:5000/api/records/zjjey-9qd20"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/d5c827b6-076b-48fb-b842-f72df3cec7f0", 
-              "name": "K\u00f6nighofer, Philip", 
-              "organisationalUnit": "Institute of Applied Information Processing and Communications (7050)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/e6f30b9e-0f1e-469b-b13c-993da9dc9540", 
-              "name": "Bubba, Hubba", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }
-          ], 
-          "createdDatePure": "2019-07-15T12:53:01.449+0000", 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Applied Information Processing and Communications (7050)", 
-          "modifiedDatePure": "2019-07-15T12:53:01.449+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/77857978-adc4-4d9d-877c-1283cbd9199f", 
-              "name": "Institute of Applied Information Processing and Communications (7050)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDatePure": "2018", 
-          "publicationStatus": "In preparation", 
-          "publication_date": "2020-02-17", 
-          "publisherName": "Best Publishers", 
-          "pureId": "19528264", 
-          "recid": "zjjey-9qd20", 
-          "title": "Originalsprache Titel", 
-          "totalNumberOfAuthors": 2, 
-          "type_p": "Conference contribution", 
-          "uuid": "31dc78d0-c5c2-4839-b6da-6513b4179f54", 
-          "versionFiles": [
-            {
-              "fileAccessType": "Open", 
-              "fileDigest": "838F57049CED88AE01BB78354AB94FD62000ECEC", 
-              "fileDigestAlgorithm": "SHA1", 
-              "fileModifBy": "weberp", 
-              "fileModifDate": "2019-07-15T12:53:01.448+0000", 
-              "fileName": "dreimobilesfestnetz_eb.pdf", 
-              "fileSize": 220190, 
-              "fileType": "application/pdf", 
-              "fileVersion": "1??"
-            }
-          ], 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-17T09:02:22.058022+00:00"
-      }, 
-      {
-        "created": "2020-02-17T09:02:20.601635+00:00", 
-        "id": "mxkd8-fth12", 
-        "links": {
-          "files": "https://localhost:5000/api/records/mxkd8-fth12/files", 
-          "self": "https://localhost:5000/api/records/mxkd8-fth12"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b", 
-              "name": "Wru\u00df, Maria", 
-              "organisationalUnit": "Administration (95021)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2019-06-05T11:53:04.014+0000", 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Administration (95021)", 
-          "modifiedDatePure": "2019-06-05T11:53:04.014+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26", 
-              "name": "Administration (95021)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDatePure": "2019", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-17", 
-          "pureId": "19434264", 
-          "recid": "mxkd8-fth12", 
-          "title": "test", 
-          "totalNumberOfAuthors": 1, 
-          "type_p": "Article", 
-          "uuid": "7e91f3ad-5913-407d-95b1-8ffdf6d18f59", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-17T09:02:20.601644+00:00"
-      }, 
-      {
-        "created": "2020-02-17T09:02:19.316696+00:00", 
-        "id": "wgxsg-ays10", 
-        "links": {
-          "files": "https://localhost:5000/api/records/wgxsg-ays10/files", 
-          "self": "https://localhost:5000/api/records/wgxsg-ays10"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/70826100-2c6b-4ca9-947f-e8fdd66b36ae", 
-              "name": "Dummler, Max", 
+              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/842de480-f122-4d8b-aabf-677d5ea1b50b", 
+              "name": "Wurst, Friedrich", 
               "personRole": "Author", 
               "type_p": "External person"
             }, 
             {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f18c9390-4845-44ad-a790-c15fc83f8e79", 
-              "name": "Brantner, Brigitte M.", 
-              "organisationalUnit": "Service und Information (95022)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/14a293cd-8642-471e-814e-e00a4c9c4929", 
-              "name": "Ladurner, Christoph", 
-              "organisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-              "personRole": "Author"
+              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/ecef45ac-084a-48e8-85ad-d71aa2312030", 
+              "name": "W\u00f6rgetter, Manfred", 
+              "personRole": "Author", 
+              "type_p": "External person"
             }
           ], 
-          "createdDatePure": "2019-02-28T12:17:37.867+0000", 
+          "createdDatePure": "2016-02-25T21:47:56.410+0000", 
           "language": "deu", 
-          "managingOrganisationalUnit": "Service und Information (95022)", 
-          "modifiedDatePure": "2019-04-10T10:17:19.146+0000", 
+          "managingOrganisationalUnit": "Institute of Process and Particle Engineering (6690)", 
+          "modifiedDatePure": "2018-09-06T07:28:34.742+0000", 
           "organisationalUnits": [
             {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/766e6980-a6cd-45dd-a946-2b0f74ca8213", 
-              "name": "Service und Information (95022)"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/fdb7051b-0b7d-4cc1-936f-94232f231381", 
-              "name": "Serials Management, Open Access and Digitisation (95023)"
+              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/44dff43c-2d42-4974-98d8-b249db092dbc", 
+              "name": "Institute of Process and Particle Engineering (6690)"
             }
           ], 
           "owners": [
             1
           ], 
           "peerReview": false, 
-          "publicationDatePure": "2019", 
+          "publicationDatePure": "1997", 
           "publicationStatus": "Published", 
           "publication_date": "2020-02-17", 
-          "pureId": "19303480", 
-          "recid": "wgxsg-ays10", 
-          "title": "Testtitel", 
-          "totalNumberOfAuthors": 3, 
-          "type_p": "Article", 
-          "uuid": "a75f158e-13c2-435a-8241-6584dc8ff2d8", 
-          "workflow": "Validated"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-17T09:02:19.316705+00:00"
-      }, 
-      {
-        "created": "2020-02-17T09:02:15.795021+00:00", 
-        "id": "qaset-vky22", 
-        "links": {
-          "files": "https://localhost:5000/api/records/qaset-vky22/files", 
-          "self": "https://localhost:5000/api/records/qaset-vky22"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/14a293cd-8642-471e-814e-e00a4c9c4929", 
-              "name": "Ladurner, Christoph", 
-              "organisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b", 
-              "name": "Wru\u00df, Maria", 
-              "organisationalUnit": "Administration (95021)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2019-02-28T11:56:16.628+0000", 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-          "modifiedDatePure": "2019-04-01T06:52:36.316+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/fdb7051b-0b7d-4cc1-936f-94232f231381", 
-              "name": "Serials Management, Open Access and Digitisation (95023)"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26", 
-              "name": "Administration (95021)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDatePure": "2019", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-17", 
-          "pureId": "19303359", 
-          "recid": "qaset-vky22", 
-          "title": "der unglaublich wichtige titel 2", 
-          "totalNumberOfAuthors": 2, 
-          "type_p": "Conference contribution", 
-          "uuid": "ff4b3bea-5104-4d6c-9367-1a7ac035a0b8", 
-          "versionFiles": [
-            {
-              "fileAccessType": "Open", 
-              "fileDigest": "E5FA44F2B31C1FB553B6021E7360D07D5D91FF5E", 
-              "fileDigestAlgorithm": "SHA1", 
-              "fileModifBy": "chrlad", 
-              "fileModifDate": "2019-02-14T13:14:47.895+0000", 
-              "fileName": "test.txt", 
-              "fileSize": 2, 
-              "fileType": "text/plain", 
-              "fileVersion": "1??"
-            }
-          ], 
+          "publisherName": ".", 
+          "pureId": "1064125", 
+          "recid": "3nc9z-6jm46", 
+          "title": "Beurteilung der Umweltvertr\u00e4glichkeit des Einsatzes von Einjahresganzpflanzen und Stroh zur Fernw\u00e4rmeerzeugung, Endbericht", 
+          "totalNumberOfAuthors": 4, 
+          "type_p": "Other report", 
+          "uuid": "4dabd5dc-2610-4b5a-b72c-83b480341998", 
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-02-17T09:02:15.795029+00:00"
-      }, 
-      {
-        "created": "2020-02-17T09:02:11.996410+00:00", 
-        "id": "m9rgv-zbb17", 
-        "links": {
-          "files": "https://localhost:5000/api/records/m9rgv-zbb17/files", 
-          "self": "https://localhost:5000/api/records/m9rgv-zbb17"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/14a293cd-8642-471e-814e-e00a4c9c4929", 
-              "name": "Ladurner, Christoph", 
-              "organisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b", 
-              "name": "Wru\u00df, Maria", 
-              "organisationalUnit": "Administration (95021)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2019-02-14T13:14:47.899+0000", 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-          "modifiedDatePure": "2019-02-14T13:14:47.899+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/fdb7051b-0b7d-4cc1-936f-94232f231381", 
-              "name": "Serials Management, Open Access and Digitisation (95023)"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26", 
-              "name": "Administration (95021)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDatePure": "2019", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-17", 
-          "pureId": "19273766", 
-          "recid": "m9rgv-zbb17", 
-          "title": "der unglaublich wichtige titel", 
-          "totalNumberOfAuthors": 2, 
-          "type_p": "Conference contribution", 
-          "uuid": "735d870d-cbfb-4c00-8615-330819e0bf11", 
-          "versionFiles": [
-            {
-              "fileAccessType": "Open", 
-              "fileDigest": "E5FA44F2B31C1FB553B6021E7360D07D5D91FF5E", 
-              "fileDigestAlgorithm": "SHA1", 
-              "fileModifBy": "chrlad", 
-              "fileModifDate": "2019-02-14T13:14:47.895+0000", 
-              "fileName": "test.txt", 
-              "fileSize": 2, 
-              "fileType": "text/plain", 
-              "fileVersion": "1??"
-            }
-          ], 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-17T09:02:11.996419+00:00"
-      }, 
-      {
-        "created": "2020-02-17T09:02:08.358219+00:00", 
-        "id": "c4jd1-d8s84", 
-        "links": {
-          "files": "https://localhost:5000/api/records/c4jd1-d8s84/files", 
-          "self": "https://localhost:5000/api/records/c4jd1-d8s84"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/14a293cd-8642-471e-814e-e00a4c9c4929", 
-              "name": "Ladurner, Christoph", 
-              "organisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b", 
-              "name": "Wru\u00df, Maria", 
-              "organisationalUnit": "Administration (95021)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2019-01-29T09:58:49.835+0000", 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-          "modifiedDatePure": "2019-05-14T09:51:12.079+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/fdb7051b-0b7d-4cc1-936f-94232f231381", 
-              "name": "Serials Management, Open Access and Digitisation (95023)"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/649cf008-b5a6-4f15-a669-32bad271995a", 
-              "name": "University Library and Archives (95020)"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26", 
-              "name": "Administration (95021)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDatePure": "2019", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-17", 
-          "pureId": "19239080", 
-          "recid": "c4jd1-d8s84", 
-          "title": "Drucksachetr", 
-          "totalNumberOfAuthors": 2, 
-          "type_p": "Article", 
-          "uuid": "3e5bc032-716b-4e4b-8e59-fe202e9e9596", 
-          "versionFiles": [
-            {
-              "fileAccessType": "Open", 
-              "fileDigest": "E5FA44F2B31C1FB553B6021E7360D07D5D91FF5E", 
-              "fileDigestAlgorithm": "SHA1", 
-              "fileModifBy": "chrlad", 
-              "fileModifDate": "2019-01-29T11:15:46.243+0000", 
-              "fileName": "test.txt", 
-              "fileSize": 2, 
-              "fileType": "text/plain", 
-              "fileVersion": "1??"
-            }
-          ], 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-17T09:02:08.358228+00:00"
+        "updated": "2020-02-17T10:28:01.721054+00:00"
       }
     ], 
-    "total": 21
+    "total": 2
   }, 
   "links": {
     "self": "https://localhost:5000/api/records/?sort=mostrecent&size=250&page=1"

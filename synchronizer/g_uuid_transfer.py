@@ -35,7 +35,7 @@ def uuid_transfer(transfer_type):
                 print('Invalid uuid. Too short\n')
                 continue
 
-            response = inst_pti.get_pure_by_id(uuid.strip())
+            response = inst_pti.get_pure_by_id(uuid.strip())        # calling PTR
 
             if response == True:        cnt_true += 1
             
