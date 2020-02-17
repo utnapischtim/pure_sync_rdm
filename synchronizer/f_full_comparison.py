@@ -247,6 +247,7 @@ class FullComparison:
                 record_id = records_to_del.readline()
                 print(f'{r_id} {response}')
                 
+                # 410 -> "PID has been deleted"
                 if response.status_code < 300 or response.status_code == 410:
                     cnt_success += 1
                     # remove deleted record_id
@@ -285,14 +286,38 @@ class FullComparison:
 
         except:
             print('\n---   !!!   Error in delete_record   !!!   ---\n')
+        
+
+    def add_all_recs_toDelete(self):
+        file_name = dirpath + "/reports/full_comparison/rdm_uuids_recids.log"
+        toDelete_str = ''
+        with open(file_name, 'r') as f:
+            lines = f.read().splitlines()
+            for line in lines:
+                toDelete_str += line.split(' ')[1] + '\n'
+        
+        toDel_fileName = self.dirpath + '/reports/to_delete.log'
+        open(toDel_fileName, "a").write(toDelete_str)
 
 
+## COMPARE
 # inst_fc = FullComparison()
-
 # inst_fc.get_from_rdm()
 # inst_fc.get_from_pure()
 # inst_fc.find_missing()
 # os.system('/usr/bin/python /home/bootcamp/src/pure_sync_rdm/synchronizer/2_uuid_transmit.py')
 
+## DUPLICATES
+# inst_fc = FullComparison()
+# inst_fc.get_from_rdm()
 # inst_fc.find_rdm_duplicates()
+
+## DELETE records in to_delete.log
+# inst_fc = FullComparison()
+# inst_fc.delete_record()
+
+## DELETE ALL RECORDS
+# inst_fc = FullComparison()
+# inst_fc.get_from_rdm()
+# inst_fc.add_all_recs_toDelete()
 # inst_fc.delete_record()

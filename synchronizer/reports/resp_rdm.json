@@ -3,11 +3,11 @@
     "access_right": {
       "buckets": [
         {
-          "doc_count": 37, 
+          "doc_count": 15, 
           "key": "closed"
         }, 
         {
-          "doc_count": 10, 
+          "doc_count": 6, 
           "key": "open"
         }
       ], 
@@ -23,11 +23,11 @@
   "hits": {
     "hits": [
       {
-        "created": "2020-02-14T14:04:10.099176+00:00", 
-        "id": "w0z54-1nc90", 
+        "created": "2020-02-17T09:03:03.798111+00:00", 
+        "id": "xqj88-fsk10", 
         "links": {
-          "files": "https://localhost:5000/api/records/w0z54-1nc90/files", 
-          "self": "https://localhost:5000/api/records/w0z54-1nc90"
+          "files": "https://localhost:5000/api/records/xqj88-fsk10/files", 
+          "self": "https://localhost:5000/api/records/xqj88-fsk10"
         }, 
         "metadata": {
           "_access": {
@@ -61,9 +61,9 @@
           "peerReview": false, 
           "publicationDatePure": "2019", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
+          "publication_date": "2020-02-17", 
           "pureId": "19530666", 
-          "recid": "w0z54-1nc90", 
+          "recid": "xqj88-fsk10", 
           "title": "test", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Article", 
@@ -71,14 +71,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-02-14T14:04:10.099185+00:00"
+        "updated": "2020-02-17T09:03:03.798123+00:00"
       }, 
       {
-        "created": "2020-02-14T14:04:06.416358+00:00", 
-        "id": "vhf1c-1ff28", 
+        "created": "2020-02-17T09:03:00.055805+00:00", 
+        "id": "p797s-xdm59", 
         "links": {
-          "files": "https://localhost:5000/api/records/vhf1c-1ff28/files", 
-          "self": "https://localhost:5000/api/records/vhf1c-1ff28"
+          "files": "https://localhost:5000/api/records/p797s-xdm59/files", 
+          "self": "https://localhost:5000/api/records/p797s-xdm59"
         }, 
         "metadata": {
           "_access": {
@@ -118,10 +118,10 @@
           "peerReview": true, 
           "publicationDatePure": "2018", 
           "publicationStatus": "In preparation", 
-          "publication_date": "2020-02-14", 
+          "publication_date": "2020-02-17", 
           "publisherName": "Best Publishers", 
           "pureId": "19528264", 
-          "recid": "vhf1c-1ff28", 
+          "recid": "p797s-xdm59", 
           "title": "Originalsprache Titel", 
           "totalNumberOfAuthors": 2, 
           "type_p": "Conference contribution", 
@@ -142,14 +142,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-02-14T14:04:06.416365+00:00"
+        "updated": "2020-02-17T09:03:00.055814+00:00"
       }, 
       {
-        "created": "2020-02-14T14:04:05.020801+00:00", 
-        "id": "2zzfh-b6033", 
+        "created": "2020-02-17T09:02:58.568051+00:00", 
+        "id": "achx2-emg27", 
         "links": {
-          "files": "https://localhost:5000/api/records/2zzfh-b6033/files", 
-          "self": "https://localhost:5000/api/records/2zzfh-b6033"
+          "files": "https://localhost:5000/api/records/achx2-emg27/files", 
+          "self": "https://localhost:5000/api/records/achx2-emg27"
         }, 
         "metadata": {
           "_access": {
@@ -183,9 +183,9 @@
           "peerReview": true, 
           "publicationDatePure": "2019", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
+          "publication_date": "2020-02-17", 
           "pureId": "19434264", 
-          "recid": "2zzfh-b6033", 
+          "recid": "achx2-emg27", 
           "title": "test", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Article", 
@@ -193,14 +193,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-02-14T14:04:05.020811+00:00"
+        "updated": "2020-02-17T09:02:58.568060+00:00"
       }, 
       {
-        "created": "2020-02-14T14:04:03.770706+00:00", 
-        "id": "33rjm-a3z60", 
+        "created": "2020-02-17T09:02:57.306184+00:00", 
+        "id": "za0e6-chc83", 
         "links": {
-          "files": "https://localhost:5000/api/records/33rjm-a3z60/files", 
-          "self": "https://localhost:5000/api/records/33rjm-a3z60"
+          "files": "https://localhost:5000/api/records/za0e6-chc83/files", 
+          "self": "https://localhost:5000/api/records/za0e6-chc83"
         }, 
         "metadata": {
           "_access": {
@@ -250,9 +250,9 @@
           "peerReview": false, 
           "publicationDatePure": "2019", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
+          "publication_date": "2020-02-17", 
           "pureId": "19303480", 
-          "recid": "33rjm-a3z60", 
+          "recid": "za0e6-chc83", 
           "title": "Testtitel", 
           "totalNumberOfAuthors": 3, 
           "type_p": "Article", 
@@ -260,14 +260,14 @@
           "workflow": "Validated"
         }, 
         "revision": 0, 
-        "updated": "2020-02-14T14:04:03.770715+00:00"
+        "updated": "2020-02-17T09:02:57.306193+00:00"
       }, 
       {
-        "created": "2020-02-14T14:04:00.262849+00:00", 
-        "id": "3yedk-0j158", 
+        "created": "2020-02-17T09:02:53.743719+00:00", 
+        "id": "c0dyw-ce875", 
         "links": {
-          "files": "https://localhost:5000/api/records/3yedk-0j158/files", 
-          "self": "https://localhost:5000/api/records/3yedk-0j158"
+          "files": "https://localhost:5000/api/records/c0dyw-ce875/files", 
+          "self": "https://localhost:5000/api/records/c0dyw-ce875"
         }, 
         "metadata": {
           "_access": {
@@ -311,9 +311,9 @@
           "peerReview": true, 
           "publicationDatePure": "2019", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
+          "publication_date": "2020-02-17", 
           "pureId": "19303359", 
-          "recid": "3yedk-0j158", 
+          "recid": "c0dyw-ce875", 
           "title": "der unglaublich wichtige titel 2", 
           "totalNumberOfAuthors": 2, 
           "type_p": "Conference contribution", 
@@ -334,14 +334,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-02-14T14:04:00.262855+00:00"
+        "updated": "2020-02-17T09:02:53.743726+00:00"
       }, 
       {
-        "created": "2020-02-14T14:03:56.620299+00:00", 
-        "id": "yq1pc-82n40", 
+        "created": "2020-02-17T09:02:50.091786+00:00", 
+        "id": "p12r3-86z54", 
         "links": {
-          "files": "https://localhost:5000/api/records/yq1pc-82n40/files", 
-          "self": "https://localhost:5000/api/records/yq1pc-82n40"
+          "files": "https://localhost:5000/api/records/p12r3-86z54/files", 
+          "self": "https://localhost:5000/api/records/p12r3-86z54"
         }, 
         "metadata": {
           "_access": {
@@ -385,9 +385,9 @@
           "peerReview": true, 
           "publicationDatePure": "2019", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
+          "publication_date": "2020-02-17", 
           "pureId": "19273766", 
-          "recid": "yq1pc-82n40", 
+          "recid": "p12r3-86z54", 
           "title": "der unglaublich wichtige titel", 
           "totalNumberOfAuthors": 2, 
           "type_p": "Conference contribution", 
@@ -408,14 +408,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-02-14T14:03:56.620308+00:00"
+        "updated": "2020-02-17T09:02:50.091794+00:00"
       }, 
       {
-        "created": "2020-02-14T14:03:53.014397+00:00", 
-        "id": "x0thh-6kj40", 
+        "created": "2020-02-17T09:02:46.190187+00:00", 
+        "id": "962ax-7rm29", 
         "links": {
-          "files": "https://localhost:5000/api/records/x0thh-6kj40/files", 
-          "self": "https://localhost:5000/api/records/x0thh-6kj40"
+          "files": "https://localhost:5000/api/records/962ax-7rm29/files", 
+          "self": "https://localhost:5000/api/records/962ax-7rm29"
         }, 
         "metadata": {
           "_access": {
@@ -463,9 +463,9 @@
           "peerReview": false, 
           "publicationDatePure": "2019", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
+          "publication_date": "2020-02-17", 
           "pureId": "19239080", 
-          "recid": "x0thh-6kj40", 
+          "recid": "962ax-7rm29", 
           "title": "Drucksachetr", 
           "totalNumberOfAuthors": 2, 
           "type_p": "Article", 
@@ -486,14 +486,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-02-14T14:03:53.014404+00:00"
+        "updated": "2020-02-17T09:02:46.190196+00:00"
       }, 
       {
-        "created": "2020-02-14T14:03:51.519625+00:00", 
-        "id": "a0qkp-j6345", 
+        "created": "2020-02-17T09:02:44.729777+00:00", 
+        "id": "mmdkg-mhj78", 
         "links": {
-          "files": "https://localhost:5000/api/records/a0qkp-j6345/files", 
-          "self": "https://localhost:5000/api/records/a0qkp-j6345"
+          "files": "https://localhost:5000/api/records/mmdkg-mhj78/files", 
+          "self": "https://localhost:5000/api/records/mmdkg-mhj78"
         }, 
         "metadata": {
           "_access": {
@@ -527,9 +527,9 @@
           "peerReview": false, 
           "publicationDatePure": "2019", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
+          "publication_date": "2020-02-17", 
           "pureId": "19530666", 
-          "recid": "a0qkp-j6345", 
+          "recid": "mmdkg-mhj78", 
           "title": "test", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Article", 
@@ -537,14 +537,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-02-14T14:03:51.519633+00:00"
+        "updated": "2020-02-17T09:02:44.729787+00:00"
       }, 
       {
-        "created": "2020-02-14T14:03:48.036102+00:00", 
-        "id": "z33vk-v9e79", 
+        "created": "2020-02-17T09:02:41.144508+00:00", 
+        "id": "m9xhk-66f41", 
         "links": {
-          "files": "https://localhost:5000/api/records/z33vk-v9e79/files", 
-          "self": "https://localhost:5000/api/records/z33vk-v9e79"
+          "files": "https://localhost:5000/api/records/m9xhk-66f41/files", 
+          "self": "https://localhost:5000/api/records/m9xhk-66f41"
         }, 
         "metadata": {
           "_access": {
@@ -584,10 +584,10 @@
           "peerReview": true, 
           "publicationDatePure": "2018", 
           "publicationStatus": "In preparation", 
-          "publication_date": "2020-02-14", 
+          "publication_date": "2020-02-17", 
           "publisherName": "Best Publishers", 
           "pureId": "19528264", 
-          "recid": "z33vk-v9e79", 
+          "recid": "m9xhk-66f41", 
           "title": "Originalsprache Titel", 
           "totalNumberOfAuthors": 2, 
           "type_p": "Conference contribution", 
@@ -608,14 +608,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-02-14T14:03:48.036110+00:00"
+        "updated": "2020-02-17T09:02:41.144514+00:00"
       }, 
       {
-        "created": "2020-02-14T14:03:46.611689+00:00", 
-        "id": "8f7mt-fvs07", 
+        "created": "2020-02-17T09:02:39.725696+00:00", 
+        "id": "ea6v6-hkv23", 
         "links": {
-          "files": "https://localhost:5000/api/records/8f7mt-fvs07/files", 
-          "self": "https://localhost:5000/api/records/8f7mt-fvs07"
+          "files": "https://localhost:5000/api/records/ea6v6-hkv23/files", 
+          "self": "https://localhost:5000/api/records/ea6v6-hkv23"
         }, 
         "metadata": {
           "_access": {
@@ -649,9 +649,9 @@
           "peerReview": true, 
           "publicationDatePure": "2019", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
+          "publication_date": "2020-02-17", 
           "pureId": "19434264", 
-          "recid": "8f7mt-fvs07", 
+          "recid": "ea6v6-hkv23", 
           "title": "test", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Article", 
@@ -659,14 +659,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-02-14T14:03:46.611697+00:00"
+        "updated": "2020-02-17T09:02:39.725703+00:00"
       }, 
       {
-        "created": "2020-02-14T14:03:45.375204+00:00", 
-        "id": "qn55m-8bh14", 
+        "created": "2020-02-17T09:02:38.428440+00:00", 
+        "id": "wsgkh-9n498", 
         "links": {
-          "files": "https://localhost:5000/api/records/qn55m-8bh14/files", 
-          "self": "https://localhost:5000/api/records/qn55m-8bh14"
+          "files": "https://localhost:5000/api/records/wsgkh-9n498/files", 
+          "self": "https://localhost:5000/api/records/wsgkh-9n498"
         }, 
         "metadata": {
           "_access": {
@@ -716,9 +716,9 @@
           "peerReview": false, 
           "publicationDatePure": "2019", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
+          "publication_date": "2020-02-17", 
           "pureId": "19303480", 
-          "recid": "qn55m-8bh14", 
+          "recid": "wsgkh-9n498", 
           "title": "Testtitel", 
           "totalNumberOfAuthors": 3, 
           "type_p": "Article", 
@@ -726,14 +726,14 @@
           "workflow": "Validated"
         }, 
         "revision": 0, 
-        "updated": "2020-02-14T14:03:45.375212+00:00"
+        "updated": "2020-02-17T09:02:38.428447+00:00"
       }, 
       {
-        "created": "2020-02-14T14:03:41.896771+00:00", 
-        "id": "nyysx-98m32", 
+        "created": "2020-02-17T09:02:34.828760+00:00", 
+        "id": "qs5d4-v0713", 
         "links": {
-          "files": "https://localhost:5000/api/records/nyysx-98m32/files", 
-          "self": "https://localhost:5000/api/records/nyysx-98m32"
+          "files": "https://localhost:5000/api/records/qs5d4-v0713/files", 
+          "self": "https://localhost:5000/api/records/qs5d4-v0713"
         }, 
         "metadata": {
           "_access": {
@@ -777,9 +777,9 @@
           "peerReview": true, 
           "publicationDatePure": "2019", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
+          "publication_date": "2020-02-17", 
           "pureId": "19303359", 
-          "recid": "nyysx-98m32", 
+          "recid": "qs5d4-v0713", 
           "title": "der unglaublich wichtige titel 2", 
           "totalNumberOfAuthors": 2, 
           "type_p": "Conference contribution", 
@@ -800,14 +800,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-02-14T14:03:41.896778+00:00"
+        "updated": "2020-02-17T09:02:34.828770+00:00"
       }, 
       {
-        "created": "2020-02-14T14:03:38.274486+00:00", 
-        "id": "txete-5qz02", 
+        "created": "2020-02-17T09:02:30.963722+00:00", 
+        "id": "y0ar3-pej87", 
         "links": {
-          "files": "https://localhost:5000/api/records/txete-5qz02/files", 
-          "self": "https://localhost:5000/api/records/txete-5qz02"
+          "files": "https://localhost:5000/api/records/y0ar3-pej87/files", 
+          "self": "https://localhost:5000/api/records/y0ar3-pej87"
         }, 
         "metadata": {
           "_access": {
@@ -851,9 +851,9 @@
           "peerReview": true, 
           "publicationDatePure": "2019", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
+          "publication_date": "2020-02-17", 
           "pureId": "19273766", 
-          "recid": "txete-5qz02", 
+          "recid": "y0ar3-pej87", 
           "title": "der unglaublich wichtige titel", 
           "totalNumberOfAuthors": 2, 
           "type_p": "Conference contribution", 
@@ -874,14 +874,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-02-14T14:03:38.274493+00:00"
+        "updated": "2020-02-17T09:02:30.963731+00:00"
       }, 
       {
-        "created": "2020-02-14T14:03:34.584427+00:00", 
-        "id": "p0906-74363", 
+        "created": "2020-02-17T09:02:27.146676+00:00", 
+        "id": "2wdev-zzy94", 
         "links": {
-          "files": "https://localhost:5000/api/records/p0906-74363/files", 
-          "self": "https://localhost:5000/api/records/p0906-74363"
+          "files": "https://localhost:5000/api/records/2wdev-zzy94/files", 
+          "self": "https://localhost:5000/api/records/2wdev-zzy94"
         }, 
         "metadata": {
           "_access": {
@@ -929,9 +929,9 @@
           "peerReview": false, 
           "publicationDatePure": "2019", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
+          "publication_date": "2020-02-17", 
           "pureId": "19239080", 
-          "recid": "p0906-74363", 
+          "recid": "2wdev-zzy94", 
           "title": "Drucksachetr", 
           "totalNumberOfAuthors": 2, 
           "type_p": "Article", 
@@ -952,14 +952,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-02-14T14:03:34.584435+00:00"
+        "updated": "2020-02-17T09:02:27.146683+00:00"
       }, 
       {
-        "created": "2020-02-14T14:03:33.046932+00:00", 
-        "id": "hxsn6-qtd62", 
+        "created": "2020-02-17T09:02:25.717379+00:00", 
+        "id": "eqcem-3t081", 
         "links": {
-          "files": "https://localhost:5000/api/records/hxsn6-qtd62/files", 
-          "self": "https://localhost:5000/api/records/hxsn6-qtd62"
+          "files": "https://localhost:5000/api/records/eqcem-3t081/files", 
+          "self": "https://localhost:5000/api/records/eqcem-3t081"
         }, 
         "metadata": {
           "_access": {
@@ -993,9 +993,9 @@
           "peerReview": false, 
           "publicationDatePure": "2019", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
+          "publication_date": "2020-02-17", 
           "pureId": "19530666", 
-          "recid": "hxsn6-qtd62", 
+          "recid": "eqcem-3t081", 
           "title": "test", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Article", 
@@ -1003,14 +1003,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-02-14T14:03:33.046939+00:00"
+        "updated": "2020-02-17T09:02:25.717386+00:00"
       }, 
       {
-        "created": "2020-02-14T14:03:29.546651+00:00", 
-        "id": "t1v0q-79y76", 
+        "created": "2020-02-17T09:02:22.058014+00:00", 
+        "id": "zjjey-9qd20", 
         "links": {
-          "files": "https://localhost:5000/api/records/t1v0q-79y76/files", 
-          "self": "https://localhost:5000/api/records/t1v0q-79y76"
+          "files": "https://localhost:5000/api/records/zjjey-9qd20/files", 
+          "self": "https://localhost:5000/api/records/zjjey-9qd20"
         }, 
         "metadata": {
           "_access": {
@@ -1050,10 +1050,10 @@
           "peerReview": true, 
           "publicationDatePure": "2018", 
           "publicationStatus": "In preparation", 
-          "publication_date": "2020-02-14", 
+          "publication_date": "2020-02-17", 
           "publisherName": "Best Publishers", 
           "pureId": "19528264", 
-          "recid": "t1v0q-79y76", 
+          "recid": "zjjey-9qd20", 
           "title": "Originalsprache Titel", 
           "totalNumberOfAuthors": 2, 
           "type_p": "Conference contribution", 
@@ -1074,14 +1074,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-02-14T14:03:29.546657+00:00"
+        "updated": "2020-02-17T09:02:22.058022+00:00"
       }, 
       {
-        "created": "2020-02-14T14:03:28.134079+00:00", 
-        "id": "byw75-mrg68", 
+        "created": "2020-02-17T09:02:20.601635+00:00", 
+        "id": "mxkd8-fth12", 
         "links": {
-          "files": "https://localhost:5000/api/records/byw75-mrg68/files", 
-          "self": "https://localhost:5000/api/records/byw75-mrg68"
+          "files": "https://localhost:5000/api/records/mxkd8-fth12/files", 
+          "self": "https://localhost:5000/api/records/mxkd8-fth12"
         }, 
         "metadata": {
           "_access": {
@@ -1115,9 +1115,9 @@
           "peerReview": true, 
           "publicationDatePure": "2019", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
+          "publication_date": "2020-02-17", 
           "pureId": "19434264", 
-          "recid": "byw75-mrg68", 
+          "recid": "mxkd8-fth12", 
           "title": "test", 
           "totalNumberOfAuthors": 1, 
           "type_p": "Article", 
@@ -1125,14 +1125,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-02-14T14:03:28.134086+00:00"
+        "updated": "2020-02-17T09:02:20.601644+00:00"
       }, 
       {
-        "created": "2020-02-14T14:03:26.871549+00:00", 
-        "id": "0qmng-63465", 
+        "created": "2020-02-17T09:02:19.316696+00:00", 
+        "id": "wgxsg-ays10", 
         "links": {
-          "files": "https://localhost:5000/api/records/0qmng-63465/files", 
-          "self": "https://localhost:5000/api/records/0qmng-63465"
+          "files": "https://localhost:5000/api/records/wgxsg-ays10/files", 
+          "self": "https://localhost:5000/api/records/wgxsg-ays10"
         }, 
         "metadata": {
           "_access": {
@@ -1182,9 +1182,9 @@
           "peerReview": false, 
           "publicationDatePure": "2019", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
+          "publication_date": "2020-02-17", 
           "pureId": "19303480", 
-          "recid": "0qmng-63465", 
+          "recid": "wgxsg-ays10", 
           "title": "Testtitel", 
           "totalNumberOfAuthors": 3, 
           "type_p": "Article", 
@@ -1192,14 +1192,14 @@
           "workflow": "Validated"
         }, 
         "revision": 0, 
-        "updated": "2020-02-14T14:03:26.871562+00:00"
+        "updated": "2020-02-17T09:02:19.316705+00:00"
       }, 
       {
-        "created": "2020-02-14T14:03:23.329746+00:00", 
-        "id": "rg607-z0m70", 
+        "created": "2020-02-17T09:02:15.795021+00:00", 
+        "id": "qaset-vky22", 
         "links": {
-          "files": "https://localhost:5000/api/records/rg607-z0m70/files", 
-          "self": "https://localhost:5000/api/records/rg607-z0m70"
+          "files": "https://localhost:5000/api/records/qaset-vky22/files", 
+          "self": "https://localhost:5000/api/records/qaset-vky22"
         }, 
         "metadata": {
           "_access": {
@@ -1243,9 +1243,9 @@
           "peerReview": true, 
           "publicationDatePure": "2019", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
+          "publication_date": "2020-02-17", 
           "pureId": "19303359", 
-          "recid": "rg607-z0m70", 
+          "recid": "qaset-vky22", 
           "title": "der unglaublich wichtige titel 2", 
           "totalNumberOfAuthors": 2, 
           "type_p": "Conference contribution", 
@@ -1266,14 +1266,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-02-14T14:03:23.329753+00:00"
+        "updated": "2020-02-17T09:02:15.795029+00:00"
       }, 
       {
-        "created": "2020-02-14T14:03:19.724789+00:00", 
-        "id": "8z7p1-dcy47", 
+        "created": "2020-02-17T09:02:11.996410+00:00", 
+        "id": "m9rgv-zbb17", 
         "links": {
-          "files": "https://localhost:5000/api/records/8z7p1-dcy47/files", 
-          "self": "https://localhost:5000/api/records/8z7p1-dcy47"
+          "files": "https://localhost:5000/api/records/m9rgv-zbb17/files", 
+          "self": "https://localhost:5000/api/records/m9rgv-zbb17"
         }, 
         "metadata": {
           "_access": {
@@ -1317,9 +1317,9 @@
           "peerReview": true, 
           "publicationDatePure": "2019", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
+          "publication_date": "2020-02-17", 
           "pureId": "19273766", 
-          "recid": "8z7p1-dcy47", 
+          "recid": "m9rgv-zbb17", 
           "title": "der unglaublich wichtige titel", 
           "totalNumberOfAuthors": 2, 
           "type_p": "Conference contribution", 
@@ -1340,14 +1340,14 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-02-14T14:03:19.724797+00:00"
+        "updated": "2020-02-17T09:02:11.996419+00:00"
       }, 
       {
-        "created": "2020-02-14T14:03:16.106813+00:00", 
-        "id": "ddyvy-v2838", 
+        "created": "2020-02-17T09:02:08.358219+00:00", 
+        "id": "c4jd1-d8s84", 
         "links": {
-          "files": "https://localhost:5000/api/records/ddyvy-v2838/files", 
-          "self": "https://localhost:5000/api/records/ddyvy-v2838"
+          "files": "https://localhost:5000/api/records/c4jd1-d8s84/files", 
+          "self": "https://localhost:5000/api/records/c4jd1-d8s84"
         }, 
         "metadata": {
           "_access": {
@@ -1395,9 +1395,9 @@
           "peerReview": false, 
           "publicationDatePure": "2019", 
           "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
+          "publication_date": "2020-02-17", 
           "pureId": "19239080", 
-          "recid": "ddyvy-v2838", 
+          "recid": "c4jd1-d8s84", 
           "title": "Drucksachetr", 
           "totalNumberOfAuthors": 2, 
           "type_p": "Article", 
@@ -1418,1721 +1418,10 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-02-14T14:03:16.106821+00:00"
-      }, 
-      {
-        "created": "2020-02-14T14:03:14.596317+00:00", 
-        "id": "n8djk-1tn95", 
-        "links": {
-          "files": "https://localhost:5000/api/records/n8djk-1tn95/files", 
-          "self": "https://localhost:5000/api/records/n8djk-1tn95"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b", 
-              "name": "Wru\u00df, Maria", 
-              "organisationalUnit": "Administration (95021)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2019-08-07T06:15:21.946+0000", 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Administration (95021)", 
-          "modifiedDatePure": "2019-08-07T06:15:21.946+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26", 
-              "name": "Administration (95021)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDatePure": "2019", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
-          "pureId": "19530666", 
-          "recid": "n8djk-1tn95", 
-          "title": "test", 
-          "totalNumberOfAuthors": 1, 
-          "type_p": "Article", 
-          "uuid": "5f8e8d34-d3f2-4695-9e82-c35783cb0316", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T14:03:14.596323+00:00"
-      }, 
-      {
-        "created": "2020-02-14T14:03:11.101775+00:00", 
-        "id": "987jm-3w428", 
-        "links": {
-          "files": "https://localhost:5000/api/records/987jm-3w428/files", 
-          "self": "https://localhost:5000/api/records/987jm-3w428"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/d5c827b6-076b-48fb-b842-f72df3cec7f0", 
-              "name": "K\u00f6nighofer, Philip", 
-              "organisationalUnit": "Institute of Applied Information Processing and Communications (7050)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/e6f30b9e-0f1e-469b-b13c-993da9dc9540", 
-              "name": "Bubba, Hubba", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }
-          ], 
-          "createdDatePure": "2019-07-15T12:53:01.449+0000", 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Applied Information Processing and Communications (7050)", 
-          "modifiedDatePure": "2019-07-15T12:53:01.449+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/77857978-adc4-4d9d-877c-1283cbd9199f", 
-              "name": "Institute of Applied Information Processing and Communications (7050)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDatePure": "2018", 
-          "publicationStatus": "In preparation", 
-          "publication_date": "2020-02-14", 
-          "publisherName": "Best Publishers", 
-          "pureId": "19528264", 
-          "recid": "987jm-3w428", 
-          "title": "Originalsprache Titel", 
-          "totalNumberOfAuthors": 2, 
-          "type_p": "Conference contribution", 
-          "uuid": "31dc78d0-c5c2-4839-b6da-6513b4179f54", 
-          "versionFiles": [
-            {
-              "fileAccessType": "Open", 
-              "fileDigest": "838F57049CED88AE01BB78354AB94FD62000ECEC", 
-              "fileDigestAlgorithm": "SHA1", 
-              "fileModifBy": "weberp", 
-              "fileModifDate": "2019-07-15T12:53:01.448+0000", 
-              "fileName": "dreimobilesfestnetz_eb.pdf", 
-              "fileSize": 220190, 
-              "fileType": "application/pdf", 
-              "fileVersion": "1??"
-            }
-          ], 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T14:03:11.101782+00:00"
-      }, 
-      {
-        "created": "2020-02-14T14:03:09.693756+00:00", 
-        "id": "6dtpv-gzx04", 
-        "links": {
-          "files": "https://localhost:5000/api/records/6dtpv-gzx04/files", 
-          "self": "https://localhost:5000/api/records/6dtpv-gzx04"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b", 
-              "name": "Wru\u00df, Maria", 
-              "organisationalUnit": "Administration (95021)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2019-06-05T11:53:04.014+0000", 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Administration (95021)", 
-          "modifiedDatePure": "2019-06-05T11:53:04.014+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26", 
-              "name": "Administration (95021)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDatePure": "2019", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
-          "pureId": "19434264", 
-          "recid": "6dtpv-gzx04", 
-          "title": "test", 
-          "totalNumberOfAuthors": 1, 
-          "type_p": "Article", 
-          "uuid": "7e91f3ad-5913-407d-95b1-8ffdf6d18f59", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T14:03:09.693781+00:00"
-      }, 
-      {
-        "created": "2020-02-14T14:03:08.449120+00:00", 
-        "id": "5e4gy-sgt98", 
-        "links": {
-          "files": "https://localhost:5000/api/records/5e4gy-sgt98/files", 
-          "self": "https://localhost:5000/api/records/5e4gy-sgt98"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/70826100-2c6b-4ca9-947f-e8fdd66b36ae", 
-              "name": "Dummler, Max", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f18c9390-4845-44ad-a790-c15fc83f8e79", 
-              "name": "Brantner, Brigitte M.", 
-              "organisationalUnit": "Service und Information (95022)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/14a293cd-8642-471e-814e-e00a4c9c4929", 
-              "name": "Ladurner, Christoph", 
-              "organisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2019-02-28T12:17:37.867+0000", 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Service und Information (95022)", 
-          "modifiedDatePure": "2019-04-10T10:17:19.146+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/766e6980-a6cd-45dd-a946-2b0f74ca8213", 
-              "name": "Service und Information (95022)"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/fdb7051b-0b7d-4cc1-936f-94232f231381", 
-              "name": "Serials Management, Open Access and Digitisation (95023)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDatePure": "2019", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
-          "pureId": "19303480", 
-          "recid": "5e4gy-sgt98", 
-          "title": "Testtitel", 
-          "totalNumberOfAuthors": 3, 
-          "type_p": "Article", 
-          "uuid": "a75f158e-13c2-435a-8241-6584dc8ff2d8", 
-          "workflow": "Validated"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T14:03:08.449128+00:00"
-      }, 
-      {
-        "created": "2020-02-14T14:03:04.948945+00:00", 
-        "id": "g9bf1-htt77", 
-        "links": {
-          "files": "https://localhost:5000/api/records/g9bf1-htt77/files", 
-          "self": "https://localhost:5000/api/records/g9bf1-htt77"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/14a293cd-8642-471e-814e-e00a4c9c4929", 
-              "name": "Ladurner, Christoph", 
-              "organisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b", 
-              "name": "Wru\u00df, Maria", 
-              "organisationalUnit": "Administration (95021)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2019-02-28T11:56:16.628+0000", 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-          "modifiedDatePure": "2019-04-01T06:52:36.316+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/fdb7051b-0b7d-4cc1-936f-94232f231381", 
-              "name": "Serials Management, Open Access and Digitisation (95023)"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26", 
-              "name": "Administration (95021)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDatePure": "2019", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
-          "pureId": "19303359", 
-          "recid": "g9bf1-htt77", 
-          "title": "der unglaublich wichtige titel 2", 
-          "totalNumberOfAuthors": 2, 
-          "type_p": "Conference contribution", 
-          "uuid": "ff4b3bea-5104-4d6c-9367-1a7ac035a0b8", 
-          "versionFiles": [
-            {
-              "fileAccessType": "Open", 
-              "fileDigest": "E5FA44F2B31C1FB553B6021E7360D07D5D91FF5E", 
-              "fileDigestAlgorithm": "SHA1", 
-              "fileModifBy": "chrlad", 
-              "fileModifDate": "2019-02-14T13:14:47.895+0000", 
-              "fileName": "test.txt", 
-              "fileSize": 2, 
-              "fileType": "text/plain", 
-              "fileVersion": "1??"
-            }
-          ], 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T14:03:04.948954+00:00"
-      }, 
-      {
-        "created": "2020-02-14T14:03:01.306507+00:00", 
-        "id": "qc8hp-mep23", 
-        "links": {
-          "files": "https://localhost:5000/api/records/qc8hp-mep23/files", 
-          "self": "https://localhost:5000/api/records/qc8hp-mep23"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/14a293cd-8642-471e-814e-e00a4c9c4929", 
-              "name": "Ladurner, Christoph", 
-              "organisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b", 
-              "name": "Wru\u00df, Maria", 
-              "organisationalUnit": "Administration (95021)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2019-02-14T13:14:47.899+0000", 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-          "modifiedDatePure": "2019-02-14T13:14:47.899+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/fdb7051b-0b7d-4cc1-936f-94232f231381", 
-              "name": "Serials Management, Open Access and Digitisation (95023)"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26", 
-              "name": "Administration (95021)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDatePure": "2019", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
-          "pureId": "19273766", 
-          "recid": "qc8hp-mep23", 
-          "title": "der unglaublich wichtige titel", 
-          "totalNumberOfAuthors": 2, 
-          "type_p": "Conference contribution", 
-          "uuid": "735d870d-cbfb-4c00-8615-330819e0bf11", 
-          "versionFiles": [
-            {
-              "fileAccessType": "Open", 
-              "fileDigest": "E5FA44F2B31C1FB553B6021E7360D07D5D91FF5E", 
-              "fileDigestAlgorithm": "SHA1", 
-              "fileModifBy": "chrlad", 
-              "fileModifDate": "2019-02-14T13:14:47.895+0000", 
-              "fileName": "test.txt", 
-              "fileSize": 2, 
-              "fileType": "text/plain", 
-              "fileVersion": "1??"
-            }
-          ], 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T14:03:01.306522+00:00"
-      }, 
-      {
-        "created": "2020-02-14T14:02:57.703716+00:00", 
-        "id": "t05r7-t4c83", 
-        "links": {
-          "files": "https://localhost:5000/api/records/t05r7-t4c83/files", 
-          "self": "https://localhost:5000/api/records/t05r7-t4c83"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/14a293cd-8642-471e-814e-e00a4c9c4929", 
-              "name": "Ladurner, Christoph", 
-              "organisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b", 
-              "name": "Wru\u00df, Maria", 
-              "organisationalUnit": "Administration (95021)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2019-01-29T09:58:49.835+0000", 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
-          "modifiedDatePure": "2019-05-14T09:51:12.079+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/fdb7051b-0b7d-4cc1-936f-94232f231381", 
-              "name": "Serials Management, Open Access and Digitisation (95023)"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/649cf008-b5a6-4f15-a669-32bad271995a", 
-              "name": "University Library and Archives (95020)"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26", 
-              "name": "Administration (95021)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDatePure": "2019", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
-          "pureId": "19239080", 
-          "recid": "t05r7-t4c83", 
-          "title": "Drucksachetr", 
-          "totalNumberOfAuthors": 2, 
-          "type_p": "Article", 
-          "uuid": "3e5bc032-716b-4e4b-8e59-fe202e9e9596", 
-          "versionFiles": [
-            {
-              "fileAccessType": "Open", 
-              "fileDigest": "E5FA44F2B31C1FB553B6021E7360D07D5D91FF5E", 
-              "fileDigestAlgorithm": "SHA1", 
-              "fileModifBy": "chrlad", 
-              "fileModifDate": "2019-01-29T11:15:46.243+0000", 
-              "fileName": "test.txt", 
-              "fileSize": 2, 
-              "fileType": "text/plain", 
-              "fileVersion": "1??"
-            }
-          ], 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T14:02:57.703741+00:00"
-      }, 
-      {
-        "created": "2020-02-14T13:22:16.159875+00:00", 
-        "id": "g3b1p-h0266", 
-        "links": {
-          "files": "https://localhost:5000/api/records/g3b1p-h0266/files", 
-          "self": "https://localhost:5000/api/records/g3b1p-h0266"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/637027eb-22d6-4582-bdcf-1d87d03c820c", 
-              "name": "Walln\u00f6fer, Eva", 
-              "organisationalUnit": "Institute of Chemical Engineering and Environmental Technology (6670)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/1040e076-e21d-41fe-81f2-fb01bc1549b2", 
-              "name": "Hacker, Viktor", 
-              "organisationalUnit": "Institute of Chemical Engineering and Environmental Technology (6670)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2016-02-25T21:48:24.943+0000", 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Chemical Engineering and Environmental Technology (6670)", 
-          "modifiedDatePure": "2018-09-06T07:28:38.033+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/beb13bea-aa04-4138-8c7c-2b3b98113c2d", 
-              "name": "Institute of Chemical Engineering and Environmental Technology (6670)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDatePure": "2008", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
-          "pureId": "1065042", 
-          "recid": "g3b1p-h0266", 
-          "title": "Ionic Liquids as humidification independend electrolytes for fuel cells", 
-          "totalNumberOfAuthors": 2, 
-          "type_p": "Poster", 
-          "uuid": "7ca68f74-e099-4957-96e1-b151a071e6ba", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T13:22:16.159882+00:00"
-      }, 
-      {
-        "created": "2020-02-14T13:22:14.898067+00:00", 
-        "id": "1zb66-5v441", 
-        "links": {
-          "files": "https://localhost:5000/api/records/1zb66-5v441/files", 
-          "self": "https://localhost:5000/api/records/1zb66-5v441"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/99109b8a-8375-465c-9fa3-6db487c0b782", 
-              "name": "Rumpf, Klemens", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "name": "Granitzer, Petra", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/c438b5b8-d494-4bfe-8be1-0d26c1ad5157", 
-              "name": "P\u00f6lt, Peter", 
-              "organisationalUnit": "Institute of Electron Microscopy and Nanoanalysis (5190)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2016-02-25T21:48:24.513+0000", 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Electron Microscopy and Nanoanalysis (5190)", 
-          "modifiedDatePure": "2020-01-05T00:00:29.030+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/1ac43399-62a2-4e74-b4ad-ad893185f244", 
-              "name": "Institute of Electron Microscopy and Nanoanalysis (5190)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDatePure": "2010", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
-          "pureId": "1064989", 
-          "recid": "1zb66-5v441", 
-          "title": "Non-saturating magnetic behaviour of a ferromagnetic semiconductor/metal nanocomposite", 
-          "totalNumberOfAuthors": 3, 
-          "type_p": "Article", 
-          "uuid": "e5f028b2-61e4-4aca-8356-0a03db1926ff", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T13:22:14.898074+00:00"
-      }, 
-      {
-        "created": "2020-02-14T13:22:13.625862+00:00", 
-        "id": "1mkc9-t9249", 
-        "links": {
-          "files": "https://localhost:5000/api/records/1mkc9-t9249/files", 
-          "self": "https://localhost:5000/api/records/1mkc9-t9249"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "name": "Meuwissen, Jean Marie Corneille", 
-              "organisationalUnit": "Institute of Urbanism (1450)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2016-02-25T21:48:23.887+0000", 
-          "language": "nld", 
-          "managingOrganisationalUnit": "Institute of Urbanism (1450)", 
-          "modifiedDatePure": "2018-09-06T07:28:37.972+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/49dac29a-a02e-40b6-a461-c92422994156", 
-              "name": "Institute of Urbanism (1450)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDatePure": "1981", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
-          "pureId": "1064937", 
-          "recid": "1mkc9-t9249", 
-          "title": "... want overal loert het gezag. Kijk uit, om je heen. Architectural strip as a social story", 
-          "totalNumberOfAuthors": 1, 
-          "type_p": "Article", 
-          "uuid": "304a34e4-2a24-4c29-a59f-a2091e3a23da", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T13:22:13.625868+00:00"
-      }, 
-      {
-        "created": "2020-02-14T13:22:10.140393+00:00", 
-        "id": "v5fcx-bcp98", 
-        "links": {
-          "files": "https://localhost:5000/api/records/v5fcx-bcp98/files", 
-          "self": "https://localhost:5000/api/records/v5fcx-bcp98"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/1198b8c9-eea7-41dd-8861-30c8d066fb27", 
-              "name": "Leberl, Franz", 
-              "organisationalUnit": "Institute of Computer Graphics and Vision (7100)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/97d46367-0d92-46e6-b578-6c334f61216f", 
-              "name": "Bischof, Horst", 
-              "organisationalUnit": "Institute of Computer Graphics and Vision (7100)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/fd77a5ad-1aa4-437c-8154-ae3180428a96", 
-              "name": "Pock, Thomas", 
-              "organisationalUnit": "Institute of Computer Graphics and Vision (7100)", 
-              "personRole": "Author"
-            }, 
-            {
-              "name": "Irschara, Arnold", 
-              "organisationalUnit": "Institute of Computer Graphics and Vision (7100)", 
-              "personRole": "Author"
-            }, 
-            {
-              "name": "Kluckner, Stefan", 
-              "organisationalUnit": "Institute of Computer Graphics and Vision (7100)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2016-02-25T21:48:22.703+0000", 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Computer Graphics and Vision (7100)", 
-          "modifiedDatePure": "2020-01-05T00:00:28.488+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87", 
-              "name": "Institute of Computer Graphics and Vision (7100)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDatePure": "2010", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
-          "pureId": "1064859", 
-          "recid": "v5fcx-bcp98", 
-          "title": "Aerial Computer Vision for a 3D Virtual Habitat", 
-          "totalNumberOfAuthors": 5, 
-          "type_p": "Article", 
-          "uuid": "21ddc3f2-8945-48fa-8351-e050d0c556d4", 
-          "versionFiles": [
-            {
-              "fileAccessType": "Open", 
-              "fileDigest": "0D62FE2620D152AC29540D3EC3A0801AE67DCF31", 
-              "fileDigestAlgorithm": "SHA1", 
-              "fileModifBy": "root", 
-              "fileModifDate": "2016-02-25T21:48:22.703+0000", 
-              "fileName": "323%20-%20Aerial%20Computer%20Vision%20for%20a%203D%20Virtual%20Habitat,%20IEEE-Computer.pdf", 
-              "fileSize": 672077, 
-              "fileType": "323 - Aerial Computer Vision for a 3D Virtual Habitat, IEEE-Computer.pdf", 
-              "fileVersion": "1??"
-            }
-          ], 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T13:22:10.140400+00:00"
-      }, 
-      {
-        "created": "2020-02-14T13:22:08.687625+00:00", 
-        "id": "rgxkb-ydw39", 
-        "links": {
-          "files": "https://localhost:5000/api/records/rgxkb-ydw39/files", 
-          "self": "https://localhost:5000/api/records/rgxkb-ydw39"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/f0240095-1921-4edc-8662-502daac5d222", 
-              "name": "Brenn, G\u00fcnter", 
-              "organisationalUnit": "Institute of Fluid Mechanics and Heat Transfer (3210)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/7f340059-e0c5-4e4a-b3ee-d900f413dccb", 
-              "name": "Raimann, J.", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/886e878d-99c2-4da7-9f77-1ccef563518c", 
-              "name": "Wolf, G.", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/cacea2a0-7562-42af-8f52-7221f9d9dd43", 
-              "name": "Domnick, J.", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/d096c49e-e288-4558-af07-3aeaed4db90e", 
-              "name": "Durst, F.", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }
-          ], 
-          "createdDatePure": "2016-02-25T21:48:22.617+0000", 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Fluid Mechanics and Heat Transfer (3210)", 
-          "modifiedDatePure": "2018-09-06T07:28:37.906+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/593818b6-e21d-4848-bc9c-a076384588ac", 
-              "name": "Institute of Fluid Mechanics and Heat Transfer (3210)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDatePure": "1999", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
-          "publisherName": "Springer", 
-          "pureId": "1064842", 
-          "recid": "rgxkb-ydw39", 
-          "title": "Molten metal atomization by inert gases: off-line and on-line characterization by PDA", 
-          "totalNumberOfAuthors": 5, 
-          "type_p": "Chapter", 
-          "uuid": "3a2816c7-51ba-45d8-9bd6-b6a47b49e8d5", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T13:22:08.687635+00:00"
-      }, 
-      {
-        "created": "2020-02-14T13:22:07.346862+00:00", 
-        "id": "tjmhb-cyx06", 
-        "links": {
-          "files": "https://localhost:5000/api/records/tjmhb-cyx06/files", 
-          "self": "https://localhost:5000/api/records/tjmhb-cyx06"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/2c0fa7bb-5068-4c93-9429-3dfc2598669b", 
-              "name": "W\u00fcrschum, Roland", 
-              "organisationalUnit": "Institute of Materials Physics (5170)", 
-              "personRole": "Author"
-            }, 
-            {
-              "name": "Kotzurek, Jaromir", 
-              "organisationalUnit": "Institute of Materials Physics (5170)", 
-              "personRole": "Author"
-            }, 
-            {
-              "name": "Neubauer, Christian", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/765666d1-2115-405a-9dab-b4fa97403415", 
-              "name": "Steyskal, Eva-Maria", 
-              "organisationalUnit": "Institute of Materials Physics (5170)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/908ee904-4b03-4806-a31a-84fa5b1e874e", 
-              "name": "Sprengel, Wolfgang", 
-              "organisationalUnit": "Institute of Materials Physics (5170)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/e1944bda-a2c3-4af6-9795-94c6b2b56e6f", 
-              "name": "Pippan, Reinhard", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/f3107e21-4009-4f7d-bafb-2d88410ceb42", 
-              "name": "Trubel, Simon", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/64443218-c885-49a5-b51e-362faf76531f", 
-              "name": "Divinski, Sergiy", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/4e8534b0-d19e-4ac2-8968-8e451be010a3", 
-              "name": "Wilde, Gerhard", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }
-          ], 
-          "createdDatePure": "2016-02-25T21:48:22.597+0000", 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Materials Physics (5170)", 
-          "modifiedDatePure": "2018-09-06T07:28:37.841+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/824db29f-dd9c-4726-b5ff-db764833ef27", 
-              "name": "Institute of Materials Physics (5170)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDatePure": "2015", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
-          "pureId": "1064841", 
-          "recid": "tjmhb-cyx06", 
-          "title": "Defects and structural anisotropy of HPT- and ECAP-deformed metals studied by differential dilatometry", 
-          "totalNumberOfAuthors": 9, 
-          "type_p": "Lecture or Presentation", 
-          "uuid": "64882022-a318-4b17-8d3e-231387da34bc", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T13:22:07.346869+00:00"
-      }, 
-      {
-        "created": "2020-02-14T13:22:05.952291+00:00", 
-        "id": "3w6z2-ayq08", 
-        "links": {
-          "files": "https://localhost:5000/api/records/3w6z2-ayq08/files", 
-          "self": "https://localhost:5000/api/records/3w6z2-ayq08"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "name": "Krois, G\u00fcnter", 
-              "organisationalUnit": "Institute of Experimental Physics (5110)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/fa38acf1-aedb-4c6d-bc0b-e65571323391", 
-              "name": "Lackner, Florian", 
-              "organisationalUnit": "Institute of Experimental Physics (5110)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/71f38de2-d572-4c69-9da9-eaa279a0da04", 
-              "name": "Ernst, Wolfgang", 
-              "organisationalUnit": "Institute of Experimental Physics (5110)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2016-02-25T21:48:22.587+0000", 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Experimental Physics (5110)", 
-          "modifiedDatePure": "2018-09-06T07:28:37.794+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/75523447-553e-47aa-a908-26841057c953", 
-              "name": "Institute of Experimental Physics (5110)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDatePure": "2013", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
-          "pureId": "1064840", 
-          "recid": "3w6z2-ayq08", 
-          "title": "Alkali metal \u2013 alkaline earth metal molecules on helium droplets \u2013 spectroscopy of LiCa and RbSr", 
-          "totalNumberOfAuthors": 3, 
-          "type_p": "Poster", 
-          "uuid": "897f77bb-82db-466d-8a6b-7fc31b3ee8d0", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T13:22:05.952298+00:00"
-      }, 
-      {
-        "created": "2020-02-14T13:22:04.673080+00:00", 
-        "id": "ktvdj-5z309", 
-        "links": {
-          "files": "https://localhost:5000/api/records/ktvdj-5z309/files", 
-          "self": "https://localhost:5000/api/records/ktvdj-5z309"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/95d15e06-1114-4686-b2c2-b83e18f9d673", 
-              "name": "Berg, Gabriele", 
-              "organisationalUnit": "Institute of Environmental Biotechnology (6530)", 
-              "personRole": "Author"
-            }, 
-            {
-              "name": "Hartenberger, Kathrin", 
-              "personRole": "Author"
-            }, 
-            {
-              "name": "Liebminger, Stefan", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/39bd9aa6-7416-4ee4-87a7-97a83d9d6450", 
-              "name": "Zachow, Christin", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2016-02-25T21:48:20.257+0000", 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Environmental Biotechnology (6530)", 
-          "modifiedDatePure": "2018-09-06T07:28:37.770+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/7c66c0e6-2ac0-44a6-a1ff-c3d24540986b", 
-              "name": "Institute of Environmental Biotechnology (6530)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDatePure": "2010", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
-          "pureId": "1064793", 
-          "recid": "ktvdj-5z309", 
-          "title": "Antagonistic endophytes from mistletoes as bio-resource to control clean room pathogens", 
-          "totalNumberOfAuthors": 4, 
-          "type_p": "Article", 
-          "uuid": "0cb6c514-23cd-4665-9efd-d07cdf693008", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T13:22:04.673088+00:00"
-      }, 
-      {
-        "created": "2020-02-14T13:22:03.317640+00:00", 
-        "id": "k10hn-kq533", 
-        "links": {
-          "files": "https://localhost:5000/api/records/k10hn-kq533/files", 
-          "self": "https://localhost:5000/api/records/k10hn-kq533"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "name": "Rabensteiner, Markus", 
-              "organisationalUnit": "Institute of Thermal Engineering (3070)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/72d8f9b1-c297-430e-aa4f-b751b7a38cad", 
-              "name": "Kinger, Gerald", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/52f6bad8-2b65-4316-93a1-6e536315e88a", 
-              "name": "Koller, Martin", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/3fd8ed41-be98-44d8-9277-ce688acb6ac3", 
-              "name": "Gronald, G\u00fcnter", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/5f3d1057-dbc5-405c-92c8-780c9c2c7506", 
-              "name": "Unterberger, Sven", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/3e94dccf-2dd3-4479-abd1-4da2e8dafb22", 
-              "name": "Hochenauer, Christoph", 
-              "organisationalUnit": "Institute of Thermal Engineering (3070)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2016-02-25T21:48:19.643+0000", 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Thermal Engineering (3070)", 
-          "modifiedDatePure": "2020-01-05T00:00:27.278+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/3423acc4-ff55-4f0f-88bd-978d80bdeccf", 
-              "name": "Institute of Thermal Engineering (3070)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDatePure": "2014", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
-          "pureId": "1064755", 
-          "recid": "k10hn-kq533", 
-          "title": "Investigation of the suitability of aqueous sodium glycinate as a solvent for post combustion carbon dioxide capture on the basis of pilot plant studies and screening methods", 
-          "totalNumberOfAuthors": 6, 
-          "type_p": "Article", 
-          "uuid": "1db476f0-402b-49c0-886a-825555ba0993", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T13:22:03.317647+00:00"
-      }, 
-      {
-        "created": "2020-02-14T13:22:01.949359+00:00", 
-        "id": "qrgqr-m7m46", 
-        "links": {
-          "files": "https://localhost:5000/api/records/qrgqr-m7m46/files", 
-          "self": "https://localhost:5000/api/records/qrgqr-m7m46"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/18d80f5c-5c71-46cd-bfcd-f0ed7d199f02", 
-              "name": "Benischke, Ralf", 
-              "organisationalUnit": "Institute of Applied Geosciences (2210)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2016-02-25T21:48:19.443+0000", 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Institute of Applied Geosciences (2210)", 
-          "modifiedDatePure": "2018-09-06T07:28:37.255+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/08528899-b061-4586-9446-c3aa40dcbccf", 
-              "name": "Institute of Applied Geosciences (2210)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDatePure": "1993", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
-          "publisherName": ".", 
-          "pureId": "1064743", 
-          "recid": "qrgqr-m7m46", 
-          "title": "Zur Hydrogeologie des H\u00f6llengebirges", 
-          "totalNumberOfAuthors": 1, 
-          "type_p": "Chapter", 
-          "uuid": "5627ad62-9997-4e8f-90e7-605cf55535aa", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T13:22:01.949366+00:00"
-      }, 
-      {
-        "created": "2020-02-14T13:22:00.731632+00:00", 
-        "id": "q38t0-hpz31", 
-        "links": {
-          "files": "https://localhost:5000/api/records/q38t0-hpz31/files", 
-          "self": "https://localhost:5000/api/records/q38t0-hpz31"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "name": "Rindler, Wolfgang", 
-              "organisationalUnit": "Institute of Materials Science, Joining and Forming (3030)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/62c69306-3be1-4b92-8623-e1e5065ee4c0", 
-              "name": "Kozeschnik, Ernst", 
-              "organisationalUnit": "Institute of Materials Science, Joining and Forming (3030)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/22ac596f-f9be-4a11-b2d4-5bb404c8deb3", 
-              "name": "Buchmayr, Bruno", 
-              "organisationalUnit": "Institute of Materials Science, Joining and Forming (3030)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2016-02-25T21:48:19.097+0000", 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Materials Science, Joining and Forming (3030)", 
-          "modifiedDatePure": "2020-02-09T00:00:10.904+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/f83c8643-c93d-4163-9196-574cafbcbede", 
-              "name": "Institute of Materials Science, Joining and Forming (3030)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDatePure": "2000", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
-          "pureId": "1064722", 
-          "recid": "q38t0-hpz31", 
-          "title": "Computer simulation of the brittle temperature range (BTR) for hot cracking in steels", 
-          "totalNumberOfAuthors": 3, 
-          "type_p": "Article", 
-          "uuid": "d1af747b-ad01-4cde-b26b-56e1a12e5ffe", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T13:22:00.731639+00:00"
-      }, 
-      {
-        "created": "2020-02-14T13:21:59.415254+00:00", 
-        "id": "zz9xk-ctp21", 
-        "links": {
-          "files": "https://localhost:5000/api/records/zz9xk-ctp21/files", 
-          "self": "https://localhost:5000/api/records/zz9xk-ctp21"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/fefbf164-7e15-46ab-a44f-4dd4765cbc8d", 
-              "name": "Benedikt, Martin", 
-              "organisationalUnit": "Virtual Vehicle Research Center (ViF) (98830)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2016-02-25T21:48:18.893+0000", 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Virtual Vehicle Research Center (ViF) (98830)", 
-          "modifiedDatePure": "2020-01-05T00:00:28.289+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/f1d52104-18a3-483c-ba3a-2754e36b50bb", 
-              "name": "Virtual Vehicle Research Center (ViF) (98830)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDatePure": "2014", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
-          "pureId": "1064699", 
-          "recid": "zz9xk-ctp21", 
-          "title": "Regelungstechnische Aspekte bei der nicht-iterativen Co-Simulation", 
-          "totalNumberOfAuthors": 1, 
-          "type_p": "Article", 
-          "uuid": "45275722-0fed-4f3b-bdcf-acfc931166b5", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T13:21:59.415262+00:00"
-      }, 
-      {
-        "created": "2020-02-14T13:21:58.119672+00:00", 
-        "id": "pfcbm-81s87", 
-        "links": {
-          "files": "https://localhost:5000/api/records/pfcbm-81s87/files", 
-          "self": "https://localhost:5000/api/records/pfcbm-81s87"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/c13aba7b-eb27-412a-a60a-ac651c48800e", 
-              "name": "Wotawa, Franz", 
-              "organisationalUnit": "Institute of Software Technology (7160)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2016-02-25T21:48:18.717+0000", 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Institute of Software Technology (7160)", 
-          "modifiedDatePure": "2018-09-06T07:28:36.382+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/c43a5652-7ed7-441f-8576-9737220860a9", 
-              "name": "Institute of Software Technology (7160)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "publicationDatePure": "1994", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
-          "pureId": "1064672", 
-          "recid": "pfcbm-81s87", 
-          "title": "Analyse und Algorithmen von fokusierten Assumption Based Truth Maintenance Systemen", 
-          "totalNumberOfAuthors": 1, 
-          "type_p": "Diploma Thesis", 
-          "uuid": "a128b4da-b9fb-4149-a162-727b2d955c92", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T13:21:58.119679+00:00"
-      }, 
-      {
-        "created": "2020-02-14T13:21:56.840227+00:00", 
-        "id": "pn15d-0yg24", 
-        "links": {
-          "files": "https://localhost:5000/api/records/pn15d-0yg24/files", 
-          "self": "https://localhost:5000/api/records/pn15d-0yg24"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/625bb16c-40ee-4632-959d-2138473a2345", 
-              "name": "Feist, Florian", 
-              "organisationalUnit": "Vehicle Safety Institute (3330)", 
-              "personRole": "Author"
-            }, 
-            {
-              "name": "Gugler, J\u00fcrgen", 
-              "organisationalUnit": "Vehicle Safety Institute (3330)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/a61dba2c-066d-4d30-a78c-22891ef68847", 
-              "name": "Smith, Tanya", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }
-          ], 
-          "createdDatePure": "2016-02-25T21:48:17.473+0000", 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Vehicle Safety Institute (3330)", 
-          "modifiedDatePure": "2018-09-06T07:28:36.338+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/24e3a479-e4f1-4882-8298-8c1966e3239f", 
-              "name": "Vehicle Safety Institute (3330)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDatePure": "2008", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
-          "publisherName": ".", 
-          "pureId": "1064647", 
-          "recid": "pn15d-0yg24", 
-          "title": "Report on new designs considering newest technologies including a cost benefit analysis", 
-          "totalNumberOfAuthors": 3, 
-          "type_p": "Commissioned report", 
-          "uuid": "54a5dfbc-9b3d-45ea-9b81-93f434e11159", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T13:21:56.840235+00:00"
-      }, 
-      {
-        "created": "2020-02-14T13:21:55.546721+00:00", 
-        "id": "s019r-drw91", 
-        "links": {
-          "files": "https://localhost:5000/api/records/s019r-drw91/files", 
-          "self": "https://localhost:5000/api/records/s019r-drw91"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "name": "Fruhwirth, Bernd", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/147e8916-1351-461d-9d95-ca050ecd9a6c", 
-              "name": "Burkard, Rainer Ernst", 
-              "organisationalUnit": "Institute of Discrete Mathematics (5050)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/96270c1c-fae7-4cbe-a3d9-8f492dd84757", 
-              "name": "Rote, G.", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }
-          ], 
-          "createdDatePure": "2016-02-25T21:48:16.927+0000", 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Optimization and Discrete Mathematics (Math B) (5020)", 
-          "modifiedDatePure": "2018-09-06T07:28:36.308+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/15d662f6-ed41-4498-bed0-8351c5267cc7", 
-              "name": "Institute of Discrete Mathematics (5050)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": true, 
-          "publicationDatePure": "1989", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
-          "pureId": "1064600", 
-          "recid": "s019r-drw91", 
-          "title": "Approximation of convex curves with application to the bicriterial min cost flow problem", 
-          "totalNumberOfAuthors": 3, 
-          "type_p": "Article", 
-          "uuid": "1ff62a26-081d-4b0d-b0f2-4ac944a8e035", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T13:21:55.546729+00:00"
-      }, 
-      {
-        "created": "2020-02-14T13:17:05.115294+00:00", 
-        "id": "0anyp-v4459", 
-        "links": {
-          "files": "https://localhost:5000/api/records/0anyp-v4459/files", 
-          "self": "https://localhost:5000/api/records/0anyp-v4459"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "open", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/97eb5f2a-19f3-4bb3-a2a8-0b3390134cea", 
-              "name": "Moser, Friedrich", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/e58ca701-6f25-4674-b0c2-8308eeda06d0", 
-              "name": "Vallant, Rudolf", 
-              "organisationalUnit": "Institute of Materials Science, Joining and Forming (3030)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/078cd1f7-d3ce-4252-a03a-d326b0dcd190", 
-              "name": "Hampel, Stefan", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }
-          ], 
-          "createdDatePure": "2016-02-25T21:52:06.787+0000", 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Institute of Materials Science, Joining and Forming (3030)", 
-          "modifiedDatePure": "2018-09-06T07:29:12.767+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/f83c8643-c93d-4163-9196-574cafbcbede", 
-              "name": "Institute of Materials Science, Joining and Forming (3030)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDatePure": "2013", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
-          "pureId": "1080699", 
-          "recid": "0anyp-v4459", 
-          "title": "Kleben von Schneidkeramik-S\u00e4gez\u00e4hnen auf ein Stahls\u00e4geblatt / Grundlagenuntersuchungen und Potential", 
-          "totalNumberOfAuthors": 3, 
-          "type_p": "Poster", 
-          "uuid": "c684766b-b41d-4dcd-9173-be6ff614ea4c", 
-          "versionFiles": [
-            {
-              "fileAccessType": "Open", 
-              "fileDigest": "E5AD05F01B86EFE7DAFE3F74212B19E26C27A9A4", 
-              "fileDigestAlgorithm": "SHA1", 
-              "fileModifBy": "root", 
-              "fileModifDate": "2016-02-25T21:52:06.783+0000", 
-              "fileName": "Poster_Kleben%20von%20Schneidkeramik-S%E4gez%E4hnen%20auf%20ein%20Stahls%E4geblatt.pdf", 
-              "fileSize": 4614516, 
-              "fileType": "Poster_Kleben von Schneidkeramik-S\u00e4gez\u00e4hnen auf ein Stahls\u00e4geblatt.pdf", 
-              "fileVersion": "1??"
-            }
-          ], 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T13:17:05.115302+00:00"
-      }, 
-      {
-        "created": "2020-02-14T13:01:27.195652+00:00", 
-        "id": "1cp72-59r27", 
-        "links": {
-          "files": "https://localhost:5000/api/records/1cp72-59r27/files", 
-          "self": "https://localhost:5000/api/records/1cp72-59r27"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/ffd6bd02-d219-4df2-9ea6-957ddff63507", 
-              "name": "Reismann, Bernhard", 
-              "organisationalUnit": "Archive and Documentation (95026)", 
-              "personRole": "Author"
-            }
-          ], 
-          "createdDatePure": "2016-02-25T21:47:57.193+0000", 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Archive and Documentation (95026)", 
-          "modifiedDatePure": "2018-09-06T07:28:35.509+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/020f9128-cd93-4873-a1de-22c46598597c", 
-              "name": "Archive and Documentation (95026)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDatePure": "2005", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
-          "publisherName": ".", 
-          "pureId": "1064153", 
-          "recid": "1cp72-59r27", 
-          "title": "Im gleichen Schritt und Tritt. Die Geschichte des \u00d6KB-Ortsverbandes St. Radegund 1865-2005", 
-          "totalNumberOfAuthors": 1, 
-          "type_p": "Book", 
-          "uuid": "d026e435-7da5-4fd9-8c24-865aa1dbcf71", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T13:01:27.195658+00:00"
-      }, 
-      {
-        "created": "2020-02-14T13:01:26.048468+00:00", 
-        "id": "m37eg-dx008", 
-        "links": {
-          "files": "https://localhost:5000/api/records/m37eg-dx008/files", 
-          "self": "https://localhost:5000/api/records/m37eg-dx008"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/63f479a2-1851-458b-aebd-4f333e95b29e", 
-              "name": "Arth, Clemens", 
-              "organisationalUnit": "Institute of Computer Graphics and Vision (7100)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/4ef382a6-807d-4655-9821-b9c2a7b4bfd4", 
-              "name": "Grasset, Raphael", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "name": "Gruber, Lukas", 
-              "personRole": "Author"
-            }, 
-            {
-              "name": "Langlotz, Tobias", 
-              "personRole": "Author"
-            }, 
-            {
-              "name": "Mulloni, Alessandro", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/41727a55-3613-43cb-943b-9bc84eb86f27", 
-              "name": "Wagner, Daniel", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }
-          ], 
-          "createdDatePure": "2016-02-25T21:47:56.953+0000", 
-          "language": "eng", 
-          "managingOrganisationalUnit": "Institute of Computer Graphics and Vision (7100)", 
-          "modifiedDatePure": "2018-09-06T07:28:35.386+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87", 
-              "name": "Institute of Computer Graphics and Vision (7100)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDatePure": "2015", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
-          "publisherName": "Institut f\u00fcr Computer Graphik und Wissensvisualisierung, Technische Universit\u00e4t Graz", 
-          "pureId": "1064135", 
-          "recid": "m37eg-dx008", 
-          "title": "The History of Mobile Augmented Reality", 
-          "totalNumberOfAuthors": 6, 
-          "type_p": "Other report", 
-          "uuid": "64cd98bd-29b3-4cc2-9189-9c2cb71bcc98", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T13:01:26.048477+00:00"
-      }, 
-      {
-        "created": "2020-02-14T13:01:24.812182+00:00", 
-        "id": "rd2zv-3jz51", 
-        "links": {
-          "files": "https://localhost:5000/api/records/rd2zv-3jz51/files", 
-          "self": "https://localhost:5000/api/records/rd2zv-3jz51"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/persons/5295ba8b-5bc3-48b7-b704-dfabceea4eab", 
-              "name": "Obernberger, Ingwald", 
-              "organisationalUnit": "Institute of Process and Particle Engineering (6690)", 
-              "personRole": "Author"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/221f7374-bfd1-4634-a6f3-17887c66cc99", 
-              "name": "Widmann, Walter", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/842de480-f122-4d8b-aabf-677d5ea1b50b", 
-              "name": "Wurst, Friedrich", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }, 
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/external-persons/ecef45ac-084a-48e8-85ad-d71aa2312030", 
-              "name": "W\u00f6rgetter, Manfred", 
-              "personRole": "Author", 
-              "type_p": "External person"
-            }
-          ], 
-          "createdDatePure": "2016-02-25T21:47:56.410+0000", 
-          "language": "deu", 
-          "managingOrganisationalUnit": "Institute of Process and Particle Engineering (6690)", 
-          "modifiedDatePure": "2018-09-06T07:28:34.742+0000", 
-          "organisationalUnits": [
-            {
-              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/44dff43c-2d42-4974-98d8-b249db092dbc", 
-              "name": "Institute of Process and Particle Engineering (6690)"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDatePure": "1997", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-02-14", 
-          "publisherName": ".", 
-          "pureId": "1064125", 
-          "recid": "rd2zv-3jz51", 
-          "title": "Beurteilung der Umweltvertr\u00e4glichkeit des Einsatzes von Einjahresganzpflanzen und Stroh zur Fernw\u00e4rmeerzeugung, Endbericht", 
-          "totalNumberOfAuthors": 4, 
-          "type_p": "Other report", 
-          "uuid": "4dabd5dc-2610-4b5a-b72c-83b480341998", 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-02-14T13:01:24.812189+00:00"
+        "updated": "2020-02-17T09:02:08.358228+00:00"
       }
     ], 
-    "total": 47
+    "total": 21
   }, 
   "links": {
     "self": "https://localhost:5000/api/records/?sort=mostrecent&size=250&page=1"

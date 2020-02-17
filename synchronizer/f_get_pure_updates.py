@@ -25,7 +25,7 @@ def get_pure_updates():
                     else:                           break
                 else:
                     # if 'Update - ' is not found then it starts updating from 3 days before
-                    date_last_update = str(date_today + timedelta(days = 3))
+                    date_last_update = str(date_today - timedelta(days = 3))
 
         
         date_object = datetime.strptime(date_last_update, '%Y-%m-%d').date()

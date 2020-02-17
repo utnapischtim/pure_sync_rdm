@@ -9,7 +9,7 @@ pure_username = 'ws_grosso'     # credentials for pure files download
 pure_password = 'U+0n0#yI'
 
 # Invenio RDM
-token_rdm = 'f3fWnL92UqHFKD0B81hSxz5lk73TkoCeeHCud70wX919oJvnIaiq7sRNyNfa'
+token_rdm = 'Kp1BK5VAftwfGJmgazcADgBgvmS18a9HobGFMISyM0F0FGhoe1vXnieumA4I'
 
 # -   -   -
 # LOG FILES
