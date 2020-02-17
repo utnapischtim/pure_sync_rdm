@@ -1,5 +1,7 @@
 def find_rdm_duplicates(self):
     try:
+        from functions.delete_record import delete_record
+
         print('---   ---   ---\nFIND RDM DUPLICATES\n\nDuplicates:\n')
 
         # Read Pure
@@ -39,7 +41,7 @@ def find_rdm_duplicates(self):
             print('- There are no duplicates\n')
             report = f"\nDelete - {self.date.today()} - success\nThere are no duplicates\n"
             open(self.dirpath + '/reports/d_daily_updates.log', "a").write(report)
-            exit        # ???
+            return
 
         else:
             print(f'\nTot {cnt} duplicates\n')
@@ -50,7 +52,7 @@ def find_rdm_duplicates(self):
 
             open(toDel_fileName, "a").write(dup_recid_str)
 
-            self.delete_record()
+            delete_record(self)
 
     except:
         print('\n---   !!!   Error in find_rdm_duplicates   !!!   ---\n')

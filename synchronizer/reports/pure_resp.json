@@ -1,72 +1,63 @@
 {
-  "pureId" : 1064859,
-  "externalId" : "52237",
-  "externalIdSource" : "researchoutputwizard",
-  "uuid" : "21ddc3f2-8945-48fa-8351-e050d0c556d4",
-  "title" : "Aerial Computer Vision for a 3D Virtual Habitat",
-  "peerReview" : true,
+  "pureId" : 19530666,
+  "uuid" : "5f8e8d34-d3f2-4695-9e82-c35783cb0316",
+  "title" : "test",
+  "peerReview" : false,
   "managingOrganisationalUnit" : {
-    "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
+    "uuid" : "650fb44b-f9dd-490c-b6e0-4b3e77b55c26",
     "link" : {
       "ref" : "content",
-      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
+      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26"
     },
-    "externalId" : "2376",
+    "externalId" : "1416",
     "externalIdSource" : "synchronisedUnifiedOrganisation",
     "externallyManaged" : true,
     "names" : [ {
       "locale" : "en_GB",
-      "value" : "Institute of Computer Graphics and Vision (7100)"
+      "value" : "Administration (95021)"
     }, {
       "locale" : "de_DE",
-      "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
+      "value" : "EDV/ Verwaltung (95021)"
     } ],
     "types" : [ {
       "locale" : "en_GB",
-      "value" : "Institute",
-      "pureId" : 5431,
-      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      "value" : "Department",
+      "pureId" : 5488,
+      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
     }, {
       "locale" : "de_DE",
-      "value" : "Institut",
-      "pureId" : 5431,
-      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      "value" : "Abteilung-DLE",
+      "pureId" : 5488,
+      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
     } ]
   },
   "confidential" : false,
   "info" : {
-    "createdBy" : "root",
-    "createdDate" : "2016-02-25T21:48:22.703+0000",
-    "modifiedBy" : "sync_user",
-    "modifiedDate" : "2020-01-05T00:00:28.488+0000",
-    "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/aerial-computer-vision-for-a-3d-virtual-habitat(21ddc3f2-8945-48fa-8351-e050d0c556d4).html",
-    "additionalExternalIds" : [ {
-      "value" : "85008044975",
-      "idSource" : "Scopus"
-    } ]
+    "createdBy" : "pure_wruss",
+    "createdDate" : "2019-08-07T06:15:21.946+0000",
+    "modifiedBy" : "pure_wruss",
+    "modifiedDate" : "2019-08-07T06:15:21.946+0000",
+    "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/test(5f8e8d34-d3f2-4695-9e82-c35783cb0316).html"
   },
-  "totalScopusCitations" : 6,
-  "pages" : "24-31",
-  "volume" : "43",
   "journalAssociation" : {
-    "pureId" : 1064863,
+    "pureId" : 19530667,
     "title" : {
-      "value" : "Computer"
+      "value" : "Test-Kompendium"
     },
     "journal" : {
-      "uuid" : "2538140d-2f99-4bb4-bbe2-514e7dc92c06",
+      "uuid" : "05a5778a-1c02-4a23-8a3c-8e4c0ad62e8d",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/journals/2538140d-2f99-4bb4-bbe2-514e7dc92c06"
+        "href" : "https://pure01.tugraz.at/ws/api/514/journals/05a5778a-1c02-4a23-8a3c-8e4c0ad62e8d"
       },
-      "externalId" : "2183",
+      "externalId" : "1366",
       "externalIdSource" : "researchoutputwizard",
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Computer"
+        "value" : "Test-Kompendium"
       }, {
         "locale" : "de_DE",
-        "value" : "Computer"
+        "value" : "Test-Kompendium"
       } ],
       "types" : [ {
         "locale" : "en_GB",
@@ -81,8 +72,7 @@
       } ]
     }
   },
-  "journalNumber" : "6",
-  "totalNumberOfAuthors" : 5,
+  "totalNumberOfAuthors" : 1,
   "types" : [ {
     "locale" : "en_GB",
     "value" : "Article",
@@ -106,12 +96,10 @@
     "uri" : "/dk/atira/pure/researchoutput/category/research"
   } ],
   "publicationStatuses" : [ {
-    "pureId" : 1064859,
-    "externalId" : "52237",
-    "externalIdSource" : "researchoutputwizard",
+    "pureId" : 19530666,
     "current" : true,
     "publicationDate" : {
-      "year" : 2010
+      "year" : 2019
     },
     "publicationStatuses" : [ {
       "locale" : "en_GB",
@@ -137,27 +125,27 @@
     "uri" : "/dk/atira/pure/core/languages/en_GB"
   } ],
   "personAssociations" : [ {
-    "pureId" : 1064888,
+    "pureId" : 19530671,
     "person" : {
-      "uuid" : "1198b8c9-eea7-41dd-8861-30c8d066fb27",
+      "uuid" : "f0f60b8b-a7cb-41e9-ad36-606d3e890a3b",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/persons/1198b8c9-eea7-41dd-8861-30c8d066fb27"
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b"
       },
-      "externalId" : "3261",
+      "externalId" : "53779",
       "externalIdSource" : "synchronisedUnifiedPerson",
       "externallyManaged" : true,
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Franz Leberl"
+        "value" : "Maria Wruß"
       }, {
         "locale" : "de_DE",
-        "value" : "Franz Leberl"
+        "value" : "Maria Wruß"
       } ]
     },
     "name" : {
-      "firstName" : "Franz",
-      "lastName" : "Leberl"
+      "firstName" : "Maria",
+      "lastName" : "Wruß"
     },
     "personRoles" : [ {
       "locale" : "en_GB",
@@ -171,381 +159,72 @@
       "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
     } ],
     "organisationalUnits" : [ {
-      "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
+      "uuid" : "650fb44b-f9dd-490c-b6e0-4b3e77b55c26",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26"
       },
-      "externalId" : "2376",
+      "externalId" : "1416",
       "externalIdSource" : "synchronisedUnifiedOrganisation",
       "externallyManaged" : true,
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Institute of Computer Graphics and Vision (7100)"
+        "value" : "Administration (95021)"
       }, {
         "locale" : "de_DE",
-        "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
+        "value" : "EDV/ Verwaltung (95021)"
       } ],
       "types" : [ {
         "locale" : "en_GB",
-        "value" : "Institute",
-        "pureId" : 5431,
-        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        "value" : "Department",
+        "pureId" : 5488,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
       }, {
         "locale" : "de_DE",
-        "value" : "Institut",
-        "pureId" : 5431,
-        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
-      } ]
-    } ]
-  }, {
-    "pureId" : 1064893,
-    "person" : {
-      "uuid" : "97d46367-0d92-46e6-b578-6c334f61216f",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/persons/97d46367-0d92-46e6-b578-6c334f61216f"
-      },
-      "externalId" : "29973",
-      "externalIdSource" : "synchronisedUnifiedPerson",
-      "externallyManaged" : true,
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "Horst Bischof"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Horst Bischof"
-      } ]
-    },
-    "name" : {
-      "firstName" : "Horst",
-      "lastName" : "Bischof"
-    },
-    "personRoles" : [ {
-      "locale" : "en_GB",
-      "value" : "Author",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Autor",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
-    } ],
-    "organisationalUnits" : [ {
-      "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
-      },
-      "externalId" : "2376",
-      "externalIdSource" : "synchronisedUnifiedOrganisation",
-      "externallyManaged" : true,
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "Institute of Computer Graphics and Vision (7100)"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
-      } ],
-      "types" : [ {
-        "locale" : "en_GB",
-        "value" : "Institute",
-        "pureId" : 5431,
-        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Institut",
-        "pureId" : 5431,
-        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
-      } ]
-    } ]
-  }, {
-    "pureId" : 1064896,
-    "person" : {
-      "uuid" : "fd77a5ad-1aa4-437c-8154-ae3180428a96",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/persons/fd77a5ad-1aa4-437c-8154-ae3180428a96"
-      },
-      "externalId" : "44110",
-      "externalIdSource" : "synchronisedUnifiedPerson",
-      "externallyManaged" : true,
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "Thomas Pock"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Thomas Pock"
-      } ]
-    },
-    "name" : {
-      "firstName" : "Thomas",
-      "lastName" : "Pock"
-    },
-    "personRoles" : [ {
-      "locale" : "en_GB",
-      "value" : "Author",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Autor",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
-    } ],
-    "organisationalUnits" : [ {
-      "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
-      },
-      "externalId" : "2376",
-      "externalIdSource" : "synchronisedUnifiedOrganisation",
-      "externallyManaged" : true,
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "Institute of Computer Graphics and Vision (7100)"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
-      } ],
-      "types" : [ {
-        "locale" : "en_GB",
-        "value" : "Institute",
-        "pureId" : 5431,
-        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Institut",
-        "pureId" : 5431,
-        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
-      } ]
-    } ]
-  }, {
-    "pureId" : 1064898,
-    "name" : {
-      "firstName" : "Arnold",
-      "lastName" : "Irschara"
-    },
-    "personRoles" : [ {
-      "locale" : "en_GB",
-      "value" : "Author",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Autor",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
-    } ],
-    "organisationalUnits" : [ {
-      "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
-      },
-      "externalId" : "2376",
-      "externalIdSource" : "synchronisedUnifiedOrganisation",
-      "externallyManaged" : true,
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "Institute of Computer Graphics and Vision (7100)"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
-      } ],
-      "types" : [ {
-        "locale" : "en_GB",
-        "value" : "Institute",
-        "pureId" : 5431,
-        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Institut",
-        "pureId" : 5431,
-        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
-      } ]
-    } ]
-  }, {
-    "pureId" : 1064903,
-    "name" : {
-      "firstName" : "Stefan",
-      "lastName" : "Kluckner"
-    },
-    "personRoles" : [ {
-      "locale" : "en_GB",
-      "value" : "Author",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Autor",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
-    } ],
-    "organisationalUnits" : [ {
-      "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
-      },
-      "externalId" : "2376",
-      "externalIdSource" : "synchronisedUnifiedOrganisation",
-      "externallyManaged" : true,
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "Institute of Computer Graphics and Vision (7100)"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
-      } ],
-      "types" : [ {
-        "locale" : "en_GB",
-        "value" : "Institute",
-        "pureId" : 5431,
-        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Institut",
-        "pureId" : 5431,
-        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+        "value" : "Abteilung-DLE",
+        "pureId" : 5488,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
       } ]
     } ]
   } ],
   "organisationalUnits" : [ {
-    "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
+    "uuid" : "650fb44b-f9dd-490c-b6e0-4b3e77b55c26",
     "link" : {
       "ref" : "content",
-      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
+      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26"
     },
-    "externalId" : "2376",
+    "externalId" : "1416",
     "externalIdSource" : "synchronisedUnifiedOrganisation",
     "externallyManaged" : true,
     "names" : [ {
       "locale" : "en_GB",
-      "value" : "Institute of Computer Graphics and Vision (7100)"
+      "value" : "Administration (95021)"
     }, {
       "locale" : "de_DE",
-      "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
+      "value" : "EDV/ Verwaltung (95021)"
     } ],
     "types" : [ {
       "locale" : "en_GB",
-      "value" : "Institute",
-      "pureId" : 5431,
-      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      "value" : "Department",
+      "pureId" : 5488,
+      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
     }, {
       "locale" : "de_DE",
-      "value" : "Institut",
-      "pureId" : 5431,
-      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      "value" : "Abteilung-DLE",
+      "pureId" : 5488,
+      "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_6850"
     } ]
   } ],
   "openAccessPermissions" : [ {
     "locale" : "en_GB",
-    "value" : "Open",
-    "pureId" : 2920,
-    "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/open"
+    "value" : "None",
+    "pureId" : 2928,
+    "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/none"
   }, {
     "locale" : "de_DE",
-    "value" : "Offen",
-    "pureId" : 2920,
-    "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/open"
-  } ],
-  "electronicVersions" : [ {
-    "pureId" : 1064866,
-    "visibleOnPortalDate" : "2016-02-25T21:48:22.703+0000",
-    "creator" : "root",
-    "created" : "2016-02-25T21:48:22.703+0000",
-    "title" : "323 - Aerial Computer Vision for a 3D Virtual Habitat, IEEE-Computer.pdf",
-    "file" : {
-      "fileName" : "323%20-%20Aerial%20Computer%20Vision%20for%20a%203D%20Virtual%20Habitat,%20IEEE-Computer.pdf",
-      "mimeType" : "323 - Aerial Computer Vision for a 3D Virtual Habitat, IEEE-Computer.pdf",
-      "size" : 672077,
-      "fileURL" : "https://pure01.tugraz.at/ws/files/1064869/323%2520-%2520Aerial%2520Computer%2520Vision%2520for%2520a%25203D%2520Virtual%2520Habitat,%2520IEEE-Computer.pdf",
-      "digestAlgorithm" : "SHA1",
-      "digest" : "0D62FE2620D152AC29540D3EC3A0801AE67DCF31"
-    },
-    "accessTypes" : [ {
-      "locale" : "en_GB",
-      "value" : "Open",
-      "pureId" : 105,
-      "uri" : "/dk/atira/pure/core/openaccesspermission/open"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Offen",
-      "pureId" : 105,
-      "uri" : "/dk/atira/pure/core/openaccesspermission/open"
-    } ],
-    "versionTypes" : [ {
-      "locale" : "en_GB",
-      "value" : "Final published version",
-      "pureId" : 23264,
-      "uri" : "/dk/atira/pure/researchoutput/electronicversion/versiontype/publishersversion"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Endgültige, publizierte Fassung",
-      "pureId" : 23264,
-      "uri" : "/dk/atira/pure/researchoutput/electronicversion/versiontype/publishersversion"
-    } ]
-  }, {
-    "pureId" : 1064872,
-    "visibleOnPortalDate" : "2016-02-25T21:48:22.703+0000",
-    "doi" : "https://doi.org/10.1109/MC.2010.156",
-    "accessTypes" : [ {
-      "locale" : "en_GB",
-      "value" : "Unknown",
-      "pureId" : 8205924,
-      "uri" : "/dk/atira/pure/core/openaccesspermission/unknown"
-    }, {
-      "locale" : "de_DE",
-      "value" : "!!Unknown",
-      "pureId" : 8205924,
-      "uri" : "/dk/atira/pure/core/openaccesspermission/unknown"
-    } ],
-    "versionTypes" : [ {
-      "locale" : "en_GB",
-      "value" : "Final published version",
-      "pureId" : 23264,
-      "uri" : "/dk/atira/pure/researchoutput/electronicversion/versiontype/publishersversion"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Endgültige, publizierte Fassung",
-      "pureId" : 23264,
-      "uri" : "/dk/atira/pure/researchoutput/electronicversion/versiontype/publishersversion"
-    } ]
-  } ],
-  "additionalLinks" : [ {
-    "pureId" : 1064881,
-    "url" : "http://www.computer.org/portal/web/csdl/doi/10.1109/MC.2010.156"
-  } ],
-  "keywordGroups" : [ {
-    "pureId" : 1064875,
-    "logicalName" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise",
-    "types" : [ {
-      "locale" : "en_GB",
-      "value" : "Fields of Expertise",
-      "uri" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Fields of Expertise",
-      "uri" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise"
-    } ],
-    "keywordContainers" : [ {
-      "pureId" : 1064879,
-      "structuredKeyword" : {
-        "pureId" : 26395,
-        "uri" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise/icc",
-        "disabled" : false,
-        "terms" : [ {
-          "locale" : "en_GB",
-          "value" : "Information, Communication & Computing"
-        }, {
-          "locale" : "de_DE",
-          "value" : "Information, Communication & Computing"
-        } ]
-      }
-    } ]
+    "value" : "Keine Angabe",
+    "pureId" : 2928,
+    "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/none"
   } ],
   "visibilities" : [ {
     "locale" : "en_GB",
@@ -564,39 +243,5 @@
     "locale" : "de_DE",
     "value" : "Zur Validierung",
     "workflowStep" : "forApproval"
-  } ],
-  "scopusMetrics" : [ {
-    "value" : 0,
-    "year" : 2020
-  }, {
-    "value" : 0,
-    "year" : 2019
-  }, {
-    "value" : 0,
-    "year" : 2018
-  }, {
-    "value" : 0,
-    "year" : 2017
-  }, {
-    "value" : 0,
-    "year" : 2016
-  }, {
-    "value" : 0,
-    "year" : 2015
-  }, {
-    "value" : 0,
-    "year" : 2014
-  }, {
-    "value" : 0,
-    "year" : 2013
-  }, {
-    "value" : 1,
-    "year" : 2012
-  }, {
-    "value" : 3,
-    "year" : 2011
-  }, {
-    "value" : 2,
-    "year" : 2010
   } ]
 }

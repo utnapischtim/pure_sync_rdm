@@ -1,5 +1,5 @@
 
-def pure_rdm_intersection(self):
+def intersection_pure_rdm(self):
     try:
         print('\n---   ---   ---\nFIND MISSING\n')
         # Read RDM

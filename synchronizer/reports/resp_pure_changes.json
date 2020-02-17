@@ -1,6 +1,6 @@
 {
-  "count" : 7,
-  "lastId" : 19653218,
+  "count" : 11,
+  "lastId" : 19653271,
   "moreChanges" : false,
   "items" : [ {
     "uuid" : "3e5bc032-716b-4e4b-8e59-fe202e9e9596",
@@ -44,9 +44,27 @@
     "family" : "dk.atira.pure.api.shared.model.researchoutput.ResearchOutput",
     "familySystemName" : "ResearchOutput",
     "version" : 193
+  }, {
+    "uuid" : "43837c47-7f1b-4049-853d-a6fa66b8d409",
+    "changeType" : "UPDATE",
+    "family" : "dk.atira.pure.api.shared.model.UserProfile",
+    "familySystemName" : "UserProfile",
+    "version" : 3209
+  }, {
+    "uuid" : "2573ac24-2994-4130-9336-ed95dd1f2b1e",
+    "changeType" : "UPDATE",
+    "family" : "dk.atira.pure.api.shared.model.system.User",
+    "familySystemName" : "User",
+    "version" : 534
+  }, {
+    "identifier" : "person",
+    "configurationType" : "dk.atira.pure.api.shared.model.sync.person.PersonExternalSynchConfiguration"
+  }, {
+    "identifier" : "person",
+    "configurationType" : "dk.atira.pure.api.shared.model.sync.person.PersonExternalSynchConfiguration"
   } ],
   "navigationLinks" : [ {
     "ref" : "next",
-    "href" : "https://pure01.tugraz.at/ws/api/514/changes/19653218"
+    "href" : "https://pure01.tugraz.at/ws/api/514/changes/19653271"
   } ]
 }
