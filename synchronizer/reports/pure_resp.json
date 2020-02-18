@@ -1,25 +1,25 @@
 {
-  "pureId" : 1181718,
-  "externalId" : "10600",
+  "pureId" : 1123349,
+  "externalId" : "59100",
   "externalIdSource" : "researchoutputwizard",
-  "uuid" : "f094161e-ad3d-458d-bf6d-f4215ffa9172",
-  "title" : "Detachment of oil drops from solid surfaces in surfactant solutions: molecular mechanisms at a moving contact line",
-  "peerReview" : true,
+  "uuid" : "5915887f-80e8-4587-a51f-921c7863f1e6",
+  "title" : "Novos conceitos de sistemas inteligentes: a rede, o edifìcio e o faturamento",
+  "peerReview" : false,
   "managingOrganisationalUnit" : {
-    "uuid" : "593818b6-e21d-4848-bc9c-a076384588ac",
+    "uuid" : "7be2cb0d-6b22-438e-a31d-44f3fdaab66e",
     "link" : {
       "ref" : "content",
-      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/593818b6-e21d-4848-bc9c-a076384588ac"
+      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/7be2cb0d-6b22-438e-a31d-44f3fdaab66e"
     },
-    "externalId" : "2300",
+    "externalId" : "11625",
     "externalIdSource" : "synchronisedUnifiedOrganisation",
     "externallyManaged" : true,
     "names" : [ {
       "locale" : "en_GB",
-      "value" : "Institute of Fluid Mechanics and Heat Transfer (3210)"
+      "value" : "Institute of Electrical Power Systems (4320)"
     }, {
       "locale" : "de_DE",
-      "value" : "Institut für Strömungslehre und Wärmeübertragung (3210)"
+      "value" : "Institut für Elektrische Anlagen und Netze (4320)"
     } ],
     "types" : [ {
       "locale" : "en_GB",
@@ -36,37 +36,31 @@
   "confidential" : false,
   "info" : {
     "createdBy" : "root",
-    "createdDate" : "2016-02-25T23:36:28.277+0000",
-    "modifiedBy" : "sync_user",
-    "modifiedDate" : "2020-02-16T00:01:39.519+0000",
-    "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/detachment-of-oil-drops-from-solid-surfaces-in-surfactant-solutions-molecular-mechanisms-at-a-moving-contact-line(f094161e-ad3d-458d-bf6d-f4215ffa9172).html",
-    "additionalExternalIds" : [ {
-      "value" : "14344251517",
-      "idSource" : "Scopus"
-    } ]
+    "createdDate" : "2016-02-25T23:25:01.337+0000",
+    "modifiedBy" : "root",
+    "modifiedDate" : "2018-09-06T07:30:37.302+0000",
+    "portalUrl" : "https://pure01.tugraz.at/portal/en/publications/novos-conceitos-de-sistemas-inteligentes-a-rede-o-edificio-e-o-faturamento(5915887f-80e8-4587-a51f-921c7863f1e6).html"
   },
-  "totalScopusCitations" : 42,
-  "pages" : "1309-1321",
-  "volume" : "44",
+  "pages" : "62-69",
   "journalAssociation" : {
-    "pureId" : 1181719,
+    "pureId" : 1123351,
     "title" : {
-      "value" : "Industrial & engineering chemistry research"
+      "value" : "Eletricidade moderna"
     },
     "journal" : {
-      "uuid" : "a27dfaff-8856-4dae-a741-6e634c2c93ca",
+      "uuid" : "22c2e7e9-ec7a-4357-89c7-d3db9c7baa62",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/journals/a27dfaff-8856-4dae-a741-6e634c2c93ca"
+        "href" : "https://pure01.tugraz.at/ws/api/514/journals/22c2e7e9-ec7a-4357-89c7-d3db9c7baa62"
       },
-      "externalId" : "1422",
+      "externalId" : "4026",
       "externalIdSource" : "researchoutputwizard",
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Industrial & engineering chemistry research"
+        "value" : "Eletricidade moderna"
       }, {
         "locale" : "de_DE",
-        "value" : "Industrial & engineering chemistry research"
+        "value" : "Eletricidade moderna"
       } ],
       "types" : [ {
         "locale" : "en_GB",
@@ -81,7 +75,8 @@
       } ]
     }
   },
-  "totalNumberOfAuthors" : 6,
+  "journalNumber" : "N 44",
+  "totalNumberOfAuthors" : 4,
   "types" : [ {
     "locale" : "en_GB",
     "value" : "Article",
@@ -105,12 +100,12 @@
     "uri" : "/dk/atira/pure/researchoutput/category/research"
   } ],
   "publicationStatuses" : [ {
-    "pureId" : 1181718,
-    "externalId" : "10600",
+    "pureId" : 1123349,
+    "externalId" : "59100",
     "externalIdSource" : "researchoutputwizard",
     "current" : true,
     "publicationDate" : {
-      "year" : 2005
+      "year" : 2011
     },
     "publicationStatuses" : [ {
       "locale" : "en_GB",
@@ -126,247 +121,20 @@
   } ],
   "languages" : [ {
     "locale" : "en_GB",
-    "value" : "English",
-    "pureId" : 4900,
-    "uri" : "/dk/atira/pure/core/languages/en_GB"
+    "value" : "Portoguese",
+    "pureId" : 4950,
+    "uri" : "/dk/atira/pure/core/languages/pt_PT"
   }, {
     "locale" : "de_DE",
-    "value" : "englisch",
-    "pureId" : 4900,
-    "uri" : "/dk/atira/pure/core/languages/en_GB"
+    "value" : "portugiesisch",
+    "pureId" : 4950,
+    "uri" : "/dk/atira/pure/core/languages/pt_PT"
   } ],
   "personAssociations" : [ {
-    "pureId" : 1181725,
-    "externalPerson" : {
-      "uuid" : "ac734fa9-edb2-4bc9-b236-54b934e10f69",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/external-persons/ac734fa9-edb2-4bc9-b236-54b934e10f69"
-      },
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "P.A. Kralchevsky"
-      }, {
-        "locale" : "de_DE",
-        "value" : "P.A. Kralchevsky"
-      } ],
-      "types" : [ {
-        "locale" : "en_GB",
-        "value" : "External person",
-        "pureId" : 5089,
-        "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Externe Person",
-        "pureId" : 5089,
-        "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
-      } ]
-    },
+    "pureId" : 1123356,
     "name" : {
-      "firstName" : "P.A.",
-      "lastName" : "Kralchevsky"
-    },
-    "personRoles" : [ {
-      "locale" : "en_GB",
-      "value" : "Author",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Autor",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
-    } ]
-  }, {
-    "pureId" : 1181727,
-    "externalPerson" : {
-      "uuid" : "9128f54b-fa5a-4eaf-8e1f-5468e912a1e8",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/external-persons/9128f54b-fa5a-4eaf-8e1f-5468e912a1e8"
-      },
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "K.D. Danov"
-      }, {
-        "locale" : "de_DE",
-        "value" : "K.D. Danov"
-      } ],
-      "types" : [ {
-        "locale" : "en_GB",
-        "value" : "External person",
-        "pureId" : 5089,
-        "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Externe Person",
-        "pureId" : 5089,
-        "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
-      } ]
-    },
-    "name" : {
-      "firstName" : "K.D.",
-      "lastName" : "Danov"
-    },
-    "personRoles" : [ {
-      "locale" : "en_GB",
-      "value" : "Author",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Autor",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
-    } ]
-  }, {
-    "pureId" : 1181728,
-    "externalPerson" : {
-      "uuid" : "3c4e9185-68d0-41b0-9e78-7edabc16d8d9",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/external-persons/3c4e9185-68d0-41b0-9e78-7edabc16d8d9"
-      },
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "V.L. Kolev"
-      }, {
-        "locale" : "de_DE",
-        "value" : "V.L. Kolev"
-      } ],
-      "types" : [ {
-        "locale" : "en_GB",
-        "value" : "External person",
-        "pureId" : 5089,
-        "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Externe Person",
-        "pureId" : 5089,
-        "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
-      } ]
-    },
-    "name" : {
-      "firstName" : "V.L.",
-      "lastName" : "Kolev"
-    },
-    "personRoles" : [ {
-      "locale" : "en_GB",
-      "value" : "Author",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Autor",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
-    } ]
-  }, {
-    "pureId" : 1181729,
-    "externalPerson" : {
-      "uuid" : "f6467b33-bcfa-40b7-ba2f-adaca5e2572d",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/external-persons/f6467b33-bcfa-40b7-ba2f-adaca5e2572d"
-      },
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "T.D. Gurkov"
-      }, {
-        "locale" : "de_DE",
-        "value" : "T.D. Gurkov"
-      } ],
-      "types" : [ {
-        "locale" : "en_GB",
-        "value" : "External person",
-        "pureId" : 5089,
-        "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Externe Person",
-        "pureId" : 5089,
-        "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
-      } ]
-    },
-    "name" : {
-      "firstName" : "T.D.",
-      "lastName" : "Gurkov"
-    },
-    "personRoles" : [ {
-      "locale" : "en_GB",
-      "value" : "Author",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Autor",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
-    } ]
-  }, {
-    "pureId" : 1181730,
-    "externalPerson" : {
-      "uuid" : "4d4899be-a38f-48f9-8a26-a148d740c7d8",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/external-persons/4d4899be-a38f-48f9-8a26-a148d740c7d8"
-      },
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "M.I. Temelska"
-      }, {
-        "locale" : "de_DE",
-        "value" : "M.I. Temelska"
-      } ],
-      "types" : [ {
-        "locale" : "en_GB",
-        "value" : "External person",
-        "pureId" : 5089,
-        "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Externe Person",
-        "pureId" : 5089,
-        "uri" : "/dk/atira/pure/externalperson/externalpersontypes/externalperson/externalperson"
-      } ]
-    },
-    "name" : {
-      "firstName" : "M.I.",
-      "lastName" : "Temelska"
-    },
-    "personRoles" : [ {
-      "locale" : "en_GB",
-      "value" : "Author",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Autor",
-      "pureId" : 5146,
-      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
-    } ]
-  }, {
-    "pureId" : 1181731,
-    "person" : {
-      "uuid" : "f0240095-1921-4edc-8662-502daac5d222",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/persons/f0240095-1921-4edc-8662-502daac5d222"
-      },
-      "externalId" : "43189",
-      "externalIdSource" : "synchronisedUnifiedPerson",
-      "externallyManaged" : true,
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "Günter Brenn"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Günter Brenn"
-      } ]
-    },
-    "name" : {
-      "firstName" : "Günter",
-      "lastName" : "Brenn"
+      "firstName" : "Maria",
+      "lastName" : "Aigner"
     },
     "personRoles" : [ {
       "locale" : "en_GB",
@@ -380,20 +148,189 @@
       "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
     } ],
     "organisationalUnits" : [ {
-      "uuid" : "593818b6-e21d-4848-bc9c-a076384588ac",
+      "uuid" : "7be2cb0d-6b22-438e-a31d-44f3fdaab66e",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/593818b6-e21d-4848-bc9c-a076384588ac"
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/7be2cb0d-6b22-438e-a31d-44f3fdaab66e"
       },
-      "externalId" : "2300",
+      "externalId" : "11625",
       "externalIdSource" : "synchronisedUnifiedOrganisation",
       "externallyManaged" : true,
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Institute of Fluid Mechanics and Heat Transfer (3210)"
+        "value" : "Institute of Electrical Power Systems (4320)"
       }, {
         "locale" : "de_DE",
-        "value" : "Institut für Strömungslehre und Wärmeübertragung (3210)"
+        "value" : "Institut für Elektrische Anlagen und Netze (4320)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    } ]
+  }, {
+    "pureId" : 1123358,
+    "name" : {
+      "firstName" : "Christian",
+      "lastName" : "Raunig"
+    },
+    "personRoles" : [ {
+      "locale" : "en_GB",
+      "value" : "Author",
+      "pureId" : 5146,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Autor",
+      "pureId" : 5146,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+    } ],
+    "organisationalUnits" : [ {
+      "uuid" : "7be2cb0d-6b22-438e-a31d-44f3fdaab66e",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/7be2cb0d-6b22-438e-a31d-44f3fdaab66e"
+      },
+      "externalId" : "11625",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Electrical Power Systems (4320)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Elektrische Anlagen und Netze (4320)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    } ]
+  }, {
+    "pureId" : 1123360,
+    "person" : {
+      "uuid" : "a8354299-a404-4e45-8a6d-d8755cfd899b",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/a8354299-a404-4e45-8a6d-d8755cfd899b"
+      },
+      "externalId" : "122",
+      "externalIdSource" : "synchronisedUnifiedPerson",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Ernst Schmautzer"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Ernst Schmautzer"
+      } ]
+    },
+    "name" : {
+      "firstName" : "Ernst",
+      "lastName" : "Schmautzer"
+    },
+    "personRoles" : [ {
+      "locale" : "en_GB",
+      "value" : "Author",
+      "pureId" : 5146,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Autor",
+      "pureId" : 5146,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+    } ],
+    "organisationalUnits" : [ {
+      "uuid" : "7be2cb0d-6b22-438e-a31d-44f3fdaab66e",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/7be2cb0d-6b22-438e-a31d-44f3fdaab66e"
+      },
+      "externalId" : "11625",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Electrical Power Systems (4320)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Elektrische Anlagen und Netze (4320)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    } ]
+  }, {
+    "pureId" : 1123362,
+    "person" : {
+      "uuid" : "b6fe38d5-7328-4a13-929d-65d9336a168c",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/b6fe38d5-7328-4a13-929d-65d9336a168c"
+      },
+      "externalId" : "6895",
+      "externalIdSource" : "synchronisedUnifiedPerson",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Lothar Fickert"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Lothar Fickert"
+      } ]
+    },
+    "name" : {
+      "firstName" : "Lothar",
+      "lastName" : "Fickert"
+    },
+    "personRoles" : [ {
+      "locale" : "en_GB",
+      "value" : "Author",
+      "pureId" : 5146,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Autor",
+      "pureId" : 5146,
+      "uri" : "/dk/atira/pure/researchoutput/roles/contributiontojournal/author"
+    } ],
+    "organisationalUnits" : [ {
+      "uuid" : "7be2cb0d-6b22-438e-a31d-44f3fdaab66e",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/7be2cb0d-6b22-438e-a31d-44f3fdaab66e"
+      },
+      "externalId" : "11625",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Electrical Power Systems (4320)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Elektrische Anlagen und Netze (4320)"
       } ],
       "types" : [ {
         "locale" : "en_GB",
@@ -409,20 +346,20 @@
     } ]
   } ],
   "organisationalUnits" : [ {
-    "uuid" : "593818b6-e21d-4848-bc9c-a076384588ac",
+    "uuid" : "7be2cb0d-6b22-438e-a31d-44f3fdaab66e",
     "link" : {
       "ref" : "content",
-      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/593818b6-e21d-4848-bc9c-a076384588ac"
+      "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/7be2cb0d-6b22-438e-a31d-44f3fdaab66e"
     },
-    "externalId" : "2300",
+    "externalId" : "11625",
     "externalIdSource" : "synchronisedUnifiedOrganisation",
     "externallyManaged" : true,
     "names" : [ {
       "locale" : "en_GB",
-      "value" : "Institute of Fluid Mechanics and Heat Transfer (3210)"
+      "value" : "Institute of Electrical Power Systems (4320)"
     }, {
       "locale" : "de_DE",
-      "value" : "Institut für Strömungslehre und Wärmeübertragung (3210)"
+      "value" : "Institut für Elektrische Anlagen und Netze (4320)"
     } ],
     "types" : [ {
       "locale" : "en_GB",
@@ -447,56 +384,32 @@
     "pureId" : 2928,
     "uri" : "/dk/atira/pure/researchoutput/openaccesspermission/none"
   } ],
-  "relatedProjects" : [ {
-    "uuid" : "67bb6a69-09ba-484c-a5f9-57b186e33190",
-    "link" : {
-      "ref" : "content",
-      "href" : "https://pure01.tugraz.at/ws/api/514/projects/67bb6a69-09ba-484c-a5f9-57b186e33190"
-    },
-    "externalId" : "F18072",
-    "externalIdSource" : "synchronisedUPMProject",
-    "externallyManaged" : true,
-    "names" : [ {
-      "locale" : "en_GB",
-      "value" : "Emulsions with nanoparticles for new materials"
-    } ],
+  "keywordGroups" : [ {
+    "pureId" : 1123352,
+    "logicalName" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise",
     "types" : [ {
       "locale" : "en_GB",
-      "value" : "Research",
-      "pureId" : 5371,
-      "uri" : "/dk/atira/pure/upmproject/upmprojecttypes/upmproject/research"
+      "value" : "Fields of Expertise",
+      "uri" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise"
     }, {
       "locale" : "de_DE",
-      "value" : "!!Research",
-      "pureId" : 5371,
-      "uri" : "/dk/atira/pure/upmproject/upmprojecttypes/upmproject/research"
-    } ]
-  }, {
-    "uuid" : "f2bdb47f-b3c0-49a3-ab57-f6b3638b23f2",
-    "link" : {
-      "ref" : "content",
-      "href" : "https://pure01.tugraz.at/ws/api/514/projects/f2bdb47f-b3c0-49a3-ab57-f6b3638b23f2"
-    },
-    "externalId" : "F19180",
-    "externalIdSource" : "synchronisedUPMProject",
-    "externallyManaged" : true,
-    "names" : [ {
-      "locale" : "en_GB",
-      "value" : "Multiphase Flows"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Mehrphasenströmungen"
+      "value" : "Fields of Expertise",
+      "uri" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise"
     } ],
-    "types" : [ {
-      "locale" : "en_GB",
-      "value" : "Research",
-      "pureId" : 5371,
-      "uri" : "/dk/atira/pure/upmproject/upmprojecttypes/upmproject/research"
-    }, {
-      "locale" : "de_DE",
-      "value" : "!!Research",
-      "pureId" : 5371,
-      "uri" : "/dk/atira/pure/upmproject/upmprojecttypes/upmproject/research"
+    "keywordContainers" : [ {
+      "pureId" : 1123354,
+      "structuredKeyword" : {
+        "pureId" : 26401,
+        "uri" : "/dk/atira/pure/researchoutput/keywords/fieldsofexpertise/so",
+        "disabled" : false,
+        "terms" : [ {
+          "locale" : "en_GB",
+          "value" : "Sonstiges"
+        }, {
+          "locale" : "de_DE",
+          "value" : "Sonstiges"
+        } ]
+      }
     } ]
   } ],
   "visibilities" : [ {
@@ -516,54 +429,5 @@
     "locale" : "de_DE",
     "value" : "Zur Validierung",
     "workflowStep" : "forApproval"
-  } ],
-  "scopusMetrics" : [ {
-    "value" : 2,
-    "year" : 2020
-  }, {
-    "value" : 4,
-    "year" : 2019
-  }, {
-    "value" : 4,
-    "year" : 2018
-  }, {
-    "value" : 1,
-    "year" : 2017
-  }, {
-    "value" : 6,
-    "year" : 2016
-  }, {
-    "value" : 3,
-    "year" : 2015
-  }, {
-    "value" : 4,
-    "year" : 2014
-  }, {
-    "value" : 5,
-    "year" : 2013
-  }, {
-    "value" : 2,
-    "year" : 2012
-  }, {
-    "value" : 4,
-    "year" : 2011
-  }, {
-    "value" : 1,
-    "year" : 2010
-  }, {
-    "value" : 2,
-    "year" : 2009
-  }, {
-    "value" : 1,
-    "year" : 2008
-  }, {
-    "value" : 1,
-    "year" : 2007
-  }, {
-    "value" : 2,
-    "year" : 2006
-  }, {
-    "value" : 0,
-    "year" : 2005
   } ]
 }

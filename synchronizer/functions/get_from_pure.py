@@ -3,8 +3,8 @@ from setup import *
 # -- GET FROM PURE --
 def get_from_pure(self):
     try:
-        pag = 2
-        pag_size = 15
+        pag = 1
+        pag_size = 50
         print(f'\n---   ---   ---\nGET FROM PURE\n\nPag size: {pag_size}\n')
 
         cnt = 0

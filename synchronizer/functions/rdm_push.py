@@ -168,6 +168,9 @@ def add_field(self, item, inv_field, path):
                 for i in resp_json:
                     if i['name'] == element:
                         element = i['iso6393']
+                    else:
+                        # in case there is no match (e.g. spelling mistake in Pure) ignore field
+                        return
 
         # - ACCESS_RIGHT -
         #   RDM access right (https://github.com/inveniosoftware/invenio-rdm-records/issues/37):
@@ -232,14 +235,16 @@ def post_to_rdm(self):
 
         if response.status_code >= 300:
 
+            self.cnt_errors += 1
             print(response.content)
 
             # metadata transmission success flag
             self.metadata_success = False
 
             # post json error_jsons
-            filename = self.dirpath + "/reports/error_jsons/" + uuid + ".json"
-            open(filename, "w").write(str(self.data))
+            if response.status_code != 429:
+                filename = f'{self.dirpath}/reports/error_jsons/{uuid}.json'
+                open(filename, "w").write(str(self.data))
             
             # error description from invenioRDM
             report += str(response.content) + '\n'

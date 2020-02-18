@@ -69,7 +69,7 @@ def rdm_push_byUuid(self, transfer_type):
                     report += "error\n"
 
                 current_time = self.datetime.now().strftime("%H:%M:%S")
-                report += f"{current_time}\nTot records: {cnt_tot} - Success transfer: {cnt_true}\nLines start: {lines_start} - Lines end: {lines_end}\n\n"
+                report += f"{current_time}\nTot records: {cnt_tot} - Success transfer: {cnt_true}\n"
             
             open(self.dirpath + '/reports/d_daily_updates.log', "a").write(report)
             print(report)

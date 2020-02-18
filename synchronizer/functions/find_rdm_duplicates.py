@@ -18,13 +18,13 @@ def find_rdm_duplicates(self):
         cnt = 0
         dup_recid = []
 
-        for uuid in uuid_rdm:
+        for uuid in reversed(uuid_rdm):
             cnt_dup = 0
             if uuid not in temp_arr:        # not duplicated
                 temp_arr.append(uuid)
             else:                           # duplicated
                 # find the corresponding recid to the duplicated uuid
-                for i in uuidRecid_rdm:
+                for i in reversed(uuidRecid_rdm):
                     split = i.split(' ')
                     uuid = uuid.split('\n')[0]
                     recid = split[1]

@@ -20,10 +20,11 @@ def delete_record(self):
         cnt_success = 0
         cnt_error = 0
         cnt_tot = 0
+        deleted_records = []
 
         while record_id:
             cnt_tot += 1
-            self.time.sleep(1)
+            self.time.sleep(0.8)
             r_id = record_id.strip()
 
             if len(r_id) != 11:
@@ -38,7 +39,9 @@ def delete_record(self):
             # 410 -> "PID has been deleted"
             if response.status_code < 300 or response.status_code == 410:
                 cnt_success += 1
-                # remove deleted record_id
+                deleted_records.append(r_id)
+
+                # remove deleted record_id from to_delete
                 with open(file_name, "r") as f:
                     lines = f.readlines()
                 with open(file_name, "w") as f:
@@ -68,6 +71,23 @@ def delete_record(self):
 
         report += f"Tot records: {cnt_tot} - Success transfer: {cnt_success}\n"
         report += f"Lines start: {lines_start} - Lines end: {lines_end}\n"
+
+        # Remove records from rdm_uuids_recids.log
+        file_name = self.dirpath + '/reports/full_comparison/rdm_uuids_recids.log'
+        cnt_removed = 0
+        with open(file_name, "r") as f:
+            lines = f.readlines()
+        with open(file_name, "w") as f:
+            for line in lines:
+                file_rid = line.strip("\n")
+                file_rid = file_rid.split(' ')[1]
+                if file_rid in deleted_records:
+                    cnt_removed += 1
+                else:
+                    f.write(line)
+
+        print(f'\nRemoved lines from rdm_uuids_recids.log: {cnt_removed}')
+
             
         open(self.dirpath + '/reports/d_daily_updates.log', "a").write(report)
         print(report)
