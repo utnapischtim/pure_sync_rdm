@@ -30,20 +30,17 @@ class Master:
         from functions.rdm_push_byPage  import get_pure_by_page
         from functions.rdm_push         import create_invenio_data
 
-        pag_begin = 1
-        pag_end =   2
-        pag_size =  5
+        pag_begin = 6
+        pag_end =   7
+        pag_size =  50
         get_pure_by_page(self, pag_begin, pag_end, pag_size)
     
 
     #   ---     ---     ---
     def pure_updates_check(self):
 
-        from functions.get_pure_updates import get_pure_updates
-        from functions.rdm_push_byUuid  import rdm_push_byUuid
-        
-        get_pure_updates(self)
-        rdm_push_byUuid(self, 'update')
+        from functions.pure_get_updates import pure_get_updates
+        pure_get_updates(self)
     
 
     #   ---     ---     ---
@@ -109,11 +106,15 @@ master_inst = Master()      # - - Create instance - -
 
 # master_inst.rdm_push_byUuid()
 # master_inst.rdm_push_byPage()
-# master_inst.delete_toDelete()
 # master_inst.pure_updates_check()
-master_inst.pure_get_changes()
+# master_inst.pure_get_changes()
 # master_inst.full_comparison()
-# master_inst.rdm_delete_duplicates()
+master_inst.rdm_delete_duplicates()
 # master_inst.delete_all_recs()
 # master_inst.delete_toDelete()
 # master_inst.shorten_logs()
+
+## NOTES ##
+#
+#  best option is first to do the full_comparison in order to have 
+#  pure_uuids.log and rdm_uuids.log up to date

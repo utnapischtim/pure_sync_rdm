@@ -1,10 +1,16 @@
 from setup import *
+from functions.get_from_rdm import get_from_rdm
 
-def get_pure_updates(self):
+def pure_get_updates(self):
     try:
+        # empty to_delete.log
+        open(self.dirpath + '/reports/to_delete.log', 'w').close()
+
+        # empty to_transfer.log
+        open(self.dirpath + '/reports/to_transfer.log', 'w').close()
+
         # Get date of last update
         file_name = self.dirpath + "/reports/d_daily_updates.log"
-
         date_today = self.date.today()
 
         # Finds last date when the update successfully happened
@@ -25,14 +31,23 @@ def get_pure_updates(self):
         
         date_object = self.datetime.strptime(date_last_update, '%Y-%m-%d').date()
 
-        # date_limit = str(date_object + timedelta(days=1))         # one day after the last update
-        date_limit = str(date_object)
+        # date_limit = str(date_object + self.timedelta(days=1))       # one day after the last update
+        date_limit = str(date_object - self.timedelta(days=3))         # one day before the last update
+        # date_limit = str(date_object)
 
         report = '\n---\n---   ---\n---   ---   ---'
         report += f"\nToday: {date_today}\nLast update: {date_last_update} \nDate limit: {date_limit}\n"
         print(report)
         print(f"See file '/records/full_reports/{date_today}_pure_updates.log'\n")
 
+        # Get all RDM uuids and recids
+        get_from_rdm(self)              # MAYBE TOO LONG !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        file_name = self.dirpath + '/reports/full_comparison/rdm_uuids_recids.log'
+        uuidRecid_rdm = open(file_name, 'r').readlines()
+        to_delete = ''
+        cnt_toDel = 0
+
+        # Gets from Pure all new records
         pag = 1
         while True:
             report += f'- Pag: {pag} -\n'
@@ -53,9 +68,6 @@ def get_pure_updates(self):
             open(self.dirpath + "/reports/resp_pure.json", 'wb').write(response.content)
             resp_json = self.json.loads(response.content)
 
-            # resp_json = open(dirpath + '/reports/resp_pure.json', 'r')                  # -- TEMPORARY --
-            # resp_json = json.load(resp_json)                                            # -- TEMPORARY --
-
             to_re_trans = ''
             cnt  = 0
             cntu = 0
@@ -63,16 +75,25 @@ def get_pure_updates(self):
             for item in resp_json['items']:
                 if 'info' in item:
                     cnt += 1
+                    pure_uuid = item['uuid']
 
                     record_date_time = item['info']['modifiedDate']
                     record_date = str(record_date_time.split('T')[0])
                     
                     if record_date >= date_limit:
-                        report += item['uuid'] + ' - ' + record_date + ' - To update ---\n'
-                        to_re_trans += item['uuid'] + '\n'
+                        report += pure_uuid + ' - ' + record_date + ' - To update\n'
+                        to_re_trans += pure_uuid + '\n'
                         cntu += 1
+
+                        # Check if older version of the same uuid is in RDM
+                        for rdm_record in uuidRecid_rdm:
+                            rdm_uuid = rdm_record.split(' ')[0]
+                            if pure_uuid == rdm_uuid:
+                                rdm_recid = rdm_record.split(' ')[1]
+                                to_delete += rdm_recid
+                                cnt_toDel += 1
                     else:
-                        report += item['uuid'] + ' - ' + record_date + ' - ok\n'
+                        report += pure_uuid + ' - ' + record_date + ' - Ok\n'
 
             line = f'Tot: {cnt} - To update: {cntu}\n'
             print(line)
@@ -84,18 +105,29 @@ def get_pure_updates(self):
                 print('There are no records to be updated\n')
                 return
 
+            # records to transfer
             open(self.dirpath + '/reports/to_transfer.log', "a").write(to_re_trans)
 
             pag += 1
             self.time.sleep(3)
 
-            # - while loop condition -
-            # if the last record is older then the date_limit then it stops
+            # if the last record is older then the date_limit then stops the while loop
             if record_date < date_limit:
                 break
+        
+                
+        # records to delete
+        if cnt_toDel > 0:
+            print(f'Old records to be deleted: {cnt_toDel}\n')
+            open(self.dirpath + '/reports/to_delete.log', "a").write(to_delete)
 
-        # from f_uuid_transfer import uuid_transfer
-        # uuid_transfer('update')
+        # UPDATE
+        from functions.rdm_push_byUuid import rdm_push_byUuid
+        rdm_push_byUuid(self, 'update')
+
+        # DELETE
+        from functions.delete_record    import delete_record
+        delete_record(self)
 
     except:
         print('\n   !!!   !!!   Error in get_pure_updates function   !!!   !!!   \n')

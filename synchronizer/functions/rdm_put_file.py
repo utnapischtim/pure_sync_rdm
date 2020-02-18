@@ -51,6 +51,7 @@ def rdm_put_file(self, file_name):
 
         filename = self.dirpath + "/reports/full_reports/" + str(self.date.today()) + "_report.log"
         open(filename, "a").write(report)
+        return response.status_code
 
 
     except:

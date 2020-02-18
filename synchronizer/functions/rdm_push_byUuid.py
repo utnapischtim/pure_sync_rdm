@@ -22,7 +22,7 @@ def rdm_push_byUuid(self, transfer_type):
         cnt_tot = 0
         cnt_true = 0
 
-        print(f'{lines_start} line/s in to_transfer.log')
+        print(f'Line/s in to_transfer.log: {lines_start}')
         
         while uuid:
             cnt_tot += 1
@@ -30,6 +30,7 @@ def rdm_push_byUuid(self, transfer_type):
             
             if (len(uuid.strip()) < 36):
                 print('Invalid uuid. Too short\n')
+                uuid = retrans_data.readline()
                 continue
 
             response = get_pure_by_id(self, uuid.strip())

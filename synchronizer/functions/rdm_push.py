@@ -215,13 +215,13 @@ def post_to_rdm(self):
         params = (
             ('prettyprint', '1'),
         )
-        # POST REQUEST
+        # POST REQUEST metadata
         response = self.requests.post('https://localhost:5000/api/records/', headers=headers, params=params, data=data_utf8, verify=False)
 
         # RESPONSE CHECK
         print('Metadata post: ', response)                
 
-        # adds all response http codes into array
+        # adds metadata http response codes into array
         if response.status_code in self.cnt_resp:       self.cnt_resp[response.status_code] += 1
         else:                                           self.cnt_resp[response.status_code] =  1
 
@@ -264,8 +264,11 @@ def post_to_rdm(self):
             # - Upload record FILES to RDM -
             if len(self.record_files) > 0:
                 for file_name in self.record_files:
-                    rdm_put_file(self, file_name)
+                    file_resp_code = rdm_put_file(self, file_name)
 
+                # adds file transfer http response codes into array
+                if file_resp_code in self.cnt_resp:     self.cnt_resp[file_resp_code] += 1
+                else:                                   self.cnt_resp[file_resp_code] =  1
 
         # FINALL SUCCESS CHECK
         # print(f'Success check -> metadata: {self.metadata_success} - file: {self.file_success}')
