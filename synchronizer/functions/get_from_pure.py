@@ -4,7 +4,7 @@ from setup import *
 def get_from_pure(self):
     try:
         pag = 1
-        pag_size = 50
+        pag_size = 25
         print(f'\n---   ---   ---\nGET FROM PURE\n\nPag size: {pag_size}\n')
 
         cnt = 0
@@ -27,9 +27,6 @@ def get_from_pure(self):
             open(self.dirpath + "/reports/resp_pure.json", 'wb').write(response.content)
             resp_json = self.json.loads(response.content)
 
-            # resp_json = open(dirpath + '/reports/resp_pure.json', 'r')             # -- TEMPORARY -- 
-            # resp_json = json.load(resp_json)                                            # -- TEMPORARY -- 
-
             if len(resp_json['items']) == 0:    go_on = False
 
             #       ---         ---         ---
@@ -39,7 +36,8 @@ def get_from_pure(self):
 
             print(f'Pag {str(pag)} - Records {cnt}')
 
-            go_on = False   # TEMP!!
+            if pag >= 2:               # TEMP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                go_on = False          # TEMP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
             self.time.sleep(3)
             pag += 1

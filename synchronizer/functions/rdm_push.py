@@ -5,134 +5,133 @@ from requests.auth import HTTPBasicAuth
 #   ---         ---         ---
 def create_invenio_data(self):
 
-    # try:
-    self.record_files = []
+    try:
+        self.record_files = []
 
-    item = self.item
-    self.uuid = item['uuid']
+        item = self.item
+        self.uuid = item['uuid']
 
-    self.data = '{'
-    self.data += '"owners": [1], '
-    self.data += '"_access": {"metadata_restricted": false, "files_restricted": false}, '
-    
-                        # invenio field name                  # PURE json path
-    add_field(self, item, 'title',                             ['title'])
-    add_field(self, item, 'publicationDatePure',               ['publicationStatuses', 0, 'publicationDate', 'year'])
-    add_field(self, item, 'createdDatePure',                   ['info', 'createdDate'])
-    add_field(self, item, 'modifiedDatePure',                  ['info', 'modifiedDate'])
-    add_field(self, item, 'pureId',                            ['pureId'])
-    add_field(self, item, 'uuid',                              ['uuid'])                                                                   
-    add_field(self, item, 'type_p',                            ['types', 0, 'value'])                                                     
-    add_field(self, item, 'category',                          ['categories', 0, 'value'])                                              
-    add_field(self, item, 'peerReview',                        ['peerReview'])                                                         
-    add_field(self, item, 'publicationStatus',                 ['publicationStatuses', 0, 'publicationStatuses', 0, 'value'])
-    add_field(self, item, 'language',                          ['languages', 0, 'value'])
-    add_field(self, item, 'totalNumberOfAuthors',              ['totalNumberOfAuthors'])
-    add_field(self, item, 'managingOrganisationalUnit',        ['managingOrganisationalUnit', 'names', 0, 'value'])
-    add_field(self, item, 'workflow',                          ['workflows', 0, 'value'])
-    add_field(self, item, 'confidential',                      ['confidential'])
-    add_field(self, item, 'publisherName',                     ['publisher', 'names', 0, 'value'])
-    add_field(self, item, 'access_right',                      ['openAccessPermissions', 0, 'value'])
-    add_field(self, item, 'pages',                             ['info','pages'])                                                     
-    add_field(self, item, 'volume',                            ['info','volume'])                                                         
-    add_field(self, item, 'versionType',                       ['electronicVersions', 0, 'versionType', 'value'])    # review                
-    add_field(self, item, 'licenseType',                       ['electronicVersions', 0, 'licenseType', 'value'])    # review
-    add_field(self, item, 'journalTitle',                      ['info', 'journalAssociation', 'title', 'value'])
-    add_field(self, item, 'journalNumber',                     ['info', 'journalNumber'])
+        self.data = '{'
+        self.data += '"owners": [1], '
+        self.data += '"_access": {"metadata_restricted": false, "files_restricted": false}, '
+        
+                            # invenio field name                  # PURE json path
+        add_field(self, item, 'title',                             ['title'])
+        add_field(self, item, 'publicationDatePure',               ['publicationStatuses', 0, 'publicationDate', 'year'])
+        add_field(self, item, 'createdDatePure',                   ['info', 'createdDate'])
+        add_field(self, item, 'modifiedDatePure',                  ['info', 'modifiedDate'])
+        add_field(self, item, 'pureId',                            ['pureId'])
+        add_field(self, item, 'uuid',                              ['uuid'])                                                                   
+        add_field(self, item, 'type_p',                            ['types', 0, 'value'])                                                     
+        add_field(self, item, 'category',                          ['categories', 0, 'value'])                                              
+        add_field(self, item, 'peerReview',                        ['peerReview'])                                                         
+        add_field(self, item, 'publicationStatus',                 ['publicationStatuses', 0, 'publicationStatuses', 0, 'value'])
+        add_field(self, item, 'language',                          ['languages', 0, 'value'])
+        add_field(self, item, 'totalNumberOfAuthors',              ['totalNumberOfAuthors'])
+        add_field(self, item, 'managingOrganisationalUnit',        ['managingOrganisationalUnit', 'names', 0, 'value'])
+        add_field(self, item, 'workflow',                          ['workflows', 0, 'value'])
+        add_field(self, item, 'confidential',                      ['confidential'])
+        add_field(self, item, 'publisherName',                     ['publisher', 'names', 0, 'value'])
+        add_field(self, item, 'access_right',                      ['openAccessPermissions', 0, 'value'])
+        add_field(self, item, 'pages',                             ['info','pages'])                                                     
+        add_field(self, item, 'volume',                            ['info','volume'])                                                         
+        add_field(self, item, 'versionType',                       ['electronicVersions', 0, 'versionType', 'value'])    # review                
+        add_field(self, item, 'licenseType',                       ['electronicVersions', 0, 'licenseType', 'value'])    # review
+        add_field(self, item, 'journalTitle',                      ['info', 'journalAssociation', 'title', 'value'])
+        add_field(self, item, 'journalNumber',                     ['info', 'journalNumber'])
 
-    if 'electronicVersions' in item:
-        cnt = 0
-        for EV in item['electronicVersions']:
-            if 'file' in EV:
-                if 'fileURL' in EV['file'] and 'fileName' in EV['file']:
-                    
-                    if cnt == 0:
-                        self.data += '"versionFiles": ['
-                    cnt += 1
+        if 'electronicVersions' in item:
+            cnt = 0
+            for EV in item['electronicVersions']:
+                if 'file' in EV:
+                    if 'fileURL' in EV['file'] and 'fileName' in EV['file']:
+                        
+                        if cnt == 0:
+                            self.data += '"versionFiles": ['
+                        cnt += 1
 
-                    self.data += '{'
-                    add_field(self, EV, 'fileName',                          ['file', 'fileName'])
-                    add_field(self, EV, 'fileModifBy',                       ['creator'])
-                    add_field(self, EV, 'fileModifDate',                     ['created'])
-                    add_field(self, EV, 'fileType',                          ['file', 'mimeType'])
-                    add_field(self, EV, 'fileAccessType',                    ['accessTypes', 0, 'value'])
-                    add_field(self, EV, 'fileSize',                          ['file', 'size'])
-                    add_field(self, EV, 'fileDigest',                        ['file', 'digest'])
-                    add_field(self, EV, 'fileDigestAlgorithm',               ['file', 'digestAlgorithm'])
+                        self.data += '{'
+                        add_field(self, EV, 'fileName',                          ['file', 'fileName'])
+                        add_field(self, EV, 'fileModifBy',                       ['creator'])
+                        add_field(self, EV, 'fileModifDate',                     ['created'])
+                        add_field(self, EV, 'fileType',                          ['file', 'mimeType'])
+                        add_field(self, EV, 'fileAccessType',                    ['accessTypes', 0, 'value'])
+                        add_field(self, EV, 'fileSize',                          ['file', 'size'])
+                        add_field(self, EV, 'fileDigest',                        ['file', 'digest'])
+                        add_field(self, EV, 'fileDigestAlgorithm',               ['file', 'digestAlgorithm'])
 
-                    self.data += f'"fileVersion": "1??", '
-                    self.data = self.data[:-2]
-                    self.data += '}, '                                  # end review
+                        self.data = self.data[:-2]
+                        self.data += '}, '                                  # end review
 
-                    # DOWNLOAD FILE FROM PURE
-                    file_name = EV['file']['fileName']
-                    file_url  = EV['file']['fileURL']
-                    response = self.requests.get(file_url, auth=HTTPBasicAuth(pure_username, pure_password))
-                    print(f'\n--- Download file from Pure. {response}\nFile name:\t{file_name}')
+                        # DOWNLOAD FILE FROM PURE
+                        file_name = EV['file']['fileName']
+                        file_url  = EV['file']['fileURL']
+                        response = self.requests.get(file_url, auth=HTTPBasicAuth(pure_username, pure_password))
+                        print(f'\n--- Download file from Pure. {response}\nFile name:\t{file_name}')
 
-                    # SAVE FILE
-                    if response.status_code < 300:
-                        open(str(self.dirpath) + '/tmp_files/' + file_name, 'wb').write(response.content)
-                        self.record_files.append(file_name)
-        if cnt > 0:
+                        # SAVE FILE
+                        if response.status_code < 300:
+                            open(str(self.dirpath) + '/tmp_files/' + file_name, 'wb').write(response.content)
+                            self.record_files.append(file_name)
+            if cnt > 0:
+                self.data = self.data[:-2]       
+                self.data += '], '
+
+
+        # --- personAssociations ---
+        if 'personAssociations' in item:
+            self.data += '"contributors": ['
+            for i in item['personAssociations']:
+                self.data += '{'
+                
+                if 'name' in i:
+                    if 'firstName' in i['name'] and 'lastName' in i['name']:
+                        full_name = i['name']['lastName'] + ', '
+                        full_name += i['name']['firstName']
+                        self.data += f'"name": "{full_name}", '
+                    else:   
+                        self.data += '"name": "Name not specified", '
+                elif 'authorCollaboratorName' in i:
+                    self.data += '"name": "See authorCollaboratorName", '
+                else:   
+                    self.data += '"name": "Name not specified", '
+
+                add_field(self, i, 'authorCollaboratorName',         ['authorCollaboration', 'names', 0, 'value'])    
+                add_field(self, i, 'personRole',                     ['personRoles', 0, 'value'])    
+                add_field(self, i, 'organisationalUnit',             ['organisationalUnits', 0, 'names', 0, 'value'])
+                add_field(self, i, 'link',                           ['person', 'link', 'href'])
+                add_field(self, i, 'link',                           ['externalPerson', 'link', 'href'])
+                add_field(self, i, 'type_p',                         ['externalPerson', 'types', 0, 'value'])
+                self.data = self.data[:-2]                          # removes last 2 characters
+                self.data += '}, '
+
             self.data = self.data[:-2]       
             self.data += '], '
 
-
-    # --- personAssociations ---
-    if 'personAssociations' in item:
-        self.data += '"contributors": ['
-        for i in item['personAssociations']:
-            self.data += '{'
-            
-            if 'name' in i:
-                if 'firstName' in i['name'] and 'lastName' in i['name']:
-                    full_name = i['name']['lastName'] + ', '
-                    full_name += i['name']['firstName']
-                    self.data += f'"name": "{full_name}", '
-                else:   
-                    self.data += '"name": "Name not specified", '
-            elif 'authorCollaboratorName' in i:
-                self.data += '"name": "See authorCollaboratorName", '
-            else:   
-                self.data += '"name": "Name not specified", '
-
-            add_field(self, i, 'authorCollaboratorName',         ['authorCollaboration', 'names', 0, 'value'])    
-            add_field(self, i, 'personRole',                     ['personRoles', 0, 'value'])    
-            add_field(self, i, 'organisationalUnit',             ['organisationalUnits', 0, 'names', 0, 'value'])
-            add_field(self, i, 'link',                           ['person', 'link', 'href'])
-            add_field(self, i, 'link',                           ['externalPerson', 'link', 'href'])
-            add_field(self, i, 'type_p',                         ['externalPerson', 'types', 0, 'value'])
-            self.data = self.data[:-2]                          # removes last 2 characters
-            self.data += '}, '
-
-        self.data = self.data[:-2]       
-        self.data += '], '
-
-    # --- organisationalUnits ---
-    if 'organisationalUnits' in item:
-        self.data += '"organisationalUnits": ['
-        for i in item['organisationalUnits']:
-            self.data += '{'
-            add_field(self, i, 'name',                           ['names', 0, 'value'])
-            add_field(self, i, 'link',                           ['link', 'href'])
+        # --- organisationalUnits ---
+        if 'organisationalUnits' in item:
+            self.data += '"organisationalUnits": ['
+            for i in item['organisationalUnits']:
+                self.data += '{'
+                add_field(self, i, 'name',                           ['names', 0, 'value'])
+                add_field(self, i, 'link',                           ['link', 'href'])
+                self.data = self.data[:-2]
+                self.data += '}, '
+                
             self.data = self.data[:-2]
-            self.data += '}, '
-            
+            self.data += '], '
+
         self.data = self.data[:-2]
-        self.data += '], '
+        self.data += '}'          # End data
 
-    self.data = self.data[:-2]
-    self.data += '}'          # End data
+        # Write last_push.log
+        filename = self.dirpath + "/reports/last_push.json"
+        open(filename, "w+").write(self.data)
 
-    # Write last_push.log
-    filename = self.dirpath + "/reports/last_push.json"
-    open(filename, "w+").write(self.data)
+        return post_to_rdm(self)
 
-    return post_to_rdm(self)
-
-    # except:
-    #     print('\n- Error in create_invenio_data method -\n')
+    except:
+        print('\n- Error in create_invenio_data method -\n')
 
 
 #   ---         ---         ---
@@ -209,7 +208,7 @@ def post_to_rdm(self):
 
         self.metadata_success = None
         self.file_success =     None
-        self.time.sleep(1)                                 # ~ 5000 records per hour
+        self.time.sleep(push_dist_sec)                        # ~ 5000 records per hour
 
         data_utf8 = self.data.encode('utf-8')
         headers = {
@@ -258,7 +257,7 @@ def post_to_rdm(self):
 
         if response.status_code == 429:
             print('Waiting 15 min')
-            self.time.sleep(900)                     # 429 too many requests, wait 15 min
+            self.time.sleep(wait_429)                     # 429 too many requests, wait 15 min
 
         # Successful transmition
         if response.status_code < 300:

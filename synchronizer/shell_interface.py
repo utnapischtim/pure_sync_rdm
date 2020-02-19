@@ -1,6 +1,9 @@
 from cmd import Cmd
+import requests
+import json
 import os
-dirpath = os.path.dirname(os.path.abspath(__file__))
+import time
+from datetime import date, datetime, timedelta
     
 class MyPrompt(Cmd):
 
@@ -13,67 +16,99 @@ class MyPrompt(Cmd):
 
     def help_exit(self):
         print('Type "exit"')
-
-
-    # GET UPDATES FROM PURE
-    def do_Updates_check(self, inp):
-        """\nHelp -> 
-                Gets from Pure API all records that have been modified
-                after the last update       """
-        from f_get_pure_updates import get_pure_updates
-        get_pure_updates()
-
     
-    # GET CHANGES FROM PURE
-    def do_Changes_check(self, inp):
-        """Help -> Gets from Pure API endpoint 'changes' all the records that have been modified.\n"""
-        from f_get_pure_changes import get_pure_changes
-        get_pure_changes()
+    #   ---     ---     ---
+    def do_rdm_push_byUuid(self, inp):
+        """\nHelp -> \n"""
+        self.get_props()
 
+        from functions.rdm_push_byUuid          import rdm_push_byUuid
+        rdm_push_byUuid(self, '')                   # transfer_type -> '' / 'full_comp' / 'update' / 'changes'
 
-    # DELETE RDM RECORD
-    def do_Duplicates_delete_RDM(self, inp):
-        """Help -> Deletes all duplicate records from RDM.\n"""
-        print("do_RDM_delete_duplicates")
-        from f_full_comparison import FullComparison
+    #   ---     ---     ---
+    def do_rdm_push_byPage(self, inp):
+        """\nHelp -> \n"""
+        self.get_props()
 
-        inst_fc = FullComparison()
-        inst_fc.get_from_rdm()
-        inst_fc.find_rdm_duplicates()
-
-
-    # COMPARE ALL PURE AND RDM RECORDS && DELETE DUPLICATES
-    def do_Full_comparison_and_dup(self, inp):
-        """\nHelp ->  
-                Get all records from Pure and from RDM,
-                afterwards checks with Pure records are missing in RDM.
-                Finally it checks for duplicate records in RDM and removes them.
-        """
-        print("do_RDM_delete_duplicates")
-        from f_uuid_transfer   import uuid_transfer
-        from f_full_comparison import FullComparison
-
-        inst_fc = FullComparison()
-        inst_fc.get_from_rdm()
-        inst_fc.get_from_pure()
-        inst_fc.find_missing()
-        uuid_transfer('full_comp')
-
-        inst_fc.find_rdm_duplicates()
+        from functions.rdm_push_byPage          import get_pure_by_page
+        from functions.rdm_push                 import create_invenio_data
+        pag_begin = 13
+        pag_end =   50
+        pag_size =  50
+        get_pure_by_page(self, pag_begin, pag_end, pag_size)
     
+    #   ---     ---     ---
+    def do_pure_updates_check(self, inp):
+        """\nHelp -> \n"""
+        self.get_props()
+
+        from functions.pure_get_updates         import pure_get_updates
+        pure_get_updates(self)
+
+    #   ---     ---     ---
+    def do_pure_get_changes(self, inp):
+        """\nHelp -> \n"""
+        self.get_props()
+
+        from functions.pure_get_changes         import pure_get_changes
+        pure_get_changes(self)
     
-    # UUID TRANSFER
-    def do_Transfer_uuid(self, inp):
-        """\nHelp -> Only uuid transfer"""
-        from f_uuid_transfer   import uuid_transfer
-        uuid_transfer('')
+    #   ---     ---     ---
+    def do_full_comparison(self, inp):
+        """\nHelp -> \n"""
+        self.get_props()
+
+        from functions.intersection_pure_rdm    import intersection_pure_rdm
+        intersection_pure_rdm(self)
+
+    #   ---     ---     ---
+    def do_rdm_duplicates(self, inp):
+        """\nHelp -> \n"""
+        self.get_props()
+
+        from functions.get_from_rdm             import get_from_rdm
+        from functions.find_rdm_duplicates      import find_rdm_duplicates
+        resp = get_from_rdm(self)
+        if resp == True: 
+            find_rdm_duplicates(self)
+
+    #   ---     ---     ---
+    def do_delete_all_recs(self, inp):
+        """\nHelp -> \n"""
+        self.get_props()
+
+        from functions.get_from_rdm             import get_from_rdm
+        from functions.delete_all_records       import delete_all_records
+        get_from_rdm(self)
+        delete_all_records(self)
+
+    #   ---     ---     ---
+    def do_delete_toDelete(self, inp):
+        """\nHelp -> \n"""
+        self.get_props()
+
+        from functions.delete_record            import delete_record
+        delete_record(self)
 
     
     # REDUCE LENGTH LOGS
     def do_Shorten_logs(self, inp):
-        """Reduce length of log files"""
-        from f_shorten_log_files   import shorten_log_files
-        shorten_log_files()
+        """\nHelp -> Reduce length of log files\n"""
+        self.get_props()
+
+        from functions.shorten_log_files        import shorten_log_files
+        shorten_log_files(self)
+
+
+    def get_props(self):
+        self.dirpath = os.path.dirname(os.path.abspath(__file__))
+        self.json = json
+        self.requests = requests
+        self.os = os
+        self.time = time
+        self.date = date
+        self.datetime = datetime
+        self.timedelta = timedelta
 
     # to exit
     do_EOF = do_exit            # ctrl + d 

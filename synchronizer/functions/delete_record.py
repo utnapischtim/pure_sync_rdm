@@ -24,7 +24,7 @@ def delete_record(self):
 
         while record_id:
             cnt_tot += 1
-            self.time.sleep(0.8)
+            self.time.sleep(push_dist_sec)
             r_id = record_id.strip()
 
             if len(r_id) != 11:
@@ -48,6 +48,8 @@ def delete_record(self):
                     for line in lines:
                         if line.strip("\n") != r_id:
                             f.write(line)
+            elif response.status_code == 429:
+                self.time.sleep(wait_429)
             else:
                 cnt_error += 1
                 print(response.content)
@@ -88,7 +90,6 @@ def delete_record(self):
 
         print(f'\nRemoved lines from rdm_uuids_recids.log: {cnt_removed}')
 
-            
         open(self.dirpath + '/reports/d_daily_updates.log', "a").write(report)
         print(report)
 

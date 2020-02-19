@@ -1,4 +1,5 @@
 from setup import *
+from functions.get_from_rdm import get_from_rdm
 
 def pure_get_updates(self):
     try:
@@ -31,8 +32,7 @@ def pure_get_updates(self):
         date_object = self.datetime.strptime(date_last_update, '%Y-%m-%d').date()
 
         # date_limit = str(date_object + self.timedelta(days=1))       # one day after the last update
-        date_limit = str(date_object - self.timedelta(days=3))         # one day before the last update
-        # date_limit = str(date_object)
+        date_limit = str(date_object)
 
         report = '\n---\n---   ---\n---   ---   ---'
         report += f"\nToday: {date_today}\nLast update: {date_last_update} \nDate limit: {date_limit}\n"
@@ -40,8 +40,7 @@ def pure_get_updates(self):
         print(f"See file '/records/full_reports/{date_today}_pure_updates.log'\n")
 
         # Get all RDM uuids and recids
-        from functions.get_from_rdm import get_from_rdm     # MAYBE TAKES TOO LONG !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        get_from_rdm(self)                                  # MAYBE TAKES TOO LONG !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        get_from_rdm(self)                                  # MIGHT TAKE TOO LONG !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         file_name = self.dirpath + '/reports/full_comparison/rdm_uuids_recids.log'
         uuidRecid_rdm = open(file_name, 'r').readlines()
         to_delete = ''
@@ -59,7 +58,7 @@ def pure_get_updates(self):
                 ('order',      'modified'),
                 ('orderBy',    'descending'),
                 ('page',        pag),                  # page
-                ('pageSize',    250),                  # records per page
+                ('pageSize',    500),                  # records per page
                 ('apiKey',     'ca2f08c5-8b33-454a-adc4-8215cfb3e088'),
             )
             # PURE get request

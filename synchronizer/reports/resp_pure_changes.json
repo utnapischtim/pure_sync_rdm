@@ -1,52 +1,52 @@
 {
   "count" : 7,
-  "lastId" : 19653429,
+  "lastId" : 19653603,
   "moreChanges" : false,
   "items" : [ {
     "uuid" : "3e5bc032-716b-4e4b-8e59-fe202e9e9596",
     "changeType" : "UPDATE",
     "family" : "dk.atira.pure.api.shared.model.researchoutput.ResearchOutput",
     "familySystemName" : "ResearchOutput",
-    "version" : 297
+    "version" : 298
   }, {
     "uuid" : "735d870d-cbfb-4c00-8615-330819e0bf11",
     "changeType" : "UPDATE",
     "family" : "dk.atira.pure.api.shared.model.researchoutput.ResearchOutput",
     "familySystemName" : "ResearchOutput",
-    "version" : 275
+    "version" : 276
   }, {
     "uuid" : "ff4b3bea-5104-4d6c-9367-1a7ac035a0b8",
     "changeType" : "UPDATE",
     "family" : "dk.atira.pure.api.shared.model.researchoutput.ResearchOutput",
     "familySystemName" : "ResearchOutput",
-    "version" : 280
+    "version" : 281
   }, {
     "uuid" : "a75f158e-13c2-435a-8241-6584dc8ff2d8",
     "changeType" : "UPDATE",
     "family" : "dk.atira.pure.api.shared.model.researchoutput.ResearchOutput",
     "familySystemName" : "ResearchOutput",
-    "version" : 296
+    "version" : 297
   }, {
     "uuid" : "7e91f3ad-5913-407d-95b1-8ffdf6d18f59",
     "changeType" : "UPDATE",
     "family" : "dk.atira.pure.api.shared.model.researchoutput.ResearchOutput",
     "familySystemName" : "ResearchOutput",
-    "version" : 242
+    "version" : 243
   }, {
     "uuid" : "31dc78d0-c5c2-4839-b6da-6513b4179f54",
     "changeType" : "UPDATE",
     "family" : "dk.atira.pure.api.shared.model.researchoutput.ResearchOutput",
     "familySystemName" : "ResearchOutput",
-    "version" : 202
+    "version" : 203
   }, {
     "uuid" : "5f8e8d34-d3f2-4695-9e82-c35783cb0316",
     "changeType" : "UPDATE",
     "family" : "dk.atira.pure.api.shared.model.researchoutput.ResearchOutput",
     "familySystemName" : "ResearchOutput",
-    "version" : 194
+    "version" : 195
   } ],
   "navigationLinks" : [ {
     "ref" : "next",
-    "href" : "https://pure01.tugraz.at/ws/api/514/changes/19653429"
+    "href" : "https://pure01.tugraz.at/ws/api/514/changes/19653603"
   } ]
 }

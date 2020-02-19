@@ -1,6 +1,5 @@
 from setup import *
 
-
 def rdm_put_file(self, file_name):
     try:
         file_path = self.dirpath + '/tmp_files/'
@@ -20,7 +19,7 @@ def rdm_put_file(self, file_name):
             for i in resp_json['hits']['hits']:
                 recid       = i['metadata']['recid']
                 record_uuid = i['metadata']['uuid']
-                print(f'Adding FILE number {cnt} to recid {recid}')
+                print(f'Adding FILE number {cnt} to ->\t{recid}')
             
             if self.uuid == record_uuid or cnt > 10:
                 break
@@ -53,6 +52,7 @@ def rdm_put_file(self, file_name):
         open(filename, "a").write(report)
         return response.status_code
 
+        # HAVING PURE ADMIN ACCOUNT REMOVE FILE FROM PURE
 
     except:
         print('\n- Error in rdm_put_file method -\n')

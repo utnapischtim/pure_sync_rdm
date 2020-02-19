@@ -83,8 +83,11 @@
       <div><p><em>{{record.description|safe}}</em></p></div>
 
       {# filler #}
-      {{ lipsum(3) }}
-
+      <br><br>
+      A description should be added here.<br>
+      The managing organization unit is -> {{ record.managingOrganisationalUnit }}
+      <br><br>
+      
       {# files #}
       {%- if record.files and record|can_list_files %}
       {% set ordered_record_files = record.files|sort(attribute="key") %}

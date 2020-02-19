@@ -1,9 +1,7 @@
-
 from setup import *
 
 def rdm_push_byUuid(self, transfer_type):
     try:
-
         # date time in date_report.log
         current_time = self.datetime.now().strftime("%H:%M:%S")
         report = f"\n{str(self.date.today())} - {current_time}\n"
@@ -11,23 +9,17 @@ def rdm_push_byUuid(self, transfer_type):
         open(filename, "a").write(report)
 
         # read to_transfer.log
-        file_name = self.dirpath + '/reports/to_transfer.log'
-        lines_start = sum(1 for line in open(file_name))
-
-        retrans_data = open(file_name, 'r')
+        retrans_data = open(self.dirpath + '/reports/to_transfer.log', 'r')
         
         uuid = retrans_data.readline()
 
         self.cnt_resp = {}
         cnt_tot = 0
         cnt_true = 0
-
-        print(f'Line/s in to_transfer.log: {lines_start}')
         
         while uuid:
             cnt_tot += 1
-            print('\nuuid: ' + uuid.strip())
-            
+                        
             if (len(uuid.strip()) < 36):
                 print('Invalid uuid. Too short\n')
                 uuid = retrans_data.readline()
@@ -38,8 +30,6 @@ def rdm_push_byUuid(self, transfer_type):
             if response == True:        cnt_true += 1
             
             uuid = retrans_data.readline()
-
-        lines_end = sum(1 for line in open(file_name))
 
         print('\n---------------------')
         if transfer_type == '':
@@ -98,7 +88,7 @@ def get_pure_by_id(self, uuid):
             print(response.content)
             raise Exception
 
-        open(self.dirpath + "/reports/pure_resp.json", 'wb').write(response.content)
+        open(self.dirpath + "/reports/resp_pure.json", 'wb').write(response.content)
         self.item = self.json.loads(response.content)
         
         # Creates data to push to InvenioRDM
