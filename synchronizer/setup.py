@@ -9,7 +9,7 @@ pure_username = 'ws_grosso'     # credentials for pure files download
 pure_password = 'U+0n0#yI'
 
 # Invenio RDM
-token_rdm       = '9GMNG6hmJKBuI4yU1lwKXUa3g8fK6jMEl69ujX7vWnaqDdnZYcxclF6EYJRK'
+token_rdm       = '46EChpZ50XI66quYG3ZAIF3OR9rUoCSsfGviDOwOyF1jXBDwvg8SerBYF7Ju'
 push_dist_sec   = 1.6
 wait_429        = 900
 

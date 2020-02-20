@@ -8,24 +8,22 @@ def delete_record(self):
 
         file_name = self.dirpath + '/reports/to_delete.log'
 
-        lines_start = sum(1 for line in open(file_name))    # count lines
-
         records_to_del = open(file_name, 'r')
 
         headers = {
             'Authorization': 'Bearer ' + token_rdm,         # token from setup.py
             'Content-Type': 'application/json',
         }
-        record_id = records_to_del.readline()
+        recid = records_to_del.readline()
         cnt_success = 0
         cnt_error = 0
         cnt_tot = 0
         deleted_records = []
 
-        while record_id:
+        while recid:
             cnt_tot += 1
             self.time.sleep(push_dist_sec)
-            r_id = record_id.strip()
+            r_id = recid.strip()
 
             if len(r_id) != 11:
                 print(f'\n{r_id} -> Wrong recid lenght! You can not use uuids.\n')
@@ -33,7 +31,7 @@ def delete_record(self):
 
             response = self.requests.delete('https://127.0.0.1:5000/api/records/' + r_id, headers=headers, verify=False)
 
-            record_id = records_to_del.readline()
+            recid = records_to_del.readline()
             print(f'{r_id} {response}')
             
             # 410 -> "PID has been deleted"
@@ -41,20 +39,31 @@ def delete_record(self):
                 cnt_success += 1
                 deleted_records.append(r_id)
 
-                # remove deleted record_id from to_delete
+                # remove deleted recid from to_delete.log
                 with open(file_name, "r") as f:
                     lines = f.readlines()
                 with open(file_name, "w") as f:
                     for line in lines:
                         if line.strip("\n") != r_id:
                             f.write(line)
+
+                # remove record from all_rdm_records.log
+                file_name = self.dirpath + "/reports/all_rdm_records.log"
+                with open(file_name, "r") as f:
+                    lines = f.readlines()
+                with open(file_name, "w") as f:
+                    for line in lines:
+                        line_recid = line.strip("\n")
+                        line_recid = line_recid.split(' ')[1]
+                        if line_recid != r_id:
+                            f.write(line)
+
+
             elif response.status_code == 429:
                 self.time.sleep(wait_429)
             else:
                 cnt_error += 1
                 print(response.content)
-
-        lines_end = sum(1 for line in open(file_name))    # count lines
 
         current_time = self.datetime.now().strftime("%H:%M:%S")
         report = f"\n{current_time}\nDelete - {self.date.today()} - "
@@ -72,7 +81,6 @@ def delete_record(self):
             current_time = self.datetime.now().strftime("%H:%M:%S")
 
         report += f"Tot records: {cnt_tot} - Success transfer: {cnt_success}\n"
-        report += f"Lines start: {lines_start} - Lines end: {lines_end}\n"
 
         # Remove records from rdm_uuids_recids.log
         file_name = self.dirpath + '/reports/full_comparison/rdm_uuids_recids.log'

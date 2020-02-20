@@ -32,9 +32,9 @@ class MyPrompt(Cmd):
 
         from functions.rdm_push_byPage          import get_pure_by_page
         from functions.rdm_push                 import create_invenio_data
-        pag_begin = 13
-        pag_end =   50
-        pag_size =  50
+        pag_begin = 1
+        pag_end =   3
+        pag_size =  10
         get_pure_by_page(self, pag_begin, pag_end, pag_size)
     
     #   ---     ---     ---

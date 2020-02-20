@@ -1,5 +1,5 @@
 from setup import *
-from functions.rdm_put_file import rdm_put_file
+from functions.rdm_put_file import rdm_put_file, get_record_recid
 from requests.auth import HTTPBasicAuth
 
 #   ---         ---         ---
@@ -204,8 +204,6 @@ def add_field(self, item, inv_field, path):
 def post_to_rdm(self):
 
     try:
-        from functions.rdm_put_file import rdm_put_file
-
         self.metadata_success = None
         self.file_success =     None
         self.time.sleep(push_dist_sec)                        # ~ 5000 records per hour
@@ -259,7 +257,7 @@ def post_to_rdm(self):
             print('Waiting 15 min')
             self.time.sleep(wait_429)                     # 429 too many requests, wait 15 min
 
-        # Successful transmition
+        # -- Successful transmition --
         if response.status_code < 300:
 
             # metadata transmission success flag
@@ -273,6 +271,15 @@ def post_to_rdm(self):
                 # adds file transfer http response codes into array
                 if file_resp_code in self.cnt_resp:     self.cnt_resp[file_resp_code] += 1
                 else:                                   self.cnt_resp[file_resp_code] =  1
+            
+            # in case there no file to transfer, gets recid
+            else:
+                get_record_recid(self)            
+
+            # add uuid to all_rdm_records
+            uuid_recid_line = f'{uuid} {self.recid}\n'
+            open(self.dirpath + "/reports/all_rdm_records.log", "a").write(uuid_recid_line)
+
 
         # FINALL SUCCESS CHECK
         # print(f'Success check -> metadata: {self.metadata_success} - file: {self.file_success}')

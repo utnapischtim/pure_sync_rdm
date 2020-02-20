@@ -3,39 +3,21 @@ from setup import *
 def rdm_put_file(self, file_name):
     try:
         file_path = self.dirpath + '/tmp_files/'
-        cnt = 0
-        
-        # GET from RDM recid of last added record
-        while True:
-            cnt += 1
-            self.time.sleep(cnt * 2)
-            response = self.requests.get(
-                'https://localhost:5000/api/records/?sort=mostrecent&size=1&page=1', 
-                params=(('prettyprint', '1'),), 
-                verify=False
-                )
-            resp_json = self.json.loads(response.content)
 
-            for i in resp_json['hits']['hits']:
-                recid       = i['metadata']['recid']
-                record_uuid = i['metadata']['uuid']
-                print(f'Adding FILE number {cnt} to ->\t{recid}')
-            
-            if self.uuid == record_uuid or cnt > 10:
-                break
-        if cnt > 10:    print('Having troubles getting the recid of the newly added record\n')
+        # GET from RDM recid of last added record
+        get_record_recid(self)
 
         # - PUT FILE TO RDM -
         headers = {
             'Content-Type': 'application/octet-stream',
         }
         data = open(file_path + file_name, 'rb').read()
-        response = self.requests.put('https://127.0.0.1:5000/api/records/' + recid + '/files/' + file_name, headers=headers, data=data, verify=False)
+        response = self.requests.put('https://127.0.0.1:5000/api/records/' + self.recid + '/files/' + file_name, headers=headers, data=data, verify=False)
 
         # Report
         report = ''
-        print(f'Transf to RDM: {response}\n')
-        report += 'FileTransf ' + str(response) + ' - ' + str(recid) + '\n'
+        print(f'RDM file put: {response}\n')
+        report += 'FileTransf ' + str(response) + ' - ' + str(self.recid) + '\n'
 
         if response.status_code >= 300:
             report += str(response.content) + '\n'
@@ -56,3 +38,30 @@ def rdm_put_file(self, file_name):
 
     except:
         print('\n- Error in rdm_put_file method -\n')
+
+
+def get_record_recid(self):
+        
+    # GET from RDM recid of last added record
+    cnt = 0
+    while True:
+        cnt += 1
+        self.time.sleep(cnt * 2)
+        response = self.requests.get(
+            'https://localhost:5000/api/records/?sort=mostrecent&size=1&page=1', 
+            params=(('prettyprint', '1'),), 
+            verify=False
+            )
+        resp_json = self.json.loads(response.content)
+
+        for i in resp_json['hits']['hits']:
+            self.recid  = i['metadata']['recid']
+            rdm_uuid    = i['metadata']['uuid']
+        
+        if self.uuid == rdm_uuid:
+            print(f'Found recid: {self.recid}')
+            break
+        elif cnt > 10:
+            print('Having troubles getting the recid of the newly added record\n')
+            break
+ 
