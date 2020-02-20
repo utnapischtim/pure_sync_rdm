@@ -1,15 +1,15 @@
 from setup import *
 from functions.get_from_rdm import get_from_rdm
 
-def pure_get_changes(self):
+def pure_get_changes(my_prompt):
     try:
         # empty to_delete.log
-        open(self.dirpath + '/data/to_delete.txt', 'w').close()
+        open(my_prompt.dirpath + '/data/to_delete.txt', 'w').close()
 
         # empty to_transfer.log
-        open(self.dirpath + '/data/to_transfer.txt', 'w').close()
+        open(my_prompt.dirpath + '/data/to_transfer.txt', 'w').close()
         
-        date = str(self.date.today())
+        date = str(my_prompt.date.today())
 
         headers = {
             'Accept': 'application/json',
@@ -21,19 +21,23 @@ def pure_get_changes(self):
         )
         # # PURE get request
         url = f'{pure_rest_api_url}changes/{date}'
-        response = self.requests.get(url, headers=headers, params=params)
-        open(self.dirpath + "/reports/temporary_files/resp_pure_changes.json", 'wb').write(response.content)
-
+        response = my_prompt.requests.get(url, headers=headers, params=params)
         print(f'\nPure response: {response}\n')
+
         if response.status_code >= 300:
             print(response.content)
 
-        resp_json = self.json.loads(response.content)
+        # Write data into resp_pure_changes
+        file_name = f'{my_prompt.dirpath}/reports/temporary_files/resp_pure_changes.json'
+        open(file_name, 'wb').write(response.content)
+
+        # Load json
+        resp_json = my_prompt.json.loads(response.content)
 
         # Get all RDM uuids and recids
-        get_from_rdm(self)                                  # MAYBE TAKES TOO LONG !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        get_from_rdm(my_prompt)                                  # MAYBE TAKES TOO LONG !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         
-        file_name = self.dirpath + '/reports/full_comparison/rdm_uuids_recids.log'
+        file_name = my_prompt.dirpath + '/reports/full_comparison/rdm_uuids_recids.log'
         uuidRecid_rdm = open(file_name, 'r').readlines()
 
         to_delete = ''
@@ -95,19 +99,19 @@ def pure_get_changes(self):
 
         # to transfer
         print(f"\nRecords to update: {cnt_toTrans}")
-        open(self.dirpath + "/data/to_transfer.txt", "a").write(to_transfer)
+        open(my_prompt.dirpath + "/data/to_transfer.txt", "a").write(to_transfer)
 
         # to delete
         print(f'To delete: {cnt_toDel}\n')
-        open(self.dirpath + '/data/to_delete.txt', "a").write(to_delete)
+        open(my_prompt.dirpath + '/data/to_delete.txt', "a").write(to_delete)
 
         # UPDATE
         from functions.rdm_push_byUuid import rdm_push_byUuid
-        rdm_push_byUuid(self, 'update')
+        rdm_push_byUuid(my_prompt, 'update')
 
         # DELETE
         from functions.delete_record    import delete_record
-        delete_record(self)
+        delete_record(my_prompt)
 
     except:
         print('Error in get_pure_changes function')

@@ -1,37 +1,37 @@
 from setup import *
 
-def rdm_put_file(self, file_name):
+def rdm_put_file(my_prompt, file_name):
     try:
-        file_path = self.dirpath + '/reports/temporary_files/'
+        file_path = my_prompt.dirpath + '/reports/temporary_files/'
 
         # GET from RDM recid of last added record
-        get_record_recid(self)
+        get_record_recid(my_prompt)
 
         # - PUT FILE TO RDM -
         headers = {
             'Content-Type': 'application/octet-stream',
         }
         data = open(file_path + file_name, 'rb').read()
-        url = f'{rdm_api_url_records}{self.recid}/files/{file_name}'
-        response = self.requests.put(url, headers=headers, data=data, verify=False)
+        url = f'{rdm_api_url_records}{my_prompt.recid}/files/{file_name}'
+        response = my_prompt.requests.put(url, headers=headers, data=data, verify=False)
 
         # Report
         report = ''
         print(f'RDM file put: {response}\n')
-        report += 'FileTransf ' + str(response) + ' - ' + str(self.recid) + '\n'
+        report += 'FileTransf ' + str(response) + ' - ' + str(my_prompt.recid) + '\n'
 
         if response.status_code >= 300:
             report += str(response.content) + '\n'
 
             # metadata transmission success flag
-            self.file_success = False
+            my_prompt.file_success = False
         else:
-            self.file_success = True
+            my_prompt.file_success = True
 
             # # if the upload was successful then delete file from /reports/temporary_files
-            self.os.remove(file_path + file_name) 
+            my_prompt.os.remove(file_path + file_name) 
 
-        filename = self.dirpath + "/reports/" + str(self.date.today()) + "_rdm_push_records.log"
+        filename = my_prompt.dirpath + "/reports/" + str(my_prompt.date.today()) + "_rdm_push_records.log"
         open(filename, "a").write(report)
         return response.status_code
 
@@ -41,26 +41,26 @@ def rdm_put_file(self, file_name):
         print('\n- Error in rdm_put_file method -\n')
 
 
-def get_record_recid(self):
+def get_record_recid(my_prompt):
     try:
         # GET from RDM recid of last added record
         cnt = 0
         while True:
             cnt += 1
-            self.time.sleep(cnt * 2)
-            response = self.requests.get(
+            my_prompt.time.sleep(cnt * 2)
+            response = my_prompt.requests.get(
                 f'{rdm_api_url_records}?sort=mostrecent&size=1&page=1', 
                 params=(('prettyprint', '1'),), 
                 verify=False
                 )
-            resp_json = self.json.loads(response.content)
+            resp_json = my_prompt.json.loads(response.content)
 
             for i in resp_json['hits']['hits']:
-                self.recid  = i['metadata']['recid']
+                my_prompt.recid  = i['metadata']['recid']
                 rdm_uuid    = i['metadata']['uuid']
             
-            if self.uuid == rdm_uuid:
-                # print(f'Found recid: {self.recid}')
+            if my_prompt.uuid == rdm_uuid:
+                # print(f'Found recid: {my_prompt.recid}')
                 break
             elif cnt > 10:
                 print('Having troubles getting the recid of the newly added record\n')

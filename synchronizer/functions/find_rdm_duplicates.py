@@ -1,17 +1,17 @@
-def find_rdm_duplicates(self):
+def find_rdm_duplicates(my_prompt):
     try:
         from functions.delete_record import delete_record
 
         print('---   ---   ---\nFIND RDM DUPLICATES\n\nDuplicates:\n')
 
         # Read Pure
-        file_name = self.dirpath + '/reports/full_comparison/rdm_uuids.log'
+        file_name = my_prompt.dirpath + '/reports/full_comparison/rdm_uuids.log'
         uuid_rdm = open(file_name, 'r').readlines()
         # Read Pure
-        file_name = self.dirpath + '/reports/full_comparison/rdm_uuids_recids.log'
+        file_name = my_prompt.dirpath + '/reports/full_comparison/rdm_uuids_recids.log'
         uuidRecid_rdm = open(file_name, 'r').readlines()
         # empty to_delete.log
-        toDel_fileName = self.dirpath + '/data/to_delete.txt'
+        toDel_fileName = my_prompt.dirpath + '/data/to_delete.txt'
         open(toDel_fileName, 'w').close()                         
 
         temp_arr = []
@@ -39,10 +39,10 @@ def find_rdm_duplicates(self):
 
         if cnt == 0:
             print('- There are no duplicates\n')
-            report = f"\nDelete - {self.date.today()} - success\nThere are no duplicates\n"
+            report = f"\nDelete - {my_prompt.date.today()} - success\nThere are no duplicates\n"
             
-            date_today = str(self.date.today())
-            open(f'{self.dirpath}/reports/{date_today}_updates.log', "a").write(report)
+            date_today = str(my_prompt.date.today())
+            open(f'{my_prompt.dirpath}/reports/{date_today}_updates.log', "a").write(report)
             
             return
 
@@ -55,7 +55,7 @@ def find_rdm_duplicates(self):
 
             open(toDel_fileName, "a").write(dup_recid_str)
 
-            delete_record(self)
+            delete_record(my_prompt)
 
     except:
         print('\n---   !!!   Error in find_rdm_duplicates   !!!   ---\n')

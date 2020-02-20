@@ -3,22 +3,22 @@ from functions.get_from_rdm             import get_from_rdm
 from functions.rdm_push_byUuid          import rdm_push_byUuid
 from functions.delete_record            import delete_record
 
-def intersection_pure_rdm(self):
+def intersection_pure_rdm(my_prompt):
     try:
         print('\n---   ---   ---\nFIND MISSING\n')
         # Read RDM         
-        get_from_rdm(self)                                                # TAKES TOO LONG ???????????????????????????
-        file_name = self.dirpath + '/reports/full_comparison/rdm_uuids.log'
+        get_from_rdm(my_prompt)                                                # TAKES TOO LONG ???????????????????????????
+        file_name = my_prompt.dirpath + '/reports/full_comparison/rdm_uuids.log'
         uuid_rdm = open(file_name, 'r').readlines()
 
         # Read Pure
-        get_from_pure(self)                                                # TAKES TOO LONG ???????????????????????????
-        file_name = self.dirpath + '/reports/full_comparison/pure_uuids.log'
+        get_from_pure(my_prompt)                                                # TAKES TOO LONG ???????????????????????????
+        file_name = my_prompt.dirpath + '/reports/full_comparison/pure_uuids.log'
         uuid_pure = open(file_name, 'r').readlines()
 
         # TO ADD --
         # empty to_transfer.log
-        toTrans_fileName = self.dirpath + '/data/to_transfer.txt'
+        toTrans_fileName = my_prompt.dirpath + '/data/to_transfer.txt'
         open(toTrans_fileName, 'w').close()
             
         # Find missing records in RDM
@@ -38,7 +38,7 @@ def intersection_pure_rdm(self):
             
         # TO DELETE --
         # empty to_transfer.log
-        toTrans_fileName = self.dirpath + '/data/to_delete.txt'
+        toTrans_fileName = my_prompt.dirpath + '/data/to_delete.txt'
         open(toTrans_fileName, 'w').close()
 
         # Find records to be deleted from RDM
@@ -57,10 +57,10 @@ def intersection_pure_rdm(self):
         print(f'{cnt_d}\trecords to be deleted from RDM\n')
 
         # Push data to RDM
-        rdm_push_byUuid(self, 'full_comp')
+        rdm_push_byUuid(my_prompt, 'full_comp')
 
         # Delete from RDM
-        delete_record(self)
+        delete_record(my_prompt)
 
     except:
         print('\n---   !!!   Error in find_missing   !!!   ---\n')

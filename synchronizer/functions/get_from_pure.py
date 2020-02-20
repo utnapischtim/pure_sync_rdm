@@ -1,7 +1,7 @@
 from setup import *
 
 # -- GET FROM PURE --
-def get_from_pure(self):
+def get_from_pure(my_prompt):
     try:
         pag = 1
         pag_size = 25
@@ -23,9 +23,9 @@ def get_from_pure(self):
                 ('apiKey', pure_api_key),
             )
             # PURE get request
-            response = self.requests.get(pure_rest_api_url + 'research-outputs', headers=headers, params=params)
-            open(self.dirpath + "/reports/temporary_files/resp_pure.json", 'wb').write(response.content)
-            resp_json = self.json.loads(response.content)
+            response = my_prompt.requests.get(pure_rest_api_url + 'research-outputs', headers=headers, params=params)
+            open(my_prompt.dirpath + "/reports/temporary_files/resp_pure.json", 'wb').write(response.content)
+            resp_json = my_prompt.json.loads(response.content)
 
             if len(resp_json['items']) == 0:    go_on = False
 
@@ -39,11 +39,11 @@ def get_from_pure(self):
             if pag >= 2:               # TEMP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 go_on = False          # TEMP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-            self.time.sleep(3)
+            my_prompt.time.sleep(3)
             pag += 1
 
         print(f'\n- Tot items: {cnt} -')
-        open(self.dirpath + "/reports/full_comparison/pure_uuids.log", 'w+').write(uuid_str)
+        open(my_prompt.dirpath + "/reports/full_comparison/pure_uuids.log", 'w+').write(uuid_str)
 
     except:
         print('\n---   !!!   Error in get_from_pure   !!!   ---\n')

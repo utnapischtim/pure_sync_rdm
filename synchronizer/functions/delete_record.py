@@ -1,12 +1,12 @@
 from setup import *
 
-def delete_record(self):
+def delete_record(my_prompt):
     # NOTE: the user ACCOUNT related to the used TOKEN must be ADMIN
     # pipenv run invenio roles add admin@invenio.org admin
     try:
         print('\n---   ---   ---\nDELETE RECORDS\n')
 
-        file_name = self.dirpath + '/data/to_delete.txt'
+        file_name = my_prompt.dirpath + '/data/to_delete.txt'
 
         records_to_del = open(file_name, 'r')
 
@@ -22,7 +22,7 @@ def delete_record(self):
 
         while recid:
             cnt_tot += 1
-            self.time.sleep(push_dist_sec)
+            my_prompt.time.sleep(push_dist_sec)
             r_id = recid.strip()
 
             if len(r_id) != 11:
@@ -30,7 +30,7 @@ def delete_record(self):
                 continue
             
             url = f'{rdm_api_url_records}{r_id}'
-            response = self.requests.delete(url, headers=headers, verify=False)
+            response = my_prompt.requests.delete(url, headers=headers, verify=False)
 
             recid = records_to_del.readline()
             print(f'{r_id} {response}')
@@ -49,7 +49,7 @@ def delete_record(self):
                             f.write(line)
 
                 # remove record from all_rdm_records.log
-                file_name = self.dirpath + "/reports/all_rdm_records.log"
+                file_name = my_prompt.dirpath + "/reports/all_rdm_records.log"
                 with open(file_name, "r") as f:
                     lines = f.readlines()
                 with open(file_name, "w") as f:
@@ -61,13 +61,13 @@ def delete_record(self):
 
 
             elif response.status_code == 429:
-                self.time.sleep(wait_429)
+                my_prompt.time.sleep(wait_429)
             else:
                 cnt_error += 1
                 print(response.content)
 
-        current_time = self.datetime.now().strftime("%H:%M:%S")
-        report = f"\n{current_time}\nDelete - {self.date.today()} - "
+        current_time = my_prompt.datetime.now().strftime("%H:%M:%S")
+        report = f"\n{current_time}\nDelete - {my_prompt.date.today()} - "
 
         if cnt_tot == 0:
             report += "success\nNothing to trasmit\n"
@@ -79,12 +79,12 @@ def delete_record(self):
             else:
                 report += "error\n"
 
-            current_time = self.datetime.now().strftime("%H:%M:%S")
+            current_time = my_prompt.datetime.now().strftime("%H:%M:%S")
 
         report += f"Tot records: {cnt_tot} - Success transfer: {cnt_success}\n"
 
         # Remove records from rdm_uuids_recids.log
-        file_name = self.dirpath + '/reports/full_comparison/rdm_uuids_recids.log'
+        file_name = my_prompt.dirpath + '/reports/full_comparison/rdm_uuids_recids.log'
         cnt_removed = 0
         with open(file_name, "r") as f:
             lines = f.readlines()
@@ -99,8 +99,8 @@ def delete_record(self):
 
         print(f'\nRemoved lines from rdm_uuids_recids.log: {cnt_removed}')
 
-        date_today = str(self.date.today())
-        open(f'{self.dirpath}/reports/{date_today}_updates.log', "a").write(report)
+        date_today = str(my_prompt.date.today())
+        open(f'{my_prompt.dirpath}/reports/{date_today}_updates.log', "a").write(report)
         
         print(report)
 
