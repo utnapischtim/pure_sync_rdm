@@ -17,7 +17,7 @@ def get_from_rdm(self):
         while go_on == True:
 
             response = self.requests.get(
-                f'https://localhost:5000/api/records/?sort=mostrecent&size={pag_size}&page={pag}', 
+                f'{rdm_api_url_records}?sort=mostrecent&size={pag_size}&page={pag}', 
                 params=params, 
                 verify=False
                 )

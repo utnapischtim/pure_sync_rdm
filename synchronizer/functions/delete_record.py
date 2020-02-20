@@ -28,8 +28,9 @@ def delete_record(self):
             if len(r_id) != 11:
                 print(f'\n{r_id} -> Wrong recid lenght! You can not use uuids.\n')
                 continue
-
-            response = self.requests.delete('https://127.0.0.1:5000/api/records/' + r_id, headers=headers, verify=False)
+            
+            url = f'{rdm_api_url_records}{r_id}'
+            response = self.requests.delete(url, headers=headers, verify=False)
 
             recid = records_to_del.readline()
             print(f'{r_id} {response}')

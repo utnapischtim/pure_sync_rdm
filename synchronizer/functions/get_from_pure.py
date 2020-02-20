@@ -15,12 +15,12 @@ def get_from_pure(self):
 
             headers = {
                 'Accept': 'application/json',
-                'api-key': 'ca2f08c5-8b33-454a-adc4-8215cfb3e088',
+                'api-key': pure_api_key,
             }
             params = (
                 ('page', pag),
                 ('pageSize', pag_size),
-                ('apiKey', 'ca2f08c5-8b33-454a-adc4-8215cfb3e088'),
+                ('apiKey', pure_api_key),
             )
             # PURE get request
             response = self.requests.get(pure_rest_api_url + 'research-outputs', headers=headers, params=params)

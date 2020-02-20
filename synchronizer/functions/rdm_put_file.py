@@ -12,7 +12,7 @@ def rdm_put_file(self, file_name):
             'Content-Type': 'application/octet-stream',
         }
         data = open(file_path + file_name, 'rb').read()
-        url = 'https://127.0.0.1:5000/api/records/' + self.recid + '/files/' + file_name
+        url = f'{rdm_api_url_records}{self.recid}/files/{file_name}'
         response = self.requests.put(url, headers=headers, data=data, verify=False)
 
         # Report
@@ -49,7 +49,7 @@ def get_record_recid(self):
             cnt += 1
             self.time.sleep(cnt * 2)
             response = self.requests.get(
-                'https://localhost:5000/api/records/?sort=mostrecent&size=1&page=1', 
+                f'{rdm_api_url_records}?sort=mostrecent&size=1&page=1', 
                 params=(('prettyprint', '1'),), 
                 verify=False
                 )

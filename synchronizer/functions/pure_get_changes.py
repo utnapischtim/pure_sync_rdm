@@ -20,7 +20,8 @@ def pure_get_changes(self):
             ('apiKey', 'ca2f08c5-8b33-454a-adc4-8215cfb3e088'),
         )
         # # PURE get request
-        response = self.requests.get('https://pure01.tugraz.at/ws/api/514/changes/' + date, headers=headers, params=params)
+        url = f'{pure_rest_api_url}changes/{date}'
+        response = self.requests.get(url, headers=headers, params=params)
         open(self.dirpath + "/reports/temporary_files/resp_pure_changes.json", 'wb').write(response.content)
 
         print(f'\nPure response: {response}\n')

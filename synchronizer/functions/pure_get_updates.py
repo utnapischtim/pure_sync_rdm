@@ -68,7 +68,9 @@ def pure_get_updates(self):
             ('apiKey',     'ca2f08c5-8b33-454a-adc4-8215cfb3e088'),
         )
         # PURE get request
-        response = self.requests.get('https://pure01.tugraz.at/ws/api/514/research-outputs', headers=headers, params=params)
+        url = f'{pure_rest_api_url}research-outputs'
+        response = self.requests.get(url, headers=headers, params=params)
+        
         print('Pure resp: ', response)
         open(self.dirpath + "/reports/temporary_files/resp_pure.json", 'wb').write(response.content)
         resp_json = self.json.loads(response.content)

@@ -211,7 +211,7 @@ def post_to_rdm(self):
             ('prettyprint', '1'),
         )
         # POST REQUEST metadata
-        response = self.requests.post('https://localhost:5000/api/records/', headers=headers, params=params, data=data_utf8, verify=False)
+        response = self.requests.post(rdm_api_url_records, headers=headers, params=params, data=data_utf8, verify=False)
 
         # RESPONSE CHECK
         print('Metadata post: ', response)                
