@@ -2,14 +2,14 @@ from setup import *
 
 def rdm_push_byUuid(self, transfer_type):
     try:
-        # date time in date_report.log
+        # date time in yyyy-mm-dd_rdm_push_records.log
         current_time = self.datetime.now().strftime("%H:%M:%S")
         report = f"\n{str(self.date.today())} - {current_time}\n"
-        filename = self.dirpath + "/reports/full_reports/" + str(self.date.today()) + "_report.log"
+        filename = self.dirpath + "/reports/" + str(self.date.today()) + "_rdm_push_records.log"
         open(filename, "a").write(report)
 
         # read to_transfer.log
-        retrans_data = open(self.dirpath + '/reports/to_transfer.log', 'r')
+        retrans_data = open(self.dirpath + '/data/to_transfer.txt', 'r')
         
         uuid = retrans_data.readline()
 
@@ -61,7 +61,11 @@ def rdm_push_byUuid(self, transfer_type):
                 current_time = self.datetime.now().strftime("%H:%M:%S")
                 report += f"{current_time}\nTot records: {cnt_tot} - Success transfer: {cnt_true}\n"
             
-            open(self.dirpath + '/reports/d_daily_updates.log', "a").write(report)
+            # Adds report to yyyy-mm-dd_updates.log
+            date_today = str(self.date.today())
+            file_name = f'{self.dirpath}/reports/{date_today}_updates.log'
+            open(file_name, "a").write(report)
+
             print(report)
 
     except:
@@ -88,7 +92,7 @@ def get_pure_by_id(self, uuid):
             print(response.content)
             raise Exception
 
-        open(self.dirpath + "/reports/resp_pure.json", 'wb').write(response.content)
+        open(self.dirpath + "/reports/temporary_files/resp_pure.json", 'wb').write(response.content)
         self.item = self.json.loads(response.content)
         
         # Creates data to push to InvenioRDM

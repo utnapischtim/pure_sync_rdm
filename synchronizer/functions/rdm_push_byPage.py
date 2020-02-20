@@ -14,7 +14,7 @@ def get_pure_by_page(self, pag_begin, pag_end, pag_size):
             report_text = f'\nPag {str(pag)} - pag_size {str(pag_size)}\n'
             print(report_text)
             # add page to report file
-            report_file = self.dirpath + "/reports/full_reports/" + str(self.date.today()) + "_report.log"     
+            report_file = self.dirpath + "/reports/" + str(self.date.today()) + "_rdm_push_records.log"     
             open(report_file, "a").write(report_text)                       # 'a' -> append
 
             headers = {
@@ -28,7 +28,7 @@ def get_pure_by_page(self, pag_begin, pag_end, pag_size):
             )
             # PURE get request
             response = self.requests.get(pure_rest_api_url + 'research-outputs', headers=headers, params=params)
-            open(self.dirpath + "/reports/resp_pure.json", 'wb').write(response.content)
+            open(self.dirpath + "/reports/temporary_files/resp_pure.json", 'wb').write(response.content)
             resp_json = self.json.loads(response.content)
 
             #       ---         ---         ---
@@ -36,18 +36,21 @@ def get_pure_by_page(self, pag_begin, pag_end, pag_size):
                 create_invenio_data(self)          # Creates data to push to InvenioRDM
             #       ---         ---         ---
                 
-            # view total number of http respone codes in report.log
+            # view total number of http respone codes in _rdm_push_records.log
             report_text = 'HTTP response codes:\n'
             for key in self.cnt_resp:
                 report_text += str(key) + ": " + str(self.cnt_resp[key]) + "\n"
             open(report_file, "a").write(report_text)
             print(report_text)
 
-            # add http reponse codes to d_rdm_push_report.log
-            report_file = self.dirpath + "/reports/d_rdm_push_report.log"
+            # add http reponse codes to yyyy-mm-_rdm_push_pages.log
+            date_today = str(self.date.today())
+            report_file = f'{self.dirpath}/reports/{date_today}_rdm_push_pages.log'
+
             now = self.datetime.now()
             current_time = now.strftime("%H:%M:%S")
             report_text = f'\n{str(self.date.today())} {current_time},\tpag {pag},\tsize {pag_size},\tcodes:\t'
+            
             for key in self.cnt_resp:
                 report_text += f'{str(key)}: {str(self.cnt_resp[key])},\t'
             open(report_file, "a").write(report_text)

@@ -6,7 +6,7 @@ def delete_record(self):
     try:
         print('\n---   ---   ---\nDELETE RECORDS\n')
 
-        file_name = self.dirpath + '/reports/to_delete.log'
+        file_name = self.dirpath + '/data/to_delete.txt'
 
         records_to_del = open(file_name, 'r')
 
@@ -98,7 +98,9 @@ def delete_record(self):
 
         print(f'\nRemoved lines from rdm_uuids_recids.log: {cnt_removed}')
 
-        open(self.dirpath + '/reports/d_daily_updates.log', "a").write(report)
+        date_today = str(self.date.today())
+        open(f'{self.dirpath}/reports/{date_today}_updates.log', "a").write(report)
+        
         print(report)
 
     except:

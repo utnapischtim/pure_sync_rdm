@@ -24,7 +24,7 @@ def get_from_pure(self):
             )
             # PURE get request
             response = self.requests.get(pure_rest_api_url + 'research-outputs', headers=headers, params=params)
-            open(self.dirpath + "/reports/resp_pure.json", 'wb').write(response.content)
+            open(self.dirpath + "/reports/temporary_files/resp_pure.json", 'wb').write(response.content)
             resp_json = self.json.loads(response.content)
 
             if len(resp_json['items']) == 0:    go_on = False

@@ -22,7 +22,7 @@ def get_from_rdm(self):
                 verify=False
                 )
             print(response)
-            open(self.dirpath + "/reports/resp_rdm.json", 'wb').write(response.content)
+            open(self.dirpath + "/reports/temporary_files/resp_rdm.json", 'wb').write(response.content)
 
             if response.status_code == 429:
                 print('\nToo many requests.. wait 15 min\n')

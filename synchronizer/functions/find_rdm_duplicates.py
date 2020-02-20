@@ -11,7 +11,7 @@ def find_rdm_duplicates(self):
         file_name = self.dirpath + '/reports/full_comparison/rdm_uuids_recids.log'
         uuidRecid_rdm = open(file_name, 'r').readlines()
         # empty to_delete.log
-        toDel_fileName = self.dirpath + '/reports/to_delete.log'
+        toDel_fileName = self.dirpath + '/data/to_delete.txt'
         open(toDel_fileName, 'w').close()                         
 
         temp_arr = []
@@ -40,7 +40,10 @@ def find_rdm_duplicates(self):
         if cnt == 0:
             print('- There are no duplicates\n')
             report = f"\nDelete - {self.date.today()} - success\nThere are no duplicates\n"
-            open(self.dirpath + '/reports/d_daily_updates.log', "a").write(report)
+            
+            date_today = str(self.date.today())
+            open(f'{self.dirpath}/reports/{date_today}_updates.log', "a").write(report)
+            
             return
 
         else:

@@ -1,20 +1,18 @@
+import os
+dirpath = os.path.dirname(os.path.abspath(__file__))
 
 # Pure REST API references
-pure_rest_api_url =     'https://pure01.tugraz.at/ws/api/514/'
-pure_api_key =          'ca2f08c5-8b33-454a-adc4-8215cfb3e088'
+pure_rest_api_url = 'https://pure01.tugraz.at/ws/api/514/'
+pure_api_key =      open(f'{dirpath}/data_setup/pure_api_key.txt', 'r').readline()
 
 pure_username = 'ws_grosso'     # credentials for pure files download
-pure_password = 'U+0n0#yI'
-
-# pure_password = load_from_file("data/pure_password.txt")
-# base_url = load_from_file("data/base_url.txt") # http://localhost:5000/
+pure_password = open(f'{dirpath}/data_setup/pure_password.txt', 'r').readline()
 
 # Invenio RDM
-token_rdm       = '46EChpZ50XI66quYG3ZAIF3OR9rUoCSsfGviDOwOyF1jXBDwvg8SerBYF7Ju'
+token_rdm       = open(f'{dirpath}/data_setup/rdm_token.txt', 'r').readline()
 push_dist_sec   = 1.6
 wait_429        = 900
 
-# -   -   -
 # LOG FILES
 log_files = [                   # d_ files
     'd_daily_updates.log', 

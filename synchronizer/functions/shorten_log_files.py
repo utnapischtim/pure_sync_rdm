@@ -26,9 +26,8 @@ def shorten_log_files(self):
             else:
                 print('ok')
             
-        # DELETE OLD full_reports FILES
-        print('\n---   ---   ---\nDELETE OLD full_reports FILES')
-        folder = '/reports/full_reports/'
+        print('\n---   ---   ---\nDELETE OLD  FILES')
+        folder = '/reports/'
 
         # Get file names from folder
         isfile = self.os.path.isfile

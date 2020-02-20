@@ -4,10 +4,10 @@ from functions.get_from_rdm import get_from_rdm
 def pure_get_changes(self):
     try:
         # empty to_delete.log
-        open(self.dirpath + '/reports/to_delete.log', 'w').close()
+        open(self.dirpath + '/data/to_delete.txt', 'w').close()
 
         # empty to_transfer.log
-        open(self.dirpath + '/reports/to_transfer.log', 'w').close()
+        open(self.dirpath + '/data/to_transfer.txt', 'w').close()
         
         date = str(self.date.today())
 
@@ -21,7 +21,7 @@ def pure_get_changes(self):
         )
         # # PURE get request
         response = self.requests.get('https://pure01.tugraz.at/ws/api/514/changes/' + date, headers=headers, params=params)
-        open(self.dirpath + "/reports/resp_pure_changes.json", 'wb').write(response.content)
+        open(self.dirpath + "/reports/temporary_files/resp_pure_changes.json", 'wb').write(response.content)
 
         print(f'\nPure response: {response}\n')
         if response.status_code >= 300:
@@ -94,11 +94,11 @@ def pure_get_changes(self):
 
         # to transfer
         print(f"\nRecords to update: {cnt_toTrans}")
-        open(self.dirpath + "/reports/to_transfer.log", "a").write(to_transfer)
+        open(self.dirpath + "/data/to_transfer.txt", "a").write(to_transfer)
 
         # to delete
         print(f'To delete: {cnt_toDel}\n')
-        open(self.dirpath + '/reports/to_delete.log', "a").write(to_delete)
+        open(self.dirpath + '/data/to_delete.txt', "a").write(to_delete)
 
         # UPDATE
         from functions.rdm_push_byUuid import rdm_push_byUuid

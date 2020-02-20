@@ -10,7 +10,7 @@ def delete_all_records(self):
         for line in lines:
             toDelete_str += line.split(' ')[1] + '\n'
     
-    toDel_fileName = self.dirpath + '/reports/to_delete.log'
+    toDel_fileName = self.dirpath + '/data/to_delete.txt'
     open(toDel_fileName, "a").write(toDelete_str)
 
     delete_record(self)

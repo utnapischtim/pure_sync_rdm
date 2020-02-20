@@ -70,7 +70,7 @@ def create_invenio_data(self):
 
                         # SAVE FILE
                         if response.status_code < 300:
-                            open(str(self.dirpath) + '/tmp_files/' + file_name, 'wb').write(response.content)
+                            open(str(self.dirpath) + '/reports/temporary_files/' + file_name, 'wb').write(response.content)
                             self.record_files.append(file_name)
             if cnt > 0:
                 self.data = self.data[:-2]       
@@ -122,10 +122,6 @@ def create_invenio_data(self):
 
         self.data = self.data[:-2]
         self.data += '}'          # End data
-
-        # Write last_push.log
-        filename = self.dirpath + "/reports/last_push.json"
-        open(filename, "w+").write(self.data)
 
         return post_to_rdm(self)
 
@@ -239,7 +235,7 @@ def post_to_rdm(self):
 
             # post json error_jsons
             if response.status_code != 429:
-                filename = f'{self.dirpath}/reports/error_jsons/{uuid}.json'
+                filename = f'{self.dirpath}/reports/temporary_files/error_jsons/{uuid}.json'
                 open(filename, "w").write(str(self.data))
             
             # error description from invenioRDM
@@ -247,9 +243,9 @@ def post_to_rdm(self):
 
             # append records to re-transfer
             if self.exec_type != 'by_id':
-                open(self.dirpath + "/reports/to_transfer.log", "a").write(uuid + "\n")
+                open(self.dirpath + "/data/to_transfer.txt", "a").write(uuid + "\n")
 
-        filename = self.dirpath + "/reports/full_reports/" + str(self.date.today()) + "_report.log"
+        filename = self.dirpath + "/reports/" + str(self.date.today()) + "_rdm_push_records.log"
         open(filename, "a").write(report)
 
         if response.status_code == 429:
@@ -299,7 +295,7 @@ def post_to_rdm(self):
 def delete_errorJson_and_toTransfer(self, uuid):
 
     # if uuid in to_transfer then removes it
-    file_name = self.dirpath + "/reports/to_transfer.log"
+    file_name = self.dirpath + "/data/to_transfer.txt"
     with open(file_name, "r") as f:
         lines = f.readlines()
     with open(file_name, "w") as f:
@@ -310,7 +306,7 @@ def delete_errorJson_and_toTransfer(self, uuid):
     # Get file names from folder
     isfile = self.os.path.isfile
     join = self.os.path.join
-    folder = '/reports/error_jsons/'
+    folder = '/reports/temporary_files/error_jsons/'
     onlyfiles = [f for f in self.os.listdir(self.dirpath + folder) if isfile(join(self.dirpath + folder, f))]
 
     for file_name in onlyfiles:
@@ -318,5 +314,5 @@ def delete_errorJson_and_toTransfer(self, uuid):
         
         if file_uuid == uuid:
             self.os.remove(self.dirpath + folder + file_name)
-            print(f'Correct transmission -> The file /reports/error_jsons/{file_name} has been deleted.\n')
+            print(f'Correct transmission -> The file /reports/temporary_files/error_jsons/{file_name} has been deleted.\n')
     

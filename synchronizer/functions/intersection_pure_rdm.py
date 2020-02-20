@@ -18,7 +18,7 @@ def intersection_pure_rdm(self):
 
         # TO ADD --
         # empty to_transfer.log
-        toTrans_fileName = self.dirpath + '/reports/to_transfer.log'
+        toTrans_fileName = self.dirpath + '/data/to_transfer.txt'
         open(toTrans_fileName, 'w').close()
             
         # Find missing records in RDM
@@ -38,7 +38,7 @@ def intersection_pure_rdm(self):
             
         # TO DELETE --
         # empty to_transfer.log
-        toTrans_fileName = self.dirpath + '/reports/to_delete.log'
+        toTrans_fileName = self.dirpath + '/data/to_delete.txt'
         open(toTrans_fileName, 'w').close()
 
         # Find records to be deleted from RDM

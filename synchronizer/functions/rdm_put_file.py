@@ -2,7 +2,7 @@ from setup import *
 
 def rdm_put_file(self, file_name):
     try:
-        file_path = self.dirpath + '/tmp_files/'
+        file_path = self.dirpath + '/reports/temporary_files/'
 
         # GET from RDM recid of last added record
         get_record_recid(self)
@@ -28,10 +28,10 @@ def rdm_put_file(self, file_name):
         else:
             self.file_success = True
 
-            # # if the upload was successful then delete file from /tmp_files
+            # # if the upload was successful then delete file from /reports/temporary_files
             self.os.remove(file_path + file_name) 
 
-        filename = self.dirpath + "/reports/full_reports/" + str(self.date.today()) + "_report.log"
+        filename = self.dirpath + "/reports/" + str(self.date.today()) + "_rdm_push_records.log"
         open(filename, "a").write(report)
         return response.status_code
 
@@ -60,7 +60,7 @@ def get_record_recid(self):
                 rdm_uuid    = i['metadata']['uuid']
             
             if self.uuid == rdm_uuid:
-                print(f'Found recid: {self.recid}')
+                # print(f'Found recid: {self.recid}')
                 break
             elif cnt > 10:
                 print('Having troubles getting the recid of the newly added record\n')
