@@ -12,7 +12,8 @@ def rdm_put_file(self, file_name):
             'Content-Type': 'application/octet-stream',
         }
         data = open(file_path + file_name, 'rb').read()
-        response = self.requests.put('https://127.0.0.1:5000/api/records/' + self.recid + '/files/' + file_name, headers=headers, data=data, verify=False)
+        url = 'https://127.0.0.1:5000/api/records/' + self.recid + '/files/' + file_name
+        response = self.requests.put(url, headers=headers, data=data, verify=False)
 
         # Report
         report = ''
@@ -41,27 +42,29 @@ def rdm_put_file(self, file_name):
 
 
 def get_record_recid(self):
-        
-    # GET from RDM recid of last added record
-    cnt = 0
-    while True:
-        cnt += 1
-        self.time.sleep(cnt * 2)
-        response = self.requests.get(
-            'https://localhost:5000/api/records/?sort=mostrecent&size=1&page=1', 
-            params=(('prettyprint', '1'),), 
-            verify=False
-            )
-        resp_json = self.json.loads(response.content)
+    try:
+        # GET from RDM recid of last added record
+        cnt = 0
+        while True:
+            cnt += 1
+            self.time.sleep(cnt * 2)
+            response = self.requests.get(
+                'https://localhost:5000/api/records/?sort=mostrecent&size=1&page=1', 
+                params=(('prettyprint', '1'),), 
+                verify=False
+                )
+            resp_json = self.json.loads(response.content)
 
-        for i in resp_json['hits']['hits']:
-            self.recid  = i['metadata']['recid']
-            rdm_uuid    = i['metadata']['uuid']
-        
-        if self.uuid == rdm_uuid:
-            print(f'Found recid: {self.recid}')
-            break
-        elif cnt > 10:
-            print('Having troubles getting the recid of the newly added record\n')
-            break
+            for i in resp_json['hits']['hits']:
+                self.recid  = i['metadata']['recid']
+                rdm_uuid    = i['metadata']['uuid']
+            
+            if self.uuid == rdm_uuid:
+                print(f'Found recid: {self.recid}')
+                break
+            elif cnt > 10:
+                print('Having troubles getting the recid of the newly added record\n')
+                break
+    except:
+        print('\n!!!    !!!  Error in get_record_recid method   !!!       !!!\n')
  

@@ -31,9 +31,6 @@ def get_pure_by_page(self, pag_begin, pag_end, pag_size):
             open(self.dirpath + "/reports/resp_pure.json", 'wb').write(response.content)
             resp_json = self.json.loads(response.content)
 
-            # resp_json = open(self.dirpath + '/reports/resp_pure.json', 'r')             # -- TEMPORARY -- 
-            # resp_json = json.load(resp_json)                                            # -- TEMPORARY -- 
-
             #       ---         ---         ---
             for self.item in resp_json['items']:
                 create_invenio_data(self)          # Creates data to push to InvenioRDM

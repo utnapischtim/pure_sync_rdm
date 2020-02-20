@@ -7,7 +7,6 @@ def create_invenio_data(self):
 
     try:
         self.record_files = []
-
         item = self.item
         self.uuid = item['uuid']
 
@@ -269,9 +268,11 @@ def post_to_rdm(self):
                     file_resp_code = rdm_put_file(self, file_name)
 
                 # adds file transfer http response codes into array
-                if file_resp_code in self.cnt_resp:     self.cnt_resp[file_resp_code] += 1
-                else:                                   self.cnt_resp[file_resp_code] =  1
-            
+                if file_resp_code not in self.cnt_resp:
+                    self.cnt_resp[file_resp_code] = 0
+
+                self.cnt_resp[file_resp_code] += 1
+                
             # in case there no file to transfer, gets recid
             else:
                 get_record_recid(self)            

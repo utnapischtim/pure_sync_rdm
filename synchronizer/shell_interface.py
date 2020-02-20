@@ -17,89 +17,97 @@ class MyPrompt(Cmd):
     def help_exit(self):
         print('Type "exit"')
     
-    #   ---     ---     ---
-    def do_rdm_push_byUuid(self, inp):
-        """\nHelp -> \n"""
-        self.get_props()
 
+    #   ---     ---     ---
+    def do_Push_uuid_toRDM(self, inp):
+        """\nHelp -> \tPush to RDM all uuids that are in to_transfer.log\n"""
+        self.get_props()
         from functions.rdm_push_byUuid          import rdm_push_byUuid
+
         rdm_push_byUuid(self, '')                   # transfer_type -> '' / 'full_comp' / 'update' / 'changes'
 
-    #   ---     ---     ---
-    def do_rdm_push_byPage(self, inp):
-        """\nHelp -> \n"""
-        self.get_props()
 
+    #   ---     ---     ---
+    def do_Push_page_toRDM(self, inp):
+        """\nHelp ->\tPush to RDM records from Pure by page \n"""
+        self.get_props()
         from functions.rdm_push_byPage          import get_pure_by_page
         from functions.rdm_push                 import create_invenio_data
+
         pag_begin = 1
         pag_end =   3
         pag_size =  10
         get_pure_by_page(self, pag_begin, pag_end, pag_size)
+
     
     #   ---     ---     ---
-    def do_pure_updates_check(self, inp):
-        """\nHelp -> \n"""
+    def do_Update_check(self, inp):
+        """\nHelp ->\tGets from Pure API all records that have been modified after the last Update_check and push them to RDM. \n"""
         self.get_props()
-
         from functions.pure_get_updates         import pure_get_updates
+
         pure_get_updates(self)
 
     #   ---     ---     ---
-    def do_pure_get_changes(self, inp):
-        """\nHelp -> \n"""
+    def do_Changes_check(self, inp):
+        """\nHelp ->\tGets from Pure API endpoint 'changes' all the records that have been updated.\n"""
         self.get_props()
 
         from functions.pure_get_changes         import pure_get_changes
         pure_get_changes(self)
     
-    #   ---     ---     ---
-    def do_full_comparison(self, inp):
-        """\nHelp -> \n"""
-        self.get_props()
 
+    #   ---     ---     ---
+    def do_Full_comparison(self, inp):
+        """\nHelp ->\tHaving all records from Pure and RDM finds out which records need to be added/deleted from RDM\n"""
+        self.get_props()
         from functions.intersection_pure_rdm    import intersection_pure_rdm
+
         intersection_pure_rdm(self)
 
-    #   ---     ---     ---
-    def do_rdm_duplicates(self, inp):
-        """\nHelp -> \n"""
-        self.get_props()
 
+    #   ---     ---     ---
+    def do_Duplicates_inRDM(self, inp):
+        """\nHelp ->\tFind and delete RDM duplicate records\n"""
+        self.get_props()
         from functions.get_from_rdm             import get_from_rdm
         from functions.find_rdm_duplicates      import find_rdm_duplicates
+
         resp = get_from_rdm(self)
         if resp == True: 
             find_rdm_duplicates(self)
 
-    #   ---     ---     ---
-    def do_delete_all_recs(self, inp):
-        """\nHelp -> \n"""
-        self.get_props()
 
+    #   ---     ---     ---
+    def do_Delete_all_recs(self, inp):
+        """\nHelp ->\tThis is a temporary method..\n"""
+        self.get_props()
         from functions.get_from_rdm             import get_from_rdm
         from functions.delete_all_records       import delete_all_records
+
         get_from_rdm(self)
         delete_all_records(self)
 
-    #   ---     ---     ---
-    def do_delete_toDelete(self, inp):
-        """\nHelp -> \n"""
-        self.get_props()
 
+    #   ---     ---     ---
+    def do_Delete_byRecid(self, inp):
+        """\nHelp ->\tDelete RDM records by recid (to_delete.log)\n"""
+        self.get_props()
         from functions.delete_record            import delete_record
+
         delete_record(self)
 
     
-    # REDUCE LENGTH LOGS
+    #   ---     ---     ---
     def do_Shorten_logs(self, inp):
-        """\nHelp -> Reduce length of log files\n"""
+        """\nHelp ->\tReduce log files length or delete them\n"""
         self.get_props()
-
         from functions.shorten_log_files        import shorten_log_files
+
         shorten_log_files(self)
 
 
+    #   ---     ---     ---
     def get_props(self):
         self.dirpath = os.path.dirname(os.path.abspath(__file__))
         self.json = json

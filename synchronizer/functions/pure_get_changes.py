@@ -67,7 +67,8 @@ def pure_get_changes(self):
                         cnt_toDel += 1
                         toDel_flag = True
 
-                if toDel_flag == True:     print(f"Delete old version - recid: {rdm_recid}")
+                if toDel_flag:
+                    print(f"Delete old version - recid: {rdm_recid}")
 
 
             #   ---     ADD / CREATE      ---
