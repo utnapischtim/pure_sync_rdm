@@ -9,7 +9,7 @@ pure_username = 'ws_grosso'     # credentials for pure files download
 pure_password = open(f'{dirpath}/data_setup/pure_password.txt', 'r').readline()
 
 # RDM
-rdm_api_url_records = 'https://127.0.0.1:5000/api/records/'
+rdm_api_url_records = 'https://127.0.0.1:5000/'
 token_rdm           = open(f'{dirpath}/data_setup/rdm_token.txt', 'r').readline()
 push_dist_sec       = 1.6
 wait_429            = 900

@@ -1,0 +1,171 @@
+{
+  "aggregations": {
+    "access_right": {
+      "buckets": [
+        {
+          "doc_count": 2, 
+          "key": "closed"
+        }
+      ], 
+      "doc_count_error_upper_bound": 0, 
+      "sum_other_doc_count": 0
+    }, 
+    "resource_type": {
+      "buckets": [], 
+      "doc_count_error_upper_bound": 0, 
+      "sum_other_doc_count": 0
+    }
+  }, 
+  "hits": {
+    "hits": [
+      {
+        "created": "2020-02-21T07:47:05.758350+00:00", 
+        "id": "16fdz-pd232", 
+        "links": {
+          "files": "https://127.0.0.1:5000/api/records/16fdz-pd232/files", 
+          "self": "https://127.0.0.1:5000/api/records/16fdz-pd232"
+        }, 
+        "metadata": {
+          "_access": {
+            "files_restricted": false, 
+            "metadata_restricted": false
+          }, 
+          "access_right": "closed", 
+          "category": "Research", 
+          "confidential": false, 
+          "contributors": [
+            {
+              "link": "https://pure01.tugraz.at/ws/api/514/persons/14a293cd-8642-471e-814e-e00a4c9c4929", 
+              "name": "Ladurner, Christoph", 
+              "organisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
+              "personRole": "Author"
+            }, 
+            {
+              "link": "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b", 
+              "name": "Wru\u00df, Maria", 
+              "organisationalUnit": "Administration (95021)", 
+              "personRole": "Author"
+            }
+          ], 
+          "createdDatePure": "2019-02-28T11:56:16.628+0000", 
+          "managingOrganisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
+          "modifiedDatePure": "2019-04-01T06:52:36.316+0000", 
+          "organisationalUnits": [
+            {
+              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/fdb7051b-0b7d-4cc1-936f-94232f231381", 
+              "name": "Serials Management, Open Access and Digitisation (95023)"
+            }, 
+            {
+              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26", 
+              "name": "Administration (95021)"
+            }
+          ], 
+          "owners": [
+            1
+          ], 
+          "peerReview": true, 
+          "publicationDatePure": "2019", 
+          "publicationStatus": "Published", 
+          "publication_date": "2020-02-21", 
+          "pureId": "19303359", 
+          "recid": "16fdz-pd232", 
+          "title": "der unglaublich wichtige titel 2", 
+          "totalNumberOfAuthors": 2, 
+          "type_p": "Conference contribution", 
+          "uuid": "ff4b3bea-5104-4d6c-9367-1a7ac035a0b8", 
+          "versionFiles": [
+            {
+              "fileAccessType": "Open", 
+              "fileDigest": "E5FA44F2B31C1FB553B6021E7360D07D5D91FF5E", 
+              "fileDigestAlgorithm": "SHA1", 
+              "fileModifBy": "chrlad", 
+              "fileModifDate": "2019-02-14T13:14:47.895+0000", 
+              "fileName": "test.txt", 
+              "fileSize": 2, 
+              "fileType": "text/plain"
+            }
+          ], 
+          "workflow": "For validation"
+        }, 
+        "revision": 0, 
+        "updated": "2020-02-21T07:47:05.758358+00:00"
+      }, 
+      {
+        "created": "2020-02-20T14:35:19.724049+00:00", 
+        "id": "b5agt-yn959", 
+        "links": {
+          "files": "https://127.0.0.1:5000/api/records/b5agt-yn959/files", 
+          "self": "https://127.0.0.1:5000/api/records/b5agt-yn959"
+        }, 
+        "metadata": {
+          "_access": {
+            "files_restricted": false, 
+            "metadata_restricted": false
+          }, 
+          "access_right": "closed", 
+          "category": "Research", 
+          "confidential": false, 
+          "contributors": [
+            {
+              "link": "https://pure01.tugraz.at/ws/api/514/persons/14a293cd-8642-471e-814e-e00a4c9c4929", 
+              "name": "Ladurner, Christoph", 
+              "organisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
+              "personRole": "Author"
+            }, 
+            {
+              "link": "https://pure01.tugraz.at/ws/api/514/persons/f0f60b8b-a7cb-41e9-ad36-606d3e890a3b", 
+              "name": "Wru\u00df, Maria", 
+              "organisationalUnit": "Administration (95021)", 
+              "personRole": "Author"
+            }
+          ], 
+          "createdDatePure": "2019-02-28T11:56:16.628+0000", 
+          "managingOrganisationalUnit": "Serials Management, Open Access and Digitisation (95023)", 
+          "modifiedDatePure": "2019-04-01T06:52:36.316+0000", 
+          "organisationalUnits": [
+            {
+              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/fdb7051b-0b7d-4cc1-936f-94232f231381", 
+              "name": "Serials Management, Open Access and Digitisation (95023)"
+            }, 
+            {
+              "link": "https://pure01.tugraz.at/ws/api/514/organisational-units/650fb44b-f9dd-490c-b6e0-4b3e77b55c26", 
+              "name": "Administration (95021)"
+            }
+          ], 
+          "owners": [
+            1
+          ], 
+          "peerReview": true, 
+          "publicationDatePure": "2019", 
+          "publicationStatus": "Published", 
+          "publication_date": "2020-02-20", 
+          "pureId": "19303359", 
+          "recid": "b5agt-yn959", 
+          "title": "der unglaublich wichtige titel 2", 
+          "totalNumberOfAuthors": 2, 
+          "type_p": "Conference contribution", 
+          "uuid": "ff4b3bea-5104-4d6c-9367-1a7ac035a0b8", 
+          "versionFiles": [
+            {
+              "fileAccessType": "Open", 
+              "fileDigest": "E5FA44F2B31C1FB553B6021E7360D07D5D91FF5E", 
+              "fileDigestAlgorithm": "SHA1", 
+              "fileModifBy": "chrlad", 
+              "fileModifDate": "2019-02-14T13:14:47.895+0000", 
+              "fileName": "test.txt", 
+              "fileSize": 2, 
+              "fileType": "text/plain"
+            }
+          ], 
+          "workflow": "For validation"
+        }, 
+        "revision": 0, 
+        "updated": "2020-02-20T14:35:19.724056+00:00"
+      }
+    ], 
+    "total": 2
+  }, 
+  "links": {
+    "self": "https://127.0.0.1:5000/api/records/?sort=mostrecent&q=%22ff4b3bea-5104-4d6c-9367-1a7ac035a0b8%22&size=100&page=1"
+  }
+}

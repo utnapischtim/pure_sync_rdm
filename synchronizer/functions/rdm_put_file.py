@@ -2,7 +2,7 @@ from setup import *
 
 def rdm_put_file(my_prompt, file_name):
     try:
-        file_path = my_prompt.dirpath + '/reports/temporary_files/'
+        file_path = my_prompt.dirpath + '/data/temporary_files/'
 
         # GET from RDM recid of last added record
         get_record_recid(my_prompt)
@@ -12,7 +12,7 @@ def rdm_put_file(my_prompt, file_name):
             'Content-Type': 'application/octet-stream',
         }
         data = open(file_path + file_name, 'rb').read()
-        url = f'{rdm_api_url_records}{my_prompt.recid}/files/{file_name}'
+        url = f'{rdm_api_url_records}api/records/{my_prompt.recid}/files/{file_name}'
         response = my_prompt.requests.put(url, headers=headers, data=data, verify=False)
 
         # Report
@@ -49,7 +49,7 @@ def get_record_recid(my_prompt):
             cnt += 1
             my_prompt.time.sleep(cnt * 2)
             response = my_prompt.requests.get(
-                f'{rdm_api_url_records}?sort=mostrecent&size=1&page=1', 
+                f'{rdm_api_url_records}api/records/?sort=mostrecent&size=1&page=1', 
                 params=(('prettyprint', '1'),), 
                 verify=False
                 )

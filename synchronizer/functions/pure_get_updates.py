@@ -72,7 +72,7 @@ def pure_get_updates(my_prompt):
         response = my_prompt.requests.get(url, headers=headers, params=params)
         
         print('Pure resp: ', response)
-        open(my_prompt.dirpath + "/reports/temporary_files/resp_pure.json", 'wb').write(response.content)
+        open(my_prompt.dirpath + "/data/temporary_files/resp_pure.json", 'wb').write(response.content)
         resp_json = my_prompt.json.loads(response.content)
 
         to_transfer = ''

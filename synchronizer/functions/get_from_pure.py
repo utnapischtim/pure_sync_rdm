@@ -24,7 +24,7 @@ def get_from_pure(my_prompt):
             )
             # PURE get request
             response = my_prompt.requests.get(pure_rest_api_url + 'research-outputs', headers=headers, params=params)
-            open(my_prompt.dirpath + "/reports/temporary_files/resp_pure.json", 'wb').write(response.content)
+            open(my_prompt.dirpath + "/data/temporary_files/resp_pure.json", 'wb').write(response.content)
             resp_json = my_prompt.json.loads(response.content)
 
             if len(resp_json['items']) == 0:    go_on = False

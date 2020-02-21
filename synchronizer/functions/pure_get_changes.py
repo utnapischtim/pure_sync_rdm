@@ -1,8 +1,11 @@
 from setup import *
-from functions.get_from_rdm import get_from_rdm
 
 def pure_get_changes(my_prompt):
     try:
+        from functions.get_from_rdm import get_from_rdm
+        from rdm_get_recid import rdm_get_recid
+        from functions.delete_record import delete_record
+
         # empty to_delete.log
         open(my_prompt.dirpath + '/data/to_delete.txt', 'w').close()
 
@@ -28,17 +31,11 @@ def pure_get_changes(my_prompt):
             print(response.content)
 
         # Write data into resp_pure_changes
-        file_name = f'{my_prompt.dirpath}/reports/temporary_files/resp_pure_changes.json'
+        file_name = f'{my_prompt.dirpath}/data/temporary_files/resp_pure_changes.json'
         open(file_name, 'wb').write(response.content)
 
-        # Load json
+        # Load response json
         resp_json = my_prompt.json.loads(response.content)
-
-        # Get all RDM uuids and recids
-        get_from_rdm(my_prompt)                                  # MAYBE TAKES TOO LONG !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        
-        file_name = my_prompt.dirpath + '/reports/full_comparison/rdm_uuids_recids.log'
-        uuidRecid_rdm = open(file_name, 'r').readlines()
 
         to_delete = ''
         cnt_toDel = 0
@@ -48,38 +45,28 @@ def pure_get_changes(my_prompt):
 
         for item in resp_json['items']:
 
-            if 'changeType' not in item:    continue
-            pure_uuid = item['uuid']
+            if 'changeType' not in item:
+                continue
+            
+            uuid = item['uuid']
             print(f"{item['changeType']} - {item['uuid']}")
 
             #   ---     UPDATE      ---
             if item['changeType'] == 'UPDATE':
                 cnt_toTrans += 1
-                to_transfer += pure_uuid + '\n'
+                to_transfer += f'{uuid}\n'
 
                 # Check if older version of the same uuid is in RDM
-                toDel_flag = False
+                recid = rdm_get_recid(my_prompt, uuid)
 
-                for rdm_record in uuidRecid_rdm:
-
-                    rdm_uuid = rdm_record.split(' ')[0]
-                    
-
-                    if pure_uuid == rdm_uuid:
-                        rdm_recid = rdm_record.split(' ')[1]
-                        
-                        to_delete += rdm_recid
-                        cnt_toDel += 1
-                        toDel_flag = True
-
-                if toDel_flag:
-                    print(f"Delete old version - recid: {rdm_recid}")
+                open(my_prompt.dirpath + "/data/to_delete.txt", "a").write(f'{recid}\n')
+                delete_record(my_prompt)
 
 
             #   ---     ADD / CREATE      ---
             if item['changeType'] == 'ADD' or item['changeType'] == 'CREATE':       # REVIEW !!!!!!!!!!! difference between add and create?
                 cnt_toTrans += 1
-                to_transfer += pure_uuid + '\n'
+                to_transfer += uuid + '\n'
 
 
             #   ---     DELETE      ---
@@ -90,7 +77,7 @@ def pure_get_changes(my_prompt):
                     rdm_uuid = rdm_record.split(' ')[0]
                     rdm_recid = rdm_record.split(' ')[1]
 
-                    if pure_uuid == rdm_uuid:
+                    if uuid == rdm_uuid:
                         
                         to_delete += rdm_recid
                         cnt_toDel += 1

@@ -17,11 +17,11 @@ def get_from_rdm(my_prompt):
 
             # REQUEST to RDM
             params = (('prettyprint', '1'),)
-            url = f'{rdm_api_url_records}?sort=mostrecent&size={pag_size}&page={pag}'
+            url = f'{rdm_api_url_records}api/records/?sort=mostrecent&size={pag_size}&page={pag}'
             response = my_prompt.requests.get(url, params=params, verify=False)
 
             print(response)
-            open(my_prompt.dirpath + "/reports/temporary_files/resp_rdm.json", 'wb').write(response.content)
+            open(my_prompt.dirpath + "/data/temporary_files/resp_rdm.json", 'wb').write(response.content)
 
             if response.status_code == 429:
                 print('\nToo many requests.. wait 15 min\n')

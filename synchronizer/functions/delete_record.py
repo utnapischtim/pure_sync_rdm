@@ -1,108 +1,101 @@
 from setup import *
 
-def delete_record(my_prompt):
+
+def delete_reading_txt(my_prompt):
     # NOTE: the user ACCOUNT related to the used TOKEN must be ADMIN
     # pipenv run invenio roles add admin@invenio.org admin
-    try:
-        print('\n---   ---   ---\nDELETE RECORDS\n')
+    # try:
+    print('\n---   ---   ---\nDELETE RECORDS\n')
+    cnt_success = 0
+    cnt_error = 0
+    cnt_tot = 0
 
-        file_name = my_prompt.dirpath + '/data/to_delete.txt'
+    file_name = my_prompt.dirpath + '/data/to_delete.txt'
+    records_to_del = open(file_name, 'r').readlines()
 
-        records_to_del = open(file_name, 'r')
+    for recid in records_to_del:
 
-        headers = {
-            'Authorization': 'Bearer ' + token_rdm,         # token from setup.py
-            'Content-Type': 'application/json',
-        }
-        recid = records_to_del.readline()
-        cnt_success = 0
-        cnt_error = 0
-        cnt_tot = 0
-        deleted_records = []
+        cnt_tot += 1
+        recid = recid.strip('\n')
 
-        while recid:
-            cnt_tot += 1
-            my_prompt.time.sleep(push_dist_sec)
-            r_id = recid.strip()
+        if len(recid) != 11:
+            print(f'\n{recid} -> Wrong recid lenght! \n')
+            continue
+        
+        # -- REQUEST --
+        response = delete_record(my_prompt, recid)
 
-            if len(r_id) != 11:
-                print(f'\n{r_id} -> Wrong recid lenght! You can not use uuids.\n')
-                continue
-            
-            url = f'{rdm_api_url_records}{r_id}'
-            response = my_prompt.requests.delete(url, headers=headers, verify=False)
+        # 410 -> "PID has been deleted"
+        if response.status_code < 300 or response.status_code == 410:
+            cnt_success += 1
 
-            recid = records_to_del.readline()
-            print(f'{r_id} {response}')
-            
-            # 410 -> "PID has been deleted"
-            if response.status_code < 300 or response.status_code == 410:
-                cnt_success += 1
-                deleted_records.append(r_id)
+        # Makes a push request every ~3 sec
+        my_prompt.time.sleep(push_dist_sec)
 
-                # remove deleted recid from to_delete.log
-                with open(file_name, "r") as f:
-                    lines = f.readlines()
-                with open(file_name, "w") as f:
-                    for line in lines:
-                        if line.strip("\n") != r_id:
-                            f.write(line)
+    current_time = my_prompt.datetime.now().strftime("%H:%M:%S")
+    report = f"\n{current_time}\nDelete - {my_prompt.date.today()} - "
 
-                # remove record from all_rdm_records.log
-                file_name = my_prompt.dirpath + "/reports/all_rdm_records.log"
-                with open(file_name, "r") as f:
-                    lines = f.readlines()
-                with open(file_name, "w") as f:
-                    for line in lines:
-                        line_recid = line.strip("\n")
-                        line_recid = line_recid.split(' ')[1]
-                        if line_recid != r_id:
-                            f.write(line)
+    if cnt_tot == 0:
+        report += "success\nNothing to trasmit\n"
+    else:
+        percent_success = cnt_success * 100 / cnt_tot
 
-
-            elif response.status_code == 429:
-                my_prompt.time.sleep(wait_429)
-            else:
-                cnt_error += 1
-                print(response.content)
-
-        current_time = my_prompt.datetime.now().strftime("%H:%M:%S")
-        report = f"\n{current_time}\nDelete - {my_prompt.date.today()} - "
-
-        if cnt_tot == 0:
-            report += "success\nNothing to trasmit\n"
+        if percent_success >= upload_percent_accept:
+            report += "success\n"
         else:
-            percent_success = cnt_success * 100 / cnt_tot
+            report += "error\n"
 
-            if percent_success >= upload_percent_accept:
-                report += "success\n"
-            else:
-                report += "error\n"
+    report += f"Tot records: {cnt_tot} - Success transfer: {cnt_success}\n"
 
-            current_time = my_prompt.datetime.now().strftime("%H:%M:%S")
+    date_today = str(my_prompt.date.today())
+    open(f'{my_prompt.dirpath}/reports/{date_today}_updates.log', "a").write(report)
+    
+    print(report)
 
-        report += f"Tot records: {cnt_tot} - Success transfer: {cnt_success}\n"
+    # except:
+    #     print('\n---   !!!   Error in delete_record   !!!   ---\n')
 
-        # Remove records from rdm_uuids_recids.log
-        file_name = my_prompt.dirpath + '/reports/full_comparison/rdm_uuids_recids.log'
-        cnt_removed = 0
+
+#   DELETE_RECORD
+def delete_record(my_prompt, recid):
+
+    #   REQUEST
+    headers = {
+        'Authorization': 'Bearer ' + token_rdm,         # token from setup.py
+        'Content-Type': 'application/json',
+    }
+    url = f'{rdm_api_url_records}api/records/{recid}'
+    response = my_prompt.requests.delete(url, headers=headers, verify=False)
+    #   ---
+    
+    print(f'{recid} {response}')
+    
+    # 410 -> "PID has been deleted"
+    if response.status_code < 300 or response.status_code == 410:
+
+        # remove deleted recid from to_delete.log
+        file_name = my_prompt.dirpath + "/data/to_delete.txt"
         with open(file_name, "r") as f:
             lines = f.readlines()
         with open(file_name, "w") as f:
             for line in lines:
-                file_rid = line.strip("\n")
-                file_rid = file_rid.split(' ')[1]
-                if file_rid in deleted_records:
-                    cnt_removed += 1
-                else:
+                if line.strip("\n") != recid:
                     f.write(line)
 
-        print(f'\nRemoved lines from rdm_uuids_recids.log: {cnt_removed}')
+        # remove record from all_rdm_records.log
+        file_name = my_prompt.dirpath + "/data/all_rdm_records.txt"
+        with open(file_name, "r") as f:
+            lines = f.readlines()
+        with open(file_name, "w") as f:
+            for line in lines:
+                line_recid = line.strip("\n")
+                line_recid = line_recid.split(' ')[1]
+                if line_recid != recid:
+                    f.write(line)
 
-        date_today = str(my_prompt.date.today())
-        open(f'{my_prompt.dirpath}/reports/{date_today}_updates.log', "a").write(report)
-        
-        print(report)
+    elif response.status_code == 429:
+        my_prompt.time.sleep(wait_429)
+    else:
+        print(response.content)
 
-    except:
-        print('\n---   !!!   Error in delete_record   !!!   ---\n')
+    return response

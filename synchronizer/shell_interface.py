@@ -90,12 +90,12 @@ class MyPrompt(Cmd):
 
 
     #   ---     ---     ---
-    def do_delete_by_recid(self, inp):
+    def do_delete_reading_txt(self, inp):
         """\nHelp ->\tDelete RDM records by recid (to_delete.log)\n"""
         self.get_props()
-        from functions.delete_record            import delete_record
+        from functions.delete_record import delete_reading_txt
 
-        delete_record(self)
+        delete_reading_txt(self)
 
     
     #   ---     ---     ---
@@ -106,6 +106,14 @@ class MyPrompt(Cmd):
 
         shorten_log_files(self)
 
+    
+    #   ---     ---     ---
+    def do_test(self, inp):
+        self.get_props()
+
+        from functions.rdm_get_recid        import rdm_get_recid
+        response = rdm_get_recid(self, inp)
+        print(response)
 
     #   ---     ---     ---
     def get_props(self):
