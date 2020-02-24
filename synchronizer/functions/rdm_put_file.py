@@ -15,10 +15,19 @@ def rdm_put_file(my_prompt, file_name):
         url = f'{rdm_api_url_records}api/records/{my_prompt.recid}/files/{file_name}'
         response = my_prompt.requests.put(url, headers=headers, data=data, verify=False)
 
+        # adds metadata http response codes into array
+        if response.status_code not in my_prompt.count_http_response_codes:
+            my_prompt.count_http_response_codes[response.status_code] = 0
+
+        my_prompt.count_http_response_codes[response.status_code] += 1
+
         # Report
         report = ''
-        print(f'RDM file put: {response}\n')
-        report += 'FileTransf ' + str(response) + ' - ' + str(my_prompt.recid) + '\n'
+        print(f'RDM put file\t\t->\t{response}')
+
+        current_time = my_prompt.datetime.now().strftime("%H:%M:%S")
+
+        report += f'{current_time} - file_put_to_rdm - {response} - {my_prompt.recid}\n'
 
         if response.status_code >= 300:
             report += str(response.content) + '\n'
@@ -31,8 +40,8 @@ def rdm_put_file(my_prompt, file_name):
             # # if the upload was successful then delete file from /reports/temporary_files
             my_prompt.os.remove(file_path + file_name) 
 
-        filename = my_prompt.dirpath + "/reports/" + str(my_prompt.date.today()) + "_rdm_push_records.log"
-        open(filename, "a").write(report)
+        file_name = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_rdm-push-records.log'
+        open(file_name, "a").write(report)
         return response.status_code
 
         # HAVING PURE ADMIN ACCOUNT REMOVE FILE FROM PURE

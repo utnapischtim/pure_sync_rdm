@@ -1,12 +1,12 @@
 from setup                      import *
 from functions.rdm_push         import create_invenio_data
-from functions.rdm_push_byUuid  import rdm_push_byUuid
+from functions.rdm_push_by_uuid  import rdm_push_by_uuid
 
 def get_pure_by_page(my_prompt, pag_begin, pag_end, pag_size):
 
     # try:
     my_prompt.exec_type = 'by_page'
-    my_prompt.count_http_resp_codes = {}
+    my_prompt.count_http_response_codes = {}
     my_prompt.cnt_errors = 0
 
     for pag in range(pag_begin, pag_end):
@@ -15,7 +15,7 @@ def get_pure_by_page(my_prompt, pag_begin, pag_end, pag_size):
         print(report_text)
 
         # add page to report file
-        report_file = my_prompt.dirpath + "/reports/" + str(my_prompt.date.today()) + "_rdm_push_records.log"     
+        report_file = my_prompt.dirpath + "/reports/" + str(my_prompt.date.today()) + "_rdm-push-records.log"     
         open(report_file, "a").write(report_text)                       # 'a' -> append
 
         # PURE GET REQUEST
@@ -40,11 +40,11 @@ def get_pure_by_page(my_prompt, pag_begin, pag_end, pag_size):
             create_invenio_data(my_prompt)          
         #       ---         ---         ---
             
-        # view total number of http respone codes in _rdm_push_records.log
+        # view total number of http respone codes in _rdm-push-records.log
         report_text = 'HTTP response codes:\n'
 
-        for key in my_prompt.count_http_resp_codes:
-            report_text += f'{key}: {my_prompt.count_http_resp_codes[key]}\n'
+        for key in my_prompt.count_http_response_codes:
+            report_text += f'{key}: {my_prompt.count_http_response_codes[key]}\n'
 
         open(report_file, "a").write(report_text)
         print(report_text)
@@ -57,15 +57,15 @@ def get_pure_by_page(my_prompt, pag_begin, pag_end, pag_size):
         current_time = now.strftime("%H:%M:%S")
         report_text = f'\n{str(my_prompt.date.today())} {current_time},\tpag {pag},\tsize {pag_size},\tcodes:\t'
         
-        for key in my_prompt.count_http_resp_codes:
-            report_text += f'{str(key)}: {str(my_prompt.count_http_resp_codes[key])},\t'
+        for key in my_prompt.count_http_response_codes:
+            report_text += f'{str(key)}: {str(my_prompt.count_http_response_codes[key])},\t'
             
         open(report_file, "a").write(report_text)
 
-        my_prompt.count_http_resp_codes = {}
+        my_prompt.count_http_response_codes = {}
 
     if my_prompt.cnt_errors > 0:
-        rdm_push_byUuid(my_prompt, 'update')
+        rdm_push_by_uuid(my_prompt, 'update')
 
     print('\n-- -- Finito -- --\n')
     # except:

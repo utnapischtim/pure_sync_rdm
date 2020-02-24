@@ -66,7 +66,7 @@ def create_invenio_data(my_prompt):
                     file_name = EV['file']['fileName']
                     file_url  = EV['file']['fileURL']
                     response = my_prompt.requests.get(file_url, auth=HTTPBasicAuth(pure_username, pure_password))
-                    print(f'\n--- Download file from Pure. {response}\nFile name:\t{file_name}')
+                    print(f'Pure download file\t->\t{response}\t({file_name})')
 
                     # SAVE FILE
                     if response.status_code < 300:
@@ -215,16 +215,19 @@ def post_to_rdm(my_prompt):
     response = my_prompt.requests.post(url, headers=headers, params=params, data=data_utf8, verify=False)
 
     # RESPONSE CHECK
-    print('Metadata post: ', response)                
+    print(f'RDM post metadata\t->\t{response}')                
 
     # adds metadata http response codes into array
-    if response.status_code in my_prompt.count_http_resp_codes:       my_prompt.count_http_resp_codes[response.status_code] += 1
-    else:                                           my_prompt.count_http_resp_codes[response.status_code] =  1
+    if response.status_code not in my_prompt.count_http_response_codes:
+        my_prompt.count_http_response_codes[response.status_code] = 0
+
+    my_prompt.count_http_response_codes[response.status_code] += 1
+
 
     uuid = my_prompt.item["uuid"]
     current_time = my_prompt.datetime.now().strftime("%H:%M:%S")
 
-    report = f'{current_time} - {str(response)} - {uuid} - {my_prompt.item["title"]}\n'
+    report = f'{current_time} - metadata_to_rdm - {str(response)} - {uuid} - {my_prompt.item["title"]}\n'
 
     if response.status_code >= 300:
 
@@ -236,8 +239,8 @@ def post_to_rdm(my_prompt):
 
         # post json error_jsons
         if response.status_code != 429:
-            filename = f'{my_prompt.dirpath}/data/temporary_files/error_jsons/{uuid}.json'
-            open(filename, "w").write(str(my_prompt.data))
+            file_name = f'{my_prompt.dirpath}/data/temporary_files/error_jsons/{uuid}.json'
+            open(file_name, "w").write(str(my_prompt.data))
         
         # error description from invenioRDM
         report += str(response.content) + '\n'
@@ -246,8 +249,8 @@ def post_to_rdm(my_prompt):
         if my_prompt.exec_type != 'by_id':
             open(my_prompt.dirpath + "/data/to_transfer.txt", "a").write(uuid + "\n")
 
-    filename = my_prompt.dirpath + "/reports/" + str(my_prompt.date.today()) + "_rdm_push_records.log"
-    open(filename, "a").write(report)
+    file_name = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_rdm-push-records.log'
+    open(file_name, "a").write(report)
 
     if response.status_code == 429:
         print('Waiting 15 min')
@@ -262,13 +265,7 @@ def post_to_rdm(my_prompt):
         # - Upload record FILES to RDM -
         if len(my_prompt.record_files) > 0:
             for file_name in my_prompt.record_files:
-                file_resp_code = rdm_put_file(my_prompt, file_name)
-
-            # adds file transfer http response codes into array
-            if file_resp_code not in my_prompt.count_http_resp_codes:
-                my_prompt.count_http_resp_codes[file_resp_code] = 0
-
-            my_prompt.count_http_resp_codes[file_resp_code] += 1
+                rdm_put_file(my_prompt, file_name)
             
         # in case there no file to transfer, gets recid
         else:

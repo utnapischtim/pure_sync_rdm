@@ -22,16 +22,16 @@ class MyPrompt(Cmd):
     def do_push_uuid_to_rmd(self, inp):
         """\nHelp -> \tPush to RDM all uuids that are in to_transfer.log\n"""
         self.get_props()
-        from functions.rdm_push_byUuid          import rdm_push_byUuid
+        from functions.rdm_push_by_uuid          import rdm_push_by_uuid
 
-        rdm_push_byUuid(self, '')                   # transfer_type -> '' / 'full_comp' / 'update' / 'changes'
+        rdm_push_by_uuid(self, '')                   # transfer_type -> '' / 'full_comp' / 'update' / 'changes'
 
 
     #   ---     ---     ---
     def do_push_page_to_rdm(self, inp):
         """\nHelp ->\tPush to RDM records from Pure by page \n"""
         self.get_props()
-        from functions.rdm_push_byPage          import get_pure_by_page
+        from functions.rdm_push_by_page          import get_pure_by_page
         from functions.rdm_push                 import create_invenio_data
 
         pag_begin = 3
@@ -111,9 +111,8 @@ class MyPrompt(Cmd):
     def do_test(self, inp):
         self.get_props()
 
-        from functions.rdm_get_recid        import rdm_get_recid
-        response = rdm_get_recid(self, inp)
-        print(response)
+        from functions.delete_record        import delete_record
+        response = delete_record(self, inp)
 
     #   ---     ---     ---
     def get_props(self):

@@ -6,16 +6,15 @@ def delete_reading_txt(my_prompt):
     # pipenv run invenio roles add admin@invenio.org admin
     # try:
     print('\n---   ---   ---\nDELETE RECORDS\n')
-    cnt_success = 0
-    cnt_error = 0
-    cnt_tot = 0
+    count_success = 0
+    count_total = 0
 
     file_name = my_prompt.dirpath + '/data/to_delete.txt'
     records_to_del = open(file_name, 'r').readlines()
 
     for recid in records_to_del:
 
-        cnt_tot += 1
+        count_total += 1
         recid = recid.strip('\n')
 
         if len(recid) != 11:
@@ -27,25 +26,22 @@ def delete_reading_txt(my_prompt):
 
         # 410 -> "PID has been deleted"
         if response.status_code < 300 or response.status_code == 410:
-            cnt_success += 1
-
-        # Makes a push request every ~3 sec
-        my_prompt.time.sleep(push_dist_sec)
+            count_success += 1
 
     current_time = my_prompt.datetime.now().strftime("%H:%M:%S")
     report = f"\n{current_time}\nDelete - {my_prompt.date.today()} - "
 
-    if cnt_tot == 0:
+    if count_total == 0:
         report += "success\nNothing to trasmit\n"
     else:
-        percent_success = cnt_success * 100 / cnt_tot
+        percent_success = count_success * 100 / count_total
 
         if percent_success >= upload_percent_accept:
             report += "success\n"
         else:
             report += "error\n"
 
-    report += f"Tot records: {cnt_tot} - Success transfer: {cnt_success}\n"
+    report += f"Tot records: {count_total} - Success transfer: {count_success}\n"
 
     date_today = str(my_prompt.date.today())
     open(f'{my_prompt.dirpath}/reports/{date_today}_updates.log', "a").write(report)
@@ -68,7 +64,19 @@ def delete_record(my_prompt, recid):
     response = my_prompt.requests.delete(url, headers=headers, verify=False)
     #   ---
     
-    print(f'{recid} {response}')
+    print(f'RDM delete\t->\t{response} - {recid}')
+
+    # adds metadata http response codes into array
+    if response.status_code not in my_prompt.count_http_response_codes:
+        my_prompt.count_http_response_codes[response.status_code] = 0
+
+    my_prompt.count_http_response_codes[response.status_code] += 1
+
+    # Append to yyyy-mm-dd_rdm-push-records.log
+    current_time = my_prompt.datetime.now().strftime("%H:%M:%S")
+    report_line = f'{current_time} - delete_from_rdm - {response} - {recid}\n'
+    file_name = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_rdm-push-records.log'
+    open(file_name, "a").write(report_line)
     
     # 410 -> "PID has been deleted"
     if response.status_code < 300 or response.status_code == 410:
@@ -93,9 +101,12 @@ def delete_record(my_prompt, recid):
                 if line_recid != recid:
                     f.write(line)
 
-    elif response.status_code == 429:
-        my_prompt.time.sleep(wait_429)
+    elif response.status_code == 429:           # http 429 -> too many requests
+        my_prompt.time.sleep(wait_429)          # wait for ~ 15 min
     else:
         print(response.content)
+
+    # Makes a push request every ~ 3 sec
+    my_prompt.time.sleep(push_dist_sec)
 
     return response

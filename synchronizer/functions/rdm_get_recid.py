@@ -1,5 +1,5 @@
 from setup import *
-from functions.delete_record import delete_reading_txt
+from functions.delete_record import delete_reading_txt, delete_record
 
 def rdm_get_recid(my_prompt, uuid):
 
@@ -28,13 +28,13 @@ def rdm_get_recid(my_prompt, uuid):
 
     total_recids = resp_json['hits']['total']
     if total_recids == 0:
-        print(f'{uuid} - recid not found')
+        print(f'Recid not found')
+        return False
 
-    print(f'\n{uuid} - {response} - total_recids: {total_recids}')
+    print(f'RDM get recid\t->\t{response} - total_recids: {total_recids}')
 
     # Iterate over all records with the same uuid
     # The first record is the most recent (they are sorted)
-    # The DUPLICATES will be DELETED
     count = 0
     for i in resp_json['hits']['hits']:
         count += 1
@@ -42,14 +42,9 @@ def rdm_get_recid(my_prompt, uuid):
         
         if count == 1:
             newest_recid = recid
-            print(f'{recid} - most recent')
         else:
-            print(f'{recid} - duplicate')
-            open(my_prompt.dirpath + "/data/to_delete.txt", "a").write(f"{recid}\n")
-
-    # Delete duplicates
-    if count > 1:
-        delete_reading_txt(my_prompt)
+            # Duplicate records are deleted
+            delete_record(my_prompt, recid)
 
     return newest_recid
 

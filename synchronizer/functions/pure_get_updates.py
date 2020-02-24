@@ -131,8 +131,8 @@ def pure_get_updates(my_prompt):
         open(my_prompt.dirpath + '/data/to_delete.txt', "a").write(to_delete)
 
     # PUSH TO RDM
-    from functions.rdm_push_byUuid import rdm_push_byUuid
-    rdm_push_byUuid(my_prompt, 'update')
+    from functions.rdm_push_by_uuid import rdm_push_by_uuid
+    rdm_push_by_uuid(my_prompt, 'update')
 
     # DELETE IN RDM
     from functions.delete_record    import delete_record

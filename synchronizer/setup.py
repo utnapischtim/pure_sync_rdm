@@ -15,12 +15,7 @@ push_dist_sec       = 1.6
 wait_429            = 900
 
 # LOG FILES
-log_files = [                   # d_ files
-    'd_daily_updates.log', 
-    'd_rdm_push_report.log', 
-    ]
-log_lines   = 120                   # number of lines in d_ log files
-log_days    = 2                     # days to keep /full_reports files
+days_to_keep_log_files = 7      # Deletes log files after x days (shorten_logfiles.py)
 
 # Percentage of updated items to considere the upload task successful
 upload_percent_accept = 90
