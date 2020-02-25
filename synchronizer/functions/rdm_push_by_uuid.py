@@ -12,7 +12,6 @@ def rdm_push_by_uuid(my_prompt):
     uuid = retrans_data.readline()
     
     while uuid:
-        my_prompt.count_total += 1
                     
         if (len(uuid.strip()) != 36):
             print('Invalid uuid lenght.\n')

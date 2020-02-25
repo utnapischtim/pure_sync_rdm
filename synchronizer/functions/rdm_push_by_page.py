@@ -6,17 +6,24 @@ def get_pure_by_page(my_prompt, pag_begin, pag_end, pag_size):
 
     # try:
     my_prompt.exec_type = 'by_page'
-    my_prompt.count_http_response_codes = {}
-    my_prompt.count_errors = 0
 
     for pag in range(pag_begin, pag_end):
 
-        report_text = f'\nPag {str(pag)} - pag_size {str(pag_size)}\n'
-        print(report_text)
+        my_prompt.count_http_response_codes = {}
+
+        my_prompt.count_total = 0
+        my_prompt.count_errors_push_metadata = 0
+        my_prompt.count_errors_put_file = 0
+        my_prompt.count_successful_push_metadata = 0
+        my_prompt.count_successful_push_file = 0
+        my_prompt.count_uuid_not_found_in_pure = 0
+
+        report = f'\nPag {str(pag)} - pag_size {str(pag_size)}\n'
+        print(report)
 
         # add page to report file
-        report_file = my_prompt.dirpath + "/reports/" + str(my_prompt.date.today()) + "_rdm-push-records.log"     
-        open(report_file, "a").write(report_text)                       # 'a' -> append
+        file_records = my_prompt.dirpath + "/reports/" + str(my_prompt.date.today()) + "_rdm-push-records.log"     
+        open(file_records, "a").write(report)                       # 'a' -> append
 
         # PURE GET REQUEST
         headers = {
@@ -39,34 +46,22 @@ def get_pure_by_page(my_prompt, pag_begin, pag_end, pag_size):
         for my_prompt.item in resp_json['items']:
             create_invenio_data(my_prompt)          
         #       ---         ---         ---
-            
-        # view total number of http respone codes in _rdm-push-records.log
-        report_text = 'HTTP response codes:\n'
 
-        for key in my_prompt.count_http_response_codes:
-            report_text += f'{key}: {my_prompt.count_http_response_codes[key]}\n'
+        # Add RDM HTTP reponse codes to yyyy-mm-_rdm_push_pages.log
+        file_pages = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_rdm_push_pages.log'
 
-        open(report_file, "a").write(report_text)
-        print(report_text)
-
-        # add http reponse codes to yyyy-mm-_rdm_push_pages.log
-        date_today = str(my_prompt.date.today())
-        report_file = f'{my_prompt.dirpath}/reports/{date_today}_rdm_push_pages.log'
-
-        now = my_prompt.datetime.now()
-        current_time = now.strftime("%H:%M:%S")
-        report_text = f'\n{str(my_prompt.date.today())} {current_time},\tpag {pag},\tsize {pag_size},\tcodes:\t'
+        current_time = my_prompt.datetime.now().strftime("%H:%M:%S")
+        report = f'\n{str(my_prompt.date.today())} {current_time},\tpag {pag},\tsize {pag_size},\tcodes:\t'
         
         for key in my_prompt.count_http_response_codes:
-            report_text += f'{str(key)}: {str(my_prompt.count_http_response_codes[key])},\t'
-            
-        open(report_file, "a").write(report_text)
+            report += f'{str(key)}: {my_prompt.count_http_response_codes[key]},\t'
 
-        my_prompt.count_http_response_codes = {}
+        open(file_pages, "a").write(report)
 
-    if my_prompt.count_errors > 0:
-        rdm_push_by_uuid(my_prompt, 'update')
+        # summary.log and records.log
+        from functions.report_records_summary import report_records_summary
+        report_records_summary(my_prompt, 'Pages')
 
-    print('\n-- -- Finito -- --\n')
+
     # except:
     #     print('\n!!!      !!!  Error in get_pure_by_page method   !!!     !!!\n')

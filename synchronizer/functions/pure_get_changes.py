@@ -161,12 +161,12 @@ def pure_get_changes_by_date(my_prompt, changes_date):
 
 
     date_today = str(my_prompt.date.today())
-    file_update = f'{my_prompt.dirpath}/reports/{date_today}_summary.log'
+    file_summary = f'{my_prompt.dirpath}/reports/{date_today}_summary.log'
 
     # - TRANSFER -
     if count_to_transfer == 0:
         # Adds report to yyyy-mm-dd_summary.log
-        open(file_update, "a").write(report)
+        open(file_summary, "a").write(report)
         print(report)
         return
 
@@ -180,42 +180,9 @@ def pure_get_changes_by_date(my_prompt, changes_date):
     from functions.rdm_push_by_uuid import rdm_push_by_uuid
     rdm_push_by_uuid(my_prompt)
     #    ---     ---
-    
-    print('\n---------------------')
 
-    if my_prompt.count_total == 0:
-        report = '\nChanges - success\nNothing to transmit\n'
-    else:
-        percent_success = my_prompt.count_successful_push_metadata * 100 / my_prompt.count_total
-
-        if percent_success >= upload_percent_accept:
-            report = "\nChanges - success\n"
-        else:
-            report = "\nChanges - error\n"
-
-        current_datetime = my_prompt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        report += f"{current_datetime}\n"
-
-        report += f"Total records:\t\t\t\t{my_prompt.count_total}\n"
-        report += f"Successful push metadata:\t{my_prompt.count_successful_push_metadata}\n"
-        report += f"Errors push metadata:\t\t{my_prompt.count_errors_push_metadata}\n"
-        report += f"Successful put file: \t\t{my_prompt.count_successful_push_file}\n"
-        report += f"Error put file:\t\t\t\t{my_prompt.count_errors_put_file}\n"
-        report += f"Uuid not found in pure: \t{my_prompt.count_uuid_not_found_in_pure}\n"
-
-
-    # Adds report to yyyy-mm-dd_summary.log
-    open(file_update, "a").write(report)
-    print(report)
-
-    # Adding count http respons to report records
-    report_records = 'RDM HTTP response codes:\n'
-    for key in my_prompt.count_http_response_codes:
-        report_records += f'{str(key)}: {str(my_prompt.count_http_response_codes[key])},\n'
-    open(file_records, "a").write(report_records)
-
+    from functions.report_records_summary import report_records_summary
+    report_records_summary(my_prompt, 'Changes')
 
     # except:
     #     print('\n!!!      !!!     Error in get_pure_changes     !!!   !!!\n')
-
-

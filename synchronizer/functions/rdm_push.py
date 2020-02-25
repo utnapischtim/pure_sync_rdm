@@ -5,6 +5,8 @@ from requests.auth import HTTPBasicAuth
 #   ---         ---         ---
 def create_invenio_data(my_prompt):
 
+    my_prompt.count_total += 1      # counts all records
+
     # try:
     my_prompt.record_files = []
     item = my_prompt.item
@@ -39,43 +41,46 @@ def create_invenio_data(my_prompt):
     add_field(my_prompt, item, 'journalTitle',                      ['info', 'journalAssociation', 'title', 'value'])
     add_field(my_prompt, item, 'journalNumber',                     ['info', 'journalNumber'])
 
+    # ELECTRONIC VERSIONS
     if 'electronicVersions' in item:
-        cnt = 0
-        for EV in item['electronicVersions']:
-            if 'file' in EV:
-                if 'fileURL' in EV['file'] and 'fileName' in EV['file']:
+        count = 0
+        for electronic_version in item['electronicVersions']:
+            if ('file' in electronic_version and 
+                'fileURL' in electronic_version['file'] and 
+                'fileName' in electronic_version['file']):
                     
-                    if cnt == 0:
-                        my_prompt.data += '"versionFiles": ['
-                    cnt += 1
+                if count == 0:
+                    my_prompt.data += '"versionFiles": ['
+                count += 1
 
-                    my_prompt.data += '{'
-                    add_field(my_prompt, EV, 'fileName',                          ['file', 'fileName'])
-                    add_field(my_prompt, EV, 'fileModifBy',                       ['creator'])
-                    add_field(my_prompt, EV, 'fileModifDate',                     ['created'])
-                    add_field(my_prompt, EV, 'fileType',                          ['file', 'mimeType'])
-                    add_field(my_prompt, EV, 'fileAccessType',                    ['accessTypes', 0, 'value'])
-                    add_field(my_prompt, EV, 'fileSize',                          ['file', 'size'])
-                    add_field(my_prompt, EV, 'fileDigest',                        ['file', 'digest'])
-                    add_field(my_prompt, EV, 'fileDigestAlgorithm',               ['file', 'digestAlgorithm'])
+                my_prompt.data += '{'
+                add_field(my_prompt, electronic_version, 'fileName',                ['file', 'fileName'])
+                add_field(my_prompt, electronic_version, 'fileModifBy',             ['creator'])
+                add_field(my_prompt, electronic_version, 'fileModifDate',           ['created'])
+                add_field(my_prompt, electronic_version, 'fileType',                ['file', 'mimeType'])
+                add_field(my_prompt, electronic_version, 'fileAccessType',          ['accessTypes', 0, 'value'])
+                add_field(my_prompt, electronic_version, 'fileSize',                ['file', 'size'])
+                add_field(my_prompt, electronic_version, 'fileDigest',              ['file', 'digest'])
+                add_field(my_prompt, electronic_version, 'fileDigestAlgorithm',     ['file', 'digestAlgorithm'])
 
-                    my_prompt.data = my_prompt.data[:-2]
-                    my_prompt.data += '}, '                                  # end review
+                my_prompt.data = my_prompt.data[:-2]
+                my_prompt.data += '}, '                                  # end review
 
-                    # DOWNLOAD FILE FROM PURE
-                    file_name = EV['file']['fileName']
-                    file_url  = EV['file']['fileURL']
-                    response = my_prompt.requests.get(file_url, auth=HTTPBasicAuth(pure_username, pure_password))
-                    print(f'Pure download file\t->\t{response}\t({file_name})')
+                # DOWNLOAD FILE FROM PURE
+                file_name = electronic_version['file']['fileName']
+                file_url  = electronic_version['file']['fileURL']
+                response = my_prompt.requests.get(file_url, auth=HTTPBasicAuth(pure_username, pure_password))
+                print(f'Pure download file\t->\t{response}\t({file_name})')
 
-                    # SAVE FILE
-                    if response.status_code < 300:
-                        open(str(my_prompt.dirpath) + '/data/temporary_files/' + file_name, 'wb').write(response.content)
-                        my_prompt.record_files.append(file_name)
-        if cnt > 0:
+                # SAVE FILE
+                if response.status_code < 300:
+                    open(str(my_prompt.dirpath) + '/data/temporary_files/' + file_name, 'wb').write(response.content)
+                    my_prompt.record_files.append(file_name)
+
+        if count > 0:
             my_prompt.data = my_prompt.data[:-2]       
             my_prompt.data += '], '
-
+            
 
     # --- personAssociations ---
     if 'personAssociations' in item:
@@ -250,7 +255,7 @@ def post_to_rdm(my_prompt):
         # error description from invenioRDM
         report += str(response.content) + '\n'
 
-        # append records to re-transfer
+        # append records to be re-transfered
         if my_prompt.exec_type != 'by_id':
             open(my_prompt.dirpath + "/data/to_transfer.txt", "a").write(uuid + "\n")
 
@@ -288,7 +293,7 @@ def post_to_rdm(my_prompt):
     if(my_prompt.metadata_success == False or my_prompt.file_success == False):
         return False
     else:
-        delete_errorJson_and_toTransfer(my_prompt, uuid)
+        remove_uuid_from_toTransfer(my_prompt, uuid)
         return True
 
     # except:
@@ -297,7 +302,7 @@ def post_to_rdm(my_prompt):
 
 
 #   ---         ---         ---
-def delete_errorJson_and_toTransfer(my_prompt, uuid):
+def remove_uuid_from_toTransfer(my_prompt, uuid):
 
     # if uuid in to_transfer then removes it
     file_name = my_prompt.dirpath + "/data/to_transfer.txt"
