@@ -7,7 +7,7 @@ def get_pure_by_page(my_prompt, pag_begin, pag_end, pag_size):
     # try:
     my_prompt.exec_type = 'by_page'
     my_prompt.count_http_response_codes = {}
-    my_prompt.cnt_errors = 0
+    my_prompt.count_errors = 0
 
     for pag in range(pag_begin, pag_end):
 
@@ -64,7 +64,7 @@ def get_pure_by_page(my_prompt, pag_begin, pag_end, pag_size):
 
         my_prompt.count_http_response_codes = {}
 
-    if my_prompt.cnt_errors > 0:
+    if my_prompt.count_errors > 0:
         rdm_push_by_uuid(my_prompt, 'update')
 
     print('\n-- -- Finito -- --\n')

@@ -30,18 +30,22 @@ def rdm_put_file(my_prompt, file_name):
         report += f'{current_time} - file_put_to_rdm - {response} - {my_prompt.recid}\n'
 
         if response.status_code >= 300:
-            report += str(response.content) + '\n'
 
-            # metadata transmission success flag
+            my_prompt.count_errors_put_file += 1
             my_prompt.file_success = False
+
+            report += f'{response.content}\n'
+
         else:
+            my_prompt.count_successful_push_file += 1
             my_prompt.file_success = True
 
-            # # if the upload was successful then delete file from /reports/temporary_files
+            # if the upload was successful then delete file from /reports/temporary_files
             my_prompt.os.remove(file_path + file_name) 
 
         file_name = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_rdm-push-records.log'
         open(file_name, "a").write(report)
+        
         return response.status_code
 
         # HAVING PURE ADMIN ACCOUNT REMOVE FILE FROM PURE

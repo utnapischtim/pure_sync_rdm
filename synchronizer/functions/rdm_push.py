@@ -166,21 +166,31 @@ def add_field(my_prompt, item, inv_field, path):
                         # in case there is no match (e.g. spelling mistake in Pure) ignore field
                         return
 
-        # - ACCESS_RIGHT -
+        # - RDM ACCESS RIGHT -
         #   RDM access right (https://github.com/inveniosoftware/invenio-rdm-records/issues/37):
         #   open        ->  metadata available              files available
         #   embargoed   ->  metadata available              files available after embargo date      (unless user has permission)
         #   restricted  ->  metadata available              files restricted                        (unless user has permission)
         #   closed      ->  metadata restricted             files restricted                        (unless user has permission)
 
+        # - PURE ACCESS RIGHT -
+        #   Open:           Full text accessible openly on Portal/Web service/Backend
+        #   Embargoed:      Full text accessible openly on Portal/Web service/Backend after end of embargo
+        #   Restricted:     Full text accessible in Backend and IP restricted
+        #   Closed:         Full text accessible in Backend only for related persons and related editors
+        #   Unknown:        Public access to file not known
+
         if inv_field == 'access_right':
             if 'openAccessPermissions' in item:
                 pure_value = item['openAccessPermissions'][0]['value']
                 accessRight_Pure_to_RDM = {
                     'Open':             'open',
-                    'Indeterminate':    'closed',          # REVIEW!!!!
-                    'None':             'closed',
-                    'Closed':           'closed'
+                    'Embargoed':        'embargoed',
+                    'Restricted':       'restricted',
+                    'Closed':           'closed',
+                    'Unknown':          'closed',
+                    'Indeterminate':    'closed',
+                    'None':             'closed'
                     }
                 if pure_value in accessRight_Pure_to_RDM:
 
@@ -231,16 +241,11 @@ def post_to_rdm(my_prompt):
 
     if response.status_code >= 300:
 
-        my_prompt.cnt_errors += 1
+        my_prompt.count_errors_push_metadata += 1
         print(response.content)
 
         # metadata transmission success flag
         my_prompt.metadata_success = False
-
-        # post json error_jsons
-        if response.status_code != 429:
-            file_name = f'{my_prompt.dirpath}/data/temporary_files/error_jsons/{uuid}.json'
-            open(file_name, "w").write(str(my_prompt.data))
         
         # error description from invenioRDM
         report += str(response.content) + '\n'
@@ -258,6 +263,8 @@ def post_to_rdm(my_prompt):
 
     # -- Successful transmition --
     if response.status_code < 300:
+
+        my_prompt.count_successful_push_metadata += 1
 
         # metadata transmission success flag
         my_prompt.metadata_success = True
@@ -300,17 +307,3 @@ def delete_errorJson_and_toTransfer(my_prompt, uuid):
         for line in lines:
             if line.strip("\n") != uuid:
                 f.write(line)
-
-    # Get file names from folder
-    isfile = my_prompt.os.path.isfile
-    join = my_prompt.os.path.join
-    folder = '/data/temporary_files/error_jsons/'
-    onlyfiles = [f for f in my_prompt.os.listdir(my_prompt.dirpath + folder) if isfile(join(my_prompt.dirpath + folder, f))]
-
-    for file_name in onlyfiles:
-        file_uuid = file_name.split('.')[0]
-        
-        if file_uuid == uuid:
-            my_prompt.os.remove(my_prompt.dirpath + folder + file_name)
-            print(f'Correct transmission -> The file /data/temporary_files/error_jsons/{file_name} has been deleted.\n')
-    

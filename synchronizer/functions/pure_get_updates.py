@@ -12,7 +12,7 @@ def pure_get_updates(my_prompt):
     open(my_prompt.dirpath + '/data/to_transfer.txt', 'w').close()
 
     # Get date of last update
-    file_name = f'{my_prompt.dirpath}/reports/{str(date_today)}_updates.log'
+    file_name = f'{my_prompt.dirpath}/reports/{str(date_today)}_summary.log'
 
     # Check if file exists
     if not my_prompt.os.path.exists(file_name):

@@ -44,7 +44,7 @@ def delete_reading_txt(my_prompt):
     report += f"Tot records: {count_total} - Success transfer: {count_success}\n"
 
     date_today = str(my_prompt.date.today())
-    open(f'{my_prompt.dirpath}/reports/{date_today}_updates.log', "a").write(report)
+    open(f'{my_prompt.dirpath}/reports/{date_today}_summary.log', "a").write(report)
     
     print(report)
 

@@ -1,12 +1,8 @@
-a = '2020-02-24_rdm_push_records.log'                               
-b = '2020-02-24_updates.log'
+from pprint import pprint 
 
-print(f'{a}\tok')
-print(f'{b}\t\tok')
+a = {'total': 55, 'successful': 44}
 
-
-
-
+pprint (a['total'])
 
 # data = [['a', 'b', 'c'], ['aaaaaaaaaa', 'b', 'c'], ['a', 'bbbbbbbbbb', 'c']]
 
