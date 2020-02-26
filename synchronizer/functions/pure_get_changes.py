@@ -1,12 +1,18 @@
 from setup import *
 
+# To execute preferibly between 22:30 and 23:30
+
 def pure_get_changes(my_prompt):
+    """ Gets from Pure API all changes that took place in a certain date
+        and modifies accordingly the RDM repository """
     
     date_today = str(my_prompt.datetime.today().strftime('%Y-%m-%d'))
     
+    # Gets the list of all the files in the folder /reports/
     isfile = my_prompt.os.path.isfile
     join = my_prompt.os.path.join
-    reports_files = [f for f in my_prompt.os.listdir(f'{my_prompt.dirpath}/reports/') if isfile(join(f'{my_prompt.dirpath}/reports/', f))]
+    directory_path = f'{my_prompt.dirpath}/reports/'
+    reports_files = [f for f in my_prompt.os.listdir(directory_path) if isfile(join(directory_path, f))]
     reports_files = sorted(reports_files, reverse=True)
 
     # Iterates over all the files in /reports folder
@@ -23,6 +29,8 @@ def pure_get_changes(my_prompt):
             print(f'\nSuccessful Check update found in {file_name}\n')
             last_update = file_split[0]
             break
+
+    last_update = '2020-02-24'  # TEMPORARY!!!!!!!!!!!!!!!
     
     if not last_update:
         print('No successful update found among all report logs\n')
@@ -51,16 +59,15 @@ def search_successful_change(my_prompt, file_name):
     
     for line in reversed(file_data):
         if 'Changes - success' in line:
+            # If there was no successful update
             return True
-
-    # If that day there was no successful update
+    
     return False
 
 
 
 def pure_get_changes_by_date(my_prompt, changes_date):
     # try:
-    from functions.get_from_rdm     import get_from_rdm
     from functions.rdm_get_recid    import rdm_get_recid
     from functions.delete_record    import delete_record
 
@@ -86,7 +93,6 @@ def pure_get_changes_by_date(my_prompt, changes_date):
 
     # Load response json
     resp_json = my_prompt.json.loads(response.content)
-    number_elements = resp_json['count']
 
     my_prompt.count_total = 0
     my_prompt.count_errors_push_metadata = 0
@@ -97,7 +103,6 @@ def pure_get_changes_by_date(my_prompt, changes_date):
 
     report =  f'\n- Changes date: {changes_date} -\n'
     report += f'Pure get CHANGES: {response}\n'
-    report += f'Elements in response: {number_elements}\n'
     print(report)
 
     # append to yyyy-mm-dd_rdm-push-records.log
@@ -107,7 +112,6 @@ def pure_get_changes_by_date(my_prompt, changes_date):
     to_transfer = ''
     check_duplicates = []
     count_to_transfer = 0
-    my_prompt.count_http_response_codes = {}
 
     for item in resp_json['items']:
 

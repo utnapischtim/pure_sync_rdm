@@ -9,7 +9,7 @@ def delete_all_records(my_prompt):
         lines = f.read().splitlines()
         
         for line in lines:
-            recid = line.split(' ')[1] + '\n'
+            recid = line.split(' ')[1]
             toDelete_str += f'{recid}\n'
     
     toDel_fileName = my_prompt.dirpath + '/data/to_delete.txt'

@@ -3,7 +3,7 @@ from setup import *
 def shorten_log_files(my_prompt):
     try:
         # DELETE OLD REPORTS
-        print('\n---   ---   ---\nDELETE OLD REPORTS')
+        print('\n---   ---   ---\nDELETE OLD REPORTS\n')
         folder = '/reports/'
 
         # Get file names from folder
@@ -25,6 +25,8 @@ def shorten_log_files(my_prompt):
                 print(f'{file_name}{tabs}Deleted')
             else:
                 print(f'{file_name}{tabs}Ok')
+
+        print('\n')
 
     except:
         print('\n!!!    !!!     ERROR in shorten_log_files      !!!     !!!\n')

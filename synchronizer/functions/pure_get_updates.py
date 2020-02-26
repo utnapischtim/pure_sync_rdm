@@ -1,9 +1,9 @@
-from setup import *
-from functions.get_from_rdm import get_from_rdm
+
 
 def pure_get_updates(my_prompt):
+
     # try:
-    date_today = my_prompt.date.today()
+    date_check = date_today = my_prompt.date.today()
 
     # empty to_delete.log
     open(my_prompt.dirpath + '/data/to_delete.txt', 'w').close()
@@ -12,27 +12,12 @@ def pure_get_updates(my_prompt):
     open(my_prompt.dirpath + '/data/to_transfer.txt', 'w').close()
 
     # Get date of last update
-    file_name = f'{my_prompt.dirpath}/reports/{str(date_today)}_summary.log'
+    file_name = f'{my_prompt.dirpath}/reports/{date_check}_summary.log'
 
-    # Check if file exists
-    if not my_prompt.os.path.exists(file_name):
-        print(f'\nERROR:\nFile {file_name} not found\n')
-        return
 
-    # Finds last date when the update successfully happened
-    with open(file_name, 'r') as f:
-        lines = f.read().splitlines()
-        for line in reversed(lines):
-            if 'Update - ' in line:
-                line =              line.split('Update - ')[1]
-                line =              line.split(' - ')
-                date_last_update =  line[0]
-                result =            line[1]
-                if result !=        'success':  continue
-                else:                           break
-            else:
-                # if 'Update - ' is not found then it starts updating from 3 days before
-                date_last_update = str(date_today - my_prompt.timedelta(days = 3))
+
+
+    exit()
 
     
     date_object = my_prompt.datetime.strptime(date_last_update, '%Y-%m-%d').date()
@@ -140,3 +125,6 @@ def pure_get_updates(my_prompt):
 
     # except:
     #     print('\n   !!!   !!!   Error in get_pure_updates function   !!!   !!!   \n')
+
+
+

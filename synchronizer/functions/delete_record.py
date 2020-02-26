@@ -66,15 +66,10 @@ def delete_record(my_prompt, recid):
     
     print(f'RDM delete\t->\t{response} - {recid}')
 
-    # adds metadata http response codes into array
-    if response.status_code not in my_prompt.count_http_response_codes:
-        my_prompt.count_http_response_codes[response.status_code] = 0
-
-    my_prompt.count_http_response_codes[response.status_code] += 1
-
     # Append to yyyy-mm-dd_rdm-push-records.log
     current_time = my_prompt.datetime.now().strftime("%H:%M:%S")
     report_line = f'{current_time} - delete_from_rdm - {response} - {recid}\n'
+    
     file_name = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_rdm-push-records.log'
     open(file_name, "a").write(report_line)
     

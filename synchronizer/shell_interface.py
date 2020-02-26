@@ -19,6 +19,15 @@ class MyPrompt(Cmd):
     
 
     #   ---     ---     ---
+    def do_update(self, inp):
+        """\nHelp -> \t\n"""
+        self.get_props()
+        from functions.pure_get_updates          import pure_get_updates
+
+        pure_get_updates(self)
+    
+
+    #   ---     ---     ---
     def do_push_uuid_to_rmd(self, inp):
         """\nHelp -> \tPush to RDM all uuids that are in to_transfer.log\n"""
         self.get_props()
@@ -35,35 +44,19 @@ class MyPrompt(Cmd):
         from functions.rdm_push                 import create_invenio_data
 
         pag_begin = 3
-        pag_end =   4
+        pag_end =   10
         pag_size =  5
         get_pure_by_page(self, pag_begin, pag_end, pag_size)
 
-    
-    #   ---     ---     ---
-    def do_update_check(self, inp):
-        """\nHelp ->\tGets from Pure API all records that have been modified after the last Update_check and push them to RDM. \n"""
-        self.get_props()
-        from functions.pure_get_updates         import pure_get_updates
-
-        pure_get_updates(self)
 
     #   ---     ---     ---
     def do_changes_check(self, inp):
-        """\nHelp ->\tGets from Pure API endpoint 'changes' all the records that have been updated.\n"""
+        """\nHelp ->\tGets from Pure API endpoint 'changes' all the records that have been created, modified or deleted.\n"""
         self.get_props()
 
         from functions.pure_get_changes         import pure_get_changes
         pure_get_changes(self)
     
-
-    #   ---     ---     ---
-    def do_full_comparison(self, inp):
-        """\nHelp ->\tHaving all records from Pure and RDM finds out which records need to be added/deleted from RDM\n"""
-        self.get_props()
-        from functions.intersection_pure_rdm    import intersection_pure_rdm
-
-        intersection_pure_rdm(self)
 
 
     #   ---     ---     ---
@@ -76,17 +69,6 @@ class MyPrompt(Cmd):
         resp = get_from_rdm(self)
         if resp == True: 
             find_rdm_duplicates(self)
-
-
-    #   ---     ---     ---
-    def do_delete_all_records(self, inp):
-        """\nHelp ->\tThis is a temporary method..\n"""
-        self.get_props()
-        from functions.get_from_rdm             import get_from_rdm
-        from functions.delete_all_records       import delete_all_records
-
-        get_from_rdm(self)
-        delete_all_records(self)
 
 
     #   ---     ---     ---

@@ -9,8 +9,6 @@ def get_pure_by_page(my_prompt, pag_begin, pag_end, pag_size):
 
     for pag in range(pag_begin, pag_end):
 
-        my_prompt.count_http_response_codes = {}
-
         my_prompt.count_total = 0
         my_prompt.count_errors_push_metadata = 0
         my_prompt.count_errors_put_file = 0
@@ -50,11 +48,16 @@ def get_pure_by_page(my_prompt, pag_begin, pag_end, pag_size):
         # Add RDM HTTP reponse codes to yyyy-mm-_rdm_push_pages.log
         file_pages = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_rdm_push_pages.log'
 
+        space_size = give_spaces(pag_size)
+        space_pag  = give_spaces(pag)
+        space_metd_succ  = give_spaces(my_prompt.count_successful_push_metadata)
+        space_metd_errr  = give_spaces(my_prompt.count_errors_push_metadata)
+        space_file_succ  = give_spaces(my_prompt.count_successful_push_file)
+
         current_time = my_prompt.datetime.now().strftime("%H:%M:%S")
-        report = f'\n{str(my_prompt.date.today())} {current_time},\tpag {pag},\tsize {pag_size},\tcodes:\t'
-        
-        for key in my_prompt.count_http_response_codes:
-            report += f'{str(key)}: {my_prompt.count_http_response_codes[key]},\t'
+        report = f'\n{my_prompt.date.today()} - pag {pag}{space_pag} - pag_size {pag_size}{space_size} - '
+        report += f'Metadata: success {my_prompt.count_successful_push_metadata}, {space_metd_succ}error {my_prompt.count_errors_push_metadata}{space_metd_errr} -\t'
+        report += f'Files: success {my_prompt.count_successful_push_file}, {space_file_succ}error {my_prompt.count_errors_put_file}'
 
         open(file_pages, "a").write(report)
 
@@ -65,3 +68,13 @@ def get_pure_by_page(my_prompt, pag_begin, pag_end, pag_size):
 
     # except:
     #     print('\n!!!      !!!  Error in get_pure_by_page method   !!!     !!!\n')
+
+
+def give_spaces(var):
+
+    if var < 10:       spaces = '   '
+    elif var < 100:    spaces = '  '
+    elif var < 1000:   spaces = ' '
+    else:              spaces = ''
+
+    return spaces

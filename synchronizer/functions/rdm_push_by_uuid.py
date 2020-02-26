@@ -6,9 +6,6 @@ def rdm_push_by_uuid(my_prompt):
     # read to_transfer.log
     retrans_data = open(my_prompt.dirpath + '/data/to_transfer.txt', 'r')
 
-    if not my_prompt.count_http_response_codes:
-        my_prompt.count_http_response_codes = {}
-
     uuid = retrans_data.readline()
     
     while uuid:

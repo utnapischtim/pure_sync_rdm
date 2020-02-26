@@ -15,12 +15,6 @@ def rdm_put_file(my_prompt, file_name):
         url = f'{rdm_api_url_records}api/records/{my_prompt.recid}/files/{file_name}'
         response = my_prompt.requests.put(url, headers=headers, data=data, verify=False)
 
-        # adds metadata http response codes into array
-        if response.status_code not in my_prompt.count_http_response_codes:
-            my_prompt.count_http_response_codes[response.status_code] = 0
-
-        my_prompt.count_http_response_codes[response.status_code] += 1
-
         # Report
         report = ''
         print(f'RDM put file\t\t->\t{response}')
