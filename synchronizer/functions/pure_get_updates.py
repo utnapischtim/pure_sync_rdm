@@ -1,9 +1,10 @@
-
+from setup import *
+from functions.last_successful_update import last_successful_update
 
 def pure_get_updates(my_prompt):
 
     # try:
-    date_check = date_today = my_prompt.date.today()
+    date_today = my_prompt.date.today()
 
     # empty to_delete.log
     open(my_prompt.dirpath + '/data/to_delete.txt', 'w').close()
@@ -12,23 +13,30 @@ def pure_get_updates(my_prompt):
     open(my_prompt.dirpath + '/data/to_transfer.txt', 'w').close()
 
     # Get date of last update
-    file_name = f'{my_prompt.dirpath}/reports/{date_check}_summary.log'
+    last_update = last_successful_update(my_prompt, 'Update')
 
+    # if last_update was not found, updates the last 3 days
+    if not last_update:
+        date_update = str(date_today - my_prompt.timedelta(days=3))
 
-
-
-    exit()
-
+    # if last update was today
+    elif last_update == str(date_today):
+        print('Last update check happened today. Nothing to update.\n')
+        return
     
-    date_object = my_prompt.datetime.strptime(date_last_update, '%Y-%m-%d').date()
-
-    # date_limit = str(date_object + my_prompt.timedelta(days=1))       # one day after the last update
-    date_limit = str(date_object)
+    # if last_update was found, updates from the day after
+    else:
+        last_update_object = my_prompt.datetime.strptime(last_update, '%Y-%m-%d').date()
+        date_update = str(last_update_object + my_prompt.timedelta(days=1))       # one day after the last update
+        print(f'Updating from {date_update}')
+        
 
     report = '\n---\n---   ---\n---   ---   ---'
-    report += f"\nToday: {date_today}\nLast update: {date_last_update} \nDate limit: {date_limit}\n"
+    report += f"\nToday: {date_today}\nLast update: {last_update} \nDate update: {date_update}\n"
     print(report)
     print(f"See file '/records/{date_today}_updates_check.log'\n")
+
+    exit()
 
     # Get all RDM uuids and recids
     get_from_rdm(my_prompt)                                  # MIGHT TAKE TOO LONG !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -72,7 +80,7 @@ def pure_get_updates(my_prompt):
                 record_date_time = item['info']['modifiedDate']
                 record_date = str(record_date_time.split('T')[0])
                 
-                if record_date >= date_limit:
+                if record_date >= date_update:
                     to_transfer += pure_uuid + '\n'
                     cntu += 1
                     report += pure_uuid + ' - ' + record_date + ' - To update'
@@ -106,8 +114,8 @@ def pure_get_updates(my_prompt):
         pag += 1
         my_prompt.time.sleep(3)
 
-        # if the last record is older then the date_limit then stops the while loop
-        if record_date < date_limit:
+        # if the last record is older then the date_update then stops the while loop
+        if record_date < date_update:
             break
             
     # records to delete

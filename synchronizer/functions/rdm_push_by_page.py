@@ -9,19 +9,24 @@ def get_pure_by_page(my_prompt, pag_begin, pag_end, pag_size):
 
     for pag in range(pag_begin, pag_end):
 
-        my_prompt.count_total = 0
-        my_prompt.count_errors_push_metadata = 0
-        my_prompt.count_errors_put_file = 0
-        my_prompt.count_successful_push_metadata = 0
-        my_prompt.count_successful_push_file = 0
-        my_prompt.count_uuid_not_found_in_pure = 0
+        date_today = my_prompt.date.today()
 
-        report = f'\nPag {str(pag)} - pag_size {str(pag_size)}\n'
+        my_prompt.count_total                       = 0
+        my_prompt.count_errors_push_metadata        = 0
+        my_prompt.count_errors_put_file             = 0
+        my_prompt.count_errors_record_delete        = 0
+        my_prompt.count_successful_push_metadata    = 0
+        my_prompt.count_successful_push_file        = 0
+        my_prompt.count_successful_record_delete    = 0
+        my_prompt.count_uuid_not_found_in_pure      = 0
+
+        report  = '\n\n--   --   --\n'
+        report += f'\nPag {str(pag)} - pag_size {str(pag_size)}\n'
+
+        # add page to report file  
+        file_records = f'{my_prompt.dirpath}/reports/{date_today}_rdm-push-records.log'
+        open(file_records, "a").write(report)
         print(report)
-
-        # add page to report file
-        file_records = my_prompt.dirpath + "/reports/" + str(my_prompt.date.today()) + "_rdm-push-records.log"     
-        open(file_records, "a").write(report)                       # 'a' -> append
 
         # PURE GET REQUEST
         headers = {
@@ -46,7 +51,7 @@ def get_pure_by_page(my_prompt, pag_begin, pag_end, pag_size):
         #       ---         ---         ---
 
         # Add RDM HTTP reponse codes to yyyy-mm-_rdm_push_pages.log
-        file_pages = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_rdm_push_pages.log'
+        file_pages = f'{my_prompt.dirpath}/reports/{date_today}_rdm_push_pages.log'
 
         space_size = give_spaces(pag_size)
         space_pag  = give_spaces(pag)
@@ -54,16 +59,19 @@ def get_pure_by_page(my_prompt, pag_begin, pag_end, pag_size):
         space_metd_errr  = give_spaces(my_prompt.count_errors_push_metadata)
         space_file_succ  = give_spaces(my_prompt.count_successful_push_file)
 
-        current_time = my_prompt.datetime.now().strftime("%H:%M:%S")
-        report = f'\n{my_prompt.date.today()} - pag {pag}{space_pag} - pag_size {pag_size}{space_size} - '
+        report = f'\n{date_today} - pag {pag}{space_pag} - pag_size {pag_size}{space_size} - '
         report += f'Metadata: success {my_prompt.count_successful_push_metadata}, {space_metd_succ}error {my_prompt.count_errors_push_metadata}{space_metd_errr} -\t'
         report += f'Files: success {my_prompt.count_successful_push_file}, {space_file_succ}error {my_prompt.count_errors_put_file}'
 
         open(file_pages, "a").write(report)
 
+        file_summary = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_summary.log'
+        open(file_summary, "a").write(f'\n\nPage: {pag} - Page size: {pag_size}')
+
         # summary.log and records.log
         from functions.report_records_summary import report_records_summary
         report_records_summary(my_prompt, 'Pages')
+
 
 
     # except:

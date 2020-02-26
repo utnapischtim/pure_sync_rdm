@@ -1,4 +1,5 @@
 from setup import *
+from functions.last_successful_update import last_successful_update
 
 # To execute preferibly between 22:30 and 23:30
 
@@ -8,35 +9,12 @@ def pure_get_changes(my_prompt):
     
     date_today = str(my_prompt.datetime.today().strftime('%Y-%m-%d'))
     
-    # Gets the list of all the files in the folder /reports/
-    isfile = my_prompt.os.path.isfile
-    join = my_prompt.os.path.join
-    directory_path = f'{my_prompt.dirpath}/reports/'
-    reports_files = [f for f in my_prompt.os.listdir(directory_path) if isfile(join(directory_path, f))]
-    reports_files = sorted(reports_files, reverse=True)
+    # Get date of last update
+    last_update = last_successful_update(my_prompt, 'Changes')
 
-    # Iterates over all the files in /reports folder
-    for file_name in reports_files:
-
-        file_split = file_name.split('_')
-
-        if file_split[1] != 'summary.log':
-            continue
-
-        # It will check first the most up to date files
-        # If no successful update is found then will check older files
-        if search_successful_change(my_prompt, file_name):
-            print(f'\nSuccessful Check update found in {file_name}\n')
-            last_update = file_split[0]
-            break
-
-    last_update = '2020-02-24'  # TEMPORARY!!!!!!!!!!!!!!!
+    last_update = '2020-02-25'      # TEMPORARY !!!!!!!!!!!!!!!
     
-    if not last_update:
-        print('No successful update found among all report logs\n')
-        return
-    
-    elif last_update == date_today:
+    if last_update == date_today:
         print('Last changes check happened today. Nothing to update.\n')
         return
 
@@ -51,32 +29,19 @@ def pure_get_changes(my_prompt):
         #   ---     ---
 
 
-def search_successful_change(my_prompt, file_name):
-    """ Search for the date of the last successful update """
-
-    file_name = f'{my_prompt.dirpath}/reports/{file_name}'
-    file_data = open(file_name, 'r').read().splitlines()
-    
-    for line in reversed(file_data):
-        if 'Changes - success' in line:
-            # If there was no successful update
-            return True
-    
-    return False
-
-
-
 def pure_get_changes_by_date(my_prompt, changes_date):
     # try:
-    from functions.rdm_get_recid    import rdm_get_recid
-    from functions.delete_record    import delete_record
+    from functions.rdm_get_recid            import rdm_get_recid
+    from functions.delete_record            import delete_record, delete_from_list
+    from functions.rdm_push_by_uuid         import rdm_push_by_uuid
+    from functions.report_records_summary   import report_records_summary
 
     headers = {
         'Accept': 'application/json',
     }
     params = (
         ('page', '1'),
-        ('pageSize', '1000'),
+        ('pageSize', '5000'),
         ('apiKey', 'ca2f08c5-8b33-454a-adc4-8215cfb3e088'),
     )
     # PURE get request
@@ -94,99 +59,147 @@ def pure_get_changes_by_date(my_prompt, changes_date):
     # Load response json
     resp_json = my_prompt.json.loads(response.content)
 
-    my_prompt.count_total = 0
-    my_prompt.count_errors_push_metadata = 0
-    my_prompt.count_errors_put_file = 0
-    my_prompt.count_successful_push_metadata = 0
-    my_prompt.count_successful_push_file = 0
-    my_prompt.count_uuid_not_found_in_pure = 0
+    my_prompt.count_total                       = 0
+    my_prompt.count_errors_push_metadata        = 0
+    my_prompt.count_errors_put_file             = 0
+    my_prompt.count_errors_record_delete        = 0
+    my_prompt.count_successful_push_metadata    = 0
+    my_prompt.count_successful_push_file        = 0
+    my_prompt.count_successful_record_delete    = 0
+    my_prompt.count_uuid_not_found_in_pure      = 0
 
-    report =  f'\n- Changes date: {changes_date} -\n'
-    report += f'Pure get CHANGES: {response}\n'
-    print(report)
+    report_records  = '\n--   --   --\n'
+    report_records +=  f'\n- Changes date: {changes_date} -\n'
+    report_records += f'Pure get CHANGES: {response}\n'
+    print(report_records)
 
     # append to yyyy-mm-dd_rdm-push-records.log
     file_records = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_rdm-push-records.log'
-    open(file_records, "a").write(report)
+    open(file_records, "a").write(report_records)
 
-    to_transfer = ''
-    check_duplicates = []
-    count_to_transfer = 0
+    to_delete_uuid  = []
+    to_delete_recid = []
+    
+    count_update             = 0
+    count_create             = 0
+    count_delete             = 0
+    count_incomplete_info    = 0
+    count_duplicated         = 0
+    count_not_ResearchOutput = 0
 
+    print(f'Number of items in response: {resp_json["count"]}')
+
+    #   ---     DELETE      ---
     for item in resp_json['items']:
 
         if 'changeType' not in item:
+            count_incomplete_info += 1
             continue
         
         elif item['familySystemName'] != 'ResearchOutput':
+            count_not_ResearchOutput += 1
             continue
 
+        elif item['changeType'] != 'DELETE':
+            continue
+
+        count_delete += 1
+        uuid = item['uuid']
+        print(f"\n{count_delete} - {item['changeType']} - {uuid}")
+
+        to_delete_uuid.append(uuid)
+
+        # Gets the record recid
+        recid = rdm_get_recid(my_prompt, uuid)
+        if recid != False:
+            to_delete_recid.append(recid)
+        else:
+            my_prompt.count_successful_record_delete += 1   # the record is not in RDM
+
+    # If there is nothing to delete
+    if len(to_delete_recid) > 0:
+
+        file_name = my_prompt.dirpath + '/data/to_delete.txt'
+        to_delete_str = ''
+
+        for i in to_delete_recid:
+            to_delete_str += f'{i}\n'
+
+        open(file_name, 'w').close()                    # empty file
+        open(file_name, "a").write(to_delete_str)       # append to file
+
+        delete_from_list(my_prompt)                     # --------------
+
+
+    #   ---     CREATE / ADD / UPDATE      ---
+    to_transfer = []
+    count = 0
+    for item in resp_json['items']:
+        
         uuid = item['uuid']
 
-        if uuid in check_duplicates:
+        if 'changeType' not in item:
+            continue
+        elif item['familySystemName'] != 'ResearchOutput':
+            continue
+        elif item['changeType'] == 'DELETE':
+            continue
+        elif uuid in to_delete_uuid:
+            count_duplicated += 1
             continue
 
-        check_duplicates.append(uuid)
-        
-        print(f"\n{item['changeType']} - {item['uuid']}")
+        count += 1
+        print(f"\n{count} - {item['changeType']} - {uuid}")
 
-        #   ---     UPDATE      ---
+        #   ---     ---      ---
+        if item['changeType'] == 'ADD' or item['changeType'] == 'CREATE':
+            count_create += 1
+            to_transfer.append(uuid)
+
+        #   ---     ---      ---
         if item['changeType'] == 'UPDATE':
     
-            # Adds the record to be transfered
-            count_to_transfer += 1
-            to_transfer += f'{uuid}\n'
+            count_update += 1
+            to_transfer.append(uuid)
             
             # Gets the record recid for deletion
             recid = rdm_get_recid(my_prompt, uuid)
-            if not recid:
-                continue
-            
-            # Deletes the record so that the new version is added
-            delete_record(my_prompt, recid)
-
-
-        #   ---     ADD / CREATE      ---
-        if item['changeType'] == 'ADD' or item['changeType'] == 'CREATE':       # REVIEW !!!!!!!!!!! difference between add and create?
-
-            # Adds the record to be transfered
-            count_to_transfer += 1
-            to_transfer += uuid + '\n'
-
-
-        #   ---     DELETE      ---
-        if item['changeType'] == 'DELETE':
-
-            # Gets the record recid
-            recid = rdm_get_recid(my_prompt, uuid)
 
             # Deletes the record so that the new version is added
-            delete_record(my_prompt, recid)
-
-
-    date_today = str(my_prompt.date.today())
-    file_summary = f'{my_prompt.dirpath}/reports/{date_today}_summary.log'
+            if recid != False:
+                delete_record(my_prompt, recid)
 
     # - TRANSFER -
-    if count_to_transfer == 0:
-        # Adds report to yyyy-mm-dd_summary.log
-        open(file_summary, "a").write(report)
-        print(report)
-        return
+    # If there is nothing to transmit
+    if len(to_transfer) > 0:
+        file_name = my_prompt.dirpath + '/data/to_transfer.txt'
+        to_transfer_str = ''
+        for i in to_transfer:
+            to_transfer_str += f'{i}\n'
+        open(file_name, 'w').close()                    # empty file
+        open(file_name, "a").write(to_transfer_str)     # append to file
 
-    print(f"\n\n-- Records to transfer: {count_to_transfer}")
+        rdm_push_by_uuid(my_prompt)                     # --------------
 
-    file_name = my_prompt.dirpath + '/data/to_transfer.txt'
-    open(file_name, 'w').close()                    # empty file
-    open(file_name, "a").write(to_transfer)         # append to file
+    file_summary = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_summary.log'
+    open(file_summary, "a").write('\n\n')
 
     #    ---     ---
-    from functions.rdm_push_by_uuid import rdm_push_by_uuid
-    rdm_push_by_uuid(my_prompt)
-    #    ---     ---
-
-    from functions.report_records_summary import report_records_summary
     report_records_summary(my_prompt, 'Changes')
+    #    ---     ---
 
-    # except:
-    #     print('\n!!!      !!!     Error in get_pure_changes     !!!   !!!\n')
+    
+    report = '\nPure changes:\n'
+    report += f'Update:     {count_update} - '
+    report += f'Create:     {count_create} - '
+    report += f'Delete:     {count_delete}\n'
+    report += f'Incomplete: {count_incomplete_info} - '     # e.g. when the uuid is not specified
+    report += f'Duplicated: {count_duplicated} - '          # for istance when a record has been modified twice in a day
+    report += f'Irrelevant: {count_not_ResearchOutput}'   # when familySystemName is not ResearchOutput
+
+    open(file_summary, "a").write(report)
+
+    file_records = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_rdm-push-records.log'
+    open(file_records, "a").write(report)
+
+    print(report)

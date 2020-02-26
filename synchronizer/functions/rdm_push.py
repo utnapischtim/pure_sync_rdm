@@ -71,7 +71,7 @@ def create_invenio_data(my_prompt):
                     file_name = electronic_version['file']['fileName']
                     file_url  = electronic_version['file']['fileURL']
                     response = my_prompt.requests.get(file_url, auth=HTTPBasicAuth(pure_username, pure_password))
-                    print(f'Pure download file\t->\t{response}\t({file_name})')
+                    print(f'\tDownload file\t->\t{response} - ({file_name})')
 
                     # SAVE FILE
                     if response.status_code < 300:
@@ -231,7 +231,7 @@ def post_to_rdm(my_prompt):
     response = my_prompt.requests.post(url, headers=headers, params=params, data=data_utf8, verify=False)
 
     # RESPONSE CHECK
-    print(f'{my_prompt.count_total} - RDM post metadata - {response} - {my_prompt.uuid}')
+    print(f'{my_prompt.count_total} - RDM post metadata\t->\t{response} - {my_prompt.uuid}')
     
     uuid = my_prompt.item["uuid"]
     current_time = my_prompt.datetime.now().strftime("%H:%M:%S")

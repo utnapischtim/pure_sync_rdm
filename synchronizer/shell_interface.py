@@ -16,37 +16,6 @@ class MyPrompt(Cmd):
 
     def help_exit(self):
         print('Type "exit"')
-    
-
-    #   ---     ---     ---
-    def do_update(self, inp):
-        """\nHelp -> \t\n"""
-        self.get_props()
-        from functions.pure_get_updates          import pure_get_updates
-
-        pure_get_updates(self)
-    
-
-    #   ---     ---     ---
-    def do_push_uuid_to_rmd(self, inp):
-        """\nHelp -> \tPush to RDM all uuids that are in to_transfer.log\n"""
-        self.get_props()
-        from functions.rdm_push_by_uuid          import rdm_push_by_uuid
-
-        rdm_push_by_uuid(self, '')                   # transfer_type -> '' / 'full_comp' / 'update' / 'changes'
-
-
-    #   ---     ---     ---
-    def do_push_page_to_rdm(self, inp):
-        """\nHelp ->\tPush to RDM records from Pure by page \n"""
-        self.get_props()
-        from functions.rdm_push_by_page          import get_pure_by_page
-        from functions.rdm_push                 import create_invenio_data
-
-        pag_begin = 3
-        pag_end =   10
-        pag_size =  5
-        get_pure_by_page(self, pag_begin, pag_end, pag_size)
 
 
     #   ---     ---     ---
@@ -56,8 +25,41 @@ class MyPrompt(Cmd):
 
         from functions.pure_get_changes         import pure_get_changes
         pure_get_changes(self)
+
+
+    #   ---     ---     ---
+    def do_push_page_to_rdm(self, inp):
+        """\nHelp ->\tPush to RDM records from Pure by page \n"""
+        self.get_props()
+        from functions.rdm_push_by_page          import get_pure_by_page
+        from functions.rdm_push                 import create_invenio_data
+
+        pag_begin = 106
+        pag_end =   108
+        pag_size =  5
+        get_pure_by_page(self, pag_begin, pag_end, pag_size)
+
+    
+    #   ---     ---     ---
+    def do_shorten_logs(self, inp):
+        """\nHelp ->\tReduce log files length or delete them\n"""
+        self.get_props()
+        from functions.shorten_log_files        import shorten_log_files
+
+        shorten_log_files(self)
+
+
+
     
 
+    #   ---     ---     ---
+    def do_push_uuid_to_rmd(self, inp):
+        """\nHelp -> \tPush to RDM all uuids that are in to_transfer.log\n"""
+        self.get_props()
+        from functions.rdm_push_by_uuid          import rdm_push_by_uuid
+
+        rdm_push_by_uuid(self, '')                   # transfer_type -> '' / 'full_comp' / 'update' / 'changes'
+    
 
     #   ---     ---     ---
     def do_duplicates_in_rdm(self, inp):
@@ -78,15 +80,24 @@ class MyPrompt(Cmd):
         from functions.delete_record import delete_reading_txt
 
         delete_reading_txt(self)
-
     
-    #   ---     ---     ---
-    def do_shorten_logs(self, inp):
-        """\nHelp ->\tReduce log files length or delete them\n"""
-        self.get_props()
-        from functions.shorten_log_files        import shorten_log_files
 
-        shorten_log_files(self)
+    #   ---     ---     ---
+    def do_update(self, inp):
+        """\nHelp -> \t\n"""
+        self.get_props()
+        from functions.pure_get_updates          import pure_get_updates
+
+        pure_get_updates(self)
+    
+
+    #   ---     ---     ---
+    def do_delete_all(self, inp):
+        """\nHelp -> \t\n"""
+        self.get_props()
+        from functions.delete_all_records    import delete_all_records
+
+        delete_all_records(self)
 
     
     #   ---     ---     ---

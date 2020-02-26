@@ -17,7 +17,7 @@ def rdm_put_file(my_prompt, file_name):
 
         # Report
         report = ''
-        print(f'RDM put file\t\t->\t{response}')
+        print(f'\tPut file\t->\t{response}')
 
         current_time = my_prompt.datetime.now().strftime("%H:%M:%S")
 

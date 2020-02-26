@@ -48,8 +48,9 @@ def get_from_rdm(my_prompt):
             pag += 1
             
         print(f'\n- Tot items: {count} -')
-        open(my_prompt.dirpath + "/reports/full_comparison/rdm_uuids_recids.log", 'w+').write(data_ur)
-        open(my_prompt.dirpath + "/reports/full_comparison/rdm_uuids.log", 'w+').write(data_u)
+        open(my_prompt.dirpath + "/data/all_rdm_records.txt", 'w+').write(data_ur)
+        # open(my_prompt.dirpath + "/reports/full_comparison/rdm_uuids_recids.log", 'w+').write(data_ur)
+        # open(my_prompt.dirpath + "/reports/full_comparison/rdm_uuids.log", 'w+').write(data_u)
 
         return True
 

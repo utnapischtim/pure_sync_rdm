@@ -1,13 +1,15 @@
 from setup import *
 
 
-def delete_reading_txt(my_prompt):
+def delete_from_list(my_prompt):
     # NOTE: the user ACCOUNT related to the used TOKEN must be ADMIN
     # pipenv run invenio roles add admin@invenio.org admin
     # try:
     print('\n---   ---   ---\nDELETE RECORDS\n')
     count_success = 0
     count_total = 0
+    my_prompt.count_errors_record_delete        = 0
+    my_prompt.count_successful_record_delete    = 0
 
     file_name = my_prompt.dirpath + '/data/to_delete.txt'
     records_to_del = open(file_name, 'r').readlines()
@@ -27,6 +29,9 @@ def delete_reading_txt(my_prompt):
         # 410 -> "PID has been deleted"
         if response.status_code < 300 or response.status_code == 410:
             count_success += 1
+            my_prompt.count_successful_record_delete += 1
+        else:
+            my_prompt.count_errors_record_delete += 1
 
     current_time = my_prompt.datetime.now().strftime("%H:%M:%S")
     report = f"\n{current_time}\nDelete - {my_prompt.date.today()} - "
