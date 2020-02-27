@@ -1,5 +1,5 @@
-from setup import *
-from functions.last_successful_update import last_successful_update
+from setup                          import *
+from functions.general_functions    import last_successful_update
 
 # To execute preferibly between 22:30 and 23:30
 
@@ -31,10 +31,10 @@ def pure_get_changes(my_prompt):
 
 def pure_get_changes_by_date(my_prompt, changes_date):
     # try:
-    from functions.rdm_get_recid            import rdm_get_recid
+    from functions.general_functions        import rdm_get_recid
     from functions.delete_record            import delete_record, delete_from_list
     from functions.rdm_push_by_uuid         import rdm_push_by_uuid
-    from functions.report_records_summary   import report_records_summary
+    from functions.general_functions        import report_records_summary
 
     headers = {
         'Accept': 'application/json',
@@ -84,8 +84,8 @@ def pure_get_changes_by_date(my_prompt, changes_date):
     report_records += f'Number of items in response: {resp_json["count"]}\n'
     print(report_records)
 
-    # append to yyyy-mm-dd_rdm-push-records.log
-    file_records = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_rdm-push-records.log'
+    # append to yyyy-mm-dd_records.log
+    file_records = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_records.log'
     open(file_records, "a").write(report_records)
 
 
@@ -198,7 +198,7 @@ def pure_get_changes_by_date(my_prompt, changes_date):
 
     open(file_summary, "a").write(report)
 
-    file_records = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_rdm-push-records.log'
+    file_records = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_records.log'
     open(file_records, "a").write(report)
 
     print(report)

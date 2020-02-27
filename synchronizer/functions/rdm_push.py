@@ -1,5 +1,5 @@
 from setup import *
-from functions.rdm_put_file import rdm_put_file, get_record_recid
+from functions.rdm_put_file import rdm_put_file, get_recid
 from requests.auth          import HTTPBasicAuth
 
 #   ---         ---         ---
@@ -253,7 +253,7 @@ def post_to_rdm(my_prompt):
         if my_prompt.exec_type != 'by_id':
             open(f'{my_prompt.dirpath}/data/to_transfer.txt', "a").write(f'{uuid}\n')
 
-    file_name = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_rdm-push-records.log'
+    file_name = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_records.log'
     open(file_name, "a").write(report)
 
     if response.status_code == 429:
@@ -275,7 +275,7 @@ def post_to_rdm(my_prompt):
             
         # in case there no file to transfer, gets recid
         else:
-            get_record_recid(my_prompt)            
+            get_recid(my_prompt)            
 
         # add uuid to all_rdm_records
         uuid_recid_line = f'{uuid} {my_prompt.recid}\n'

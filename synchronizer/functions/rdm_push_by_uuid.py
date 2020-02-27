@@ -49,7 +49,7 @@ def get_pure_by_id(my_prompt, uuid):
         my_prompt.count_uuid_not_found_in_pure += 1
         print(response.content)
 
-        file_name = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_rdm-push-records.log'
+        file_name = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_records.log'
         report = f'Get metadata from Pure - {response.content}\n'
         open(file_name, "a").write(report)
 

@@ -2,11 +2,11 @@ from setup import *
 
 def pure_get_updates(my_prompt):
     
-    from functions.last_successful_update   import last_successful_update
-    from functions.rdm_get_recid            import rdm_get_recid
+    from functions.general_functions        import last_successful_update
+    from functions.general_functions        import rdm_get_recid
     from functions.delete_record            import delete_record
     from functions.rdm_push_by_uuid         import rdm_push_by_uuid
-    from functions.report_records_summary   import report_records_summary
+    from functions.general_functions        import report_records_summary
     
     date_today = my_prompt.date.today()
 
@@ -34,14 +34,14 @@ def pure_get_updates(my_prompt):
         print(f'Updating from {date_update}')
 
 
-    report = '\n---\n---   ---\n---   ---   ---'
+    report = '\n---   ---   ---\n'
     report += f"\nToday: {date_today}\nLast update: {last_update} \nDate update: {date_update}\n"
 
     file_updates = f'{my_prompt.dirpath}/reports/{str(date_today)}_updates.log'
     open(file_updates, "a").write(report)
 
     # Records.log Report
-    file_summary = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_rdm-push-records.log'
+    file_summary = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_records.log'
     open(file_summary, "a").write('\n\n- UPDATES -\n')
 
     report = ''

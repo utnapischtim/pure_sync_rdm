@@ -1,6 +1,7 @@
-from setup                      import *
-from functions.rdm_push         import create_invenio_data
-from functions.rdm_push_by_uuid  import rdm_push_by_uuid
+from setup                          import *
+from functions.rdm_push             import create_invenio_data
+from functions.rdm_push_by_uuid     import rdm_push_by_uuid
+from functions.general_functions    import give_spaces
 
 def get_pure_by_page(my_prompt, pag_begin, pag_end, pag_size):
 
@@ -21,10 +22,10 @@ def get_pure_by_page(my_prompt, pag_begin, pag_end, pag_size):
         my_prompt.count_uuid_not_found_in_pure      = 0
 
         report  = '\n\n--   --   --\n'
-        report += f'\n\nPag {str(pag)} - pag_size {str(pag_size)}\n'
+        report += f'\nPag {str(pag)} - pag_size {str(pag_size)}\n'
 
         # add page to report file  
-        file_records = f'{my_prompt.dirpath}/reports/{date_today}_rdm-push-records.log'
+        file_records = f'{my_prompt.dirpath}/reports/{date_today}_records.log'
         open(file_records, "a").write(report)
         print(report)
 
@@ -50,8 +51,8 @@ def get_pure_by_page(my_prompt, pag_begin, pag_end, pag_size):
             create_invenio_data(my_prompt)          
         #       ---         ---         ---
 
-        # Add RDM HTTP reponse codes to yyyy-mm-_rdm_push_pages.log
-        file_pages = f'{my_prompt.dirpath}/reports/{date_today}_rdm_push_pages.log'
+        # Add RDM HTTP reponse codes to yyyy-mm-_pages.log
+        file_pages = f'{my_prompt.dirpath}/reports/{date_today}_pages.log'
 
         space_size = give_spaces(pag_size)
         space_pag  = give_spaces(pag)
@@ -59,30 +60,20 @@ def get_pure_by_page(my_prompt, pag_begin, pag_end, pag_size):
         space_metd_errr  = give_spaces(my_prompt.count_errors_push_metadata)
         space_file_succ  = give_spaces(my_prompt.count_successful_push_file)
 
-        report = f'\n{date_today} - pag {pag}{space_pag} - pag_size {pag_size}{space_size} - '
+        report = f'\nPage {pag}{space_pag} - Page size {pag_size}{space_size} - '
         report += f'Metadata: success {my_prompt.count_successful_push_metadata}, {space_metd_succ}error {my_prompt.count_errors_push_metadata}{space_metd_errr} -\t'
         report += f'Files: success {my_prompt.count_successful_push_file}, {space_file_succ}error {my_prompt.count_errors_put_file}'
 
         open(file_pages, "a").write(report)
 
         file_summary = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_summary.log'
-        open(file_summary, "a").write(f'\n\nPage: {pag} - Page size: {pag_size}')
+        open(file_summary, "a").write(f'\n\n\nPage: {pag} - Page size: {pag_size}')
 
         # summary.log and records.log
-        from functions.report_records_summary import report_records_summary
+        from functions.general_functions import report_records_summary
         report_records_summary(my_prompt, 'Pages')
 
 
 
     # except:
     #     print('\n!!!      !!!  Error in get_pure_by_page method   !!!     !!!\n')
-
-
-def give_spaces(var):
-
-    if var < 10:       spaces = '   '
-    elif var < 100:    spaces = '  '
-    elif var < 1000:   spaces = ' '
-    else:              spaces = ''
-
-    return spaces

@@ -71,11 +71,11 @@ def delete_record(my_prompt, recid):
     
     print(f'RDM delete\t->\t{response} - {recid}')
 
-    # Append to yyyy-mm-dd_rdm-push-records.log
+    # Append to yyyy-mm-dd_records.log
     current_time = my_prompt.datetime.now().strftime("%H:%M:%S")
     report_line = f'{current_time} - delete_from_rdm - {response} - {recid}\n'
     
-    file_name = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_rdm-push-records.log'
+    file_name = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_records.log'
     open(file_name, "a").write(report_line)
     
     # 410 -> "PID has been deleted"

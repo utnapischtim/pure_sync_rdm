@@ -25,7 +25,6 @@ def rdm_duplicates(my_prompt):
 
         temp_arr.append(uuid)
 
-
     print(f'\nTotal items: {len(all_records)}\nDeleted: {count_deleted}\n')
 
         
