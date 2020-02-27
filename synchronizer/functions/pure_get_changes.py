@@ -12,7 +12,7 @@ def pure_get_changes(my_prompt):
     # Get date of last update
     last_update = last_successful_update(my_prompt, 'Changes')
 
-    last_update = '2020-02-25'      # TEMPORARY !!!!!!!!!!!!!!!
+    last_update = '2020-02-26'      # TEMPORARY !!!!!!!!!!!!!!!
     
     if last_update == date_today:
         print('Last changes check happened today. Nothing to update.\n')
@@ -68,15 +68,6 @@ def pure_get_changes_by_date(my_prompt, changes_date):
     my_prompt.count_successful_record_delete    = 0
     my_prompt.count_uuid_not_found_in_pure      = 0
 
-    report_records  = '\n--   --   --\n'
-    report_records +=  f'\n- Changes date: {changes_date} -\n'
-    report_records += f'Pure get CHANGES: {response}\n'
-    print(report_records)
-
-    # append to yyyy-mm-dd_rdm-push-records.log
-    file_records = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_rdm-push-records.log'
-    open(file_records, "a").write(report_records)
-
     to_delete_uuid  = []
     to_delete_recid = []
     
@@ -87,7 +78,16 @@ def pure_get_changes_by_date(my_prompt, changes_date):
     count_duplicated         = 0
     count_not_ResearchOutput = 0
 
-    print(f'Number of items in response: {resp_json["count"]}')
+    report_records  = '\n\n--   --   --\n'
+    report_records +=  f'\n- Changes date: {changes_date} -\n'
+    report_records += f'Pure get CHANGES: {response}\n'
+    report_records += f'Number of items in response: {resp_json["count"]\n}'
+    print(report_records)
+
+    # append to yyyy-mm-dd_rdm-push-records.log
+    file_records = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_rdm-push-records.log'
+    open(file_records, "a").write(report_records)
+
 
     #   ---     DELETE      ---
     for item in resp_json['items']:
@@ -188,7 +188,6 @@ def pure_get_changes_by_date(my_prompt, changes_date):
     report_records_summary(my_prompt, 'Changes')
     #    ---     ---
 
-    
     report = '\nPure changes:\n'
     report += f'Update:     {count_update} - '
     report += f'Create:     {count_create} - '

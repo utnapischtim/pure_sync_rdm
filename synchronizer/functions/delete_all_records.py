@@ -1,5 +1,4 @@
 from functions.delete_record    import delete_from_list
-from functions.get_from_rdm     import get_from_rdm
 from setup                      import *
 
 def delete_all_records(my_prompt):

@@ -21,9 +21,11 @@ def report_records_summary(my_prompt, process_type):
         report += f"Metadata:   ->  successful: {my_prompt.count_successful_push_metadata} - "
         report += f"errors: {my_prompt.count_errors_push_metadata}\n"
         report += f"File:       ->  successful: {my_prompt.count_successful_push_file} - "
-        report += f"errors: {my_prompt.count_errors_put_file}\n"
-        report += f"Delete:     ->  successful: {my_prompt.count_successful_record_delete} - "
-        report += f"errors: {my_prompt.count_errors_record_delete}"
+        report += f"errors: {my_prompt.count_errors_put_file}"
+        
+        if process_type != 'Pages':
+            report += f"\nDelete:     ->  successful: {my_prompt.count_successful_record_delete} - "
+            report += f"errors: {my_prompt.count_errors_record_delete}"
 
     print(report)
 

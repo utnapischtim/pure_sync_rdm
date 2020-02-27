@@ -28,7 +28,7 @@ def rdm_get_recid(my_prompt, uuid):
 
     total_recids = resp_json['hits']['total']
     if total_recids == 0:
-        print(f'Recid not found in RDM')
+        print(f'{uuid} - Recid not found in RDM')
         my_prompt.time.sleep(0.6)
         return False
 

@@ -21,7 +21,7 @@ def get_pure_by_page(my_prompt, pag_begin, pag_end, pag_size):
         my_prompt.count_uuid_not_found_in_pure      = 0
 
         report  = '\n\n--   --   --\n'
-        report += f'\nPag {str(pag)} - pag_size {str(pag_size)}\n'
+        report += f'\n\nPag {str(pag)} - pag_size {str(pag_size)}\n'
 
         # add page to report file  
         file_records = f'{my_prompt.dirpath}/reports/{date_today}_rdm-push-records.log'
