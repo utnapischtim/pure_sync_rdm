@@ -31,5 +31,5 @@ def last_successful_update(my_prompt, process_type):
                 last_update = file_split[0]
                 return last_update
     
-    print(f'No successful {process_type} found among all report logs\n')
+    print(f'\nNo successful {process_type} found among all report logs\n')
     return False

@@ -81,7 +81,7 @@ def pure_get_changes_by_date(my_prompt, changes_date):
     report_records  = '\n\n--   --   --\n'
     report_records +=  f'\n- Changes date: {changes_date} -\n'
     report_records += f'Pure get CHANGES: {response}\n'
-    report_records += f'Number of items in response: {resp_json["count"]\n}'
+    report_records += f'Number of items in response: {resp_json["count"]}\n'
     print(report_records)
 
     # append to yyyy-mm-dd_rdm-push-records.log

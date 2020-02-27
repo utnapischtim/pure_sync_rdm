@@ -15,7 +15,7 @@ push_dist_sec       = 1.6
 wait_429            = 900
 
 # LOG FILES
-days_to_keep_log_files = 7      # Deletes log files after x days (shorten_logfiles.py)
+days_to_keep_log_files = 2      # Deletes log files after x days (shorten_logfiles.py)
 
 # Percentage of updated items to considere the upload task successful
 upload_percent_accept = 90

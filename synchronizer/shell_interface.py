@@ -65,12 +65,9 @@ class MyPrompt(Cmd):
     def do_duplicates_in_rdm(self, inp):
         """\nHelp ->\tFind and delete RDM duplicate records\n"""
         self.get_props()
-        from functions.get_from_rdm             import get_from_rdm
-        from functions.find_rdm_duplicates      import find_rdm_duplicates
+        from functions.rdm_duplicates      import rdm_duplicates
 
-        resp = get_from_rdm(self)
-        if resp == True: 
-            find_rdm_duplicates(self)
+        rdm_duplicates(self)
 
 
     #   ---     ---     ---
