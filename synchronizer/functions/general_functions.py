@@ -4,6 +4,8 @@ from functions.delete_record import delete_from_list, delete_record
 
 def rdm_get_recid(my_prompt, uuid):
 
+    my_prompt.time.sleep(0.6)
+    
     if len(uuid) != 36:
         print(f'\nERROR - The uuid must have 36 characters. Given: {uuid}\n')
         return False
@@ -30,10 +32,9 @@ def rdm_get_recid(my_prompt, uuid):
     total_recids = resp_json['hits']['total']
     if total_recids == 0:
         print(f'{uuid} - Recid not found in RDM')
-        my_prompt.time.sleep(0.6)
         return False
 
-    print(f'RDM get recid\t->\t{response} - total_recids: {total_recids}')
+    print(f'\tRDM get recid\t->\t{response} - total_recids: {total_recids}')
 
     # Iterate over all records with the same uuid
     # The first record is the most recent (they are sorted)
@@ -48,6 +49,7 @@ def rdm_get_recid(my_prompt, uuid):
             # Duplicate records are deleted
             delete_record(my_prompt, recid)
 
+    my_prompt.recid = newest_recid
     return newest_recid
 
 

@@ -1,0 +1,59 @@
+-------     ----------------------
+SUMMARY -   yyyy-mm-dd_summary.log
+-------     ----------------------
+
+Gives summary information about each process that is executed.
+Next an example of process report:
+
+A -> Changes - success
+B -> 2020-02-27 10:39:55
+C -> Metadata:   ->  successful: 9 - errors: 0
+D -> File:       ->  successful: 5 - errors: 0
+E -> Delete:     ->  successful: 0 - errors: 0
+F -> Pure changes:
+G -> Update:     8 - Create:     1 - Delete:     0
+H -> Incomplete: 0 - Duplicated: 0 - Irrelevant: 7
+
+A:  Specifies the type of process (Changes / Updates / Pages) and the status (success / error).
+    
+    Changes: gets from Pure API 'changes' endpoint all the changes that took place in a certain date and updates accordingly the RDM repository
+    Updates: gets from Pure API 'research-outputs' endpoint all the last modified records (alternative to 'Changes')
+    Pages:   gets from Pure API 'research-outputs' endpoint all records divided by pages (used only for first full transfer)
+
+    This information will be used to check whas the last successful 'Changes' or 'Updates' process.
+
+C:  Status of metadata transmitted to RDM.
+
+D:  Status of file transmitted to RDM (which is related to a previously transmitted metadata)
+
+E:  Status of records deleted from RDM. Field not used in 'Pages' and 'Update' processes
+
+F:  Lines F - H will be created only for 'Changes' process.
+
+G:  Update, create and delete refere to the <changeType> specified in the response from Pure.
+
+H:  Incomplete: when <uuid>, <changeType> or <familySystemName> fields are missing
+    Duplicated: when a record has been modified multiple times then it is enough to update RDM only once..
+    Irrelevant: when <familySystemName> has a different value then 'ResearchOutput'
+
+
+-------     -------------------------------
+RECORDS -   yyyy-mm-dd_records.log
+-------     -------------------------------
+This report gives detailed information about all interactions with RDM API, such as:
+- Metadata transmission
+- File transmission
+- Record deletion
+
+
+-------     -----------------------------
+PAGES -     yyyy-mm-dd_pages.log
+-------     -----------------------------
+This report holds a brief summary of a page transmission from Pure to RDM.
+Next, an example:
+pag 26   - pag_size 50   - Metadata: success 50,   error 0    -	Files: success 3,    error 0
+
+
+-------     ----------------------
+UPDATES -   yyyy-mm-dd_updates.log
+-------     ----------------------

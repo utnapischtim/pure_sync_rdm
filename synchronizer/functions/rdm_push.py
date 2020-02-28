@@ -1,6 +1,7 @@
-from setup import *
-from functions.rdm_put_file import rdm_put_file, get_recid
-from requests.auth          import HTTPBasicAuth
+from setup                          import *
+from functions.rdm_put_file         import rdm_put_file
+from functions.general_functions    import rdm_get_recid
+from requests.auth                  import HTTPBasicAuth
 
 #   ---         ---         ---
 def create_invenio_data(my_prompt):
@@ -230,10 +231,11 @@ def post_to_rdm(my_prompt):
     url = f'{rdm_api_url_records}api/records/'
     response = my_prompt.requests.post(url, headers=headers, params=params, data=data_utf8, verify=False)
 
-    # RESPONSE CHECK
-    print(f'{my_prompt.count_total} - RDM post metadata\t->\t{response} - {my_prompt.uuid}')
-    
     uuid = my_prompt.item["uuid"]
+
+    # RESPONSE CHECK
+    print(f'{my_prompt.count_total} - RDM post metadata\t->\t{response} - {uuid}')
+    
     current_time = my_prompt.datetime.now().strftime("%H:%M:%S")
 
     report = f'{current_time} - metadata_to_rdm - {str(response)} - {uuid} - {my_prompt.item["title"]}\n'
@@ -263,6 +265,7 @@ def post_to_rdm(my_prompt):
     # -- Successful transmition --
     if response.status_code < 300:
 
+        my_prompt.recid = None
         my_prompt.count_successful_push_metadata += 1
 
         # metadata transmission success flag
@@ -273,13 +276,14 @@ def post_to_rdm(my_prompt):
             for file_name in my_prompt.record_files:
                 rdm_put_file(my_prompt, file_name)
             
-        # in case there no file to transfer, gets recid
+        # in case there are no file to transfer, gets recid
         else:
-            get_recid(my_prompt)            
-
-        # add uuid to all_rdm_records
-        uuid_recid_line = f'{uuid} {my_prompt.recid}\n'
-        open(f'{my_prompt.dirpath}/data/all_rdm_records.txt', "a").write(uuid_recid_line)
+            # my_prompt.time.sleep(1)
+            rdm_get_recid(my_prompt, uuid)            
+        if my_prompt.recid:
+            # add uuid to all_rdm_records
+            uuid_recid_line = f'{uuid} {my_prompt.recid}\n'
+            open(f'{my_prompt.dirpath}/data/all_rdm_records.txt', "a").write(uuid_recid_line)
 
 
     # FINALL SUCCESS CHECK

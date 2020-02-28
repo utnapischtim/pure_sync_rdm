@@ -68,8 +68,8 @@ def pure_get_changes_by_date(my_prompt, changes_date):
     my_prompt.count_successful_record_delete    = 0
     my_prompt.count_uuid_not_found_in_pure      = 0
 
+    # used to check if there are doubled tasks (e.g. update uuid and delete same uuid)
     to_delete_uuid  = []
-    to_delete_recid = []
     
     count_update             = 0
     count_create             = 0
@@ -107,28 +107,17 @@ def pure_get_changes_by_date(my_prompt, changes_date):
         uuid = item['uuid']
         print(f"\n{count_delete} - {item['changeType']} - {uuid}")
 
-        to_delete_uuid.append(uuid)
+        to_delete_uuid.append(uuid)         
 
         # Gets the record recid
         recid = rdm_get_recid(my_prompt, uuid)
+
         if recid != False:
-            to_delete_recid.append(recid)
+            delete_record(my_prompt, recid)
+
         else:
             my_prompt.count_successful_record_delete += 1   # the record is not in RDM
 
-    # If there is nothing to delete
-    if len(to_delete_recid) > 0:
-
-        file_name = my_prompt.dirpath + '/data/to_delete.txt'
-        to_delete_str = ''
-
-        for i in to_delete_recid:
-            to_delete_str += f'{i}\n'
-
-        open(file_name, 'w').close()                    # empty file
-        open(file_name, "a").write(to_delete_str)       # append to file
-
-        delete_from_list(my_prompt)                     # --------------
 
 
     #   ---     CREATE / ADD / UPDATE      ---
@@ -144,30 +133,28 @@ def pure_get_changes_by_date(my_prompt, changes_date):
             continue
         elif item['changeType'] == 'DELETE':
             continue
-        elif uuid in to_delete_uuid:
+        elif uuid in to_delete_uuid or uuid in to_transfer:
             count_duplicated += 1
             continue
 
         count += 1
         print(f"\n{count} - {item['changeType']} - {uuid}")
 
-        #   ---     ---      ---
         if item['changeType'] == 'ADD' or item['changeType'] == 'CREATE':
             count_create += 1
-            to_transfer.append(uuid)
 
-        #   ---     ---      ---
         if item['changeType'] == 'UPDATE':
     
             count_update += 1
-            to_transfer.append(uuid)
-            
-            # Gets the record recid for deletion
-            recid = rdm_get_recid(my_prompt, uuid)
 
-            # Deletes the record so that the new version is added
-            if recid != False:
-                delete_record(my_prompt, recid)
+        to_transfer.append(uuid)
+        
+        # Gets the record recid for deletion
+        recid = rdm_get_recid(my_prompt, uuid)
+
+        # Deletes the record so that the new version is added
+        if recid != False:
+            delete_record(my_prompt, recid)
 
     # - TRANSFER -
     # If there is nothing to transmit

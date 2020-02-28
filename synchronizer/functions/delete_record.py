@@ -69,7 +69,7 @@ def delete_record(my_prompt, recid):
     response = my_prompt.requests.delete(url, headers=headers, verify=False)
     #   ---
     
-    print(f'RDM delete\t->\t{response} - {recid}')
+    print(f'\tRDM delete\t->\t{response} - {recid}')
 
     # Append to yyyy-mm-dd_records.log
     current_time = my_prompt.datetime.now().strftime("%H:%M:%S")
