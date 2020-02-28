@@ -265,24 +265,22 @@ def post_to_rdm(my_prompt):
     # -- Successful transmition --
     if response.status_code < 300:
 
-        my_prompt.recid = None
         my_prompt.count_successful_push_metadata += 1
 
         # metadata transmission success flag
         my_prompt.metadata_success = True
 
+        # Gets recid from RDM
+        recid = rdm_get_recid(my_prompt, uuid) 
+
         # - Upload record FILES to RDM -
         if len(my_prompt.record_files) > 0:
             for file_name in my_prompt.record_files:
-                rdm_put_file(my_prompt, file_name)
-            
-        # in case there are no file to transfer, gets recid
-        else:
-            # my_prompt.time.sleep(1)
-            rdm_get_recid(my_prompt, uuid)            
-        if my_prompt.recid:
+                rdm_put_file(my_prompt, file_name, recid)
+                       
+        if recid:
             # add uuid to all_rdm_records
-            uuid_recid_line = f'{uuid} {my_prompt.recid}\n'
+            uuid_recid_line = f'{uuid} {recid}\n'
             open(f'{my_prompt.dirpath}/data/all_rdm_records.txt', "a").write(uuid_recid_line)
 
 

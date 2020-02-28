@@ -43,7 +43,7 @@ def get_pure_by_id(my_prompt, uuid):
         ('apiKey', pure_api_key),
     )
     response = my_prompt.requests.get(pure_rest_api_url + 'research-outputs/' + uuid, headers=headers, params=params)
-    print(f'\nPure get metadata\t->\t{response}')
+    print(f'\n\tPure get metadata\t->\t{response}')
 
     if response.status_code >= 300:
         my_prompt.count_uuid_not_found_in_pure += 1

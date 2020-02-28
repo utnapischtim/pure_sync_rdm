@@ -12,7 +12,7 @@ def pure_get_changes(my_prompt):
     # Get date of last update
     last_update = last_successful_update(my_prompt, 'Changes')
 
-    last_update = '2020-02-26'      # TEMPORARY !!!!!!!!!!!!!!!
+    last_update = '2020-02-27'      # TEMPORARY !!!!!!!!!!!!!!!
     
     if last_update == date_today:
         print('Last changes check happened today. Nothing to update.\n')

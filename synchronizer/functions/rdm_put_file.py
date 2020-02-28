@@ -1,12 +1,12 @@
-from setup                          import *
-from functions.general_functions    import rdm_get_recid
+from setup import *
+# from functions.general_functions    import rdm_get_recid
 
-def rdm_put_file(my_prompt, file_name):
+def rdm_put_file(my_prompt, file_name, recid):
     # try:
     file_path = my_prompt.dirpath + '/data/temporary_files/'
 
-    # GET from RDM recid of last added record
-    recid = rdm_get_recid(my_prompt, my_prompt.uuid)
+    # # GET from RDM recid of last added record
+    # recid = rdm_get_recid(my_prompt, my_prompt.uuid)
 
     # - PUT FILE TO RDM -
     headers = {
@@ -30,6 +30,7 @@ def rdm_put_file(my_prompt, file_name):
         my_prompt.file_success = False
 
         report += f'{response.content}\n'
+        print(response.content)
 
     else:
         my_prompt.count_successful_push_file += 1

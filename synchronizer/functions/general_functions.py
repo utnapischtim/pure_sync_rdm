@@ -4,7 +4,7 @@ from functions.delete_record import delete_from_list, delete_record
 
 def rdm_get_recid(my_prompt, uuid):
 
-    my_prompt.time.sleep(0.6)
+    my_prompt.time.sleep(1)
     
     if len(uuid) != 36:
         print(f'\nERROR - The uuid must have 36 characters. Given: {uuid}\n')
@@ -31,7 +31,7 @@ def rdm_get_recid(my_prompt, uuid):
 
     total_recids = resp_json['hits']['total']
     if total_recids == 0:
-        print(f'{uuid} - Recid not found in RDM')
+        print(f'\t{uuid} - Recid not found in RDM')
         return False
 
     print(f'\tRDM get recid\t->\t{response} - total_recids: {total_recids}')
