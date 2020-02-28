@@ -6,7 +6,7 @@ from functions.general_functions    import give_spaces
 def get_pure_by_page(my_prompt, pag_begin, pag_end, pag_size):
 
     # try:
-    my_prompt.exec_type = 'by_page'
+    # my_prompt.exec_type = 'by_page'
 
     for pag in range(pag_begin, pag_end):
 
@@ -46,12 +46,13 @@ def get_pure_by_page(my_prompt, pag_begin, pag_end, pag_size):
         # Load json response
         resp_json = my_prompt.json.loads(response.content)
 
+        #       ---         ---         ---
         # Creates data to push to InvenioRDM
         for my_prompt.item in resp_json['items']:
             create_invenio_data(my_prompt)          
         #       ---         ---         ---
 
-        # Add RDM HTTP reponse codes to yyyy-mm-_pages.log
+        # Add RDM HTTP reponse codes to yyyy-mm-dd_pages.log
         file_pages = f'{my_prompt.dirpath}/reports/{date_today}_pages.log'
 
         space_size = give_spaces(pag_size)

@@ -20,7 +20,8 @@ class MyPrompt(Cmd):
 
     #   ---     ---     ---
     def do_changes(self, inp):
-        """\nHelp ->\tGets from Pure API endpoint 'changes' all the records that have been created, modified or deleted.\n"""
+        """\nHelp ->\tGets from Pure API endpoint 'changes' all the records that have been created, modified and deleted.
+        Next updates accordingly RDM records\n"""
         self.get_props()
 
         from functions.pure_get_changes import pure_get_changes
@@ -34,8 +35,8 @@ class MyPrompt(Cmd):
         from functions.rdm_push_by_page import get_pure_by_page
         from functions.rdm_push         import create_invenio_data
 
-        pag_begin = 60
-        pag_end =   61
+        pag_begin = 61
+        pag_end =   62
         pag_size =  10
         get_pure_by_page(self, pag_begin, pag_end, pag_size)
 

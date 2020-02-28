@@ -4,6 +4,40 @@ from functions.general_functions    import rdm_get_recid
 from requests.auth                  import HTTPBasicAuth
 
 #   ---         ---         ---
+def rdm_add_record(my_prompt, uuid):
+    """ Method used to get from Pure record's metadata """
+    
+    # my_prompt.exec_type = 'by_id'
+    
+    headers = {
+        'Accept': 'application/json',
+        'api-key': pure_api_key,
+    }
+    params = (
+        ('apiKey', pure_api_key),
+    )
+    response = my_prompt.requests.get(f'{pure_rest_api_url}research-outputs/{uuid}', headers=headers, params=params)
+    print(f'\n\tGet metadata\t->\t{response}')
+
+    if response.status_code >= 300:
+        my_prompt.count_uuid_not_found_in_pure += 1
+        print(response.content)
+
+        file_name = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_records.log'
+        report = f'Get metadata from Pure - {response.content}\n'
+        open(file_name, "a").write(report)
+
+        my_prompt.time.sleep(1)
+        return 
+
+    open(my_prompt.dirpath + "/data/temporary_files/resp_pure.json", 'wb').write(response.content)
+    my_prompt.item = my_prompt.json.loads(response.content)
+    
+    # Creates data to push to InvenioRDM
+    return create_invenio_data(my_prompt)
+
+
+#   ---         ---         ---
 def create_invenio_data(my_prompt):
     """ Gets the necessary information from Pure response in order to
         create the json that will be pushed to RDM """
@@ -251,9 +285,9 @@ def post_to_rdm(my_prompt):
         # error description from invenioRDM
         report += f'{response.content}\n'
 
-        # append records to be re-transfered
-        if my_prompt.exec_type != 'by_id':
-            open(f'{my_prompt.dirpath}/data/to_transfer.txt', "a").write(f'{uuid}\n')
+        # # append records to be re-transfered
+        # if my_prompt.exec_type != 'by_id':
+        #     open(f'{my_prompt.dirpath}/data/to_transfer.txt', "a").write(f'{uuid}\n')
 
     file_name = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_records.log'
     open(file_name, "a").write(report)
