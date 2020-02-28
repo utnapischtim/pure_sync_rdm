@@ -1,7 +1,4 @@
-l = ['aa', 'bb', 'cc', 'bb']
+file_name = 'file.name.txt'
 
-print(l)
-
-l = list(set(l))
-
-print(l)
+file_extension = file_name.split('.')[file_name.count('.')]
+print(file_extension)

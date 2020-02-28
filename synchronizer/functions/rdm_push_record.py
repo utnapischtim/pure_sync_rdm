@@ -4,7 +4,7 @@ from functions.general_functions    import rdm_get_recid
 from requests.auth                  import HTTPBasicAuth
 
 #   ---         ---         ---
-def rdm_add_record(my_prompt, uuid):
+def rdm_push_record(my_prompt, uuid):
     """ Method used to get from Pure record's metadata """
     
     # my_prompt.exec_type = 'by_id'
@@ -108,12 +108,20 @@ def create_invenio_data(my_prompt):
                     response = my_prompt.requests.get(file_url, auth=HTTPBasicAuth(pure_username, pure_password))
                     print(f'\tDownload file\t->\t{response} - ({file_name})')
 
-                    # SAVE FILE
                     if response.status_code < 300:
-                        open(str(my_prompt.dirpath) + '/data/temporary_files/' + file_name, 'wb').write(response.content)
+                        # Save file
+                        open(f'{my_prompt.dirpath}/data/temporary_files/{file_name}', 'wb').write(response.content)
+
+                        # ISSUE encountered when putting txt files
+                        file_extension = file_name.split('.')[file_name.count('.')]
+                        if file_extension == 'txt':
+                            print('\nATTENTION, the file extension is txt')
+                            print('Known issue -> jinja2.exceptions.UndefinedError: No first item, sequence was empty.\n')                        
+                        # Put file to RDM
                         my_prompt.record_files.append(file_name)
                     else:
                         print(f'Error downloading file from pure ({file_url})')
+
 
         if count > 0:
             my_prompt.data = my_prompt.data[:-2]       
@@ -165,6 +173,8 @@ def create_invenio_data(my_prompt):
 
     my_prompt.data = my_prompt.data[:-2]
     my_prompt.data += '}'
+
+    open(f'{my_prompt.dirpath}/data/temporary_files/lash_push.json', "w").write(my_prompt.data)
 
     return post_to_rdm(my_prompt)
 
@@ -268,7 +278,8 @@ def post_to_rdm(my_prompt):
     uuid = my_prompt.item["uuid"]
 
     # RESPONSE CHECK
-    print(f'{my_prompt.count_total} - RDM post metadata\t->\t{response} - {uuid}')
+    # print(f'{my_prompt.count_total} - RDM post metadata\t->\t{response} - {uuid}')
+    print(f'\tPost metadata\t->\t{response} - {uuid}')
     
     current_time = my_prompt.datetime.now().strftime("%H:%M:%S")
 
@@ -285,9 +296,9 @@ def post_to_rdm(my_prompt):
         # error description from invenioRDM
         report += f'{response.content}\n'
 
-        # # append records to be re-transfered
-        # if my_prompt.exec_type != 'by_id':
-        #     open(f'{my_prompt.dirpath}/data/to_transfer.txt', "a").write(f'{uuid}\n')
+        # Add record to to_transfer.txt to be re pushed afterwards
+        open(f'{my_prompt.dirpath}/data/to_transfer.txt', "a").write(f'{uuid}\n')
+
 
     file_name = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_records.log'
     open(file_name, "a").write(report)
@@ -305,6 +316,10 @@ def post_to_rdm(my_prompt):
         my_prompt.metadata_success = True
 
         # Gets recid from RDM
+            # Normally it gets the recid just when putting a file into RDM
+            # Now it does it always:
+            #   - to check if there are duplicates
+            #   - to add the record uuid and recid to all_rdm_records.txt
         recid = rdm_get_recid(my_prompt, uuid) 
 
         # - Upload record FILES to RDM -

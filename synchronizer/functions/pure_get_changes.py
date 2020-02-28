@@ -31,10 +31,10 @@ def pure_get_changes(my_prompt):
 
 def pure_get_changes_by_date(my_prompt, changes_date):
     # try:
-    from functions.general_functions        import rdm_get_recid
+    from functions.general_functions        import rdm_get_recid, report_records_summary
     from functions.delete_record            import delete_record, delete_from_list
     from functions.rdm_push_by_uuid         import rdm_push_by_uuid
-    from functions.general_functions        import report_records_summary
+    from functions.rdm_push_record          import rdm_push_record
 
     headers = {
         'Accept': 'application/json',
@@ -69,7 +69,7 @@ def pure_get_changes_by_date(my_prompt, changes_date):
     my_prompt.count_uuid_not_found_in_pure      = 0
 
     # used to check if there are doubled tasks (e.g. update uuid and delete same uuid)
-    to_delete_uuid  = []
+    duplicated_uuid  = []
     
     count_update             = 0
     count_create             = 0
@@ -107,7 +107,7 @@ def pure_get_changes_by_date(my_prompt, changes_date):
         uuid = item['uuid']
         print(f"\n{count_delete} - {item['changeType']} - {uuid}")
 
-        to_delete_uuid.append(uuid)         
+        duplicated_uuid.append(uuid)         
 
         # Gets the record recid
         recid = rdm_get_recid(my_prompt, uuid)
@@ -121,7 +121,6 @@ def pure_get_changes_by_date(my_prompt, changes_date):
 
 
     #   ---     CREATE / ADD / UPDATE      ---
-    to_transfer = []
     count = 0
     for item in resp_json['items']:
         
@@ -133,7 +132,7 @@ def pure_get_changes_by_date(my_prompt, changes_date):
             continue
         elif item['changeType'] == 'DELETE':
             continue
-        elif uuid in to_delete_uuid or uuid in to_transfer:
+        elif uuid in duplicated_uuid:
             count_duplicated += 1
             continue
 
@@ -144,29 +143,15 @@ def pure_get_changes_by_date(my_prompt, changes_date):
             count_create += 1
 
         if item['changeType'] == 'UPDATE':
-    
             count_update += 1
-
-        to_transfer.append(uuid)
         
-        # Gets the record recid for deletion
-        recid = rdm_get_recid(my_prompt, uuid)
+        # Checks if this uuid has already been created / updated / deleted
+        duplicated_uuid.append(uuid)
+        
+        #   ---       ---       ---
+        rdm_push_record(my_prompt, uuid)
+        #   ---       ---       ---
 
-        # Deletes the record so that the new version is added
-        if recid != False:
-            delete_record(my_prompt, recid)
-
-    # - TRANSFER -
-    # If there is nothing to transmit
-    if len(to_transfer) > 0:
-        file_name = my_prompt.dirpath + '/data/to_transfer.txt'
-        to_transfer_str = ''
-        for i in to_transfer:
-            to_transfer_str += f'{i}\n'
-        open(file_name, 'w').close()                    # empty file
-        open(file_name, "a").write(to_transfer_str)     # append to file
-
-        rdm_push_by_uuid(my_prompt)                     # --------------
 
     file_summary = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_summary.log'
     open(file_summary, "a").write('\n\n')

@@ -1,5 +1,5 @@
 from setup                          import *
-from functions.rdm_push             import create_invenio_data
+from functions.rdm_push_record      import create_invenio_data
 from functions.rdm_push_by_uuid     import rdm_push_by_uuid
 from functions.general_functions    import give_spaces
 

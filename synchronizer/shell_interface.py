@@ -35,8 +35,8 @@ class MyPrompt(Cmd):
         from functions.rdm_push_by_page import get_pure_by_page
         from functions.rdm_push         import create_invenio_data
 
-        pag_begin = 61
-        pag_end =   62
+        pag_begin = 80
+        pag_end =   80
         pag_size =  10
         get_pure_by_page(self, pag_begin, pag_end, pag_size)
 
@@ -81,9 +81,9 @@ class MyPrompt(Cmd):
     def do_delete_from_list(self, inp):
         """\nHelp ->\tDelete RDM records by recid (to_delete.log)\n"""
         self.get_props()
-        from functions.delete_record import delete_reading_txt
+        from functions.delete_record import delete_from_list
 
-        delete_reading_txt(self)
+        delete_from_list(self)
 
     #   TEMPORARY .....................
     def do_uuid_push_from_list(self, inp):

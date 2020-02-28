@@ -31,7 +31,7 @@ def rdm_get_recid(my_prompt, uuid):
 
     total_recids = resp_json['hits']['total']
     if total_recids == 0:
-        print(f'\t{uuid} - Recid not found in RDM')
+        print(f'\tRecid not found in RDM')
         return False
 
     print(f'\tRDM get recid\t->\t{response} - total_recids: {total_recids}')
