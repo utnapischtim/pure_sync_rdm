@@ -1,17 +1,17 @@
 from setup import *
 
-def shorten_log_files(my_prompt):
+def shorten_log_files(shell_interface):
     # try:
     # DELETE OLD REPORTS
     print('\n---   ---   ---\nDELETE OLD REPORTS\n')
     folder = '/reports/'
 
     # Get file names from folder
-    isfile = my_prompt.os.path.isfile
-    join = my_prompt.os.path.join
-    onlyfiles = [f for f in my_prompt.os.listdir(my_prompt.dirpath + folder) if isfile(join(my_prompt.dirpath + folder, f))]
+    isfile = shell_interface.os.path.isfile
+    join = shell_interface.os.path.join
+    onlyfiles = [f for f in shell_interface.os.listdir(shell_interface.dirpath + folder) if isfile(join(shell_interface.dirpath + folder, f))]
 
-    date_limit = str(my_prompt.date.today() - my_prompt.timedelta(days=days_to_keep_log_files))
+    date_limit = str(shell_interface.date.today() - shell_interface.timedelta(days=days_to_keep_log_files))
 
     for file_name in onlyfiles:
         date = file_name.split('_')[0]
@@ -21,7 +21,7 @@ def shorten_log_files(my_prompt):
             tabs += '\t'
 
         if date <= date_limit:
-            my_prompt.os.remove(my_prompt.dirpath + folder + file_name)
+            shell_interface.os.remove(shell_interface.dirpath + folder + file_name)
             print(f'{file_name}{tabs}Deleted')
         else:
             print(f'{file_name}{tabs}Ok')
@@ -31,7 +31,7 @@ def shorten_log_files(my_prompt):
 
     # # SHORTEN ALL_CHANGES.LOG
     # log_lines = 30
-    # file_data = open(f'{my_prompt.dirpath}/reports/all_changes.log')
+    # file_data = open(f'{shell_interface.dirpath}/reports/all_changes.log')
 
     # num_lines = sum(1 for line in file_data)
 

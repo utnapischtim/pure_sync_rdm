@@ -1,12 +1,12 @@
 
-def rdm_duplicates(my_prompt):
+def rdm_duplicates(shell_interface):
 
     from functions.delete_record import delete_record
 
     print('---   ---   ---\nFIND RDM DUPLICATES\n\nDuplicates:\n')
 
     # Read Pure
-    file_name = my_prompt.dirpath + '/data/all_rdm_records.txt'
+    file_name = shell_interface.dirpath + '/data/all_rdm_records.txt'
     all_records = open(file_name, 'r').readlines()                       
 
     temp_arr = []
@@ -20,7 +20,7 @@ def rdm_duplicates(my_prompt):
 
         if uuid in temp_arr:
             count_deleted += 1
-            delete_record(my_prompt, recid)
+            delete_record(shell_interface, recid)
             continue
 
         temp_arr.append(uuid)

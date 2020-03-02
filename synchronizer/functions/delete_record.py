@@ -1,17 +1,17 @@
 from setup import *
 
 
-def delete_from_list(my_prompt):
+def delete_from_list(shell_interface):
     # NOTE: the user ACCOUNT related to the used TOKEN must be ADMIN
     # pipenv run invenio roles add admin@invenio.org admin
     
     print('\n---   ---   ---\nDELETE RECORDS\n')
     count_success = 0
     count_total = 0
-    my_prompt.count_errors_record_delete        = 0
-    my_prompt.count_successful_record_delete    = 0
+    shell_interface.count_errors_record_delete        = 0
+    shell_interface.count_successful_record_delete    = 0
 
-    file_name = my_prompt.dirpath + '/data/to_delete.txt'
+    file_name = shell_interface.dirpath + '/data/to_delete.txt'
     records_to_del = open(file_name, 'r').readlines()
 
     for recid in records_to_del:
@@ -24,17 +24,17 @@ def delete_from_list(my_prompt):
             continue
         
         # -- REQUEST --
-        response = delete_record(my_prompt, recid)
+        response = delete_record(shell_interface, recid)
 
         # 410 -> "PID has been deleted"
         if response.status_code < 300 or response.status_code == 410:
             count_success += 1
-            my_prompt.count_successful_record_delete += 1
+            shell_interface.count_successful_record_delete += 1
         else:
-            my_prompt.count_errors_record_delete += 1
+            shell_interface.count_errors_record_delete += 1
 
-    current_time = my_prompt.datetime.now().strftime("%H:%M:%S")
-    report = f"\n{current_time}\nDelete - {my_prompt.date.today()} - "
+    current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
+    report = f"\n{current_time}\nDelete - {shell_interface.date.today()} - "
 
     if count_total == 0:
         report += "success\nNothing to trasmit\n"
@@ -48,15 +48,15 @@ def delete_from_list(my_prompt):
 
     report += f"Tot records: {count_total} - Success transfer: {count_success}\n"
 
-    date_today = str(my_prompt.date.today())
-    open(f'{my_prompt.dirpath}/reports/{date_today}_summary.log', "a").write(report)
+    date_today = str(shell_interface.date.today())
+    open(f'{shell_interface.dirpath}/reports/{date_today}_summary.log', "a").write(report)
     
     print(report)
 
 
 
 #   DELETE_RECORD
-def delete_record(my_prompt, recid):
+def delete_record(shell_interface, recid):
 
     #   REQUEST
     headers = {
@@ -64,23 +64,23 @@ def delete_record(my_prompt, recid):
         'Content-Type': 'application/json',
     }
     url = f'{rdm_api_url_records}api/records/{recid}'
-    response = my_prompt.requests.delete(url, headers=headers, verify=False)
+    response = shell_interface.requests.delete(url, headers=headers, verify=False)
     #   ---
     
     print(f'\tRDM delete\t->\t{response} - {recid}')
 
     # Append to yyyy-mm-dd_records.log
-    current_time = my_prompt.datetime.now().strftime("%H:%M:%S")
+    current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
     report_line = f'{current_time} - delete_from_rdm - {response} - {recid}\n'
     
-    file_name = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_records.log'
+    file_name = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
     open(file_name, "a").write(report_line)
     
     # 410 -> "PID has been deleted"
     if response.status_code < 300 or response.status_code == 410:
 
         # remove deleted recid from to_delete.log
-        file_name = my_prompt.dirpath + "/data/to_delete.txt"
+        file_name = shell_interface.dirpath + "/data/to_delete.txt"
         with open(file_name, "r") as f:
             lines = f.readlines()
         with open(file_name, "w") as f:
@@ -89,7 +89,7 @@ def delete_record(my_prompt, recid):
                     f.write(line)
 
         # remove record from all_rdm_records.log
-        file_name = my_prompt.dirpath + "/data/all_rdm_records.txt"
+        file_name = shell_interface.dirpath + "/data/all_rdm_records.txt"
         with open(file_name, "r") as f:
             lines = f.readlines()
         with open(file_name, "w") as f:
@@ -100,11 +100,11 @@ def delete_record(my_prompt, recid):
                     f.write(line)
 
     elif response.status_code == 429:           # http 429 -> too many requests
-        my_prompt.time.sleep(wait_429)          # wait for ~ 15 min
+        shell_interface.time.sleep(wait_429)          # wait for ~ 15 min
     else:
         print(response.content)
 
     # Makes a push request every ~ 3 sec
-    my_prompt.time.sleep(push_dist_sec)
+    shell_interface.time.sleep(push_dist_sec)
 
     return response

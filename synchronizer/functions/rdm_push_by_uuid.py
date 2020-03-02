@@ -1,11 +1,11 @@
 from setup import *
 
-def rdm_push_by_uuid(my_prompt):
+def rdm_push_by_uuid(shell_interface):
 
     from functions.rdm_push_record import rdm_push_record
 
     # read to_transfer.log
-    retrans_data = open(my_prompt.dirpath + '/data/to_transfer.txt', 'r')
+    retrans_data = open(shell_interface.dirpath + '/data/to_transfer.txt', 'r')
 
     uuid_row = retrans_data.readline()
     
@@ -18,7 +18,7 @@ def rdm_push_by_uuid(my_prompt):
             continue
         
         #   ---     ---
-        rdm_push_record(my_prompt, uuid)
+        rdm_push_record(shell_interface, uuid)
         #   ---     ---
         
         uuid_row = retrans_data.readline()

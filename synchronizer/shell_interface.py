@@ -37,8 +37,8 @@ class MyPrompt(Cmd):
     def do_pages(self, inp):
         """\nHelp ->\tPush to RDM records from Pure by page \n"""
         self.get_props()
-        pag_begin = 180
-        pag_end =   182
+        pag_begin = 18
+        pag_end =   20
         pag_size =  2
         get_pure_by_page(self, pag_begin, pag_end, pag_size)
     

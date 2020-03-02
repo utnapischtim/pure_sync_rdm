@@ -1,20 +1,14 @@
 
-num = 54861
 
-# ----------
 
-digits = 1
+def add_spaces(value, max_spaces):
+    spaces = max_spaces - len(str(value))
+    return ''.ljust(spaces) + str(value)
 
-while True:
-    num /= 10
-    if num < 1:
-        break
-    digits += 1
 
-print(digits)
 
-# ----------
+l = [5, 88, 777, 6544, 98787, 21]
 
-digits = len(str(num))
-
-print(digits)
+for i in l:
+    response = add_spaces(i, 6)
+    print(response)

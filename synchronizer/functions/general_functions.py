@@ -2,9 +2,9 @@ from setup import *
 from functions.delete_record import delete_from_list, delete_record
 
 
-def rdm_get_recid(my_prompt, uuid):
+def rdm_get_recid(shell_interface, uuid):
 
-    my_prompt.time.sleep(1)
+    shell_interface.time.sleep(1)
     
     if len(uuid) != 36:
         print(f'\nERROR - The uuid must have 36 characters. Given: {uuid}\n')
@@ -17,17 +17,17 @@ def rdm_get_recid(my_prompt, uuid):
     page  = 'page=1'
     query = f'q="{uuid}"'
     url = f'{rdm_api_url_records}api/records/?{sort}&{size}&{page}&{query}'
-    response = my_prompt.requests.get(url, params=params, verify=False)
+    response = shell_interface.requests.get(url, params=params, verify=False)
 
     if response.status_code >= 300:
         print(f'\n{uuid} - {response}')
         print(response.content)
         return False
 
-    open(f'{my_prompt.dirpath}/data/temporary_files/rdm_get_recid.txt', "wb").write(response.content)
+    open(f'{shell_interface.dirpath}/data/temporary_files/rdm_get_recid.txt', "wb").write(response.content)
 
     # Load response
-    resp_json = my_prompt.json.loads(response.content)
+    resp_json = shell_interface.json.loads(response.content)
 
     total_recids = resp_json['hits']['total']
     if total_recids == 0:
@@ -47,74 +47,74 @@ def rdm_get_recid(my_prompt, uuid):
             newest_recid = recid
         else:
             # Duplicate records are deleted
-            delete_record(my_prompt, recid)
+            delete_record(shell_interface, recid)
 
-    my_prompt.recid = newest_recid
+    shell_interface.recid = newest_recid
     return newest_recid
 
 
 
-def report_records_summary(my_prompt, process_type):
+def report_records_summary(shell_interface, process_type):
     
-    current_datetime = my_prompt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    current_datetime = shell_interface.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    if my_prompt.count_total == 0:
+    if shell_interface.count_total == 0:
         report =  f'{process_type} - success\n'
         report += f"{current_datetime}\n"
         report += "Nothing to transmit\n"
     else:
-        percent_success = my_prompt.count_successful_push_metadata * 100 / my_prompt.count_total
+        percent_success = shell_interface.count_successful_push_metadata * 100 / shell_interface.count_total
 
         if percent_success >= upload_percent_accept:
             report = f"\n{process_type} - success\n"
 
             # ALL_CHANGES.LOG
-            if hasattr(my_prompt, 'changes_date'):
-                file_records     = f'{my_prompt.dirpath}/data/all_changes.txt'
-                file_records_str = f'{my_prompt.changes_date} - success\n'
+            if hasattr(shell_interface, 'changes_date'):
+                file_records     = f'{shell_interface.dirpath}/data/all_changes.txt'
+                file_records_str = f'{shell_interface.changes_date} - success\n'
                 open(file_records, "a").write(file_records_str)
         else:
             report = f"\n{process_type} - error\n"
 
-        metadata_succs  = my_prompt.count_successful_push_metadata
-        metadata_error  = my_prompt.count_errors_push_metadata
-        file_succs      = my_prompt.count_successful_push_file
-        file_error      = my_prompt.count_errors_put_file
+        metadata_succs  = shell_interface.count_successful_push_metadata
+        metadata_error  = shell_interface.count_errors_push_metadata
+        file_succs      = shell_interface.count_successful_push_file
+        file_error      = shell_interface.count_errors_put_file
 
         report += f"{current_datetime}\n"
-        report += f"Metadata       ->  successful: {give_spaces(metadata_succs)} - "        # Metadata
+        report += f"Metadata       ->  successful: {add_spaces(metadata_succs)} - "        # Metadata
         report += f"errors: {metadata_error}\n"
-        report += f"File           ->  successful: {give_spaces(file_succs)} - "            # File
+        report += f"File           ->  successful: {add_spaces(file_succs)} - "            # File
         report += f"errors: {file_error}"
         
         if process_type != 'Pages':
-            delete_succs = my_prompt.count_successful_record_delete
-            delete_error = my_prompt.count_errors_record_delete
-            report += f"\nDelete         ->  successful: {give_spaces(delete_succs)} - "    # Delete
+            delete_succs = shell_interface.count_successful_record_delete
+            delete_error = shell_interface.count_errors_record_delete
+            report += f"\nDelete         ->  successful: {add_spaces(delete_succs)} - "    # Delete
             report += f"errors: {delete_error}"
 
     print(report)
 
     # RECORDS.LOG
-    file_records = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_records.log'
+    file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
     open(file_records, "a").write(report)
 
     # SUMMARY.LOG
-    file_summary = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_summary.log'
+    file_summary = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_summary.log'
     open(file_summary, "a").write(report)
 
 
 
-def last_successful_update(my_prompt, process_type):
+def last_successful_update(shell_interface, process_type):
     """ Search for the date of the last successful update """
 
-    directory_path = f'{my_prompt.dirpath}/reports/'
+    directory_path = f'{shell_interface.dirpath}/reports/'
 
     # Gets the list of all the files in the folder /reports/
-    isfile = my_prompt.os.path.isfile
-    join = my_prompt.os.path.join
+    isfile = shell_interface.os.path.isfile
+    join = shell_interface.os.path.join
 
-    reports_files = [f for f in my_prompt.os.listdir(directory_path) if isfile(join(directory_path, f))]
+    reports_files = [f for f in shell_interface.os.listdir(directory_path) if isfile(join(directory_path, f))]
     reports_files = sorted(reports_files, reverse=True)
 
     # Iterates over all the files in /reports folder
@@ -127,7 +127,7 @@ def last_successful_update(my_prompt, process_type):
 
         # It will check first the newest files
         # If no successful update is found then will check older files
-        file_name = f'{my_prompt.dirpath}/reports/{file_name}'
+        file_name = f'{shell_interface.dirpath}/reports/{file_name}'
         file_data = open(file_name, 'r').read().splitlines()
         
         for line in reversed(file_data):
@@ -140,23 +140,18 @@ def last_successful_update(my_prompt, process_type):
     return False
 
 
-def give_spaces(var):
-    """ Add spaces to variables that will be used in log files """
-    if   var < 10:     spaces = f'    {var}'
-    elif var < 100:    spaces = f'   {var}'
-    elif var < 1000:   spaces = f'  {var}'
-    elif var < 10000:  spaces = f' {var}'
-    else:              spaces = f'{var}'
-    return spaces
+def add_spaces(value):
+    spaces = 6 - len(str(value))                # 6 is the maximum length of the given value
+    return ''.ljust(spaces) + str(value)        # ljust -> adds spaces after a string
 
 
-def initialize_count_variables(my_prompt):
+def initialize_count_variables(shell_interface):
     """ Initialize variables that will be used in report_records_summary method """
-    my_prompt.count_total                       = 0
-    my_prompt.count_errors_push_metadata        = 0
-    my_prompt.count_errors_put_file             = 0
-    my_prompt.count_errors_record_delete        = 0
-    my_prompt.count_successful_push_metadata    = 0
-    my_prompt.count_successful_push_file        = 0
-    my_prompt.count_successful_record_delete    = 0
-    my_prompt.count_uuid_not_found_in_pure      = 0
+    shell_interface.count_total                       = 0
+    shell_interface.count_errors_push_metadata        = 0
+    shell_interface.count_errors_put_file             = 0
+    shell_interface.count_errors_record_delete        = 0
+    shell_interface.count_successful_push_metadata    = 0
+    shell_interface.count_successful_push_file        = 0
+    shell_interface.count_successful_record_delete    = 0
+    shell_interface.count_uuid_not_found_in_pure      = 0
