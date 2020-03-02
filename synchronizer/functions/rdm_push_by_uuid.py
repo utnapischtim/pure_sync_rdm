@@ -1,8 +1,7 @@
 from setup import *
+from functions.rdm_push_record import rdm_push_record
 
 def rdm_push_by_uuid(shell_interface):
-
-    from functions.rdm_push_record import rdm_push_record
 
     # read to_transfer.log
     retrans_data = open(shell_interface.dirpath + '/data/to_transfer.txt', 'r')

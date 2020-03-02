@@ -1,5 +1,8 @@
-from setup                          import *
-from functions.general_functions    import last_successful_update, add_spaces
+from setup                              import *
+from functions.general_functions        import last_successful_update, add_spaces, rdm_get_recid, report_records_summary
+from functions.delete_record            import delete_record, delete_from_list
+from functions.rdm_push_by_uuid         import rdm_push_by_uuid
+from functions.rdm_push_record          import rdm_push_record
 
 # To execute preferably between 22:30 and 23:30
 
@@ -30,11 +33,6 @@ def pure_get_changes(shell_interface):
 
 
 def pure_get_changes_by_date(shell_interface, changes_date):
-    
-    from functions.general_functions        import rdm_get_recid, report_records_summary
-    from functions.delete_record            import delete_record, delete_from_list
-    from functions.rdm_push_by_uuid         import rdm_push_by_uuid
-    from functions.rdm_push_record          import rdm_push_record
 
     shell_interface.changes_date = changes_date
 

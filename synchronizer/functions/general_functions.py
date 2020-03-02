@@ -141,7 +141,8 @@ def last_successful_update(shell_interface, process_type):
 
 
 def add_spaces(value):
-    spaces = 6 - len(str(value))                # 6 is the maximum length of the given value
+    max_length = 6                              # 6 is the maximum length of the given value
+    spaces = max_length - len(str(value))
     return ''.ljust(spaces) + str(value)        # ljust -> adds spaces after a string
 
 

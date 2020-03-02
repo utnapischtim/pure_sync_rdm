@@ -1,7 +1,6 @@
+from functions.delete_record import delete_record
 
 def rdm_duplicates(shell_interface):
-
-    from functions.delete_record import delete_record
 
     print('---   ---   ---\nFIND RDM DUPLICATES\n\nDuplicates:\n')
 

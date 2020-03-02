@@ -1,10 +1,10 @@
-from setup import *
+from setup                              import *
+from functions.general_functions        import last_successful_update, rdm_get_recid, report_records_summary, initialize_count_variables
+from functions.delete_record            import delete_record
+from functions.rdm_push_record          import rdm_push_record
+
 
 def pure_get_updates(shell_interface):
-    
-    from functions.general_functions        import last_successful_update, rdm_get_recid, report_records_summary
-    from functions.delete_record            import delete_record
-    from functions.rdm_push_record          import rdm_push_record
     
     date_today = shell_interface.date.today()
 
@@ -43,15 +43,8 @@ def pure_get_updates(shell_interface):
 
     # Gets from Pure all new records
     while True:
-    
-        shell_interface.count_total                       = 0
-        shell_interface.count_errors_push_metadata        = 0
-        shell_interface.count_errors_put_file             = 0
-        shell_interface.count_errors_record_delete        = 0
-        shell_interface.count_successful_push_metadata    = 0
-        shell_interface.count_successful_push_file        = 0
-        shell_interface.count_successful_record_delete    = 0
-        shell_interface.count_uuid_not_found_in_pure      = 0
+        
+        initialize_count_variables(shell_interface)
 
         report += f'- Pag: {pag} -\n'
         print(f'Pag: {pag}')
