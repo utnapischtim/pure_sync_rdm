@@ -1,9 +1,9 @@
 from setup import *
 
 def rdm_push_by_uuid(my_prompt):
-    # try:
 
     from functions.rdm_push_record import rdm_push_record
+
     # read to_transfer.log
     retrans_data = open(my_prompt.dirpath + '/data/to_transfer.txt', 'r')
 
@@ -24,6 +24,3 @@ def rdm_push_by_uuid(my_prompt):
         uuid_row = retrans_data.readline()
 
     return
-    
-    # except:
-    #     print('\n!!!   !!!   ERROR in rdm_push_by_uuid   !!!   !!!\n')

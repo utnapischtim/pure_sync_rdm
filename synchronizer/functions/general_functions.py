@@ -67,6 +67,12 @@ def report_records_summary(my_prompt, process_type):
 
         if percent_success >= upload_percent_accept:
             report = f"\n{process_type} - success\n"
+
+            # ALL_CHANGES.LOG
+            if hasattr(my_prompt, 'changes_date'):
+                file_records     = f'{my_prompt.dirpath}/data/all_changes.txt'
+                file_records_str = f'{my_prompt.changes_date} - success\n'
+                open(file_records, "a").write(file_records_str)
         else:
             report = f"\n{process_type} - error\n"
 
@@ -76,15 +82,15 @@ def report_records_summary(my_prompt, process_type):
         file_error      = my_prompt.count_errors_put_file
 
         report += f"{current_datetime}\n"
-        report += f"Metadata   ->  successful: {metadata_succs}{give_spaces(metadata_succs)}- "      # Metadata
+        report += f"Metadata       ->  successful: {give_spaces(metadata_succs)} - "        # Metadata
         report += f"errors: {metadata_error}\n"
-        report += f"File       ->  successful: {file_succs}{give_spaces(file_succs)}- "              # File
+        report += f"File           ->  successful: {give_spaces(file_succs)} - "            # File
         report += f"errors: {file_error}"
         
         if process_type != 'Pages':
             delete_succs = my_prompt.count_successful_record_delete
             delete_error = my_prompt.count_errors_record_delete
-            report += f"\nDelete     ->  successful: {delete_succs}{give_spaces(delete_succs)}- "    # Delete
+            report += f"\nDelete         ->  successful: {give_spaces(delete_succs)} - "    # Delete
             report += f"errors: {delete_error}"
 
     print(report)
@@ -119,7 +125,7 @@ def last_successful_update(my_prompt, process_type):
         if file_split[1] != 'summary.log':
             continue
 
-        # It will check first the most up to date files
+        # It will check first the newest files
         # If no successful update is found then will check older files
         file_name = f'{my_prompt.dirpath}/reports/{file_name}'
         file_data = open(file_name, 'r').read().splitlines()
@@ -135,10 +141,22 @@ def last_successful_update(my_prompt, process_type):
 
 
 def give_spaces(var):
-
-    if var < 10:       spaces = '   '
-    elif var < 100:    spaces = '  '
-    elif var < 1000:   spaces = ' '
-    else:              spaces = ''
-
+    """ Add spaces to variables that will be used in log files """
+    if   var < 10:     spaces = f'    {var}'
+    elif var < 100:    spaces = f'   {var}'
+    elif var < 1000:   spaces = f'  {var}'
+    elif var < 10000:  spaces = f' {var}'
+    else:              spaces = f'{var}'
     return spaces
+
+
+def initialize_count_variables(my_prompt):
+    """ Initialize variables that will be used in report_records_summary method """
+    my_prompt.count_total                       = 0
+    my_prompt.count_errors_push_metadata        = 0
+    my_prompt.count_errors_put_file             = 0
+    my_prompt.count_errors_record_delete        = 0
+    my_prompt.count_successful_push_metadata    = 0
+    my_prompt.count_successful_push_file        = 0
+    my_prompt.count_successful_record_delete    = 0
+    my_prompt.count_uuid_not_found_in_pure      = 0

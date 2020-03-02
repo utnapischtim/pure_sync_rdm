@@ -5,9 +5,6 @@ from functions.general_functions    import give_spaces
 
 def get_pure_by_page(my_prompt, pag_begin, pag_end, pag_size):
 
-    # try:
-    # my_prompt.exec_type = 'by_page'
-
     for pag in range(pag_begin, pag_end):
 
         date_today = my_prompt.date.today()
@@ -22,7 +19,7 @@ def get_pure_by_page(my_prompt, pag_begin, pag_end, pag_size):
         my_prompt.count_uuid_not_found_in_pure      = 0
 
         report  = '\n\n--   --   --\n'
-        report += f'\nPag {str(pag)} - pag_size {str(pag_size)}\n'
+        report += f'\nPag {str(pag)} - pag_size {str(pag_size)}'
 
         # add page to report file  
         file_records = f'{my_prompt.dirpath}/reports/{date_today}_records.log'
@@ -49,21 +46,21 @@ def get_pure_by_page(my_prompt, pag_begin, pag_end, pag_size):
         #       ---         ---         ---
         # Creates data to push to InvenioRDM
         for my_prompt.item in resp_json['items']:
+            print('')                       # adds new line in the console
             create_invenio_data(my_prompt)          
         #       ---         ---         ---
 
         # Add RDM HTTP reponse codes to yyyy-mm-dd_pages.log
         file_pages = f'{my_prompt.dirpath}/reports/{date_today}_pages.log'
 
-        space_size = give_spaces(pag_size)
-        space_pag  = give_spaces(pag)
-        space_metd_succ  = give_spaces(my_prompt.count_successful_push_metadata)
-        space_metd_errr  = give_spaces(my_prompt.count_errors_push_metadata)
-        space_file_succ  = give_spaces(my_prompt.count_successful_push_file)
+        metadata_success  = give_spaces(my_prompt.count_successful_push_metadata)
+        metadata_error    = give_spaces(my_prompt.count_errors_push_metadata)
+        file_success      = give_spaces(my_prompt.count_successful_push_file)
+        file_error        = give_spaces(my_prompt.count_errors_put_file)
 
-        report = f'\nPage {pag}{space_pag} - Page size {pag_size}{space_size} - '
-        report += f'Metadata: success {my_prompt.count_successful_push_metadata}, {space_metd_succ}error {my_prompt.count_errors_push_metadata}{space_metd_errr} -\t'
-        report += f'Files: success {my_prompt.count_successful_push_file}, {space_file_succ}error {my_prompt.count_errors_put_file}'
+        report = f'\nPage {give_spaces(pag)} - Page size {give_spaces(pag_size)} - '
+        report += f'Metadata: success {metadata_success}, error {metadata_error} -\t'
+        report += f'Files: success {file_success}, error {file_error}'
 
         open(file_pages, "a").write(report)
 
@@ -73,8 +70,3 @@ def get_pure_by_page(my_prompt, pag_begin, pag_end, pag_size):
         # summary.log and records.log
         from functions.general_functions import report_records_summary
         report_records_summary(my_prompt, 'Pages')
-
-
-
-    # except:
-    #     print('\n!!!      !!!  Error in get_pure_by_page method   !!!     !!!\n')

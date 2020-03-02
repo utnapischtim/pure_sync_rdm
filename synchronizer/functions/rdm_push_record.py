@@ -7,8 +7,6 @@ from requests.auth                  import HTTPBasicAuth
 def rdm_push_record(my_prompt, uuid):
     """ Method used to get from Pure record's metadata """
     
-    # my_prompt.exec_type = 'by_id'
-    
     headers = {
         'Accept': 'application/json',
         'api-key': pure_api_key,
@@ -41,7 +39,6 @@ def rdm_push_record(my_prompt, uuid):
 def create_invenio_data(my_prompt):
     """ Gets the necessary information from Pure response in order to
         create the json that will be pushed to RDM """
-    # try:
 
     my_prompt.count_total += 1      # counts all records
 
@@ -178,9 +175,6 @@ def create_invenio_data(my_prompt):
 
     return post_to_rdm(my_prompt)
 
-    # except:
-    #     print('\n- Error in create_invenio_data method -\n')
-
 
 #   ---         ---         ---
 def add_field(my_prompt, item, inv_field, path):
@@ -250,7 +244,7 @@ def add_field(my_prompt, item, inv_field, path):
                     print('\n--- new access_right ---> not in accessRight_Pure_to_RDM array\n\n')
 
         # Adding field
-        my_prompt.data += '"' + inv_field + '": "' + element + '", '
+        my_prompt.data += f'"{inv_field}": "{element}", '
         return
 
     except:
@@ -259,9 +253,8 @@ def add_field(my_prompt, item, inv_field, path):
 #   ---         ---         ---
 def post_to_rdm(my_prompt):
 
-    # try:
     my_prompt.metadata_success = None
-    my_prompt.file_success =     None
+    my_prompt.file_success     = None
     my_prompt.time.sleep(push_dist_sec)                        # ~ 5000 records per hour
 
     data_utf8 = my_prompt.data.encode('utf-8')
@@ -346,7 +339,4 @@ def post_to_rdm(my_prompt):
                 if line.strip("\n") != uuid:
                     f.write(line)
         return True
-
-    # except:
-    #     print('\n- Error in post_to_rdm method -\n')
 

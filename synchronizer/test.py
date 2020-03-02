@@ -1,4 +1,20 @@
-file_name = 'file.name.txt'
 
-file_extension = file_name.split('.')[file_name.count('.')]
-print(file_extension)
+num = 54861
+
+# ----------
+
+digits = 1
+
+while True:
+    num /= 10
+    if num < 1:
+        break
+    digits += 1
+
+print(digits)
+
+# ----------
+
+digits = len(str(num))
+
+print(digits)

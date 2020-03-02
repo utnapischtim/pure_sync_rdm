@@ -1,7 +1,7 @@
 from setup import *
 
 def rdm_put_file(my_prompt, file_name, recid):
-    # try:
+    
     file_path_name = f'{my_prompt.dirpath}/data/temporary_files/{file_name}'
 
     # - PUT FILE TO RDM -
@@ -40,6 +40,3 @@ def rdm_put_file(my_prompt, file_name, recid):
     return response.status_code
 
     # HAVING PURE ADMIN ACCOUNT REMOVE FILE FROM PURE
-
-    # except:
-    #     print('\n- Error in rdm_put_file method -\n')

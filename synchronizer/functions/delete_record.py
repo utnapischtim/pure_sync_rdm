@@ -4,7 +4,7 @@ from setup import *
 def delete_from_list(my_prompt):
     # NOTE: the user ACCOUNT related to the used TOKEN must be ADMIN
     # pipenv run invenio roles add admin@invenio.org admin
-    # try:
+    
     print('\n---   ---   ---\nDELETE RECORDS\n')
     count_success = 0
     count_total = 0
@@ -53,8 +53,6 @@ def delete_from_list(my_prompt):
     
     print(report)
 
-    # except:
-    #     print('\n---   !!!   Error in delete_record   !!!   ---\n')
 
 
 #   DELETE_RECORD
@@ -62,7 +60,7 @@ def delete_record(my_prompt, recid):
 
     #   REQUEST
     headers = {
-        'Authorization': 'Bearer ' + token_rdm,         # token from setup.py
+        'Authorization': f'Bearer {token_rdm}',         # token from setup.py
         'Content-Type': 'application/json',
     }
     url = f'{rdm_api_url_records}api/records/{recid}'

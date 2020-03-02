@@ -1,7 +1,7 @@
 from setup                          import *
-from functions.general_functions    import last_successful_update
+from functions.general_functions    import last_successful_update, give_spaces
 
-# To execute preferibly between 22:30 and 23:30
+# To execute preferably between 22:30 and 23:30
 
 def pure_get_changes(my_prompt):
     """ Gets from Pure API all changes that took place in a certain date
@@ -12,7 +12,7 @@ def pure_get_changes(my_prompt):
     # Get date of last update
     last_update = last_successful_update(my_prompt, 'Changes')
 
-    last_update = '2020-02-27'      # TEMPORARY !!!!!!!!!!!!!!!
+    last_update = '2020-03-01'      # TEMPORARY !!!!!!!!!!!!!!!
     
     if last_update == date_today:
         print('Last changes check happened today. Nothing to update.\n')
@@ -30,11 +30,13 @@ def pure_get_changes(my_prompt):
 
 
 def pure_get_changes_by_date(my_prompt, changes_date):
-    # try:
+    
     from functions.general_functions        import rdm_get_recid, report_records_summary
     from functions.delete_record            import delete_record, delete_from_list
     from functions.rdm_push_by_uuid         import rdm_push_by_uuid
     from functions.rdm_push_record          import rdm_push_record
+
+    my_prompt.changes_date = changes_date
 
     headers = {
         'Accept': 'application/json',
@@ -88,18 +90,15 @@ def pure_get_changes_by_date(my_prompt, changes_date):
     file_records = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_records.log'
     open(file_records, "a").write(report_records)
 
-
     #   ---     DELETE      ---
     for item in resp_json['items']:
 
-        if 'changeType' not in item:
+        if 'changeType' not in item or 'uuid' not in item:
             count_incomplete_info += 1
             continue
-        
         elif item['familySystemName'] != 'ResearchOutput':
             count_not_ResearchOutput += 1
             continue
-
         elif item['changeType'] != 'DELETE':
             continue
 
@@ -114,10 +113,8 @@ def pure_get_changes_by_date(my_prompt, changes_date):
 
         if recid != False:
             delete_record(my_prompt, recid)
-
         else:
             my_prompt.count_successful_record_delete += 1   # the record is not in RDM
-
 
 
     #   ---     CREATE / ADD / UPDATE      ---
@@ -126,7 +123,7 @@ def pure_get_changes_by_date(my_prompt, changes_date):
         
         uuid = item['uuid']
 
-        if 'changeType' not in item:
+        if 'changeType' not in item or 'uuid' not in item:
             continue
         elif item['familySystemName'] != 'ResearchOutput':
             continue
@@ -152,21 +149,21 @@ def pure_get_changes_by_date(my_prompt, changes_date):
         rdm_push_record(my_prompt, uuid)
         #   ---       ---       ---
 
-
     file_summary = f'{my_prompt.dirpath}/reports/{my_prompt.date.today()}_summary.log'
-    open(file_summary, "a").write('\n\n')
+    summary_date = f'\n\n\nChanges date: {changes_date}'
+    open(file_summary, "a").write(summary_date)
 
     #    ---     ---
     report_records_summary(my_prompt, 'Changes')
     #    ---     ---
 
     report = '\nPure changes:\n'
-    report += f'Update:     {count_update} - '
-    report += f'Create:     {count_create} - '
-    report += f'Delete:     {count_delete}\n'
-    report += f'Incomplete: {count_incomplete_info} - '     # e.g. when the uuid is not specified
-    report += f'Duplicated: {count_duplicated} - '          # for istance when a record has been modified twice in a day
-    report += f'Irrelevant: {count_not_ResearchOutput}'   # when familySystemName is not ResearchOutput
+    report += f'Update:     {give_spaces(count_update)} - '
+    report += f'Create:     {give_spaces(count_create)} - '
+    report += f'Delete:     {give_spaces(count_delete)}\n'
+    report += f'Incomplete: {give_spaces(count_incomplete_info)} - '     # e.g. when the uuid is not specified
+    report += f'Duplicated: {give_spaces(count_duplicated)} - '          # for istance when a record has been modified twice in a day
+    report += f'Irrelevant: {give_spaces(count_not_ResearchOutput)}'     # when familySystemName is not ResearchOutput
 
     open(file_summary, "a").write(report)
 
