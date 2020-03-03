@@ -1,5 +1,5 @@
 from setup                              import *
-from functions.general_functions        import last_successful_update, add_spaces, rdm_get_recid, report_records_summary
+from functions.general_functions        import add_spaces, rdm_get_recid, report_records_summary, initialize_count_variables
 from functions.delete_record            import delete_record, delete_from_list
 from functions.rdm_push_by_uuid         import rdm_push_by_uuid
 from functions.rdm_push_record          import rdm_push_record
@@ -10,25 +10,18 @@ def pure_get_changes(shell_interface):
     """ Gets from Pure API all changes that took place in a certain date
         and modifies accordingly the RDM repository """
     
-    date_today = str(shell_interface.datetime.today().strftime('%Y-%m-%d'))
-    
     # Get date of last update
-    last_update = last_successful_update(shell_interface, 'Changes')
-
-    last_update = '2020-03-01'      # TEMPORARY !!!!!!!!!!!!!!!
+    missing_updates = get_missing_updates(shell_interface)
     
-    if last_update == date_today:
-        print('Last changes check happened today. Nothing to update.\n')
+    # missing_updates = ['2020-03-03']      # TEMPORARY !!!!!!!!!!!!!!!
+    
+    if missing_updates == []:
+        print('\nNothing to update.\n')
         return
 
-    # Converts last_update string to object
-    last_update = shell_interface.datetime.strptime(str(last_update), "%Y-%m-%d").date()
-
-    while str(last_update) < date_today:
-        # Adds one day to to_update, 
-        last_update = last_update + shell_interface.timedelta(days=1)
+    for date_to_update in reversed(missing_updates):
         #   ---     ---
-        pure_get_changes_by_date(shell_interface, last_update)
+        pure_get_changes_by_date(shell_interface, date_to_update)
         #   ---     ---
 
 
@@ -59,14 +52,7 @@ def pure_get_changes_by_date(shell_interface, changes_date):
     # Load response json
     resp_json = shell_interface.json.loads(response.content)
 
-    shell_interface.count_total                       = 0
-    shell_interface.count_errors_push_metadata        = 0
-    shell_interface.count_errors_put_file             = 0
-    shell_interface.count_errors_record_delete        = 0
-    shell_interface.count_successful_push_metadata    = 0
-    shell_interface.count_successful_push_file        = 0
-    shell_interface.count_successful_record_delete    = 0
-    shell_interface.count_uuid_not_found_in_pure      = 0
+    initialize_count_variables(shell_interface)
 
     # used to check if there are doubled tasks (e.g. update uuid and delete same uuid)
     duplicated_uuid  = []
@@ -169,3 +155,26 @@ def pure_get_changes_by_date(shell_interface, changes_date):
     open(file_records, "a").write(report)
 
     print(report)
+
+
+def get_missing_updates(shell_interface):
+    """ Search for missing updates in the last 7 days """
+
+    file_name = '/home/bootcamp/src/pure_sync_rdm/synchronizer/data/successful_updates.txt'
+
+    missing_updates = []
+    count = 0
+    days_span = 7
+
+    date_today = str(shell_interface.datetime.today().strftime('%Y-%m-%d'))
+    date_check = shell_interface.datetime.strptime(date_today, "%Y-%m-%d").date()
+
+    while count < days_span:
+
+        if str(date_check) not in open(file_name, 'r').read():
+            missing_updates.append(str(date_check))        
+
+        date_check = date_check - shell_interface.timedelta(days=1)
+        count += 1
+
+    return missing_updates

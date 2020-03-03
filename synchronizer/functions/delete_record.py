@@ -16,8 +16,13 @@ def delete_from_list(shell_interface):
 
     for recid in records_to_del:
 
-        count_total += 1
         recid = recid.strip('\n')
+
+        # Ignore empty lines
+        if len(recid) == 0:
+            continue
+
+        count_total += 1
 
         if len(recid) != 11:
             print(f'\n{recid} -> Wrong recid lenght! \n')

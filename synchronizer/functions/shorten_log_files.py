@@ -1,7 +1,7 @@
 from setup import *
 
 def shorten_log_files(shell_interface):
-    # try:
+
     # DELETE OLD REPORTS
     print('\n---   ---   ---\nDELETE OLD REPORTS\n')
     folder = '/reports/'
@@ -29,25 +29,21 @@ def shorten_log_files(shell_interface):
     print('\n')
 
 
-    # # SHORTEN ALL_CHANGES.LOG
-    # log_lines = 30
-    # file_data = open(f'{shell_interface.dirpath}/reports/all_changes.log')
+    # SHORTEN ALL_CHANGES.TXT
+    log_lines = 30
+    file_name = f'{shell_interface.dirpath}/data/all_changes.txt'
+    file_data = open(file_name)
 
-    # num_lines = sum(1 for line in file_data)
+    num_lines = sum(1 for line in file_data)
 
-    # if num_lines > log_lines:
-    #     file_data = open(file_name)
-    #     lines = file_data.read().splitlines()
-    #     data = ''
+    if num_lines > log_lines:
+        file_data = open(file_name)
+        lines = file_data.read().splitlines()
+        data = ''
 
-    #     for i in range (log_lines, 0, -1):
-    #         last_line = lines[-i]
-    #         data += last_line + '\n'
+        for i in range (log_lines, 0, -1):
+            last_line = lines[-i]
+            data += last_line + '\n'
 
-    #     open(file_name, 'w').close()
-    #     open(file_name, "w").write(data)
-
-
-    # except:
-    #     print('\n!!!    !!!     ERROR in shorten_log_files      !!!     !!!\n')
-
+        open(file_name, 'w').close()
+        open(file_name, "w").write(data)

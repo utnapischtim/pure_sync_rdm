@@ -1,15 +1,14 @@
-from cmd import Cmd
 import requests
 import json
 import os
 import time
+from cmd                            import Cmd
 from datetime                       import date, datetime, timedelta
 from functions.pure_get_changes     import pure_get_changes
 from functions.rdm_push_by_page     import get_pure_by_page
 from functions.rdm_push_record      import create_invenio_data
 from functions.shorten_log_files    import shorten_log_files
 from functions.rdm_duplicates       import rdm_duplicates
-from functions.pure_get_updates     import pure_get_updates
 from functions.delete_all_records   import delete_all_records
 from functions.rdm_push_by_uuid     import rdm_push_by_uuid
 from functions.delete_record        import delete_record, delete_from_list
@@ -37,9 +36,9 @@ class MyPrompt(Cmd):
     def do_pages(self, inp):
         """\nHelp ->\tPush to RDM records from Pure by page \n"""
         self.get_props()
-        pag_begin = 18
-        pag_end =   20
-        pag_size =  2
+        pag_begin = 500
+        pag_end =   502
+        pag_size =  100
         get_pure_by_page(self, pag_begin, pag_end, pag_size)
     
     #   ---     ---     ---
@@ -53,12 +52,6 @@ class MyPrompt(Cmd):
         """\nHelp ->\tFind and delete RDM duplicate records\n"""
         self.get_props()
         rdm_duplicates(self)
-    
-    #   ---     ---     ---
-    def do_update(self, inp):
-        """\nHelp -> \t\n"""
-        self.get_props()
-        pure_get_updates(self)
 
     #   ---     ---     ---
     def do_delete_all(self, inp):
@@ -76,15 +69,6 @@ class MyPrompt(Cmd):
     def do_uuid_push_from_list(self, inp):
         """\nHelp -> \tPush to RDM all uuids that are in to_transfer.log\n"""
         self.get_props()
-        self.count_total                       = 0
-        self.count_errors_push_metadata        = 0
-        self.count_errors_put_file             = 0
-        self.count_errors_record_delete        = 0
-        self.count_successful_push_metadata    = 0
-        self.count_successful_push_file        = 0
-        self.count_successful_record_delete    = 0
-        self.count_uuid_not_found_in_pure      = 0
-
         rdm_push_by_uuid(self)                   # transfer_type -> '' / 'full_comp' / 'update' / 'changes'
 
     #   ---     ---     ---

@@ -1,0 +1,14 @@
+
+ - RDM ACCESS RIGHT -
+   RDM access right (https://github.com/inveniosoftware/invenio-rdm-records/issues/37):
+   open        ->  metadata available              files available
+   embargoed   ->  metadata available              files available after embargo date      (unless user has permission)
+   restricted  ->  metadata available              files restricted                        (unless user has permission)
+   closed      ->  metadata restricted             files restricted                        (unless user has permission)
+
+ - PURE ACCESS RIGHT -
+   Open:           Full text accessible openly on Portal/Web service/Backend
+   Embargoed:      Full text accessible openly on Portal/Web service/Backend after end of embargo
+   Restricted:     Full text accessible in Backend and IP restricted
+   Closed:         Full text accessible in Backend only for related persons and related editors
+   Unknown:        Public access to file not known

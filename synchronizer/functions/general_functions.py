@@ -68,10 +68,10 @@ def report_records_summary(shell_interface, process_type):
         if percent_success >= upload_percent_accept:
             report = f"\n{process_type} - success\n"
 
-            # ALL_CHANGES.LOG
+            # SUCCESSFUL_UPDATES.TXT
             if hasattr(shell_interface, 'changes_date'):
-                file_records     = f'{shell_interface.dirpath}/data/all_changes.txt'
-                file_records_str = f'{shell_interface.changes_date} - success\n'
+                file_records     = f'{shell_interface.dirpath}/data/successful_updates.txt'
+                file_records_str = f'{shell_interface.changes_date}\n'
                 open(file_records, "a").write(file_records_str)
         else:
             report = f"\n{process_type} - error\n"
@@ -102,42 +102,6 @@ def report_records_summary(shell_interface, process_type):
     # SUMMARY.LOG
     file_summary = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_summary.log'
     open(file_summary, "a").write(report)
-
-
-
-def last_successful_update(shell_interface, process_type):
-    """ Search for the date of the last successful update """
-
-    directory_path = f'{shell_interface.dirpath}/reports/'
-
-    # Gets the list of all the files in the folder /reports/
-    isfile = shell_interface.os.path.isfile
-    join = shell_interface.os.path.join
-
-    reports_files = [f for f in shell_interface.os.listdir(directory_path) if isfile(join(directory_path, f))]
-    reports_files = sorted(reports_files, reverse=True)
-
-    # Iterates over all the files in /reports folder
-    for file_name in reports_files:
-
-        file_split = file_name.split('_')
-
-        if file_split[1] != 'summary.log':
-            continue
-
-        # It will check first the newest files
-        # If no successful update is found then will check older files
-        file_name = f'{shell_interface.dirpath}/reports/{file_name}'
-        file_data = open(file_name, 'r').read().splitlines()
-        
-        for line in reversed(file_data):
-            if f'{process_type} - success' in line:
-                print(f'\nSuccessful Check update found in {file_name}\n')
-                last_update = file_split[0]
-                return last_update
-    
-    print(f'\nNo successful {process_type} found among all report logs\n')
-    return False
 
 
 def add_spaces(value):

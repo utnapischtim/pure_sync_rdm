@@ -1,4 +1,5 @@
-from setup import *
+from setup                      import *
+from requests.auth              import HTTPBasicAuth
 
 def rdm_put_file(shell_interface, file_name, recid):
     
@@ -40,3 +41,26 @@ def rdm_put_file(shell_interface, file_name, recid):
     return response.status_code
 
     # HAVING PURE ADMIN ACCOUNT REMOVE FILE FROM PURE
+
+
+def get_file_from_pure(shell_interface, electronic_version):
+
+    file_name = electronic_version['file']['fileName']
+    file_url  = electronic_version['file']['fileURL']
+
+    response = shell_interface.requests.get(file_url, auth=HTTPBasicAuth(pure_username, pure_password))
+    print(f'\tDownload file\t->\t{response} - ({file_name})')
+
+    if response.status_code < 300:
+        # Save file
+        open(f'{shell_interface.dirpath}/data/temporary_files/{file_name}', 'wb').write(response.content)
+
+        # ISSUE encountered when putting txt files
+        file_extension = file_name.split('.')[file_name.count('.')]
+        if file_extension == 'txt':
+            print('\n\tATTENTION, the file extension is txt')
+            print('\tKnown issue -> jinja2.exceptions.UndefinedError: No first item, sequence was empty.\n')                        
+        # Put file to RDM
+        shell_interface.record_files.append(file_name)
+    else:
+        print(f'Error downloading file from pure ({file_url})')

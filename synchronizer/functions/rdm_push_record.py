@@ -1,12 +1,12 @@
 from setup                          import *
-from functions.rdm_put_file         import rdm_put_file
+from functions.get_put_file         import rdm_put_file, get_file_from_pure
 from functions.general_functions    import rdm_get_recid
-from requests.auth                  import HTTPBasicAuth
 
 #   ---         ---         ---
 def rdm_push_record(shell_interface, uuid):
     """ Method used to get from Pure record's metadata """
     
+    # PURE REQUEST
     headers = {
         'Accept': 'application/json',
         'api-key': pure_api_key,
@@ -16,6 +16,7 @@ def rdm_push_record(shell_interface, uuid):
     )
     url = f'{pure_rest_api_url}research-outputs/{uuid}'
     response = shell_interface.requests.get(url, headers=headers, params=params)
+
     print(f'\n\tGet metadata\t->\t{response}')
 
     if response.status_code >= 300:
@@ -32,228 +33,218 @@ def rdm_push_record(shell_interface, uuid):
     file_name = f'{shell_interface.dirpath}/data/temporary_files/resp_pure.json'
     open(file_name, 'wb').write(response.content)
     shell_interface.item = shell_interface.json.loads(response.content)
+
+    # resp_json = open(shell_interface.dirpath + '/data/temporary_files/resp_pure.json', 'r')             # -- TEMPORARY -- 
+    # shell_interface.item = shell_interface.json.load(resp_json)                                         # -- TEMPORARY -- 
     
     # Creates data to push to InvenioRDM
     return create_invenio_data(shell_interface)
 
 
 #   ---         ---         ---
-def create_invenio_data(shell_interface):
+def create_invenio_data(sxi):
     """ Gets the necessary information from Pure response in order to
         create the json that will be pushed to RDM """
 
-    shell_interface.count_total += 1      # counts all records
+    sxi.count_total += 1      # counts all records
 
-    shell_interface.record_files = []
-    item = shell_interface.item
-    shell_interface.uuid = item['uuid']
+    sxi.record_files = []
+    item = sxi.item
+    sxi.uuid = item['uuid']
 
-    shell_interface.data = '{'
-    shell_interface.data += '"owners": [1], '
-    shell_interface.data += '"_access": {"metadata_restricted": false, "files_restricted": false}, '
+    sxi.data = {}
+    sxi.data['owners']       = [1]
+    sxi.data['_access']      = {'metadata_restricted': False, 'files_restricted': False}
+    # sxi.data['language']     = 'eng'
+    # sxi.data['contributors'] = [{'name': 'Doe, John'}]
+    # sxi.data['access_right'] = 'open'
+
+                        # RDM field name                # PURE json path
+    add_field(sxi, item, 'title',                       ['title'])
+    add_field(sxi, item, 'uuid',                        ['uuid'])
+    add_field(sxi, item, 'pureId',                      ['pureId'])
+    add_field(sxi, item, 'publicationDatePure',         ['publicationStatuses', 0, 'publicationDate', 'year'])
+    add_field(sxi, item, 'createdDatePure',             ['info', 'createdDate'])
+    add_field(sxi, item, 'modifiedDatePure',            ['info', 'modifiedDate'])
+    add_field(sxi, item, 'pages',                       ['info','pages'])   
+    add_field(sxi, item, 'volume',                      ['info','volume'])
+    add_field(sxi, item, 'journalTitle',                ['info', 'journalAssociation', 'title', 'value'])
+    add_field(sxi, item, 'journalNumber',               ['info', 'journalNumber'])
+    add_field(sxi, item, 'pureId',                      ['pureId'])
+    add_field(sxi, item, 'type_p',                      ['types', 0, 'value'])    
+    add_field(sxi, item, 'category',                    ['categories', 0, 'value'])  
+    add_field(sxi, item, 'peerReview',                  ['peerReview'])    
+    add_field(sxi, item, 'publicationStatus',           ['publicationStatuses', 0, 'publicationStatuses', 0, 'value'])
+    add_field(sxi, item, 'language',                    ['languages', 0, 'value'])
+    add_field(sxi, item, 'totalNumberOfAuthors',        ['totalNumberOfAuthors'])
+    add_field(sxi, item, 'managingOrganisationalUnit',  ['managingOrganisationalUnit', 'names', 0, 'value'])
+    add_field(sxi, item, 'workflow',                    ['workflows', 0, 'value'])
+    add_field(sxi, item, 'confidential',                ['confidential'])
+    add_field(sxi, item, 'publisherName',               ['publisher', 'names', 0, 'value'])
+    add_field(sxi, item, 'access_right',                ['openAccessPermissions', 0, 'value'])
+
     
-                              # RDM field name                    # PURE json path
-    add_field(shell_interface, item, 'title',                             ['title'])
-    add_field(shell_interface, item, 'publicationDatePure',               ['publicationStatuses', 0, 'publicationDate', 'year'])
-    add_field(shell_interface, item, 'createdDatePure',                   ['info', 'createdDate'])
-    add_field(shell_interface, item, 'modifiedDatePure',                  ['info', 'modifiedDate'])
-    add_field(shell_interface, item, 'pureId',                            ['pureId'])
-    add_field(shell_interface, item, 'uuid',                              ['uuid'])                                                                   
-    add_field(shell_interface, item, 'type_p',                            ['types', 0, 'value'])                                                     
-    add_field(shell_interface, item, 'category',                          ['categories', 0, 'value'])                                              
-    add_field(shell_interface, item, 'peerReview',                        ['peerReview'])                                                         
-    add_field(shell_interface, item, 'publicationStatus',                 ['publicationStatuses', 0, 'publicationStatuses', 0, 'value'])
-    add_field(shell_interface, item, 'language',                          ['languages', 0, 'value'])
-    add_field(shell_interface, item, 'totalNumberOfAuthors',              ['totalNumberOfAuthors'])
-    add_field(shell_interface, item, 'managingOrganisationalUnit',        ['managingOrganisationalUnit', 'names', 0, 'value'])
-    add_field(shell_interface, item, 'workflow',                          ['workflows', 0, 'value'])
-    add_field(shell_interface, item, 'confidential',                      ['confidential'])
-    add_field(shell_interface, item, 'publisherName',                     ['publisher', 'names', 0, 'value'])
-    add_field(shell_interface, item, 'access_right',                      ['openAccessPermissions', 0, 'value'])
-    add_field(shell_interface, item, 'pages',                             ['info','pages'])                                                     
-    add_field(shell_interface, item, 'volume',                            ['info','volume'])
-    add_field(shell_interface, item, 'journalTitle',                      ['info', 'journalAssociation', 'title', 'value'])
-    add_field(shell_interface, item, 'journalNumber',                     ['info', 'journalNumber'])
+    # --- electronicVersions ---
 
-    # ELECTRONIC VERSIONS
+    # TEMP NOTE: check <additionalFiles>
+
     if 'electronicVersions' in item:
-        count = 0
-        for electronic_version in item['electronicVersions']:
-            if 'file'     in electronic_version:
-                if 'fileURL'  in electronic_version['file'] and 'fileName' in electronic_version['file']:
-                    if count == 0:
-                        shell_interface.data += '"versionFiles": ['
-                    count += 1
+        sxi.data['versionFiles'] = []
+        sub_data = {}
+        for i in item['electronicVersions']:
+            if 'file' not in i:
+                continue
+            elif 'fileURL' not in i['file'] or 'fileName' not in i['file']:
+                continue
 
-                    shell_interface.data += '{'
-                    add_field(shell_interface, electronic_version, 'fileName',                ['file', 'fileName'])
-                    add_field(shell_interface, electronic_version, 'fileModifBy',             ['creator'])
-                    add_field(shell_interface, electronic_version, 'fileModifDate',           ['created'])
-                    add_field(shell_interface, electronic_version, 'fileType',                ['file', 'mimeType'])
-                    add_field(shell_interface, electronic_version, 'fileSize',                ['file', 'size'])
-                    add_field(shell_interface, electronic_version, 'fileDigest',              ['file', 'digest'])
-                    add_field(shell_interface, electronic_version, 'fileDigestAlgorithm',     ['file', 'digestAlgorithm'])
+            sub_data = add_to_var(sub_data, i, 'fileName',            ['file', 'fileName'])
+            sub_data = add_to_var(sub_data, i, 'fileSize',            ['file', 'size'])
+            sub_data = add_to_var(sub_data, i, 'fileType',            ['file', 'mimeType'])
+            sub_data = add_to_var(sub_data, i, 'fileDigest',          ['file', 'digest'])
+            sub_data = add_to_var(sub_data, i, 'fileDigestAlgorithm', ['file', 'digestAlgorithm'])
+            sub_data = add_to_var(sub_data, i, 'fileModifBy',         ['creator'])
+            sub_data = add_to_var(sub_data, i, 'fileModifDate',       ['created'])
+            sub_data = add_to_var(sub_data, i, 'fileAccessType',      ['accessTypes', 0, 'value'])
+            sub_data = add_to_var(sub_data, i, 'fileVersionType',     ['versionType', 0, 'value'])
+            sub_data = add_to_var(sub_data, i, 'fileLicenseType',     ['licenseType', 0, 'value'])
 
-                    add_field(shell_interface, electronic_version, 'fileAccessType',          ['accessTypes', 0, 'value'])
-                    add_field(shell_interface, electronic_version, 'fileVersionType',         ['versionType', 0, 'value'])
-                    add_field(shell_interface, electronic_version, 'fileLicenseType',         ['licenseType', 0, 'value'])
+            sxi.data['versionFiles'].append(sub_data)
 
-                    shell_interface.data = shell_interface.data[:-2]
-                    shell_interface.data += '}, '                                  # end review
-
-                    # DOWNLOAD FILE FROM PURE
-                    file_name = electronic_version['file']['fileName']
-                    file_url  = electronic_version['file']['fileURL']
-                    response = shell_interface.requests.get(file_url, auth=HTTPBasicAuth(pure_username, pure_password))
-                    print(f'\tDownload file\t->\t{response} - ({file_name})')
-
-                    if response.status_code < 300:
-                        # Save file
-                        open(f'{shell_interface.dirpath}/data/temporary_files/{file_name}', 'wb').write(response.content)
-
-                        # ISSUE encountered when putting txt files
-                        file_extension = file_name.split('.')[file_name.count('.')]
-                        if file_extension == 'txt':
-                            print('\nATTENTION, the file extension is txt')
-                            print('Known issue -> jinja2.exceptions.UndefinedError: No first item, sequence was empty.\n')                        
-                        # Put file to RDM
-                        shell_interface.record_files.append(file_name)
-                    else:
-                        print(f'Error downloading file from pure ({file_url})')
-
-
-        if count > 0:
-            shell_interface.data = shell_interface.data[:-2]       
-            shell_interface.data += '], '
+            # Download file from Pure
+            get_file_from_pure(sxi, i)
 
 
     # --- personAssociations ---
     if 'personAssociations' in item:
-        shell_interface.data += '"contributors": ['
+        sxi.data['contributors'] = []
+        sub_data = {}
         for i in item['personAssociations']:
-            shell_interface.data += '{'
-            
-            if 'name' in i:
-                if 'firstName' in i['name'] and 'lastName' in i['name']:
-                    full_name = i['name']['lastName'] + ', '
-                    full_name += i['name']['firstName']
-                    shell_interface.data += f'"name": "{full_name}", '
-                else:   
-                    shell_interface.data += '"name": "Name not specified", '
-            elif 'authorCollaboratorName' in i:
-                shell_interface.data += '"name": "See authorCollaboratorName", '
-            else:   
-                shell_interface.data += '"name": "Name not specified", '
 
-            add_field(shell_interface, i, 'authorCollaboratorName',         ['authorCollaboration', 'names', 0, 'value'])    
-            add_field(shell_interface, i, 'personRole',                     ['personRoles', 0, 'value'])    
-            add_field(shell_interface, i, 'organisationalUnit',             ['organisationalUnits', 0, 'names', 0, 'value'])
-            add_field(shell_interface, i, 'link',                           ['person', 'link', 'href'])
-            add_field(shell_interface, i, 'link',                           ['externalPerson', 'link', 'href'])
-            add_field(shell_interface, i, 'type_p',                         ['externalPerson', 'types', 0, 'value'])
-            shell_interface.data = shell_interface.data[:-2]                          # removes last 2 characters
-            shell_interface.data += '}, '
+            first_name = get_value(i, ['name', 'firstName'])
+            last_name  = get_value(i, ['name', 'lastName'])
 
-        shell_interface.data = shell_interface.data[:-2]       
-        shell_interface.data += '], '
+            if first_name and last_name:
+                sub_data['name'] = f'{last_name}, {first_name}'
+
+            sub_data = add_to_var(sub_data, i, 'authorCollaboratorName',   ['authorCollaboration', 'names', 0, 'value'])   
+            sub_data = add_to_var(sub_data, i, 'personRole',               ['personRoles', 0, 'value'])    
+            sub_data = add_to_var(sub_data, i, 'organisationalUnit',       ['organisationalUnits', 0, 'names', 0, 'value'])
+            sub_data = add_to_var(sub_data, i, 'link',                     ['person', 'link', 'href'])
+            sub_data = add_to_var(sub_data, i, 'link',                     ['externalPerson', 'link', 'href'])
+            sub_data = add_to_var(sub_data, i, 'type_p',                   ['externalPerson', 'types', 0, 'value'])
+
+        sxi.data['contributors'].append(sub_data)
+
 
     # --- organisationalUnits ---
     if 'organisationalUnits' in item:
-        shell_interface.data += '"organisationalUnits": ['
+        sxi.data['organisationalUnits'] = []
+        sub_data = {}
         for i in item['organisationalUnits']:
-            shell_interface.data += '{'
-            add_field(shell_interface, i, 'name',                           ['names', 0, 'value'])
-            add_field(shell_interface, i, 'link',                           ['link', 'href'])
-            shell_interface.data = shell_interface.data[:-2]
-            shell_interface.data += '}, '
-            
-        shell_interface.data = shell_interface.data[:-2]
-        shell_interface.data += '], '
 
-    shell_interface.data = shell_interface.data[:-2]
-    shell_interface.data += '}'
+            sub_data = add_to_var(sub_data, i, 'name', ['names', 0, 'value'])
+            sub_data = add_to_var(sub_data, i, 'link', ['link', 'href'])
 
-    open(f'{shell_interface.dirpath}/data/temporary_files/lash_push.json', "w").write(shell_interface.data)
+        sxi.data['organisationalUnits'].append(sub_data)
 
-    return post_to_rdm(shell_interface)
+
+    sxi.data = sxi.json.dumps(sxi.data)
+    open(f'{sxi.dirpath}/data/temporary_files/lash_push.json', "w").write(sxi.data)
+
+    # Call post_to_rdm
+    return post_to_rdm(sxi)
+
 
 
 #   ---         ---         ---
-def add_field(shell_interface, item, rdm_field, path):
-    try:
-        child = item
-        cnt = 0
-        for i in path:
-            if i in child or i == 0:
-                cnt += 1
-                child = child[i]
-            else:
-                return
+def add_to_var(file_data, item, rdm_field, path):
+    """ Adds the field to file_data """
+    value = get_value(item, path)
+    if value:
+        file_data[rdm_field] = value
+    return file_data
 
-        # the full path is not available (missing field)
-        if len(path) != cnt:    return
-        
-        element = str(child)
 
-        # REPLACEMENTS
-        element = element.replace('\t', ' ')        # replace \t with ' '
-        element = element.replace('\\', '\\\\')     # adds \ before \
-        element = element.replace('"', '\\"')       # adds \ before "
-        element = element.replace('\n', '')         # removes new lines
+#   ---         ---         ---
+def add_field(sxi, item, rdm_field, path):
+    """ Adds the field to the data json """
+    value = get_value(item, path)
 
-        # Language translation to iso 369-3
-        if rdm_field == 'language':
-            if element == 'Undefined/Unknown':
-                return
-            else:
-                resp_json = shell_interface.json.load(open(shell_interface.dirpath + '/iso6393.json', 'r'))
-                for i in resp_json:
-                    if i['name'] == element:
-                        element = i['iso6393']
-                    else:
-                        # in case there is no match (e.g. spelling mistake in Pure) ignore field
-                        return
+    if rdm_field == 'language':
+        value = language_conversion(sxi, value)
+    elif rdm_field == 'access_right':
+        value = accessright_conversion(value)
 
-        # - RDM ACCESS RIGHT -
-        #   RDM access right (https://github.com/inveniosoftware/invenio-rdm-records/issues/37):
-        #   open        ->  metadata available              files available
-        #   embargoed   ->  metadata available              files available after embargo date      (unless user has permission)
-        #   restricted  ->  metadata available              files restricted                        (unless user has permission)
-        #   closed      ->  metadata restricted             files restricted                        (unless user has permission)
+    if value:
+        sxi.data[rdm_field] = value
+    return
 
-        # - PURE ACCESS RIGHT -
-        #   Open:           Full text accessible openly on Portal/Web service/Backend
-        #   Embargoed:      Full text accessible openly on Portal/Web service/Backend after end of embargo
-        #   Restricted:     Full text accessible in Backend and IP restricted
-        #   Closed:         Full text accessible in Backend only for related persons and related editors
-        #   Unknown:        Public access to file not known
 
-        if rdm_field == 'access_right':
-            if 'openAccessPermissions' in item:
+#   ---         ---         ---
+def accessright_conversion(pure_value):
 
-                # element = 'closed'               # default value
+    accessright_pure_to_rdm = {
+        'Open':             'open',
+        'Embargoed':        'embargoed',
+        'Restricted':       'restricted',
+        'Closed':           'closed',
+        'Unknown':          'closed',
+        'Indeterminate':    'closed',
+        'None':             'closed'
+        }
+    if pure_value in accessright_pure_to_rdm:
+        return accessright_pure_to_rdm[pure_value]
+    else:
+        print('\n--- new access_right ---> not in accessright_pure_to_rdmk array\n\n')
+        return False
 
-                pure_value = item['openAccessPermissions'][0]['value']
-                accessRight_pure_to_rdm = {
-                    'Open':             'open',
-                    'Embargoed':        'embargoed',
-                    'Restricted':       'restricted',
-                    'Closed':           'closed',
-                    'Unknown':          'closed',
-                    'Indeterminate':    'closed',
-                    'None':             'closed'
-                    }
-                if pure_value in accessRight_pure_to_rdm:
-                    element  = accessRight_pure_to_rdm[pure_value]
-                else:
-                    print('\n--- new access_right ---> not in accessRight_pure_to_rdm array\n\n')
-                    
-        # Adding field
-        shell_interface.data += f'"{rdm_field}": "{element}", '
-        return
 
-    except:
-        print('\n- Error in add_field method -\n')
+#   ---         ---         ---
+def language_conversion(sxi, pure_language):
+    if pure_language == 'Undefined/Unknown':
+        return False
+    
+    file_name = f'{sxi.dirpath}/iso6393.json'
+    resp_json = sxi.json.load(open(file_name, 'r'))
+    for i in resp_json:
+        if i['name'] == pure_language:
+            return i['iso6393']
+        else:
+            # in case there is no match (e.g. spelling mistake in Pure) ignore field
+            return False
+
+
+#   ---         ---         ---
+def get_value(item, path):
+    """ Goes through the json item to get the information of the specified path """
+
+    child = item
+    cnt = 0
+    # Iterates over the given path
+    for i in path:
+        # If the child (step in path) exists or is equal to zero
+        if i in child or i == 0:
+            # Counts if the iteration took place over every path element
+            cnt += 1
+            child = child[i]
+        else:
+            return False
+
+    # If the full path is not available (missing field)
+    if len(path) != cnt:
+        return False
+
+    element = str(child)
+
+    # REPLACEMENTS
+    element = element.replace('\t', ' ')        # replace \t with ' '
+    element = element.replace('\\', '\\\\')     # adds \ before \
+    element = element.replace('"', '\\"')       # adds \ before "
+    element = element.replace('\n', '')         # removes new lines
+
+    return element
+
+
 
 #   ---         ---         ---
 def post_to_rdm(shell_interface):
@@ -263,6 +254,7 @@ def post_to_rdm(shell_interface):
     shell_interface.time.sleep(push_dist_sec)                        # ~ 5000 records per hour
 
     data_utf8 = shell_interface.data.encode('utf-8')
+    
     headers = {
         'Content-Type': 'application/json',
     }
