@@ -4,7 +4,7 @@ from functions.rdm_push_by_uuid     import rdm_push_by_uuid
 from functions.general_functions    import add_spaces, report_records_summary, initialize_count_variables
 
 
-def get_pure_by_page(shell_interface, pag_begin, pag_end, pag_size):
+def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: int):
 
     for pag in range(pag_begin, pag_end):
 
@@ -13,7 +13,7 @@ def get_pure_by_page(shell_interface, pag_begin, pag_end, pag_size):
         initialize_count_variables(shell_interface)
 
         report  = '\n\n--   --   --\n'
-        report += f'\nPag {str(pag)} - pag_size {str(pag_size)}'
+        report += f'\nPag {str(pag)} - pag_size {str(pag_size)}\n'
 
         # add page to report file  
         file_records = f'{shell_interface.dirpath}/reports/{date_today}_records.log'

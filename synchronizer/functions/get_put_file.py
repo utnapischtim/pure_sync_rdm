@@ -1,7 +1,7 @@
 from setup                      import *
 from requests.auth              import HTTPBasicAuth
 
-def rdm_put_file(shell_interface, file_name, recid):
+def rdm_put_file(shell_interface, file_name: str, recid: str):
     
     file_path_name = f'{shell_interface.dirpath}/data/temporary_files/{file_name}'
 
@@ -43,7 +43,7 @@ def rdm_put_file(shell_interface, file_name, recid):
     # HAVING PURE ADMIN ACCOUNT REMOVE FILE FROM PURE
 
 
-def get_file_from_pure(shell_interface, electronic_version):
+def get_file_from_pure(shell_interface, electronic_version: str):
 
     file_name = electronic_version['file']['fileName']
     file_url  = electronic_version['file']['fileURL']

@@ -13,7 +13,7 @@ def pure_get_changes(shell_interface):
     # Get date of last update
     missing_updates = get_missing_updates(shell_interface)
     
-    # missing_updates = ['2020-03-03']      # TEMPORARY !!!!!!!!!!!!!!!
+    missing_updates = ['2020-03-04']      # TEMPORARY !!!!!!!!!!!!!!!
     
     if missing_updates == []:
         print('\nNothing to update.\n')
@@ -25,7 +25,7 @@ def pure_get_changes(shell_interface):
         #   ---     ---
 
 
-def pure_get_changes_by_date(shell_interface, changes_date):
+def pure_get_changes_by_date(shell_interface, changes_date: str):
 
     shell_interface.changes_date = changes_date
 
@@ -118,6 +118,7 @@ def pure_get_changes_by_date(shell_interface, changes_date):
             continue
 
         count += 1
+
         print(f"\n{count} - {item['changeType']} - {uuid}")
 
         if item['changeType'] == 'ADD' or item['changeType'] == 'CREATE':

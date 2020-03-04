@@ -54,7 +54,7 @@ def rdm_get_recid(shell_interface, uuid):
 
 
 
-def report_records_summary(shell_interface, process_type):
+def report_records_summary(shell_interface, process_type: str):
     
     current_datetime = shell_interface.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -104,7 +104,7 @@ def report_records_summary(shell_interface, process_type):
     open(file_summary, "a").write(report)
 
 
-def add_spaces(value):
+def add_spaces(value: int):
     max_length = 6                              # 6 is the maximum length of the given value
     spaces = max_length - len(str(value))
     return ''.ljust(spaces) + str(value)        # ljust -> adds spaces after a string

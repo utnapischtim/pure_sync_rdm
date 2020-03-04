@@ -4,7 +4,7 @@ from functions.general_functions    import rdm_get_recid
 from requests.auth                  import HTTPBasicAuth
 
 #   ---         ---         ---
-def rdm_push_record(shell_interface, uuid):
+def rdm_push_record(shell_interface, uuid: str):
     """ Method used to get from Pure record's metadata """
     
     headers = {
@@ -178,7 +178,7 @@ def create_invenio_data(shell_interface):
 
 
 #   ---         ---         ---
-def add_field(shell_interface, item, rdm_field, path):
+def add_field(shell_interface, item: list, rdm_field: str, path: list):
     try:
         child = item
         cnt = 0

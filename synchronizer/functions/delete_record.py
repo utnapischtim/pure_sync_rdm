@@ -61,7 +61,7 @@ def delete_from_list(shell_interface):
 
 
 #   DELETE_RECORD
-def delete_record(shell_interface, recid):
+def delete_record(shell_interface, recid: str):
 
     #   REQUEST
     headers = {

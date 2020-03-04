@@ -1,3 +1,20 @@
+""" Pure synchronizer
+
+Usage:
+    shell_interface.py changes
+    shell_interface.py pages
+    shell_interface.py shorten_logs
+    shell_interface.py delete_from_list
+    shell_interface.py push_from_list
+    shell_interface.py duplicates
+    shell_interface.py delete_all
+
+Options:
+    -h --help     Show this screen.
+    --version     Show version.
+
+"""
+from docopt                         import docopt
 import requests
 import json
 import os
@@ -12,67 +29,11 @@ from functions.rdm_duplicates       import rdm_duplicates
 from functions.delete_all_records   import delete_all_records
 from functions.rdm_push_by_uuid     import rdm_push_by_uuid
 from functions.delete_record        import delete_record, delete_from_list
+
+
+class shell_interface:
     
-class MyPrompt(Cmd):
-
-    prompt = 'pure_rdm_sync > '
-    intro = "\nWelcome! Type ? to list commands\n"
-    
-    def do_exit(self, inp):
-        print("\nBye\n")
-        return True
-
-    def help_exit(self):
-        print('Type "exit"')
-
-    #   ---     ---     ---
-    def do_changes(self, inp):
-        """\nHelp ->\tGets from Pure API endpoint 'changes' all the records that have been created, modified and deleted.
-        Next updates accordingly RDM records\n"""
-        self.get_props()
-        pure_get_changes(self)
-
-    #   ---     ---     ---
-    def do_pages(self, inp):
-        """\nHelp ->\tPush to RDM records from Pure by page \n"""
-        self.get_props()
-        pag_begin = 500
-        pag_end =   502
-        pag_size =  100
-        get_pure_by_page(self, pag_begin, pag_end, pag_size)
-    
-    #   ---     ---     ---
-    def do_shorten_logs(self, inp):
-        """\nHelp ->\tReduce log files length or delete them\n"""
-        self.get_props()
-        shorten_log_files(self)
-
-    #   ---     ---     ---
-    def do_duplicates(self, inp):
-        """\nHelp ->\tFind and delete RDM duplicate records\n"""
-        self.get_props()
-        rdm_duplicates(self)
-
-    #   ---     ---     ---
-    def do_delete_all(self, inp):
-        """\nHelp -> \t\n"""
-        self.get_props()
-        delete_all_records(self)
-
-    #   TEMPORARY .....................
-    def do_delete_from_list(self, inp):
-        """\nHelp ->\tDelete RDM records by recid (to_delete.log)\n"""
-        self.get_props()
-        delete_from_list(self)
-
-    #   TEMPORARY .....................
-    def do_uuid_push_from_list(self, inp):
-        """\nHelp -> \tPush to RDM all uuids that are in to_transfer.log\n"""
-        self.get_props()
-        rdm_push_by_uuid(self)                   # transfer_type -> '' / 'full_comp' / 'update' / 'changes'
-
-    #   ---     ---     ---
-    def get_props(self):
+    def __init__(self):
         self.dirpath = os.path.dirname(os.path.abspath(__file__))
         self.json = json
         self.requests = requests
@@ -82,8 +43,61 @@ class MyPrompt(Cmd):
         self.datetime = datetime
         self.timedelta = timedelta
 
-    # to exit
-    do_EOF = do_exit            # ctrl + d 
+
+    def changes(self):
+        """ Gets from Pure API endpoint 'changes' all the records that have been created, modified and deleted.
+        Next updates accordingly RDM records """
+        pure_get_changes(self)
+
+
+    def pages(self):
+        """ Push to RDM records from Pure by page """
+        pag_begin = 1
+        pag_end =   3
+        pag_size =  50
+        get_pure_by_page(self, pag_begin, pag_end, pag_size)
+
+
+    def shorten_logs(self):
+        """ Reduce log files length or delete them """
+        shorten_log_files(self)
+
+
+    def delete_from_list(self):
+        """ Delete RDM records by recid (to_delete.log) """
+        delete_from_list(self)
+
+
+    def push_from_list(self):
+        """ Push to RDM all uuids that are in to_transfer.log """
+        rdm_push_by_uuid(self)
+
+
+    def duplicates(self):
+        """ Find and delete RDM duplicate records """
+        rdm_duplicates(self)
+
+
+    def delete_all(self):
+        delete_all_records(self)
+
+
 
 if __name__ == '__main__':
-    MyPrompt().cmdloop()
+    arguments = docopt(__doc__, version='Pure synchronizer 1.0')
+    # print(arguments)
+    docopt_instance = shell_interface()
+
+if arguments['changes'] == True:                docopt_instance.changes()
+elif arguments['pages'] == True:                docopt_instance.pages()
+elif arguments['shorten_logs'] == True:         docopt_instance.shorten_logs()
+elif arguments['delete_from_list'] == True:     docopt_instance.delete_from_list()
+elif arguments['push_from_list'] == True:       docopt_instance.push_from_list()
+elif arguments['duplicates'] == True:           docopt_instance.duplicates()
+elif arguments['delete_all'] == True:           docopt_instance.delete_all()
+
+
+
+
+
+
