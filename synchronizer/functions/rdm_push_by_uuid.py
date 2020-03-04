@@ -7,22 +7,18 @@ def rdm_push_by_uuid(shell_interface):
     initialize_count_variables(shell_interface)
 
     # read to_transfer.log
-    retrans_data = open(shell_interface.dirpath + '/data/to_transfer.txt', 'r')
+    file_name = f'{shell_interface.dirpath}/data/to_transfer.txt'
+    uuids = open(file_name, 'r').readlines()
 
-    uuid_row = retrans_data.readline()
-    
-    while uuid_row:
-        
-        uuid = uuid_row.strip()
+    if len(uuids) == 0:
+        print('\nThere is nothing to push.\n')
+        return
+
+    for uuid in uuids:
         if (len(uuid) != 36):
             print('Invalid uuid lenght.\n')
-            uuid_row = retrans_data.readline()
             continue
         
-        #   ---     ---
         rdm_push_record(shell_interface, uuid)
-        #   ---     ---
-        
-        uuid_row = retrans_data.readline()
 
     return

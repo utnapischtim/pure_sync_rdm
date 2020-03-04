@@ -1,11 +1,12 @@
 from setup                              import *
-from functions.general_functions        import add_spaces, rdm_get_recid, report_records_summary, initialize_count_variables
+from functions.general_functions        import add_spaces, rdm_get_recid, initialize_count_variables
 from functions.delete_record            import delete_record, delete_from_list
 from functions.rdm_push_by_uuid         import rdm_push_by_uuid
 from functions.rdm_push_record          import rdm_push_record
 
 # To execute preferably between 22:30 and 23:30
 
+#       ---     ---     ---
 def pure_get_changes(shell_interface):
     """ Gets from Pure API all changes that took place in a certain date
         and modifies accordingly the RDM repository """
@@ -25,9 +26,10 @@ def pure_get_changes(shell_interface):
         #   ---     ---
 
 
+#       ---     ---     ---
 def pure_get_changes_by_date(shell_interface, changes_date: str):
 
-    shell_interface.changes_date = changes_date
+    current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
 
     headers = {
         'Accept': 'application/json',
@@ -60,14 +62,13 @@ def pure_get_changes_by_date(shell_interface, changes_date: str):
     count_update             = 0
     count_create             = 0
     count_delete             = 0
-    count_incomplete_info    = 0
+    count_incomplete         = 0
     count_duplicated         = 0
     count_not_ResearchOutput = 0
 
     report_records  = '\n\n--   --   --\n'
     report_records +=  f'\n- Changes date: {changes_date} -\n'
-    report_records += f'Pure get CHANGES: {response}\n'
-    report_records += f'Number of items in response: {resp_json["count"]}\n'
+    report_records += f'Number of items in response: {resp_json["count"]}\n\n'
     print(report_records)
 
     # append to yyyy-mm-dd_records.log
@@ -78,7 +79,7 @@ def pure_get_changes_by_date(shell_interface, changes_date: str):
     for item in resp_json['items']:
 
         if 'changeType' not in item or 'uuid' not in item:
-            count_incomplete_info += 1
+            count_incomplete += 1
             continue
         elif item['familySystemName'] != 'ResearchOutput':
             count_not_ResearchOutput += 1
@@ -134,34 +135,69 @@ def pure_get_changes_by_date(shell_interface, changes_date: str):
         rdm_push_record(shell_interface, uuid)
         #   ---       ---       ---
 
-    file_summary = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_summary.log'
-    summary_date = f'\n\n\nChanges date: {changes_date}'
-    open(file_summary, "a").write(summary_date)
+    # If there are no changes
+    if shell_interface.count_total == 0:
+        nothing_to_transfer(shell_interface, changes_date)
+        return
 
-    #    ---     ---
-    report_records_summary(shell_interface, 'Changes')
-    #    ---     ---
+    # Calculates if the process was successful
+    percent_success = shell_interface.count_successful_push_metadata * 100 / shell_interface.count_total
+    if percent_success >= upload_percent_accept:
+        # SUCCESSFUL_CHANGES.TXT
+        file_records = f'{shell_interface.dirpath}/data/successful_changes.txt'
+        data         = f'{changes_date}\n'
+        open(file_records, "a").write(data)
 
-    report = '\nPure changes:\n'
-    report += f'Update:     {add_spaces(count_update)} - '
-    report += f'Create:     {add_spaces(count_create)} - '
-    report += f'Delete:     {add_spaces(count_delete)}\n'
-    report += f'Incomplete: {add_spaces(count_incomplete_info)} - '     # e.g. when the uuid is not specified
-    report += f'Duplicated: {add_spaces(count_duplicated)} - '          # for istance when a record has been modified twice in a day
-    report += f'Irrelevant: {add_spaces(count_not_ResearchOutput)}'     # when familySystemName is not ResearchOutput
+    metadata_succs              = add_spaces(shell_interface.count_successful_push_metadata)
+    metadata_error              = add_spaces(shell_interface.count_errors_push_metadata)
+    file_succs                  = add_spaces(shell_interface.count_successful_push_file)
+    file_error                  = add_spaces(shell_interface.count_errors_put_file)
+    delete_succs                = add_spaces(shell_interface.count_successful_record_delete)
+    delete_error                = add_spaces(shell_interface.count_errors_record_delete)
+    count_update                = add_spaces(count_update)
+    count_create                = add_spaces(count_create)
+    count_delete                = add_spaces(count_delete)
+    count_incomplete            = add_spaces(count_incomplete)          # Incomplete:  when the uuid or changeType are not specified
+    count_duplicated            = add_spaces(count_duplicated)          # Duplicated:  e.g. when a record has been modified twice in a day
+    count_not_ResearchOutput    = add_spaces(count_not_ResearchOutput)  # Irrelevant:  when familySystemName is not ResearchOutput
 
-    open(file_summary, "a").write(report)
-
-    file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
-    open(file_records, "a").write(report)
-
+    report = f"""
+Metadata         ->  successful: {metadata_succs} - errors:   {metadata_error}
+File             ->  successful: {file_succs} - errors:   {file_error}
+Delete           ->  successful: {delete_succs} - errors:   {delete_error}
+Pure changes:
+Update:     {count_update} - Create:     {count_create} - Delete:    {count_delete}
+Incomplete: {count_incomplete} - Duplicated: {count_duplicated} - Irrelevant:{count_not_ResearchOutput}
+    """
     print(report)
 
+    # RECORDS.LOG
+    file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
+    open(file_records, "a").write(report)
+    
+    # CHANGES.LOG
+    file_changes = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_changes.log'
+    changes_intro = f'\n\n--   --   --\n\n{current_time}\nChanges date: {changes_date}\n'
+    open(file_changes, "a").write(changes_intro + report)
 
+
+
+#       ---     ---     ---
+def nothing_to_transfer(shell_interface, changes_date):
+
+    current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
+    report = f'\n\n--   --   --\n\n{current_time}\nChanges date: {changes_date}\n\nNothing to transfer.\n\n'
+
+    file_changes = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_changes.log'
+    open(file_changes, "a").write(report)
+    return
+
+
+#       ---     ---     ---
 def get_missing_updates(shell_interface):
     """ Search for missing updates in the last 7 days """
 
-    file_name = '/home/bootcamp/src/pure_sync_rdm/synchronizer/data/successful_updates.txt'
+    file_name = '/home/bootcamp/src/pure_sync_rdm/synchronizer/data/successful_changes.txt'
 
     missing_updates = []
     count = 0

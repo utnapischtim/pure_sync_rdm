@@ -2,10 +2,7 @@ from functions.delete_record import delete_record
 
 def rdm_duplicates(shell_interface):
 
-    print('---   ---   ---\nFIND RDM DUPLICATES\n\nDuplicates:\n')
-
-    # Read Pure
-    file_name = shell_interface.dirpath + '/data/all_rdm_records.txt'
+    file_name = f'{shell_interface.dirpath}/data/all_rdm_records.txt'
     all_records = open(file_name, 'r').readlines()                       
 
     temp_arr = []
@@ -24,7 +21,10 @@ def rdm_duplicates(shell_interface):
 
         temp_arr.append(uuid)
 
-    print(f'\nTotal items: {len(all_records)}\nDeleted: {count_deleted}\n')
+    if count_deleted == 0:
+        print('\nThere are no duplicate records to delete\n')
+
+    print(f'Total items: {len(all_records)}\nDeleted: {count_deleted}\n')
 
         
         

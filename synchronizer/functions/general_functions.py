@@ -54,56 +54,6 @@ def rdm_get_recid(shell_interface, uuid):
 
 
 
-def report_records_summary(shell_interface, process_type: str):
-    
-    current_datetime = shell_interface.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-    if shell_interface.count_total == 0:
-        report =  f'{process_type} - success\n'
-        report += f"{current_datetime}\n"
-        report += "Nothing to transmit\n"
-    else:
-        percent_success = shell_interface.count_successful_push_metadata * 100 / shell_interface.count_total
-
-        if percent_success >= upload_percent_accept:
-            report = f"\n{process_type} - success\n"
-
-            # SUCCESSFUL_UPDATES.TXT
-            if hasattr(shell_interface, 'changes_date'):
-                file_records     = f'{shell_interface.dirpath}/data/successful_updates.txt'
-                file_records_str = f'{shell_interface.changes_date}\n'
-                open(file_records, "a").write(file_records_str)
-        else:
-            report = f"\n{process_type} - error\n"
-
-        metadata_succs  = shell_interface.count_successful_push_metadata
-        metadata_error  = shell_interface.count_errors_push_metadata
-        file_succs      = shell_interface.count_successful_push_file
-        file_error      = shell_interface.count_errors_put_file
-
-        report += f"{current_datetime}\n"
-        report += f"Metadata       ->  successful: {add_spaces(metadata_succs)} - "        # Metadata
-        report += f"errors: {metadata_error}\n"
-        report += f"File           ->  successful: {add_spaces(file_succs)} - "            # File
-        report += f"errors: {file_error}"
-        
-        if process_type != 'Pages':
-            delete_succs = shell_interface.count_successful_record_delete
-            delete_error = shell_interface.count_errors_record_delete
-            report += f"\nDelete         ->  successful: {add_spaces(delete_succs)} - "    # Delete
-            report += f"errors: {delete_error}"
-
-    print(report)
-
-    # RECORDS.LOG
-    file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
-    open(file_records, "a").write(report)
-
-    # SUMMARY.LOG
-    file_summary = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_summary.log'
-    open(file_summary, "a").write(report)
-
-
 def add_spaces(value: int):
     max_length = 6                              # 6 is the maximum length of the given value
     spaces = max_length - len(str(value))

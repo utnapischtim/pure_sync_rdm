@@ -1,7 +1,7 @@
 from setup                          import *
 from functions.rdm_push_record      import create_invenio_data
 from functions.rdm_push_by_uuid     import rdm_push_by_uuid
-from functions.general_functions    import add_spaces, report_records_summary, initialize_count_variables
+from functions.general_functions    import add_spaces, initialize_count_variables
 
 
 def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: int):
@@ -54,14 +54,10 @@ def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: in
         file_success      = add_spaces(shell_interface.count_successful_push_file)
         file_error        = add_spaces(shell_interface.count_errors_put_file)
 
-        report = f'\nPage {add_spaces(pag)} - Page size {add_spaces(pag_size)} - '
+        current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
+
+        report = f'\n{current_time} - Page {add_spaces(pag)} - Page size {add_spaces(pag_size)} - '
         report += f'Metadata: success {metadata_success}, error {metadata_error} -\t'
         report += f'Files: success {file_success}, error {file_error}'
         
         open(file_pages, "a").write(report)
-
-        file_summary = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_summary.log'
-        open(file_summary, "a").write(f'\n\n\nPage: {pag} - Page size: {pag_size}')
-
-        # summary.log and records.log
-        report_records_summary(shell_interface, 'Pages')

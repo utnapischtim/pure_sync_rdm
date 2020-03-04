@@ -5,16 +5,19 @@ def delete_from_list(shell_interface):
     # NOTE: the user ACCOUNT related to the used TOKEN must be ADMIN
     # pipenv run invenio roles add admin@invenio.org admin
     
-    print('\n---   ---   ---\nDELETE RECORDS\n')
     count_success = 0
     count_total = 0
     shell_interface.count_errors_record_delete        = 0
     shell_interface.count_successful_record_delete    = 0
 
     file_name = shell_interface.dirpath + '/data/to_delete.txt'
-    records_to_del = open(file_name, 'r').readlines()
+    recids = open(file_name, 'r').readlines()
 
-    for recid in records_to_del:
+    if len(recids) == 0:
+        print('\nThere is nothing to delete.\n')
+        return
+
+    for recid in recids:
 
         recid = recid.strip('\n')
 
@@ -37,26 +40,6 @@ def delete_from_list(shell_interface):
             shell_interface.count_successful_record_delete += 1
         else:
             shell_interface.count_errors_record_delete += 1
-
-    current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
-    report = f"\n{current_time}\nDelete - {shell_interface.date.today()} - "
-
-    if count_total == 0:
-        report += "success\nNothing to trasmit\n"
-    else:
-        percent_success = count_success * 100 / count_total
-
-        if percent_success >= upload_percent_accept:
-            report += "success\n"
-        else:
-            report += "error\n"
-
-    report += f"Tot records: {count_total} - Success transfer: {count_success}\n"
-
-    date_today = str(shell_interface.date.today())
-    open(f'{shell_interface.dirpath}/reports/{date_today}_summary.log', "a").write(report)
-    
-    print(report)
 
 
 
