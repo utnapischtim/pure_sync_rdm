@@ -14,7 +14,7 @@ def pure_get_changes(shell_interface):
     # Get date of last update
     missing_updates = get_missing_updates(shell_interface)
     
-    missing_updates = ['2020-03-04']      # TEMPORARY !!!!!!!!!!!!!!!
+    missing_updates = ['2020-03-05']      # TEMPORARY !!!!!!!!!!!!!!!
     
     if missing_updates == []:
         print('\nNothing to update.\n')
@@ -30,6 +30,8 @@ def pure_get_changes(shell_interface):
 def pure_get_changes_by_date(shell_interface, changes_date: str):
 
     current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
+    shell_interface.count_http_responses = {}
+    
     file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
     file_changes = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_changes.log'
 
@@ -46,12 +48,12 @@ def pure_get_changes_by_date(shell_interface, changes_date: str):
     response = shell_interface.requests.get(url, headers=headers, params=params)
     # ---- --- -------
 
-    if response.status_code >= 300:
-        print(response.content)
-
     # Write data into resp_pure_changes
     file_name = f'{shell_interface.dirpath}/data/temporary_files/resp_pure_changes.json'
     open(file_name, 'wb').write(response.content)
+
+    if response.status_code >= 300:
+        print(response.content)
 
     # Load response json
     resp_json = shell_interface.json.loads(response.content)
@@ -77,25 +79,23 @@ Changes date: {changes_date}
 Number of items in response: {resp_json["count"]}
 
 """
-    print(report_intro)
-
     # append to yyyy-mm-dd_records.log
     open(file_records, "a").write(report_intro)
+    print(report_intro)
 
     #   ---     DELETE      ---
     for item in resp_json['items']:
 
         if 'changeType' not in item or 'uuid' not in item:
-            count_incomplete += 1
             continue
         elif item['familySystemName'] != 'ResearchOutput':
-            count_not_ResearchOutput += 1
             continue
         elif item['changeType'] != 'DELETE':
             continue
 
         count_delete += 1
         uuid = item['uuid']
+
         print(f"\n{count_delete} - {item['changeType']} - {uuid}")
 
         duplicated_uuid.append(uuid)         
@@ -108,23 +108,24 @@ Number of items in response: {resp_json["count"]}
         else:
             shell_interface.count_successful_record_delete += 1   # the record is not in RDM
 
-
     #   ---     CREATE / ADD / UPDATE      ---
     count = 0
     for item in resp_json['items']:
         
-        uuid = item['uuid']
-
         if 'changeType' not in item or 'uuid' not in item:
+            count_incomplete += 1
             continue
         elif item['familySystemName'] != 'ResearchOutput':
+            count_not_ResearchOutput += 1
             continue
         elif item['changeType'] == 'DELETE':
             continue
-        elif uuid in duplicated_uuid:
+
+        uuid = item['uuid']
+        if uuid in duplicated_uuid:
             count_duplicated += 1
             continue
-
+        
         count += 1
 
         print(f"\n{count} - {item['changeType']} - {uuid}")
@@ -151,9 +152,9 @@ Number of items in response: {resp_json["count"]}
     percent_success = shell_interface.count_successful_push_metadata * 100 / shell_interface.count_total
     if percent_success >= upload_percent_accept:
         # SUCCESSFUL_CHANGES.TXT
-        file_records = f'{shell_interface.dirpath}/data/successful_changes.txt'
+        file_success = f'{shell_interface.dirpath}/data/successful_changes.txt'
         data         = f'{changes_date}\n'
-        open(file_records, "a").write(data)
+        open(file_success, "a").write(data)
 
     metadata_succs              = add_spaces(shell_interface.count_successful_push_metadata)
     metadata_error              = add_spaces(shell_interface.count_errors_push_metadata)
@@ -184,7 +185,7 @@ Incomplete: {count_incomplete} - Duplicated: {count_duplicated} - Irrelevant:{co
     # CHANGES.LOG
     open(file_changes, "a").write(report_intro + report)
     return
-
+    
 
 #       ---     ---     ---
 def nothing_to_transfer(shell_interface, report_intro, file_changes):

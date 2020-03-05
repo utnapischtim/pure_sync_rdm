@@ -124,11 +124,18 @@ def create_invenio_data(shell_interface):
             elif first_name and not last_name:
                 sub_data['name'] = f'(last name not specified), {first_name}'
 
+            # ORCID
+            person_uuid = get_value(i, ['person', 'uuid'])
+            if person_uuid:
+                sub_data['uuid'] = person_uuid
+                orcid = get_orcid(shell_interface, person_uuid)
+                if orcid:
+                    sub_data['orcid'] = orcid
+
+            sub_data = add_to_var(sub_data, i, 'externalId',               ['person', 'externalId'])
             sub_data = add_to_var(sub_data, i, 'authorCollaboratorName',   ['authorCollaboration', 'names', 0, 'value'])   
             sub_data = add_to_var(sub_data, i, 'personRole',               ['personRoles', 0, 'value'])    
             sub_data = add_to_var(sub_data, i, 'organisationalUnit',       ['organisationalUnits', 0, 'names', 0, 'value'])
-            sub_data = add_to_var(sub_data, i, 'link',                     ['person', 'link', 'href'])
-            sub_data = add_to_var(sub_data, i, 'link',                     ['externalPerson', 'link', 'href'])
             sub_data = add_to_var(sub_data, i, 'type_p',                   ['externalPerson', 'types', 0, 'value'])
 
         shell_interface.data['contributors'].append(sub_data)
@@ -262,16 +269,20 @@ def post_to_rdm(shell_interface):
     url = f'{rdm_api_url_records}api/records/'
     response = shell_interface.requests.post(url, headers=headers, params=params, data=data_utf8, verify=False)
 
+    # Count http responses
+    if response.status_code not in shell_interface.count_http_responses:
+        shell_interface.count_http_responses[response.status_code] = 0
+    shell_interface.count_http_responses[response.status_code] += 1
+
     uuid = shell_interface.item["uuid"]
 
-    # RESPONSE CHECK
-    # print(f'{shell_interface.count_total} - RDM post metadata\t->\t{response} - {uuid}')
     print(f'\tPost metadata\t->\t{response} - {uuid}')
     
     current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
 
     report = f'{current_time} - metadata_to_rdm - {str(response)} - {uuid} - {shell_interface.item["title"]}\n'
 
+    # RESPONSE CHECK
     if response.status_code >= 300:
 
         shell_interface.count_errors_push_metadata += 1
@@ -285,7 +296,6 @@ def post_to_rdm(shell_interface):
 
         # Add record to to_transfer.txt to be re pushed afterwards
         open(f'{shell_interface.dirpath}/data/to_transfer.txt', "a").write(f'{uuid}\n')
-
 
     file_name = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
     open(file_name, "a").write(report)
@@ -333,3 +343,29 @@ def post_to_rdm(shell_interface):
                     f.write(line)
         return True
 
+
+
+#   ---         ---         ---
+def get_orcid(shell_interface, person_uuid):
+    headers = {
+    'Accept': 'application/json',
+    }
+    params = (
+        ('apiKey', pure_api_key),
+    )
+    response = shell_interface.requests.get(f'{pure_rest_api_url}/persons/{person_uuid}', headers=headers, params=params)
+    open(f'{shell_interface.dirpath}/data/temporary_files/resp_pure_persons.json', 'wb').write(response.content)
+    
+    print(f'\tPure Get Orcid\t->\t{response}')
+    
+    if response.status_code >= 300:
+        print(response.content)
+
+    resp_json = shell_interface.json.loads(response.content)
+
+    if 'orcid' in resp_json:
+        orcid = resp_json['orcid']
+        print(f'\t\t!!!!! orcid: {orcid} !!!!!!!!!!')
+        return resp_json['orcid']
+
+    return False

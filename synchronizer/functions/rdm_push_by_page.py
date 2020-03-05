@@ -10,11 +10,12 @@ def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: in
 
         date_today = shell_interface.date.today()
         current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
+        shell_interface.count_http_responses = {}
 
         initialize_count_variables(shell_interface)
 
         report  = '\n\n--   --   --\n'
-        report += f'\nPag {str(pag)} - pag_size {str(pag_size)}\n'
+        report += f'\nPag {str(pag)} - pag_size {str(pag_size)}\n\n'
 
         # add page to report file  
         file_records = f'{shell_interface.dirpath}/reports/{date_today}_records.log'
@@ -53,22 +54,31 @@ def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: in
             create_invenio_data(shell_interface)          
         #       ---         ---         ---
 
+        http_response_str = 'HTTP responses: '
+        for key in shell_interface.count_http_responses:
+            http_response_str += f'{key}: {shell_interface.count_http_responses[key]}, '
+        http_response_str = http_response_str[:-2]
+
         metadata_success  = add_spaces(shell_interface.count_successful_push_metadata)
         metadata_error    = add_spaces(shell_interface.count_errors_push_metadata)
         file_success      = add_spaces(shell_interface.count_successful_push_file)
         file_error        = add_spaces(shell_interface.count_errors_put_file)
-        pag               = add_spaces(pag)
-        pag_size          = add_spaces(pag_size)
+        pag_log           = add_spaces(pag)
+        pag_size_log      = add_spaces(pag_size)
 
         # Summary added to pages.log
         report = f"""
-{current_time} - Page {pag} - Page size {pag_size} - Metadata: success {metadata_success}, error {metadata_error} -\tFiles: success {file_success}, error {file_error}"""
+{current_time} - Page {pag_log} - Page size {pag_size_log} - METADATA: success {metadata_success}, error {metadata_error} - FILES: success {file_success}, error {file_error} - {http_response_str}"""
         file_pages = f'{shell_interface.dirpath}/reports/{date_today}_pages.log'
         open(file_pages, "a").write(report)
 
         # Summary added to records.log
         report = f"""
-Metadata: success {metadata_success}, error {metadata_error}
-Files:    success {file_success}, error {file_error}"""
+Metadata:       success {metadata_success}, error {metadata_error}
+Files:          success {file_success}, error {file_error}
+
+{http_response_str}"""
         file_records = f'{shell_interface.dirpath}/reports/{date_today}_records.log'
         open(file_records, "a").write(report)
+
+        print(report + '\n')

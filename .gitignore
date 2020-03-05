@@ -3,6 +3,7 @@ synchronizer/functions/other/
 synchronizer/reports/
 synchronizer/data_setup/
 synchronizer/data/
+synchronizer/test.py
 
 
 # Byte-compiled / optimized / DLL files

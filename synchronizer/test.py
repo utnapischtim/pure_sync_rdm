@@ -1,35 +1,25 @@
-""" Pure synchronizer
-
-Usage:
-    shell_interface.py changes
-    shell_interface.py pages
-    shell_interface.py shorten_logs
-    shell_interface.py delete_from_list
-    shell_interface.py push_from_list
-    shell_interface.py duplicates
-    shell_interface.py delete_all
-
-Options:
-    -h --help     Show this screen.
-    --version     Show version.
-
-"""
-from docopt                         import docopt
 import requests
 import json
-import os
 import time
-from cmd                            import Cmd
-from datetime                       import date, datetime, timedelta
-from functions.rdm_push_by_page     import get_pure_by_page
+from setup      import *
 
-if __name__ == '__main__':
-    arguments = docopt(__doc__, version='Pure synchronizer 1.0')
-    print(arguments)
+# c0a3f804-fb58-4bbb-9ee4-0a3f7276c0c8 martin ebner
+uuid = 'c0a3f804-fb58-4bbb-9ee4-0a3f7276c0c8'
 
-if arguments['pages'] == True:
-    print('running pages')
+import requests
 
+headers = {
+    'Accept': 'application/json',
+}
+params = (
+    ('apiKey', pure_api_key),
+)
+response = requests.get(f'{pure_rest_api_url}/persons/{uuid}', headers=headers, params=params)
 
-class shell_interface ():
-    
+open(f'{dirpath}/data/temporary_files/resp_pure_persons.json', 'wb').write(response.content)
+resp_json = json.loads(response.content)
+
+print(response)
+
+print(resp_json['orcid'])
+
