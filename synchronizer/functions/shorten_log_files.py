@@ -3,7 +3,7 @@ from setup import *
 def shorten_log_files(shell_interface):
 
     # DELETE OLD REPORTS
-    print('\n---   ---   ---\nDELETE OLD REPORTS\n')
+    print()
     folder = '/reports/'
 
     # Get file names from folder
@@ -25,25 +25,28 @@ def shorten_log_files(shell_interface):
             print(f'{file_name}{tabs}Deleted')
         else:
             print(f'{file_name}{tabs}Ok')
+    print()
 
-    print('\n')
-
-
-    # SHORTEN ALL_CHANGES.TXT
-    log_lines = 30
-    file_name = f'{shell_interface.dirpath}/data/all_changes.txt'
+    # SHORTEN SUCCESSFUL_CHANGES.TXT
+    file_name = f'{shell_interface.dirpath}/data/successful_changes.txt'
     file_data = open(file_name)
 
     num_lines = sum(1 for line in file_data)
 
-    if num_lines > log_lines:
+    if num_lines > lines_successful_changes:
         file_data = open(file_name)
         lines = file_data.read().splitlines()
         data = ''
 
-        for i in range (log_lines, 0, -1):
+        for i in range (lines_successful_changes, 0, -1):
             last_line = lines[-i]
-            data += last_line + '\n'
+            data += f'{last_line}\n'
 
         open(file_name, 'w').close()
         open(file_name, "w").write(data)
+
+        print(f'successful_changes.txt\t\tReduced from {num_lines} to {lines_successful_changes} lines')
+    else:
+        print(f'successful_changes.txt\t\tOk')
+
+    print('\n')

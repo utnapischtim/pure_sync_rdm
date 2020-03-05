@@ -30,6 +30,8 @@ def pure_get_changes(shell_interface):
 def pure_get_changes_by_date(shell_interface, changes_date: str):
 
     current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
+    file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
+    file_changes = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_changes.log'
 
     headers = {
         'Accept': 'application/json',
@@ -66,14 +68,19 @@ def pure_get_changes_by_date(shell_interface, changes_date: str):
     count_duplicated         = 0
     count_not_ResearchOutput = 0
 
-    report_records  = '\n\n--   --   --\n'
-    report_records +=  f'\n- Changes date: {changes_date} -\n'
-    report_records += f'Number of items in response: {resp_json["count"]}\n\n'
-    print(report_records)
+    report_intro = f"""
+
+--   --   --
+
+{current_time}
+Changes date: {changes_date}
+Number of items in response: {resp_json["count"]}
+
+"""
+    print(report_intro)
 
     # append to yyyy-mm-dd_records.log
-    file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
-    open(file_records, "a").write(report_records)
+    open(file_records, "a").write(report_intro)
 
     #   ---     DELETE      ---
     for item in resp_json['items']:
@@ -137,7 +144,7 @@ def pure_get_changes_by_date(shell_interface, changes_date: str):
 
     # If there are no changes
     if shell_interface.count_total == 0:
-        nothing_to_transfer(shell_interface, changes_date)
+        nothing_to_transfer(shell_interface, report_intro, file_changes)
         return
 
     # Calculates if the process was successful
@@ -172,24 +179,17 @@ Incomplete: {count_incomplete} - Duplicated: {count_duplicated} - Irrelevant:{co
     print(report)
 
     # RECORDS.LOG
-    file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
     open(file_records, "a").write(report)
     
     # CHANGES.LOG
-    file_changes = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_changes.log'
-    changes_intro = f'\n\n--   --   --\n\n{current_time}\nChanges date: {changes_date}\n'
-    open(file_changes, "a").write(changes_intro + report)
-
+    open(file_changes, "a").write(report_intro + report)
+    return
 
 
 #       ---     ---     ---
-def nothing_to_transfer(shell_interface, changes_date):
+def nothing_to_transfer(shell_interface, report_intro, file_changes):
 
-    current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
-    report = f'\n\n--   --   --\n\n{current_time}\nChanges date: {changes_date}\n\nNothing to transfer.\n\n'
-
-    file_changes = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_changes.log'
-    open(file_changes, "a").write(report)
+    open(file_changes, "a").write(report_intro + 'Nothing to transfer.\n\n')
     return
 
 

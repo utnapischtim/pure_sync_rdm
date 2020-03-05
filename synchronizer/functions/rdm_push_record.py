@@ -82,9 +82,6 @@ def create_invenio_data(shell_interface):
 
     
     # --- electronicVersions ---
-
-    # TEMP NOTE: check <additionalFiles>
-
     if 'electronicVersions' in item:
         shell_interface.data['versionFiles'] = []
         sub_data = {}
@@ -152,9 +149,8 @@ def create_invenio_data(shell_interface):
     shell_interface.data = shell_interface.json.dumps(shell_interface.data)
     open(f'{shell_interface.dirpath}/data/temporary_files/lash_push.json', "w").write(shell_interface.data)
 
-    # Call post_to_rdm
+    # Calling post_to_rdm
     return post_to_rdm(shell_interface)
-
 
 
 #   ---         ---         ---
@@ -307,9 +303,8 @@ def post_to_rdm(shell_interface):
         shell_interface.metadata_success = True
 
         # Gets recid from RDM
-            # Normally it gets the recid just when putting a file into RDM
-            # Now it does it always:
             #   - to check if there are duplicates
+            #   - to delete duplicates
             #   - to add the record uuid and recid to all_rdm_records.txt
         recid = rdm_get_recid(shell_interface, uuid) 
 
