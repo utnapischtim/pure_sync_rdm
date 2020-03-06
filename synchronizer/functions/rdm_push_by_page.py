@@ -63,6 +63,8 @@ def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: in
         metadata_error    = add_spaces(shell_interface.count_errors_push_metadata)
         file_success      = add_spaces(shell_interface.count_successful_push_file)
         file_error        = add_spaces(shell_interface.count_errors_put_file)
+        count_abstracts   = add_spaces(shell_interface.count_abstracts)
+        count_orcids      = add_spaces(shell_interface.count_orcids)
         pag_log           = add_spaces(pag)
         pag_size_log      = add_spaces(pag_size)
 
@@ -74,8 +76,9 @@ def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: in
 
         # Summary added to records.log
         report = f"""
-Metadata:       success {metadata_success}, error {metadata_error}
-Files:          success {file_success}, error {file_error}
+Metadata success: {metadata_success}, metadata error: {metadata_error}
+Files success:    {file_success}, files error:    {file_error}
+Abstracts:        {count_abstracts}, Orcids:         {count_orcids}
 
 {http_response_str}"""
         file_records = f'{shell_interface.dirpath}/reports/{date_today}_records.log'

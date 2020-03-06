@@ -1,25 +1,20 @@
-import requests
-import json
-import time
-from setup      import *
+import smtplib 
 
-# c0a3f804-fb58-4bbb-9ee4-0a3f7276c0c8 martin ebner
-uuid = 'c0a3f804-fb58-4bbb-9ee4-0a3f7276c0c8'
+# creates SMTP session 
+s = smtplib.SMTP('smtp.gmail.com', 587) 
 
-import requests
+# start TLS for security 
+s.starttls() 
 
-headers = {
-    'Accept': 'application/json',
-}
-params = (
-    ('apiKey', pure_api_key),
-)
-response = requests.get(f'{pure_rest_api_url}/persons/{uuid}', headers=headers, params=params)
+# Authentication 
+s.login("mattugraz@gmail.com", "sanrafael88!") 
 
-open(f'{dirpath}/data/temporary_files/resp_pure_persons.json', 'wb').write(response.content)
-resp_json = json.loads(response.content)
+# message to be sent 
+message = "Message_you_need_to_send"
 
-print(response)
+# sending the mail 
+s.sendmail("mattugraz@gmail.com", "mattugraz@gmail.com", message) 
 
-print(resp_json['orcid'])
+# terminating the session 
+s.quit() 
 

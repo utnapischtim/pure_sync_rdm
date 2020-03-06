@@ -15,7 +15,7 @@ def rdm_put_file(shell_interface, file_name: str, recid: str):
 
     # Report
     report = ''
-    print(f'\t- -  Put file\t->\t{response}')
+    print(f'\t- -  Put file - {response}')
 
     current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
     report += f'{current_time} - file_put_to_rdm - {response} - {recid}\n'
@@ -49,7 +49,7 @@ def get_file_from_pure(shell_interface, electronic_version: str):
     file_url  = electronic_version['file']['fileURL']
 
     response = shell_interface.requests.get(file_url, auth=HTTPBasicAuth(pure_username, pure_password))
-    print(f'\tDownload file\t->\t{response} - ({file_name})')
+    print(f'\tDownload file - {response} - ({file_name})')
 
     if response.status_code < 300:
         # Save file

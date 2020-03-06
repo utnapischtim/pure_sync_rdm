@@ -74,7 +74,14 @@
           <li>
             <!-- TODO: ORCID or other icon -->
             <i class="fa fa-user" aria-hidden="true"></i>
-            <span class="text-muted">{{ author.name }}</span>
+            {%- if author.orcid is defined -%}
+              <span class="text-muted">
+              <a href="https://127.0.0.1:5000/api/records/{{ record.recid }}"><img style="width: 18px" src="https://ospolicyobservatory.uvic.ca/wp-content/uploads/orcid_128x128-1.png"></a>  
+              {{ author.name }} (orcid {{ author.orcid }})
+              </span>
+            {%- else -%}
+              <span class="text-muted">{{ author.name }}</span>
+            {%- endif -%}
           </li>
         {%- endfor -%}
         </ul>
@@ -85,15 +92,11 @@
       {# filler #}
       <br><br>
       {%- if record.abstract is defined %}
-
-      <h2>Abstract</h2><br>
-      {{ record.abstract }}
-      
-      {% else %}
-
-      <h3>No abstract available.</h3><br>
-
-      {% endif %}
+        <h2>Abstract</h2><br>
+        {{ record.abstract }}
+      {%- else -%}
+        <h3>No abstract available.</h3><br>
+      {%- endif -%}
       <br><br>
       
       {# files #}

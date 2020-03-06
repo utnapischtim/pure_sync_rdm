@@ -14,7 +14,7 @@ def pure_get_changes(shell_interface):
     # Get date of last update
     missing_updates = get_missing_updates(shell_interface)
     
-    # missing_updates = ['2020-03-05']      # TEMPORARY !!!!!!!!!!!!!!!
+    missing_updates = ['2020-03-06']      # TEMPORARY !!!!!!!!!!!!!!!
     
     if missing_updates == []:
         print('\nNothing to update.\n')

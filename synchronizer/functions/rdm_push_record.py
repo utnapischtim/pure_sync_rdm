@@ -17,7 +17,7 @@ def rdm_push_record(shell_interface, uuid: str):
     url = f'{pure_rest_api_url}research-outputs/{uuid}'
     response = shell_interface.requests.get(url, headers=headers, params=params)
 
-    print(f'\n\tGet metadata\t->\t{response}')
+    print(f'\n\tGet  metadata - {response}')
 
     if response.status_code >= 300:
         shell_interface.count_uuid_not_found_in_pure += 1
@@ -81,7 +81,8 @@ def create_invenio_data(shell_interface):
     add_field(shell_interface, item, 'access_right',                ['openAccessPermissions', 0, 'value'])
     add_field(shell_interface, item, 'abstract',                    ['abstracts', 0, 'value'])
 
-    if 'abstracts' in item:                                                                             # TEMPORARY
+    if 'abstracts' in item:
+        shell_interface.count_abstracts += 1
         msg = '\tABSTRACT\t!!!!!!!!!!!!!!!'                                                             # TEMPORARY
         print(msg)                                                                                      # TEMPORARY
         file_name = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'     # TEMPORARY
@@ -288,7 +289,7 @@ def post_to_rdm(shell_interface):
 
     uuid = shell_interface.item["uuid"]
 
-    print(f'\tPost metadata\t->\t{response} - {uuid}')
+    print(f'\tPost metadata - {response} - Uuid                - {uuid}')
     
     current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
 
@@ -368,16 +369,18 @@ def get_orcid(shell_interface, person_uuid: str, name: str):
     response = shell_interface.requests.get(f'{pure_rest_api_url}/persons/{person_uuid}', headers=headers, params=params)
     open(f'{shell_interface.dirpath}/data/temporary_files/resp_pure_persons.json', 'wb').write(response.content)
     
-    print(f'\tPureGet Orcid\t->\t{response} - {name}')
-    
     if response.status_code >= 300:
         print(response.content)
         return False
 
     resp_json = shell_interface.json.loads(response.content)
 
+    message = f'\tPureGet Orcid - {response}'
     if 'orcid' in resp_json:
-        # print(f"\t- - - - Orcid\t->\t{resp_json['orcid']}"")      # TEMPORARY
-        return resp_json['orcid']
+        shell_interface.count_orcids += 1
+        orcid = resp_json['orcid']
+        print(f'{message} - {orcid} - {name}')
+        return orcid
 
+    print(f'{message} - Orcid not found     - {name}')
     return False

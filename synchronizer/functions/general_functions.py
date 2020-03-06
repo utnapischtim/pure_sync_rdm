@@ -34,7 +34,7 @@ def rdm_get_recid(shell_interface, uuid):
         print(f'\tRecid not found in RDM')
         return False
 
-    print(f'\tRDM get recid\t->\t{response} - total_recids: {total_recids}')
+    log_message = f'\tRDM get recid - {response} - Total: {total_recids}'
 
     # Iterate over all records with the same uuid
     # The first record is the most recent (they are sorted)
@@ -44,7 +44,7 @@ def rdm_get_recid(shell_interface, uuid):
         recid = i['metadata']['recid']
         
         if count == 1:
-            print(f'\t-Newest recid\t->\t{recid}')      # TEMPORARY
+            print(f'{log_message}            - Newest: {recid}')      # TEMPORARY
             newest_recid = recid
         else:
             # Duplicate records are deleted
@@ -71,3 +71,5 @@ def initialize_count_variables(shell_interface):
     shell_interface.count_successful_push_file        = 0
     shell_interface.count_successful_record_delete    = 0
     shell_interface.count_uuid_not_found_in_pure      = 0
+    shell_interface.count_abstracts                   = 0
+    shell_interface.count_orcids                      = 0
