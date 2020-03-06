@@ -5,7 +5,7 @@ Usage:
     shell_interface.py pages
     shell_interface.py shorten_logs
     shell_interface.py delete_from_list
-    shell_interface.py push_from_list
+    shell_interface.py uuid
     shell_interface.py duplicates
     shell_interface.py delete_all
 
@@ -52,9 +52,9 @@ class shell_interface:
 
     def pages(self):
         """ Push to RDM records from Pure by page """
-        pag_begin = 102
-        pag_end =   103
-        pag_size =  50
+        pag_begin = 100
+        pag_end =   101
+        pag_size =  20
         get_pure_by_page(self, pag_begin, pag_end, pag_size)
 
 
@@ -68,7 +68,7 @@ class shell_interface:
         delete_from_list(self)
 
 
-    def push_from_list(self):
+    def uuid(self):
         """ Push to RDM all uuids that are in to_transfer.log """
         rdm_push_by_uuid(self)
 
@@ -92,7 +92,7 @@ if arguments['changes'] == True:                docopt_instance.changes()
 elif arguments['pages'] == True:                docopt_instance.pages()
 elif arguments['shorten_logs'] == True:         docopt_instance.shorten_logs()
 elif arguments['delete_from_list'] == True:     docopt_instance.delete_from_list()
-elif arguments['push_from_list'] == True:       docopt_instance.push_from_list()
+elif arguments['uuid'] == True:                 docopt_instance.uuid()
 elif arguments['duplicates'] == True:           docopt_instance.duplicates()
 elif arguments['delete_all'] == True:           docopt_instance.delete_all()
 

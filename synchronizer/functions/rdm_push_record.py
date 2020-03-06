@@ -79,6 +79,13 @@ def create_invenio_data(shell_interface):
     add_field(shell_interface, item, 'confidential',                ['confidential'])
     add_field(shell_interface, item, 'publisherName',               ['publisher', 'names', 0, 'value'])
     add_field(shell_interface, item, 'access_right',                ['openAccessPermissions', 0, 'value'])
+    add_field(shell_interface, item, 'abstract',                    ['abstracts', 0, 'value'])
+
+    if 'abstracts' in item:                                                                             # TEMPORARY
+        msg = '\tABSTRACT\t!!!!!!!!!!!!!!!'                                                             # TEMPORARY
+        print(msg)                                                                                      # TEMPORARY
+        file_name = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'     # TEMPORARY
+        open(file_name, "a").write(f'{shell_interface.uuid} - {msg}\n')                                 # TEMPORARY
 
     
     # --- electronicVersions ---
@@ -111,8 +118,9 @@ def create_invenio_data(shell_interface):
     # --- personAssociations ---
     if 'personAssociations' in item:
         shell_interface.data['contributors'] = []
-        sub_data = {}
+        
         for i in item['personAssociations']:
+            sub_data = {}
 
             first_name = get_value(i, ['name', 'firstName'])
             last_name  = get_value(i, ['name', 'lastName'])
@@ -127,18 +135,22 @@ def create_invenio_data(shell_interface):
             # ORCID
             person_uuid = get_value(i, ['person', 'uuid'])
             if person_uuid:
+                # Only 'person' uuids (internal persons) are in Pure. 
+                # 'externalPerson' uuids will not be found (404), therefore it is not possible to get their orcid's
                 sub_data['uuid'] = person_uuid
-                orcid = get_orcid(shell_interface, person_uuid)
+                orcid = get_orcid(shell_interface, person_uuid, sub_data['name'])
                 if orcid:
                     sub_data['orcid'] = orcid
+            else:
+                sub_data = add_to_var(sub_data, i, 'uuid',   ['externalPerson', 'uuid'])
 
-            sub_data = add_to_var(sub_data, i, 'externalId',               ['person', 'externalId'])
+            sub_data = add_to_var(sub_data, i, 'externalId',               ['person', 'externalId'])     # 'externalPerson' never have 'externalId'
             sub_data = add_to_var(sub_data, i, 'authorCollaboratorName',   ['authorCollaboration', 'names', 0, 'value'])   
             sub_data = add_to_var(sub_data, i, 'personRole',               ['personRoles', 0, 'value'])    
             sub_data = add_to_var(sub_data, i, 'organisationalUnit',       ['organisationalUnits', 0, 'names', 0, 'value'])
             sub_data = add_to_var(sub_data, i, 'type_p',                   ['externalPerson', 'types', 0, 'value'])
 
-        shell_interface.data['contributors'].append(sub_data)
+            shell_interface.data['contributors'].append(sub_data)
 
 
     # --- organisationalUnits ---
@@ -346,7 +358,7 @@ def post_to_rdm(shell_interface):
 
 
 #   ---         ---         ---
-def get_orcid(shell_interface, person_uuid):
+def get_orcid(shell_interface, person_uuid: str, name: str):
     headers = {
     'Accept': 'application/json',
     }
@@ -356,16 +368,16 @@ def get_orcid(shell_interface, person_uuid):
     response = shell_interface.requests.get(f'{pure_rest_api_url}/persons/{person_uuid}', headers=headers, params=params)
     open(f'{shell_interface.dirpath}/data/temporary_files/resp_pure_persons.json', 'wb').write(response.content)
     
-    print(f'\tPure Get Orcid\t->\t{response}')
+    print(f'\tPureGet Orcid\t->\t{response} - {name}')
     
     if response.status_code >= 300:
         print(response.content)
+        return False
 
     resp_json = shell_interface.json.loads(response.content)
 
     if 'orcid' in resp_json:
-        orcid = resp_json['orcid']
-        print(f'\t\t!!!!! orcid: {orcid} !!!!!!!!!!')
+        # print(f"\t- - - - Orcid\t->\t{resp_json['orcid']}"")      # TEMPORARY
         return resp_json['orcid']
 
     return False

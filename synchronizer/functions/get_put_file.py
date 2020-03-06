@@ -15,7 +15,7 @@ def rdm_put_file(shell_interface, file_name: str, recid: str):
 
     # Report
     report = ''
-    print(f'\tPut file\t->\t{response}')
+    print(f'\t- -  Put file\t->\t{response}')
 
     current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
     report += f'{current_time} - file_put_to_rdm - {response} - {recid}\n'

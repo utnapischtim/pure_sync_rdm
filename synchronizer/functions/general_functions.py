@@ -44,6 +44,7 @@ def rdm_get_recid(shell_interface, uuid):
         recid = i['metadata']['recid']
         
         if count == 1:
+            print(f'\t-Newest recid\t->\t{recid}')      # TEMPORARY
             newest_recid = recid
         else:
             # Duplicate records are deleted
