@@ -14,11 +14,10 @@ def rdm_put_file(shell_interface, file_name: str, recid: str):
     response = shell_interface.requests.put(url, headers=headers, data=data, verify=False)
 
     # Report
-    report = ''
     print(f'\t- -  Put file - {response}')
 
     current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
-    report += f'{current_time} - file_put_to_rdm - {response} - {recid}\n'
+    report = f'{current_time} - file_put_to_rdm - {response} - {recid}\n'
 
     if response.status_code >= 300:
 
@@ -40,7 +39,6 @@ def rdm_put_file(shell_interface, file_name: str, recid: str):
     
     return response.status_code
 
-    # HAVING PURE ADMIN ACCOUNT REMOVE FILE FROM PURE
 
 
 def get_file_from_pure(shell_interface, electronic_version: str):

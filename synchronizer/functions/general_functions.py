@@ -1,6 +1,6 @@
 from setup import *
 from functions.delete_record import delete_from_list, delete_record
-
+import smtplib             # SMTP library
 
 def rdm_get_recid(shell_interface, uuid):
 
@@ -73,3 +73,21 @@ def initialize_count_variables(shell_interface):
     shell_interface.count_uuid_not_found_in_pure      = 0
     shell_interface.count_abstracts                   = 0
     shell_interface.count_orcids                      = 0
+
+def send_email(uuid: str, file_name: str):
+    
+    # creates SMTP session 
+    s = smtplib.SMTP('smtp.gmail.com', 587) 
+
+    # start TLS for security 
+    s.starttls() 
+
+    # Authentication 
+    s.login(email_sender, email_sender_password) 
+
+    # sending the mail
+    message = email_message.format(uuid, file_name)
+    resp = s.sendmail(email_sender, email_receiver, message) 
+    print(resp)
+    # terminating the session 
+    s.quit() 

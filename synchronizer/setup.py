@@ -21,3 +21,11 @@ lines_successful_changes = 30     # Reduce the number of lines in successful_cha
 # Percentage of updated items to considere the upload task successful
 upload_percent_accept = 90
 
+# EMAIL
+email_receiver        = open(f'{dirpath}/data_setup/email_receiver.txt', 'r').readline()
+email_sender          = open(f'{dirpath}/data_setup/email_sender.txt', 'r').readline()
+email_sender_password = open(f'{dirpath}/data_setup/email_sender_password.txt', 'r').readline()
+email_subject         = 'Pure file delete 2'
+email_message         = """\
+Subject: """ + email_subject + """
+Please remove from pure uuid {} the file {}."""
