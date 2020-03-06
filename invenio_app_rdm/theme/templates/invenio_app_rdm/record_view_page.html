@@ -84,8 +84,16 @@
 
       {# filler #}
       <br><br>
+      {%- if record.abstract is defined %}
+
       <h2>Abstract</h2><br>
       {{ record.abstract }}
+      
+      {% else %}
+
+      <h3>No abstract available.</h3><br>
+
+      {% endif %}
       <br><br>
       
       {# files #}
