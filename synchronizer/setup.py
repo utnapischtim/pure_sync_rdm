@@ -25,6 +25,8 @@ upload_percent_accept = 90
 email_receiver        = open(f'{dirpath}/data_setup/email_receiver.txt', 'r').readline()
 email_sender          = open(f'{dirpath}/data_setup/email_sender.txt', 'r').readline()
 email_sender_password = open(f'{dirpath}/data_setup/email_sender_password.txt', 'r').readline()
+email_smtp_server     = 'smtp.gmail.com'
+email_smtp_port       = 587
 email_subject         = 'Pure file delete 2'
 email_message         = """\
 Subject: """ + email_subject + """

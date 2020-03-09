@@ -5,7 +5,7 @@ from functions.general_functions    import rdm_get_recid
 #   ---         ---         ---
 def rdm_push_record(shell_interface, uuid: str):
     """ Method used to get from Pure record's metadata """
-    
+
     # PURE REQUEST
     headers = {
         'Accept': 'application/json',
@@ -19,25 +19,24 @@ def rdm_push_record(shell_interface, uuid: str):
 
     print(f'\n\tGet  metadata - {response}')
 
+    # Add response content to resp_pure.json
+    file_response = f'{shell_interface.dirpath}/data/temporary_files/resp_pure.json'
+    open(file_response, 'wb').write(response.content)
+
+    # Check response
     if response.status_code >= 300:
-        shell_interface.count_uuid_not_found_in_pure += 1
         print(response.content)
 
-        file_name = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
+        file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
         report = f'Get metadata from Pure - {response.content}\n'
-        open(file_name, "a").write(report)
+        open(file_records, "a").write(report)
 
         shell_interface.time.sleep(1)
-        return 
+        return False
 
-    file_name = f'{shell_interface.dirpath}/data/temporary_files/resp_pure.json'
-    open(file_name, 'wb').write(response.content)
+    # Parse json
     shell_interface.item = shell_interface.json.loads(response.content)
-
-    # resp_json = open(shell_interface.dirpath + '/data/temporary_files/resp_pure.json', 'r')             # -- TEMPORARY -- 
-    # shell_interface.item = shell_interface.json.load(resp_json)                                         # -- TEMPORARY -- 
     
-    # Creates data to push to InvenioRDM
     return create_invenio_data(shell_interface)
 
 
@@ -46,15 +45,16 @@ def create_invenio_data(shell_interface):
     """ Gets the necessary information from Pure response in order to
         create the json that will be pushed to RDM """
 
-    shell_interface.count_total += 1      # counts all records
+    # counts all records
+    shell_interface.count_total += 1      
 
     shell_interface.record_files = []
     item = shell_interface.item
     shell_interface.uuid = item['uuid']
 
     shell_interface.data = {}
-    shell_interface.data['owners']       = [1]
-    shell_interface.data['_access']      = {'metadata_restricted': False, 'files_restricted': False}
+    shell_interface.data['owners']       = [1, 2]     # user id of the record owner
+    shell_interface.data['_access']      = {}
 
                         # RDM field name                # PURE json path
     add_field(shell_interface, item, 'title',                       ['title'])
@@ -78,9 +78,18 @@ def create_invenio_data(shell_interface):
     add_field(shell_interface, item, 'workflow',                    ['workflows', 0, 'value'])
     add_field(shell_interface, item, 'confidential',                ['confidential'])
     add_field(shell_interface, item, 'publisherName',               ['publisher', 'names', 0, 'value'])
-    add_field(shell_interface, item, 'access_right',                ['openAccessPermissions', 0, 'value'])
     add_field(shell_interface, item, 'abstract',                    ['abstracts', 0, 'value'])
 
+    # --- Open Access Permissions ---
+    pure_value = get_value(item, ['openAccessPermissions', 0, 'value'])
+    if pure_value:
+        rdm_value = accessright_conversion(pure_value)
+        shell_interface.data['access_right'] = rdm_value
+        shell_interface.data['_access']['metadata_restricted'] = True
+        if rdm_value == 'open':
+            shell_interface.data['_access']['metadata_restricted'] = False
+
+    # --- Abstract ---  
     if 'abstracts' in item:
         shell_interface.count_abstracts += 1
         msg = '\tABSTRACT\t!!!!!!!!!!!!!!!'                                                             # TEMPORARY
@@ -88,8 +97,7 @@ def create_invenio_data(shell_interface):
         file_name = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'     # TEMPORARY
         open(file_name, "a").write(f'{shell_interface.uuid} - {msg}\n')                                 # TEMPORARY
 
-    
-    # --- electronicVersions ---
+    # --- Electronic Versions ---
     if 'electronicVersions' in item:
         shell_interface.data['versionFiles'] = []
         sub_data = {}
@@ -106,14 +114,24 @@ def create_invenio_data(shell_interface):
             sub_data = add_to_var(sub_data, i, 'fileDigestAlgorithm', ['file', 'digestAlgorithm'])
             sub_data = add_to_var(sub_data, i, 'fileModifBy',         ['creator'])
             sub_data = add_to_var(sub_data, i, 'fileModifDate',       ['created'])
-            sub_data = add_to_var(sub_data, i, 'fileAccessType',      ['accessTypes', 0, 'value'])
             sub_data = add_to_var(sub_data, i, 'fileVersionType',     ['versionType', 0, 'value'])
             sub_data = add_to_var(sub_data, i, 'fileLicenseType',     ['licenseType', 0, 'value'])
 
+            # --- Access Types ---
+            pure_value = get_value(i, ['accessTypes', 0, 'value'])
+            if pure_value:
+                rdm_value = accessright_conversion(pure_value)
+                sub_data['fileAccessType'] = rdm_value
+                shell_interface.data['_access']['files_restricted'] = True
+                if rdm_value == 'open':
+                    shell_interface.data['_access']['files_restricted'] = False
+
+            # Append to sub_data to .data
             shell_interface.data['versionFiles'].append(sub_data)
 
             # Download file from Pure
             get_file_from_pure(shell_interface, i)
+
 
 
     # --- personAssociations ---
@@ -189,8 +207,6 @@ def add_field(shell_interface, item: list, rdm_field: str, path: list):
 
     if rdm_field == 'language':
         value = language_conversion(shell_interface, value)
-    elif rdm_field == 'access_right':
-        value = accessright_conversion(value)
 
     if value:
         shell_interface.data[rdm_field] = value
@@ -334,7 +350,7 @@ def post_to_rdm(shell_interface):
         # - Upload record FILES to RDM -
         if len(shell_interface.record_files) > 0:
             for file_name in shell_interface.record_files:
-                rdm_put_file(shell_interface, file_name, recid)
+                rdm_put_file(shell_interface, file_name, recid, uuid)
                        
         if recid:
             # add uuid to all_rdm_records
@@ -369,6 +385,8 @@ def get_orcid(shell_interface, person_uuid: str, name: str):
     response = shell_interface.requests.get(f'{pure_rest_api_url}/persons/{person_uuid}', headers=headers, params=params)
     open(f'{shell_interface.dirpath}/data/temporary_files/resp_pure_persons.json', 'wb').write(response.content)
     
+    shell_interface.time.sleep(0.1)
+    
     if response.status_code >= 300:
         print(response.content)
         return False
@@ -382,5 +400,5 @@ def get_orcid(shell_interface, person_uuid: str, name: str):
         print(f'{message} - {orcid} - {name}')
         return orcid
 
-    print(f'{message} - Orcid not found     - {name}')
+    print(f'{message} - Not found           - {name}')
     return False

@@ -1,6 +1,5 @@
 from setup import *
 from functions.delete_record import delete_from_list, delete_record
-import smtplib             # SMTP library
 
 def rdm_get_recid(shell_interface, uuid):
 
@@ -56,13 +55,14 @@ def rdm_get_recid(shell_interface, uuid):
 
 
 def add_spaces(value: int):
-    max_length = 6                              # 6 is the maximum length of the given value
+    max_length = 5                              # 5 is the maximum length of the given value
     spaces = max_length - len(str(value))
     return ''.ljust(spaces) + str(value)        # ljust -> adds spaces after a string
 
 
 def initialize_count_variables(shell_interface):
     """ Initialize variables that will be used in report_records_summary method """
+
     shell_interface.count_total                       = 0
     shell_interface.count_errors_push_metadata        = 0
     shell_interface.count_errors_put_file             = 0
@@ -70,24 +70,5 @@ def initialize_count_variables(shell_interface):
     shell_interface.count_successful_push_metadata    = 0
     shell_interface.count_successful_push_file        = 0
     shell_interface.count_successful_record_delete    = 0
-    shell_interface.count_uuid_not_found_in_pure      = 0
     shell_interface.count_abstracts                   = 0
     shell_interface.count_orcids                      = 0
-
-def send_email(uuid: str, file_name: str):
-    
-    # creates SMTP session 
-    s = smtplib.SMTP('smtp.gmail.com', 587) 
-
-    # start TLS for security 
-    s.starttls() 
-
-    # Authentication 
-    s.login(email_sender, email_sender_password) 
-
-    # sending the mail
-    message = email_message.format(uuid, file_name)
-    resp = s.sendmail(email_sender, email_receiver, message) 
-    print(resp)
-    # terminating the session 
-    s.quit() 

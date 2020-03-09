@@ -70,7 +70,12 @@ def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: in
 
         # Summary added to pages.log
         report = f"""
-{current_time} - Page {pag_log} - Page size {pag_size_log} - METADATA: success {metadata_success}, error {metadata_error} - FILES: success {file_success}, error {file_error} - {http_response_str}"""
+{current_time}, Page {pag_log}, Size {pag_size_log}, \
+Metadata success: {metadata_success}, Metadata errors: {metadata_error}, \
+File success: {file_success}, File errors: {file_error}, \
+Abstracts: {count_abstracts}, Orcids: {count_orcids}, \
+{http_response_str}\
+"""
         file_pages = f'{shell_interface.dirpath}/reports/{date_today}_pages.log'
         open(file_pages, "a").write(report)
 

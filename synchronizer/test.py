@@ -1,3 +1,5 @@
-from functions.general_functions import send_email
 
-send_email('987-654-321', 'somefile.pdf')
+print(f"""\
+tot: aaa
+cnt_author: bbb
+""")
