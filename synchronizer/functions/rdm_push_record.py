@@ -53,8 +53,9 @@ def create_invenio_data(shell_interface):
     shell_interface.uuid = item['uuid']
 
     shell_interface.data = {}
-    shell_interface.data['owners']       = [1, 2]     # user id of the record owner
-    shell_interface.data['_access']      = {}
+    shell_interface.data['owners']       = [1, 2]                                                       # user id of the record owner
+    # shell_interface.data['_access']      = {'metadata_restricted': True, 'files_restricted': True}      # Default value for _access field
+    shell_interface.data['_access']      = {'metadata_restricted': False, 'files_restricted': False}
 
                         # RDM field name                # PURE json path
     add_field(shell_interface, item, 'title',                       ['title'])
@@ -80,22 +81,16 @@ def create_invenio_data(shell_interface):
     add_field(shell_interface, item, 'publisherName',               ['publisher', 'names', 0, 'value'])
     add_field(shell_interface, item, 'abstract',                    ['abstracts', 0, 'value'])
 
-    # --- Open Access Permissions ---
-    pure_value = get_value(item, ['openAccessPermissions', 0, 'value'])
-    if pure_value:
-        rdm_value = accessright_conversion(pure_value)
-        shell_interface.data['access_right'] = rdm_value
-        shell_interface.data['_access']['metadata_restricted'] = True
-        if rdm_value == 'open':
-            shell_interface.data['_access']['metadata_restricted'] = False
+    add_field(shell_interface, item, 'access_right',                ['openAccessPermissions', 0, 'value'])
 
-    # --- Abstract ---  
-    if 'abstracts' in item:
-        shell_interface.count_abstracts += 1
-        msg = '\tABSTRACT\t!!!!!!!!!!!!!!!'                                                             # TEMPORARY
-        print(msg)                                                                                      # TEMPORARY
-        file_name = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'     # TEMPORARY
-        open(file_name, "a").write(f'{shell_interface.uuid} - {msg}\n')                                 # TEMPORARY
+    # # --- Open Access Permissions ---
+    # pure_value = get_value(item, ['openAccessPermissions', 0, 'value'])
+    # if pure_value:
+    #     rdm_value = accessright_conversion(pure_value)
+    #     shell_interface.data['access_right'] = rdm_value
+        
+    #     if rdm_value == 'open':
+    #         shell_interface.data['_access']['metadata_restricted'] = False
 
     # --- Electronic Versions ---
     if 'electronicVersions' in item:
@@ -117,14 +112,15 @@ def create_invenio_data(shell_interface):
             sub_data = add_to_var(sub_data, i, 'fileVersionType',     ['versionType', 0, 'value'])
             sub_data = add_to_var(sub_data, i, 'fileLicenseType',     ['licenseType', 0, 'value'])
 
-            # --- Access Types ---
-            pure_value = get_value(i, ['accessTypes', 0, 'value'])
-            if pure_value:
-                rdm_value = accessright_conversion(pure_value)
-                sub_data['fileAccessType'] = rdm_value
-                shell_interface.data['_access']['files_restricted'] = True
-                if rdm_value == 'open':
-                    shell_interface.data['_access']['files_restricted'] = False
+            sub_data = add_to_var(sub_data, i, 'fileAccessType',      ['accessTypes', 0, 'value'])
+
+            # # --- Access Types ---
+            # pure_value = get_value(i, ['accessTypes', 0, 'value'])
+            # if pure_value:
+            #     rdm_value = accessright_conversion(pure_value)
+            #     sub_data['fileAccessType'] = rdm_value
+            #     if rdm_value == 'open':
+            #         shell_interface.data['_access']['files_restricted'] = False
 
             # Append to sub_data to .data
             shell_interface.data['versionFiles'].append(sub_data)
@@ -183,6 +179,9 @@ def create_invenio_data(shell_interface):
 
         shell_interface.data['organisationalUnits'].append(sub_data)
 
+    # --- Abstract ---  
+    if 'abstracts' in item:
+        shell_interface.count_abstracts += 1
 
     shell_interface.data = shell_interface.json.dumps(shell_interface.data)
     open(f'{shell_interface.dirpath}/data/temporary_files/lash_push.json', "w").write(shell_interface.data)
@@ -207,6 +206,8 @@ def add_field(shell_interface, item: list, rdm_field: str, path: list):
 
     if rdm_field == 'language':
         value = language_conversion(shell_interface, value)
+    elif rdm_field == 'access_right':
+        value = accessright_conversion(value)
 
     if value:
         shell_interface.data[rdm_field] = value
