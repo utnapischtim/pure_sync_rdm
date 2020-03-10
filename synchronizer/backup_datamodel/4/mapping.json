@@ -49,39 +49,6 @@
           }
         }
       },
-      "contributors": {
-        "type": "object",
-        "properties": {
-          "ids": {
-            "type": "object",
-            "properties": {
-              "source": {
-                "type": "text",
-                "fields": {
-                  "keyword": {
-                    "type": "keyword"
-                  }
-                }
-              },
-              "value": {
-                "type": "keyword"
-              }
-            }
-          },
-          "affiliations": {
-            "type": "text"
-          },
-          "role": {
-            "type": "keyword"
-          },
-          "email": {
-            "type": "text"
-          },
-          "name": {
-            "type": "text"
-          }
-        }
-      },
       "dates": {
         "type": "object",
         "properties": {
@@ -173,7 +140,19 @@
         "type": "text",
         "copy_to": "suggest_title"
       },
-      "version": {
+      "uuid": {
+        "type": "text"
+      },
+      "repositoryReview": {
+        "type": "text"
+      },
+      "metadataVersion": {
+        "type": "keyword"
+      },
+      "metadataModifBy": {
+        "type": "keyword"
+      },
+      "metadataModifDate": {
         "type": "keyword"
       },
       "publicationDatePure": {
@@ -186,9 +165,6 @@
         "type": "text"
       },
       "pureId": {
-        "type": "text"
-      },
-      "uuid": {
         "type": "text"
       },
       "type_p": {
@@ -221,6 +197,9 @@
       "publisherName": {
         "type": "text"
       },
+      "accessType": {
+        "type": "text"
+      },
       "pages": {
         "type": "text"
       },
@@ -239,35 +218,107 @@
       "journalNumber": {
         "type": "text"
       },
-      "fileAccessType": {
+      "abstract": {
         "type": "text"
       },
-      "fileCreator": {
-        "type": "text"
+      "contributors": {
+        "type": "object",
+        "properties": {
+          "ids": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword"
+                  }
+                }
+              },
+              "value": {
+                "type": "keyword"
+              }
+            }
+          },
+          "name": {
+            "type": "text"
+          },
+          "uuid": {
+            "type": "text"
+          },
+          "externalId": {
+            "type": "text"
+          },
+          "orcid": {
+            "type": "text"
+          },
+          "authorCollaboratorName": {
+            "type": "text"
+          },
+          "personRole": {
+            "type": "text"
+          },
+          "organisationalUnit": {
+            "type": "text"
+          },
+          "type_p": {
+            "type": "text"
+          }
+        }
       },
-      "fileCreationDate": {
-        "type": "text"
-      },
-      "fileTitle": {
-        "type": "text"
-      },
-      "fileDigest": {
-        "type": "text"
-      },
-      "fileDigestAlgorithm": {
-        "type": "text"
-      },
-      "fileName": {
-        "type": "text"
-      },
-      "fileURL": {
-        "type": "text"
-      },
-      "fileType": {
-        "type": "text"
-      },
-      "fileSize": {
-        "type": "integer"
+      "versionFiles": {
+        "type": "object",
+        "properties": {
+          "ids": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword"
+                  }
+                }
+              },
+              "value": {
+                "type": "keyword"
+              }
+            }
+          },
+          "name": {
+            "type": "text"
+          },
+          "version": {
+            "type": "text"
+          },
+          "createdBy": {
+            "type": "text"
+          },
+          "createdDate": {
+            "type": "text"
+          },
+          "mimeType": {
+            "type": "text"
+          },
+          "size": {
+            "type": "integer"
+          },
+          "digest": {
+            "type": "text"
+          },
+          "digestAlgorithm": {
+            "type": "text"
+          },
+          "versionType": {
+            "type": "text"
+          },
+          "licenseType": {
+            "type": "text"
+          },
+          "accessType": {
+            "type": "text"
+          }
+        }
       },
       "organisationalUnits": {
         "type": "object",

@@ -54,7 +54,7 @@ def get_file_from_pure(shell_interface, electronic_version: str):
     file_url  = electronic_version['file']['fileURL']
 
     response = shell_interface.requests.get(file_url, auth=HTTPBasicAuth(pure_username, pure_password))
-    print(f'\tDownload file - {response} - ({file_name})')
+    print(f'\tDownload file - {response} - File name:            {file_name}')
 
     if response.status_code < 300:
         # Save file

@@ -43,11 +43,30 @@ class ContributorSchemaV1(StrictKeysMixin):
 
     ids = fields.Nested(PersonIdsSchemaV1, many=True)
     name = SanitizedUnicode(required=True)
+    uuid = fields.Str()
+    externalId = fields.Str()
+    orcid = fields.Str()
     authorCollaboratorName = fields.Str()
     personRole = fields.Str()
     organisationalUnit = fields.Str()
-    link = fields.Str()
     type_p = fields.Str()
+
+
+class VersionFilesSchemaV1(StrictKeysMixin):
+    """versionFiles schema."""
+
+    ids = fields.Nested(PersonIdsSchemaV1, many=True)
+    name = fields.Str()
+    version = fields.Str()
+    createdBy = fields.Str()
+    createdDate = fields.Str()
+    mimeType = fields.Str()
+    size = fields.Integer()
+    digest = fields.Str()
+    digestAlgorithm = fields.Str()
+    versionType = fields.Str()
+    licenseType = fields.Str()
+    accessType = fields.Str()
 
 
 class organisationalUnitsSchemaV1(StrictKeysMixin):
@@ -177,12 +196,15 @@ class MetadataSchemaV1(StrictKeysMixin):
 
     # ADDED
     title = SanitizedUnicode(required=True, validate=validate.Length(min=3))
-    version = SanitizedUnicode()
+    uuid = fields.Str()
+    repositoryReview = fields.Str()
+    metadataVersion = SanitizedUnicode()
+    metadataModifBy = SanitizedUnicode()
+    metadataModifDate = SanitizedUnicode()
     publicationDatePure = fields.Str()
     createdDatePure = fields.Str()
     modifiedDatePure = fields.Str()
     pureId = fields.Str()
-    uuid = fields.Str()
     type_p = fields.Str()
     category = fields.Str()
     peerReview = fields.Bool()
@@ -193,22 +215,16 @@ class MetadataSchemaV1(StrictKeysMixin):
     workflow = fields.Str()
     confidential = fields.Bool()
     publisherName = fields.Str()
+    accessType = fields.Str()
     pages = fields.Str()
     volume = fields.Str()
     versionType = fields.Str()
     licenseType = fields.Str()
     journalTitle = fields.Str()
     journalNumber = fields.Str()
-    fileAccessType = fields.Str()
-    fileCreator = fields.Str()
-    fileCreationDate = fields.Str()
-    fileTitle = fields.Str()
-    fileDigest = fields.Str()
-    fileDigestAlgorithm = fields.Str()
-    fileName = fields.Str()
-    fileURL = fields.Str()
-    fileType = fields.Str()
-    fileSize = fields.Integer()
+    abstract = fields.Str()
+    VersionFilesSchemaV1
+    versionFiles = Nested(VersionFilesSchemaV1, many=True)
     organisationalUnits = Nested(organisationalUnitsSchemaV1, many=True)
 
 

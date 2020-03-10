@@ -72,61 +72,6 @@
       },
       "uniqueItems": true
     },
-    "contributors": {
-      "description": "Contributors in order of importance.",
-      "minItems": 1,
-      "type": "array",
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "ids": {
-            "description": "List of IDs related with the person.",
-            "type": "array",
-            "uniqueItems": true,
-            "items": {
-              "additionalProperties": false,
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "value": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "name": {
-            "description": "Full name of person or organisation. Personal name format: family, given.",
-            "type": "string"
-          },
-          "authorCollaboratorName": {
-            "description": "",
-            "type": "string"
-          },
-          "personRole": {
-            "description": "",
-            "type": "string"
-          },
-          "organisationalUnit": {
-            "description": "",
-            "type": "string"
-          },
-          "link": {
-            "description": "",
-            "type": "string"
-          },
-          "type_p": {
-            "description": "",
-            "type": "string"
-          }
-        },
-        "required": [
-          "name"
-        ]
-      }
-    },
     "dates": {
       "description": "Date interval.",
       "items": {
@@ -258,6 +203,14 @@
       "description": "Record title.",
       "type": "string"
     },
+    "uuid": {
+      "description": "",
+      "type": "string"
+    },
+    "repositoryReview": {
+      "description": "Review done by the university stuff to validate the record authenticity",
+      "type": "string"
+    },
     "metadataVersion": {
       "description": "Record version tag.",
       "type": "string"
@@ -286,10 +239,6 @@
       "format": "date-time"
     },
     "pureId": {
-      "description": "",
-      "type": "string"
-    },
-    "uuid": {
       "description": "",
       "type": "string"
     },
@@ -362,45 +311,72 @@
       "description": "",
       "type": "string"
     },
-    "fileAccessType": {
+    "abstract": {
       "description": "",
       "type": "string"
     },
-    "fileCreator": {
-      "description": "",
-      "type": "string"
-    },
-    "fileCreationDate": {
-      "description": "",
-      "type": "string"
-    },
-    "fileTitle": {
-      "description": "",
-      "type": "string"
-    },
-    "fileDigest": {
-      "description": "",
-      "type": "string"
-    },
-    "fileDigestAlgorithm": {
-      "description": "",
-      "type": "string"
-    },
-    "fileName": {
-      "description": "",
-      "type": "string"
-    },
-    "fileURL": {
-      "description": "",
-      "type": "string"
-    },
-    "fileType": {
-      "description": "",
-      "type": "string"
-    },
-    "fileSize": {
-      "description": "",
-      "type": "number"
+    "contributors": {
+      "description": "Contributors in order of importance.",
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "ids": {
+            "description": "List of IDs related with the person.",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "additionalProperties": false,
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "name": {
+            "description": "Full name of person or organisation. Personal name format: family, given.",
+            "type": "string"
+          },
+          "uuid": {
+            "description": "",
+            "type": "string"
+          },
+          "externalId": {
+            "description": "",
+            "type": "string"
+          },
+          "orcid": {
+            "description": "",
+            "type": "string"
+          },
+          "authorCollaboratorName": {
+            "description": "",
+            "type": "string"
+          },
+          "personRole": {
+            "description": "",
+            "type": "string"
+          },
+          "organisationalUnit": {
+            "description": "",
+            "type": "string"
+          },
+          "type_p": {
+            "description": "",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      }
     },
     "versionFiles": {
       "description": "List of files and relative versions.",
@@ -426,20 +402,48 @@
               }
             }
           },
-          "fileName": {
+          "name": {
             "description": "",
             "type": "string"
           },
-          "fileVersion": {
+          "version": {
             "description": "",
             "type": "string"
           },
-          "fileModifBy": {
+          "createdBy": {
             "description": "",
             "type": "string"
           },
-          "fileModifDate": {
+          "createdDate": {
             "description": "",
+            "type": "string"
+          },
+          "mimeType": {
+            "description": "e.g. application/pdf",
+            "type": "string"
+          },
+          "size": {
+            "description": "",
+            "type": "number"
+          },
+          "digest": {
+            "description": "",
+            "type": "string"
+          },
+          "digestAlgorithm": {
+            "description": "",
+            "type": "string"
+          },
+          "versionType": {
+            "description": "E.g. Final published version",
+            "type": "string"
+          },
+          "licenseType": {
+            "description": "E.g. CC BY",
+            "type": "string"
+          },
+          "accessType": {
+            "description": "E.g. Open, Restricted, Closed...",
             "type": "string"
           }
         }
@@ -481,7 +485,6 @@
     }
   },
   "required": [
-    "_access",
     "access_right",
     "contributors",
     "description",

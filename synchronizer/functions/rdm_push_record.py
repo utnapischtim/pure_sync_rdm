@@ -169,7 +169,6 @@ def get_files_data(shell_interface, i: dict):
         return
 
     sub_data = {}
-
     sub_data = add_to_var(sub_data, i, 'name',            ['file', 'fileName'])
     sub_data = add_to_var(sub_data, i, 'size',            ['file', 'size'])
     sub_data = add_to_var(sub_data, i, 'mimeType',        ['file', 'mimeType'])
@@ -186,7 +185,6 @@ def get_files_data(shell_interface, i: dict):
 
     # Download file from Pure
     get_file_from_pure(shell_interface, i)
-
     return
 
 
@@ -310,7 +308,7 @@ def post_to_rdm(shell_interface):
 
     uuid = shell_interface.item["uuid"]
 
-    print(f'\tPost metadata - {response} - Uuid                - {uuid}')
+    print(f'\tPost metadata - {response} - Uuid:                 {uuid}')
     
     current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
 
