@@ -1,5 +1,6 @@
 from setup import *
 from functions.delete_record import delete_from_list, delete_record
+import psycopg2
 
 def rdm_get_recid(shell_interface, uuid):
 
@@ -43,7 +44,9 @@ def rdm_get_recid(shell_interface, uuid):
         recid = i['metadata']['recid']
         
         if count == 1:
-            print(f'{log_message}            - Newest: https://127.0.0.1:5000/api/records/{recid}')      # TEMPORARY
+            shell_interface.api_url             = f'https://127.0.0.1:5000/api/records/{recid}'
+            shell_interface.landing_page_url    = f'https://127.0.0.1:5000/records/{recid}'
+            print(f'{log_message}            - Newest: {shell_interface.api_url} - {shell_interface.landing_page_url}')
             newest_recid = recid
         else:
             # Duplicate records are deleted
@@ -72,3 +75,22 @@ def initialize_count_variables(shell_interface):
     shell_interface.count_successful_record_delete    = 0
     shell_interface.count_abstracts                   = 0
     shell_interface.count_orcids                      = 0
+
+
+def db_connect(shell_interface):
+    connection = psycopg2.connect(f"""\
+        host={db_host} \
+        dbname={db_name} \
+        user={db_user} \
+        password={db_password} \
+        """)
+    shell_interface.cursor = connection.cursor()
+
+
+def db_query(shell_interface, query):
+
+    shell_interface.cursor.execute(query)
+
+    return shell_interface.cursor.fetchall() 
+
+

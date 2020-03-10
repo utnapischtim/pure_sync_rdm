@@ -1,0 +1,16 @@
+
+
+TABLE NAME: accounts_user
+
+          Column      |            Type             |                         Modifiers                          
+------------------+-----------------------------+------------------------------------------------------------
+ id               | integer                     | not null default nextval('accounts_user_id_seq'::regclass)
+ email            | character varying(255)      | 
+ password         | character varying(255)      | 
+ active           | boolean                     | 
+ confirmed_at     | timestamp without time zone | 
+ last_login_at    | timestamp without time zone | 
+ current_login_at | timestamp without time zone | 
+ last_login_ip    | character varying(50)       | 
+ current_login_ip | character varying(50)       | 
+ login_count      | integer                     |

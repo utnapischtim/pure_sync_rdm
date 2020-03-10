@@ -3,7 +3,10 @@ from setup import *
 
 def delete_from_list(shell_interface):
     # NOTE: the user ACCOUNT related to the used TOKEN must be ADMIN
-    # pipenv run invenio roles add admin@invenio.org admin
+    """
+    pipenv run invenio roles add admin@invenio.org admin
+    pipenv run invenio roles add master@tugraz.at admin
+    """
     
     count_success = 0
     count_total = 0

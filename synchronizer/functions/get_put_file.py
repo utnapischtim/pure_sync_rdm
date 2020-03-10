@@ -42,6 +42,8 @@ def rdm_put_file(shell_interface, file_name: str, recid: str, uuid: str):
 
     file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
     open(file_records, "a").write(report)
+
+    shell_interface.time.sleep(0.2)
     
     return response.status_code
 
@@ -70,6 +72,9 @@ def get_file_from_pure(shell_interface, electronic_version: str):
     else:
         print(f'Error downloading file from pure ({file_url})')
 
+    shell_interface.time.sleep(0.2)
+    return
+
 
 #   ---     ---     ---
 def send_email(uuid: str, file_name: str):
@@ -91,3 +96,4 @@ def send_email(uuid: str, file_name: str):
     
     # terminating the session 
     s.quit() 
+    return

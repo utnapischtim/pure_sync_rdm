@@ -8,6 +8,7 @@ Usage:
     shell_interface.py uuid
     shell_interface.py duplicates
     shell_interface.py delete_all
+    shell_interface.py test
 
 Options:
     -h --help     Show this screen.
@@ -29,6 +30,7 @@ from functions.rdm_duplicates       import rdm_duplicates
 from functions.delete_all_records   import delete_all_records
 from functions.rdm_push_by_uuid     import rdm_push_by_uuid
 from functions.delete_record        import delete_record, delete_from_list
+from functions.general_functions    import db_connect, db_query
 
 
 class shell_interface:
@@ -42,6 +44,7 @@ class shell_interface:
         self.date = date
         self.datetime = datetime
         self.timedelta = timedelta
+        db_connect(self)
 
 
     def changes(self):
@@ -54,7 +57,7 @@ class shell_interface:
         """ Push to RDM records from Pure by page """
         pag_begin = 1
         pag_end =   2
-        pag_size =  2
+        pag_size =  50
         get_pure_by_page(self, pag_begin, pag_end, pag_size)
 
 
@@ -81,6 +84,20 @@ class shell_interface:
     def delete_all(self):
         delete_all_records(self)
 
+    def test(self):
+        resp = db_query(self, "select * from accounts_user where email = 'admin@invenio.org'")
+        if len(resp) == 0:
+            print('\naccounts_user: email not found\n')
+        elif len(resp) > 1:
+            print('\naccounts_user: email found multiple times\n')
+        else:
+            resp = resp[0]
+            print(f"""
+                id:         {resp[0]}
+                email:      {resp[1]}
+                current_ip: {resp[8]}
+                """)
+
 
 if __name__ == '__main__':
     arguments = docopt(__doc__, version='Pure synchronizer 1.0')
@@ -94,3 +111,4 @@ elif arguments['delete_from_list'] == True:     docopt_instance.delete_from_list
 elif arguments['uuid'] == True:                 docopt_instance.uuid()
 elif arguments['duplicates'] == True:           docopt_instance.duplicates()
 elif arguments['delete_all'] == True:           docopt_instance.delete_all()
+elif arguments['test'] == True:                 docopt_instance.test()

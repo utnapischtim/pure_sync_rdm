@@ -4,9 +4,8 @@ dirpath = os.path.dirname(os.path.abspath(__file__))
 # Pure REST API references
 pure_rest_api_url   = open(f'{dirpath}/data_setup/pure_rest_api_url.txt', 'r').readline()
 pure_api_key        = open(f'{dirpath}/data_setup/pure_api_key.txt', 'r').readline()
-
-pure_username       = 'ws_grosso'     # credentials for pure files download
 pure_password       = open(f'{dirpath}/data_setup/pure_password.txt', 'r').readline()
+pure_username       = open(f'{dirpath}/data_setup/pure_username.txt', 'r').readline()
 
 # RDM
 rdm_api_url_records = open(f'{dirpath}/data_setup/rdm_api_url_records.txt', 'r').readline()
@@ -31,3 +30,9 @@ email_subject         = 'Pure file delete 2'
 email_message         = """\
 Subject: """ + email_subject + """
 Please remove from pure uuid {} the file {}."""
+
+# DATABASE
+db_host = open(f'{dirpath}/data_setup/db_host.txt', 'r').readline()
+db_name = open(f'{dirpath}/data_setup/db_name.txt', 'r').readline()
+db_user = open(f'{dirpath}/data_setup/db_user.txt', 'r').readline()
+db_pswd = open(f'{dirpath}/data_setup/db_pswd.txt', 'r').readline()
