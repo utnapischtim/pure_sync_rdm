@@ -10,7 +10,7 @@ def delete_from_list(shell_interface):
     shell_interface.count_errors_record_delete        = 0
     shell_interface.count_successful_record_delete    = 0
 
-    file_name = shell_interface.dirpath + '/data/to_delete.txt'
+    file_name = f'{shell_interface.dirpath}/data/to_delete.txt'
     recids = open(file_name, 'r').readlines()
 
     if len(recids) == 0:
@@ -48,7 +48,7 @@ def delete_record(shell_interface, recid: str):
 
     #   REQUEST
     headers = {
-        'Authorization': f'Bearer {token_rdm}',         # token from setup.py
+        'Authorization': f'Bearer {token_rdm}',
         'Content-Type': 'application/json',
     }
     url = f'{rdm_api_url_records}api/records/{recid}'

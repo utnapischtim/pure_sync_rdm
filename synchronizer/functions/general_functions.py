@@ -15,7 +15,7 @@ def rdm_get_recid(shell_interface, uuid):
     size  = 'size=100'
     page  = 'page=1'
     query = f'q="{uuid}"'
-    url = f'{rdm_api_url_records}api/records/?{sort}&{size}&{page}&{query}'
+    url = f'{rdm_api_url_records}api/records/?{sort}&{query}&{size}&{page}'
     response = shell_interface.requests.get(url, params=params, verify=False)
 
     if response.status_code >= 300:
@@ -23,14 +23,14 @@ def rdm_get_recid(shell_interface, uuid):
         print(response.content)
         return False
 
-    open(f'{shell_interface.dirpath}/data/temporary_files/rdm_get_recid.txt', "wb").write(response.content)
+    open(f'{shell_interface.dirpath}/data/temporary_files/rdm_get_recid.json', "wb").write(response.content)
 
     # Load response
     resp_json = shell_interface.json.loads(response.content)
 
     total_recids = resp_json['hits']['total']
     if total_recids == 0:
-        print(f'\tRecid not found in RDM')
+        print(f'\t- - WARNING: Recid not found in RDM - -')
         return False
 
     log_message = f'\tRDM get recid - {response} - Total: {total_recids}'
@@ -43,7 +43,7 @@ def rdm_get_recid(shell_interface, uuid):
         recid = i['metadata']['recid']
         
         if count == 1:
-            print(f'{log_message}            - Newest: {recid}')      # TEMPORARY
+            print(f'{log_message}            - Newest: https://127.0.0.1:5000/api/records/{recid}')      # TEMPORARY
             newest_recid = recid
         else:
             # Duplicate records are deleted

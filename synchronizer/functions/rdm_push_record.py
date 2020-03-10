@@ -53,12 +53,18 @@ def create_invenio_data(shell_interface):
     shell_interface.uuid = item['uuid']
 
     shell_interface.data = {}
-    shell_interface.data['owners']       = [1, 2]                                                       # user id of the record owner
-    # shell_interface.data['_access']      = {'metadata_restricted': True, 'files_restricted': True}      # Default value for _access field
-    shell_interface.data['_access']      = {'metadata_restricted': False, 'files_restricted': False}
+    # Leaving owner id 1 always available
+    shell_interface.data['owners']       = [1]                                                            # user id of the record owner
+    shell_interface.data['_access']      = {'metadata_restricted': False, 'files_restricted': False}      # Default value for _access field
 
-                        # RDM field name                # PURE json path
+                                    # RDM field name                # PURE json path
     add_field(shell_interface, item, 'title',                       ['title'])
+    add_field(shell_interface, item, 'access_right',                ['openAccessPermissions', 0, 'value'])
+    
+    # shell_interface.data['_access']      = {'metadata_restricted': False, 'files_restricted': False}      # TEST TEST
+    # shell_interface.data['title'] = 'Title 10'                                                            # TEST TEST
+    # shell_interface.data['access_right'] = 'open'                                                         # TEST TEST
+
     add_field(shell_interface, item, 'uuid',                        ['uuid'])
     add_field(shell_interface, item, 'pureId',                      ['pureId'])
     add_field(shell_interface, item, 'publicationDatePure',         ['publicationStatuses', 0, 'publicationDate', 'year'])
@@ -81,53 +87,18 @@ def create_invenio_data(shell_interface):
     add_field(shell_interface, item, 'publisherName',               ['publisher', 'names', 0, 'value'])
     add_field(shell_interface, item, 'abstract',                    ['abstracts', 0, 'value'])
 
-    add_field(shell_interface, item, 'access_right',                ['openAccessPermissions', 0, 'value'])
 
-    # # --- Open Access Permissions ---
-    # pure_value = get_value(item, ['openAccessPermissions', 0, 'value'])
-    # if pure_value:
-    #     rdm_value = accessright_conversion(pure_value)
-    #     shell_interface.data['access_right'] = rdm_value
-        
-    #     if rdm_value == 'open':
-    #         shell_interface.data['_access']['metadata_restricted'] = False
+    shell_interface.data['versionFiles'] = []
 
     # --- Electronic Versions ---
     if 'electronicVersions' in item:
-        shell_interface.data['versionFiles'] = []
-        sub_data = {}
         for i in item['electronicVersions']:
-            if 'file' not in i:
-                continue
-            elif 'fileURL' not in i['file'] or 'fileName' not in i['file']:
-                continue
+            get_files_data(shell_interface, i)
 
-            sub_data = add_to_var(sub_data, i, 'fileName',            ['file', 'fileName'])
-            sub_data = add_to_var(sub_data, i, 'fileSize',            ['file', 'size'])
-            sub_data = add_to_var(sub_data, i, 'fileType',            ['file', 'mimeType'])
-            sub_data = add_to_var(sub_data, i, 'fileDigest',          ['file', 'digest'])
-            sub_data = add_to_var(sub_data, i, 'fileDigestAlgorithm', ['file', 'digestAlgorithm'])
-            sub_data = add_to_var(sub_data, i, 'fileModifBy',         ['creator'])
-            sub_data = add_to_var(sub_data, i, 'fileModifDate',       ['created'])
-            sub_data = add_to_var(sub_data, i, 'fileVersionType',     ['versionType', 0, 'value'])
-            sub_data = add_to_var(sub_data, i, 'fileLicenseType',     ['licenseType', 0, 'value'])
-
-            sub_data = add_to_var(sub_data, i, 'fileAccessType',      ['accessTypes', 0, 'value'])
-
-            # # --- Access Types ---
-            # pure_value = get_value(i, ['accessTypes', 0, 'value'])
-            # if pure_value:
-            #     rdm_value = accessright_conversion(pure_value)
-            #     sub_data['fileAccessType'] = rdm_value
-            #     if rdm_value == 'open':
-            #         shell_interface.data['_access']['files_restricted'] = False
-
-            # Append to sub_data to .data
-            shell_interface.data['versionFiles'].append(sub_data)
-
-            # Download file from Pure
-            get_file_from_pure(shell_interface, i)
-
+    # --- Additional Files ---
+    if 'additionalFiles' in item:
+        for i in item['additionalFiles']:
+            get_files_data(shell_interface, i)
 
 
     # --- personAssociations ---
@@ -190,10 +161,43 @@ def create_invenio_data(shell_interface):
     return post_to_rdm(shell_interface)
 
 
+def get_files_data(shell_interface, i: dict):
+
+    if 'file' not in i:
+        return
+    elif 'fileURL' not in i['file'] or 'fileName' not in i['file']:
+        return
+
+    sub_data = {}
+
+    sub_data = add_to_var(sub_data, i, 'name',            ['file', 'fileName'])
+    sub_data = add_to_var(sub_data, i, 'size',            ['file', 'size'])
+    sub_data = add_to_var(sub_data, i, 'mimeType',        ['file', 'mimeType'])
+    sub_data = add_to_var(sub_data, i, 'digest',          ['file', 'digest'])
+    sub_data = add_to_var(sub_data, i, 'digestAlgorithm', ['file', 'digestAlgorithm'])
+    sub_data = add_to_var(sub_data, i, 'createdBy',       ['creator'])
+    sub_data = add_to_var(sub_data, i, 'createdDate',     ['created'])
+    sub_data = add_to_var(sub_data, i, 'versionType',     ['versionTypes', 0, 'value'])
+    sub_data = add_to_var(sub_data, i, 'licenseType',     ['licenseTypes', 0, 'value'])
+    sub_data = add_to_var(sub_data, i, 'accessType',      ['accessTypes', 0, 'value'])
+
+    # Append to sub_data to .data
+    shell_interface.data['versionFiles'].append(sub_data)
+
+    # Download file from Pure
+    get_file_from_pure(shell_interface, i)
+
+    return
+
+
 #   ---         ---         ---
 def add_to_var(sub_data: dict, item: list, rdm_field: str, path: list):
     """ Adds the field to sub_data """
     value = get_value(item, path)
+
+    if rdm_field == 'accessType':
+        value = accessright_conversion(value)
+
     if value:
         sub_data[rdm_field] = value
     return sub_data
@@ -216,7 +220,7 @@ def add_field(shell_interface, item: list, rdm_field: str, path: list):
 
 #   ---         ---         ---
 def accessright_conversion(pure_value: str):
-
+    
     accessright_pure_to_rdm = {
         'Open':             'open',
         'Embargoed':        'embargoed',
@@ -253,19 +257,19 @@ def get_value(item, path: list):
     """ Goes through the json item to get the information of the specified path """
 
     child = item
-    cnt = 0
+    count = 0
     # Iterates over the given path
     for i in path:
         # If the child (step in path) exists or is equal to zero
         if i in child or i == 0:
             # Counts if the iteration took place over every path element
-            cnt += 1
+            count += 1
             child = child[i]
         else:
             return False
 
     # If the full path is not available (missing field)
-    if len(path) != cnt:
+    if len(path) != count:
         return False
 
     element = str(child)
@@ -333,7 +337,7 @@ def post_to_rdm(shell_interface):
     if response.status_code == 429:
         print('Waiting 15 min')
         shell_interface.time.sleep(wait_429)                     # 429 too many requests, wait 15 min
-
+    
     # -- Successful transmition --
     if response.status_code < 300:
 
@@ -346,7 +350,9 @@ def post_to_rdm(shell_interface):
             #   - to check if there are duplicates
             #   - to delete duplicates
             #   - to add the record uuid and recid to all_rdm_records.txt
-        recid = rdm_get_recid(shell_interface, uuid) 
+        recid = rdm_get_recid(shell_interface, uuid)
+        if not recid:
+            return False
 
         # - Upload record FILES to RDM -
         if len(shell_interface.record_files) > 0:
@@ -354,7 +360,7 @@ def post_to_rdm(shell_interface):
                 rdm_put_file(shell_interface, file_name, recid, uuid)
                        
         if recid:
-            # add uuid to all_rdm_records
+            # add record to all_rdm_records
             uuid_recid_line = f'{uuid} {recid}\n'
             open(f'{shell_interface.dirpath}/data/all_rdm_records.txt', "a").write(uuid_recid_line)
 

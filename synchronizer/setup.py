@@ -11,7 +11,7 @@ pure_password       = open(f'{dirpath}/data_setup/pure_password.txt', 'r').readl
 # RDM
 rdm_api_url_records = open(f'{dirpath}/data_setup/rdm_api_url_records.txt', 'r').readline()
 token_rdm           = open(f'{dirpath}/data_setup/rdm_token.txt', 'r').readline()
-push_dist_sec       = 3
+push_dist_sec       = 1
 wait_429            = 900
 
 # LOG FILES

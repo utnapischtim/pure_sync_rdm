@@ -54,7 +54,7 @@ class shell_interface:
         """ Push to RDM records from Pure by page """
         pag_begin = 1
         pag_end =   2
-        pag_size =  5
+        pag_size =  2
         get_pure_by_page(self, pag_begin, pag_end, pag_size)
 
 
@@ -82,7 +82,6 @@ class shell_interface:
         delete_all_records(self)
 
 
-
 if __name__ == '__main__':
     arguments = docopt(__doc__, version='Pure synchronizer 1.0')
     # print(arguments)
@@ -95,9 +94,3 @@ elif arguments['delete_from_list'] == True:     docopt_instance.delete_from_list
 elif arguments['uuid'] == True:                 docopt_instance.uuid()
 elif arguments['duplicates'] == True:           docopt_instance.duplicates()
 elif arguments['delete_all'] == True:           docopt_instance.delete_all()
-
-
-
-
-
-

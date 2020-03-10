@@ -9,6 +9,7 @@ def rdm_put_file(shell_interface, file_name: str, recid: str, uuid: str):
 
     # - PUT FILE TO RDM -
     headers = {
+        'Authorization': f'Bearer {token_rdm}',
         'Content-Type': 'application/octet-stream',
     }
     data = open(file_path_name, 'rb').read()

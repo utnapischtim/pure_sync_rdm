@@ -76,8 +76,9 @@
             <i class="fa fa-user" aria-hidden="true"></i>
             {%- if author.orcid is defined -%}
               <span class="text-muted">
-              <a href="https://127.0.0.1:5000/api/records/{{ record.recid }}"><img style="width: 18px" src="https://ospolicyobservatory.uvic.ca/wp-content/uploads/orcid_128x128-1.png"></a>  
-              {{ author.name }} (orcid {{ author.orcid }})
+              <!-- src="/static/images/orcid.png" -->
+              <a href="https://orcid.org/{{ author.orcid }}"><img style="width: 18px" src="https://ospolicyobservatory.uvic.ca/wp-content/uploads/orcid_128x128-1.png"></a>  
+              {{ author.name }}
               </span>
             {%- else -%}
               <span class="text-muted">{{ author.name }}</span>
