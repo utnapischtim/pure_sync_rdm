@@ -58,15 +58,13 @@ def create_invenio_data(shell_interface: object):
     # GET FROM DB id of certain user (by email) - select id from accounts_user where email = 'admin@invenio.org';
 
     shell_interface.data['owners']  = [1, 3]                                                            # user id of the record owner
-    shell_interface.data['_access'] = {'metadata_restricted': False, 'files_restricted': False}      # Default value for _access field
+    shell_interface.data['_access'] = {'metadata_restricted': True, 'files_restricted': True}        # Default value for _access field
 
                                     # RDM field name                # PURE json path
     add_field(shell_interface, item, 'title',                       ['title'])
     add_field(shell_interface, item, 'access_right',                ['openAccessPermissions', 0, 'value'])
     
-    shell_interface.data['_access']      = {'metadata_restricted': True, 'files_restricted': True}        # TEST TEST
-    shell_interface.data['title']        = 'Title 1'                                                            # TEST TEST
-    shell_interface.data['access_right'] = 'open'                                                         # TEST TEST
+    # shell_interface.data['title']        = 'Title 1'                                                      # TEST TEST
 
     add_field(shell_interface, item, 'uuid',                        ['uuid'])
     add_field(shell_interface, item, 'pureId',                      ['pureId'])
@@ -92,6 +90,8 @@ def create_invenio_data(shell_interface: object):
 
     # --- Electronic Versions ---
     shell_interface.data['versionFiles'] = []
+
+    shell_interface.rdm_file_review = get_rdm_file_review(shell_interface)
 
     if 'electronicVersions' in item:
         for i in item['electronicVersions']:
@@ -162,16 +162,42 @@ def create_invenio_data(shell_interface: object):
     return post_to_rdm(shell_interface)
 
 
+
 def get_files_data(shell_interface: object, i: dict):
     """ Gets metadata information from electronicVersions and additionalFiles files.
         It also downloads the relative files. The Metadata without file will be ignored """
 
     if 'file' not in i:
-        return
+        return False
     elif 'fileURL' not in i['file'] or 'fileName' not in i['file']:
-        return
+        return False
+
+    internal_review = False     # Default value
+
+    pure_size   = get_value(i, ['file', 'size'])
+    pure_name   = get_value(i, ['file', 'fileName'])
+    pure_review = get_value(i, ['file', 'internalReview'])
+
+    shell_interface.pure_rdm_file_match = []        # [file_match, internalReview]
+
+    # Checks if pure_size and pure_name are the same as any of the files in RDM with the same uuid
+    if shell_interface.rdm_file_review:
+
+        for rdm_file in shell_interface.rdm_file_review:
+
+            rdm_size   = str(rdm_file['size'])
+            rdm_review = rdm_file['review']
+
+            if pure_size == rdm_size and pure_name == rdm_file['name']:
+                shell_interface.pure_rdm_file_match.append(True)
+                shell_interface.pure_rdm_file_match.append(rdm_review)
+                internal_review = rdm_review       # The new uploaded file will have the same review value as in RDM
+                break
 
     sub_data = {}
+
+    sub_data['internalReview'] = internal_review
+
     sub_data = add_to_var(sub_data, i, 'name',            ['file', 'fileName'])
     sub_data = add_to_var(sub_data, i, 'size',            ['file', 'size'])
     sub_data = add_to_var(sub_data, i, 'mimeType',        ['file', 'mimeType'])
@@ -190,6 +216,60 @@ def get_files_data(shell_interface: object, i: dict):
     get_file_from_pure(shell_interface, i)
     return
 
+
+
+
+#   ---         ---         ---
+def get_rdm_file_review(shell_interface: object):
+    """ When a record is updated in Pure, there will be a check if the new file from Pure is the same as the old file in RDM.
+    To do so it makes a comparison on the file size.
+    If the size is not the same, then it will be uploaded to RDM and a new internal review will be required. """
+
+    # --- Get file size and internalReview from RDM ---
+    sort  = 'sort=mostrecent'
+    size  = 'size=100'
+    page  = 'page=1'
+    query = f'q="{shell_interface.uuid}"'
+
+    headers = {
+        'Authorization': f'Bearer {token_rdm}',
+        'Content-Type': 'application/json',
+    }
+    params = (('prettyprint', '1'),)
+    url = f'{rdm_api_url_records}api/records/?{sort}&{query}&{size}&{page}'
+    response = shell_interface.requests.get(url, headers=headers, params=params, verify=False)
+
+    if response.status_code >= 300:
+        print(f'\ntget_rdm_file_size - {shell_interface.uuid} - {response}')
+        print(response.content)
+        return False
+
+    open(f'{shell_interface.dirpath}/data/temporary_files/rdm_get_recid.json', "wb").write(response.content)
+
+    # Load response
+    resp_json = shell_interface.json.loads(response.content)
+
+    total_recids = resp_json['hits']['total']
+    if total_recids == 0:
+        return False
+
+    record = resp_json['hits']['hits'][0]['metadata']  # [0] because they are ordered, therefore it is the most recent
+
+    data = []
+
+    if 'versionFiles' in record:
+        for file in record['versionFiles']:
+            file_size   = file['size']
+            file_name   = file['name']
+            file_review = file['internalReview']
+
+            data.append({'size': file_size, 'review': file_review, 'name': file_name})
+
+            # print(f'\tFile/s size   - {response} - Number files:  {total_recids}    - Size: {file_size} - Review: {file_review}')
+
+    return data
+
+    
 
 #   ---         ---         ---
 def add_to_var(sub_data: dict, item: list, rdm_field: str, path: list):
@@ -369,7 +449,7 @@ def post_to_rdm(shell_interface: object):
     if(shell_interface.metadata_success == False or shell_interface.file_success == False):
         return False
     else:
-        # # Push RDM record link to Pure
+        # # Push RDM record link to Pure                                # TODO
         # shell_interface.api_url
         # shell_interface.landing_page_url
 

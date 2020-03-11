@@ -1,5 +1,5 @@
-from setup                      import *
-from requests.auth              import HTTPBasicAuth
+from setup          import *
+from requests.auth  import HTTPBasicAuth
 import smtplib
 
 #   ---     ---     ---
@@ -56,8 +56,23 @@ def get_file_from_pure(shell_interface, electronic_version: str):
     file_url  = electronic_version['file']['fileURL']
 
     response = shell_interface.requests.get(file_url, auth=HTTPBasicAuth(pure_username, pure_password))
-    print(f'\tDownload file - {response} - File name:            {file_name}')
 
+    # 
+    if len(shell_interface.pure_rdm_file_match) == 0:
+        match_review = 'Uuid not in RDM    '
+
+    elif shell_interface.pure_rdm_file_match[0] == False:
+        match_review = 'Match: F, Review: -'
+
+    else:
+        match_review = 'Match: T, Review: F'
+        if shell_interface.pure_rdm_file_match[1]:
+            match_review = 'Match: T, Review: T'
+    
+    print(f'\tDownload file - {response} - {match_review} - {file_name}')
+
+
+    
     if response.status_code < 300:
         # Save file
         open(f'{shell_interface.dirpath}/data/temporary_files/{file_name}', 'wb').write(response.content)

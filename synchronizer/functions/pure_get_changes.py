@@ -14,7 +14,7 @@ def pure_get_changes(shell_interface):
     # Get date of last update
     missing_updates = get_missing_updates(shell_interface)
     
-    missing_updates = ['2020-03-09']      # TEMPORARY !!!!!!!!!!!!!!!
+    # missing_updates = ['2020-03-11']      # TEMPORARY !!!!!!!!!!!!!!!
     
     if missing_updates == []:
         print('\nNothing to update.\n')
@@ -150,10 +150,13 @@ Number of items in response: {resp_json["count"]}
 
     # Calculates if the process was successful
     percent_success = shell_interface.count_successful_push_metadata * 100 / shell_interface.count_total
-    if percent_success >= upload_percent_accept:
-        # SUCCESSFUL_CHANGES.TXT
+    data         = f'{changes_date}\n'
+    
+    # If the percentage of successfully transmitted records is higher then the limit specified in setup.py
+    # And changes_date is not in successful_changes.txt
+    if (percent_success >= upload_percent_accept and data not in open(file_name, 'r').read()):
+        
         file_success = f'{shell_interface.dirpath}/data/successful_changes.txt'
-        data         = f'{changes_date}\n'
         open(file_success, "a").write(data)
 
     metadata_succs              = add_spaces(shell_interface.count_successful_push_metadata)

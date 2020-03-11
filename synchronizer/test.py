@@ -1,44 +1,24 @@
-from setup import *
-import requests
 import json
-    	
-pag = 1
-pag_size = 50
+import os
 
-count = 0
-go_on = True
+dirpath = os.path.dirname(os.path.abspath(__file__))
 
-while go_on == True:
+resp_json = open(dirpath + '/data/temporary_files/resp_pure_1.json', 'r')
+resp_json = json.load(resp_json)
 
-	# REQUEST to RDM
-	headers = {
-        'Authorization': f'Bearer {token_rdm}',
-        'Content-Type': 'application/json',
-    }
-	params = (('prettyprint', '1'),)
-	url = f'{rdm_api_url_records}api/records/?sort=mostrecent&size={pag_size}&page={pag}'
+cnt = 0
+cntf = 0
 
-	response = requests.get(url, headers=headers, params=params, verify=False)
-	print(f'\n{response}\n')
+for item in resp_json['items']:
+    cnt += 1
+    # print(cnt, ' ', item['uuid'])
 
-	open(f"{dirpath}/data/temporary_files/resp_rdm.json", 'wb').write(response.content)
+    if 'electronicVersions' in item:
 
-	if response.status_code >= 300:
-		print(response.content)
-		break
+        for EV in item['electronicVersions']:
+            if 'file' in EV:
+                cntf += 1
+                print(item['uuid'])
+                # print('\tfile: ',EV['file']['fileName'])
 
-	else:
-		resp_json = json.loads(response.content)
-
-		for i in resp_json['hits']['hits']:
-			count += 1
-			uuid = i['metadata']['uuid']
-			recid = i['metadata']['recid']
-			print(f'{uuid} - {recid}')
-
-		print(f'\nPag {str(pag)} - Records {count}')
-
-	if 'next' not in resp_json['links']:
-		go_on = False
-	
-	pag += 1
+print('\nTot files: ', cntf, '\n')

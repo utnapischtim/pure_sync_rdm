@@ -1,0 +1,5 @@
+
+- datamodel (schema, mapping, marshmellow)
+
+- theme/templates/invenio_app_rdm/record_view_page.html
+- theme/templates/invenio_app_rdm/search.html

@@ -11,13 +11,18 @@ def rdm_get_recid(shell_interface, uuid):
         return False
 
     # GET request RDM
-    params = (('prettyprint', '1'),)
     sort  = 'sort=mostrecent'
     size  = 'size=100'
     page  = 'page=1'
     query = f'q="{uuid}"'
+
+    headers = {
+        'Authorization': f'Bearer {token_rdm}',
+        'Content-Type': 'application/json',
+    }
+    params = (('prettyprint', '1'),)
     url = f'{rdm_api_url_records}api/records/?{sort}&{query}&{size}&{page}'
-    response = shell_interface.requests.get(url, params=params, verify=False)
+    response = shell_interface.requests.get(url, headers=headers, params=params, verify=False)
 
     if response.status_code >= 300:
         print(f'\n{uuid} - {response}')
@@ -44,10 +49,13 @@ def rdm_get_recid(shell_interface, uuid):
         recid = i['metadata']['recid']
         
         if count == 1:
+            # URLs to be transmitted to Pure if the record is successfuly added in RDM
             shell_interface.api_url             = f'https://127.0.0.1:5000/api/records/{recid}'
             shell_interface.landing_page_url    = f'https://127.0.0.1:5000/records/{recid}'
+
             print(f'{log_message}            - Newest: {shell_interface.api_url} - {shell_interface.landing_page_url}')
             newest_recid = recid
+
         else:
             # Duplicate records are deleted
             delete_record(shell_interface, recid)

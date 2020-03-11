@@ -32,7 +32,7 @@ Subject: """ + email_subject + """
 Please remove from pure uuid {} the file {}."""
 
 # DATABASE
-db_host = open(f'{dirpath}/data_setup/db_host.txt', 'r').readline()
-db_name = open(f'{dirpath}/data_setup/db_name.txt', 'r').readline()
-db_user = open(f'{dirpath}/data_setup/db_user.txt', 'r').readline()
-db_pswd = open(f'{dirpath}/data_setup/db_pswd.txt', 'r').readline()
+db_host     = open(f'{dirpath}/data_setup/db_host.txt', 'r').readline()
+db_name     = open(f'{dirpath}/data_setup/db_name.txt', 'r').readline()
+db_user     = open(f'{dirpath}/data_setup/db_user.txt', 'r').readline()
+db_password = open(f'{dirpath}/data_setup/db_password.txt', 'r').readline()
