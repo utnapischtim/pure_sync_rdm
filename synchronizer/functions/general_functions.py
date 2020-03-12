@@ -53,7 +53,7 @@ def rdm_get_recid(shell_interface, uuid):
             shell_interface.api_url             = f'https://127.0.0.1:5000/api/records/{recid}'
             shell_interface.landing_page_url    = f'https://127.0.0.1:5000/records/{recid}'
 
-            print(f'{log_message}            - Newest: {shell_interface.api_url} - {shell_interface.landing_page_url}')
+            print(f'{log_message}            - Newest: {shell_interface.api_url}')
             newest_recid = recid
 
         else:

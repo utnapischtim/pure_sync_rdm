@@ -76,9 +76,11 @@
             <i class="fa fa-user" aria-hidden="true"></i>
             {%- if author.orcid is defined -%}
               <span class="text-muted">
-              <!-- src="/static/images/orcid.png" -->
-              <a href="https://orcid.org/{{ author.orcid }}"><img style="width: 18px" src="https://ospolicyobservatory.uvic.ca/wp-content/uploads/orcid_128x128-1.png"></a>  
-              {{ author.name }}
+              <a href="https://orcid.org/{{ author.orcid }}">
+                <!-- <img style="width: 180px" src="/static/images/logo-tu-graz.png"> -->
+                <img style="width: 18px" src="https://ospolicyobservatory.uvic.ca/wp-content/uploads/orcid_128x128-1.png">
+                {{ author.name }}
+              </a>  
               </span>
             {%- else -%}
               <span class="text-muted">{{ author.name }}</span>

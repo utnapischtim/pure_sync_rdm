@@ -12,7 +12,7 @@ def rdm_push_by_uuid(shell_interface):
     uuids = open(file_name, 'r').readlines()
 
     if len(uuids) == 0:
-        print('\nThere is nothing to push.\n')
+        print('\nThere is nothing to transfer.\n')
         return
 
     for uuid in uuids:

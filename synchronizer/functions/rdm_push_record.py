@@ -34,7 +34,7 @@ def rdm_push_record(shell_interface: object, uuid: str):
         shell_interface.time.sleep(1)
         return False
 
-    # Parse json
+    # Load json
     shell_interface.item = shell_interface.json.loads(response.content)
     
     return create_invenio_data(shell_interface)
@@ -49,6 +49,7 @@ def create_invenio_data(shell_interface: object):
     shell_interface.count_total += 1      
 
     shell_interface.record_files = []
+    shell_interface.rdm_file_review = []
     item = shell_interface.item
     shell_interface.uuid = item['uuid']
 
@@ -91,7 +92,9 @@ def create_invenio_data(shell_interface: object):
     # --- Electronic Versions ---
     shell_interface.data['versionFiles'] = []
 
-    shell_interface.rdm_file_review = get_rdm_file_review(shell_interface)
+    if 'electronicVersions' in item or 'additionalFiles' in item:
+        # Checks if the file has been already uploaded to RDM and if it has been internally reviewed
+        get_rdm_file_review(shell_interface)
 
     if 'electronicVersions' in item:
         for i in item['electronicVersions']:
@@ -176,23 +179,20 @@ def get_files_data(shell_interface: object, i: dict):
 
     pure_size   = get_value(i, ['file', 'size'])
     pure_name   = get_value(i, ['file', 'fileName'])
-    pure_review = get_value(i, ['file', 'internalReview'])
 
     shell_interface.pure_rdm_file_match = []        # [file_match, internalReview]
 
     # Checks if pure_size and pure_name are the same as any of the files in RDM with the same uuid
-    if shell_interface.rdm_file_review:
+    for rdm_file in shell_interface.rdm_file_review:
 
-        for rdm_file in shell_interface.rdm_file_review:
+        rdm_size   = str(rdm_file['size'])
+        rdm_review = rdm_file['review']
 
-            rdm_size   = str(rdm_file['size'])
-            rdm_review = rdm_file['review']
-
-            if pure_size == rdm_size and pure_name == rdm_file['name']:
-                shell_interface.pure_rdm_file_match.append(True)
-                shell_interface.pure_rdm_file_match.append(rdm_review)
-                internal_review = rdm_review       # The new uploaded file will have the same review value as in RDM
-                break
+        if pure_size == rdm_size and pure_name == rdm_file['name']:
+            shell_interface.pure_rdm_file_match.append(True)
+            shell_interface.pure_rdm_file_match.append(rdm_review)
+            internal_review = rdm_review       # The new uploaded file will have the same review value as in RDM
+            break
 
     sub_data = {}
 
@@ -215,7 +215,6 @@ def get_files_data(shell_interface: object, i: dict):
     # Download file from Pure
     get_file_from_pure(shell_interface, i)
     return
-
 
 
 
@@ -255,19 +254,16 @@ def get_rdm_file_review(shell_interface: object):
 
     record = resp_json['hits']['hits'][0]['metadata']  # [0] because they are ordered, therefore it is the most recent
 
-    data = []
-
     if 'versionFiles' in record:
         for file in record['versionFiles']:
             file_size   = file['size']
             file_name   = file['name']
             file_review = file['internalReview']
 
-            data.append({'size': file_size, 'review': file_review, 'name': file_name})
+            shell_interface.rdm_file_review.append({'size': file_size, 'review': file_review, 'name': file_name})
 
             # print(f'\tFile/s size   - {response} - Number files:  {total_recids}    - Size: {file_size} - Review: {file_review}')
-
-    return data
+    return
 
     
 

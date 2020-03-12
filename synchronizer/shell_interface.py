@@ -55,9 +55,9 @@ class shell_interface:
 
     def pages(self):
         """ Push to RDM records from Pure by page """
-        pag_begin = 2
-        pag_end =   3
-        pag_size =  10
+        pag_begin = 1
+        pag_end =   4
+        pag_size =  25
         get_pure_by_page(self, pag_begin, pag_end, pag_size)
 
 
@@ -85,6 +85,7 @@ class shell_interface:
         delete_all_records(self)
 
     def test(self):
+        # DB query - Get user IP
         resp = db_query(self, "select * from accounts_user where email = 'admin@invenio.org'")
         if len(resp) == 0:
             print('\naccounts_user: email not found\n')
@@ -104,11 +105,11 @@ if __name__ == '__main__':
     # print(arguments)
     docopt_instance = shell_interface()
 
-if arguments['changes'] == True:                docopt_instance.changes()
-elif arguments['pages'] == True:                docopt_instance.pages()
-elif arguments['shorten_logs'] == True:         docopt_instance.shorten_logs()
-elif arguments['delete_from_list'] == True:     docopt_instance.delete_from_list()
-elif arguments['uuid'] == True:                 docopt_instance.uuid()
-elif arguments['duplicates'] == True:           docopt_instance.duplicates()
-elif arguments['delete_all'] == True:           docopt_instance.delete_all()
-elif arguments['test'] == True:                 docopt_instance.test()
+if arguments['changes']             == True: docopt_instance.changes()
+elif arguments['pages']             == True: docopt_instance.pages()
+elif arguments['shorten_logs']      == True: docopt_instance.shorten_logs()
+elif arguments['delete_from_list']  == True: docopt_instance.delete_from_list()
+elif arguments['uuid']              == True: docopt_instance.uuid()
+elif arguments['duplicates']        == True: docopt_instance.duplicates()
+elif arguments['delete_all']        == True: docopt_instance.delete_all()
+elif arguments['test']              == True: docopt_instance.test()
