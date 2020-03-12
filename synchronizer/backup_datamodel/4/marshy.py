@@ -57,6 +57,9 @@ class VersionFilesSchemaV1(StrictKeysMixin):
 
     ids = fields.Nested(PersonIdsSchemaV1, many=True)
     name = fields.Str()
+    internalReview = fields.Bool()
+    internalReviewBy = fields.Str()
+    internalReviewDate = fields.Str()
     version = fields.Str()
     createdBy = fields.Str()
     createdDate = fields.Str()
@@ -223,7 +226,6 @@ class MetadataSchemaV1(StrictKeysMixin):
     journalTitle = fields.Str()
     journalNumber = fields.Str()
     abstract = fields.Str()
-    VersionFilesSchemaV1
     versionFiles = Nested(VersionFilesSchemaV1, many=True)
     organisationalUnits = Nested(organisationalUnitsSchemaV1, many=True)
 

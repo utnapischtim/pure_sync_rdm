@@ -58,7 +58,7 @@ def create_invenio_data(shell_interface: object):
     # Other ids specific for actual users
     # GET FROM DB id of certain user (by email) - select id from accounts_user where email = 'admin@invenio.org';
 
-    shell_interface.data['owners']  = [1, 3]                                                            # user id of the record owner
+    shell_interface.data['owners']  = [1]                                                            # user id of the record owner
     shell_interface.data['_access'] = {'metadata_restricted': True, 'files_restricted': True}        # Default value for _access field
 
                                     # RDM field name                # PURE json path

@@ -288,6 +288,15 @@
           "name": {
             "type": "text"
           },
+          "internalReview": {
+            "type": "boolean"
+          },
+          "internalReviewBy": {
+            "type": "text"
+          },
+          "internalReviewDate": {
+            "type": "text"
+          },
           "version": {
             "type": "text"
           },
