@@ -211,6 +211,14 @@
       "description": "Review done by the university stuff to validate the record authenticity",
       "type": "string"
     },
+    "ipRestrictions": {
+      "description": "Restrictions based on IP address",
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
     "metadataVersion": {
       "description": "Record version tag.",
       "type": "string"

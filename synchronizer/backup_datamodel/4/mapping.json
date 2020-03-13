@@ -146,6 +146,9 @@
       "repositoryReview": {
         "type": "text"
       },
+      "ipRestrictions": {
+        "type": "text"
+      },
       "metadataVersion": {
         "type": "keyword"
       },

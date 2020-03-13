@@ -201,6 +201,7 @@ class MetadataSchemaV1(StrictKeysMixin):
     title = SanitizedUnicode(required=True, validate=validate.Length(min=3))
     uuid = fields.Str()
     repositoryReview = fields.Str()
+    ipRestrictions = fields.List(fields.Str())
     metadataVersion = SanitizedUnicode()
     metadataModifBy = SanitizedUnicode()
     metadataModifDate = SanitizedUnicode()
