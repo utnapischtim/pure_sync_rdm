@@ -212,7 +212,7 @@
       "type": "string"
     },
     "ipRestrictions": {
-      "description": "Restrictions based on IP address",
+      "description": "",
       "items": {
         "type": "string"
       },

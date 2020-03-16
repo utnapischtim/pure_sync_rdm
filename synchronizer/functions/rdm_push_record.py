@@ -58,14 +58,18 @@ def create_invenio_data(shell_interface: object):
     # Other ids specific for actual users
     # GET FROM DB id of certain user (by email) - select id from accounts_user where email = 'admin@invenio.org';
 
-    shell_interface.data['owners']  = [1, 5, 99]                                                            # user id of the record owner
-    shell_interface.data['_access'] = {'metadata_restricted': True, 'files_restricted': True}        # Default value for _access field
+    # user id of the record owner
+    shell_interface.data['owners']  = [1, 3, 99]                                                    # TEMPORARY  TEMPORARY  TEMPORARY  TEMPORARY
+
+    # shell_interface.data['_access'] = {'metadata_restricted': True, 'files_restricted': True}        # Default value for _access field
+    shell_interface.data['_access'] = {'metadata_restricted': False, 'files_restricted': False}        # Default value for _access field
 
                                     # RDM field name                # PURE json path
     add_field(shell_interface, item, 'title',                       ['title'])
     add_field(shell_interface, item, 'access_right',                ['openAccessPermissions', 0, 'value'])
     
-    # shell_interface.data['title']        = 'Title 1'                                                      # TEST TEST
+    # shell_interface.data['title']           = 'Title 1'                                                      # TEST TEST
+    shell_interface.data['ipRestrictions']  = ['127.0.0.9']                                                      # TEST TEST
 
     add_field(shell_interface, item, 'uuid',                        ['uuid'])
     add_field(shell_interface, item, 'pureId',                      ['pureId'])
