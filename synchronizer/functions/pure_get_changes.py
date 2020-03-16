@@ -41,7 +41,7 @@ def pure_get_changes_by_date(shell_interface, changes_date: str):
     params = (
         ('page', '1'),
         ('pageSize', '5000'),
-        ('apiKey', 'ca2f08c5-8b33-454a-adc4-8215cfb3e088'),
+        ('apiKey', pure_api_key),
     )
     # PURE get request
     url = f'{pure_rest_api_url}changes/{changes_date}'

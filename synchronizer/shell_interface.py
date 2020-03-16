@@ -9,28 +9,31 @@ Usage:
     shell_interface.py duplicates
     shell_interface.py delete_all
     shell_interface.py test
+    shell_interface.py persons
 
 Options:
     -h --help     Show this screen.
     --version     Show version.
 
 """
-from docopt                         import docopt
+from docopt                             import docopt
 import requests
 import json
 import os
 import time
-from cmd                            import Cmd
-from datetime                       import date, datetime, timedelta
-from functions.pure_get_changes     import pure_get_changes
-from functions.rdm_push_by_page     import get_pure_by_page
-from functions.rdm_push_record      import create_invenio_data
-from functions.shorten_log_files    import shorten_log_files
-from functions.rdm_duplicates       import rdm_duplicates
-from functions.delete_all_records   import delete_all_records
-from functions.rdm_push_by_uuid     import rdm_push_by_uuid
-from functions.delete_record        import delete_record, delete_from_list
-from functions.general_functions    import db_connect, db_query
+from cmd                                import Cmd
+from datetime                           import date, datetime, timedelta
+from functions.pure_get_changes         import pure_get_changes
+from functions.rdm_push_by_page         import get_pure_by_page
+from functions.rdm_push_record          import create_invenio_data
+from functions.shorten_log_files        import shorten_log_files
+from functions.rdm_duplicates           import rdm_duplicates
+from functions.delete_all_records       import delete_all_records
+from functions.rdm_push_by_uuid         import rdm_push_by_uuid
+from functions.delete_record            import delete_record, delete_from_list
+from functions.general_functions        import db_connect, db_query
+from functions.rdm_person_association   import rdm_person_association
+
 
 
 class shell_interface:
@@ -84,7 +87,13 @@ class shell_interface:
     def delete_all(self):
         delete_all_records(self)
 
-    def test(self):
+    def persons(self):
+        rdm_person_association(self)
+
+
+
+    
+    def get_email_test(self):
         # DB query - Get user IP
         resp = db_query(self, "select * from accounts_user where email = 'admin@invenio.org'")
         if len(resp) == 0:
@@ -112,4 +121,4 @@ elif arguments['delete_from_list']  == True: docopt_instance.delete_from_list()
 elif arguments['uuid']              == True: docopt_instance.uuid()
 elif arguments['duplicates']        == True: docopt_instance.duplicates()
 elif arguments['delete_all']        == True: docopt_instance.delete_all()
-elif arguments['test']              == True: docopt_instance.test()
+elif arguments['persons']           == True: docopt_instance.persons()
