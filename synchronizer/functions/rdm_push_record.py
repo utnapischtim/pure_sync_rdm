@@ -1,49 +1,19 @@
 from setup                          import *
 from functions.get_put_file         import rdm_put_file, get_file_from_pure
-from functions.general_functions    import rdm_get_recid
+from functions.general_functions    import rdm_get_recid, pure_get_metadata
 
 #   ---         ---         ---
 def rdm_push_record(shell_interface: object, uuid: str):
-    """ Method used to get from Pure record's metadata """
-
-    # PURE REQUEST
-    headers = {
-        'Accept': 'application/json',
-        'api-key': pure_api_key,
-    }
-    params = (
-        ('apiKey', pure_api_key),
-    )
-    url = f'{pure_rest_api_url}research-outputs/{uuid}'
-    response = shell_interface.requests.get(url, headers=headers, params=params)
-
-    print(f'\n\tGet  metadata - {response}')
-
-    # Add response content to resp_pure.json
-    file_response = f'{shell_interface.dirpath}/data/temporary_files/resp_pure.json'
-    open(file_response, 'wb').write(response.content)
-
-    # Check response
-    if response.status_code >= 300:
-        print(response.content)
-
-        file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
-        report = f'Get metadata from Pure - {response.content}\n'
-        open(file_records, "a").write(report)
-
-        shell_interface.time.sleep(1)
-        return False
-
-    # Load json
-    shell_interface.item = shell_interface.json.loads(response.content)
     
+    # Gets from Pure the metadata of the given uuid
+    pure_get_metadata(shell_interface, uuid)
+
     return create_invenio_data(shell_interface)
 
 
 #   ---         ---         ---
 def create_invenio_data(shell_interface: object):
-    """ Gets the necessary information from Pure response in order to
-        create the json that will be pushed to RDM """
+    """ Reads pure metadata and creates the json that will be pushed to RDM """
 
     # counts all records
     shell_interface.count_total += 1      

@@ -1,22 +1,16 @@
-import json
-import os
+from setup          import *
+import requests
 
-dirpath = os.path.dirname(os.path.abspath(__file__))
+file_name = 'img1.jpg'
+recid = '9tse4-5g827'
 
-resp_json = open(dirpath + '/data/temporary_files/resp_pure_4.json', 'r')
-resp_json = json.load(resp_json)
+headers = {
+    'Authorization': f'Bearer {token_rdm}',
+    'Content-Type': 'application/octet-stream',
+}
+data = open(f'{dirpath}/{file_name}', 'rb').read()
+url = f'{rdm_api_url_records}api/records/{recid}/files/{file_name}'
+response = requests.put(url, headers=headers, data=data, verify=False)
+print(response)
 
-cnt = 0
-cnt_files = 0
-
-for item in resp_json['items']:
-    cnt += 1
-
-    if 'electronicVersions' in item:
-
-        for EV in item['electronicVersions']:
-            if 'file' in EV:
-                cnt_files += 1
-                print(item['uuid'])
-
-print('\nTot files: ', cnt_files, '\n')
+# curl -k -X PUT https://localhost:5000/api/records/pv1dx-rwa61/files/snow_doge.jpg -H "Content-Type: application/octet-stream" --data-binary @snow_doge.jpg

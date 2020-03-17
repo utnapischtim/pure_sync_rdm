@@ -2,9 +2,79 @@ from setup import *
 from functions.delete_record import delete_from_list, delete_record
 import psycopg2
 
-def rdm_get_recid(shell_interface, uuid):
 
-    shell_interface.time.sleep(1)
+
+#   ---         ---         ---
+def pure_get_metadata(shell_interface: object, uuid: str):
+    """ Method used to get from Pure record's metadata """
+
+    # PURE REQUEST
+    headers = {
+        'Accept': 'application/json',
+        'api-key': pure_api_key,
+    }
+    params = (
+        ('apiKey', pure_api_key),
+    )
+    url = f'{pure_rest_api_url}research-outputs/{uuid}'
+    response = shell_interface.requests.get(url, headers=headers, params=params)
+
+    print(f'\n\tGet  metadata - {response}')
+
+    # Add response content to resp_pure.json
+    file_response = f'{shell_interface.dirpath}/data/temporary_files/resp_pure.json'
+    open(file_response, 'wb').write(response.content)
+
+    # Check response
+    if response.status_code >= 300:
+        print(response.content)
+
+        file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
+        report = f'Get metadata from Pure - {response.content}\n'
+        open(file_records, "a").write(report)
+
+        shell_interface.time.sleep(1)
+        return False
+
+    # Load json
+    shell_interface.item = shell_interface.json.loads(response.content)
+
+
+
+#   ---         ---         ---
+# def rdm_get_recid_metadata(shell_interface: object, recid: str):
+def rdm_get_recid_metadata(recid: str):
+    import requests
+
+    
+    if len(recid) != 11:
+        print(f'\nERROR - The recid must have 11 characters. Given: {recid}\n')
+        return False
+
+    # GET request RDM
+    headers = {
+        'Authorization': f'Bearer {token_rdm}',
+        'Content-Type': 'application/json',
+    }
+    params = (('prettyprint', '1'),)
+    url = f'{rdm_api_url_records}api/records/{recid}'
+    # response = shell_interface.requests.get(url, headers=headers, params=params, verify=False)
+    response = requests.get(url, headers=headers, params=params, verify=False)
+
+    if response.status_code >= 300:
+        print(f'\n{recid} - {response}')
+        print(response.content)
+        return False
+
+    # open(f'{shell_interface.dirpath}/data/temporary_files/rdm_get_recid_metadata.json', "wb").write(response.content)
+    open(f'{dirpath}/data/temporary_files/rdm_get_recid_metadata.json', "wb").write(response.content)
+    
+    return response
+
+
+
+#   ---         ---         ---
+def rdm_get_uuid_metadata(shell_interface: object, uuid: str):
     
     if len(uuid) != 36:
         print(f'\nERROR - The uuid must have 36 characters. Given: {uuid}\n')
@@ -29,9 +99,19 @@ def rdm_get_recid(shell_interface, uuid):
         print(response.content)
         return False
 
-    open(f'{shell_interface.dirpath}/data/temporary_files/rdm_get_recid.json', "wb").write(response.content)
+    open(f'{shell_interface.dirpath}/data/temporary_files/rdm_get_uuid_metadata.json', "wb").write(response.content)
+    
+    return response
+    
 
-    # Load response
+
+#   ---         ---         ---
+def rdm_get_recid(shell_interface: object, uuid: str):
+
+    shell_interface.time.sleep(0.5)
+
+    response = rdm_get_uuid_metadata(shell_interface, uuid)
+
     resp_json = shell_interface.json.loads(response.content)
 
     total_recids = resp_json['hits']['total']
@@ -65,12 +145,14 @@ def rdm_get_recid(shell_interface, uuid):
 
 
 
+#   ---         ---         ---
 def add_spaces(value: int):
     max_length = 5                              # 5 is the maximum length of the given value
     spaces = max_length - len(str(value))
     return ''.ljust(spaces) + str(value)        # ljust -> adds spaces after a string
 
 
+#   ---         ---         ---
 def initialize_count_variables(shell_interface):
     """ Initialize variables that will be used in report_records_summary method """
 
@@ -85,6 +167,7 @@ def initialize_count_variables(shell_interface):
     shell_interface.count_orcids                      = 0
 
 
+#   ---         ---         ---
 def db_connect(shell_interface):
     connection = psycopg2.connect(f"""\
         host={db_host} \
@@ -95,6 +178,7 @@ def db_connect(shell_interface):
     shell_interface.cursor = connection.cursor()
 
 
+#   ---         ---         ---
 def db_query(shell_interface, query):
 
     shell_interface.cursor.execute(query)
