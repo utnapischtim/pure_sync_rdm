@@ -28,8 +28,12 @@ def create_invenio_data(shell_interface: object):
     # Other ids specific for actual users
     # GET FROM DB id of certain user (by email) - select id from accounts_user where email = 'admin@invenio.org';
 
-    # user id of the record owner
-    shell_interface.data['owners']  = [1, 3, 99]                                                    # TEMPORARY  TEMPORARY  TEMPORARY  TEMPORARY
+    # RDM user id of the record owner
+    shell_interface.data['owners'] = [1]                                                    # Master user id = 1 (?????????????)
+
+    # If some RDM owner is specified then it will be added to owners(see rdm_person_association.py)
+    if shell_interface.rdm_record_owner:
+        shell_interface.data['owners'].append(shell_interface.rdm_record_owner)
 
     # shell_interface.data['_access'] = {'metadata_restricted': True, 'files_restricted': True}        # Default value for _access field
     shell_interface.data['_access'] = {'metadata_restricted': False, 'files_restricted': False}        # Default value for _access field
