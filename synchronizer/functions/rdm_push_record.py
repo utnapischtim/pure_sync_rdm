@@ -87,9 +87,15 @@ def create_invenio_data(shell_interface: object):
     if 'personAssociations' in item:
         shell_interface.data['contributors'] = []
         
+        file_owner_name = f'{shell_interface.dirpath}/data/pure_rdm_user_id.txt'
+        file_owner_data = open(file_owner_name).readlines()
+
         for i in item['personAssociations']:
             sub_data = {}
 
+            person_uuid = get_value(i, ['person', 'uuid'])
+
+            # Name
             first_name = get_value(i, ['name', 'firstName'])
             last_name  = get_value(i, ['name', 'lastName'])
 
@@ -99,6 +105,18 @@ def create_invenio_data(shell_interface: object):
                 sub_data['name'] = f'{last_name}, (first name not specified)'
             elif first_name and not last_name:
                 sub_data['name'] = f'(last name not specified), {first_name}'
+
+            # RDM OWNER
+            # Searchs among all users uuid if there is a match
+            for line in file_owner_data:
+                if person_uuid == line.split(' ')[0]:
+
+                    rdm_record_owner = line.split(' ')[1]
+                    
+                    if rdm_record_owner not in shell_interface.data['owners']:
+                        # Adds RDM user id (record owner) to 'owners'
+                        shell_interface.data['owners'].append(rdm_record_owner)
+
 
             # ORCID
             person_uuid = get_value(i, ['person', 'uuid'])
@@ -112,6 +130,7 @@ def create_invenio_data(shell_interface: object):
             else:
                 sub_data = add_to_var(sub_data, i, 'uuid',   ['externalPerson', 'uuid'])
 
+            # Standard fields
             sub_data = add_to_var(sub_data, i, 'externalId',               ['person', 'externalId'])     # 'externalPerson' never have 'externalId'
             sub_data = add_to_var(sub_data, i, 'authorCollaboratorName',   ['authorCollaboration', 'names', 0, 'value'])   
             sub_data = add_to_var(sub_data, i, 'personRole',               ['personRoles', 0, 'value'])    
@@ -401,10 +420,14 @@ def post_to_rdm(shell_interface: object):
         # metadata transmission success flag
         shell_interface.metadata_success = True
 
+        # After pushing the record's metadata to RDM needs about a second to be able to get its recid
+        shell_interface.time.sleep(1)
+
         # Gets recid from RDM
             #   - to check if there are duplicates
             #   - to delete duplicates
             #   - to add the record uuid and recid to all_rdm_records.txt
+        
         recid = rdm_get_recid(shell_interface, uuid)
         if not recid:
             return False

@@ -108,8 +108,6 @@ def rdm_get_uuid_metadata(shell_interface: object, uuid: str):
 #   ---         ---         ---
 def rdm_get_recid(shell_interface: object, uuid: str):
 
-    shell_interface.time.sleep(0.5)
-
     response = rdm_get_uuid_metadata(shell_interface, uuid)
 
     resp_json = shell_interface.json.loads(response.content)

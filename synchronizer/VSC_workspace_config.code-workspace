@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "/home/bootcamp/src"
+		},
+		{
+			"path": "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/invenio_rdm_records"
+		},
+		{
+			"path": "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/invenio_records_permissions"
+		},
+		{
+			"path": "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/invenio_access"
+		},
+		{
+			"path": "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/invenio_accounts"
+		},
+		{
+			"path": "/home/bootcamp/.local/share/virtualenvs/pure_sync_rdm-fOqjLk38/lib/python3.6/site-packages/invenio_oauthclient"
+		}
+	],
+	"settings": {}
+}

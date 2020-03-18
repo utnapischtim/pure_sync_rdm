@@ -18,6 +18,15 @@ def rdm_person_association(shell_interface: object, persion_uuid: str):
     # Get RDM user id
     get_rdm_owner(shell_interface, email)
 
+    # If the user was not found in RDM then there is no owner to add to the record.
+    if shell_interface.rdm_record_owner == None:
+        return
+
+    # Pure user uuid  +  RDM user id  +  RDM email
+    line = f'{person_uuid} {shell_interface.rdm_record_owner} {email}'
+    file_name = f'{shell_interface.dirpath}/data/pure_rdm_user_id.txt'
+    open(file_name, 'wb').write(line)
+
     # PURE REQUEST
     headers = {
         'Accept': 'application/json',
@@ -53,34 +62,28 @@ def rdm_person_association(shell_interface: object, persion_uuid: str):
         # If the record is not in RDM, it is added
         if recid == False:
             shell_interface.item = item
-            print('--------- Create new record')
+            print('------- Create new record')
             create_invenio_data(shell_interface)
 
         else:
             # Checks if the owner is already in RDM record metadata
             # Get metadata from RDM
             response = rdm_get_recid_metadata(recid)
-            print(f'\tRDM getMetad. - {response}')
 
             record_json = shell_interface.json.loads(response.content)['metadata']
 
-
-
-            record_json['owners'] = [1, 55]
-            update_rdm_record(shell_interface, record_json, recid)
-            exit()
-
+            print(f"\tRDM getMetad. - {response} - Current owners:     - {record_json['owners']}")
 
             # If the owner is not among metadata owners
             if shell_interface.rdm_record_owner not in record_json['owners']:
-                print('--------- Adding owner to record')
+                print('------- Adding owner to record')
 
                 record_json['owners'].append(shell_interface.rdm_record_owner)
 
                 # Add owner to the record
                 update_rdm_record(shell_interface, record_json, recid)
             else:
-                print('--------- Owner already in record ;)')
+                print('------- Owner already in record ;)')
 
 
 #   ---         ---         ---
@@ -110,6 +113,10 @@ def update_rdm_record(shell_interface: object, record_json: dict, recid: str):
 
 #   ---         ---         ---
 def get_rdm_owner(shell_interface: object, email: str):
+
+    # TODO - TODO - TODO - TODO - TODO - TODO - TODO - TODO - TODO - TODO - TODO - TODO - TODO - TODO - TODO - TODO - TODO - TODO - TODO
+    # IT CAN NOT BE BASED ONLY ON THE EMAIL !!!!!!!!!!!!
+    # HOW TO BE SURE THAT IS THE SAME USER AS IN PURE? SEE SHIBBOLETH
 
     # DB query - Get user IP
     response = db_query(shell_interface, f"SELECT id FROM accounts_user WHERE email = '{email}'")

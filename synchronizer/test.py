@@ -1,7 +1,5 @@
+file_name = f'./synchronizer/data/pure_rdm_user_id.txt'
+file_data = open(file_name).readlines()
 
-a = [8, 9]
-b = [3]
-for i in a:
-    b.append(i)
-
-print(b)
+for i in file_data:
+    print(i.split(' ')[0])
