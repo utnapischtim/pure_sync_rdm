@@ -128,66 +128,9 @@ class RecordOwners(Generator):
 
 
 #######################################################
-# GROUP RESTRICTION
-# RecordOwners:
-# {Need(method='role', value='admin'),    Need(method='system_role', value='authenticated_user'), Need(method='system_role', value='any_user'), Need(method='id', value=1)}
-# RecordManager:
-# {Need(method='role', value='managers'), Need(method='system_role', value='authenticated_user'), Need(method='system_role', value='any_user'), Need(method='id', value=3)}
+def RecordManagers():
+    return RoleNeed('managers')
 
-class RecordManagers(Generator):
-
-    def needs(self, record=None, **kwargs):
-        """Enabling Needs."""
-        return [UserNeed(owner) for owner in record.get('owners', [])]
-        
-    def query_filter(self, record=None, **kwargs):
-        return Q('match_all')
-
-
-class RecordArchitecture(Generator):
-
-    def query_filter(self, record=None, **kwargs):
-        
-        provides = g.identity.provides
-
-        print(f'{provides}')
-
-        # Gets the user's id
-        for need in provides:
-            if need.method == 'id':
-                userId = need.value
-
-        for need in provides:
-            if need.method == 'role' and need.value == 'architecture':
-                print (f'Architect id: {userId} !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-                return Q('term', owners=userId)
-        return []
-
-# class Record(Generator):
-    
-#     def __init__(self):
-#         super(RecordManager, self).__init__()
-
-#     def needs(self, **kwargs):
-#         return []
-
-#     def query_filter(self, record=None, **kwargs):
-#         return []
-
-
-class RecordIP(Generator):
-    def needs(self, record=None, **rest_over):
-        is_restricted = (
-            record and
-            record.get('_access', {}).get('ipRestrictions', False)
-        )
-        return [any_user] if not is_restricted else []
-
-    def excludes(self, record=None, **rest_over):
-        return []
-
-    def query_filter(self, *args, **kwargs):
-        return Q('term', **{"_access.ipRestrictions": False})
 
 ##########################################################
 
@@ -213,7 +156,6 @@ class AnyUserIfPublic(Generator):
     def query_filter(self, *args, **kwargs):
         """Filters for non-restricted records."""
         # TODO: Implement with new permissions metadata
-        print(f'ooooooooooooooooooooooooooo {kwargs}')
         return Q('term', **{"_access.metadata_restricted": False})
 
 
