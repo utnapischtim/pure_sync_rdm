@@ -129,46 +129,26 @@ class RecordOwners(Generator):
 
 ###   ###   ###   ###   ###   ###
 #
-def RecordManagers():
-    return RoleNeed('managers')
 
-class RecordFaculty(Generator):
+class RecordGroups(Generator):
     
     def needs(self, record=None, **rest_over):
 
-        # return [any_user]
-
-        provides = g.identity.provides
-        print(f'Provides: {provides}')
-
-        record_groups = []
-        for need in provides:
-            if need.method == 'role':
-                record_groups.append(need.value)
-
-        print(f"record_groups {record_groups}")
-        print(f"groupRestrictions {record.get('groupRestrictions')}")
-
-        intersection = list(set(record.get('groupRestrictions')) & set(record_groups))
-        print(f'intersection {intersection}')
-
-        if len(intersection) > 0:
-            return [RoleNeed(group) for group in record.get('groupRestrictions', [])]
-        else:
-            return []
+        return [RoleNeed(group) for group in record.get('groupRestrictions', [])]
 
     def query_filter(self, *args, **kwargs):
-    
-        # return Q('match_all')
-        # return Q('match', **{"totalNumberOfAuthors": 3}) | Q('match', **{"totalNumberOfAuthors": 4})
-        
+
+        # return Q('match_all')         # TEMPORARY
+
         provides = g.identity.provides
 
+        # Get all user's groups
         record_groups = []
         for need in provides:
             if need.method == 'role':
                 record_groups.append(need.value)
 
+        # Queries Elasticsearch to get all records that match the user's groups
         queries = [
             Q('match', **{
                 "groupRestrictions": group
