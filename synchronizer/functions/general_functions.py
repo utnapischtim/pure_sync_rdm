@@ -109,7 +109,7 @@ def rdm_get_recid(shell_interface: object, uuid: str):
 
     total_recids = resp_json['hits']['total']
     if total_recids == 0:
-        print(f'\tRecid not found in RDM')
+        print(f'\tRecid not in RDM')
         return False
 
     log_message = f'\tRDM get recid      - {response} - Total: {total_recids}'

@@ -26,7 +26,6 @@ def rdm_person_association(shell_interface: object, external_id: int):
 
     # Get from RDM user_uuid
     user_uuid = pure_get_user_uuid(shell_interface, external_id)
-    print(f'user uuid          - {user_uuid}')
     
     if len(user_uuid) != 36:
         print('\n- Warning! Incorrect user_uuid length -\n')
@@ -61,14 +60,16 @@ def rdm_person_association(shell_interface: object, external_id: int):
     
         uuid  = item['uuid']
         
-        print(f'\n\tUser record uuid   - {uuid}')
+        print(f'\n\tRecord uuid        - {uuid}')
 
         # Get from RDM the recid
         recid = rdm_get_recid(shell_interface, uuid)
 
         # If the record is not in RDM, it is added
         if recid == False:
+            item['owners'] = [user_id]
             shell_interface.item = item
+
             print('\t+ Create new record +')
             create_invenio_data(shell_interface)
 
@@ -85,7 +86,7 @@ def rdm_person_association(shell_interface: object, external_id: int):
             if user_id and user_id not in record_json['owners']:
 
                 record_json['owners'].append(user_id)
-                print(f"\t+   Adding owner   +                  - New owners:         - {record_json['owners']}")
+                print(f"\t+   Adding owner   -                  - New owners:         - {record_json['owners']}")
 
                 record_json = shell_interface.json.dumps(record_json)
 
@@ -122,32 +123,49 @@ def update_rdm_record(shell_interface: object, data: str, recid: str):
 
 #   ---         ---         ---
 def pure_get_user_uuid(shell_interface: object, external_id: str):
-    
-    # PURE get person records
-    headers = {
-        'Accept': 'application/json',
-    }
-    params = (
-        ('q', f'"{external_id}"'),
-        ('apiKey', pure_api_key),
-        ('pageSize', 25),
-    )
-    url = f'{pure_rest_api_url}persons'
+    """ PURE get person records """
 
-    response = shell_interface.requests.get(url, headers=headers, params=params)
+    keep_searching = True
+    page_size = 50
+    page = 1
 
-    if response.status_code >= 300:
-        return False
+    while keep_searching:
 
-    open(f'{shell_interface.dirpath}/data/temporary_files/pure_get_user_uuid.json', "wb").write(response.content)
-    record_json = shell_interface.json.loads(response.content)
+        headers = {
+            'Accept': 'application/json',
+        }
+        params = (
+            ('q', f'"{external_id}"'),
+            ('apiKey', pure_api_key),
+            ('pageSize', page_size),
+            ('page', page),
+        )
+        url = f'{pure_rest_api_url}persons'
 
-    total_items = record_json['count']
-    print(f'Pure get user uuid - {response} - Total items: {total_items}')
+        response = shell_interface.requests.get(url, headers=headers, params=params)
 
-    for item in record_json['items']:
-        if item['externalId'] == external_id:
-            return item['uuid']
+        if response.status_code >= 300:
+            print(response.content)
+            return False
+
+        open(f'{shell_interface.dirpath}/data/temporary_files/pure_get_user_uuid.json', "wb").write(response.content)
+        record_json = shell_interface.json.loads(response.content)
+
+        total_items = record_json['count']
+        print(f'Pure get user uuid - {response} - Total items: {total_items}')
+
+        for item in record_json['items']:
+            if item['externalId'] == external_id:
+
+                first_name  = item['name']['firstName']
+                lastName    = item['name']['lastName']
+                uuid        = item['uuid']
+
+                print(f'User uuid          - {uuid}  - {first_name} {lastName}')
+                return uuid
+
+        if 'navigationLinks' in record_json:
+            page += 1
 
     return False
 

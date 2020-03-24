@@ -20,6 +20,7 @@ def create_invenio_data(shell_interface: object):
 
     shell_interface.record_files = []
     shell_interface.rdm_file_review = []
+
     item = shell_interface.item
     shell_interface.uuid = item['uuid']
 
@@ -28,12 +29,15 @@ def create_invenio_data(shell_interface: object):
     # Other ids specific for actual users
     # GET FROM DB id of certain user (by email) - select id from accounts_user where email = 'admin@invenio.org';
 
-    # RDM user id of the record owner
-    shell_interface.data['owners'] = [1]                                                    # Master user id = 1 (?????????????)
-
-    # If some RDM owner is specified then it will be added to owners(see rdm_person_association.py)
-    if shell_interface.rdm_record_owner:
-        shell_interface.data['owners'].append(shell_interface.rdm_record_owner)
+    # RDM user id of the record owner.
+    # Minimum length 1 -> owner 1 must be the admin user
+    
+    if 'owners' in item:
+        shell_interface.data['owners'] = item['owners']
+        shell_interface.data['owners'].append(1)
+        print(f"\tOwners:            - {shell_interface.data['owners']}")
+    else:
+        shell_interface.data['owners'] = [1]
 
     # shell_interface.data['_access'] = {'metadata_restricted': True, 'files_restricted': True}        # Default value for _access field
     shell_interface.data['_access'] = {'metadata_restricted': False, 'files_restricted': False}        # Default value for _access field
