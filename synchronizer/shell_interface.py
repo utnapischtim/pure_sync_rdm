@@ -10,6 +10,7 @@ Usage:
     shell_interface.py delete_all
     shell_interface.py test
     shell_interface.py persons
+    shell_interface.py owners
 
 Options:
     -h --help     Show this screen.
@@ -21,7 +22,6 @@ import requests
 import json
 import os
 import time
-# from cmd                                import Cmd
 from datetime                           import date, datetime, timedelta
 from functions.pure_get_changes         import pure_get_changes
 from functions.rdm_push_by_page         import get_pure_by_page
@@ -31,8 +31,9 @@ from functions.rdm_duplicates           import rdm_duplicates
 from functions.delete_all_records       import delete_all_records
 from functions.rdm_push_by_uuid         import rdm_push_by_uuid
 from functions.delete_record            import delete_record, delete_from_list
-from functions.rdm_person_association   import rdm_person_association
 from functions.general_functions        import db_connect
+from functions.rdm_person_association   import rdm_person_association, get_rdm_record_owners
+# from ..person_association.rdm_person_association  import rdm_person_association
 
 
 class shell_interface:
@@ -87,8 +88,13 @@ class shell_interface:
     def delete_all(self):
         delete_all_records(self)
 
+
     def persons(self):
         rdm_person_association(self, '128')
+
+
+    def owners(self):
+        get_rdm_record_owners(self)
 
 
 if __name__ == '__main__':
@@ -104,3 +110,4 @@ elif arguments['uuid']              == True: docopt_instance.uuid()
 elif arguments['duplicates']        == True: docopt_instance.duplicates()
 elif arguments['delete_all']        == True: docopt_instance.delete_all()
 elif arguments['persons']           == True: docopt_instance.persons()
+elif arguments['owners']            == True: docopt_instance.owners()

@@ -15,7 +15,7 @@ def rdm_person_association(shell_interface: object, external_id: int):
     print(f'\nExternal_id: {external_id}\n')
 
     # Gets the ID and IP of the logged in user
-    response = get_rdm_user_id(shell_interface)
+    response = rdm_get_user_id(shell_interface)
 
     # If the user was not found in RDM then there is no owner to add to the record.
     if not response:
@@ -171,7 +171,7 @@ def pure_get_user_uuid(shell_interface: object, external_id: str):
 
 
 #   ---         ---         ---
-def get_rdm_user_id(shell_interface: object):
+def rdm_get_user_id(shell_interface: object):
     """ Gets the ID and IP of the logged in user """
 
     # Table -> accounts_user_session_activity:
@@ -199,3 +199,63 @@ def get_rdm_user_id(shell_interface: object):
     print(f'user IP: {response[0][1]} - user_id: {response[0][0]}')
 
     return response[0]
+
+
+#   ---         ---         ---
+def get_rdm_record_owners(shell_interface: object):
+            
+    pag = 1
+    pag_size = 25
+
+    count = 0
+    go_on = True
+
+    # Empty file
+    file_owner = f"{shell_interface.dirpath}/data/temporary_files/rdm_records_owner.txt"
+    open(file_owner, 'w').close()
+
+    while go_on == True:
+
+        # REQUEST to RDM
+        headers = {
+            'Authorization': f'Bearer {token_rdm}',
+            'Content-Type': 'application/json',
+        }
+        params = (('prettyprint', '1'),)
+        url = f'{rdm_api_url_records}api/records/?sort=mostrecent&size={pag_size}&page={pag}'
+
+        response = shell_interface.requests.get(url, headers=headers, params=params, verify=False)
+        print(f'\n{response}\n')
+        
+        file_name = f"{shell_interface.dirpath}/data/temporary_files/rdm_get_records.json"
+        open(file_name, 'wb').write(response.content)
+
+        if response.status_code >= 300:
+            print(response.content)
+            break
+
+        resp_json = shell_interface.json.loads(response.content)
+        data = ''
+
+        for i in resp_json['hits']['hits']:
+            count += 1
+
+            uuid   = i['metadata']['uuid']
+            recid  = i['metadata']['recid']
+            owners = i['metadata']['owners']
+
+            line = f'{uuid} - {recid} - {owners}'
+            print(line)
+            data += f'{line}\n'
+
+        print(f'Pag {str(pag)} - Records {count}')
+        
+        open(file_owner, 'a').write(data)
+
+        if 'next' not in resp_json['links']:
+            go_on = False
+        
+        pag += 1
+
+
+
