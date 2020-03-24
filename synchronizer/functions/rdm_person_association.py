@@ -4,57 +4,64 @@ from functions.rdm_push_record      import rdm_push_record, create_invenio_data
 
 
 #   ---         ---         ---
-def rdm_person_association(shell_interface: object, persion_uuid: str):
+def rdm_person_association(shell_interface: object, external_id: int):
     """ Gets from pure all the records related to a certain user,
         afterwards it modifies RDM record's owner to match the user.
         To be executed when a user access for the first time (or at every access ?). """
 
-    person_uuid = 'cdc5cd7e-a6d4-4e2a-b258-d0cad657a1d1'        # TEMPORARY
-    email       = 'tset@invenio.org'                            # TEMPORARY
-
     initialize_count_variables(shell_interface)
     shell_interface.count_http_responses = {}
 
-    # Get RDM user id
-    get_rdm_owner(shell_interface, email)
+    print(f'\nExternal_id: {external_id}\n')
+
+    # Gets the ID and IP of the logged in user
+    response = get_rdm_user_id(shell_interface)
 
     # If the user was not found in RDM then there is no owner to add to the record.
-    if shell_interface.rdm_record_owner == None:
+    if not response:
         return
 
-    # Pure user uuid  +  RDM user id  +  RDM email
-    line = f'{person_uuid} {shell_interface.rdm_record_owner} {email}'
-    file_name = f'{shell_interface.dirpath}/data/pure_rdm_user_id.txt'
-    open(file_name, 'wb').write(line)
+    user_id = response[0]
+    user_ip = response[1]
 
-    # PURE REQUEST
+    # Get from RDM user_uuid
+    user_uuid = pure_get_user_uuid(shell_interface, external_id)
+    print(f'user uuid          - {user_uuid}')
+    
+    if len(user_uuid) != 36:
+        print('\n- Warning! Incorrect user_uuid length -\n')
+        return False
+
+    # PURE get person records
     headers = {
         'Accept': 'application/json',
     }
     params = (
         ('apiKey', pure_api_key),
+        ('pageSize', 200),
     )
-    url = f'{pure_rest_api_url}persons/{person_uuid}/research-outputs'
+    url = f'{pure_rest_api_url}persons/{user_uuid}/research-outputs'
     response = shell_interface.requests.get(url, headers=headers, params=params)
 
-    print(f'\tPerson records - {response}\n')
-
-    # Write data into resp_pure_changes
-    file_name = f'{shell_interface.dirpath}/data/temporary_files/resp_pure_persons.json'
+    # Write data into pure_get_person_records
+    file_name = f'{shell_interface.dirpath}/data/temporary_files/pure_get_person_records.json'
     open(file_name, 'wb').write(response.content)
 
     if response.status_code >= 300:
         print(response.content)
+        return False
 
     # Load response json
     resp_json = shell_interface.json.loads(response.content)
 
+    total_items = resp_json['count']
+    print(f'Get person records - {response} - total_items: {total_items}')
+
     for item in resp_json['items']:
     
         uuid  = item['uuid']
-        title = item['title']
         
-        print(f'\n\tPerson record - {uuid} - {title}')
+        print(f'\n\tUser record uuid   - {uuid}')
 
         # Get from RDM the recid
         recid = rdm_get_recid(shell_interface, uuid)
@@ -62,34 +69,37 @@ def rdm_person_association(shell_interface: object, persion_uuid: str):
         # If the record is not in RDM, it is added
         if recid == False:
             shell_interface.item = item
-            print('------- Create new record')
+            print('\t+ Create new record +')
             create_invenio_data(shell_interface)
 
         else:
             # Checks if the owner is already in RDM record metadata
             # Get metadata from RDM
-            response = rdm_get_recid_metadata(recid)
+            response = rdm_get_recid_metadata(shell_interface, recid)
 
             record_json = shell_interface.json.loads(response.content)['metadata']
 
-            print(f"\tRDM getMetad. - {response} - Current owners:     - {record_json['owners']}")
+            print(f"\tRDM get metadata   - {response} - Current owners:     - {record_json['owners']}")
 
             # If the owner is not among metadata owners
-            if shell_interface.rdm_record_owner not in record_json['owners']:
-                print('------- Adding owner to record')
+            if user_id and user_id not in record_json['owners']:
 
-                record_json['owners'].append(shell_interface.rdm_record_owner)
+                record_json['owners'].append(user_id)
+                print(f"\t+   Adding owner   +                  - New owners:         - {record_json['owners']}")
+
+                record_json = shell_interface.json.dumps(record_json)
+
+                file_name = f'{shell_interface.dirpath}/data/temporary_files/rdm_record_update.json'
+                open(file_name, 'a').write(record_json)
 
                 # Add owner to the record
                 update_rdm_record(shell_interface, record_json, recid)
             else:
-                print('------- Owner already in record ;)')
+                print('\t+ Owner in record  +')
 
 
 #   ---         ---         ---
-def update_rdm_record(shell_interface: object, record_json: dict, recid: str):
-
-    data = shell_interface.json.dumps(record_json)
+def update_rdm_record(shell_interface: object, data: str, recid: str):
 
     data_utf8 = data.encode('utf-8')
 
@@ -104,29 +114,70 @@ def update_rdm_record(shell_interface: object, record_json: dict, recid: str):
     url = f'{rdm_api_url_records}api/records/{recid}'
 
     response = shell_interface.requests.put(url, headers=headers, params=params, data=data_utf8, verify=False)
-
-    print(f'\tRecord update - {response}')
+    print(f'\tRecord update      - {response}')
 
     if response.status_code >= 300:
         print(response.content)
 
 
 #   ---         ---         ---
-def get_rdm_owner(shell_interface: object, email: str):
+def pure_get_user_uuid(shell_interface: object, external_id: str):
+    
+    # PURE get person records
+    headers = {
+        'Accept': 'application/json',
+    }
+    params = (
+        ('q', f'"{external_id}"'),
+        ('apiKey', pure_api_key),
+        ('pageSize', 25),
+    )
+    url = f'{pure_rest_api_url}persons'
 
-    # TODO - TODO - TODO - TODO - TODO - TODO - TODO - TODO - TODO - TODO - TODO - TODO - TODO - TODO - TODO - TODO - TODO - TODO - TODO
-    # IT CAN NOT BE BASED ONLY ON THE EMAIL !!!!!!!!!!!!
-    # HOW TO BE SURE THAT IS THE SAME USER AS IN PURE? SEE SHIBBOLETH
+    response = shell_interface.requests.get(url, headers=headers, params=params)
 
-    # DB query - Get user IP
-    response = db_query(shell_interface, f"SELECT id FROM accounts_user WHERE email = '{email}'")
+    if response.status_code >= 300:
+        return False
+
+    open(f'{shell_interface.dirpath}/data/temporary_files/pure_get_user_uuid.json', "wb").write(response.content)
+    record_json = shell_interface.json.loads(response.content)
+
+    total_items = record_json['count']
+    print(f'Pure get user uuid - {response} - Total items: {total_items}')
+
+    for item in record_json['items']:
+        if item['externalId'] == external_id:
+            return item['uuid']
+
+    return False
+
+
+#   ---         ---         ---
+def get_rdm_user_id(shell_interface: object):
+    """ Gets the ID and IP of the logged in user """
+
+    # Table -> accounts_user_session_activity:
+    # created
+    # updated
+    # sid_s
+    # user_id
+    # ip
+    # country
+    # browser
+    # browser_version
+    # os
+    # device
+
+    response = db_query(shell_interface, f"SELECT user_id, ip FROM accounts_user_session_activity")
+
     if len(response) == 0:
-        print('\naccounts_user: email not found\n')
+        print('\n- accounts_user_session_activity: No user is logged in -\n')
         return False
 
     elif len(response) > 1:
-        print('\naccounts_user: email found multiple times\n')
+        print('\n- accounts_user_session_activity: Multiple users in \n')
         return False
 
-    shell_interface.rdm_record_owner = response[0][0]
-    print(f'\tRDM record owner - {shell_interface.rdm_record_owner}')
+    print(f'user IP: {response[0][1]} - user_id: {response[0][0]}')
+
+    return response[0]

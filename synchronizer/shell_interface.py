@@ -58,9 +58,9 @@ class shell_interface:
 
     def pages(self):
         """ Push to RDM records from Pure by page """
-        pag_begin = 3
-        pag_end =   4
-        pag_size =  2
+        pag_begin = 1
+        pag_end =   3
+        pag_size =  5
         get_pure_by_page(self, pag_begin, pag_end, pag_size)
 
 
@@ -88,7 +88,7 @@ class shell_interface:
         delete_all_records(self)
 
     def persons(self):
-        rdm_person_association(self, 'cdc5cd7e-a6d4-4e2a-b258-d0cad657a1d1')
+        rdm_person_association(self, '30')
 
 
 if __name__ == '__main__':

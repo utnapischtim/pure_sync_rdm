@@ -43,9 +43,7 @@ def pure_get_metadata(shell_interface: object, uuid: str):
 
 #   ---         ---         ---
 # def rdm_get_recid_metadata(shell_interface: object, recid: str):
-def rdm_get_recid_metadata(recid: str):
-    import requests
-
+def rdm_get_recid_metadata(shell_interface: object, recid: str):
     
     if len(recid) != 11:
         print(f'\nERROR - The recid must have 11 characters. Given: {recid}\n')
@@ -58,19 +56,16 @@ def rdm_get_recid_metadata(recid: str):
     }
     params = (('prettyprint', '1'),)
     url = f'{rdm_api_url_records}api/records/{recid}'
-    # response = shell_interface.requests.get(url, headers=headers, params=params, verify=False)
-    response = requests.get(url, headers=headers, params=params, verify=False)
+    response = shell_interface.requests.get(url, headers=headers, params=params, verify=False)
 
     if response.status_code >= 300:
         print(f'\n{recid} - {response}')
         print(response.content)
         return False
 
-    # open(f'{shell_interface.dirpath}/data/temporary_files/rdm_get_recid_metadata.json', "wb").write(response.content)
-    open(f'{dirpath}/data/temporary_files/rdm_get_recid_metadata.json', "wb").write(response.content)
+    open(f'{shell_interface.dirpath}/data/temporary_files/rdm_get_recid_metadata.json', "wb").write(response.content)
     
     return response
-
 
 
 #   ---         ---         ---
@@ -114,10 +109,10 @@ def rdm_get_recid(shell_interface: object, uuid: str):
 
     total_recids = resp_json['hits']['total']
     if total_recids == 0:
-        print(f'\t- - Recid not found in RDM - -')
+        print(f'\tRecid not found in RDM')
         return False
 
-    log_message = f'\tRDM get recid - {response} - Total: {total_recids}'
+    log_message = f'\tRDM get recid      - {response} - Total: {total_recids}'
 
     # Iterate over all records with the same uuid
     # The first record is the most recent (they are sorted)

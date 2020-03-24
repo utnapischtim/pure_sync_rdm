@@ -42,8 +42,8 @@ def create_invenio_data(shell_interface: object):
     add_field(shell_interface, item, 'title',                       ['title'])
     add_field(shell_interface, item, 'access_right',                ['openAccessPermissions', 0, 'value'])
     
-    shell_interface.data['title']           = 'ccc'                                                      # TEST TEST
-    shell_interface.data['groupRestrictions']  = ['CC']                                             # TEST TEST
+    # shell_interface.data['title']           = 'test title'                                                      # TEST TEST
+    shell_interface.data['groupRestrictions']  = ['civils']                                             # TEST TEST
     shell_interface.data['ipRestrictions']     = ['127.0.0.9']                                                 # TEST TEST
 
     add_field(shell_interface, item, 'uuid',                        ['uuid'])
@@ -87,9 +87,6 @@ def create_invenio_data(shell_interface: object):
     # --- personAssociations ---
     if 'personAssociations' in item:
         shell_interface.data['contributors'] = []
-        
-        file_owner_name = f'{shell_interface.dirpath}/data/pure_rdm_user_id.txt'
-        file_owner_data = open(file_owner_name).readlines()
 
         for i in item['personAssociations']:
             sub_data = {}
@@ -107,17 +104,12 @@ def create_invenio_data(shell_interface: object):
             elif first_name and not last_name:
                 sub_data['name'] = f'(last name not specified), {first_name}'
 
-            # RDM OWNER
-            # Searchs among all users uuid if there is a match
-            for line in file_owner_data:
-                if person_uuid == line.split(' ')[0]:
-
-                    rdm_record_owner = line.split(' ')[1]
-                    
-                    if rdm_record_owner not in shell_interface.data['owners']:
-                        # Adds RDM user id (record owner) to 'owners'
-                        shell_interface.data['owners'].append(rdm_record_owner)
-
+            # Standard fields
+            sub_data = add_to_var(sub_data, i, 'externalId',               ['person', 'externalId'])     # 'externalPerson' never have 'externalId'
+            sub_data = add_to_var(sub_data, i, 'authorCollaboratorName',   ['authorCollaboration', 'names', 0, 'value'])   
+            sub_data = add_to_var(sub_data, i, 'personRole',               ['personRoles', 0, 'value'])    
+            sub_data = add_to_var(sub_data, i, 'organisationalUnit',       ['organisationalUnits', 0, 'names', 0, 'value'])
+            sub_data = add_to_var(sub_data, i, 'type_p',                   ['externalPerson', 'types', 0, 'value'])
 
             # ORCID
             person_uuid = get_value(i, ['person', 'uuid'])
@@ -130,13 +122,6 @@ def create_invenio_data(shell_interface: object):
                     sub_data['orcid'] = orcid
             else:
                 sub_data = add_to_var(sub_data, i, 'uuid',   ['externalPerson', 'uuid'])
-
-            # Standard fields
-            sub_data = add_to_var(sub_data, i, 'externalId',               ['person', 'externalId'])     # 'externalPerson' never have 'externalId'
-            sub_data = add_to_var(sub_data, i, 'authorCollaboratorName',   ['authorCollaboration', 'names', 0, 'value'])   
-            sub_data = add_to_var(sub_data, i, 'personRole',               ['personRoles', 0, 'value'])    
-            sub_data = add_to_var(sub_data, i, 'organisationalUnit',       ['organisationalUnits', 0, 'names', 0, 'value'])
-            sub_data = add_to_var(sub_data, i, 'type_p',                   ['externalPerson', 'types', 0, 'value'])
 
             shell_interface.data['contributors'].append(sub_data)
 
@@ -386,7 +371,7 @@ def post_to_rdm(shell_interface: object):
     shell_interface.count_http_responses[response.status_code] += 1
 
     uuid = shell_interface.item["uuid"]
-    print(f'\tPost metadata - {response} - Uuid:                 {uuid}')
+    print(f'\tRDM post metadata  - {response} - Uuid:                 {uuid}')
     
     current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
     report = f'{current_time} - metadata_to_rdm - {str(response)} - {uuid} - {shell_interface.item["title"]}\n'
@@ -483,7 +468,7 @@ def get_orcid(shell_interface: object, person_uuid: str, name: str):
 
     resp_json = shell_interface.json.loads(response.content)
 
-    message = f'\tPureGet Orcid - {response}'
+    message = f'\tPure get orcid     - {response}'
     if 'orcid' in resp_json:
         shell_interface.count_orcids += 1
         orcid = resp_json['orcid']
