@@ -74,9 +74,9 @@ def rdm_person_association(shell_interface: object, external_id: int):
 
         else:
             # Checks if the owner is already in RDM record metadata
+            
             # Get metadata from RDM
             response = rdm_get_recid_metadata(shell_interface, recid)
-
             record_json = shell_interface.json.loads(response.content)['metadata']
 
             print(f"\tRDM get metadata   - {response} - Current owners:     - {record_json['owners']}")
