@@ -1,6 +1,7 @@
 from setup                          import *
 from functions.get_put_file         import rdm_put_file, get_file_from_pure
 from functions.general_functions    import rdm_get_recid, pure_get_metadata
+from functions.rdm_groups           import rdm_create_group, rdm_add_user_to_group
 
 #   ---         ---         ---
 def rdm_push_record(shell_interface: object, uuid: str):
@@ -64,14 +65,22 @@ def create_invenio_data(shell_interface: object):
     add_field(shell_interface, item, 'category',                    ['categories', 0, 'value'])  
     add_field(shell_interface, item, 'peerReview',                  ['peerReview'])    
     add_field(shell_interface, item, 'publicationStatus',           ['publicationStatuses', 0, 'publicationStatuses', 0, 'value'])
+    add_field(shell_interface, item, 'managingOrganisationalUnit',  ['managingOrganisationalUnit', 'names', 0, 'value'])
     add_field(shell_interface, item, 'language',                    ['languages', 0, 'value'])
     add_field(shell_interface, item, 'totalNumberOfAuthors',        ['totalNumberOfAuthors'])
-    add_field(shell_interface, item, 'managingOrganisationalUnit',  ['managingOrganisationalUnit', 'names', 0, 'value'])
     add_field(shell_interface, item, 'workflow',                    ['workflows', 0, 'value'])
     add_field(shell_interface, item, 'confidential',                ['confidential'])
     add_field(shell_interface, item, 'publisherName',               ['publisher', 'names', 0, 'value'])
     add_field(shell_interface, item, 'abstract',                    ['abstracts', 0, 'value'])
 
+    # --- Managing Organisational Unit ---
+    if 'managingOrganisationalUnit' in item:
+
+        # Create group
+        managing_organisational_unit_uuid = get_value(item, ['managingOrganisationalUnit', 'uuid'])
+        rdm_create_group(shell_interface, managing_organisational_unit_uuid)
+
+    
     # --- Electronic Versions ---
     shell_interface.data['versionFiles'] = []
 
@@ -112,7 +121,7 @@ def create_invenio_data(shell_interface: object):
             sub_data = add_to_var(sub_data, i, 'externalId',               ['person', 'externalId'])     # 'externalPerson' never have 'externalId'
             sub_data = add_to_var(sub_data, i, 'authorCollaboratorName',   ['authorCollaboration', 'names', 0, 'value'])   
             sub_data = add_to_var(sub_data, i, 'personRole',               ['personRoles', 0, 'value'])    
-            sub_data = add_to_var(sub_data, i, 'organisationalUnit',       ['organisationalUnits', 0, 'names', 0, 'value'])
+            sub_data = add_to_var(sub_data, i, 'organisationalUnit',       ['organisationalUnits', 0, 'names', 0, 'value']) # UnitS...
             sub_data = add_to_var(sub_data, i, 'type_p',                   ['externalPerson', 'types', 0, 'value'])
 
             # ORCID
