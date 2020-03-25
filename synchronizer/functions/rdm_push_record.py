@@ -315,7 +315,7 @@ def language_conversion(shell_interface: object, pure_language: str):
     if pure_language == 'Undefined/Unknown':
         return False
     
-    file_name = f'{shell_interface.dirpath}/iso6393.json'
+    file_name = f'{shell_interface.dirpath}/data/iso6393.json'
     resp_json = shell_interface.json.load(open(file_name, 'r'))
     for i in resp_json:
         if i['name'] == pure_language:

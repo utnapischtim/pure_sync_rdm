@@ -59,9 +59,9 @@ class shell_interface:
 
     def pages(self):
         """ Push to RDM records from Pure by page """
-        pag_begin = 101
-        pag_end =   102
-        pag_size =  1
+        pag_begin = 112
+        pag_end =   113
+        pag_size =  25
         get_pure_by_page(self, pag_begin, pag_end, pag_size)
 
 
