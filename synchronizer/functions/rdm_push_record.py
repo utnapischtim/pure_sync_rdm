@@ -123,6 +123,15 @@ def create_invenio_data(shell_interface: object):
             sub_data = add_to_var(sub_data, i, 'personRole',               ['personRoles', 0, 'value'])    
             sub_data = add_to_var(sub_data, i, 'organisationalUnit',       ['organisationalUnits', 0, 'names', 0, 'value']) # UnitS...
             sub_data = add_to_var(sub_data, i, 'type_p',                   ['externalPerson', 'types', 0, 'value'])
+            
+            # # Adding contributor to RDM groups - TEMPORARY TEMPORARY TEMPORARY TEMPORARY TEMPORARY TEMPORARY 
+            # externalId = get_value(i, ['person', 'externalId'])
+            # if externalId:
+            #     print(f'{last_name}, {first_name} - {externalId}')
+            #     organisationalUnits_uuid = get_value(i, ['organisationalUnits', 0, 'uuid'])
+            #     if organisationalUnits_uuid:
+            #         rdm_add_user_to_group(shell_interface, 3, organisationalUnits_uuid)
+
 
             # ORCID
             person_uuid = get_value(i, ['person', 'uuid'])

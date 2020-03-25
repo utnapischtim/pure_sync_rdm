@@ -19,26 +19,28 @@ def rdm_create_group(shell_interface: object, group_name: str):
         print(f'\tGroup in database {len(response)} times             - {group_name}')
 
 
-def rdm_add_user_to_group(shell_interface: object, user_id, group_name: str):
+def rdm_add_user_to_group(shell_interface: object, user_id: int, group_name: str):
 
     # NEEDS TESTING - NEEDS TESTING - NEEDS TESTING - NEEDS TESTING - NEEDS TESTING - NEEDS TESTING - NEEDS TESTING - NEEDS TESTING - NEEDS TESTING
 
     # Get user's rdm email
-    user_email = db_query(shell_interface, f"SELECT email FROM accounts_user WHERE id = {user_id}")[0]
+    user_email = db_query(shell_interface, f"SELECT email FROM accounts_user WHERE id = {user_id}")[0][0]
 
     # Get group's id
     query = f"SELECT id FROM accounts_role WHERE name = '{group_name}'"
     response = db_query(shell_interface, query)
+
     if len(response) == 0:
-        print(f'Warning - Group {group_name} not in accounts_role table.')
         rdm_create_group(shell_interface, group_name)
         response = db_query(shell_interface, query)
-    group_id = response[0]
+
+    group_id = response[0][0]
 
     # Checks if match already exists
     response = db_query(shell_interface, f"SELECT * FROM accounts_userrole WHERE user_id = {user_id} AND role_id = {group_id}")
+
     if len(response) > 0:
-        print(f'User {user_email} (id {user_id}) already belongs to group {group_name} (id {group_id})')
+        print(f'\tUser {user_email} (id {user_id}) already belongs to group {group_name} (id {group_id})')
         return True
 
     # Adds user to group
