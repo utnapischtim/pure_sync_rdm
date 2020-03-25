@@ -1,13 +1,13 @@
 from setup                          import *
-from functions.general_functions    import rdm_get_recid, rdm_get_recid_metadata, initialize_count_variables, db_connect, db_query
+from functions.general_functions    import rdm_get_recid, rdm_get_recid_metadata, initialize_count_variables, db_connect, db_query, add_spaces
+# from functions.general_functions    import *
 from functions.rdm_push_record      import rdm_push_record, create_invenio_data
 
 
 #   ---         ---         ---
 def rdm_person_association(shell_interface: object, external_id: int):
     """ Gets from pure all the records related to a certain user,
-        afterwards it modifies RDM record's owner to match the user.
-        To be executed when a user access for the first time (or at every access ?). """
+        afterwards it modifies/create RDM records accordingly. """
 
     initialize_count_variables(shell_interface)
     shell_interface.count_http_responses = {}
@@ -208,7 +208,9 @@ def get_rdm_record_owners(shell_interface: object):
     pag_size = 25
 
     count = 0
+    count_records_per_owner = {}
     go_on = True
+
 
     # Empty file
     file_owner = f"{shell_interface.dirpath}/data/temporary_files/rdm_records_owner.txt"
@@ -237,18 +239,23 @@ def get_rdm_record_owners(shell_interface: object):
         resp_json = shell_interface.json.loads(response.content)
         data = ''
 
-        for i in resp_json['hits']['hits']:
+        for item in resp_json['hits']['hits']:
             count += 1
 
-            uuid   = i['metadata']['uuid']
-            recid  = i['metadata']['recid']
-            owners = i['metadata']['owners']
+            uuid   = item['metadata']['uuid']
+            recid  = item['metadata']['recid']
+            owners = item['metadata']['owners']
 
             line = f'{uuid} - {recid} - {owners}'
             print(line)
             data += f'{line}\n'
 
-        print(f'Pag {str(pag)} - Records {count}')
+            for i in owners:
+                if i not in count_records_per_owner:
+                    count_records_per_owner[i] = 0
+                count_records_per_owner[i] += 1
+
+        print(f'\nPag {str(pag)} - Records {count}\n')
         
         open(file_owner, 'a').write(data)
 
@@ -257,5 +264,10 @@ def get_rdm_record_owners(shell_interface: object):
         
         pag += 1
 
+    print('\nOwner  Records')
+    for key in count_records_per_owner:
+        records = add_spaces(count_records_per_owner[key])
+        key     = add_spaces(key)
+        print(f'{key}    {records}')
 
 

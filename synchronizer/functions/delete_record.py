@@ -58,7 +58,7 @@ def delete_record(shell_interface, recid: str):
     response = shell_interface.requests.delete(url, headers=headers, verify=False)
     #   ---
     
-    print(f'\tRDM delete    - {response} - Deleted recid:        {recid}')
+    print(f'\tRDM delete record  - {response} - Deleted recid:        {recid}')
 
     # Append to yyyy-mm-dd_records.log
     current_time = shell_interface.datetime.now().strftime("%H:%M:%S")

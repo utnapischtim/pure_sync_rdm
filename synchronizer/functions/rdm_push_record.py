@@ -47,8 +47,8 @@ def create_invenio_data(shell_interface: object):
     add_field(shell_interface, item, 'access_right',                ['openAccessPermissions', 0, 'value'])
     
     # shell_interface.data['title']           = 'test title'                                                      # TEST TEST
-    shell_interface.data['groupRestrictions']  = ['civils']                                             # TEST TEST
-    shell_interface.data['ipRestrictions']     = ['127.0.0.9']                                                 # TEST TEST
+    shell_interface.data['groupRestrictions']  = ['civils']                                                 # TEST TEST
+    shell_interface.data['ipRestrictions']     = ['127.0.0.1']                                                 # TEST TEST
 
     add_field(shell_interface, item, 'uuid',                        ['uuid'])
     add_field(shell_interface, item, 'pureId',                      ['pureId'])
