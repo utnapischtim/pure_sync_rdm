@@ -33,9 +33,12 @@ def create_invenio_data(shell_interface: object):
     # RDM user id of the record owner.
     # Minimum length 1 -> owner 1 must be the admin user
     
+    # When the item's metadata comes directly from pure it never contains 'owners' field.
+    # It does instead when it comes from other sources, such as RDM update
     if 'owners' in item:
         shell_interface.data['owners'] = item['owners']
-        shell_interface.data['owners'].append(1)
+        if 1 not in shell_interface.data['owners']:
+            shell_interface.data['owners'].append(1)
         print(f"\tOwners:            - {shell_interface.data['owners']}")
     else:
         shell_interface.data['owners'] = [1]

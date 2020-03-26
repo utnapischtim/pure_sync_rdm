@@ -1,11 +1,15 @@
 from setup                          import *
-from functions.general_functions    import rdm_get_recid, rdm_get_recid_metadata, initialize_count_variables, db_connect, db_query, add_spaces
-# from functions.general_functions    import *
-from functions.rdm_push_record      import rdm_push_record, create_invenio_data
-
+from functions.rdm_push_record      import  rdm_push_record, create_invenio_data
+from functions.general_functions    import  rdm_get_recid, \
+                                            rdm_get_recid_metadata, \
+                                            initialize_count_variables, \
+                                            db_connect, \
+                                            db_query, \
+                                            add_spaces, \
+                                            bcolors
 
 #   ---         ---         ---
-def rdm_person_association(shell_interface: object, external_id: int):
+def rdm_owners(shell_interface: object, external_id: int):
     """ Gets from pure all the records related to a certain user,
         afterwards it modifies/create RDM records accordingly. """
 
@@ -24,12 +28,18 @@ def rdm_person_association(shell_interface: object, external_id: int):
     user_id = response[0]
     user_ip = response[1]
 
-    # Get from RDM user_uuid
+    # Get from pure user_uuid
     user_uuid = pure_get_user_uuid(shell_interface, external_id)
     
+    if not user_uuid:
+        return False
+
     if len(user_uuid) != 36:
         print('\n- Warning! Incorrect user_uuid length -\n')
         return False
+
+    # Add user to user_ids_match table
+    add_user_ids_match(shell_interface, user_id, user_uuid, external_id)
 
     # PURE get person records
     headers = {
@@ -56,11 +66,16 @@ def rdm_person_association(shell_interface: object, external_id: int):
     total_items = resp_json['count']
     print(f'Get person records - {response} - total_items: {total_items}')
 
+    if total_items == 0:
+        print('\nThe user has no records - End task\n')
+        return True
+
     for item in resp_json['items']:
     
         uuid  = item['uuid']
+        title = item['title']
         
-        print(f'\n\tRecord uuid        - {uuid}')
+        print(f'\n\tRecord uuid        - {uuid}  - {title}')
 
         # Get from RDM the recid
         recid = rdm_get_recid(shell_interface, uuid)
@@ -70,7 +85,7 @@ def rdm_person_association(shell_interface: object, external_id: int):
             item['owners'] = [user_id]
             shell_interface.item = item
 
-            print('\t+ Create new record +')
+            print('\t+ Create record    +')
             create_invenio_data(shell_interface)
 
         else:
@@ -126,7 +141,7 @@ def pure_get_user_uuid(shell_interface: object, external_id: str):
     """ PURE get person records """
 
     keep_searching = True
-    page_size = 50
+    page_size = 25
     page = 1
 
     while keep_searching:
@@ -152,6 +167,11 @@ def pure_get_user_uuid(shell_interface: object, external_id: str):
         record_json = shell_interface.json.loads(response.content)
 
         total_items = record_json['count']
+        
+        if total_items == 0:
+            print(f'{bcolors.RED}\nUser uuid not found - Exit task\n{bcolors.END}')
+            return False
+
         print(f'Pure get user uuid - {response} - Total items: {total_items}')
 
         for item in record_json['items']:
@@ -166,6 +186,8 @@ def pure_get_user_uuid(shell_interface: object, external_id: str):
 
         if 'navigationLinks' in record_json:
             page += 1
+        else:
+            keep_searching = False
 
     return False
 
@@ -263,11 +285,56 @@ def get_rdm_record_owners(shell_interface: object):
             go_on = False
         
         pag += 1
+        shell_interface.time.sleep(1)
 
-    print('\nOwner  Records')
+    print('Owner  Records')
     for key in count_records_per_owner:
         records = add_spaces(count_records_per_owner[key])
         key     = add_spaces(key)
         print(f'{key}    {records}')
 
 
+
+def add_user_ids_match(shell_interface: object, user_id: int, user_uuid: str, external_id: str):
+
+    file_name = f"{shell_interface.dirpath}/data/user_ids_match.txt"
+
+    needs_to_add = check_user_ids_match(shell_interface, user_id, user_uuid, external_id, file_name)
+
+    if needs_to_add:
+        open(file_name, 'a').write(f'{user_id} {user_uuid} {external_id}\n')
+        print(f'user_ids_match     - Adding: {user_id}, {user_uuid}, {external_id}')
+
+
+def check_user_ids_match(shell_interface: object, user_id: int, user_uuid: str, external_id: str, file_name: str):
+
+    file_data = open(file_name).readlines()
+    for line in file_data:
+        line = line.split('\n')[0]
+        line = line.split(' ')
+
+        # Checks if at least one of the ids match
+        if str(user_id) == line[0] or user_uuid == line[1] or external_id == line[2]:
+            
+            if line == [str(user_id), user_uuid, external_id]:
+                print('user_ids_match     - full match')
+                return False
+
+            # print('user_ids_match     - partial match -----------------------------------')
+            # print(f'{user_id} == {line[0]} and {user_uuid} == {line[1]} and {external_id} == {line[2]}')
+            # return False
+    
+    print('user_ids_match     - No match')
+    return True
+
+def get_rdm_userid_from_list_by_externalid(shell_interface: object, external_id: str):
+    file_name = f"{shell_interface.dirpath}/data/user_ids_match.txt"
+    file_data = open(file_name).readlines()
+    for line in file_data:
+        line = line.split('\n')[0]
+        line = line.split(' ')
+
+        # Checks if at least one of the ids match
+        if external_id == line[2]:
+            print(f'RDM useridFromList - externalId: {external_id} -> user id: {line[0]}')
+            return line[0]

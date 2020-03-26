@@ -3,6 +3,4 @@
 # print(f'response: {response}')
 
 from functions.general_functions import bcolors
-
-
 print(bcolors.BLUE + "Warning: No active frommets remain. Continue?" + bcolors.END)

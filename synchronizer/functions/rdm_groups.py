@@ -13,7 +13,7 @@ def rdm_create_group(shell_interface: object, group_name: str):
             print(f'Warning - Creating group response: {response}')
 
     elif len(response) == 1:
-        print(f'\tGroup in database                     - {group_name}')
+        print(f'\tGroup in database  -                  - {group_name}')
         
     elif len(response) > 1:
         print(f'\tGroup in database {len(response)} times             - {group_name}')

@@ -9,8 +9,8 @@ Usage:
     shell_interface.py duplicates
     shell_interface.py delete_all
     shell_interface.py test
-    shell_interface.py persons
     shell_interface.py owners
+    shell_interface.py owners_list
 
 Options:
     -h --help     Show this screen.
@@ -32,8 +32,7 @@ from functions.delete_all_records       import delete_all_records
 from functions.rdm_push_by_uuid         import rdm_push_by_uuid
 from functions.delete_record            import delete_record, delete_from_list
 from functions.general_functions        import db_connect
-from functions.rdm_person_association   import rdm_person_association, get_rdm_record_owners
-# from ..person_association.rdm_person_association  import rdm_person_association
+from functions.rdm_owners               import rdm_owners, get_rdm_record_owners
 
 
 class shell_interface:
@@ -59,9 +58,9 @@ class shell_interface:
 
     def pages(self):
         """ Push to RDM records from Pure by page """
-        pag_begin = 114
-        pag_end =   115
-        pag_size =  2
+        pag_begin = 1
+        pag_end =   2
+        pag_size =  3
         get_pure_by_page(self, pag_begin, pag_end, pag_size)
 
 
@@ -89,13 +88,18 @@ class shell_interface:
         delete_all_records(self)
 
 
-    def persons(self):
+    def owners(self):
         """ Gets from pure all the records related to a certain user,
             afterwards it modifies/create RDM records accordingly."""
-        rdm_person_association(self, '128')
+        rdm_owners(self, '54426')
+
+        # admin     63222
+        # visitor   65033
+        # arc       -82496
+        # viertel   64193
 
 
-    def owners(self):
+    def owners_list(self):
         """ Gets from RDM all record uuids, recids and owners """
         get_rdm_record_owners(self)
 
@@ -112,5 +116,5 @@ elif arguments['delete']            == True: docopt_instance.delete()
 elif arguments['uuid']              == True: docopt_instance.uuid()
 elif arguments['duplicates']        == True: docopt_instance.duplicates()
 elif arguments['delete_all']        == True: docopt_instance.delete_all()
-elif arguments['persons']           == True: docopt_instance.persons()
 elif arguments['owners']            == True: docopt_instance.owners()
+elif arguments['owners_list']       == True: docopt_instance.owners_list()
