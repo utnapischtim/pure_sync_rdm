@@ -174,7 +174,9 @@ def db_connect(shell_interface):
 #   ---         ---         ---
 def db_query(shell_interface, query):
     shell_interface.cursor.execute(query)
-    return shell_interface.cursor.fetchall() 
+    if shell_interface.cursor.rowcount > 0:
+        return shell_interface.cursor.fetchall()
+    return False
 
 
 #   ---         ---         ---

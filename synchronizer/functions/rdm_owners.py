@@ -142,7 +142,7 @@ def pure_get_user_uuid(shell_interface: object, external_id: str):
     """ PURE get person records """
 
     keep_searching = True
-    page_size = 25
+    page_size = 250
     page = 1
 
     while keep_searching:
@@ -211,7 +211,7 @@ def rdm_get_user_id(shell_interface: object):
 
     response = db_query(shell_interface, f"SELECT user_id, ip FROM accounts_user_session_activity")
 
-    if len(response) == 0:
+    if not response:
         print('\n- accounts_user_session_activity: No user is logged in -\n')
         return False
 

@@ -50,8 +50,8 @@ def create_invenio_data(shell_interface: object):
     add_field(shell_interface, item, 'title',                       ['title'])
     add_field(shell_interface, item, 'access_right',                ['openAccessPermissions', 0, 'value'])
     
-    # shell_interface.data['title']           = 'test title'                                                      # TEST TEST
-    shell_interface.data['groupRestrictions']  = ['civils']                                                 # TEST TEST
+    # shell_interface.data['title']              = 'test title'                                                      # TEST TEST
+    # shell_interface.data['groupRestrictions']  = ['civils']                                                 # TEST TEST
     shell_interface.data['ipRestrictions']     = ['127.0.0.1']                                                 # TEST TEST
 
     add_field(shell_interface, item, 'uuid',                        ['uuid'])
@@ -144,6 +144,14 @@ def create_invenio_data(shell_interface: object):
                     sub_data['orcid'] = orcid
             else:
                 sub_data = add_to_var(sub_data, i, 'uuid',   ['externalPerson', 'uuid'])
+
+            # # Adding contributor to RDM groups - TEMPORARY TEMPORARY TEMPORARY TEMPORARY TEMPORARY TEMPORARY 
+            # externalId = get_value(i, ['person', 'externalId'])
+            # if externalId:
+            #     print(f'{last_name}, {first_name} - {externalId}')
+            #     organisationalUnits_uuid = get_value(i, ['organisationalUnits', 0, 'uuid'])
+            #     if organisationalUnits_uuid:
+            #         rdm_add_user_to_group(shell_interface, 3, organisationalUnits_uuid)
 
             shell_interface.data['contributors'].append(sub_data)
 
