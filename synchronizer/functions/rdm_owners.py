@@ -1,5 +1,6 @@
 from setup                          import *
-from functions.rdm_push_record      import  rdm_push_record, create_invenio_data
+from functions.rdm_push_record      import  create_invenio_data
+from functions.rdm_push_record      import  rdm_push_record
 from functions.general_functions    import  rdm_get_recid, \
                                             rdm_get_recid_metadata, \
                                             initialize_count_variables, \
@@ -326,15 +327,3 @@ def check_user_ids_match(shell_interface: object, user_id: int, user_uuid: str, 
     
     print('user_ids_match     - No match')
     return True
-
-def get_rdm_userid_from_list_by_externalid(shell_interface: object, external_id: str):
-    file_name = f"{shell_interface.dirpath}/data/user_ids_match.txt"
-    file_data = open(file_name).readlines()
-    for line in file_data:
-        line = line.split('\n')[0]
-        line = line.split(' ')
-
-        # Checks if at least one of the ids match
-        if external_id == line[2]:
-            print(f'RDM useridFromList - externalId: {external_id} -> user id: {line[0]}')
-            return line[0]

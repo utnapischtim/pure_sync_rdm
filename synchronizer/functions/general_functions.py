@@ -21,8 +21,8 @@ def pure_get_metadata(shell_interface: object, uuid: str):
 
     print(f'\n\tGet  metadata - {response}')
 
-    # Add response content to resp_pure.json
-    file_response = f'{shell_interface.dirpath}/data/temporary_files/resp_pure.json'
+    # Add response content to pure_get_metadata.json
+    file_response = f'{shell_interface.dirpath}/data/temporary_files/pure_get_metadata.json'
     open(file_response, 'wb').write(response.content)
 
     # Check response
@@ -187,3 +187,20 @@ class bcolors:
     END = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+
+
+#   ---         ---         ---
+def get_rdm_userid_from_list_by_externalid(shell_interface: object, external_id: str):
+
+    file_data = open(f"{shell_interface.dirpath}/data/user_ids_match.txt").readlines()
+
+    for line in file_data:
+        line = line.split('\n')[0]
+        line = line.split(' ')
+
+        # Checks if at least one of the ids match
+        if external_id == line[2]:
+            user_id         = line[0]
+            user_id_spaces  = add_spaces(user_id)
+            print(f'\tRDM useridFromList - user id:  {user_id_spaces}  - externalId: {external_id} - - - - - - - - - - - - - - - - - - - - -')
+            return user_id

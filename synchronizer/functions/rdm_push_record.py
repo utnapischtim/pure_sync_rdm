@@ -1,6 +1,6 @@
 from setup                          import *
 from functions.get_put_file         import rdm_put_file, get_file_from_pure
-from functions.general_functions    import rdm_get_recid, pure_get_metadata
+from functions.general_functions    import rdm_get_recid, pure_get_metadata, get_rdm_userid_from_list_by_externalid
 from functions.rdm_groups           import rdm_create_group, rdm_add_user_to_group
 
 #   ---         ---         ---
@@ -127,14 +127,11 @@ def create_invenio_data(shell_interface: object):
             sub_data = add_to_var(sub_data, i, 'organisationalUnit',       ['organisationalUnits', 0, 'names', 0, 'value']) # UnitS...
             sub_data = add_to_var(sub_data, i, 'type_p',                   ['externalPerson', 'types', 0, 'value'])
             
-            # # Adding contributor to RDM groups - TEMPORARY TEMPORARY TEMPORARY TEMPORARY TEMPORARY TEMPORARY 
-            # externalId = get_value(i, ['person', 'externalId'])
-            # if externalId:
-            #     print(f'{last_name}, {first_name} - {externalId}')
-            #     organisationalUnits_uuid = get_value(i, ['organisationalUnits', 0, 'uuid'])
-            #     if organisationalUnits_uuid:
-            #         rdm_add_user_to_group(shell_interface, 3, organisationalUnits_uuid)
-
+            # Checks if it can get the record owner (user_ids_match.txt)
+            external_id = get_value(i, ['person', 'externalId'])
+            owner       = get_rdm_userid_from_list_by_externalid(shell_interface, external_id)
+            if owner: 
+                shell_interface.data['owners'].append(owner)
 
             # ORCID
             person_uuid = get_value(i, ['person', 'uuid'])
