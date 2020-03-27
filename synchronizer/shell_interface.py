@@ -60,7 +60,7 @@ class shell_interface:
         """ Push to RDM records from Pure by page """
         pag_begin = 1
         pag_end =   2
-        pag_size =  3
+        pag_size =  2
         get_pure_by_page(self, pag_begin, pag_end, pag_size)
 
 
@@ -95,8 +95,8 @@ class shell_interface:
 
         # admin     63222
         # visitor   65033
-        # arc       -82496
-        # viertel   64193
+        # arc       54426
+        # viertel   948
 
 
     def owners_list(self):

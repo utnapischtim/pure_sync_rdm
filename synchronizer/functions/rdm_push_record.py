@@ -68,21 +68,22 @@ def create_invenio_data(shell_interface: object):
     add_field(shell_interface, item, 'category',                    ['categories', 0, 'value'])  
     add_field(shell_interface, item, 'peerReview',                  ['peerReview'])    
     add_field(shell_interface, item, 'publicationStatus',           ['publicationStatuses', 0, 'publicationStatuses', 0, 'value'])
-    add_field(shell_interface, item, 'managingOrganisationalUnit',  ['managingOrganisationalUnit', 'names', 0, 'value'])
     add_field(shell_interface, item, 'language',                    ['languages', 0, 'value'])
     add_field(shell_interface, item, 'totalNumberOfAuthors',        ['totalNumberOfAuthors'])
     add_field(shell_interface, item, 'workflow',                    ['workflows', 0, 'value'])
     add_field(shell_interface, item, 'confidential',                ['confidential'])
     add_field(shell_interface, item, 'publisherName',               ['publisher', 'names', 0, 'value'])
     add_field(shell_interface, item, 'abstract',                    ['abstracts', 0, 'value'])
+    add_field(shell_interface, item, 'managingOrganisationalUnit',            ['managingOrganisationalUnit', 'names', 0, 'value'])
+    add_field(shell_interface, item, 'managingOrganisationalUnit_uuid',       ['managingOrganisationalUnit', 'uuid'])
+    add_field(shell_interface, item, 'managingOrganisationalUnit_externalId', ['managingOrganisationalUnit', 'externalId'])
 
     # --- Managing Organisational Unit ---
     if 'managingOrganisationalUnit' in item:
-
+        managing_organisational_unit      = get_value(item, ['managingOrganisationalUnit', 'names', 0, 'value'])
+        managing_organisational_unit_uuid = get_value(item, ['managingOrganisationalUnit', 'externalId'])
         # Create group
-        managing_organisational_unit_uuid = get_value(item, ['managingOrganisationalUnit', 'uuid'])
-        rdm_create_group(shell_interface, managing_organisational_unit_uuid)
-
+        rdm_create_group(shell_interface, managing_organisational_unit_uuid, managing_organisational_unit)
     
     # --- Electronic Versions ---
     shell_interface.data['versionFiles'] = []
@@ -130,8 +131,8 @@ def create_invenio_data(shell_interface: object):
             # Checks if it can get the record owner (user_ids_match.txt)
             external_id = get_value(i, ['person', 'externalId'])
             owner       = get_rdm_userid_from_list_by_externalid(shell_interface, external_id)
-            if owner: 
-                shell_interface.data['owners'].append(owner)
+            if owner and owner not in shell_interface.data['owners']: 
+                shell_interface.data['owners'].append(int(owner))
 
             # ORCID
             person_uuid = get_value(i, ['person', 'uuid'])
