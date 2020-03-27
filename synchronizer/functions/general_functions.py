@@ -204,5 +204,5 @@ def get_rdm_userid_from_list_by_externalid(shell_interface: object, external_id:
         if external_id == line[2]:
             user_id         = line[0]
             user_id_spaces  = add_spaces(user_id)
-            print(f'\tRDM useridFromList - user id:  {user_id_spaces}  - externalId: {external_id}   - - - - - - - - - - - - - - - - - - - -')
+            print(f'\tRDM useridFromList - user id: {user_id_spaces}   - externalId: {external_id}')
             return user_id

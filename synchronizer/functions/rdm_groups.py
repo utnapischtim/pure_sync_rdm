@@ -13,13 +13,6 @@ def rdm_create_group(shell_interface: object, group_externalId: str, group_name:
     if not response:
         message += 'Not found        - '
 
-        # Known issue related to the system path at execution time
-        command = f'pipenv run invenio roles create {group_externalId}'
-        response = shell_interface.os.system(command)
-
-        if response != 0:
-            print(f'Warning - Creating group response: {response}')
-
     elif len(response) == 1:
         message += 'Found            - '
         
@@ -28,6 +21,17 @@ def rdm_create_group(shell_interface: object, group_externalId: str, group_name:
 
     message += f'externalId:  {add_spaces(group_externalId)}  - {group_name}'
     print(message)
+
+    if not response:
+        # Known issue related to the system path at execution time
+        group_name = group_name.replace('(', '\(')
+        group_name = group_name.replace(')', '\)')
+        group_name = group_name.replace(' ', '_')
+        command = f'pipenv run invenio roles create {group_externalId} -d {group_name}'
+        response = shell_interface.os.system(command)
+
+        if response != 0:
+            print(f'Warning - Creating group response: {response}')
 
 def rdm_add_user_to_group(shell_interface: object, user_id: int, group_externalId: str):
 
