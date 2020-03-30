@@ -429,7 +429,7 @@ def post_to_rdm(shell_interface: object):
         print('Waiting 15 min')
         shell_interface.time.sleep(wait_429)                     # 429 too many requests, wait 15 min
     
-    # In case of SUCCESSFUL TRANSMISsION
+    # In case of SUCCESSFUL TRANSMISSION
     if response.status_code < 300:
 
         shell_interface.count_successful_push_metadata += 1
@@ -437,7 +437,7 @@ def post_to_rdm(shell_interface: object):
         # metadata transmission success flag
         shell_interface.metadata_success = True
 
-        # After pushing the record's metadata to RDM needs about a second to be able to get its recid
+        # After pushing the record's metadata to RDM needs about a second to be able to get its recid from RDM
         shell_interface.time.sleep(1)
 
         # Gets recid from RDM
@@ -504,6 +504,11 @@ def get_orcid(shell_interface: object, person_uuid: str, name: str):
         shell_interface.count_orcids += 1
         orcid = resp_json['orcid']
         print(f'{message} - {orcid} - {name}')
+
+        file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
+        report = f'         - orcid: {orcid}         - {person_uuid} - {name}\n'
+        open(file_records, "a").write(report)
+
         return orcid
 
     print(f'{message} - Not found           - {name}')

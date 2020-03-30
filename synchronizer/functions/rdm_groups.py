@@ -5,10 +5,7 @@ def rdm_create_group(shell_interface: object, group_externalId: str, group_name:
 
     response = db_query(shell_interface, f"SELECT * FROM accounts_role WHERE name = '{group_externalId}'")
 
-    message = f'RDM check db group - Found            - {group_externalId} {group_name}'
-    message = f'RDM check db group - Not found        - {group_externalId} {group_name}'
-
-    message = f'\tRDM check db group - '
+    message = f'\tRDM group          - '
 
     if not response:
         message += 'Not found        - '
@@ -16,14 +13,14 @@ def rdm_create_group(shell_interface: object, group_externalId: str, group_name:
     elif len(response) == 1:
         message += 'Found            - '
         
-    elif len(response) > 1:
-        print(f'Group in database {len(response)} times - {group_externalId} !!!!!!! TEMPORARY')
+    elif len(response) > 1:                                                                         #  TEMPORARY
+        print(f'Group in database {len(response)} times - {group_externalId} !!!!!!!')              #  TEMPORARY
 
     message += f'externalId:  {add_spaces(group_externalId)}  - {group_name}'
     print(message)
 
     if not response:
-        # Known issue related to the system path at execution time
+                                                            # Known issue related to the system path at execution time
         group_name = group_name.replace('(', '\(')
         group_name = group_name.replace(')', '\)')
         group_name = group_name.replace(' ', '_')

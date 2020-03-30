@@ -109,7 +109,6 @@ def rdm_get_recid(shell_interface: object, uuid: str):
 
     total_recids = resp_json['hits']['total']
     if total_recids == 0:
-        # print(f'\tRecid not in RDM')
         return False
 
     log_message = f'\tRDM get recid      - {response} - Total: {total_recids}'
@@ -123,8 +122,10 @@ def rdm_get_recid(shell_interface: object, uuid: str):
         
         if count == 1:
             # URLs to be transmitted to Pure if the record is successfuly added in RDM
-            shell_interface.api_url             = f'https://127.0.0.1:5000/api/records/{recid}'
-            shell_interface.landing_page_url    = f'https://127.0.0.1:5000/records/{recid}'
+            # shell_interface.api_url             = f'https://127.0.0.1:5000/api/records/{recid}'
+            # shell_interface.landing_page_url    = f'https://127.0.0.1:5000/records/{recid}'
+            shell_interface.api_url             = f'{rdm_api_url_records}api/records/{recid}'
+            shell_interface.landing_page_url    = f'{rdm_api_url_records}records/{recid}'
 
             print(f'{log_message}            - Newest: {shell_interface.api_url}')
             newest_recid = recid
@@ -194,6 +195,9 @@ class bcolors:
 #   ---         ---         ---
 def get_rdm_userid_from_list_by_externalid(shell_interface: object, external_id: str):
 
+    if shell_interface.rdm_record_owner:
+        return shell_interface.owner
+
     file_data = open(f"{shell_interface.dirpath}/data/user_ids_match.txt").readlines()
 
     for line in file_data:
@@ -206,3 +210,6 @@ def get_rdm_userid_from_list_by_externalid(shell_interface: object, external_id:
             user_id_spaces  = add_spaces(user_id)
             print(f'\tRDM useridFromList - user id: {user_id_spaces}   - externalId: {external_id}')
             return user_id
+
+
+

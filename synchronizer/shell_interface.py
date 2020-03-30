@@ -17,11 +17,11 @@ Options:
     --version     Show version.
 
 """
-from docopt                             import docopt
 import requests
 import json
 import os
 import time
+from docopt                             import docopt
 from datetime                           import date, datetime, timedelta
 from functions.pure_get_changes         import pure_get_changes
 from functions.rdm_push_by_page         import get_pure_by_page
@@ -58,9 +58,9 @@ class shell_interface:
 
     def pages(self):
         """ Push to RDM records from Pure by page """
-        pag_begin = 2
-        pag_end =   3
-        pag_size =  25
+        pag_begin = 93
+        pag_end =   94
+        pag_size =  10
         get_pure_by_page(self, pag_begin, pag_end, pag_size)
 
 
@@ -91,11 +91,11 @@ class shell_interface:
     def owners(self):
         """ Gets from pure all the records related to a certain user,
             afterwards it modifies/create RDM records accordingly."""
-        rdm_owners(self, '54426')
+        rdm_owners(self, '3853')
 
         # admin     63222
-        # visitor   65033
-        # arc       54426
+        # visitor   111700
+        # arc       103390
         # viertel   948
 
 

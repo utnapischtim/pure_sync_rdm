@@ -41,6 +41,7 @@ def rdm_owners(shell_interface: object, external_id: int):
 
     # Add user to user_ids_match table
     add_user_ids_match(shell_interface, user_id, user_uuid, external_id)
+    
 
     # PURE get person records
     headers = {
@@ -88,6 +89,8 @@ def rdm_owners(shell_interface: object, external_id: int):
 
             print('\t+ Create record    +')
             create_invenio_data(shell_interface)
+
+            shell_interface.time.sleep(0.5)
 
         else:
             # Checks if the owner is already in RDM record metadata
@@ -168,10 +171,6 @@ def pure_get_user_uuid(shell_interface: object, external_id: str):
         record_json = shell_interface.json.loads(response.content)
 
         total_items = record_json['count']
-        
-        if total_items == 0:
-            print(f'{bcolors.RED}\nUser uuid not found - Exit task\n{bcolors.END}')
-            return False
 
         print(f'Pure get user uuid - {response} - Total items: {total_items}')
 
@@ -190,6 +189,7 @@ def pure_get_user_uuid(shell_interface: object, external_id: str):
         else:
             keep_searching = False
 
+    print(f'{bcolors.RED}\nUser uuid not found - Exit task\n{bcolors.END}')
     return False
 
 
@@ -221,6 +221,7 @@ def rdm_get_user_id(shell_interface: object):
 
     print(f'user IP: {response[0][1]} - user_id: {response[0][0]}')
 
+    shell_interface.rdm_record_owner = response[0][0]
     return response[0]
 
 
@@ -228,7 +229,7 @@ def rdm_get_user_id(shell_interface: object):
 def get_rdm_record_owners(shell_interface: object):
             
     pag = 1
-    pag_size = 25
+    pag_size = 250
 
     count = 0
     count_records_per_owner = {}
@@ -286,7 +287,7 @@ def get_rdm_record_owners(shell_interface: object):
             go_on = False
         
         pag += 1
-        shell_interface.time.sleep(1)
+        shell_interface.time.sleep(0.5)
 
     print('Owner  Records')
     for key in count_records_per_owner:
@@ -304,7 +305,7 @@ def add_user_ids_match(shell_interface: object, user_id: int, user_uuid: str, ex
 
     if needs_to_add:
         open(file_name, 'a').write(f'{user_id} {user_uuid} {external_id}\n')
-        print(f'user_ids_match     - Adding: {user_id}, {user_uuid}, {external_id}')
+        print(f'user_ids_match     - Adding id toList - {user_id}, {user_uuid}, {external_id}')
 
 
 def check_user_ids_match(shell_interface: object, user_id: int, user_uuid: str, external_id: str, file_name: str):
@@ -325,5 +326,5 @@ def check_user_ids_match(shell_interface: object, user_id: int, user_uuid: str, 
             # print(f'{user_id} == {line[0]} and {user_uuid} == {line[1]} and {external_id} == {line[2]}')
             # return False
     
-    print('user_ids_match     - No match')
+    # print('user_ids_match     - No match')
     return True
