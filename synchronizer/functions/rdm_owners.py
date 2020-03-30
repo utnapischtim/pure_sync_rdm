@@ -38,7 +38,7 @@ def rdm_owners(shell_interface: object, external_id: int):
 #   ---         ---         ---
 def rdm_owners_by_orcid(shell_interface: object, orcid: int):
 
-    print(f'\orcid: {orcid}\n')
+    print(f'\norcid: {orcid}\n')
 
     if len(orcid) != 19:
         print('Warning - Orcid length it is not 19\n')
@@ -65,81 +65,94 @@ def get_owner_records(shell_interface, user_id, user_uuid):
     initialize_count_variables(shell_interface)
     shell_interface.count_http_responses = {}
 
-    # PURE get person records
-    headers = {
-        'Accept': 'application/json',
-    }
-    params = (
-        ('apiKey', pure_api_key),
-        ('pageSize', 500),
-    )
-    url = f'{pure_rest_api_url}persons/{user_uuid}/research-outputs'
-    response = shell_interface.requests.get(url, headers=headers, params=params)
+    page      = 1
+    page_size = 3
+    go_on     = True
+    count     = 0
 
-    # Write data into pure_get_person_records
-    file_name = f'{shell_interface.dirpath}/data/temporary_files/pure_get_person_records.json'
-    open(file_name, 'wb').write(response.content)
+    while go_on:
+        # print(f'Page {page}             - Size {page_size}')
 
-    if response.status_code >= 300:
-        print(response.content)
-        return False
+        # PURE get person records
+        headers = {
+            'Accept': 'application/json',
+        }
+        params = (
+            ('apiKey', pure_api_key),
+            ('page', page),
+            ('pageSize', page_size),
+        )
+        url = f'{pure_rest_api_url}persons/{user_uuid}/research-outputs'
+        response = shell_interface.requests.get(url, headers=headers, params=params)
 
-    # Load response json
-    resp_json = shell_interface.json.loads(response.content)
+        # Write data into pure_get_person_records
+        file_name = f'{shell_interface.dirpath}/data/temporary_files/pure_get_person_records.json'
+        open(file_name, 'wb').write(response.content)
 
-    total_items = resp_json['count']
-    print(f'Get person records - {response} - total_items: {total_items}')
+        if response.status_code >= 300:
+            print(response.content)
+            return False
 
-    if total_items == 0:
-        print('\nThe user has no records - End task\n')
-        return True
+        # Load response json
+        resp_json = shell_interface.json.loads(response.content)
 
-    for item in resp_json['items']:
-    
-        uuid  = item['uuid']
-        title = item['title']
+        total_items = resp_json['count']
+        print(f'Get person records - {response} - Page {page} (size {page_size})    - Total records: {total_items}')
+
+        if total_items == 0:
+            if page == 1:
+                print('\nThe user has no records - End task\n')
+            return True
+
+        for item in resp_json['items']:
         
-        print(f'\n\tRecord uuid        - {uuid}  - {title}')
-
-        # Get from RDM the recid
-        recid = rdm_get_recid(shell_interface, uuid)
-
-        # If the record is not in RDM, it is added
-        if recid == False:
-            item['owners'] = [user_id]
-            shell_interface.item = item
-
-            print('\t+ Create record    +')
-            create_invenio_data(shell_interface)
-
-        else:
-            # Checks if the owner is already in RDM record metadata
-
-            shell_interface.time.sleep(0.5)
+            uuid  = item['uuid']
+            title = item['title']
+            count += 1
             
-            # Get metadata from RDM
-            response = rdm_get_recid_metadata(shell_interface, recid)
-            record_json = shell_interface.json.loads(response.content)['metadata']
+            print(f'\n\tRecord uuid        - {uuid}  - {title}')
 
-            print(f"\tRDM get metadata   - {response} - Current owners:     - {record_json['owners']}")
+            # Get from RDM the recid
+            recid = rdm_get_recid(shell_interface, uuid)
 
-            # If the owner is not among metadata owners
-            if user_id and user_id not in record_json['owners']:
+            # If the record is not in RDM, it is added
+            if recid == False:
+                item['owners'] = [user_id]
+                shell_interface.item = item
 
-                record_json['owners'].append(user_id)
-                print(f"\t+   Adding owner   -                  - New owners:         - {record_json['owners']}")
+                print('\t+ Create record    +')
+                create_invenio_data(shell_interface)
 
-                record_json = shell_interface.json.dumps(record_json)
-
-                file_name = f'{shell_interface.dirpath}/data/temporary_files/rdm_record_update.json'
-                open(file_name, 'a').write(record_json)
-
-                # Add owner to the record
-                update_rdm_record(shell_interface, record_json, recid)
             else:
-                print('\t+ Owner in record  +')
+                # Checks if the owner is already in RDM record metadata
 
-            exit()
+                shell_interface.time.sleep(0.5)
+                
+                # Get metadata from RDM
+                response = rdm_get_recid_metadata(shell_interface, recid)
+                record_json = shell_interface.json.loads(response.content)['metadata']
+
+                print(f"\tRDM get metadata   - {response} - Current owners:     - {record_json['owners']}")
+
+                # If the owner is not among metadata owners
+                if user_id and user_id not in record_json['owners']:
+
+                    record_json['owners'].append(user_id)
+                    print(f"\t+   Adding owner   -                  - New owners:         - {record_json['owners']}")
+
+                    record_json = shell_interface.json.dumps(record_json)
+
+                    file_name = f'{shell_interface.dirpath}/data/temporary_files/rdm_record_update.json'
+                    open(file_name, 'a').write(record_json)
+
+                    # Add owner to the record
+                    update_rdm_record(shell_interface, record_json, recid)
+                else:
+                    print('\t+ Owner in record  +')
+
+                # exit()
+
+        page += 1
 
 
 #   ---         ---         ---
@@ -268,7 +281,7 @@ def get_rdm_record_owners(shell_interface: object):
 
 
     # Empty file
-    file_owner = f"{shell_interface.dirpath}/data/rdm_records_owner.txt"
+    file_owner = f"{shell_interface.dirpath}/data/temporary_files/rdm_records_owner.txt"
     open(file_owner, 'w').close()
 
     while go_on == True:
