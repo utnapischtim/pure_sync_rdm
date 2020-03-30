@@ -10,6 +10,7 @@ Usage:
     shell_interface.py delete_all
     shell_interface.py test
     shell_interface.py owners
+    shell_interface.py owners_orcid
     shell_interface.py owners_list
 
 Options:
@@ -32,7 +33,7 @@ from functions.delete_all_records       import delete_all_records
 from functions.rdm_push_by_uuid         import rdm_push_by_uuid
 from functions.delete_record            import delete_record, delete_from_list
 from functions.general_functions        import db_connect
-from functions.rdm_owners               import rdm_owners, get_rdm_record_owners
+from functions.rdm_owners               import rdm_owners, get_rdm_record_owners, rdm_owners_by_orcid
 
 
 class shell_interface:
@@ -91,12 +92,11 @@ class shell_interface:
     def owners(self):
         """ Gets from pure all the records related to a certain user,
             afterwards it modifies/create RDM records accordingly."""
-        rdm_owners(self, '3853')
+        rdm_owners(self, '-71501')
 
-        # admin     63222
-        # visitor   111700
-        # arc       103390
-        # viertel   948
+
+    def owners_orcid(self):
+        rdm_owners_by_orcid(self, '0000-0002-4154-6945')
 
 
     def owners_list(self):
@@ -117,4 +117,5 @@ elif arguments['uuid']              == True: docopt_instance.uuid()
 elif arguments['duplicates']        == True: docopt_instance.duplicates()
 elif arguments['delete_all']        == True: docopt_instance.delete_all()
 elif arguments['owners']            == True: docopt_instance.owners()
+elif arguments['owners_orcid']      == True: docopt_instance.owners_orcid()
 elif arguments['owners_list']       == True: docopt_instance.owners_list()

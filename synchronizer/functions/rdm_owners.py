@@ -14,34 +14,56 @@ def rdm_owners(shell_interface: object, external_id: int):
     """ Gets from pure all the records related to a certain user,
         afterwards it modifies/create RDM records accordingly. """
 
-    initialize_count_variables(shell_interface)
-    shell_interface.count_http_responses = {}
-
     print(f'\nExternal_id: {external_id}\n')
 
     # Gets the ID and IP of the logged in user
-    response = rdm_get_user_id(shell_interface)
+    user_id = rdm_get_user_id(shell_interface)
 
     # If the user was not found in RDM then there is no owner to add to the record.
-    if not response:
+    if not user_id:
         return
 
-    user_id = response[0]
-    user_ip = response[1]
-
     # Get from pure user_uuid
-    user_uuid = pure_get_user_uuid(shell_interface, external_id)
+    user_uuid = pure_get_user_uuid(shell_interface, 'externalId', external_id)
     
     if not user_uuid:
         return False
 
-    if len(user_uuid) != 36:
-        print('\n- Warning! Incorrect user_uuid length -\n')
-        return False
-
     # Add user to user_ids_match table
     add_user_ids_match(shell_interface, user_id, user_uuid, external_id)
+
+    get_owner_records(shell_interface, user_id, user_uuid)
+
+
+#   ---         ---         ---
+def rdm_owners_by_orcid(shell_interface: object, orcid: int):
+
+    print(f'\orcid: {orcid}\n')
+
+    if len(orcid) != 19:
+        print('Warning - Orcid length it is not 19\n')
+
+    # Gets the ID and IP of the logged in user
+    user_id = rdm_get_user_id(shell_interface)
+
+    # If the user was not found in RDM then there is no owner to add to the record.
+    if not user_id:
+        return
+
+    # Get from pure user_uuid
+    user_uuid = pure_get_user_uuid(shell_interface, 'orcid', orcid)
     
+    if not user_uuid:
+        return False
+
+    get_owner_records(shell_interface, user_id, user_uuid)
+    
+
+#   ---         ---         ---
+def get_owner_records(shell_interface, user_id, user_uuid):
+    
+    initialize_count_variables(shell_interface)
+    shell_interface.count_http_responses = {}
 
     # PURE get person records
     headers = {
@@ -49,7 +71,7 @@ def rdm_owners(shell_interface: object, external_id: int):
     }
     params = (
         ('apiKey', pure_api_key),
-        ('pageSize', 200),
+        ('pageSize', 500),
     )
     url = f'{pure_rest_api_url}persons/{user_uuid}/research-outputs'
     response = shell_interface.requests.get(url, headers=headers, params=params)
@@ -90,10 +112,10 @@ def rdm_owners(shell_interface: object, external_id: int):
             print('\t+ Create record    +')
             create_invenio_data(shell_interface)
 
-            shell_interface.time.sleep(0.5)
-
         else:
             # Checks if the owner is already in RDM record metadata
+
+            shell_interface.time.sleep(0.5)
             
             # Get metadata from RDM
             response = rdm_get_recid_metadata(shell_interface, recid)
@@ -116,6 +138,8 @@ def rdm_owners(shell_interface: object, external_id: int):
                 update_rdm_record(shell_interface, record_json, recid)
             else:
                 print('\t+ Owner in record  +')
+
+            exit()
 
 
 #   ---         ---         ---
@@ -141,7 +165,7 @@ def update_rdm_record(shell_interface: object, data: str, recid: str):
 
 
 #   ---         ---         ---
-def pure_get_user_uuid(shell_interface: object, external_id: str):
+def pure_get_user_uuid(shell_interface: object, key_name: str, key_value: str):
     """ PURE get person records """
 
     keep_searching = True
@@ -154,7 +178,7 @@ def pure_get_user_uuid(shell_interface: object, external_id: str):
             'Accept': 'application/json',
         }
         params = (
-            ('q', f'"{external_id}"'),
+            ('q', f'"{key_value}"'),
             ('apiKey', pure_api_key),
             ('pageSize', page_size),
             ('page', page),
@@ -175,13 +199,19 @@ def pure_get_user_uuid(shell_interface: object, external_id: str):
         print(f'Pure get user uuid - {response} - Total items: {total_items}')
 
         for item in record_json['items']:
-            if item['externalId'] == external_id:
+
+            if item[key_name] == key_value:
 
                 first_name  = item['name']['firstName']
                 lastName    = item['name']['lastName']
                 uuid        = item['uuid']
 
                 print(f'User uuid          - {uuid}  - {first_name} {lastName}')
+
+                if len(uuid) != 36:
+                    print('\n- Warning! Incorrect user_uuid length -\n')
+                    return False
+
                 return uuid
 
         if 'navigationLinks' in record_json:
@@ -202,7 +232,7 @@ def rdm_get_user_id(shell_interface: object):
     # updated
     # sid_s
     # user_id
-    # ip
+    # ip            <- !!!!!!!!!!
     # country
     # browser
     # browser_version
@@ -222,7 +252,8 @@ def rdm_get_user_id(shell_interface: object):
     print(f'user IP: {response[0][1]} - user_id: {response[0][0]}')
 
     shell_interface.rdm_record_owner = response[0][0]
-    return response[0]
+
+    return shell_interface.rdm_record_owner
 
 
 #   ---         ---         ---
@@ -237,7 +268,7 @@ def get_rdm_record_owners(shell_interface: object):
 
 
     # Empty file
-    file_owner = f"{shell_interface.dirpath}/data/temporary_files/rdm_records_owner.txt"
+    file_owner = f"{shell_interface.dirpath}/data/rdm_records_owner.txt"
     open(file_owner, 'w').close()
 
     while go_on == True:

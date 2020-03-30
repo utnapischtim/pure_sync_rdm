@@ -105,6 +105,13 @@ def rdm_get_recid(shell_interface: object, uuid: str):
 
     response = rdm_get_uuid_metadata(shell_interface, uuid)
 
+    if response.status_code >= 300:
+        print(response.content)
+
+    if response.status_code == 429:
+        shell_interface.time.sleep(300)
+        return False
+
     resp_json = shell_interface.json.loads(response.content)
 
     total_recids = resp_json['hits']['total']
@@ -196,7 +203,7 @@ class bcolors:
 def get_rdm_userid_from_list_by_externalid(shell_interface: object, external_id: str):
 
     if shell_interface.rdm_record_owner:
-        return shell_interface.owner
+        return shell_interface.rdm_record_owner
 
     file_data = open(f"{shell_interface.dirpath}/data/user_ids_match.txt").readlines()
 
