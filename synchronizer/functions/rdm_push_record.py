@@ -32,7 +32,6 @@ def create_invenio_data(shell_interface: object):
     metadata_version = rdm_versioning(shell_interface, shell_interface.uuid)
     shell_interface.data['metadataVersion']   = metadata_version
     shell_interface.data['metadataModifDate'] = shell_interface.datetime.today().strftime('%Y-%m-%d-%H:%M:%S')
-    print(shell_interface.data)
 
     # When the item's metadata comes directly from pure it never contains 'owners' field.
     # It does instead when it comes from other sources, such as RDM update

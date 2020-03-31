@@ -13,13 +13,5 @@
 #         print(exc)
 
 
-j1 = {
-    "pureId": "1097026",
-    "publicationDatePure": "2008"
-}
-j2 = {
-    "pureId": "1097026",
-    "publicationDatePure": "200d8"
-}
-if j1 == j2:
-    print('uguali')
+r = open('/home/bootcamp/src/pure_sync_rdm/synchronizer/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.txt', "wb").write('w2erwerwerwerwer')
+print(r)

@@ -133,9 +133,9 @@ def rdm_get_recid(shell_interface: object, uuid: str):
             print(f'{log_message}            - Newest: {shell_interface.api_url}')
             newest_recid = recid
 
-        else:
-            # Duplicate records are deleted
-            delete_record(shell_interface, recid)
+        # else:
+        #     # Duplicate records are deleted
+        #     delete_record(shell_interface, recid)
 
     shell_interface.recid = newest_recid
     return newest_recid
