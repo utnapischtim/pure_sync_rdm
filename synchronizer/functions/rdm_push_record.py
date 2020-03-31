@@ -2,6 +2,7 @@ from setup                          import *
 from functions.get_put_file         import rdm_put_file, get_file_from_pure
 from functions.general_functions    import rdm_get_recid, pure_get_metadata, get_rdm_userid_from_list_by_externalid
 from functions.rdm_groups           import rdm_create_group, rdm_add_user_to_group
+from functions.rdm_versioning       import rdm_versioning
 
 #   ---         ---         ---
 def rdm_push_record(shell_interface: object, uuid: str):
@@ -26,13 +27,13 @@ def create_invenio_data(shell_interface: object):
     shell_interface.uuid = item['uuid']
 
     shell_interface.data = {}
-    # Id 1 (master@tugraz.at) -> owner of all records
-    # Other ids specific for actual users
-    # GET FROM DB id of certain user (by email) - select id from accounts_user where email = 'admin@invenio.org';
 
-    # RDM user id of the record owner.
-    # Minimum length 1 -> owner 1 must be the admin user
-    
+    # Versioning
+    metadata_version = rdm_versioning(shell_interface, shell_interface.uuid)
+    shell_interface.data['metadataVersion']   = metadata_version
+    shell_interface.data['metadataModifDate'] = shell_interface.datetime.today().strftime('%Y-%m-%d-%H:%M:%S')
+    print(shell_interface.data)
+
     # When the item's metadata comes directly from pure it never contains 'owners' field.
     # It does instead when it comes from other sources, such as RDM update
     if 'owners' in item:
@@ -51,7 +52,7 @@ def create_invenio_data(shell_interface: object):
     add_field(shell_interface, item, 'access_right',                ['openAccessPermissions', 0, 'value'])
     
     # shell_interface.data['title']              = 'test title'                                                      # TEST TEST
-    # shell_interface.data['groupRestrictions']  = ['civils']                                                 # TEST TEST
+    shell_interface.data['groupRestrictions']  = ['11070']                                                 # TEST TEST
     shell_interface.data['ipRestrictions']     = ['127.0.0.1']                                                 # TEST TEST
 
     add_field(shell_interface, item, 'uuid',                        ['uuid'])
@@ -444,7 +445,7 @@ def post_to_rdm(shell_interface: object):
             #   - to check if there are duplicates
             #   - to delete duplicates
             #   - to add the record uuid and recid to all_rdm_records.txt
-        
+            #   - gets the last metadata_version
         recid = rdm_get_recid(shell_interface, uuid)
         if not recid:
             return False

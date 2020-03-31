@@ -42,7 +42,6 @@ def pure_get_metadata(shell_interface: object, uuid: str):
 
 
 #   ---         ---         ---
-# def rdm_get_recid_metadata(shell_interface: object, recid: str):
 def rdm_get_recid_metadata(shell_interface: object, recid: str):
     
     if len(recid) != 11:
@@ -105,17 +104,15 @@ def rdm_get_recid(shell_interface: object, uuid: str):
 
     response = rdm_get_uuid_metadata(shell_interface, uuid)
 
-    if response.status_code >= 300:
-        print(response.content)
-
     if response.status_code == 429:
-        shell_interface.time.sleep(300)
+        shell_interface.time.sleep(wait_429)
         return False
 
     resp_json = shell_interface.json.loads(response.content)
 
     total_recids = resp_json['hits']['total']
     if total_recids == 0:
+        # If there are no records with the same uuid means it is the first one (version 1)
         return False
 
     log_message = f'\tRDM get recid      - {response} - Total: {total_recids}'
@@ -123,14 +120,13 @@ def rdm_get_recid(shell_interface: object, uuid: str):
     # Iterate over all records with the same uuid
     # The first record is the most recent (they are sorted)
     count = 0
-    for i in resp_json['hits']['hits']:
+    for item in resp_json['hits']['hits']:
         count += 1
-        recid = i['metadata']['recid']
+
+        recid = item['metadata']['recid']
         
         if count == 1:
-            # URLs to be transmitted to Pure if the record is successfuly added in RDM
-            # shell_interface.api_url             = f'https://127.0.0.1:5000/api/records/{recid}'
-            # shell_interface.landing_page_url    = f'https://127.0.0.1:5000/records/{recid}'
+            # URLs to be transmitted to Pure if the record is successfuly added in RDM      # TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
             shell_interface.api_url             = f'{rdm_api_url_records}api/records/{recid}'
             shell_interface.landing_page_url    = f'{rdm_api_url_records}records/{recid}'
 

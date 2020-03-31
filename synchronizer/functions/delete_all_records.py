@@ -3,7 +3,7 @@ from setup                      import *
 
 def delete_all_records(shell_interface):
 
-    # get_from_rdm(shell_interface)
+    get_from_rdm(shell_interface)
 
     file_name = shell_interface.dirpath + "/data/all_rdm_records.txt"
     toDelete_str = ''
