@@ -146,8 +146,14 @@
       "repositoryReview": {
         "type": "text"
       },
+      "groupRestrictions": {
+        "type": "text"
+      },
+      "visibleIpRange": {
+        "type": "boolean"
+      },
       "metadataVersion": {
-        "type": "keyword"
+        "type": "integer"
       },
       "metadataModifBy": {
         "type": "keyword"
@@ -188,6 +194,12 @@
       "managingOrganisationalUnit": {
         "type": "text"
       },
+      "managingOrganisationalUnit_uuid": {
+        "type": "text"
+      },
+      "managingOrganisationalUnit_externalId": {
+        "type": "text"
+      },
       "workflow": {
         "type": "text"
       },
@@ -218,6 +230,9 @@
       "journalNumber": {
         "type": "text"
       },
+      "abstract": {
+        "type": "text"
+      },
       "contributors": {
         "type": "object",
         "properties": {
@@ -244,6 +259,9 @@
             "type": "text"
           },
           "externalId": {
+            "type": "text"
+          },
+          "rdmId": {
             "type": "text"
           },
           "orcid": {
@@ -282,31 +300,46 @@
               }
             }
           },
-          "fileName": {
+          "name": {
             "type": "text"
           },
-          "fileVersion": {
+          "internalReview": {
+            "type": "boolean"
+          },
+          "internalReviewBy": {
             "type": "text"
           },
-          "fileModifBy": {
+          "internalReviewDate": {
             "type": "text"
           },
-          "fileModifDate": {
-            "type": "text"
-          },
-          "fileType": {
-            "type": "text"
-          },
-          "fileAccessType": {
-            "type": "text"
-          },
-          "fileSize": {
+          "version": {
             "type": "integer"
           },
-          "fileDigest": {
+          "createdBy": {
             "type": "text"
           },
-          "fileDigestAlgorithm": {
+          "createdDate": {
+            "type": "text"
+          },
+          "mimeType": {
+            "type": "text"
+          },
+          "size": {
+            "type": "integer"
+          },
+          "digest": {
+            "type": "text"
+          },
+          "digestAlgorithm": {
+            "type": "text"
+          },
+          "versionType": {
+            "type": "text"
+          },
+          "licenseType": {
+            "type": "text"
+          },
+          "accessType": {
             "type": "text"
           }
         }

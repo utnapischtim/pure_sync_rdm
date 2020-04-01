@@ -52,7 +52,7 @@ def create_invenio_data(shell_interface: object):
     
     # shell_interface.data['title']              = 'test title'                                                      # TEST TEST
     shell_interface.data['groupRestrictions']  = ['11070']                                                 # TEST TEST
-    shell_interface.data['ipRestrictions']     = ['127.0.0.1']                                                 # TEST TEST
+    shell_interface.data['visibleIpRange']     = True                                                 # TEST TEST
 
     add_field(shell_interface, item, 'uuid',                        ['uuid'])
     add_field(shell_interface, item, 'pureId',                      ['pureId'])
@@ -128,9 +128,10 @@ def create_invenio_data(shell_interface: object):
             sub_data = add_to_var(sub_data, i, 'organisationalUnit',       ['organisationalUnits', 0, 'names', 0, 'value']) # UnitS...
             sub_data = add_to_var(sub_data, i, 'type_p',                   ['externalPerson', 'types', 0, 'value'])
             
-            # Checks if it can get the record owner (user_ids_match.txt)
-            external_id = get_value(i, ['person', 'externalId'])
-            owner       = get_rdm_userid_from_list_by_externalid(shell_interface, external_id)
+            # Checks if the record owner is available in user_ids_match.txt
+            person_external_id = get_value(i, ['person', 'externalId'])
+            owner = get_rdm_userid_from_list_by_externalid(shell_interface, person_external_id)
+
             if owner and owner not in shell_interface.data['owners']: 
                 shell_interface.data['owners'].append(int(owner))
 
@@ -146,13 +147,18 @@ def create_invenio_data(shell_interface: object):
             else:
                 sub_data = add_to_var(sub_data, i, 'uuid',   ['externalPerson', 'uuid'])
 
-            # # Adding contributor to RDM groups - TEMPORARY TEMPORARY TEMPORARY TEMPORARY TEMPORARY TEMPORARY 
-            # externalId = get_value(i, ['person', 'externalId'])
-            # if externalId:
-            #     print(f'{last_name}, {first_name} - {externalId}')
-            #     organisationalUnits_uuid = get_value(i, ['organisationalUnits', 0, 'uuid'])
-            #     if organisationalUnits_uuid:
-            #         rdm_add_user_to_group(shell_interface, 3, organisationalUnits_uuid)
+            # TEMPORARY  TEMPORARY  TEMPORARY  TEMPORARY 
+            if not owner:
+                owner = 2
+            # TEMPORARY  TEMPORARY  TEMPORARY  TEMPORARY 
+
+            # Adding contributor to RDM groups (managing organisational units)
+            person_external_id = get_value(i, ['person', 'externalId'])
+            if person_external_id and owner:
+                organisationalUnits_externalId = get_value(i, ['organisationalUnits', 0, 'externalId'])
+                if organisationalUnits_externalId:
+                    # Adds the user to an RDM group (shell_interface, user_id, group_name)
+                    rdm_add_user_to_group(shell_interface, owner, organisationalUnits_externalId)
 
             shell_interface.data['contributors'].append(sub_data)
 
@@ -203,8 +209,8 @@ def get_files_data(shell_interface: object, i: dict):
         rdm_review = rdm_file['review']
 
         if pure_size == rdm_size and pure_name == rdm_file['name']:
-            shell_interface.pure_rdm_file_match.append(True)
-            shell_interface.pure_rdm_file_match.append(rdm_review)
+            shell_interface.pure_rdm_file_match.append(True)            # Do the old and new file match?
+            shell_interface.pure_rdm_file_match.append(rdm_review)      # Was the old file reviewed?
             internal_review = rdm_review       # The new uploaded file will have the same review value as in RDM
             break
 

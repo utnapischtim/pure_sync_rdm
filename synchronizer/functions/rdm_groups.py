@@ -35,21 +35,24 @@ def rdm_add_user_to_group(shell_interface: object, user_id: int, group_externalI
     # Get user's rdm email
     user_email = db_query(shell_interface, f"SELECT email FROM accounts_user WHERE id = {user_id}")[0][0]
 
-    # Get group's id
+    # Get group id
     query = f"SELECT id FROM accounts_role WHERE name = '{group_externalId}'"
     response = db_query(shell_interface, query)
 
     if not response:
+        # If the group does not exist then creates it
         rdm_create_group(shell_interface, group_externalId)
-        response = db_query(shell_interface, query)
+        # Repeats the query to get the group id
+        group_id = db_query(shell_interface, query)
 
     group_id = response[0][0]
 
     # Checks if match already exists
     response = db_query(shell_interface, f"SELECT * FROM accounts_userrole WHERE user_id = {user_id} AND role_id = {group_id}")
 
-    if not response:
-        print(f'\tUser {user_email} (id {user_id}) already belongs to group {group_externalId} (id {group_id})')
+    if response:
+                  Pure get orcid     - <Response [200]>    - Not found           - Obernberger, Ingwald
+        print(f'\tRDM user in group  - User id: {user_id}  -                     - Already belongs to group {group_externalId} (id {group_id})')
         return True
 
     # Adds user to group

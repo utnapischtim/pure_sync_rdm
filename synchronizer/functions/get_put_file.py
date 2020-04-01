@@ -38,7 +38,7 @@ def rdm_put_file(shell_interface, file_name: str, recid: str, uuid: str):
         shell_interface.os.remove(file_path_name) 
 
         # # Sends email to remove record from Pure
-        # send_email(uuid, file_name)
+        # send_email(uuid, file_name)               # - # - SEND EMAIL - # - #
 
     file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
     open(file_records, "a").write(report)
@@ -55,23 +55,24 @@ def get_file_from_pure(shell_interface, electronic_version: str):
     file_name = electronic_version['file']['fileName']
     file_url  = electronic_version['file']['fileURL']
 
+    # Get request to Pure
     response = shell_interface.requests.get(file_url, auth=HTTPBasicAuth(pure_username, pure_password))
 
-    # 
+    # If the file is not in RDM
     if len(shell_interface.pure_rdm_file_match) == 0:
-        match_review = 'Uuid not in RDM    '
+        match_review = 'File not in RDM    '
 
+    # If the file in pure is different from the one in RDM
     elif shell_interface.pure_rdm_file_match[0] == False:
         match_review = 'Match: F, Review: -'
 
+    # If the file is the same, checks if the one in RDM has been reviewed by internal stuff
     else:
         match_review = 'Match: T, Review: F'
         if shell_interface.pure_rdm_file_match[1]:
             match_review = 'Match: T, Review: T'
     
     print(f'\tPure get file      - {response} - {match_review} - {file_name}')
-
-
     
     if response.status_code < 300:
         # Save file

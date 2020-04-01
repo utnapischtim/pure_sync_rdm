@@ -59,9 +59,9 @@ class shell_interface:
 
     def pages(self):
         """ Push to RDM records from Pure by page """
-        pag_begin = 1
-        pag_end =   2
-        pag_size =  2
+        pag_begin = 3
+        pag_end =   4
+        pag_size =  5
         get_pure_by_page(self, pag_begin, pag_end, pag_size)
 
 
@@ -92,7 +92,11 @@ class shell_interface:
     def owners(self):
         """ Gets from pure all the records related to a certain user,
             afterwards it modifies/create RDM records accordingly."""
-        rdm_owners(self, '-71501')
+        rdm_owners(self, '948')
+
+        2 - 948
+        3 - 54426
+        4 - 56038
 
 
     def owners_orcid(self):

@@ -219,13 +219,9 @@
       "type": "array",
       "uniqueItems": true
     },
-    "ipRestrictions": {
+    "visibleIpRange": {
       "description": "",
-      "items": {
-        "type": "string"
-      },
-      "type": "array",
-      "uniqueItems": true
+      "type": "boolean"
     },
     "metadataVersion": {
       "description": "Record version tag.",
