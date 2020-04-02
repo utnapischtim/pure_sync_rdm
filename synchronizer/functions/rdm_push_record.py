@@ -161,22 +161,29 @@ def create_invenio_data(shell_interface: object):
     # --- organisationalUnits ---
     if 'organisationalUnits' in item:
         shell_interface.data['organisationalUnits'] = []
-        sub_data = {}
+        shell_interface.data['groupRestrictions']   = []
+
+        if len(item['organisationalUnits']) > 1:
+            print('This one ;)')
+
         for i in item['organisationalUnits']:
-            sub_data = add_to_var(sub_data, i, 'name',       ['names', 0, 'value'])
-            sub_data = add_to_var(sub_data, i, 'uuid',       ['uuid'])
-            sub_data = add_to_var(sub_data, i, 'externalId', ['externalId'])
+            sub_data = {}
 
             organisational_unit_name       = get_value(i, ['names', 0, 'value'])
+            organisational_unit_uuid       = get_value(i, ['uuid'])
             organisational_unit_externalId = get_value(i, ['externalId'])
 
+            sub_data['name']        = organisational_unit_name
+            sub_data['uuid']        = organisational_unit_uuid
+            sub_data['externalId']  = organisational_unit_externalId
+
+            shell_interface.data['organisationalUnits'].append(sub_data)
+
             # Adding organisational unit as group owner
-            shell_interface.data['groupRestrictions'] = [organisational_unit_externalId]
+            shell_interface.data['groupRestrictions'].append(organisational_unit_externalId)
 
             # # Create group
             # rdm_create_group(shell_interface, organisational_unit_externalId, organisational_unit_name)
-
-        shell_interface.data['organisationalUnits'].append(sub_data)
 
     # --- Abstract ---  
     if 'abstracts' in item:
