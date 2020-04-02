@@ -49,8 +49,13 @@ def create_invenio_data(shell_interface: object):
     add_field(shell_interface, item, 'title',                       ['title'])
     add_field(shell_interface, item, 'access_right',                ['openAccessPermissions', 0, 'value'])
     
-    # shell_interface.data['title']              = 'test title'                                                      # TEST TEST
-    shell_interface.data['visibleIpRange']     = True                                                 # TEST TEST
+    # TO REVIEW - TO REVIEW - TO REVIEW - TO REVIEW - TO REVIEW
+    # shell_interface.data['title']              = 'test title'
+    shell_interface.data['visibleIpRange']      = True
+
+    # Applied Restrictions possible values: groups, owners, ip_ranges
+    shell_interface.data['appliedRestrictions'] = ['groups', 'owners', 'ip_ranges']
+    # TO REVIEW - TO REVIEW - TO REVIEW - TO REVIEW - TO REVIEW    
 
     add_field(shell_interface, item, 'uuid',                        ['uuid'])
     add_field(shell_interface, item, 'pureId',                      ['pureId'])
@@ -75,16 +80,6 @@ def create_invenio_data(shell_interface: object):
     add_field(shell_interface, item, 'managingOrganisationalUnit',            ['managingOrganisationalUnit', 'names', 0, 'value'])
     add_field(shell_interface, item, 'managingOrganisationalUnit_uuid',       ['managingOrganisationalUnit', 'uuid'])
     add_field(shell_interface, item, 'managingOrganisationalUnit_externalId', ['managingOrganisationalUnit', 'externalId'])
-
-    # --- Managing Organisational Unit ---
-    if 'managingOrganisationalUnit' in item:
-        managing_organisational_unit            = get_value(item, ['managingOrganisationalUnit', 'names', 0, 'value'])
-        managing_organisational_unit_externalId = get_value(item, ['managingOrganisationalUnit', 'externalId'])
-        # Alternative is to get from 'OrganisationalUnits'                                          -   REVIEW REVIEW REVIEW REVIEW 
-        shell_interface.data['groupRestrictions'] = [managing_organisational_unit_externalId]
-
-        # # Create group
-        # rdm_create_group(shell_interface, managing_organisational_unit_externalId, managing_organisational_unit)
     
     # --- Electronic Versions ---
     shell_interface.data['versionFiles'] = []
@@ -168,11 +163,18 @@ def create_invenio_data(shell_interface: object):
         shell_interface.data['organisationalUnits'] = []
         sub_data = {}
         for i in item['organisationalUnits']:
+            sub_data = add_to_var(sub_data, i, 'name',       ['names', 0, 'value'])
+            sub_data = add_to_var(sub_data, i, 'uuid',       ['uuid'])
+            sub_data = add_to_var(sub_data, i, 'externalId', ['externalId'])
 
-            sub_data = add_to_var(sub_data, i, 'name', ['names', 0, 'value'])
-            sub_data = add_to_var(sub_data, i, 'name', ['names', 0, 'value'])
-            sub_data = add_to_var(sub_data, i, 'name', ['names', 0, 'value'])
-            sub_data = add_to_var(sub_data, i, 'link', ['link', 'href'])
+            organisational_unit_name       = get_value(i, ['names', 0, 'value'])
+            organisational_unit_externalId = get_value(i, ['externalId'])
+
+            # Adding organisational unit as group owner
+            shell_interface.data['groupRestrictions'] = [organisational_unit_externalId]
+
+            # # Create group
+            # rdm_create_group(shell_interface, organisational_unit_externalId, organisational_unit_name)
 
         shell_interface.data['organisationalUnits'].append(sub_data)
 
