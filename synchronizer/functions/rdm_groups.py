@@ -51,8 +51,7 @@ def rdm_add_user_to_group(shell_interface: object, user_id: int, group_externalI
     response = db_query(shell_interface, f"SELECT * FROM accounts_userrole WHERE user_id = {user_id} AND role_id = {group_id}")
 
     if response:
-                  Pure get orcid     - <Response [200]>    - Not found           - Obernberger, Ingwald
-        print(f'\tRDM user in group  - User id: {user_id}  -                     - Already belongs to group {group_externalId} (id {group_id})')
+        print(f'\tRDM user in group  - User id: {add_spaces(user_id)}   -                     - Already belongs to group {group_externalId} (id {group_id})')
         return True
 
     # Adds user to group

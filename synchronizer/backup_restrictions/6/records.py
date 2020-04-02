@@ -15,7 +15,7 @@ from flask import current_app
 from werkzeug.utils import import_string
 
 from ..errors import UnknownGeneratorError
-from ..generators import Admin, AnyUser, AnyUserIfPublic, Disable, RecordOwners, RecordGroups, RecordIPs
+from ..generators import Admin, AnyUser, AnyUserIfPublic, Disable, RecordOwners, RecordGroups, RecordIp, RecordIpRange
 from .base import BasePermissionPolicy
 from flask_principal import ActionNeed, UserNeed, RoleNeed
 
@@ -61,12 +61,12 @@ class RecordPermissionPolicy(BasePermissionPolicy):
     can_create = [Disable()]
 
     # Read access given to everyone if public record/files and owners always.
-    # can_read = [AnyUser()]
+    can_read = [AnyUser()]
     # can_read = [RecordOwners()]
     # can_read = [AnyUserIfPublic()]
-    # can_read = [RecordGroups()] 
-    can_read = [RecordIPs()]
-    # can_read = [GetRdmUserId()]
+    # can_read = [RecordGroups()]
+    # can_read = [RecordIp()]
+    # can_read = [RecordIpRange()]
 
     # Update access given to record owners.
     can_update = [RecordOwners()]

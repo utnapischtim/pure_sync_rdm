@@ -1,25 +1,12 @@
-from functions.delete_record    import delete_from_list
+from functions.delete_record    import delete_record
 from setup                      import *
 
 def delete_all_records(shell_interface):
 
-    get_from_rdm(shell_interface)
-
-    file_name = shell_interface.dirpath + "/data/all_rdm_records.txt"
-    toDelete_str = ''
-
-    with open(file_name, 'r') as f:
-        lines = f.read().splitlines()
-        
-        for line in lines:
-            recid = line.split(' ')[1]
-            toDelete_str += f'{recid}\n'
-    
-    toDel_fileName = shell_interface.dirpath + '/data/to_delete.txt'
-    open(toDel_fileName, "a").write(toDelete_str)
-
-    delete_from_list(shell_interface)
-
+    file_data = open(f'{shell_interface.dirpath}/data/all_rdm_records.txt').readlines()
+    for line in file_data:
+        recid = line.split(' ')[1].strip('\n')
+        delete_record(shell_interface, recid)
 
 
 # -- GET FROM RDM --

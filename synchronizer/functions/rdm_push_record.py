@@ -28,10 +28,10 @@ def create_invenio_data(shell_interface: object):
 
     shell_interface.data = {}
 
-    # Versioning
-    metadata_version = rdm_versioning(shell_interface, shell_interface.uuid)
-    shell_interface.data['metadataVersion']   = metadata_version
-    shell_interface.data['metadataModifDate'] = shell_interface.datetime.today().strftime('%Y-%m-%d-%H:%M:%S')
+    # # Versioning
+    # metadata_version = rdm_versioning(shell_interface, shell_interface.uuid)
+    # shell_interface.data['metadataVersion']   = metadata_version
+    # shell_interface.data['metadataModifDate'] = shell_interface.datetime.today().strftime('%Y-%m-%d-%H:%M:%S')
 
     # When the item's metadata comes directly from pure it never contains 'owners' field.
     # It does instead when it comes from other sources, such as RDM update
@@ -43,7 +43,6 @@ def create_invenio_data(shell_interface: object):
     else:
         shell_interface.data['owners'] = [1]
 
-    # shell_interface.data['_access'] = {'metadata_restricted': True, 'files_restricted': True}        # Default value for _access field
     shell_interface.data['_access'] = {'metadata_restricted': False, 'files_restricted': False}        # Default value for _access field
 
                                     # RDM field name                # PURE json path
@@ -51,7 +50,6 @@ def create_invenio_data(shell_interface: object):
     add_field(shell_interface, item, 'access_right',                ['openAccessPermissions', 0, 'value'])
     
     # shell_interface.data['title']              = 'test title'                                                      # TEST TEST
-    shell_interface.data['groupRestrictions']  = ['11070']                                                 # TEST TEST
     shell_interface.data['visibleIpRange']     = True                                                 # TEST TEST
 
     add_field(shell_interface, item, 'uuid',                        ['uuid'])
@@ -80,10 +78,13 @@ def create_invenio_data(shell_interface: object):
 
     # --- Managing Organisational Unit ---
     if 'managingOrganisationalUnit' in item:
-        managing_organisational_unit      = get_value(item, ['managingOrganisationalUnit', 'names', 0, 'value'])
-        managing_organisational_unit_uuid = get_value(item, ['managingOrganisationalUnit', 'externalId'])
-        # Create group
-        rdm_create_group(shell_interface, managing_organisational_unit_uuid, managing_organisational_unit)
+        managing_organisational_unit            = get_value(item, ['managingOrganisationalUnit', 'names', 0, 'value'])
+        managing_organisational_unit_externalId = get_value(item, ['managingOrganisationalUnit', 'externalId'])
+        # Alternative is to get from 'OrganisationalUnits'                                          -   REVIEW REVIEW REVIEW REVIEW 
+        shell_interface.data['groupRestrictions'] = [managing_organisational_unit_externalId]
+
+        # # Create group
+        # rdm_create_group(shell_interface, managing_organisational_unit_externalId, managing_organisational_unit)
     
     # --- Electronic Versions ---
     shell_interface.data['versionFiles'] = []
@@ -106,10 +107,9 @@ def create_invenio_data(shell_interface: object):
         shell_interface.data['contributors'] = []
 
         for i in item['personAssociations']:
+
             sub_data = {}
-
             person_uuid = get_value(i, ['person', 'uuid'])
-
             # Name
             first_name = get_value(i, ['name', 'firstName'])
             last_name  = get_value(i, ['name', 'lastName'])
@@ -147,18 +147,18 @@ def create_invenio_data(shell_interface: object):
             else:
                 sub_data = add_to_var(sub_data, i, 'uuid',   ['externalPerson', 'uuid'])
 
-            # TEMPORARY  TEMPORARY  TEMPORARY  TEMPORARY 
-            if not owner:
-                owner = 2
-            # TEMPORARY  TEMPORARY  TEMPORARY  TEMPORARY 
+            # # TEMPORARY  TEMPORARY  TEMPORARY  TEMPORARY 
+            # if not owner:
+            #     owner = 2
+            # # TEMPORARY  TEMPORARY  TEMPORARY  TEMPORARY 
 
-            # Adding contributor to RDM groups (managing organisational units)
-            person_external_id = get_value(i, ['person', 'externalId'])
-            if person_external_id and owner:
-                organisationalUnits_externalId = get_value(i, ['organisationalUnits', 0, 'externalId'])
-                if organisationalUnits_externalId:
-                    # Adds the user to an RDM group (shell_interface, user_id, group_name)
-                    rdm_add_user_to_group(shell_interface, owner, organisationalUnits_externalId)
+            # # Adding contributor to RDM groups (managing organisational units)
+            # person_external_id = get_value(i, ['person', 'externalId'])
+            # if person_external_id and owner:
+            #     organisationalUnits_externalId = get_value(i, ['organisationalUnits', 0, 'externalId'])
+            #     if organisationalUnits_externalId:
+            #         # Adds the user to an RDM group (shell_interface, user_id, group_name)
+            #         rdm_add_user_to_group(shell_interface, owner, organisationalUnits_externalId)
 
             shell_interface.data['contributors'].append(sub_data)
 
@@ -169,6 +169,8 @@ def create_invenio_data(shell_interface: object):
         sub_data = {}
         for i in item['organisationalUnits']:
 
+            sub_data = add_to_var(sub_data, i, 'name', ['names', 0, 'value'])
+            sub_data = add_to_var(sub_data, i, 'name', ['names', 0, 'value'])
             sub_data = add_to_var(sub_data, i, 'name', ['names', 0, 'value'])
             sub_data = add_to_var(sub_data, i, 'link', ['link', 'href'])
 
@@ -387,7 +389,7 @@ def post_to_rdm(shell_interface: object):
     shell_interface.metadata_success = None
     shell_interface.file_success     = None
 
-    # push_dist_sec is normally set to 3 sec. ~ 1000 records per hour
+    # push_dist_sec is normally set to ~ 1.5 sec. -> 5000 records per hour
     shell_interface.time.sleep(push_dist_sec)                        
 
     data_utf8 = shell_interface.data.encode('utf-8')
@@ -409,6 +411,8 @@ def post_to_rdm(shell_interface: object):
 
     uuid = shell_interface.item["uuid"]
     print(f'\tRDM post metadata  - {response} - Uuid:                 {uuid}')
+
+    open(f'{shell_interface.dirpath}/data/temporary_files/rdm_post_metadata_response.json', "wb").write(response.content)
     
     current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
     report = f'{current_time} - metadata_to_rdm - {str(response)} - {uuid} - {shell_interface.item["title"]}\n'

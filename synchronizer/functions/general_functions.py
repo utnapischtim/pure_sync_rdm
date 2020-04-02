@@ -59,7 +59,6 @@ def rdm_get_recid_metadata(shell_interface: object, recid: str):
 
     if response.status_code >= 300:
         print(f'\n{recid} - {response}')
-        print(response.content)
         return False
 
     open(f'{shell_interface.dirpath}/data/temporary_files/rdm_get_recid_metadata.json', "wb").write(response.content)
@@ -69,7 +68,7 @@ def rdm_get_recid_metadata(shell_interface: object, recid: str):
 
 #   ---         ---         ---
 def rdm_get_uuid_metadata(shell_interface: object, uuid: str):
-    
+
     if len(uuid) != 36:
         print(f'\nERROR - The uuid must have 36 characters. Given: {uuid}\n')
         return False
@@ -90,7 +89,6 @@ def rdm_get_uuid_metadata(shell_interface: object, uuid: str):
 
     if response.status_code >= 300:
         print(f'\n{uuid} - {response}')
-        print(response.content)
         return False
 
     open(f'{shell_interface.dirpath}/data/temporary_files/rdm_get_uuid_metadata.json', "wb").write(response.content)
@@ -101,6 +99,9 @@ def rdm_get_uuid_metadata(shell_interface: object, uuid: str):
 
 #   ---         ---         ---
 def rdm_get_recid(shell_interface: object, uuid: str):
+
+    """ KNOWN ISSUE: if the applied restriction in invenio_records_permissions
+                     do not allow to read the record then it will not be listed """
 
     response = rdm_get_uuid_metadata(shell_interface, uuid)
 
