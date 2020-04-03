@@ -7,7 +7,8 @@ from functions.general_functions    import  rdm_get_recid, \
                                             db_connect, \
                                             db_query, \
                                             add_spaces, \
-                                            bcolors
+                                            bcolors, \
+                                            update_rdm_record
 
 #   ---         ---         ---
 def rdm_owners(shell_interface: object, external_id: int):
@@ -153,28 +154,6 @@ def get_owner_records(shell_interface, user_id, user_uuid):
                 # exit()
 
         page += 1
-
-
-#   ---         ---         ---
-def update_rdm_record(shell_interface: object, data: str, recid: str):
-
-    data_utf8 = data.encode('utf-8')
-
-    headers = {
-        'Authorization': f'Bearer {token_rdm}',
-        'Content-Type': 'application/json',
-    }
-    params = (
-        ('prettyprint', '1'),
-    )
-
-    url = f'{rdm_api_url_records}api/records/{recid}'
-
-    response = shell_interface.requests.put(url, headers=headers, params=params, data=data_utf8, verify=False)
-    print(f'\tRecord update      - {response}')
-
-    if response.status_code >= 300:
-        print(response.content)
 
 
 #   ---         ---         ---

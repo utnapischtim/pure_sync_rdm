@@ -1,14 +1,12 @@
 from setup                          import *
-from functions.general_functions    import rdm_get_uuid_metadata, add_spaces
+from functions.general_functions    import rdm_get_metadata_by_query, add_spaces
 
 def rdm_versioning(shell_interface: object, uuid: str):
-    response = rdm_get_uuid_metadata(shell_interface, uuid)
+    response = rdm_get_metadata_by_query(shell_interface, uuid)
 
     if response.status_code == 429:
         shell_interface.time.sleep(wait_429)
         return False
-
-    open(f'{shell_interface.dirpath}/data/temporary_files/rdm_get_uuid_metadata.json', "wb").write(response.content)
 
     resp_json = shell_interface.json.loads(response.content)
     

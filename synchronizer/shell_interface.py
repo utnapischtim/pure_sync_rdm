@@ -12,6 +12,8 @@ Usage:
     shell_interface.py owners
     shell_interface.py owners_orcid
     shell_interface.py owners_list
+    shell_interface.py group_split
+    shell_interface.py group_merge
 
 Options:
     -h --help     Show this screen.
@@ -34,6 +36,7 @@ from functions.rdm_push_by_uuid         import rdm_push_by_uuid
 from functions.delete_record            import delete_record, delete_from_list
 from functions.general_functions        import db_connect
 from functions.rdm_owners               import rdm_owners, get_rdm_record_owners, rdm_owners_by_orcid
+from functions.rdm_groups               import rdm_group_split, rdm_group_merge
 
 
 class shell_interface:
@@ -88,24 +91,32 @@ class shell_interface:
     def delete_all(self):
         delete_all_records(self)
 
-
     def owners(self):
         """ Gets from pure all the records related to a certain user,
             afterwards it modifies/create RDM records accordingly."""
-        rdm_owners(self, '948')
+        rdm_owners(self, '56038')
 
         2 - 948
         3 - 54426
         4 - 56038
 
-
     def owners_orcid(self):
         rdm_owners_by_orcid(self, '0000-0002-4154-6945')
-
 
     def owners_list(self):
         """ Gets from RDM all record uuids, recids and owners """
         get_rdm_record_owners(self)
+
+    def rdm_group_split(self):
+        """  """
+        old_id   = '2376'
+        new_id_1 = '20353'
+        new_id_2 = '33320'
+        rdm_group_split(self, old_id, new_id_1, new_id_2)
+
+    def rdm_group_merge(self):
+        """  """
+        rdm_group_merge(self)
 
 
 if __name__ == '__main__':
@@ -123,3 +134,5 @@ elif arguments['delete_all']        == True: docopt_instance.delete_all()
 elif arguments['owners']            == True: docopt_instance.owners()
 elif arguments['owners_orcid']      == True: docopt_instance.owners_orcid()
 elif arguments['owners_list']       == True: docopt_instance.owners_list()
+elif arguments['group_split']       == True: docopt_instance.rdm_group_split()
+elif arguments['group_merge']       == True: docopt_instance.rdm_group_merge()

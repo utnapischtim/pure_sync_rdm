@@ -1,6 +1,6 @@
-from functions.general_functions import db_query, add_spaces
+from functions.general_functions import db_query, add_spaces, update_rdm_record, rdm_get_metadata_by_query
 
-
+#   ---         ---         ---
 def rdm_create_group(shell_interface: object, group_externalId: str, group_name: str):
 
     response = db_query(shell_interface, f"SELECT * FROM accounts_role WHERE name = '{group_externalId}'")
@@ -30,6 +30,7 @@ def rdm_create_group(shell_interface: object, group_externalId: str, group_name:
         if response != 0:
             print(f'Warning - Creating group response: {response}')
 
+#   ---         ---         ---
 def rdm_add_user_to_group(shell_interface: object, user_id: int, group_externalId: str):
 
     # Get user's rdm email
@@ -59,4 +60,65 @@ def rdm_add_user_to_group(shell_interface: object, user_id: int, group_externalI
     response = shell_interface.os.system(command)
     if response != 0:
         print(f'Warning - Creating group response: {response}')
+
+
+#   ---         ---         ---
+def rdm_group_split(shell_interface: object, old_id: str, new_id_1: str, new_id_2: str):
+
+    """ 
+    - remove users from old account_role
+    - delete old account_role
+    - create new accounts_roles
+    - add users to new account_roles
+    - modify record: 
+        . groupRestrictions
+        . managingOrganisationUnit (if necessary)
+        . organisationUnits
+        . contributors organisationUnit (should that be added??)
+    """
+
+    print(f'Old id: {old_id} - New ids: {new_id_1}, {new_id_2}')
+
+
+    # - Remove users from old account_role -
+    # Get all users in group
+    user_email = db_query(shell_interface, f"SELECT email FROM accounts_user WHERE id = {user_id}")[0][0]
+
+    # command = f'pipenv run invenio roles add {user_email} {group_externalId}'
+    # response = shell_interface.os.system(command)
+    # if response != 0:
+    #     print(f'Warning - Creating group response: {response}')
+
+
+
+
+
+    # - Delete old account_role -
+
+    # - Create new accounts_roles -
+
+    # - Add users to new account_roles -
+
+
+
+
+
+    # # - Modify record -
+    # # Get from RDM all records with old group
+    # response = rdm_get_metadata_by_query(shell_interface, old_id)
+
+    # resp_json = shell_interface.json.loads(response.content)
+    # total_items = resp_json['hits']['total']
+    # if total_items == 0:
+    #     print(f'No items with group_id {old_id}')
+    # print(f'Total items: {total_items}')
+
+
+    return
+
+
+#   ---         ---         ---
+def rdm_group_merge(shell_interface: object, old_id_1: str, old_id_2: str, new_id: str):
+    print('rdm_group_merge')
+    return
 

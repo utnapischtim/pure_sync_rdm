@@ -67,17 +67,14 @@ def rdm_get_recid_metadata(shell_interface: object, recid: str):
 
 
 #   ---         ---         ---
-def rdm_get_uuid_metadata(shell_interface: object, uuid: str):
-
-    if len(uuid) != 36:
-        print(f'\nERROR - The uuid must have 36 characters. Given: {uuid}\n')
-        return False
+# def rdm_get_uuid_metadata(shell_interface: object, uuid: str):
+def rdm_get_metadata_by_query(shell_interface: object, query_value: str):
 
     # GET request RDM
     sort  = 'sort=mostrecent'
     size  = 'size=100'
     page  = 'page=1'
-    query = f'q="{uuid}"'
+    query = f'q="{query_value}"'
 
     headers = {
         'Authorization': f'Bearer {token_rdm}',
@@ -88,10 +85,10 @@ def rdm_get_uuid_metadata(shell_interface: object, uuid: str):
     response = shell_interface.requests.get(url, headers=headers, params=params, verify=False)
 
     if response.status_code >= 300:
-        print(f'\n{uuid} - {response}')
+        print(f'\n{query_value} - {response}')
         return False
 
-    open(f'{shell_interface.dirpath}/data/temporary_files/rdm_get_uuid_metadata.json', "wb").write(response.content)
+    open(f'{shell_interface.dirpath}/data/temporary_files/rdm_get_metadata_by_query.json', "wb").write(response.content)
     
     return response
     
@@ -103,7 +100,7 @@ def rdm_get_recid(shell_interface: object, uuid: str):
     """ KNOWN ISSUE: if the applied restriction in invenio_records_permissions
                      do not allow to read the record then it will not be listed """
 
-    response = rdm_get_uuid_metadata(shell_interface, uuid)
+    response = rdm_get_metadata_query(shell_interface, uuid)
 
     if response.status_code == 429:
         shell_interface.time.sleep(wait_429)
@@ -215,5 +212,27 @@ def get_rdm_userid_from_list_by_externalid(shell_interface: object, external_id:
             print(f'\tRDM owner list     - user id: {user_id_spaces}   - externalId: {external_id}')
             return user_id
 
+
+
+#   ---         ---         ---
+def update_rdm_record(shell_interface: object, data: str, recid: str):
+
+    data_utf8 = data.encode('utf-8')
+
+    headers = {
+        'Authorization': f'Bearer {token_rdm}',
+        'Content-Type': 'application/json',
+    }
+    params = (
+        ('prettyprint', '1'),
+    )
+
+    url = f'{rdm_api_url_records}api/records/{recid}'
+
+    response = shell_interface.requests.put(url, headers=headers, params=params, data=data_utf8, verify=False)
+    print(f'\tRecord update      - {response}')
+
+    if response.status_code >= 300:
+        print(response.content)
 
 
