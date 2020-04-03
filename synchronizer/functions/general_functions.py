@@ -100,7 +100,7 @@ def rdm_get_recid(shell_interface: object, uuid: str):
     """ KNOWN ISSUE: if the applied restriction in invenio_records_permissions
                      do not allow to read the record then it will not be listed """
 
-    response = rdm_get_metadata_query(shell_interface, uuid)
+    response = rdm_get_metadata_by_query(shell_interface, uuid)
 
     if response.status_code == 429:
         shell_interface.time.sleep(wait_429)

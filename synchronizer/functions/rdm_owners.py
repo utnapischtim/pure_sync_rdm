@@ -219,18 +219,6 @@ def pure_get_user_uuid(shell_interface: object, key_name: str, key_value: str):
 def rdm_get_user_id(shell_interface: object):
     """ Gets the ID and IP of the logged in user """
 
-    # Table -> accounts_user_session_activity:
-    # created
-    # updated
-    # sid_s
-    # user_id
-    # ip            <- !!!!!!!!!!
-    # country
-    # browser
-    # browser_version
-    # os
-    # device
-
     response = db_query(shell_interface, f"SELECT user_id, ip FROM accounts_user_session_activity")
 
     if not response:

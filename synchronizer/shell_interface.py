@@ -110,9 +110,8 @@ class shell_interface:
     def rdm_group_split(self):
         """  """
         old_id   = '2376'
-        new_id_1 = '20353'
-        new_id_2 = '33320'
-        rdm_group_split(self, old_id, new_id_1, new_id_2)
+        new_ids = ['20353', '33320']
+        rdm_group_split(self, old_id, new_ids)
 
     def rdm_group_merge(self):
         """  """
