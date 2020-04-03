@@ -15,9 +15,9 @@ from flask import current_app
 from werkzeug.utils import import_string
 
 from ..errors import UnknownGeneratorError
-from ..generators import Admin, AnyUser, AnyUserIfPublic, Disable, RecordOwners, RecordManagers
+from ..generators import Admin, AnyUser, AnyUserIfPublic, Disable, RecordOwners, RecordGroups, RecordIp, RecordIpRange
 from .base import BasePermissionPolicy
-
+from flask_principal import ActionNeed, UserNeed, RoleNeed
 
 @staticmethod
 def _unknwon_generator(class_name):
@@ -56,31 +56,27 @@ class RecordPermissionPolicy(BasePermissionPolicy):
 
     # Read access given to everyone.
     can_list = [AnyUser()]
-    # Create action given to no one (Not even superusers) bc Deposits should
-    # be used.
+
+    # Create action given to no one (Not even superusers) bc Deposits should be used.
     can_create = [Disable()]
+
     # Read access given to everyone if public record/files and owners always.
-    from flask_principal import ActionNeed, UserNeed, RoleNeed
-    can_read = [RecordManagers()]
+    # can_read = [AnyUser()]
+    # can_read = [RecordOwners()]
     # can_read = [AnyUserIfPublic()]
+    # can_read = [RecordGroups()]
+    can_read = [RecordIp()]
+    # can_read = [RecordIpRange()]
+
     # Update access given to record owners.
     can_update = [RecordOwners()]
+
     # Delete access given to admins only.
     can_delete = [Admin()]
+
     # Associated files permissions (which are really bucket permissions)
     can_read_files = [AnyUserIfPublic(), RecordOwners()]
     can_update_files = [RecordOwners()]
-
-    # #########################
-    # print(f"""
-    # can_list   = {can_list}
-    # can_create = {can_create}
-    # can_read   = {can_read}
-    # can_update = {can_update}
-    # can_delete = {can_delete}
-    
-    # """)
-    # #########################
 
     def __init__(self, action, **over):
         """Constructor."""

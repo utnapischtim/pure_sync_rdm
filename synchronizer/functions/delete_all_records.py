@@ -3,6 +3,8 @@ from setup                      import *
 
 def delete_all_records(shell_interface):
 
+    rdm_get_all_recods(shell_interface)
+
     file_data = open(f'{shell_interface.dirpath}/data/all_rdm_records.txt').readlines()
     for line in file_data:
         recid = line.split(' ')[1].strip('\n')
@@ -10,7 +12,7 @@ def delete_all_records(shell_interface):
 
 
 # -- GET FROM RDM --
-def get_from_rdm(shell_interface):
+def rdm_get_all_recods(shell_interface):
     try:
         pag = 1
         pag_size = 1000
@@ -21,6 +23,11 @@ def get_from_rdm(shell_interface):
         go_on = True
         data_ur = ''
         data_u = ''
+
+        file_name = f'{shell_interface.dirpath}/data/all_rdm_records.txt'
+
+        # Empty all_rdm_records
+        open(file_name, 'w').close()
 
         while go_on == True:
 
@@ -57,7 +64,7 @@ def get_from_rdm(shell_interface):
             pag += 1
             
         print(f'\n- Tot items: {count} -')
-        open(shell_interface.dirpath + "/data/all_rdm_records.txt", 'w+').write(data_ur)
+        open(file_name, 'w+').write(data_ur)
 
         return True
 

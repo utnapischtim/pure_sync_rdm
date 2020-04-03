@@ -203,7 +203,21 @@ class MetadataSchemaV1(StrictKeysMixin):
     title               = SanitizedUnicode(required=True, validate=validate.Length(min=3))
     uuid                = fields.Str()
     repositoryReview    = fields.Str()
-    appliedRestrictions = fields.List(fields.Str())
+
+
+    # appliedRestrictions = fields.List(fields.Str())
+    APPLIED_RESTRICTIONS_CHOICES = [
+        'owners',
+        'groups',
+        'ip_range'
+    ]
+    appliedRestrictions = SanitizedUnicode(validate=validate.OneOf(
+        choices=APPLIED_RESTRICTIONS_CHOICES,
+        error=_('Invalid applied restrictions. {input} not one of {choices}.')
+    ))
+
+
+
     groupRestrictions   = fields.List(fields.Str())
     visibleIpRange      = fields.Bool()
     metadataVersion     = fields.Integer()

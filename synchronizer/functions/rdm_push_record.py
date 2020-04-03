@@ -1,6 +1,6 @@
 from setup                          import *
 from functions.get_put_file         import rdm_put_file, get_file_from_pure
-from functions.general_functions    import rdm_get_recid, pure_get_metadata, get_rdm_userid_from_list_by_externalid
+from functions.general_functions    import rdm_get_recid, pure_get_metadata, get_rdm_userid_from_list_by_externalid, bcolors
 from functions.rdm_groups           import rdm_create_group, rdm_add_user_to_group
 from functions.rdm_versioning       import rdm_versioning
 
@@ -43,18 +43,24 @@ def create_invenio_data(shell_interface: object):
     else:
         shell_interface.data['owners'] = [1]
 
-    shell_interface.data['_access'] = {'metadata_restricted': False, 'files_restricted': False}        # Default value for _access field
-
                                     # RDM field name                # PURE json path
     add_field(shell_interface, item, 'title',                       ['title'])
     add_field(shell_interface, item, 'access_right',                ['openAccessPermissions', 0, 'value'])
     
     # TO REVIEW - TO REVIEW - TO REVIEW - TO REVIEW - TO REVIEW
     # shell_interface.data['title']              = 'test title'
-    shell_interface.data['visibleIpRange']      = True
+    shell_interface.data['visibleIpRange']      = False
 
-    # Applied Restrictions possible values: groups, owners, ip_ranges
+    # Applied Restrictions possible values
+    applied_restrictions_possible_values = ['groups', 'owners', 'ip_ranges']
+
     shell_interface.data['appliedRestrictions'] = ['groups', 'owners', 'ip_ranges']
+    
+    for i in shell_interface.data['appliedRestrictions']:
+        if i not in applied_restrictions_possible_values:
+            print(f"{bcolors.YELLOW}Warning: the value '{i}' is not amont the accepted restrictions.{bcolors.END}\n")
+
+    shell_interface.data['_access'] = {'metadata_restricted': False, 'files_restricted': False}        # Default value for _access field
     # TO REVIEW - TO REVIEW - TO REVIEW - TO REVIEW - TO REVIEW    
 
     add_field(shell_interface, item, 'uuid',                        ['uuid'])
@@ -132,9 +138,10 @@ def create_invenio_data(shell_interface: object):
 
             # ORCID
             person_uuid = get_value(i, ['person', 'uuid'])
+
+            # Only 'person' uuids (internal persons) are in Pure. 
+            # 'externalPerson' uuids will not be found (404), therefore it is not possible to get their orcid's
             if person_uuid:
-                # Only 'person' uuids (internal persons) are in Pure. 
-                # 'externalPerson' uuids will not be found (404), therefore it is not possible to get their orcid's
                 sub_data['uuid'] = person_uuid
                 orcid = get_orcid(shell_interface, person_uuid, sub_data['name'])
                 if orcid:
@@ -182,8 +189,8 @@ def create_invenio_data(shell_interface: object):
             # Adding organisational unit as group owner
             shell_interface.data['groupRestrictions'].append(organisational_unit_externalId)
 
-            # # Create group
-            # rdm_create_group(shell_interface, organisational_unit_externalId, organisational_unit_name)
+            # Create group
+            rdm_create_group(shell_interface, organisational_unit_externalId, organisational_unit_name)
 
     # --- Abstract ---  
     if 'abstracts' in item:
@@ -246,7 +253,6 @@ def get_files_data(shell_interface: object, i: dict):
     # Download file from Pure
     get_file_from_pure(shell_interface, i)
     return
-
 
 
 #   ---         ---         ---

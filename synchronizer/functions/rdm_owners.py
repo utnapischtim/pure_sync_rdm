@@ -66,7 +66,7 @@ def get_owner_records(shell_interface, user_id, user_uuid):
     shell_interface.count_http_responses = {}
 
     page      = 1
-    page_size = 3
+    page_size = 25
     go_on     = True
     count     = 0
 
@@ -97,7 +97,7 @@ def get_owner_records(shell_interface, user_id, user_uuid):
         resp_json = shell_interface.json.loads(response.content)
 
         total_items = resp_json['count']
-        print(f'Get person records - {response} - Page {page} (size {page_size})    - Total records: {total_items}')
+        print(f'\nGet person records - {response} - Page {page} (size {page_size})    - Total records: {total_items}')
 
         if total_items == 0:
             if page == 1:
@@ -110,7 +110,7 @@ def get_owner_records(shell_interface, user_id, user_uuid):
             title = item['title']
             count += 1
             
-            print(f'\n\tRecord uuid        - {uuid}  - {title}')
+            print(f'\n\tRecord uuid        - {uuid}  - {title[0:55]}...')
 
             # Get from RDM the recid
             recid = rdm_get_recid(shell_interface, uuid)

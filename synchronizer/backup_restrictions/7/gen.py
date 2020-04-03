@@ -21,6 +21,10 @@ from invenio_access.permissions import any_user, superuser_access
 from invenio_files_rest.models import Bucket, ObjectVersion
 from invenio_records_files.api import Record
 from invenio_records_files.models import RecordsBuckets
+from invenio_accounts.ext   import InvenioAccountsREST
+
+from flask_security import current_user
+from invenio_accounts.models import SessionActivity  ###############################
 
 
 class Generator(object):
@@ -118,63 +122,113 @@ class RecordOwners(Generator):
         """Filters for current identity as owner."""
         
         provides = g.identity.provides
-        print(f'{provides}')
 
         for need in provides:
             if need.method == 'id':
                 return Q('term', owners=need.value)
-                        # Term(owners=2)
         return []
 
 
 ###   ###   ###   ###   ###   ###
 #
-def RecordManagers():
-    return RoleNeed('managers')
-
-class RecordFaculty(Generator):
+class RecordGroups(Generator):
     
     def needs(self, record=None, **rest_over):
 
-        # return [any_user]
-
-        provides = g.identity.provides
-        print(f'Provides: {provides}')
-
-        record_groups = []
-        for need in provides:
-            if need.method == 'role':
-                record_groups.append(need.value)
-
-        print(f"record_groups {record_groups}")
-        print(f"groupRestrictions {record.get('groupRestrictions')}")
-
-        intersection = list(set(record.get('groupRestrictions')) & set(record_groups))
-        print(f'intersection {intersection}')
-
-        if len(intersection) > 0:
-            return [RoleNeed(group) for group in record.get('groupRestrictions', [])]
-        else:
-            return []
+        return [RoleNeed(group) for group in record.get('groupRestrictions', [])]
 
     def query_filter(self, *args, **kwargs):
-    
-        # return Q('match_all')
-        # return Q('match', **{"totalNumberOfAuthors": 3}) | Q('match', **{"totalNumberOfAuthors": 4})
-        
+
+        # return Q('match_all')         # TEMPORARY
+
         provides = g.identity.provides
 
+        # Get all user's groups
         record_groups = []
         for need in provides:
             if need.method == 'role':
                 record_groups.append(need.value)
 
+        # Queries Elasticsearch to get all records that match the user's groups
         queries = [
             Q('match', **{
                 "groupRestrictions": group
             }) for group in record_groups
         ]
         return reduce(operator.or_, queries)
+
+
+
+class RecordIp (Generator):
+
+    def __init__(self):
+
+        user_ip    = '127.0.0.8'
+        single_ips = [['127.0.0.3', '127.0.0.8']]
+
+        # Checks if the user IP is among single IPs
+        self.in_range = False
+        if user_ip in single_ips:
+            self.in_range = True
+
+    def needs(self, record=None, **rest_over):
+        if self.in_range:
+            return [any_user]
+        return[]
+            
+    def query_filter(self, *args, **kwargs):
+        if self.in_range:
+            return Q('match_all')
+        return ~Q('match_all')
+
+
+
+class RecordIpRange (Generator):
+
+    def __init__(self):
+
+        # # TEMPORARY  TEMPORARY  TEMPORARY  TEMPORARY
+        # import psycopg2
+        # connection = psycopg2.connect(f"""\
+        #     host=localhost \
+        #     dbname=invenio-app-rdm \
+        #     user=invenio-app-rdm \
+        #     password=invenio-app-rdm \
+        #     """)
+        # cursor = connection.cursor()
+        # cursor.execute("SELECT ip FROM accounts_user_session_activity;")
+        # self.user_ip = cursor.fetchall()[0][0]
+#           -           -           -           -
+        # sessions = SessionActivity.query_by_user(
+        #     user_id=current_user.get_id()  
+        # ).all()
+        # print(f'SSSSSSSSSSSSSSSS {session.ip}')
+
+        self.user_ip = '127.0.1.9'
+        self.ip_range = [['127.0.0.3', '127.0.0.8'], ['127.0.1.10', '127.0.2.18']]
+
+        # Checks if the user IP is in the IP range
+        self.in_range = False
+        for range in self.ip_range:
+            ip_start = range[0]
+            ip_end   = range[1]
+            if self.user_ip >= ip_start and self.user_ip <= ip_end:
+                self.in_range = True
+
+    def needs(self, record=None, **rest_over):
+
+        # Admin users will see the record metadata even with restrictions
+        visible_for_ip_range = record.get('visibleIpRange', [])
+        if visible_for_ip_range and self.in_range:
+            return [any_user]
+        return[]
+
+    def query_filter(self, *args, **kwargs):
+        if self.in_range:
+            return Q('match', **{"visibleIpRange": True})
+
+        # Match None in search
+        return ~Q('match_all')
 
 #
 ###   ###   ###   ###   ###   ###
@@ -199,7 +253,6 @@ class AnyUserIfPublic(Generator):
         return []
 
     def query_filter(self, *args, **kwargs):
-        print(f'k {kwargs}')
         """Filters for non-restricted records."""
         # TODO: Implement with new permissions metadata
         return Q('term', **{"_access.metadata_restricted": False})
@@ -293,4 +346,3 @@ class AllowedByAccessLevel(Generator):
 # |       False     |       False      |     Open     |  True  |
 # |-----------------|------------------|--------------|--------|
 #
-
