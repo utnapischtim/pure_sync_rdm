@@ -5,7 +5,7 @@ import psycopg2
 
 
 #   ---         ---         ---
-def pure_get_metadata(shell_interface: object, uuid: str):
+def pure_get_uuid_metadata(shell_interface: object, uuid: str):
     """ Method used to get from Pure record's metadata """
 
     # PURE REQUEST
@@ -21,8 +21,8 @@ def pure_get_metadata(shell_interface: object, uuid: str):
 
     print(f'\n\tPure get  metadata - {response}')
 
-    # Add response content to pure_get_metadata.json
-    file_response = f'{shell_interface.dirpath}/data/temporary_files/pure_get_metadata.json'
+    # Add response content to pure_get_uuid_metadata.json
+    file_response = f'{shell_interface.dirpath}/data/temporary_files/pure_get_uuid_metadata.json'
     open(file_response, 'wb').write(response.content)
 
     # Check response
@@ -30,7 +30,7 @@ def pure_get_metadata(shell_interface: object, uuid: str):
         print(response.content)
 
         file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
-        report = f'Get metadata from Pure - {response.content}\n'
+        report = f'Get Pure metadata      - {response.content}\n'
         open(file_records, "a").write(report)
 
         shell_interface.time.sleep(1)

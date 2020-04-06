@@ -13,19 +13,10 @@
 #         print(exc)
 
 
-user_ip = '127.0.2.11'
+a = [{'externalId': '2372346', 'name': 'Institu', 'uuid': 'b9fadcac9bca87'}, {'externalId': '2376', 'name': 'Institu', 'uuid': 'b9fadcac9b4444444444ca87'}]
 
-ip_range = [['127.0.0.3', '127.0.0.8'], ['127.0.1.10', '127.0.2.18']]
+for i in a:
+    if i['externalId'] == '2376':
+        a.remove(i)
 
-in_range = False
-
-for range in ip_range:
-
-    ip_start = range[0]
-    ip_end   = range[1]
-
-    if user_ip > ip_start and user_ip < ip_end:
-        in_range = True
-
-
-print(f'\nIn range: {in_range}\n')
+print(a)

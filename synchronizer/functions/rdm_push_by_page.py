@@ -35,7 +35,7 @@ def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: in
         url = f'{pure_rest_api_url}research-outputs'
         response = shell_interface.requests.get(url, headers=headers, params=params)
 
-        file_name = f'{shell_interface.dirpath}/data/temporary_files/pure_get_metadata.json'
+        file_name = f'{shell_interface.dirpath}/data/temporary_files/pure_get_uuid_metadata.json'
         open(file_name, 'wb').write(response.content)
 
         # (500 -> internal server error)

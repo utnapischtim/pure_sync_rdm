@@ -194,7 +194,7 @@
       "totalNumberOfAuthors": {
         "type": "integer"
       },
-      "managingOrganisationalUnit": {
+      "managingOrganisationalUnit_name": {
         "type": "text"
       },
       "managingOrganisationalUnit_uuid": {

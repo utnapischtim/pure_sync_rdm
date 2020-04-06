@@ -1,6 +1,6 @@
 from setup                          import *
 from functions.get_put_file         import rdm_put_file, get_file_from_pure
-from functions.general_functions    import rdm_get_recid, pure_get_metadata, get_rdm_userid_from_list_by_externalid, bcolors
+from functions.general_functions    import rdm_get_recid, pure_get_uuid_metadata, get_rdm_userid_from_list_by_externalid, bcolors
 from functions.rdm_groups           import rdm_create_group, rdm_add_user_to_group
 from functions.rdm_versioning       import rdm_versioning
 
@@ -8,7 +8,7 @@ from functions.rdm_versioning       import rdm_versioning
 def rdm_push_record(shell_interface: object, uuid: str):
     
     # Gets from Pure the metadata of the given uuid
-    pure_get_metadata(shell_interface, uuid)
+    pure_get_uuid_metadata(shell_interface, uuid)
 
     return create_invenio_data(shell_interface)
 
@@ -83,7 +83,7 @@ def create_invenio_data(shell_interface: object):
     add_field(shell_interface, item, 'confidential',                ['confidential'])
     add_field(shell_interface, item, 'publisherName',               ['publisher', 'names', 0, 'value'])
     add_field(shell_interface, item, 'abstract',                    ['abstracts', 0, 'value'])
-    add_field(shell_interface, item, 'managingOrganisationalUnit',            ['managingOrganisationalUnit', 'names', 0, 'value'])
+    add_field(shell_interface, item, 'managingOrganisationalUnit_name',       ['managingOrganisationalUnit', 'names', 0, 'value'])
     add_field(shell_interface, item, 'managingOrganisationalUnit_uuid',       ['managingOrganisationalUnit', 'uuid'])
     add_field(shell_interface, item, 'managingOrganisationalUnit_externalId', ['managingOrganisationalUnit', 'externalId'])
     

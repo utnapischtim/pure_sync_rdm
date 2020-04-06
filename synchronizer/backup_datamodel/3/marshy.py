@@ -233,7 +233,7 @@ class MetadataSchemaV1(StrictKeysMixin):
     publicationStatus   = fields.Str()
     language            = SanitizedUnicode(validate=validate_iso639_3)
     totalNumberOfAuthors                    = fields.Integer()
-    managingOrganisationalUnit              = fields.Str()
+    managingOrganisationalUnit_name         = fields.Str()
     managingOrganisationalUnit_uuid         = fields.Str()
     managingOrganisationalUnit_externalId   = fields.Str()
     workflow            = fields.Str()
