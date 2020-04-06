@@ -63,7 +63,7 @@ class shell_interface:
     def pages(self):
         """ Push to RDM records from Pure by page """
         pag_begin = 1
-        pag_end =   3
+        pag_end =   2
         pag_size =  2
         get_pure_by_page(self, pag_begin, pag_end, pag_size)
 
@@ -109,13 +109,15 @@ class shell_interface:
 
     def rdm_group_split(self):
         """  """
-        old_id   = '2376'
+        old_id  = '2376'
         new_ids = ['20353', '33320']
         rdm_group_split(self, old_id, new_ids)
 
     def rdm_group_merge(self):
         """  """
-        rdm_group_merge(self)
+        old_id  = ['20353', '33320']
+        new_ids = '2376'
+        rdm_group_merge(self, old_id, new_ids)
 
 
 if __name__ == '__main__':
