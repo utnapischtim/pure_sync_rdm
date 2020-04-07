@@ -170,9 +170,6 @@ def create_invenio_data(shell_interface: object):
         shell_interface.data['organisationalUnits'] = []
         shell_interface.data['groupRestrictions']   = []
 
-        if len(item['organisationalUnits']) > 1:
-            print('This one ;)')
-
         for i in item['organisationalUnits']:
             sub_data = {}
 

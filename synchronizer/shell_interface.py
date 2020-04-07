@@ -64,7 +64,7 @@ class shell_interface:
         """ Push to RDM records from Pure by page """
         pag_begin = 1
         pag_end =   2
-        pag_size =  2
+        pag_size =  6
         get_pure_by_page(self, pag_begin, pag_end, pag_size)
 
 
@@ -118,6 +118,11 @@ class shell_interface:
         old_id  = ['20353', '33320']
         new_ids = '2376'
         rdm_group_merge(self, old_id, new_ids)
+# 709803a8-0655-4a08-a05a-fb706f36a332
+# a218e4b7-f925-4329-9584-06d9e1c18869
+# 8955b899-e9fb-43a1-8512-9b95d52dc123
+# 6cafe0a1-41a0-4402-900b-021a07d25c7a
+# a144e753-66b8-4f7b-a4fd-4e5a098dc3ec
 
 
 if __name__ == '__main__':
