@@ -12,11 +12,3 @@
 #     except yaml.YAMLError as exc:
 #         print(exc)
 
-
-a = [{'externalId': '2372346', 'name': 'Institu', 'uuid': 'b9fadcac9bca87'}, {'externalId': '2376', 'name': 'Institu', 'uuid': 'b9fadcac9b4444444444ca87'}]
-
-for i in a:
-    if i['externalId'] == '2376':
-        a.remove(i)
-
-print(a)

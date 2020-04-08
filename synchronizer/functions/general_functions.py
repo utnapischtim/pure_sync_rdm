@@ -141,7 +141,7 @@ def rdm_get_recid(shell_interface: object, uuid: str):
 
 
 #   ---         ---         ---
-def add_spaces(value: int):
+def add_spaces(value: str):
     max_length = 5                              # 5 is the maximum length of the given value
     spaces = max_length - len(str(value))
     return ''.ljust(spaces) + str(value)        # ljust -> adds spaces after a string
@@ -218,7 +218,6 @@ def get_rdm_userid_from_list_by_externalid(shell_interface: object, external_id:
 def update_rdm_record(shell_interface: object, data: str, recid: str):
 
     data_utf8 = data.encode('utf-8')
-
     headers = {
         'Authorization': f'Bearer {token_rdm}',
         'Content-Type': 'application/json',
@@ -226,7 +225,6 @@ def update_rdm_record(shell_interface: object, data: str, recid: str):
     params = (
         ('prettyprint', '1'),
     )
-
     url = f'{rdm_api_url_records}api/records/{recid}'
 
     response = shell_interface.requests.put(url, headers=headers, params=params, data=data_utf8, verify=False)
@@ -234,5 +232,6 @@ def update_rdm_record(shell_interface: object, data: str, recid: str):
 
     if response.status_code >= 300:
         print(response.content)
-
+        
+    return response
 

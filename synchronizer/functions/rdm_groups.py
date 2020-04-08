@@ -6,30 +6,24 @@ def rdm_create_group(shell_interface: object, group_externalId: str, group_name:
 
     response = db_query(shell_interface, f"SELECT * FROM accounts_role WHERE name = '{group_externalId}'")
 
-    message = f'\tRDM group          - '
+    # If the group has already been created
+    if response:
+        print(f'\tRDM group          - Found            - externalId:  {add_spaces(group_externalId)}  - {group_name}')
+        return 'Already exists'
+    
+    print(f'\tRDM group          - Not found        - externalId:  {add_spaces(group_externalId)}  - {group_name}')
 
-    if not response:
-        message += 'Not found        - '
+    group_name = group_name.replace('(', '\(')
+    group_name = group_name.replace(')', '\)')
+    group_name = group_name.replace(' ', '_')
+    command = f'pipenv run invenio roles create {group_externalId} -d {group_name}'
+    response = shell_interface.os.system(command)
 
-    elif len(response) == 1:
-        message += 'Found            - '
-        
-    elif len(response) > 1:                                                                         #  TEMPORARY
-        print(f'Group in database {len(response)} times - {group_externalId} !!!!!!!')              #  TEMPORARY
+    if response != 0:
+        print(f'\tWarning - Creating group response: {response}')
+        return f'Error: {response}'
 
-    message += f'externalId:  {add_spaces(group_externalId)}  - {group_name}'
-    print(message)
-
-    if not response:
-                                                            # Known issue related to the system path at execution time
-        group_name = group_name.replace('(', '\(')
-        group_name = group_name.replace(')', '\)')
-        group_name = group_name.replace(' ', '_')
-        command = f'pipenv run invenio roles create {group_externalId} -d {group_name}'
-        response = shell_interface.os.system(command)
-
-        if response != 0:
-            print(f'Warning - Creating group response: {response}')
+    return 'Success'
 
 #   ---         ---         ---
 def rdm_add_user_to_group(shell_interface: object, user_id: int, group_externalId: str):
@@ -76,25 +70,36 @@ def rdm_group_split(shell_interface: object, old_group_externalId: str, new_grou
         . managingOrganisationUnit (if necessary)
         . organisationUnits
     """
+    # Report
+    current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
+    report_name = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_groups.log'
+    report = f"""
+
+--   --   --
+
+{current_time} - RDM GROUP SPLIT -
+
+Old group             - externalId: {old_group_externalId}
+"""
+    open(report_name, "a").write(report)
 
     print(f'\nOld group: {old_group_externalId} - New groups: {new_groups_externalIds}\n')
 
-    # Get name and uuid of new organisationalUnits
-    new_organisationalUnits_data = []
+    # Get name and uuid of new groups
+    new_groups_data = []
 
     for externalId in new_groups_externalIds:
         # Get group information
         response = pure_get_organisationalUnit_data(shell_interface, externalId)
-        new_organisationalUnits_data.append(response)
+        new_groups_data.append(response)
+
+        report = f"\nNew group             - externalId: {externalId}   - {response['uuid']} - {response['name']}\n"
+        open(report_name, "a").write(report)
 
         # Create new group
-        rdm_create_group(shell_interface, externalId, response['name'])
+        response = rdm_create_group(shell_interface, externalId, response['name'])
+        open(report_name, "a").write(f'New group creation    - {response}\n')
 
-    
-
-
-    # - - Remove users from old account_role - -
-    # - - Add users to new account_roles - -
     # Get group id
     query = f"SELECT id FROM accounts_role WHERE name = '{old_group_externalId}';"
     old_group_id = db_query(shell_interface, query)[0][0]
@@ -104,22 +109,40 @@ def rdm_group_split(shell_interface: object, old_group_externalId: str, new_grou
     query = f"SELECT user_id FROM accounts_userrole WHERE role_id = {old_group_id};"
     response = db_query(shell_interface, query)
 
+    report = 'Users in old group: '
     if not response:
-        print('\tUsers in group:      None')
+        report += '0'
+        print(f'\t{report}')
+        open(report_name, "a").write(f'\n{report}\n')
     else:
-        print(f'\tUsers in group:      {len(response)}')
+        report += f'{len(response)}'
+        print(f'\t{report}')
+        open(report_name, "a").write(f'\n{report}\n')
+
         for i in response:
+
             user_id = i[0]
+            open(report_name, "a").write(f'\nUser id: {add_spaces(user_id)}\n')
 
             # Get user email
             user_email = get_user_email(shell_interface, user_id)
 
             # Remove user from old group
-            group_remove_user(shell_interface, user_email, old_group_externalId)
+            response = group_remove_user(shell_interface, user_email, old_group_externalId)
+            report = f'Remove from old group - Group: {add_spaces(old_group_externalId)}       - '
+            if response:
+                report += 'Success\n'
+            else:
+                report += 'Failure\n'
+            open(report_name, "a").write(report)
 
-            # Add user to new groups
             for new_group_externalId in new_groups_externalIds:
-                group_add_user(shell_interface, user_email, new_group_externalId, user_id)
+
+                # Add user to new groups
+                response = group_add_user(shell_interface, user_email, new_group_externalId, user_id)
+
+                report = f'Add user to new group - Group: {add_spaces(new_group_externalId)}       - {response}\n'
+                open(report_name, "a").write(report)
 
 
     # # - - Delete old group - -
@@ -131,38 +154,37 @@ def rdm_group_split(shell_interface: object, old_group_externalId: str, new_grou
     #     print(f'Group {old_group_externalId} successfuly deleted')
     # #  NOT WORKING  !!!  NOT WORKING  !!!  NOT WORKING  !!!  NOT WORKING  !!!  NOT WORKING  !!!
 
-
+    # - -               - -
     # - - Modify record - -
 
-    # Get from RDM all records with old group
+    # Get from RDM all old group's records
     response = rdm_get_metadata_by_query(shell_interface, old_group_externalId)
 
     resp_json = shell_interface.json.loads(response.content)
     total_items = resp_json['hits']['total']
+    
+    report = f'\nRDM group records:   {total_items}\n'
+    print(report)
+    open(report_name, "a").write(report)
 
     if total_items == 0:
-        print('\nRDM group records:   None\n')
         return True
-    
-    print(f'\nRDM group records:   {total_items}\n')
-    
 
     # Iterates over all old group records
     for item in resp_json['hits']['hits']:
         item = item['metadata']
 
         recid = item['recid']
-        print(f"\tRecid:               {rdm_api_url_records}api/records/{recid}")
+        url = f'{rdm_api_url_records}api/records/{recid}'
+        print(f"\tRecid:               {url}")
 
-        open(f'{shell_interface.dirpath}/data/temporary_files/t1.json', 'w').write(shell_interface.json.dumps(item))
-        
         # Removes old organisationalUnit from organisationalUnits
         for i in item['organisationalUnits']:
             if i['externalId'] == old_group_externalId:
                 item['organisationalUnits'].remove(i)
 
         # Adds new organisationalUnits
-        for i in new_organisationalUnits_data:
+        for i in new_groups_data:
             item['organisationalUnits'].append(i)
 
         # Change group restrictions
@@ -174,15 +196,19 @@ def rdm_group_split(shell_interface: object, old_group_externalId: str, new_grou
         # KNOWN ISSUE: IT CAN HAVE ONLY ONE ORGANIZATION        !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         # Change managingOrganisationalUnit
         if item['managingOrganisationalUnit_externalId'] == old_group_externalId:
-            item['managingOrganisationalUnit_name']       = new_organisationalUnits_data[0]['name']
-            item['managingOrganisationalUnit_uuid']       = new_organisationalUnits_data[0]['uuid']
-            item['managingOrganisationalUnit_externalId'] = new_organisationalUnits_data[0]['externalId']
+            item['managingOrganisationalUnit_name']       = new_groups_data[0]['name']
+            item['managingOrganisationalUnit_uuid']       = new_groups_data[0]['uuid']
+            item['managingOrganisationalUnit_externalId'] = new_groups_data[0]['externalId']
         # KNOWN ISSUE: IT CAN HAVE ONLY ONE ORGANIZATION        !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        open(f'{shell_interface.dirpath}/data/temporary_files/t2.json', 'w').write(shell_interface.json.dumps(item))
         record_json = shell_interface.json.dumps(item)
 
-        update_rdm_record(shell_interface, record_json, recid)
+        # Update record
+        response = update_rdm_record(shell_interface, record_json, recid)
+
+        current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
+        open(report_name, "a").write(f'{current_time} - {response} - {url}\n')
+
         shell_interface.time.sleep(0.2)
 
     return
@@ -200,9 +226,19 @@ def rdm_group_merge(shell_interface: object, old_groups_externalId: list, new_gr
         . managingOrganisationUnit (if necessary)
         . organisationUnits
     """
+    # Report
+    current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
+    report_name = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_groups.log'
+    report = f"""
 
-    print(f'\nOld groups: {old_groups_externalId}')
-    print(f'New group:  {new_group_externalId}\n')
+--   --   --
+
+{current_time} - RDM GROUP MERGE -
+
+New group             - externalId: {new_group_externalId}
+"""
+    open(report_name, "a").write(report)
+    print(f'{report}Old groups: {old_groups_externalId}')
 
     # Get name and uuid of new organisationalUnit
     new_organisationalUnit_data = pure_get_organisationalUnit_data(shell_interface, new_group_externalId)
@@ -353,6 +389,8 @@ def group_remove_user(shell_interface, user_email, old_group_externalId):
     response = shell_interface.os.system(command)
     if response != 0:
         print(f'Warning - Creating group response: {response}')
+        return False
+    return True
 
 def group_add_user(shell_interface, user_email, new_group_externalId, user_id):
     
@@ -365,12 +403,19 @@ def group_add_user(shell_interface, user_email, new_group_externalId, user_id):
     response = db_query(shell_interface, query)
 
     if response:
+        return 'Already in group'
+    else:
         # Add user to new groups
         print(f'\tAdding user to group {new_group_externalId}')
+
         command = f'pipenv run invenio roles add {user_email} {new_group_externalId}'
         response = shell_interface.os.system(command)
+
         if response != 0:
             print(f'Warning - Creating group response: {response}')
+            return f'Error: {response}'
+
+    return 'Success'
 
 def get_user_email(shell_interface, user_id):
     # Get user email
