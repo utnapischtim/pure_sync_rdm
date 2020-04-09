@@ -48,14 +48,12 @@ def create_invenio_data(shell_interface: object):
     add_field(shell_interface, item, 'access_right',                ['openAccessPermissions', 0, 'value'])
     
     # TO REVIEW - TO REVIEW - TO REVIEW - TO REVIEW - TO REVIEW
-    # shell_interface.data['title']              = 'test title'
-    shell_interface.data['visibleIpRange']      = False
+    # shell_interface.data['owners'].append(3)
+    shell_interface.data['visibleIpRange']      = True
 
-    # Applied Restrictions possible values
-    applied_restrictions_possible_values = ['groups', 'owners', 'ip_ranges']
+    shell_interface.data['appliedRestrictions'] = ['owners', 'ip_single']
 
-    shell_interface.data['appliedRestrictions'] = ['groups', 'owners', 'ip_ranges']
-    
+    # Checks if the applied restrictions are valid
     for i in shell_interface.data['appliedRestrictions']:
         if i not in applied_restrictions_possible_values:
             print(f"{bcolors.YELLOW}Warning: the value '{i}' is not amont the accepted restrictions.{bcolors.END}\n")

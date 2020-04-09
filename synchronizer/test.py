@@ -12,3 +12,7 @@
 #     except yaml.YAMLError as exc:
 #         print(exc)
 
+d = {'kk': 'vv', 'k2': 'v2'}
+
+for i in d:
+    print(i)

@@ -36,3 +36,6 @@ db_host     = open(f'{dirpath}/data_setup/db_host.txt', 'r').readline()
 db_name     = open(f'{dirpath}/data_setup/db_name.txt', 'r').readline()
 db_user     = open(f'{dirpath}/data_setup/db_user.txt', 'r').readline()
 db_password = open(f'{dirpath}/data_setup/db_password.txt', 'r').readline()
+
+# RESTRICTIONS
+applied_restrictions_possible_values = ['groups', 'owners', 'ip_ranges', 'ip_single']

@@ -147,7 +147,7 @@
         "type": "text"
       },
       "appliedRestrictions": {
-        "type": "keyword"
+        "type": "text"
       },
       "groupRestrictions": {
         "type": "text"
