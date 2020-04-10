@@ -32,6 +32,7 @@ Subject: """ + email_subject + """
 Please remove from pure uuid {} the file {}."""
 
 # DATABASE
+# Get db info from  docker-services.yml -> db -> environment  ???????      REVIEW  REVIEW  REVIEW 
 db_host     = open(f'{dirpath}/data_setup/db_host.txt', 'r').readline()
 db_name     = open(f'{dirpath}/data_setup/db_name.txt', 'r').readline()
 db_user     = open(f'{dirpath}/data_setup/db_user.txt', 'r').readline()
