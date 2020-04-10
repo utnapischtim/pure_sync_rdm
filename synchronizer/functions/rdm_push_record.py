@@ -28,10 +28,10 @@ def create_invenio_data(shell_interface: object):
 
     shell_interface.data = {}
 
-    # # Versioning
-    # metadata_version = rdm_versioning(shell_interface, shell_interface.uuid)
-    # shell_interface.data['metadataVersion']   = metadata_version
-    # shell_interface.data['metadataModifDate'] = shell_interface.datetime.today().strftime('%Y-%m-%d-%H:%M:%S')
+    # Versioning
+    metadata_version = rdm_versioning(shell_interface, shell_interface.uuid)
+    shell_interface.data['metadataVersion']   = metadata_version
+    shell_interface.data['metadataModifDate'] = shell_interface.datetime.today().strftime('%Y-%m-%d-%H:%M:%S')
 
     # When the item's metadata comes directly from pure it never contains 'owners' field.
     # It does instead when it comes from other sources, such as RDM update
@@ -49,17 +49,14 @@ def create_invenio_data(shell_interface: object):
     
     # TO REVIEW - TO REVIEW - TO REVIEW - TO REVIEW - TO REVIEW
     # shell_interface.data['owners'].append(3)
-    shell_interface.data['visibleIpRange']      = True
-
     shell_interface.data['appliedRestrictions'] = ['owners', 'ip_single']
+    shell_interface.data['_access'] = {'metadata_restricted': False, 'files_restricted': False}        # Default value for _access field
+    # TO REVIEW - TO REVIEW - TO REVIEW - TO REVIEW - TO REVIEW    
 
     # Checks if the applied restrictions are valid
     for i in shell_interface.data['appliedRestrictions']:
         if i not in applied_restrictions_possible_values:
             print(f"{bcolors.YELLOW}Warning: the value '{i}' is not amont the accepted restrictions.{bcolors.END}\n")
-
-    shell_interface.data['_access'] = {'metadata_restricted': False, 'files_restricted': False}        # Default value for _access field
-    # TO REVIEW - TO REVIEW - TO REVIEW - TO REVIEW - TO REVIEW    
 
     add_field(shell_interface, item, 'uuid',                        ['uuid'])
     add_field(shell_interface, item, 'pureId',                      ['pureId'])
@@ -420,7 +417,7 @@ def post_to_rdm(shell_interface: object):
     shell_interface.count_http_responses[response.status_code] += 1
 
     uuid = shell_interface.item["uuid"]
-    print(f'\tRDM post metadata  - {response} - Uuid:                 {uuid}')
+    print(f'\tRDM post metadata     - {response} - Uuid:                 {uuid}')
 
     open(f'{shell_interface.dirpath}/data/temporary_files/rdm_post_metadata_response.json', "wb").write(response.content)
     
@@ -519,15 +516,15 @@ def get_orcid(shell_interface: object, person_uuid: str, name: str):
 
     resp_json = shell_interface.json.loads(response.content)
 
-    message = f'\tPure get orcid     - {response}'
+    message = f'\tPure get orcid        - {response}'
     if 'orcid' in resp_json:
         shell_interface.count_orcids += 1
         orcid = resp_json['orcid']
         print(f'{message} - {orcid} - {name}')
 
-        file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
-        report = f'         - orcid: {orcid}         - {person_uuid} - {name}\n'
-        open(file_records, "a").write(report)
+        # file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
+        # report = f'         - orcid: {orcid}         - {person_uuid} - {name}\n'
+        # open(file_records, "a").write(report)
 
         return orcid
 

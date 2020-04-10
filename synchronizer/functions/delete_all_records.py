@@ -32,9 +32,15 @@ def rdm_get_all_recods(shell_interface):
         while go_on == True:
 
             # REQUEST to RDM
-            params = (('prettyprint', '1'),)
+            headers = {
+                'Authorization': f'Bearer {token_rdm}',
+                'Content-Type': 'application/json',
+            }
+            params = (
+                ('prettyprint', '1'),
+                )
             url = f'{rdm_api_url_records}api/records/?sort=mostrecent&size={pag_size}&page={pag}'
-            response = shell_interface.requests.get(url, params=params, verify=False)
+            response = shell_interface.requests.get(url, headers=headers, params=params, verify=False)
 
             print(response)
             open(shell_interface.dirpath + "/data/temporary_files/resp_rdm.json", 'wb').write(response.content)
@@ -51,8 +57,8 @@ def rdm_get_all_recods(shell_interface):
                 resp_json = shell_interface.json.loads(response.content)
 
                 for i in resp_json['hits']['hits']:
-                    data_ur += i['metadata']['uuid'] + ' ' + i['metadata']['recid'] + '\n'
-                    data_u  += i['metadata']['uuid'] + '\n'
+                    data_ur += f"{i['metadata']['uuid']} {i['metadata']['recid']}\n"
+                    data_u  += f"{i['metadata']['uuid']}\n"
                     count += 1
 
                 print(f'Pag {str(pag)} - Records {count}')

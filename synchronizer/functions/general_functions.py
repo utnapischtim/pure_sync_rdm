@@ -19,7 +19,7 @@ def pure_get_uuid_metadata(shell_interface: object, uuid: str):
     url = f'{pure_rest_api_url}research-outputs/{uuid}'
     response = shell_interface.requests.get(url, headers=headers, params=params)
 
-    print(f'\n\tPure get  metadata - {response}')
+    print(f'\n\tPure get metadata      - {response}')
 
     # Add response content to pure_get_uuid_metadata.json
     file_response = f'{shell_interface.dirpath}/data/temporary_files/pure_get_uuid_metadata.json'
@@ -113,7 +113,7 @@ def rdm_get_recid(shell_interface: object, uuid: str):
         # If there are no records with the same uuid means it is the first one (version 1)
         return False
 
-    log_message = f'\tRDM get recid      - {response} - Total: {total_recids}'
+    message = f'\tRDM get recid         - {response} - Total: {total_recids}            - '
 
     # Iterate over all records with the same uuid
     # The first record is the most recent (they are sorted)
@@ -128,8 +128,11 @@ def rdm_get_recid(shell_interface: object, uuid: str):
             shell_interface.api_url             = f'{rdm_api_url_records}api/records/{recid}'
             shell_interface.landing_page_url    = f'{rdm_api_url_records}records/{recid}'
 
-            print(f'{log_message}            - Newest: {shell_interface.api_url}')
             newest_recid = recid
+
+            if total_recids > 1:
+                message += 'Newest: '
+            print(f'{message}{shell_interface.api_url}')
 
         else:
             # Duplicate records are deleted           -> Disable when versioning is running
@@ -175,6 +178,7 @@ def db_connect(shell_interface):
 
 #   ---         ---         ---
 def db_query(shell_interface, query):
+    
     shell_interface.cursor.execute(query)
     if shell_interface.cursor.rowcount > 0:
         return shell_interface.cursor.fetchall()

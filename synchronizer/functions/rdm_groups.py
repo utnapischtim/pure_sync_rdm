@@ -5,13 +5,15 @@ from functions.general_functions    import db_query, add_spaces, update_rdm_reco
 def rdm_create_group(shell_interface: object, group_externalId: str, group_name: str):
 
     response = db_query(shell_interface, f"SELECT * FROM accounts_role WHERE name = '{group_externalId}'")
+    message   = f'\tRDM search group      -  ExtId:   {add_spaces(group_externalId)}  -'
+    message_2 = f'          - {group_name[0:40]}'
 
     # If the group has already been created
     if response:
-        print(f'\tRDM group          - Found            - externalId:  {add_spaces(group_externalId)}  - {group_name}')
+        print(f'{message} Found     {message_2}')
         return 'Already exists'
-    
-    print(f'\tRDM group          - Not found        - externalId:  {add_spaces(group_externalId)}  - {group_name}')
+
+    print(f'{message} Not found {message_2}')
 
     group_name = group_name.replace('(', '\(')
     group_name = group_name.replace(')', '\)')
@@ -103,7 +105,7 @@ Old group             - externalId: {old_group_externalId}
     # Get group id
     query = f"SELECT id FROM accounts_role WHERE name = '{old_group_externalId}';"
     old_group_id = db_query(shell_interface, query)[0][0]
-    print(f'\tOld group id:        {old_group_id}')
+    print(f'\tOld group             - Id: {old_group_id}')
 
     # Get all users in old group
     query = f"SELECT user_id FROM accounts_userrole WHERE role_id = {old_group_id};"
@@ -134,15 +136,19 @@ Old group             - externalId: {old_group_externalId}
                 # Add user to new groups
                 group_add_user(shell_interface, user_email, new_group_externalId, user_id)
 
-
-    # # - - Delete old group - -
-    # #  NOT WORKING  !!!  NOT WORKING  !!!  NOT WORKING  !!!  NOT WORKING  !!!  NOT WORKING  !!!
-    # #  MOST LIKELY PERMISSION RELATED ISSUE
-    # response = db_query(shell_interface, f"DELETE FROM accounts_role WHERE name = '{old_group_externalId}';")
-    # if response:
-    #     print(response)
-    #     print(f'Group {old_group_externalId} successfuly deleted')
-    # #  NOT WORKING  !!!  NOT WORKING  !!!  NOT WORKING  !!!  NOT WORKING  !!!  NOT WORKING  !!!
+    # DOESNT WORK - DOESNT WORK - DOESNT WORK - DOESNT WORK - DOESNT WORK - DOESNT WORK -
+    # - - Delete old group - - 
+    # Checks if there are still users in accounts_userrole that are related to the old group
+    query = f"SELECT user_id FROM accounts_userrole WHERE role_id = '{old_group_id}';"
+    response = db_query(shell_interface, query)
+    if not response:
+        response = db_query(shell_interface, f"DELETE FROM accounts_role WHERE name = '{old_group_externalId}';")
+        if response:
+            print(response)
+            print(f'Group {old_group_externalId} successfuly deleted')
+    if len(response) > 0:
+        print(f'Warning: there are still users related to the old group -> {response}')
+    # DOESNT WORK - DOESNT WORK - DOESNT WORK - DOESNT WORK - DOESNT WORK - DOESNT WORK -
 
     # - -               - -
     # - - Modify record - -
@@ -183,13 +189,11 @@ Old group             - externalId: {old_group_externalId}
         for i in new_groups_externalIds:
             item['groupRestrictions'].append(i)
 
-        # KNOWN ISSUE: IT CAN HAVE ONLY ONE ORGANIZATION        !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         # Change managingOrganisationalUnit
         if item['managingOrganisationalUnit_externalId'] == old_group_externalId:
             item['managingOrganisationalUnit_name']       = new_groups_data[0]['name']
             item['managingOrganisationalUnit_uuid']       = new_groups_data[0]['uuid']
             item['managingOrganisationalUnit_externalId'] = new_groups_data[0]['externalId']
-        # KNOWN ISSUE: IT CAN HAVE ONLY ONE ORGANIZATION        !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         record_json = shell_interface.json.dumps(item)
 
@@ -200,9 +204,7 @@ Old group             - externalId: {old_group_externalId}
         open(report_name, "a").write(f'{current_time} - {response} - {url}\n')
 
         shell_interface.time.sleep(0.2)
-
     return
-
 
 #   ---         ---         ---
 def rdm_group_merge(shell_interface: object, old_groups_externalId: list, new_group_externalId: str):

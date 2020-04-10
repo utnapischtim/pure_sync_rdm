@@ -3,7 +3,7 @@
 Usage:
     shell_interface.py changes
     shell_interface.py pages
-    shell_interface.py shorten_logs
+    shell_interface.py logs
     shell_interface.py delete
     shell_interface.py uuid
     shell_interface.py duplicates
@@ -29,7 +29,7 @@ from datetime                           import date, datetime, timedelta
 from functions.pure_get_changes         import pure_get_changes
 from functions.rdm_push_by_page         import get_pure_by_page
 from functions.rdm_push_record          import create_invenio_data
-from functions.shorten_log_files        import shorten_log_files
+from functions.log_files                import delete_old_log_files
 from functions.rdm_duplicates           import rdm_duplicates
 from functions.delete_all_records       import delete_all_records
 from functions.rdm_push_by_uuid         import rdm_push_by_uuid
@@ -62,16 +62,15 @@ class shell_interface:
 
     def pages(self):
         """ Push to RDM records from Pure by page """
-        pag_begin = 151
-        pag_end = pag_begin + 1
-        # pag_end =   153
-        pag_size =  1
+        pag_begin = 50
+        pag_end   = 150
+        pag_size  = 20
         get_pure_by_page(self, pag_begin, pag_end, pag_size)
 
 
-    def shorten_logs(self):
-        """ Reduce log files length or delete them """
-        shorten_log_files(self)
+    def logs(self):
+        """ Delete old log files """
+        delete_old_log_files(self)
 
 
     def delete(self):
@@ -133,7 +132,7 @@ if __name__ == '__main__':
 
 if arguments['changes']             == True: docopt_instance.changes()
 elif arguments['pages']             == True: docopt_instance.pages()
-elif arguments['shorten_logs']      == True: docopt_instance.shorten_logs()
+elif arguments['logs']              == True: docopt_instance.logs()
 elif arguments['delete']            == True: docopt_instance.delete()
 elif arguments['uuid']              == True: docopt_instance.uuid()
 elif arguments['duplicates']        == True: docopt_instance.duplicates()

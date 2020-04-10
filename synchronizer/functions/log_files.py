@@ -1,8 +1,8 @@
 from setup import *
 
-def shorten_log_files(shell_interface):
+def delete_old_log_files(shell_interface):
 
-    # DELETE OLD REPORTS
+    # DELETE OLD LOG FILES
     print()
     folder = '/reports/'
 

@@ -14,13 +14,12 @@ def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: in
 
         initialize_count_variables(shell_interface)
 
-        report  = '\n\n--   --   --\n'
-        report += f'\nPag {str(pag)} - pag_size {str(pag_size)}\n\n'
-
         # add page to report file  
+        report  = f'\n\n--   --   --\n\nPag {str(pag)} - pag_size {str(pag_size)}\n\n'
         file_records = f'{shell_interface.dirpath}/reports/{date_today}_records.log'
         open(file_records, "a").write(report)
-        print(report)
+
+        print(f'--   --   --\n\nPag {str(pag)} - pag_size {str(pag_size)}')
 
         # PURE GET REQUEST
         headers = {
@@ -54,7 +53,7 @@ def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: in
             create_invenio_data(shell_interface)          
         #       ---         ---         ---
 
-        http_response_str = 'HTTP responses: '
+        http_response_str = 'HTTP responses -> '
         for key in shell_interface.count_http_responses:
             http_response_str += f'{key}: {shell_interface.count_http_responses[key]}, '
         http_response_str = http_response_str[:-2]
@@ -70,10 +69,10 @@ def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: in
 
         # Summary added to pages.log
         report = f"""
-{current_time}, Page {pag_log}, Size {pag_size_log}, \
-Metadata (success {metadata_success}, errors {metadata_error}), \
-File (success {file_success}, errors {file_error}), \
-Abstracts: {count_abstracts}, Orcids: {count_orcids}, \
+{current_time} - Page {pag_log} - Size {pag_size_log} - \
+Metadata (ok {metadata_success}, error {metadata_error}) - \
+File (ok {file_success}, error {file_error}) - \
+Abstracts: {count_abstracts} - Orcids: {count_orcids} - \
 {http_response_str}\
 """
         file_pages = f'{shell_interface.dirpath}/reports/{date_today}_pages.log'
