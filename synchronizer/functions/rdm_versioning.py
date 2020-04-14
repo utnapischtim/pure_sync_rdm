@@ -1,5 +1,5 @@
 from setup                          import *
-from functions.general_functions    import rdm_get_metadata_by_query, add_spaces
+from functions.general_functions    import rdm_get_metadata_by_query, add_spaces, add_to_full_report
 
 def rdm_versioning(shell_interface: object, uuid: str):
     response = rdm_get_metadata_by_query(shell_interface, uuid)
@@ -39,5 +39,5 @@ def rdm_versioning(shell_interface: object, uuid: str):
 
         metadata_version += 1
     
-    print(message)
+    add_to_full_report(shell_interface, message)
     return metadata_version

@@ -1,6 +1,6 @@
 from setup                          import *
 from functions.get_put_file         import rdm_put_file, get_file_from_pure
-from functions.general_functions    import rdm_get_recid, pure_get_uuid_metadata, get_rdm_userid_from_list_by_externalid, bcolors
+from functions.general_functions    import rdm_get_recid, pure_get_uuid_metadata, get_rdm_userid_from_list_by_externalid, bcolors, add_to_full_report
 from functions.rdm_groups           import rdm_create_group, rdm_add_user_to_group
 from functions.rdm_versioning       import rdm_versioning
 
@@ -47,7 +47,8 @@ def create_invenio_data(shell_interface: object):
         shell_interface.data['owners'] = item['owners']
         if 1 not in shell_interface.data['owners']:
             shell_interface.data['owners'].append(1)
-        print(f"\tOwners:            - {shell_interface.data['owners']}")
+        report = f"\tOwners:            - {shell_interface.data['owners']}"
+        add_to_full_report(shell_interface, report)
     else:
         shell_interface.data['owners'] = [1]
 
@@ -64,7 +65,8 @@ def create_invenio_data(shell_interface: object):
     # Checks if the applied restrictions are valid
     for i in shell_interface.data['appliedRestrictions']:
         if i not in applied_restrictions_possible_values:
-            print(f"{bcolors.YELLOW}Warning: the value '{i}' is not amont the accepted restrictions.{bcolors.END}\n")
+            report = f"{bcolors.YELLOW}Warning: the value '{i}' is not amont the accepted restrictions.{bcolors.END}\n"
+            add_to_full_report(shell_interface, report)
 
     add_field(shell_interface, item, 'uuid',                        ['uuid'])
     add_field(shell_interface, item, 'pureId',                      ['pureId'])
@@ -272,8 +274,11 @@ def get_rdm_file_review(shell_interface: object):
     response = shell_interface.requests.get(url, headers=headers, params=params, verify=False)
 
     if response.status_code >= 300:
-        print(f'\ntget_rdm_file_size - {shell_interface.uuid} - {response}')
-        print(response.content)
+
+        report = f'\nget_rdm_file_size - {shell_interface.uuid} - {response}'
+        add_to_full_report(shell_interface, report)
+        add_to_full_report(shell_interface, response.content)
+
         return False
 
     open(f'{shell_interface.dirpath}/data/temporary_files/rdm_get_recid.json', "wb").write(response.content)
@@ -420,8 +425,9 @@ def post_to_rdm(shell_interface: object):
         shell_interface.count_http_responses[response.status_code] = 0
     shell_interface.count_http_responses[response.status_code] += 1
 
-    uuid = shell_interface.item["uuid"]
-    print(f'\tRDM post metadata     - {response} - Uuid:                 {uuid}')
+    uuid = shell_interface.item['uuid']
+    report = f"\tRDM post metadata     - {response} - Uuid:                 {uuid}"
+    add_to_full_report(shell_interface, report)
 
     open(f'{shell_interface.dirpath}/data/temporary_files/rdm_post_metadata_response.json', "wb").write(response.content)
     
@@ -438,7 +444,7 @@ def post_to_rdm(shell_interface: object):
         
         # error description from invenioRDM
         report += f'{response.content}\n'
-        print(response.content)
+        add_to_full_report(shell_interface, response.content)
 
         # Add record to to_transfer.txt to be re pushed afterwards
         open(f'{shell_interface.dirpath}/data/to_transfer.txt', "a").write(f'{uuid}\n')
@@ -447,7 +453,7 @@ def post_to_rdm(shell_interface: object):
     open(file_name, "a").write(report)
 
     if response.status_code == 429:
-        print('Waiting 15 min')
+        add_to_full_report(shell_interface, 'Waiting 15 min')
         shell_interface.time.sleep(wait_429)                     # 429 too many requests, wait 15 min
     
     # In case of SUCCESSFUL TRANSMISSION
@@ -515,16 +521,19 @@ def get_orcid(shell_interface: object, person_uuid: str, name: str):
     shell_interface.time.sleep(0.1)
     
     if response.status_code >= 300:
-        print(response.content)
+        add_to_full_report(shell_interface, response.content)
         return False
 
     resp_json = shell_interface.json.loads(response.content)
 
-    message = f'\tPure get orcid        - {response}'
+    message = f'\tPure get orcid        - {response} - '
+
     if 'orcid' in resp_json:
         shell_interface.count_orcids += 1
         orcid = resp_json['orcid']
-        print(f'{message} - {orcid} - {name}')
+
+        message += f'{orcid} - {name}'
+        add_to_full_report(shell_interface, message)
 
         # file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
         # report = f'         - orcid: {orcid}         - {person_uuid} - {name}\n'
@@ -532,5 +541,7 @@ def get_orcid(shell_interface: object, person_uuid: str, name: str):
 
         return orcid
 
-    print(f'{message} - Not found           - {name}')
+    message += f'Not found           - {name}'
+    add_to_full_report(shell_interface, message)
     return False
+

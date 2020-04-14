@@ -1,7 +1,7 @@
 from setup                          import *
 from functions.rdm_push_record      import create_invenio_data
 from functions.rdm_push_by_uuid     import rdm_push_by_uuid
-from functions.general_functions    import add_spaces, initialize_count_variables
+from functions.general_functions    import add_spaces, initialize_count_variables, add_to_full_report
 
 
 def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: int):
@@ -19,7 +19,7 @@ def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: in
         file_records = f'{shell_interface.dirpath}/reports/{date_today}_records.log'
         open(file_records, "a").write(report)
 
-        print(f'--   --   --\n\nPag {str(pag)} - pag_size {str(pag_size)}')
+        add_to_full_report(shell_interface, f'--   --   --\n\nPag {str(pag)} - pag_size {str(pag_size)}')
 
         # PURE GET REQUEST
         headers = {
@@ -39,7 +39,7 @@ def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: in
 
         # (500 -> internal server error)
         if response.status_code >= 300:
-            print(response.content)
+            add_to_full_report(shell_interface, response.content)
             shell_interface.time.sleep(180)
             continue
 
@@ -49,7 +49,7 @@ def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: in
         #       ---         ---         ---
         # Creates data to push to RDM
         for shell_interface.item in resp_json['items']:
-            print('')                                   # adds new line in the console
+            add_to_full_report(shell_interface, '')          # adds new line in the console
             create_invenio_data(shell_interface)          
         #       ---         ---         ---
 
@@ -88,4 +88,4 @@ Abstracts:        {count_abstracts}, Orcids:          {count_orcids}
         file_records = f'{shell_interface.dirpath}/reports/{date_today}_records.log'
         open(file_records, "a").write(report)
 
-        print(report + '\n')
+        add_to_full_report(shell_interface, f'{report}\n')

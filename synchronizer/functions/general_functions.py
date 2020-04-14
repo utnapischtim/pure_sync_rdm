@@ -113,8 +113,6 @@ def rdm_get_recid(shell_interface: object, uuid: str):
         # If there are no records with the same uuid means it is the first one (version 1)
         return False
 
-    message = f'\tRDM get recid         - {response} - Total:       {add_spaces(total_recids)}  - '
-
     # Iterate over all records with the same uuid
     # The first record is the most recent (they are sorted)
     count = 0
@@ -129,9 +127,8 @@ def rdm_get_recid(shell_interface: object, uuid: str):
             shell_interface.landing_page_url    = f'{rdm_api_url_records}records/{recid}'
             newest_recid = recid
 
-            if total_recids > 1:
-                message += 'Newest: '
-            print(f'{message}{shell_interface.api_url}')
+            report = f'\tRDM get recid         - {response} - Total:       {add_spaces(total_recids)}  - {shell_interface.api_url}'
+            add_to_full_report(shell_interface, report)
 
         else:
             # If versioning is running then it is not necessary to delete older versions of the record
@@ -239,3 +236,8 @@ def update_rdm_record(shell_interface: object, data: str, recid: str):
         
     return response
 
+
+def add_to_full_report(shell_interface: object, report: str):
+    file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records_full.log'
+    open(file_records, "a").write(f'{report}\n')
+    print(report)

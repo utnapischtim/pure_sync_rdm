@@ -1,5 +1,6 @@
-from setup          import *
-from requests.auth  import HTTPBasicAuth
+from setup                          import *
+from requests.auth                  import HTTPBasicAuth
+from functions.general_functions    import add_to_full_report
 import smtplib
 
 #   ---     ---     ---
@@ -17,7 +18,7 @@ def rdm_put_file(shell_interface, file_name: str, recid: str, uuid: str):
     response = shell_interface.requests.put(url, headers=headers, data=data, verify=False)
 
     # Report
-    print(f'\tRDM put file          - {response}')
+    add_to_full_report(shell_interface, f'\tRDM put file          - {response}')
 
     current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
     report = f'{current_time} - file_put_to_rdm - {response} - {recid}\n'
@@ -72,7 +73,8 @@ def get_file_from_pure(shell_interface, electronic_version: str):
         if shell_interface.pure_rdm_file_match[1]:
             match_review = 'Match: T, Review: T'
     
-    print(f'\tPure get file         - {response} - {match_review} - {file_name}')
+    report = f'\tPure get file         - {response} - {match_review} - {file_name}'
+    add_to_full_report(shell_interface, report)
     
     if response.status_code < 300:
         # Save file

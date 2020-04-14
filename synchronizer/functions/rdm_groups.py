@@ -1,5 +1,5 @@
 from setup                          import *
-from functions.general_functions    import db_query, add_spaces, update_rdm_record, rdm_get_metadata_by_query
+from functions.general_functions    import db_query, add_spaces, update_rdm_record, rdm_get_metadata_by_query, add_to_full_report
 
 #   ---         ---         ---
 def rdm_create_group(shell_interface: object, group_externalId: str, group_name: str):
@@ -13,7 +13,8 @@ def rdm_create_group(shell_interface: object, group_externalId: str, group_name:
         print(f'{message} Found     {message_2}')
         return 'Already exists'
 
-    print(f'{message} Not found {message_2}')
+    report = f'{message} Not found {message_2}'
+    add_to_full_report(shell_interface, report)
 
     group_name = group_name.replace('(', '\(')
     group_name = group_name.replace(')', '\)')
