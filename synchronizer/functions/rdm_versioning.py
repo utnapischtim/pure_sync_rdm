@@ -10,14 +10,14 @@ def rdm_versioning(shell_interface: object, uuid: str):
 
     resp_json = shell_interface.json.loads(response.content)
     
-    message = '\tMetadata Version   - '
+    message = f'\tRDM metadata version  - {response} - '
 
     total_recids = resp_json['hits']['total']
 
     if total_recids == 0:
         # If there are no records with the same uuid means it is the first one (version 1)
         metadata_version = 1
-        message += f'RDM versioning       - Record NOT found - Metadata version: 1'
+        message += f'Record NOT found    - Metadata version: 1'
 
     else:
         rdm_metadata = resp_json['hits']['hits'][0]['metadata']
@@ -28,12 +28,14 @@ def rdm_versioning(shell_interface: object, uuid: str):
         # 2 - When getting records from pure 'changes' endpoint, they will have some changes (no need to compare it)
         #     So, it is probably not necessary to 'check_metadata_differences'
 
+        if 'metadataVersion' not in rdm_metadata:
+            return False
 
         # Gets metadata_version from RDM
         metadata_version = rdm_metadata['metadataVersion']
 
         # Increase by one for new version
-        message += f'RDM versioning       - Current ver.:{add_spaces(metadata_version)}  - New version: {metadata_version + 1}'
+        message += f'Current ver.:{add_spaces(metadata_version)}  - New version: {metadata_version + 1}'
 
         metadata_version += 1
     

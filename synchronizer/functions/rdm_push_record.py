@@ -29,9 +29,11 @@ def create_invenio_data(shell_interface: object):
     shell_interface.data = {}
 
     # Versioning
-    metadata_version = rdm_versioning(shell_interface, shell_interface.uuid)
-    shell_interface.data['metadataVersion']   = metadata_version
-    shell_interface.data['metadataModifDate'] = shell_interface.datetime.today().strftime('%Y-%m-%d-%H:%M:%S')
+    if versioning_running:
+        metadata_version = rdm_versioning(shell_interface, shell_interface.uuid)
+        if metadata_version:
+            shell_interface.data['metadataVersion']   = metadata_version
+            shell_interface.data['metadataModifDate'] = shell_interface.datetime.today().strftime('%Y-%m-%d-%H:%M:%S')
 
     # When the item's metadata comes directly from pure it never contains 'owners' field.
     # It does instead when it comes from other sources, such as RDM update
@@ -144,12 +146,9 @@ def create_invenio_data(shell_interface: object):
             else:
                 sub_data = add_to_var(sub_data, i, 'uuid',   ['externalPerson', 'uuid'])
 
-            # # TEMPORARY  TEMPORARY  TEMPORARY  TEMPORARY 
-            # if not owner:
-            #     owner = 2
-            # # TEMPORARY  TEMPORARY  TEMPORARY  TEMPORARY 
 
             # # Adding contributor to RDM groups (managing organisational units)
+            # owner = 2         # TEMPORARY  TEMPORARY
             # person_external_id = get_value(i, ['person', 'externalId'])
             # if person_external_id and owner:
             #     organisationalUnits_externalId = get_value(i, ['organisationalUnits', 0, 'externalId'])

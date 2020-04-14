@@ -19,7 +19,7 @@ def pure_get_uuid_metadata(shell_interface: object, uuid: str):
     url = f'{pure_rest_api_url}research-outputs/{uuid}'
     response = shell_interface.requests.get(url, headers=headers, params=params)
 
-    print(f'\n\tPure get metadata      - {response}')
+    print(f'\n\tPure get metadata     - {response}')
 
     # Add response content to pure_get_uuid_metadata.json
     file_response = f'{shell_interface.dirpath}/data/temporary_files/pure_get_uuid_metadata.json'
@@ -113,7 +113,7 @@ def rdm_get_recid(shell_interface: object, uuid: str):
         # If there are no records with the same uuid means it is the first one (version 1)
         return False
 
-    message = f'\tRDM get recid         - {response} - Total: {total_recids}            - '
+    message = f'\tRDM get recid         - {response} - Total:       {add_spaces(total_recids)}  - '
 
     # Iterate over all records with the same uuid
     # The first record is the most recent (they are sorted)
@@ -127,7 +127,6 @@ def rdm_get_recid(shell_interface: object, uuid: str):
             # URLs to be transmitted to Pure if the record is successfuly added in RDM      # TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
             shell_interface.api_url             = f'{rdm_api_url_records}api/records/{recid}'
             shell_interface.landing_page_url    = f'{rdm_api_url_records}records/{recid}'
-
             newest_recid = recid
 
             if total_recids > 1:
@@ -135,10 +134,11 @@ def rdm_get_recid(shell_interface: object, uuid: str):
             print(f'{message}{shell_interface.api_url}')
 
         else:
-            # Duplicate records are deleted           -> Disable when versioning is running
-            delete_record(shell_interface, recid)
+            # If versioning is running then it is not necessary to delete older versions of the record
+            if not versioning_running:
+                # Duplicate records are deleted
+                delete_record(shell_interface, recid)
 
-    shell_interface.recid = newest_recid
     return newest_recid
 
 

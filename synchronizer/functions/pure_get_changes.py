@@ -176,6 +176,7 @@ Number of items in response: {resp_json["count"]}
 Metadata         ->  successful: {metadata_succs} - errors:   {metadata_error}
 File             ->  successful: {file_succs} - errors:   {file_error}
 Delete           ->  successful: {delete_succs} - errors:   {delete_error}
+
 Pure changes:
 Update:     {count_update} - Create:     {count_create} - Delete:    {count_delete}
 Incomplete: {count_incomplete} - Duplicated: {count_duplicated} - Irrelevant:{count_not_ResearchOutput}
