@@ -20,7 +20,7 @@ def create_invenio_data(shell_interface: object):
     # counts all records
     shell_interface.count_total += 1      
 
-    shell_interface.record_files = []
+    shell_interface.record_files    = []
     shell_interface.rdm_file_review = []
 
     item = shell_interface.item
@@ -30,10 +30,16 @@ def create_invenio_data(shell_interface: object):
 
     # Versioning
     if versioning_running:
+
+        # Get metadata version
         metadata_version = rdm_versioning(shell_interface, shell_interface.uuid)
+        
         if metadata_version:
             shell_interface.data['metadataVersion']   = metadata_version
-            shell_interface.data['metadataModifDate'] = shell_interface.datetime.today().strftime('%Y-%m-%d-%H:%M:%S')
+
+            add_field(shell_interface, item, 'metadataModifBy',   ['info', 'modifiedBy'])
+            add_field(shell_interface, item, 'metadataModifDate', ['info', 'modifiedDate'])
+
 
     # When the item's metadata comes directly from pure it never contains 'owners' field.
     # It does instead when it comes from other sources, such as RDM update
@@ -62,9 +68,8 @@ def create_invenio_data(shell_interface: object):
 
     add_field(shell_interface, item, 'uuid',                        ['uuid'])
     add_field(shell_interface, item, 'pureId',                      ['pureId'])
-    add_field(shell_interface, item, 'publicationDatePure',         ['publicationStatuses', 0, 'publicationDate', 'year'])
-    add_field(shell_interface, item, 'createdDatePure',             ['info', 'createdDate'])
-    add_field(shell_interface, item, 'modifiedDatePure',            ['info', 'modifiedDate'])
+    add_field(shell_interface, item, 'publicationDate',             ['publicationStatuses', 0, 'publicationDate', 'year'])
+    add_field(shell_interface, item, 'createdDate',                 ['info', 'createdDate'])
     add_field(shell_interface, item, 'pages',                       ['info','pages'])   
     add_field(shell_interface, item, 'volume',                      ['info','volume'])
     add_field(shell_interface, item, 'journalTitle',                ['info', 'journalAssociation', 'title', 'value'])
