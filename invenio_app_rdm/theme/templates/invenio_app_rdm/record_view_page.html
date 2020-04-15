@@ -102,6 +102,15 @@
       {%- endif -%}
       <br><br>
       
+      
+      <b>
+      Older versions:
+      </b>
+      {%- for version in record.metadataOlderVersions -%}
+        </br><a href="https://127.0.0.1:5000/api/records/{{ version }}"> API </a>, <a href="https://127.0.0.1:5000/records/{{ version }}"> Landing page </a> <- {{ version }}
+      {%- endfor -%}
+
+
       {# files #}
       {%- if record.files and record|can_list_files %}
       {% set ordered_record_files = record.files|sort(attribute="key") %}

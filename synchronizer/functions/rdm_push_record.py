@@ -32,10 +32,14 @@ def create_invenio_data(shell_interface: object):
     if versioning_running:
 
         # Get metadata version
-        metadata_version = rdm_versioning(shell_interface, shell_interface.uuid)
-        
-        if metadata_version:
-            shell_interface.data['metadataVersion']   = metadata_version
+        response = rdm_versioning(shell_interface, shell_interface.uuid)
+
+        metadata_version        = response[0]
+        older_metadata_versions = response[1]
+
+        if response:
+            shell_interface.data['metadataVersion']       = metadata_version
+            shell_interface.data['metadataOlderVersions'] = older_metadata_versions
 
             add_field(shell_interface, item, 'metadataModifBy',   ['info', 'modifiedBy'])
             add_field(shell_interface, item, 'metadataModifDate', ['info', 'modifiedDate'])

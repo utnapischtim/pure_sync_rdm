@@ -19,7 +19,7 @@ def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: in
         file_records = f'{shell_interface.dirpath}/reports/{date_today}_records.log'
         open(file_records, "a").write(report)
 
-        add_to_full_report(shell_interface, f'--   --   --\n\nPag {str(pag)} - pag_size {str(pag_size)}')
+        add_to_full_report(shell_interface, f'--   --   --\n\nPag {str(pag)} - pag_size {str(pag_size)} - {current_time}')
 
         # PURE GET REQUEST
         headers = {

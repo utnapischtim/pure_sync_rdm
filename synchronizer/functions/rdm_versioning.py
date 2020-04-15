@@ -20,24 +20,52 @@ def rdm_versioning(shell_interface: object, uuid: str):
         message += f'Record NOT found    - Metadata version: 1'
 
     else:
-        rdm_metadata = resp_json['hits']['hits'][0]['metadata']
-        # open(f'{shell_interface.dirpath}/data/temporary_files/version1.json', "w").write(shell_interface.json.dumps(rdm_metadata))
-        # open(f'{shell_interface.dirpath}/data/temporary_files/version2.json', "w").write(shell_interface.json.dumps(shell_interface.item))
+        metadata_version = None
+        older_metadata_versions = []
 
-        # 1 - Getting records from pages (when populating RDM for the first time) there should be no versioning required
-        # 2 - When getting records from pure 'changes' endpoint, they will have some changes (no need to compare it)
-        #     So, it is probably not necessary to 'check_metadata_differences'
+        # Iterates over all records in response
+        for item in resp_json['hits']['hits']:
+            rdm_metadata = item['metadata']
 
-        if 'metadataVersion' not in rdm_metadata:
-            return False
+            # If a record has a differnt uuid than it will be ignored
+            if uuid != rdm_metadata['uuid']:
+                print(f"Different uuid {rdm_metadata['uuid']}")
+                continue
 
-        # Gets metadata_version from RDM
-        metadata_version = rdm_metadata['metadataVersion']
+            if 'metadataVersion' in rdm_metadata and not metadata_version:
+                metadata_version = rdm_metadata['metadataVersion']
+                print(f'Latest metadata version {metadata_version}')
+                continue
+            
+            older_metadata_versions.append(item['id'])
 
-        # Increase by one for new version
         message += f'Current ver.:{add_spaces(metadata_version)}  - New version: {metadata_version + 1}'
+        print(older_metadata_versions)
 
-        metadata_version += 1
-    
+
+        # ##### OLD VERSION #####
+        # rdm_metadata = resp_json['hits']['hits'][0]['metadata']
+        # # open(f'{shell_interface.dirpath}/data/temporary_files/version1.json', "w").write(shell_interface.json.dumps(rdm_metadata))
+        # # open(f'{shell_interface.dirpath}/data/temporary_files/version2.json', "w").write(shell_interface.json.dumps(shell_interface.item))
+
+        # # 1 - Getting records from pages (when populating RDM for the first time) there should be no versioning required
+        # # 2 - When getting records from pure 'changes' endpoint, they will have some changes (no need to compare it)
+        # #     So, it is probably not necessary to 'check_metadata_differences'
+
+        # if 'metadataVersion' not in rdm_metadata:
+        #     return False
+
+        # # Gets metadata_version from RDM
+        # metadata_version = rdm_metadata['metadataVersion']
+
+        # # Increase by one for new version
+        # message += f'Current ver.:{add_spaces(metadata_version)}  - New version: {metadata_version + 1}'
+
+        # metadata_version += 1
+        # ##### OLD VERSION #####
+
+        
+
     add_to_full_report(shell_interface, message)
-    return metadata_version
+
+    return [metadata_version, older_metadata_versions]
