@@ -42,4 +42,4 @@ db_password = open(f'{dirpath}/data_setup/db_password.txt', 'r').readline()
 applied_restrictions_possible_values = ['groups', 'owners', 'ip_ranges', 'ip_single']
 
 # VERSIONING
-versioning_running = True
+versioning_running = False

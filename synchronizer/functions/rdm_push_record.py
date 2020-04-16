@@ -51,7 +51,7 @@ def create_invenio_data(shell_interface: object):
         shell_interface.data['owners'] = item['owners']
         if 1 not in shell_interface.data['owners']:
             shell_interface.data['owners'].append(1)
-        report = f"\tOwners:            - {shell_interface.data['owners']}"
+        report = f"\tOwners:               - {shell_interface.data['owners']}"
         add_to_full_report(shell_interface, report)
     else:
         shell_interface.data['owners'] = [1]

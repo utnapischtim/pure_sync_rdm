@@ -15,9 +15,9 @@ def rdm_owners(shell_interface: object, external_id: int):
     """ Gets from pure all the records related to a certain user,
         afterwards it modifies/create RDM records accordingly. """
 
-    print(f'\nExternal_id: {external_id}\n')
+    print(f'\nUser external_id: {external_id}\n')
 
-    # Gets the ID and IP of the logged in user
+    # Gets the ID of the logged in user
     user_id = rdm_get_user_id(shell_interface)
 
     # If the user was not found in RDM then there is no owner to add to the record.
@@ -111,7 +111,7 @@ def get_owner_records(shell_interface, user_id, user_uuid):
             title = item['title']
             count += 1
             
-            print(f'\n\tRecord uuid        - {uuid}  - {title[0:55]}...')
+            print(f'\n\tRecord uuid           - {uuid}   - {title[0:55]}...')
 
             # Get from RDM the recid
             recid = rdm_get_recid(shell_interface, uuid)
@@ -133,13 +133,13 @@ def get_owner_records(shell_interface, user_id, user_uuid):
                 response = rdm_get_recid_metadata(shell_interface, recid)
                 record_json = shell_interface.json.loads(response.content)['metadata']
 
-                print(f"\tRDM get metadata   - {response} - Current owners:     - {record_json['owners']}")
+                print(f"\tRDM get metadata      - {response} - Current owners:     - {record_json['owners']}")
 
                 # If the owner is not among metadata owners
                 if user_id and user_id not in record_json['owners']:
 
                     record_json['owners'].append(user_id)
-                    print(f"\t+   Adding owner   -                  - New owners:         - {record_json['owners']}")
+                    print(f"\t+   Adding owner      -               - New owners:         - {record_json['owners']}")
 
                     record_json = shell_interface.json.dumps(record_json)
 
@@ -198,7 +198,7 @@ def pure_get_user_uuid(shell_interface: object, key_name: str, key_value: str):
                 lastName    = item['name']['lastName']
                 uuid        = item['uuid']
 
-                print(f'User uuid          - {uuid}  - {first_name} {lastName}')
+                print(f'User uuid          - {first_name} {lastName}  -  {uuid}')
 
                 if len(uuid) != 36:
                     print('\n- Warning! Incorrect user_uuid length -\n')

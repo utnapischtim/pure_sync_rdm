@@ -1,5 +1,5 @@
 from setup                              import *
-from functions.general_functions        import add_spaces, rdm_get_recid, initialize_count_variables
+from functions.general_functions        import add_spaces, rdm_get_recid, initialize_count_variables, add_to_full_report
 from functions.delete_record            import delete_record, delete_from_list
 from functions.rdm_push_by_uuid         import rdm_push_by_uuid
 from functions.rdm_push_record          import rdm_push_record
@@ -17,7 +17,7 @@ def pure_get_changes(shell_interface):
     # missing_updates = ['2020-03-11']      # TEMPORARY !!!!!!!!!!!!!!!
     
     if missing_updates == []:
-        print('\nNothing to update.\n')
+        add_to_full_report(shell_interface, '\nNothing to update.\n')
         return
 
     for date_to_update in reversed(missing_updates):
@@ -53,7 +53,7 @@ def pure_get_changes_by_date(shell_interface, changes_date: str):
     open(file_name, 'wb').write(response.content)
 
     if response.status_code >= 300:
-        print(response.content)
+        add_to_full_report(shell_interface, response.content)
 
     # Load response json
     resp_json = shell_interface.json.loads(response.content)
@@ -81,7 +81,7 @@ Number of items in response: {resp_json["count"]}
 """
     # append to yyyy-mm-dd_records.log
     open(file_records, "a").write(report_intro)
-    print(report_intro)
+    add_to_full_report(shell_interface, report_intro)
 
     #   ---     DELETE      ---
     for item in resp_json['items']:
@@ -96,7 +96,8 @@ Number of items in response: {resp_json["count"]}
         count_delete += 1
         uuid = item['uuid']
 
-        print(f"\n{count_delete} - {item['changeType']} - {uuid}")
+        report = f"\n{count_delete} - {item['changeType']} - {uuid}"
+        add_to_full_report(shell_interface, report)
 
         duplicated_uuid.append(uuid)         
 
@@ -128,7 +129,8 @@ Number of items in response: {resp_json["count"]}
         
         count += 1
 
-        print(f"\n{count} - {item['changeType']} - {uuid}")
+        report = f"\n{count} - {item['changeType']} - {uuid}"
+        add_to_full_report(shell_interface, report)
 
         if item['changeType'] == 'ADD' or item['changeType'] == 'CREATE':
             count_create += 1
@@ -181,7 +183,7 @@ Pure changes:
 Update:     {count_update} - Create:     {count_create} - Delete:    {count_delete}
 Incomplete: {count_incomplete} - Duplicated: {count_duplicated} - Irrelevant:{count_not_ResearchOutput}
     """
-    print(report)
+    add_to_full_report(shell_interface, report)
 
     # RECORDS.LOG
     open(file_records, "a").write(report)
@@ -203,6 +205,7 @@ def get_missing_updates(shell_interface):
     """ Search for missing updates in the last 7 days """
 
     file_name = '/home/bootcamp/src/pure_sync_rdm/synchronizer/data/successful_changes.txt'
+    # file_name = f'{shell_interface.dirpath}/data/successful_changes.txt'
 
     missing_updates = []
     count = 0

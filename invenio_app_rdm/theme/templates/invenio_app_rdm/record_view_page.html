@@ -103,11 +103,19 @@
       <br><br>
       
       
-      <b>
-      Older versions:
-      </b>
+      <b>Older versions:</b></br>
+      
       {%- for version in record.metadataOlderVersions -%}
-        </br><a href="https://127.0.0.1:5000/api/records/{{ version }}"> API </a>, <a href="https://127.0.0.1:5000/records/{{ version }}"> Landing page </a> <- {{ version }}
+        </br>
+
+        {%- if version == '6zhv3-t8t95' %}
+          <b>--------------------------  {{ version }}</b>
+
+        {%- else -%}
+          <a href="https://127.0.0.1:5000/api/records/{{ version }}"> API </a>, <a href="https://127.0.0.1:5000/records/{{ version }}"> Landing page </a> <- {{ version }}
+
+        {%- endif -%}
+
       {%- endfor -%}
 
 

@@ -1,11 +1,7 @@
-from setup import *
-
+from setup                          import *
 
 def delete_from_list(shell_interface):
     # NOTE: the user ACCOUNT related to the used TOKEN must be ADMIN
-    """
-    pipenv run invenio roles add admin@invenio.org admin
-    """
     
     count_success = 0
     count_total = 0
@@ -48,6 +44,8 @@ def delete_from_list(shell_interface):
 #   DELETE_RECORD
 def delete_record(shell_interface, recid: str):
 
+    from functions.general_functions    import add_to_full_report
+    
     #   REQUEST
     headers = {
         'Authorization': f'Bearer {token_rdm}',
@@ -57,7 +55,8 @@ def delete_record(shell_interface, recid: str):
     response = shell_interface.requests.delete(url, headers=headers, verify=False)
     #   ---
     
-    print(f'\tRDM delete record     - {response} - Deleted recid:        {recid}')
+    report = f'\tRDM delete record     - {response} - Deleted recid:        {recid}'
+    add_to_full_report(shell_interface, report)
 
     # Append to yyyy-mm-dd_records.log
     current_time = shell_interface.datetime.now().strftime("%H:%M:%S")

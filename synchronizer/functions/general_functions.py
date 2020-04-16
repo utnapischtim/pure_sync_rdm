@@ -1,8 +1,8 @@
-from setup import *
-from functions.delete_record import delete_from_list, delete_record
+from setup                      import *
+from functions.delete_record    import delete_from_list, delete_record
 import psycopg2
-
-
+import requests
+import json
 
 #   ---         ---         ---
 def pure_get_uuid_metadata(shell_interface: object, uuid: str):
@@ -92,7 +92,6 @@ def rdm_get_metadata_by_query(shell_interface: object, query_value: str):
     
     return response
     
-
 
 #   ---         ---         ---
 def rdm_get_recid(shell_interface: object, uuid: str):
@@ -214,7 +213,6 @@ def get_rdm_userid_from_list_by_externalid(shell_interface: object, external_id:
             return user_id
 
 
-
 #   ---         ---         ---
 def update_rdm_record(shell_interface: object, data: str, recid: str):
 
@@ -229,7 +227,7 @@ def update_rdm_record(shell_interface: object, data: str, recid: str):
     url = f'{rdm_api_url_records}api/records/{recid}'
 
     response = shell_interface.requests.put(url, headers=headers, params=params, data=data_utf8, verify=False)
-    print(f'\tRecord update      - {response}')
+    print(f'\tRecord update         - {response}')
 
     if response.status_code >= 300:
         print(response.content)
@@ -237,7 +235,29 @@ def update_rdm_record(shell_interface: object, data: str, recid: str):
     return response
 
 
+#   ---         ---         ---
 def add_to_full_report(shell_interface: object, report: str):
     file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records_full.log'
     open(file_records, "a").write(f'{report}\n')
     print(report)
+
+
+#   ---         ---         ---
+def rdm_put(data: str, recid: str):
+    
+    data_utf8 = data.encode('utf-8')
+    headers = {
+        'Authorization': f'Bearer {token_rdm}',
+        'Content-Type': 'application/json',
+    }
+    params = (
+        ('prettyprint', '1'),
+    )
+    url = f'{rdm_api_url_records}api/records/{recid}'
+
+    response = requests.put(url, headers=headers, params=params, data=data_utf8, verify=False)
+
+    if response.status_code >= 300:
+        print(response.content)
+        
+    return response

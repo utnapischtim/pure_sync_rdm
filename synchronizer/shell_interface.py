@@ -8,7 +8,6 @@ Usage:
     shell_interface.py uuid
     shell_interface.py duplicates
     shell_interface.py delete_all
-    shell_interface.py test
     shell_interface.py owners
     shell_interface.py owners_orcid
     shell_interface.py owners_list
@@ -62,9 +61,9 @@ class shell_interface:
 
     def pages(self):
         """ Push to RDM records from Pure by page """
-        pag_begin = 2
-        pag_end   = 3
-        pag_size  = 10
+        pag_begin = 3
+        pag_end   = 4
+        pag_size  = 5
         get_pure_by_page(self, pag_begin, pag_end, pag_size)
 
 
@@ -94,10 +93,8 @@ class shell_interface:
     def owners(self):
         """ Gets from pure all the records related to a certain user,
             afterwards it modifies/create RDM records accordingly."""
-        rdm_owners(self, '56038')
-        # 2 - 948
-        # 3 - 54426
-        # 4 - 56038
+        user_externalId = '56038'
+        rdm_owners(self, user_externalId)
 
     def owners_orcid(self):
         rdm_owners_by_orcid(self, '0000-0002-4154-6945')
@@ -109,19 +106,14 @@ class shell_interface:
     def rdm_group_split(self):
         """  """
         old_id  = '2376'
-        new_ids = ['20353', '33320']
+        new_ids = ['14446', '2403']
         rdm_group_split(self, old_id, new_ids)
 
     def rdm_group_merge(self):
         """  """
-        old_id  = ['20353', '33320']
+        old_id  = ['14446', '2403']
         new_ids = '2376'
         rdm_group_merge(self, old_id, new_ids)
-# 709803a8-0655-4a08-a05a-fb706f36a332
-# a218e4b7-f925-4329-9584-06d9e1c18869
-# 8955b899-e9fb-43a1-8512-9b95d52dc123
-# 6cafe0a1-41a0-4402-900b-021a07d25c7a
-# a144e753-66b8-4f7b-a4fd-4e5a098dc3ec
 
 
 if __name__ == '__main__':
