@@ -17,7 +17,7 @@ def pure_get_changes(shell_interface):
     # missing_updates = ['2020-03-11']      # TEMPORARY !!!!!!!!!!!!!!!
     
     if missing_updates == []:
-        add_to_full_report(shell_interface, '\nNothing to update.\n')
+        add_to_full_report('\nNothing to update.\n')
         return
 
     for date_to_update in reversed(missing_updates):
@@ -53,7 +53,7 @@ def pure_get_changes_by_date(shell_interface, changes_date: str):
     open(file_name, 'wb').write(response.content)
 
     if response.status_code >= 300:
-        add_to_full_report(shell_interface, response.content)
+        add_to_full_report(response.content)
 
     # Load response json
     resp_json = shell_interface.json.loads(response.content)
@@ -81,7 +81,7 @@ Number of items in response: {resp_json["count"]}
 """
     # append to yyyy-mm-dd_records.log
     open(file_records, "a").write(report_intro)
-    add_to_full_report(shell_interface, report_intro)
+    add_to_full_report(report_intro)
 
     #   ---     DELETE      ---
     for item in resp_json['items']:
@@ -97,7 +97,7 @@ Number of items in response: {resp_json["count"]}
         uuid = item['uuid']
 
         report = f"\n{count_delete} - {item['changeType']} - {uuid}"
-        add_to_full_report(shell_interface, report)
+        add_to_full_report(report)
 
         duplicated_uuid.append(uuid)         
 
@@ -130,7 +130,7 @@ Number of items in response: {resp_json["count"]}
         count += 1
 
         report = f"\n{count} - {item['changeType']} - {uuid}"
-        add_to_full_report(shell_interface, report)
+        add_to_full_report(report)
 
         if item['changeType'] == 'ADD' or item['changeType'] == 'CREATE':
             count_create += 1
@@ -183,7 +183,7 @@ Pure changes:
 Update:     {count_update} - Create:     {count_create} - Delete:    {count_delete}
 Incomplete: {count_incomplete} - Duplicated: {count_duplicated} - Irrelevant:{count_not_ResearchOutput}
     """
-    add_to_full_report(shell_interface, report)
+    add_to_full_report(report)
 
     # RECORDS.LOG
     open(file_records, "a").write(report)

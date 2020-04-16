@@ -18,7 +18,7 @@ def rdm_put_file(shell_interface, file_name: str, recid: str, uuid: str):
     response = shell_interface.requests.put(url, headers=headers, data=data, verify=False)
 
     # Report
-    add_to_full_report(shell_interface, f'\tRDM put file          - {response}')
+    add_to_full_report(f'\tRDM put file          - {response}')
 
     current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
     report = f'{current_time} - file_put_to_rdm - {response} - {recid}\n'
@@ -29,7 +29,7 @@ def rdm_put_file(shell_interface, file_name: str, recid: str, uuid: str):
         shell_interface.file_success = False
 
         report += f'{response.content}\n'
-        print(response.content)
+        add_to_full_report(response.content)
 
     else:
         shell_interface.count_successful_push_file += 1
@@ -74,7 +74,7 @@ def get_file_from_pure(shell_interface, electronic_version: str):
             match_review = 'Match: T, Review: T'
     
     report = f'\tPure get file         - {response} - {match_review} - {file_name}'
-    add_to_full_report(shell_interface, report)
+    add_to_full_report(report)
     
     if response.status_code < 300:
         # Save file
@@ -85,10 +85,11 @@ def get_file_from_pure(shell_interface, electronic_version: str):
         # ISSUE encountered when putting txt files
         file_extension = file_name.split('.')[file_name.count('.')]
         if file_extension == 'txt':
-            print('\n\tATTENTION, the file extension is txt - \tKnown issue -> jinja2.exceptions.UndefinedError: No first item, sequence was empty.\n')
+            report = '\n\tATTENTION, the file extension is txt - \tKnown issue -> jinja2.exceptions.UndefinedError: No first item, sequence was empty.\n'
+            add_to_full_report(report)
 
     else:
-        print(f'Error downloading file from pure ({file_url})')
+        add_to_full_report(f'Error downloading file from pure ({file_url})')
 
     shell_interface.time.sleep(0.2)
     return
@@ -97,8 +98,6 @@ def get_file_from_pure(shell_interface, electronic_version: str):
 #   ---     ---     ---
 def send_email(uuid: str, file_name: str):
     
-    print('\tSend email')
-
     # creates SMTP session 
     s = smtplib.SMTP(email_smtp_server, email_smtp_port) 
 

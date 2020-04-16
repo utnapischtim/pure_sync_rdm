@@ -3,6 +3,8 @@ from functions.delete_record    import delete_from_list, delete_record
 import psycopg2
 import requests
 import json
+import os
+from datetime                    import date
 
 #   ---         ---         ---
 def pure_get_uuid_metadata(shell_interface: object, uuid: str):
@@ -19,7 +21,7 @@ def pure_get_uuid_metadata(shell_interface: object, uuid: str):
     url = f'{pure_rest_api_url}research-outputs/{uuid}'
     response = shell_interface.requests.get(url, headers=headers, params=params)
 
-    print(f'\n\tPure get metadata     - {response}')
+    add_to_full_report(f'\n\tPure get metadata     - {response}')
 
     # Add response content to pure_get_uuid_metadata.json
     file_response = f'{shell_interface.dirpath}/data/temporary_files/pure_get_uuid_metadata.json'
@@ -27,7 +29,7 @@ def pure_get_uuid_metadata(shell_interface: object, uuid: str):
 
     # Check response
     if response.status_code >= 300:
-        print(response.content)
+        add_to_full_report(response.content)
 
         file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
         report = f'Get Pure metadata      - {response.content}\n'
@@ -45,7 +47,8 @@ def pure_get_uuid_metadata(shell_interface: object, uuid: str):
 def rdm_get_recid_metadata(shell_interface: object, recid: str):
     
     if len(recid) != 11:
-        print(f'\nERROR - The recid must have 11 characters. Given: {recid}\n')
+        report = f'\nERROR - The recid must have 11 characters. Given: {recid}\n'
+        add_to_full_report(report)
         return False
 
     # GET request RDM
@@ -58,7 +61,7 @@ def rdm_get_recid_metadata(shell_interface: object, recid: str):
     response = shell_interface.requests.get(url, headers=headers, params=params, verify=False)
 
     if response.status_code >= 300:
-        print(f'\n{recid} - {response}')
+        add_to_full_report(f'\n{recid} - {response}')
         return False
 
     open(f'{shell_interface.dirpath}/data/temporary_files/rdm_get_recid_metadata.json', "wb").write(response.content)
@@ -85,7 +88,7 @@ def rdm_get_metadata_by_query(shell_interface: object, query_value: str):
     response = shell_interface.requests.get(url, headers=headers, params=params, verify=False)
 
     if response.status_code >= 300:
-        print(f'\n{query_value} - {response}')
+        add_to_full_report(f'\n{query_value} - {response}')
         return False
 
     open(f'{shell_interface.dirpath}/data/temporary_files/rdm_get_metadata_by_query.json', "wb").write(response.content)
@@ -127,7 +130,7 @@ def rdm_get_recid(shell_interface: object, uuid: str):
             newest_recid = recid
 
             report = f'\tRDM get recid         - {response} - Total:       {add_spaces(total_recids)}  - {shell_interface.api_url}'
-            add_to_full_report(shell_interface, report)
+            add_to_full_report(report)
 
         else:
             # If versioning is running then it is not necessary to delete older versions of the record
@@ -209,7 +212,10 @@ def get_rdm_userid_from_list_by_externalid(shell_interface: object, external_id:
         if external_id == line[2]:
             user_id         = line[0]
             user_id_spaces  = add_spaces(user_id)
-            print(f'\tRDM owner list     - user id: {user_id_spaces}   - externalId: {external_id}')
+
+            report = f'\tRDM owner list        - user id: {user_id_spaces}   - externalId: {external_id}'
+            add_to_full_report(report)
+
             return user_id
 
 
@@ -227,17 +233,16 @@ def update_rdm_record(shell_interface: object, data: str, recid: str):
     url = f'{rdm_api_url_records}api/records/{recid}'
 
     response = shell_interface.requests.put(url, headers=headers, params=params, data=data_utf8, verify=False)
-    print(f'\tRecord update         - {response}')
+    add_to_full_report(f'\tRecord update         - {response}')
 
     if response.status_code >= 300:
-        print(response.content)
-        
+        add_to_full_report(response.content)
     return response
 
 
 #   ---         ---         ---
-def add_to_full_report(shell_interface: object, report: str):
-    file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records_full.log'
+def add_to_full_report(report: str):
+    file_records = f'{dirpath}/reports/{date.today()}_records_full.log'
     open(file_records, "a").write(f'{report}\n')
     print(report)
 
@@ -258,6 +263,6 @@ def rdm_put(data: str, recid: str):
     response = requests.put(url, headers=headers, params=params, data=data_utf8, verify=False)
 
     if response.status_code >= 300:
-        print(response.content)
+        add_to_full_report(response.content)
         
     return response

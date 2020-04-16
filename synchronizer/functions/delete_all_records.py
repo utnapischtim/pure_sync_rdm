@@ -17,7 +17,7 @@ def rdm_get_all_recods(shell_interface):
         pag = 1
         pag_size = 1000
 
-        print(f'\n---   ---   ---\nGET FROM RDM\n\nPag size: {pag_size}\n')
+        add_to_full_report(f'\n---   ---   ---\nGET FROM RDM\n\nPag size: {pag_size}\n')
 
         count = 0
         go_on = True
@@ -42,15 +42,15 @@ def rdm_get_all_recods(shell_interface):
             url = f'{rdm_api_url_records}api/records/?sort=mostrecent&size={pag_size}&page={pag}'
             response = shell_interface.requests.get(url, headers=headers, params=params, verify=False)
 
-            print(response)
+            add_to_full_report(response)
             open(shell_interface.dirpath + "/data/temporary_files/resp_rdm.json", 'wb').write(response.content)
 
             if response.status_code == 429:
-                print('\nToo many requests.. wait 15 min\n')
+                add_to_full_report('\nToo many requests.. wait 15 min\n')
                 shell_interface.time.sleep(wait_429)
 
             elif response.status_code >= 300:
-                print(response.content)
+                add_to_full_report(response.content)
                 return False
 
             else:
@@ -61,7 +61,7 @@ def rdm_get_all_recods(shell_interface):
                     data_u  += f"{i['metadata']['uuid']}\n"
                     count += 1
 
-                print(f'Pag {str(pag)} - Records {count}')
+                add_to_full_report(f'Pag {str(pag)} - Records {count}')
 
             if 'next' not in resp_json['links']:
                 go_on = False
@@ -69,10 +69,10 @@ def rdm_get_all_recods(shell_interface):
             shell_interface.time.sleep(3)
             pag += 1
             
-        print(f'\n- Tot items: {count} -')
+        add_to_full_report(f'\n- Tot items: {count} -')
         open(file_name, 'w+').write(data_ur)
 
         return True
 
     except:
-        print('\n---   !!!   Error in get_from_rdm   !!!   ---\n')
+        add_to_full_report('\n---   !!!   Error in get_from_rdm   !!!   ---\n')

@@ -1,4 +1,5 @@
-from functions.delete_record import delete_record
+from functions.delete_record            import delete_record
+from functions.general_functions        import add_to_full_report
 
 def rdm_duplicates(shell_interface):
 
@@ -22,9 +23,11 @@ def rdm_duplicates(shell_interface):
         temp_arr.append(uuid)
 
     if count_deleted == 0:
-        print('\nThere are no duplicate records to delete\n')
+        report = '\nThere are no duplicate records to delete\n'
+        add_to_full_report(shell_interface, report)
 
-    print(f'Total items: {len(all_records)}\nDeleted: {count_deleted}\n')
+    report = f'Total items: {len(all_records)}\nDeleted: {count_deleted}\n'
+    add_to_full_report(shell_interface, report)
 
         
         

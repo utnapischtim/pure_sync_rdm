@@ -15,7 +15,7 @@ def rdm_owners(shell_interface: object, external_id: int):
     """ Gets from pure all the records related to a certain user,
         afterwards it modifies/create RDM records accordingly. """
 
-    print(f'\nUser external_id: {external_id}\n')
+    add_to_full_report(f'\nUser external_id: {external_id}\n')
 
     # Gets the ID of the logged in user
     user_id = rdm_get_user_id(shell_interface)
@@ -39,10 +39,10 @@ def rdm_owners(shell_interface: object, external_id: int):
 #   ---         ---         ---
 def rdm_owners_by_orcid(shell_interface: object, orcid: int):
 
-    print(f'\norcid: {orcid}\n')
+    add_to_full_report(f'\norcid: {orcid}\n')
 
     if len(orcid) != 19:
-        print('Warning - Orcid length it is not 19\n')
+        add_to_full_report('Warning - Orcid length it is not 19\n')
 
     # Gets the ID and IP of the logged in user
     user_id = rdm_get_user_id(shell_interface)
@@ -72,7 +72,7 @@ def get_owner_records(shell_interface, user_id, user_uuid):
     count     = 0
 
     while go_on:
-        # print(f'Page {page}             - Size {page_size}')
+        # add_to_full_report(f'Page {page}             - Size {page_size}')
 
         # PURE get person records
         headers = {
@@ -91,18 +91,18 @@ def get_owner_records(shell_interface, user_id, user_uuid):
         open(file_name, 'wb').write(response.content)
 
         if response.status_code >= 300:
-            print(response.content)
+            add_to_full_report(response.content)
             return False
 
         # Load response json
         resp_json = shell_interface.json.loads(response.content)
 
         total_items = resp_json['count']
-        print(f'\nGet person records - {response} - Page {page} (size {page_size})    - Total records: {total_items}')
+        add_to_full_report(f'\nGet person records - {response} - Page {page} (size {page_size})    - Total records: {total_items}')
 
         if total_items == 0:
             if page == 1:
-                print('\nThe user has no records - End task\n')
+                add_to_full_report('\nThe user has no records - End task\n')
             return True
 
         for item in resp_json['items']:
@@ -111,7 +111,7 @@ def get_owner_records(shell_interface, user_id, user_uuid):
             title = item['title']
             count += 1
             
-            print(f'\n\tRecord uuid           - {uuid}   - {title[0:55]}...')
+            add_to_full_report(f'\n\tRecord uuid           - {uuid}   - {title[0:55]}...')
 
             # Get from RDM the recid
             recid = rdm_get_recid(shell_interface, uuid)
@@ -121,7 +121,7 @@ def get_owner_records(shell_interface, user_id, user_uuid):
                 item['owners'] = [user_id]
                 shell_interface.item = item
 
-                print('\t+ Create record    +')
+                add_to_full_report('\t+ Create record    +')
                 create_invenio_data(shell_interface)
 
             else:
@@ -133,13 +133,13 @@ def get_owner_records(shell_interface, user_id, user_uuid):
                 response = rdm_get_recid_metadata(shell_interface, recid)
                 record_json = shell_interface.json.loads(response.content)['metadata']
 
-                print(f"\tRDM get metadata      - {response} - Current owners:     - {record_json['owners']}")
+                add_to_full_report(f"\tRDM get metadata      - {response} - Current owners:     - {record_json['owners']}")
 
                 # If the owner is not among metadata owners
                 if user_id and user_id not in record_json['owners']:
 
                     record_json['owners'].append(user_id)
-                    print(f"\t+   Adding owner      -               - New owners:         - {record_json['owners']}")
+                    add_to_full_report(f"\t+   Adding owner      -               - New owners:         - {record_json['owners']}")
 
                     record_json = shell_interface.json.dumps(record_json)
 
@@ -149,7 +149,7 @@ def get_owner_records(shell_interface, user_id, user_uuid):
                     # Add owner to the record
                     update_rdm_record(shell_interface, record_json, recid)
                 else:
-                    print('\t+ Owner in record  +')
+                    add_to_full_report('\t+ Owner in record  +')
 
                 # exit()
 
@@ -180,7 +180,7 @@ def pure_get_user_uuid(shell_interface: object, key_name: str, key_value: str):
         response = shell_interface.requests.get(url, headers=headers, params=params)
 
         if response.status_code >= 300:
-            print(response.content)
+            add_to_full_report(response.content)
             return False
 
         open(f'{shell_interface.dirpath}/data/temporary_files/pure_get_user_uuid.json', "wb").write(response.content)
@@ -188,7 +188,7 @@ def pure_get_user_uuid(shell_interface: object, key_name: str, key_value: str):
 
         total_items = record_json['count']
 
-        print(f'Pure get user uuid - {response} - Total items: {total_items}')
+        add_to_full_report(f'Pure get user uuid - {response} - Total items: {total_items}')
 
         for item in record_json['items']:
 
@@ -198,10 +198,10 @@ def pure_get_user_uuid(shell_interface: object, key_name: str, key_value: str):
                 lastName    = item['name']['lastName']
                 uuid        = item['uuid']
 
-                print(f'User uuid          - {first_name} {lastName}  -  {uuid}')
+                add_to_full_report(f'User uuid          - {first_name} {lastName}  -  {uuid}')
 
                 if len(uuid) != 36:
-                    print('\n- Warning! Incorrect user_uuid length -\n')
+                    add_to_full_report('\n- Warning! Incorrect user_uuid length -\n')
                     return False
 
                 return uuid
@@ -211,7 +211,7 @@ def pure_get_user_uuid(shell_interface: object, key_name: str, key_value: str):
         else:
             keep_searching = False
 
-    print(f'{bcolors.RED}\nUser uuid not found - Exit task\n{bcolors.END}')
+    add_to_full_report(f'{bcolors.RED}\nUser uuid not found - Exit task\n{bcolors.END}')
     return False
 
 
@@ -222,14 +222,14 @@ def rdm_get_user_id(shell_interface: object):
     response = db_query(shell_interface, f"SELECT user_id, ip FROM accounts_user_session_activity")
 
     if not response:
-        print('\n- accounts_user_session_activity: No user is logged in -\n')
+        add_to_full_report('\n- accounts_user_session_activity: No user is logged in -\n')
         return False
 
     elif len(response) > 1:
-        print('\n- accounts_user_session_activity: Multiple users in \n')
+        add_to_full_report('\n- accounts_user_session_activity: Multiple users in \n')
         return False
 
-    print(f'user IP: {response[0][1]} - user_id: {response[0][0]}')
+    add_to_full_report(f'user IP: {response[0][1]} - user_id: {response[0][0]}')
 
     shell_interface.rdm_record_owner = response[0][0]
 
@@ -262,13 +262,13 @@ def get_rdm_record_owners(shell_interface: object):
         url = f'{rdm_api_url_records}api/records/?sort=mostrecent&size={pag_size}&page={pag}'
 
         response = shell_interface.requests.get(url, headers=headers, params=params, verify=False)
-        print(f'\n{response}\n')
+        add_to_full_report(f'\n{response}\n')
         
         file_name = f"{shell_interface.dirpath}/data/temporary_files/rdm_get_records.json"
         open(file_name, 'wb').write(response.content)
 
         if response.status_code >= 300:
-            print(response.content)
+            add_to_full_report(response.content)
             break
 
         resp_json = shell_interface.json.loads(response.content)
@@ -282,7 +282,7 @@ def get_rdm_record_owners(shell_interface: object):
             owners = item['metadata']['owners']
 
             line = f'{uuid} - {recid} - {owners}'
-            print(line)
+            add_to_full_report(line)
             data += f'{line}\n'
 
             for i in owners:
@@ -290,7 +290,7 @@ def get_rdm_record_owners(shell_interface: object):
                     count_records_per_owner[i] = 0
                 count_records_per_owner[i] += 1
 
-        print(f'\nPag {str(pag)} - Records {count}\n')
+        add_to_full_report(f'\nPag {str(pag)} - Records {count}\n')
         
         open(file_owner, 'a').write(data)
 
@@ -300,11 +300,11 @@ def get_rdm_record_owners(shell_interface: object):
         pag += 1
         shell_interface.time.sleep(0.5)
 
-    print('Owner  Records')
+    add_to_full_report('Owner  Records')
     for key in count_records_per_owner:
         records = add_spaces(count_records_per_owner[key])
         key     = add_spaces(key)
-        print(f'{key}    {records}')
+        add_to_full_report(f'{key}    {records}')
 
 
 
@@ -316,7 +316,7 @@ def add_user_ids_match(shell_interface: object, user_id: int, user_uuid: str, ex
 
     if needs_to_add:
         open(file_name, 'a').write(f'{user_id} {user_uuid} {external_id}\n')
-        print(f'user_ids_match     - Adding id toList - {user_id}, {user_uuid}, {external_id}')
+        add_to_full_report(f'user_ids_match     - Adding id toList - {user_id}, {user_uuid}, {external_id}')
 
 
 def check_user_ids_match(shell_interface: object, user_id: int, user_uuid: str, external_id: str, file_name: str):
@@ -330,12 +330,12 @@ def check_user_ids_match(shell_interface: object, user_id: int, user_uuid: str, 
         if str(user_id) == line[0] or user_uuid == line[1] or external_id == line[2]:
             
             if line == [str(user_id), user_uuid, external_id]:
-                print('user_ids_match     - full match')
+                add_to_full_report('user_ids_match     - full match')
                 return False
 
-            # print('user_ids_match     - partial match -----------------------------------')
-            # print(f'{user_id} == {line[0]} and {user_uuid} == {line[1]} and {external_id} == {line[2]}')
+            # add_to_full_report('user_ids_match     - partial match -----------------------------------')
+            # add_to_full_report(f'{user_id} == {line[0]} and {user_uuid} == {line[1]} and {external_id} == {line[2]}')
             # return False
     
-    # print('user_ids_match     - No match')
+    # add_to_full_report('user_ids_match     - No match')
     return True

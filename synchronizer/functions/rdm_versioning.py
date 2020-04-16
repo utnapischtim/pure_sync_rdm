@@ -29,7 +29,7 @@ def rdm_versioning (shell_interface: object, uuid: str):
 
             # If a record has a differnt uuid than it will be ignored
             if uuid != rdm_metadata['uuid']:
-                print(f" VERSIONING - Different uuid {rdm_metadata['uuid']}")
+                add_to_full_report(f" VERSIONING - Different uuid {rdm_metadata['uuid']}")
                 continue
             
             # Add recid to listed versions
@@ -42,6 +42,6 @@ def rdm_versioning (shell_interface: object, uuid: str):
 
         message += f'Current ver.:{add_spaces(metadata_version)}  - New version: {metadata_version + 1}'        
 
-    add_to_full_report(shell_interface, message)
+    add_to_full_report(message)
 
     return [metadata_version, metadata_versions]

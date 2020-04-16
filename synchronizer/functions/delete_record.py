@@ -12,7 +12,7 @@ def delete_from_list(shell_interface):
     recids = open(file_name, 'r').readlines()
 
     if len(recids) == 0:
-        print('\nThere is nothing to delete.\n')
+        add_to_full_report('\nThere is nothing to delete.\n')
         return
 
     for recid in recids:
@@ -26,7 +26,7 @@ def delete_from_list(shell_interface):
         count_total += 1
 
         if len(recid) != 11:
-            print(f'\n{recid} -> Wrong recid lenght! \n')
+            add_to_full_report(f'\n{recid} -> Wrong recid lenght! \n')
             continue
         
         # -- REQUEST --
@@ -56,7 +56,7 @@ def delete_record(shell_interface, recid: str):
     #   ---
     
     report = f'\tRDM delete record     - {response} - Deleted recid:        {recid}'
-    add_to_full_report(shell_interface, report)
+    add_to_full_report(report)
 
     # Append to yyyy-mm-dd_records.log
     current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
@@ -91,7 +91,7 @@ def delete_record(shell_interface, recid: str):
     elif response.status_code == 429:           # http 429 -> too many requests
         shell_interface.time.sleep(wait_429)          # wait for ~ 15 min
     else:
-        print(response.content)
+        add_to_full_report(response.content)
 
     # Makes a push request every ~ 3 sec
     shell_interface.time.sleep(push_dist_sec)

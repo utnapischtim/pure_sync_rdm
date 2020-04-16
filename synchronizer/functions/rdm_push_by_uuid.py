@@ -12,13 +12,13 @@ def rdm_push_by_uuid(shell_interface):
     uuids = open(file_name, 'r').readlines()
 
     if len(uuids) == 0:
-        print('\nThere is nothing to transfer.\n')
+        add_to_full_report('\nThere is nothing to transfer.\n')
         return
 
     for uuid in uuids:
         uuid = uuid.split('\n')[0]
         if (len(uuid) != 36):
-            print('Invalid uuid lenght.')
+            add_to_full_report('Invalid uuid lenght.')
             continue
         
         rdm_push_record(shell_interface, uuid)

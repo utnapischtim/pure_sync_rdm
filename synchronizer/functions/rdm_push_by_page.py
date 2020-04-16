@@ -19,7 +19,7 @@ def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: in
         file_records = f'{shell_interface.dirpath}/reports/{date_today}_records.log'
         open(file_records, "a").write(report)
 
-        add_to_full_report(shell_interface, f'--   --   --\n\nPag {str(pag)} - pag_size {str(pag_size)} - {current_time}')
+        add_to_full_report(f'--   --   --\n\nPag {str(pag)} - pag_size {str(pag_size)} - {current_time}')
 
         # PURE GET REQUEST
         headers = {
@@ -39,7 +39,7 @@ def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: in
 
         # (500 -> internal server error)
         if response.status_code >= 300:
-            add_to_full_report(shell_interface, response.content)
+            add_to_full_report(response.content)
             shell_interface.time.sleep(180)
             continue
 
@@ -49,7 +49,7 @@ def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: in
         #       ---         ---         ---
         # Creates data to push to RDM
         for shell_interface.item in resp_json['items']:
-            add_to_full_report(shell_interface, '')          # adds new line in the console
+            add_to_full_report('')          # adds new line in the console
             create_invenio_data(shell_interface)          
         #       ---         ---         ---
 
@@ -88,4 +88,4 @@ Abstracts:        {count_abstracts}, Orcids:          {count_orcids}
         file_records = f'{shell_interface.dirpath}/reports/{date_today}_records.log'
         open(file_records, "a").write(report)
 
-        add_to_full_report(shell_interface, f'{report}\n')
+        add_to_full_report(f'{report}\n')

@@ -1,9 +1,13 @@
 from setup import *
+from functions.general_functions    import add_to_full_report
+from datetime                       import datetime
 
 def delete_old_log_files(shell_interface):
 
+    current_time = datetime.now().strftime("%H:%M:%S")
+    add_to_full_report(f'\n - Delete old log files - {current_time}\n')
+
     # DELETE OLD LOG FILES
-    print()
     folder = '/reports/'
 
     # Get file names from folder
@@ -22,16 +26,16 @@ def delete_old_log_files(shell_interface):
 
         if date <= date_limit:
             shell_interface.os.remove(shell_interface.dirpath + folder + file_name)
-            print(f'{file_name}{tabs}Deleted')
+            add_to_full_report(f'{file_name}{tabs}Deleted')
         else:
-            print(f'{file_name}{tabs}Ok')
-    print()
+            add_to_full_report(f'{file_name}{tabs}Ok')
 
     # SHORTEN SUCCESSFUL_CHANGES.TXT
     file_name = f'{shell_interface.dirpath}/data/successful_changes.txt'
     file_data = open(file_name)
 
     num_lines = sum(1 for line in file_data)
+    report = 'successful_changes.txt\t\t'
 
     if num_lines > lines_successful_changes:
         file_data = open(file_name)
@@ -45,8 +49,8 @@ def delete_old_log_files(shell_interface):
         open(file_name, 'w').close()
         open(file_name, "w").write(data)
 
-        print(f'successful_changes.txt\t\tReduced from {num_lines} to {lines_successful_changes} lines')
+        report += f'Reduced from {num_lines} to {lines_successful_changes} lines\n'
+        add_to_full_report(report)
     else:
-        print(f'successful_changes.txt\t\tOk')
-
-    print('\n')
+        report += f'Ok\n'
+        add_to_full_report(report)
