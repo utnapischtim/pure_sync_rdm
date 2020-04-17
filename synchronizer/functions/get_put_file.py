@@ -1,21 +1,23 @@
 from setup                          import *
 from requests.auth                  import HTTPBasicAuth
-from functions.general_functions    import add_to_full_report
+from functions.general_functions    import add_to_full_report, rdm_put_file
 import smtplib
 
 #   ---     ---     ---
-def rdm_put_file(shell_interface, file_name: str, recid: str, uuid: str):
+def rdm_add_file(shell_interface, file_name: str, recid: str, uuid: str):
     
-    file_path_name = f'{shell_interface.dirpath}/data/temporary_files/{file_name}'
-
-    # - PUT FILE TO RDM -
-    headers = {
-        'Authorization': f'Bearer {token_rdm}',
-        'Content-Type': 'application/octet-stream',
-    }
-    data = open(file_path_name, 'rb').read()
+    file_path_name = f'{dirpath}/data/temporary_files/{file_name}'
     url = f'{rdm_api_url_records}api/records/{recid}/files/{file_name}'
-    response = shell_interface.requests.put(url, headers=headers, data=data, verify=False)
+
+    # # - PUT FILE TO RDM -
+    # headers = {
+    #     'Authorization': f'Bearer {token_rdm}',
+    #     'Content-Type': 'application/octet-stream',
+    # }
+    # data = open(file_path_name, 'rb').read()
+    # response = shell_interface.requests.put(url, headers=headers, data=data, verify=False)
+
+    response = rdm_put_file(url, file_path_name)
 
     # Report
     add_to_full_report(f'\tRDM put file          - {response}')
@@ -41,7 +43,7 @@ def rdm_put_file(shell_interface, file_name: str, recid: str, uuid: str):
         # # Sends email to remove record from Pure
         # send_email(uuid, file_name)               # - # - SEND EMAIL - # - #
 
-    file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
+    file_records = f'{dirpath}/reports/{shell_interface.date.today()}_records.log'
     open(file_records, "a").write(report)
 
     shell_interface.time.sleep(0.2)
@@ -78,7 +80,7 @@ def get_file_from_pure(shell_interface, electronic_version: str):
     
     if response.status_code < 300:
         # Save file
-        open(f'{shell_interface.dirpath}/data/temporary_files/{file_name}', 'wb').write(response.content)
+        open(f'{dirpath}/data/temporary_files/{file_name}', 'wb').write(response.content)
 
         shell_interface.record_files.append(file_name)
 

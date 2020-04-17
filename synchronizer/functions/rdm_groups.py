@@ -1,5 +1,5 @@
 from setup                          import *
-from functions.general_functions    import db_query, add_spaces, update_rdm_record, rdm_get_metadata_by_query, add_to_full_report
+from functions.general_functions    import db_query, add_spaces, update_rdm_record, rdm_get_metadata_by_query, add_to_full_report, rdm_get_metadata_verified
 
 #   ---         ---         ---
 def rdm_create_group(shell_interface: object, group_externalId: str, group_name: str):
@@ -78,7 +78,7 @@ def rdm_group_split(shell_interface: object, old_group_externalId: str, new_grou
     """
     # Report
     current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
-    report_name = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_groups.log'
+    report_name = f'{dirpath}/reports/{shell_interface.date.today()}_groups.log'
     shell_interface.report_name = report_name
     report = f"""
 
@@ -214,7 +214,7 @@ def rdm_group_merge(shell_interface: object, old_groups_externalId: list, new_gr
     """
     # Report
     current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
-    shell_interface.report_name = report_name = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_groups.log'
+    shell_interface.report_name = report_name = f'{dirpath}/reports/{shell_interface.date.today()}_groups.log'
 
     report = f"\n\n--   --   --\n\n{current_time} - RDM GROUP MERGE -\n\n"
     open(report_name, "a").write(report)
@@ -285,7 +285,7 @@ def rdm_group_merge(shell_interface: object, old_groups_externalId: list, new_gr
         response = rdm_get_metadata_by_query(shell_interface, old_group_externalId)
 
 
-        # fffff = f'{shell_interface.dirpath}/data/temporary_files/rdm_get_metadata_by_query.json'
+        # fffff = f'{dirpath}/data/temporary_files/rdm_get_metadata_by_query.json'
         # with open(fffff) as json_file:
         #     resp_json = shell_interface.json.load(json_file)
 
@@ -350,20 +350,14 @@ def rdm_group_merge(shell_interface: object, old_groups_externalId: list, new_gr
 def pure_get_organisationalUnit_data(shell_interface: object, externalId: str):
     """ Get organisationalUnit name and uuid """
 
-    # PURE REQUEST
-    headers = {
-        'Accept': 'application/json',
-    }
-    params = (
-        ('page', '1'),
-        ('pageSize', '1'),
-        ('apiKey', pure_api_key),
-    )
-    url = f'{pure_rest_api_url}organisational-units/{externalId}/research-outputs'
-    response = shell_interface.requests.get(url, headers=headers, params=params)
+    # # PURE REQUEST
+    page = 'page=1'
+    size = 'pageSize=100'
+    url = f'{pure_rest_api_url}organisational-units/{externalId}/research-outputs?{size}&{page}'
+    response = rdm_get_metadata_verified(url)
 
     # Add response content to pure_get_uuid_metadata.json
-    file_response = f'{shell_interface.dirpath}/data/temporary_files/pure_get_uuid_metadata.json'
+    file_response = f'{dirpath}/data/temporary_files/pure_get_uuid_metadata.json'
     open(file_response, 'wb').write(response.content)
 
     # Check response

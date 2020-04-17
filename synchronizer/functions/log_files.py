@@ -13,7 +13,7 @@ def delete_old_log_files(shell_interface):
     # Get file names from folder
     isfile = shell_interface.os.path.isfile
     join = shell_interface.os.path.join
-    onlyfiles = [f for f in shell_interface.os.listdir(shell_interface.dirpath + folder) if isfile(join(shell_interface.dirpath + folder, f))]
+    onlyfiles = [f for f in shell_interface.os.listdir(dirpath + folder) if isfile(join(dirpath + folder, f))]
 
     date_limit = str(shell_interface.date.today() - shell_interface.timedelta(days=days_to_keep_log_files))
 
@@ -25,13 +25,13 @@ def delete_old_log_files(shell_interface):
             tabs += '\t'
 
         if date <= date_limit:
-            shell_interface.os.remove(shell_interface.dirpath + folder + file_name)
+            shell_interface.os.remove(dirpath + folder + file_name)
             add_to_full_report(f'{file_name}{tabs}Deleted')
         else:
             add_to_full_report(f'{file_name}{tabs}Ok')
 
     # SHORTEN SUCCESSFUL_CHANGES.TXT
-    file_name = f'{shell_interface.dirpath}/data/successful_changes.txt'
+    file_name = f'{dirpath}/data/successful_changes.txt'
     file_data = open(file_name)
 
     num_lines = sum(1 for line in file_data)

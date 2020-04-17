@@ -1,7 +1,7 @@
 from setup                          import *
 from functions.rdm_push_record      import create_invenio_data
 from functions.rdm_push_by_uuid     import rdm_push_by_uuid
-from functions.general_functions    import add_spaces, initialize_count_variables, add_to_full_report
+from functions.general_functions    import add_spaces, initialize_count_variables, add_to_full_report, rdm_get_metadata_verified
 
 
 def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: int):
@@ -16,25 +16,16 @@ def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: in
 
         # add page to report file  
         report  = f'\n\n--   --   --\n\nPag {str(pag)} - pag_size {str(pag_size)}\n\n'
-        file_records = f'{shell_interface.dirpath}/reports/{date_today}_records.log'
+        file_records = f'{dirpath}/reports/{date_today}_records.log'
         open(file_records, "a").write(report)
 
         add_to_full_report(f'--   --   --\n\nPag {str(pag)} - pag_size {str(pag_size)} - {current_time}')
 
         # PURE GET REQUEST
-        headers = {
-            'Accept': 'application/json',
-            'api-key': pure_api_key,
-        }
-        params = (
-            ('page', pag),
-            ('pageSize', pag_size),
-            ('apiKey', pure_api_key),
-        )
-        url = f'{pure_rest_api_url}research-outputs'
-        response = shell_interface.requests.get(url, headers=headers, params=params)
+        url = f'{pure_rest_api_url}research-outputs?pageSize={pag_size}&page={pag}'
+        response = rdm_get_metadata_verified(url)
 
-        file_name = f'{shell_interface.dirpath}/data/temporary_files/pure_get_uuid_metadata.json'
+        file_name = f'{dirpath}/data/temporary_files/pure_get_uuid_metadata.json'
         open(file_name, 'wb').write(response.content)
 
         # (500 -> internal server error)
@@ -75,7 +66,7 @@ File (ok{file_success}, error{file_error}) - \
 Abstracts:{count_abstracts} - Orcids:{count_orcids} - \
 {http_response_str}\
 """
-        file_pages = f'{shell_interface.dirpath}/reports/{date_today}_pages.log'
+        file_pages = f'{dirpath}/reports/{date_today}_pages.log'
         open(file_pages, "a").write(report)
 
         # Summary added to records.log
@@ -85,7 +76,7 @@ Files success:    {file_success}, files errors:    {file_error}
 Abstracts:        {count_abstracts}, Orcids:          {count_orcids}
 
 {http_response_str}"""
-        file_records = f'{shell_interface.dirpath}/reports/{date_today}_records.log'
+        file_records = f'{dirpath}/reports/{date_today}_records.log'
         open(file_records, "a").write(report)
 
         add_to_full_report(f'{report}\n')

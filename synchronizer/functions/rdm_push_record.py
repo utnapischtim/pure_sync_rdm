@@ -1,6 +1,6 @@
 from setup                          import *
-from functions.get_put_file         import rdm_put_file, get_file_from_pure
-from functions.general_functions    import rdm_get_recid, pure_get_uuid_metadata, get_rdm_userid_from_list_by_externalid, bcolors, add_to_full_report
+from functions.get_put_file         import rdm_add_file, get_file_from_pure
+from functions.general_functions    import *
 from functions.rdm_groups           import rdm_create_group, rdm_add_user_to_group
 from functions.rdm_versioning       import rdm_versioning
 
@@ -199,7 +199,7 @@ def create_invenio_data(shell_interface: object):
         shell_interface.count_abstracts += 1
 
     shell_interface.data = shell_interface.json.dumps(shell_interface.data)
-    open(f'{shell_interface.dirpath}/data/temporary_files/lash_push.json', "w").write(shell_interface.data)
+    open(f'{dirpath}/data/temporary_files/lash_push.json', "w").write(shell_interface.data)
 
     # Calling post_to_rdm
     return post_to_rdm(shell_interface)
@@ -269,23 +269,17 @@ def get_rdm_file_review(shell_interface: object):
     page  = 'page=1'
     query = f'q="{shell_interface.uuid}"'
 
-    headers = {
-        'Authorization': f'Bearer {token_rdm}',
-        'Content-Type': 'application/json',
-    }
-    params = (('prettyprint', '1'),)
     url = f'{rdm_api_url_records}api/records/?{sort}&{query}&{size}&{page}'
-    response = shell_interface.requests.get(url, headers=headers, params=params, verify=False)
+    response = rdm_get_metadata(url)
 
     if response.status_code >= 300:
-
         report = f'\nget_rdm_file_size - {shell_interface.uuid} - {response}'
         add_to_full_report(report)
         add_to_full_report(response.content)
 
         return False
 
-    open(f'{shell_interface.dirpath}/data/temporary_files/rdm_get_recid.json', "wb").write(response.content)
+    open(f'{dirpath}/data/temporary_files/rdm_get_recid.json', "wb").write(response.content)
 
     # Load response
     resp_json = shell_interface.json.loads(response.content)
@@ -361,7 +355,7 @@ def language_conversion(shell_interface: object, pure_language: str):
     if pure_language == 'Undefined/Unknown':
         return False
     
-    file_name = f'{shell_interface.dirpath}/data/iso6393.json'
+    file_name = f'{dirpath}/data/iso6393.json'
     resp_json = shell_interface.json.load(open(file_name, 'r'))
     for i in resp_json:
         if i['name'] == pure_language:
@@ -402,27 +396,18 @@ def get_value(item, path: list):
     return element
 
 
-
 #   ---         ---         ---
 def post_to_rdm(shell_interface: object):
 
     shell_interface.metadata_success = None
     shell_interface.file_success     = None
 
-    # push_dist_sec is normally set to ~ 1.5 sec. -> 5000 records per hour
+    # RDM accepts 5000 records per hour (one record every ~ 1.4 sec.)
     shell_interface.time.sleep(push_dist_sec)                        
-
-    data_utf8 = shell_interface.data.encode('utf-8')
     
     # POST REQUEST metadata
-    headers = {
-        'Content-Type': 'application/json',
-    }
-    params = (
-        ('prettyprint', '1'),
-    )
     url = f'{rdm_api_url_records}api/records/'
-    response = shell_interface.requests.post(url, headers=headers, params=params, data=data_utf8, verify=False)
+    response = rdm_post_metadata(url, shell_interface.data)
 
     # Count http responses
     if response.status_code not in shell_interface.count_http_responses:
@@ -433,7 +418,7 @@ def post_to_rdm(shell_interface: object):
     report = f"\tRDM post metadata     - {response} - Uuid:                 {uuid}"
     add_to_full_report(report)
 
-    open(f'{shell_interface.dirpath}/data/temporary_files/rdm_post_metadata_response.json', "wb").write(response.content)
+    open(f'{dirpath}/data/temporary_files/rdm_post_metadata_response.json', "wb").write(response.content)
     
     current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
     report = f'{current_time} - metadata_to_rdm - {str(response)} - {uuid} - {shell_interface.item["title"]}\n'
@@ -451,9 +436,9 @@ def post_to_rdm(shell_interface: object):
         add_to_full_report(response.content)
 
         # Add record to to_transfer.txt to be re pushed afterwards
-        open(f'{shell_interface.dirpath}/data/to_transfer.txt', "a").write(f'{uuid}\n')
+        open(f'{dirpath}/data/to_transfer.txt', "a").write(f'{uuid}\n')
 
-    file_name = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
+    file_name = f'{dirpath}/reports/{shell_interface.date.today()}_records.log'
     open(file_name, "a").write(report)
 
     if response.status_code == 429:
@@ -482,12 +467,12 @@ def post_to_rdm(shell_interface: object):
 
         # - Upload record FILES to RDM -
         for file_name in shell_interface.record_files:
-            rdm_put_file(shell_interface, file_name, recid, uuid)
+            rdm_add_file(shell_interface, file_name, recid, uuid)
                        
         if recid:
             # add record to all_rdm_records
             uuid_recid_line = f'{uuid} {recid}\n'
-            open(f'{shell_interface.dirpath}/data/all_rdm_records.txt', "a").write(uuid_recid_line)
+            open(f'{dirpath}/data/all_rdm_records.txt', "a").write(uuid_recid_line)
 
 
     # FINALL SUCCESS CHECK
@@ -499,7 +484,7 @@ def post_to_rdm(shell_interface: object):
         # shell_interface.landing_page_url
 
         # if uuid in to_transfer then removes it
-        file_name = f'{shell_interface.dirpath}/data/to_transfer.txt'
+        file_name = f'{dirpath}/data/to_transfer.txt'
         with open(file_name, "r") as f:
             lines = f.readlines()
         with open(file_name, "w") as f:
@@ -512,16 +497,11 @@ def post_to_rdm(shell_interface: object):
 
 #   ---         ---         ---
 def get_orcid(shell_interface: object, person_uuid: str, name: str):
-    headers = {
-    'Accept': 'application/json',
-    }
-    params = (
-        ('apiKey', pure_api_key),
-    )
+
     url = f'{pure_rest_api_url}/persons/{person_uuid}'
-    response = shell_interface.requests.get(url, headers=headers, params=params)
-    open(f'{shell_interface.dirpath}/data/temporary_files/resp_pure_persons.json', 'wb').write(response.content)
+    response = rdm_get_metadata_verified(url)
     
+    open(f'{dirpath}/data/temporary_files/resp_pure_persons.json', 'wb').write(response.content)
     shell_interface.time.sleep(0.1)
     
     if response.status_code >= 300:
@@ -539,7 +519,7 @@ def get_orcid(shell_interface: object, person_uuid: str, name: str):
         message += f'{orcid} - {name}'
         add_to_full_report(message)
 
-        # file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
+        # file_records = f'{dirpath}/reports/{shell_interface.date.today()}_records.log'
         # report = f'         - orcid: {orcid}         - {person_uuid} - {name}\n'
         # open(file_records, "a").write(report)
 

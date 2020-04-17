@@ -3,7 +3,6 @@ from functions.delete_record    import delete_from_list, delete_record
 import psycopg2
 import requests
 import json
-import os
 from datetime                    import date
 
 #   ---         ---         ---
@@ -11,27 +10,20 @@ def pure_get_uuid_metadata(shell_interface: object, uuid: str):
     """ Method used to get from Pure record's metadata """
 
     # PURE REQUEST
-    headers = {
-        'Accept': 'application/json',
-        'api-key': pure_api_key,
-    }
-    params = (
-        ('apiKey', pure_api_key),
-    )
     url = f'{pure_rest_api_url}research-outputs/{uuid}'
-    response = shell_interface.requests.get(url, headers=headers, params=params)
+    response = rdm_get_metadata_verified(url)
 
     add_to_full_report(f'\n\tPure get metadata     - {response}')
 
     # Add response content to pure_get_uuid_metadata.json
-    file_response = f'{shell_interface.dirpath}/data/temporary_files/pure_get_uuid_metadata.json'
+    file_response = f'{dirpath}/data/temporary_files/pure_get_uuid_metadata.json'
     open(file_response, 'wb').write(response.content)
 
     # Check response
     if response.status_code >= 300:
         add_to_full_report(response.content)
 
-        file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
+        file_records = f'{dirpath}/reports/{shell_interface.date.today()}_records.log'
         report = f'Get Pure metadata      - {response.content}\n'
         open(file_records, "a").write(report)
 
@@ -51,20 +43,15 @@ def rdm_get_recid_metadata(shell_interface: object, recid: str):
         add_to_full_report(report)
         return False
 
-    # GET request RDM
-    headers = {
-        'Authorization': f'Bearer {token_rdm}',
-        'Content-Type': 'application/json',
-    }
-    params = (('prettyprint', '1'),)
+    # # GET request RDM
     url = f'{rdm_api_url_records}api/records/{recid}'
-    response = shell_interface.requests.get(url, headers=headers, params=params, verify=False)
+    response = rdm_get_metadata(url)
 
     if response.status_code >= 300:
         add_to_full_report(f'\n{recid} - {response}')
         return False
 
-    open(f'{shell_interface.dirpath}/data/temporary_files/rdm_get_recid_metadata.json', "wb").write(response.content)
+    open(f'{dirpath}/data/temporary_files/rdm_get_recid_metadata.json', "wb").write(response.content)
     
     return response
 
@@ -79,19 +66,14 @@ def rdm_get_metadata_by_query(shell_interface: object, query_value: str):
     page  = 'page=1'
     query = f'q="{query_value}"'
 
-    headers = {
-        'Authorization': f'Bearer {token_rdm}',
-        'Content-Type': 'application/json',
-    }
-    params = (('prettyprint', '1'),)
     url = f'{rdm_api_url_records}api/records/?{sort}&{query}&{size}&{page}'
-    response = shell_interface.requests.get(url, headers=headers, params=params, verify=False)
+    response = rdm_get_metadata(url)
 
     if response.status_code >= 300:
         add_to_full_report(f'\n{query_value} - {response}')
         return False
 
-    open(f'{shell_interface.dirpath}/data/temporary_files/rdm_get_metadata_by_query.json', "wb").write(response.content)
+    open(f'{dirpath}/data/temporary_files/rdm_get_metadata_by_query.json', "wb").write(response.content)
     
     return response
     
@@ -202,7 +184,7 @@ def get_rdm_userid_from_list_by_externalid(shell_interface: object, external_id:
     if shell_interface.rdm_record_owner:
         return shell_interface.rdm_record_owner
 
-    file_data = open(f"{shell_interface.dirpath}/data/user_ids_match.txt").readlines()
+    file_data = open(f"{dirpath}/data/user_ids_match.txt").readlines()
 
     for line in file_data:
         line = line.split('\n')[0]
@@ -222,17 +204,9 @@ def get_rdm_userid_from_list_by_externalid(shell_interface: object, external_id:
 #   ---         ---         ---
 def update_rdm_record(shell_interface: object, data: str, recid: str):
 
-    data_utf8 = data.encode('utf-8')
-    headers = {
-        'Authorization': f'Bearer {token_rdm}',
-        'Content-Type': 'application/json',
-    }
-    params = (
-        ('prettyprint', '1'),
-    )
     url = f'{rdm_api_url_records}api/records/{recid}'
+    response = rdm_put_metadata(url, data)
 
-    response = shell_interface.requests.put(url, headers=headers, params=params, data=data_utf8, verify=False)
     add_to_full_report(f'\tRecord update         - {response}')
 
     if response.status_code >= 300:
@@ -248,9 +222,7 @@ def add_to_full_report(report: str):
 
 
 #   ---         ---         ---
-def rdm_put(data: str, recid: str):
-    
-    data_utf8 = data.encode('utf-8')
+def rdm_get_metadata(url: str):
     headers = {
         'Authorization': f'Bearer {token_rdm}',
         'Content-Type': 'application/json',
@@ -258,11 +230,58 @@ def rdm_put(data: str, recid: str):
     params = (
         ('prettyprint', '1'),
     )
-    url = f'{rdm_api_url_records}api/records/{recid}'
-
-    response = requests.put(url, headers=headers, params=params, data=data_utf8, verify=False)
-
-    if response.status_code >= 300:
-        add_to_full_report(response.content)
-        
+    response = requests.get(url, headers=headers, params=params, verify=False)
     return response
+
+
+#   ---         ---         ---
+def rdm_get_metadata_verified(url: str):
+    headers = {
+        'Accept': 'application/json',
+        'api-key': pure_api_key,
+    }
+    params = (
+        # ('apiKey', pure_api_key),
+    )
+    response = requests.get(url, headers=headers, params=params)
+    return response
+
+
+#   ---         ---         ---
+def rdm_post_metadata(url: str, data: str):
+    """ Used to create a new record """
+    headers = {
+        'Content-Type': 'application/json',
+    }
+    params = (
+        ('prettyprint', '1'),
+    )
+    data_utf8 = data.encode('utf-8')
+    return requests.post(url, headers=headers, params=params, data=data_utf8, verify=False)
+
+
+#   ---         ---         ---
+def rdm_put_metadata(url: str, data: str):
+    """ Used to update an existing record """
+    headers = {
+        'Authorization': f'Bearer {token_rdm}',
+        'Content-Type': 'application/json',
+    }
+    params = (
+        ('prettyprint', '1'),
+    )
+    data_utf8 = data.encode('utf-8')
+    response = requests.put(url, headers=headers, params=params, data=data_utf8, verify=False)
+    return response
+
+
+#   ---         ---         ---
+def rdm_put_file(url: str, file_path_name: str):
+    headers = {
+        'Authorization': f'Bearer {token_rdm}',
+        'Content-Type': 'application/octet-stream',
+    }
+    data = open(file_path_name, 'rb').read()
+    response = requests.put(url, headers=headers, data=data, verify=False)
+    return response
+

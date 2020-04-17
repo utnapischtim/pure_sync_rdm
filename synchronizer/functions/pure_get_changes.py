@@ -1,5 +1,5 @@
 from setup                              import *
-from functions.general_functions        import add_spaces, rdm_get_recid, initialize_count_variables, add_to_full_report
+from functions.general_functions        import *
 from functions.delete_record            import delete_record, delete_from_list
 from functions.rdm_push_by_uuid         import rdm_push_by_uuid
 from functions.rdm_push_record          import rdm_push_record
@@ -8,7 +8,7 @@ from functions.rdm_push_record          import rdm_push_record
 
 #       ---     ---     ---
 def pure_get_changes(shell_interface):
-    """ Gets from Pure API all changes that took place in a certain date
+    """ Gets from Pure API all changes that took place of a certain date
         and modifies accordingly the RDM repository """
     
     # Get date of last update
@@ -21,9 +21,9 @@ def pure_get_changes(shell_interface):
         return
 
     for date_to_update in reversed(missing_updates):
-        #   ---     ---
+        
+        # Get from pure all chenges of a certain date
         pure_get_changes_by_date(shell_interface, date_to_update)
-        #   ---     ---
 
 
 #       ---     ---     ---
@@ -32,24 +32,19 @@ def pure_get_changes_by_date(shell_interface, changes_date: str):
     current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
     shell_interface.count_http_responses = {}
     
-    file_records = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
-    file_changes = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_changes.log'
+    file_records = f'{dirpath}/reports/{shell_interface.date.today()}_records.log'
+    file_changes = f'{dirpath}/reports/{shell_interface.date.today()}_changes.log'
 
-    headers = {
-        'Accept': 'application/json',
-    }
-    params = (
-        ('page', '1'),
-        ('pageSize', '5000'),
-        ('apiKey', pure_api_key),
-    )
-    # PURE get request
-    url = f'{pure_rest_api_url}changes/{changes_date}'
-    response = shell_interface.requests.get(url, headers=headers, params=params)
+    page = 'page=1'
+    size = 'pageSize=100'
+
+    url = f'{pure_rest_api_url}changes/{changes_date}?{size}&{page}'
+    response = rdm_get_metadata_verified(url)
+
     # ---- --- -------
 
     # Write data into resp_pure_changes
-    file_name = f'{shell_interface.dirpath}/data/temporary_files/resp_pure_changes.json'
+    file_name = f'{dirpath}/data/temporary_files/resp_pure_changes.json'
     open(file_name, 'wb').write(response.content)
 
     if response.status_code >= 300:
@@ -158,7 +153,7 @@ Number of items in response: {resp_json["count"]}
     # And changes_date is not in successful_changes.txt
     if (percent_success >= upload_percent_accept and data not in open(file_name, 'r').read()):
         
-        file_success = f'{shell_interface.dirpath}/data/successful_changes.txt'
+        file_success = f'{dirpath}/data/successful_changes.txt'
         open(file_success, "a").write(data)
 
     metadata_succs              = add_spaces(shell_interface.count_successful_push_metadata)
@@ -205,7 +200,7 @@ def get_missing_updates(shell_interface):
     """ Search for missing updates in the last 7 days """
 
     file_name = '/home/bootcamp/src/pure_sync_rdm/synchronizer/data/successful_changes.txt'
-    # file_name = f'{shell_interface.dirpath}/data/successful_changes.txt'
+    # file_name = f'{dirpath}/data/successful_changes.txt'
 
     missing_updates = []
     count = 0

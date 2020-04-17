@@ -1,14 +1,8 @@
 from setup                          import *
 from functions.rdm_push_record      import  create_invenio_data
 from functions.rdm_push_record      import  rdm_push_record
-from functions.general_functions    import  rdm_get_recid, \
-                                            rdm_get_recid_metadata, \
-                                            initialize_count_variables, \
-                                            db_connect, \
-                                            db_query, \
-                                            add_spaces, \
-                                            bcolors, \
-                                            update_rdm_record
+from functions.general_functions    import *
+
 
 #   ---         ---         ---
 def rdm_owners(shell_interface: object, external_id: int):
@@ -72,22 +66,12 @@ def get_owner_records(shell_interface, user_id, user_uuid):
     count     = 0
 
     while go_on:
-        # add_to_full_report(f'Page {page}             - Size {page_size}')
 
-        # PURE get person records
-        headers = {
-            'Accept': 'application/json',
-        }
-        params = (
-            ('apiKey', pure_api_key),
-            ('page', page),
-            ('pageSize', page_size),
-        )
-        url = f'{pure_rest_api_url}persons/{user_uuid}/research-outputs'
-        response = shell_interface.requests.get(url, headers=headers, params=params)
+        url = f'{pure_rest_api_url}persons/{user_uuid}/research-outputs?page={page}&pageSize={page_size}'
+        response = rdm_get_metadata_verified(url)
 
         # Write data into pure_get_person_records
-        file_name = f'{shell_interface.dirpath}/data/temporary_files/pure_get_person_records.json'
+        file_name = f'{dirpath}/data/temporary_files/pure_get_person_records.json'
         open(file_name, 'wb').write(response.content)
 
         if response.status_code >= 300:
@@ -143,7 +127,7 @@ def get_owner_records(shell_interface, user_id, user_uuid):
 
                     record_json = shell_interface.json.dumps(record_json)
 
-                    file_name = f'{shell_interface.dirpath}/data/temporary_files/rdm_record_update.json'
+                    file_name = f'{dirpath}/data/temporary_files/rdm_record_update.json'
                     open(file_name, 'a').write(record_json)
 
                     # Add owner to the record
@@ -166,24 +150,14 @@ def pure_get_user_uuid(shell_interface: object, key_name: str, key_value: str):
 
     while keep_searching:
 
-        headers = {
-            'Accept': 'application/json',
-        }
-        params = (
-            ('q', f'"{key_value}"'),
-            ('apiKey', pure_api_key),
-            ('pageSize', page_size),
-            ('page', page),
-        )
-        url = f'{pure_rest_api_url}persons'
-
-        response = shell_interface.requests.get(url, headers=headers, params=params)
+        url = f'{pure_rest_api_url}persons?page={page}&pageSize={page_size}&q=' + f'"{key_value}"'
+        response = rdm_get_metadata_verified(url)
 
         if response.status_code >= 300:
             add_to_full_report(response.content)
             return False
 
-        open(f'{shell_interface.dirpath}/data/temporary_files/pure_get_user_uuid.json', "wb").write(response.content)
+        open(f'{dirpath}/data/temporary_files/pure_get_user_uuid.json', "wb").write(response.content)
         record_json = shell_interface.json.loads(response.content)
 
         total_items = record_json['count']
@@ -248,23 +222,18 @@ def get_rdm_record_owners(shell_interface: object):
 
 
     # Empty file
-    file_owner = f"{shell_interface.dirpath}/data/temporary_files/rdm_records_owner.txt"
+    file_owner = f"{dirpath}/data/temporary_files/rdm_records_owner.txt"
     open(file_owner, 'w').close()
 
     while go_on == True:
 
-        # REQUEST to RDM
-        headers = {
-            'Authorization': f'Bearer {token_rdm}',
-            'Content-Type': 'application/json',
-        }
-        params = (('prettyprint', '1'),)
-        url = f'{rdm_api_url_records}api/records/?sort=mostrecent&size={pag_size}&page={pag}'
+        # # REQUEST to RDM
+        url = f'{rdm_api_url_records}api/records/?sort=mostrecent&pageSize={pag_size}&page={pag}'
+        response = rdm_get_metadata_verified(url)
 
-        response = shell_interface.requests.get(url, headers=headers, params=params, verify=False)
         add_to_full_report(f'\n{response}\n')
         
-        file_name = f"{shell_interface.dirpath}/data/temporary_files/rdm_get_records.json"
+        file_name = f"{dirpath}/data/temporary_files/rdm_get_records.json"
         open(file_name, 'wb').write(response.content)
 
         if response.status_code >= 300:
@@ -310,7 +279,7 @@ def get_rdm_record_owners(shell_interface: object):
 
 def add_user_ids_match(shell_interface: object, user_id: int, user_uuid: str, external_id: str):
 
-    file_name = f"{shell_interface.dirpath}/data/user_ids_match.txt"
+    file_name = f"{dirpath}/data/user_ids_match.txt"
 
     needs_to_add = check_user_ids_match(shell_interface, user_id, user_uuid, external_id, file_name)
 
@@ -337,5 +306,4 @@ def check_user_ids_match(shell_interface: object, user_id: int, user_uuid: str, 
             # add_to_full_report(f'{user_id} == {line[0]} and {user_uuid} == {line[1]} and {external_id} == {line[2]}')
             # return False
     
-    # add_to_full_report('user_ids_match     - No match')
     return True
