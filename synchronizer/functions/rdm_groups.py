@@ -161,8 +161,6 @@ def rdm_group_merge(shell_interface: object, old_groups_externalId: list, new_gr
 
 #   ---         ---         ---
 def rdm_split_modify_record(shell_interface, old_group_externalId, report_name, new_groups_data, new_groups_externalIds):
-    # - -               - -
-    # - - Modify record - -
 
     # Get from RDM all old group's records
     response = rdm_get_metadata_by_query(shell_interface, old_group_externalId)

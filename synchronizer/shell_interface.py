@@ -14,6 +14,9 @@ Usage:
     shell_interface.py group_split
     shell_interface.py group_merge
 
+Arguments:
+    USER_EXTERNAL_ID        externalId of the user
+
 Options:
     -h --help     Show this screen.
     --version     Show version.

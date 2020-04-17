@@ -270,6 +270,7 @@ def get_rdm_record_owners(shell_interface: object):
         shell_interface.time.sleep(0.5)
 
     add_to_full_report('Owner  Records')
+    
     for key in count_records_per_owner:
         records = add_spaces(count_records_per_owner[key])
         key     = add_spaces(key)
@@ -301,9 +302,5 @@ def check_user_ids_match(shell_interface: object, user_id: int, user_uuid: str, 
             if line == [str(user_id), user_uuid, external_id]:
                 add_to_full_report('user_ids_match     - full match')
                 return False
-
-            # add_to_full_report('user_ids_match     - partial match -----------------------------------')
-            # add_to_full_report(f'{user_id} == {line[0]} and {user_uuid} == {line[1]} and {external_id} == {line[2]}')
-            # return False
     
     return True
