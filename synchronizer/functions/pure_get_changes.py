@@ -21,7 +21,7 @@ def pure_get_changes(shell_interface):
         return
 
     for date_to_update in reversed(missing_updates):
-        
+
         # Get from pure all chenges of a certain date
         pure_get_changes_by_date(shell_interface, date_to_update)
 
@@ -199,8 +199,7 @@ def nothing_to_transfer(shell_interface, report_intro, file_changes):
 def get_missing_updates(shell_interface):
     """ Search for missing updates in the last 7 days """
 
-    file_name = '/home/bootcamp/src/pure_sync_rdm/synchronizer/data/successful_changes.txt'
-    # file_name = f'{dirpath}/data/successful_changes.txt'
+    file_name = f'{dirpath}/data/successful_changes.txt'
 
     missing_updates = []
     count = 0
