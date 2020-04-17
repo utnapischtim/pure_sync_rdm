@@ -167,18 +167,6 @@ def db_query(shell_interface, query):
 
 
 #   ---         ---         ---
-# Allows coloring console text
-class bcolors:
-    BLUE = '\033[94m'
-    GREEN = '\033[92m'
-    YELLOW = '\033[93m'
-    RED = '\033[91m'
-    END = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
-
-
-#   ---         ---         ---
 def get_rdm_userid_from_list_by_externalid(shell_interface: object, external_id: str):
 
     if shell_interface.rdm_record_owner:

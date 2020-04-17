@@ -1,13 +1,15 @@
-from setup                          import *
-from functions.rdm_push_record      import  create_invenio_data
-from functions.rdm_push_record      import  rdm_push_record
-from functions.general_functions    import *
+from setup                          import pure_rest_api_url, dirpath, rdm_api_url_records, token_rdm
+from functions.general_functions    import add_to_full_report, initialize_count_variables, rdm_get_metadata, rdm_get_recid, rdm_get_recid_metadata, update_rdm_record, db_query, add_spaces
+from functions.rdm_push_record      import create_invenio_data
+from functions.rdm_push_record      import rdm_push_record
 
 
 #   ---         ---         ---
 def rdm_owners(shell_interface: object, external_id: int):
     """ Gets from pure all the records related to a certain user,
         afterwards it modifies/create RDM records accordingly. """
+
+    user_externalId = '56038' # TEMP
 
     add_to_full_report(f'\nUser external_id: {external_id}\n')
 
@@ -32,6 +34,8 @@ def rdm_owners(shell_interface: object, external_id: int):
 
 #   ---         ---         ---
 def rdm_owners_by_orcid(shell_interface: object, orcid: int):
+
+    orchid = '0000-0002-4154-6945'  # TEMP
 
     add_to_full_report(f'\norcid: {orcid}\n')
 
@@ -185,7 +189,7 @@ def pure_get_user_uuid(shell_interface: object, key_name: str, key_value: str):
         else:
             keep_searching = False
 
-    add_to_full_report(f'{bcolors.RED}\nUser uuid not found - Exit task\n{bcolors.END}')
+    add_to_full_report(f'\nUser uuid not found - Exit task\n')
     return False
 
 
@@ -227,9 +231,9 @@ def get_rdm_record_owners(shell_interface: object):
 
     while go_on == True:
 
-        # # REQUEST to RDM
-        url = f'{rdm_api_url_records}api/records/?sort=mostrecent&pageSize={pag_size}&page={pag}'
-        response = rdm_get_metadata_verified(url)
+        # REQUEST to RDM
+        url = f'{rdm_api_url_records}api/records/?sort=mostrecent&size={pag_size}&page={pag}'
+        response = rdm_get_metadata(url)
 
         add_to_full_report(f'\n{response}\n')
         
@@ -270,7 +274,7 @@ def get_rdm_record_owners(shell_interface: object):
         shell_interface.time.sleep(0.5)
 
     add_to_full_report('Owner  Records')
-    
+
     for key in count_records_per_owner:
         records = add_spaces(count_records_per_owner[key])
         key     = add_spaces(key)

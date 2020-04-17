@@ -4,6 +4,9 @@ synchronizer/reports/
 synchronizer/data_setup/
 synchronizer/data/
 synchronizer/test*
+synchronizer/backup_datamodel/
+synchronizer/backup_restrictions/
+
 
 
 # Byte-compiled / optimized / DLL files

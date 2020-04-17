@@ -68,8 +68,8 @@ def rdm_group_split(shell_interface: object, old_group_externalId: str, new_grou
 
     """ 
     1 - Create new groups
-    2 - Remove users from old group
-    3 - Add users to new groups
+    2 - Add users to new groups
+    3 - Remove users from old group
     4 - Delete old group
     5 - Modify RDM record: 
         . groupRestrictions
@@ -238,14 +238,14 @@ def rdm_split_users_from_old_to_new_group(shell_interface, old_group_id, report_
 
             # Get user email
             user_email = get_user_email(shell_interface, user_id)
+            
+            for new_group_externalId in new_groups_externalIds:
+                # Add user to new groups
+                group_add_user(shell_interface, user_email, new_group_externalId, user_id)
 
             # Remove user from old group
             response = group_remove_user(shell_interface, user_email, old_group_externalId)
 
-            for new_group_externalId in new_groups_externalIds:
-
-                # Add user to new groups
-                group_add_user(shell_interface, user_email, new_group_externalId, user_id)
 
     # Delete old group
 
