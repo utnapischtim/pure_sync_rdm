@@ -1,15 +1,15 @@
 from setup                          import pure_rest_api_url, dirpath, rdm_api_url_records, token_rdm
-from functions.general_functions    import add_to_full_report, initialize_count_variables, rdm_get_metadata, rdm_get_recid, rdm_get_recid_metadata, update_rdm_record, db_query, add_spaces
+from functions.general_functions    import rdm_get_metadata_verified, rdm_get_metadata, add_to_full_report, initialize_count_variables, rdm_get_recid, rdm_get_recid_metadata, update_rdm_record, db_query, add_spaces
 from functions.rdm_push_record      import create_invenio_data
 from functions.rdm_push_record      import rdm_push_record
 
 
 #   ---         ---         ---
-def rdm_owners(shell_interface: object, external_id: int):
+def rdm_owners(shell_interface: object):
     """ Gets from pure all the records related to a certain user,
         afterwards it modifies/create RDM records accordingly. """
 
-    user_externalId = '56038' # TEMP
+    external_id = '56038' # TEMP
 
     add_to_full_report(f'\nUser external_id: {external_id}\n')
 
@@ -33,9 +33,9 @@ def rdm_owners(shell_interface: object, external_id: int):
 
 
 #   ---         ---         ---
-def rdm_owners_by_orcid(shell_interface: object, orcid: int):
+def rdm_owners_by_orcid(shell_interface: object):
 
-    orchid = '0000-0002-4154-6945'  # TEMP
+    orcid = '0000-0002-4154-6945'  # TEMP
 
     add_to_full_report(f'\norcid: {orcid}\n')
 
@@ -222,6 +222,7 @@ def get_rdm_record_owners(shell_interface: object):
 
     count = 0
     count_records_per_owner = {}
+    all_records_list = ''
     go_on = True
 
 
@@ -257,6 +258,8 @@ def get_rdm_record_owners(shell_interface: object):
             line = f'{uuid} - {recid} - {owners}'
             add_to_full_report(line)
             data += f'{line}\n'
+            
+            all_records_list += f'{uuid} {recid}\n'
 
             for i in owners:
                 if i not in count_records_per_owner:
@@ -279,6 +282,13 @@ def get_rdm_record_owners(shell_interface: object):
         records = add_spaces(count_records_per_owner[key])
         key     = add_spaces(key)
         add_to_full_report(f'{key}    {records}')
+    
+    # Updates content of all_rdm_records.txt file
+    file_all_records_list = f"{dirpath}/data/all_rdm_records.txt"
+    # Empty file
+    open(file_all_records_list, 'w').close()
+    # Add all records to file
+    open(file_all_records_list, 'a').write(all_records_list)
 
 
 

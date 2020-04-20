@@ -98,6 +98,11 @@ Old group             - externalId: {old_group_externalId}
     for externalId in new_groups_externalIds:
         # Get group information
         response = pure_get_organisationalUnit_data(shell_interface, externalId)
+
+        if not response:
+            add_to_full_report(f'\nGroup {old_group_externalId} not found in Pure\n')
+            return False
+
         new_groups_data.append(response)
 
         report = f"\nNew group             - externalId: {externalId}   - {response['uuid']} - {response['name']}\n"
@@ -143,6 +148,9 @@ def rdm_group_merge(shell_interface: object, old_groups_externalId: list, new_gr
 
     # Get name and uuid of new organisationalUnit
     new_group_data = pure_get_organisationalUnit_data(shell_interface, new_group_externalId)
+    if not new_group_data:
+        add_to_full_report(f'\nWarning - New group ({new_group_externalId}) not in Pure - Abort task\n')
+        return False
 
     report = f"New group             - externalId: {add_spaces(new_group_externalId)}   - {new_group_data['name']}\n"
     open(report_name, "a").write(report)
@@ -330,7 +338,7 @@ def rdm_merge_users_from_old_to_new_group(shell_interface, old_groups_externalId
         response       = db_query(shell_interface, query)
 
         if not response:
-            add_to_full_report('\nOld group not in database - Abort task\n')
+            add_to_full_report('\nWarning - Old group ({old_groups_externalId}) not in database - Abort task\n')
             return False
 
         old_group_id   = response[0][0]
@@ -381,6 +389,7 @@ def pure_get_organisationalUnit_data(shell_interface: object, externalId: str):
     # Check response
     if response.status_code >= 300:
         add_to_full_report(response.content)
+        return False
 
     # Load json
     data = shell_interface.json.loads(response.content)

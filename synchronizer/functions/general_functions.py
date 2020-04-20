@@ -1,9 +1,15 @@
-from setup                      import *
-from functions.delete_record    import delete_from_list, delete_record
+from setup                          import *
+from functions.delete_record        import delete_from_list, delete_record
+from datetime                       import date
+import time
 import psycopg2
 import requests
 import json
-from datetime                    import date
+import os
+
+# def get_directory_path():
+#     """ Gets the directory path """
+#     return os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
 
 #   ---         ---         ---
 def pure_get_uuid_metadata(shell_interface: object, uuid: str):
@@ -86,8 +92,11 @@ def rdm_get_recid(shell_interface: object, uuid: str):
 
     response = rdm_get_metadata_by_query(shell_interface, uuid)
 
-    if response.status_code == 429:
-        shell_interface.time.sleep(wait_429)
+
+    # if response.status_code == 429:
+    #     shell_interface.time.sleep(wait_429)
+    #     return False
+    if not too_many_rdm_requests_check(response):
         return False
 
     resp_json = shell_interface.json.loads(response.content)
@@ -183,7 +192,7 @@ def get_rdm_userid_from_list_by_externalid(shell_interface: object, external_id:
             user_id         = line[0]
             user_id_spaces  = add_spaces(user_id)
 
-            report = f'\tRDM owner list        - user id: {user_id_spaces}   - externalId: {external_id}'
+            report = f'\tRDM owner list        -                  -  user id: {user_id_spaces}   - externalId: {external_id}'
             add_to_full_report(report)
 
             return user_id
@@ -273,3 +282,14 @@ def rdm_put_file(url: str, file_path_name: str):
     response = requests.put(url, headers=headers, data=data, verify=False)
     return response
 
+
+#   ---         ---         ---
+def too_many_rdm_requests_check(response: int):
+    """ If too many requests are submitted to RDM (more then 5000 / hour) """
+
+    if response.status_code == 429:
+        add_to_full_report(response.content)
+        add_to_full_report('\nToo many RDM requests.. wait {wait_429 / 60} minutes\n')
+        time.sleep(wait_429)
+        return False
+    return True

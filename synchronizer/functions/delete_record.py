@@ -1,6 +1,10 @@
 from setup                          import *
+# from functions.general_functions    import too_many_rdm_requests_check
 
 def delete_from_list(shell_interface):
+
+    from functions.general_functions    import add_to_full_report
+    
     # NOTE: the user ACCOUNT related to the used TOKEN must be ADMIN
     
     count_success = 0
@@ -8,7 +12,7 @@ def delete_from_list(shell_interface):
     shell_interface.count_errors_record_delete        = 0
     shell_interface.count_successful_record_delete    = 0
 
-    file_name = f'{shell_interface.dirpath}/data/to_delete.txt'
+    file_name = f'{dirpath}/data/to_delete.txt'
     recids = open(file_name, 'r').readlines()
 
     if len(recids) == 0:
@@ -44,7 +48,7 @@ def delete_from_list(shell_interface):
 #   DELETE_RECORD
 def delete_record(shell_interface, recid: str):
 
-    from functions.general_functions    import add_to_full_report
+    from functions.general_functions    import add_to_full_report, too_many_rdm_requests_check
     
     #   REQUEST
     headers = {
@@ -62,38 +66,74 @@ def delete_record(shell_interface, recid: str):
     current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
     report_line = f'{current_time} - delete_from_rdm - {response} - {recid}\n'
     
-    file_name = f'{shell_interface.dirpath}/reports/{shell_interface.date.today()}_records.log'
+    file_name = f'{dirpath}/reports/{shell_interface.date.today()}_records.log'
     open(file_name, "a").write(report_line)
+
+
     
+    # # 410 -> "PID has been deleted"
+    # if response.status_code < 300 or response.status_code == 410:
+
+    #     # remove deleted recid from to_delete.log
+    #     file_name = dirpath + "/data/to_delete.txt"
+    #     with open(file_name, "r") as f:
+    #         lines = f.readlines()
+    #     with open(file_name, "w") as f:
+    #         for line in lines:
+    #             if line.strip("\n") != recid:
+    #                 f.write(line)
+
+    #     # remove record from all_rdm_records.log
+    #     file_name = dirpath + "/data/all_rdm_records.txt"
+    #     with open(file_name, "r") as f:
+    #         lines = f.readlines()
+    #     with open(file_name, "w") as f:
+    #         for line in lines:
+    #             line_recid = line.strip("\n")
+    #             line_recid = line_recid.split(' ')[1]
+    #             if line_recid != recid:
+    #                 f.write(line)
+
+    # elif response.status_code == 429:
+    #     # If too many requests are submitted to RDM (more then 5000 / hour)
+    #     shell_interface.time.sleep(wait_429)        # wait for ~ 15 min
+    # else:
+    #     add_to_full_report(response.content)
+
+
+
+
+    # If the status_code is 429 (too many requests) then it will wait for some minutes
+    too_many_rdm_requests_check(response)
+
     # 410 -> "PID has been deleted"
-    if response.status_code < 300 or response.status_code == 410:
-
-        # remove deleted recid from to_delete.log
-        file_name = shell_interface.dirpath + "/data/to_delete.txt"
-        with open(file_name, "r") as f:
-            lines = f.readlines()
-        with open(file_name, "w") as f:
-            for line in lines:
-                if line.strip("\n") != recid:
-                    f.write(line)
-
-        # remove record from all_rdm_records.log
-        file_name = shell_interface.dirpath + "/data/all_rdm_records.txt"
-        with open(file_name, "r") as f:
-            lines = f.readlines()
-        with open(file_name, "w") as f:
-            for line in lines:
-                line_recid = line.strip("\n")
-                line_recid = line_recid.split(' ')[1]
-                if line_recid != recid:
-                    f.write(line)
-
-    elif response.status_code == 429:           # http 429 -> too many requests
-        shell_interface.time.sleep(wait_429)          # wait for ~ 15 min
-    else:
+    if response.status_code >= 300 and response.status_code != 410:
         add_to_full_report(response.content)
+        return False
 
-    # Makes a push request every ~ 3 sec
-    shell_interface.time.sleep(push_dist_sec)
+    # remove deleted recid from to_delete.log
+    file_name = dirpath + "/data/to_delete.txt"
+    with open(file_name, "r") as f:
+        lines = f.readlines()
+    with open(file_name, "w") as f:
+        for line in lines:
+            if line.strip("\n") != recid:
+                f.write(line)
+
+    # remove record from all_rdm_records.log
+    file_name = dirpath + "/data/all_rdm_records.txt"
+    with open(file_name, "r") as f:
+        lines = f.readlines()
+    with open(file_name, "w") as f:
+        for line in lines:
+            line_recid = line.strip("\n")
+            line_recid = line_recid.split(' ')[1]
+            if line_recid != recid:
+                f.write(line)
+
+
+
+
+
 
     return response

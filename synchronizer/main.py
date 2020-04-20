@@ -1,36 +1,47 @@
 
-if arguments['changes']:
-    docopt_instance.changes()
 
-elif arguments['pages']:
-    docopt_instance.pages()
+def method_call(docopt_instance: object, arguments: dict):
 
-elif arguments['logs']:
-    docopt_instance.logs()
+    if arguments['changes']:
+        docopt_instance.changes()
 
-elif arguments['delete']:
-    docopt_instance.delete()
+    elif arguments['pages']:
+        page_start = int(arguments['PAGE_START'])
+        page_end   = int(arguments['PAGE_END'])
+        page_size  = int(arguments['PAGE_SIZE'])
+        docopt_instance.pages(page_start, page_end, page_size)
 
-elif arguments['uuid']:
-    docopt_instance.uuid()
+    elif arguments['logs']:
+        docopt_instance.logs()
 
-elif arguments['duplicates']:
-    docopt_instance.duplicates()
+    elif arguments['delete']:
+        docopt_instance.delete()
 
-elif arguments['delete_all']:
-    docopt_instance.delete_all()
+    elif arguments['uuid']:
+        docopt_instance.uuid()
 
-elif arguments['owners']:
-    docopt_instance.owners()
+    elif arguments['duplicates']:
+        docopt_instance.duplicates()
 
-elif arguments['owners_orcid']:
-    docopt_instance.owners_orcid()
+    elif arguments['delete_all']:
+        docopt_instance.delete_all()
 
-elif arguments['owners_list']:
-    docopt_instance.owners_list()
+    elif arguments['owners']:
+        docopt_instance.owners()
 
-elif arguments['group_split']:
-    docopt_instance.rdm_group_split()
+    elif arguments['owners_orcid']:
+        docopt_instance.owners_orcid()
 
-elif arguments['group_merge']:
-    docopt_instance.rdm_group_merge()
+    elif arguments['owners_list']:
+        docopt_instance.owners_list()
+
+    elif arguments['group_split']:
+        old_id  = arguments['OLD_GROUP']
+        new_ids = arguments['NEW_GROUPS'].split(' ')
+        docopt_instance.rdm_group_split(old_id, new_ids)
+
+    elif arguments['group_merge']:
+        old_ids = arguments['OLD_GROUPS'].split(' ')
+        new_id  = arguments['NEW_GROUP']
+        docopt_instance.rdm_group_merge(old_ids, new_id)
+

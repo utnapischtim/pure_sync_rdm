@@ -441,9 +441,13 @@ def post_to_rdm(shell_interface: object):
     file_name = f'{dirpath}/reports/{shell_interface.date.today()}_records.log'
     open(file_name, "a").write(report)
 
-    if response.status_code == 429:
-        add_to_full_report('Waiting 15 min')
-        shell_interface.time.sleep(wait_429)                     # 429 too many requests, wait 15 min
+    # if response.status_code == 429:
+    #     add_to_full_report('Waiting 15 min')
+    #     shell_interface.time.sleep(wait_429)                     # 429 too many requests, wait 15 min
+
+    # If the status_code is 429 (too many requests) then it will wait for some minutes
+    too_many_rdm_requests_check(response)
+    
     
     # In case of SUCCESSFUL TRANSMISSION
     if response.status_code < 300:

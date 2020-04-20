@@ -24,10 +24,10 @@ def rdm_duplicates(shell_interface):
 
     if count_deleted == 0:
         report = '\nThere are no duplicate records to delete\n'
-        add_to_full_report(shell_interface, report)
+        add_to_full_report(report)
 
     report = f'Total items: {len(all_records)}\nDeleted: {count_deleted}\n'
-    add_to_full_report(shell_interface, report)
+    add_to_full_report(report)
 
         
         

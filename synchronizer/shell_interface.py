@@ -32,8 +32,10 @@ import requests
 import json
 import os
 import time
-from docopt                             import docopt
 from datetime                           import date, datetime, timedelta
+
+from docopt                             import docopt
+from main                               import method_call
 from functions.pure_get_changes         import pure_get_changes
 from functions.rdm_push_by_page         import get_pure_by_page
 from functions.rdm_push_record          import create_invenio_data
@@ -50,7 +52,6 @@ from functions.rdm_groups               import rdm_group_split, rdm_group_merge
 class shell_interface:
     
     def __init__(self):
-        self.dirpath = os.path.dirname(os.path.abspath(__file__))
         self.json = json
         self.requests = requests
         self.os = os
@@ -106,56 +107,14 @@ class shell_interface:
         """ Split a single group into moltiple ones """
         rdm_group_split(self, old_id, new_ids)
 
-    def rdm_group_merge(self):
+    def rdm_group_merge(self, old_ids, new_id):
         """ Merges multiple groups into a single one """
         rdm_group_merge(self, old_ids, new_id)
 
 
 if __name__ == '__main__':
     arguments = docopt(__doc__, version='Pure synchronizer 1.0')
-    print(arguments)
     docopt_instance = shell_interface()
 
-if arguments['changes']:
-    docopt_instance.changes()
-
-elif arguments['pages']:
-    page_start = int(arguments['PAGE_START'])
-    page_end   = int(arguments['PAGE_END'])
-    page_size  = int(arguments['PAGE_SIZE'])
-    docopt_instance.pages(page_start, page_end, page_size)
-
-elif arguments['logs']:
-    docopt_instance.logs()
-
-elif arguments['delete']:
-    docopt_instance.delete()
-
-elif arguments['uuid']:
-    docopt_instance.uuid()
-
-elif arguments['duplicates']:
-    docopt_instance.duplicates()
-
-elif arguments['delete_all']:
-    docopt_instance.delete_all()
-
-elif arguments['owners']:
-    docopt_instance.owners()
-
-elif arguments['owners_orcid']:
-    docopt_instance.owners_orcid()
-
-elif arguments['owners_list']:
-    docopt_instance.owners_list()
-
-elif arguments['group_split']:
-    old_id  = arguments['OLD_GROUP']
-    new_ids = arguments['NEW_GROUPS'].split(' ')
-    docopt_instance.rdm_group_split(old_id, new_ids)
-
-elif arguments['group_merge']:
-    old_ids = arguments['OLD_GROUPS'].split(' ')
-    new_id  = arguments['NEW_GROUP']
-    docopt_instance.rdm_group_merge(old_ids, new_id)
-
+# Calls the method given in the arguments
+method_call(docopt_instance, arguments)
