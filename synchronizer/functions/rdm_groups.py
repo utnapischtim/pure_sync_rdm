@@ -225,8 +225,7 @@ def rdm_split_modify_record(shell_interface, old_group_externalId, report_name, 
         current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
         open(report_name, "a").write(f'{current_time} - {response} - {url}\n')
 
-        # shell_interface.time.sleep(0.2)
-    return
+    return True
 
 
 #   ---         ---         ---

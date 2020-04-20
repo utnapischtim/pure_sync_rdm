@@ -3,9 +3,11 @@ synchronizer/functions/other/
 synchronizer/reports/
 synchronizer/data_setup/
 synchronizer/data/
-synchronizer/test*
 synchronizer/backup_datamodel/
 synchronizer/backup_restrictions/
+synchronizer/test*
+synchronizer/test.py
+synchronizer/test2.py
 
 
 

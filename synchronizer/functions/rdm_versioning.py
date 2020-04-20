@@ -1,4 +1,3 @@
-# from setup                          import *
 from functions.general_functions    import rdm_get_metadata_by_query, add_spaces, add_to_full_report, too_many_rdm_requests_check
 
 def rdm_versioning (shell_interface: object, uuid: str):

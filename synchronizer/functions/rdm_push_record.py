@@ -122,6 +122,8 @@ def create_invenio_data(shell_interface: object):
     if 'personAssociations' in item:
         shell_interface.data['contributors'] = []
 
+        file_data = open(f"{dirpath}/data/user_ids_match.txt").readlines()
+
         for i in item['personAssociations']:
 
             sub_data = {}
@@ -146,7 +148,7 @@ def create_invenio_data(shell_interface: object):
             
             # Checks if the record owner is available in user_ids_match.txt
             person_external_id = get_value(i, ['person', 'externalId'])
-            owner = get_rdm_userid_from_list_by_externalid(shell_interface, person_external_id)
+            owner = get_rdm_userid_from_list_by_externalid(shell_interface, person_external_id, file_data)
 
             if owner and owner not in shell_interface.data['owners']: 
                 shell_interface.data['owners'].append(int(owner))

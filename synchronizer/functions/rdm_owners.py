@@ -116,9 +116,6 @@ def get_owner_records(shell_interface, user_id, user_uuid):
 
             else:
                 # Checks if the owner is already in RDM record metadata
-
-                # shell_interface.time.sleep(0.5)
-                
                 # Get metadata from RDM
                 response = rdm_get_recid_metadata(shell_interface, recid)
                 record_json = shell_interface.json.loads(response.content)['metadata']
@@ -140,8 +137,6 @@ def get_owner_records(shell_interface, user_id, user_uuid):
                     update_rdm_record(shell_interface, record_json, recid)
                 else:
                     add_to_full_report('\t+ Owner in record  +')
-
-                # exit()
 
         page += 1
 
@@ -227,7 +222,6 @@ def get_rdm_record_owners(shell_interface: object):
     all_records_list = ''
     go_on = True
 
-
     # Empty file
     file_owner = f"{dirpath}/data/temporary_files/rdm_records_owner.txt"
     open(file_owner, 'w').close()
@@ -276,7 +270,6 @@ def get_rdm_record_owners(shell_interface: object):
             go_on = False
         
         pag += 1
-        # shell_interface.time.sleep(0.5)
 
     add_to_full_report('Owner  Records')
 

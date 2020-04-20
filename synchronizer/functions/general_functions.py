@@ -33,7 +33,6 @@ def pure_get_uuid_metadata(shell_interface: object, uuid: str):
         report = f'Get Pure metadata      - {response.content}\n'
         open(file_records, "a").write(report)
 
-        # shell_interface.time.sleep(1)
         return False
 
     # Load json
@@ -153,12 +152,10 @@ def initialize_count_variables(shell_interface):
 
 
 #   ---         ---         ---
-def get_rdm_userid_from_list_by_externalid(shell_interface: object, external_id: str):
+def get_rdm_userid_from_list_by_externalid(shell_interface: object, external_id: str, file_data: list):
 
     if shell_interface.rdm_record_owner:
         return shell_interface.rdm_record_owner
-
-    file_data = open(f"{dirpath}/data/user_ids_match.txt").readlines()
 
     for line in file_data:
         line = line.split('\n')[0]
@@ -169,7 +166,7 @@ def get_rdm_userid_from_list_by_externalid(shell_interface: object, external_id:
             user_id         = line[0]
             user_id_spaces  = add_spaces(user_id)
 
-            report = f'\tRDM owner list        -                  -  user id: {user_id_spaces}   - externalId: {external_id}'
+            report = f'\tRDM owner list        -                  - User id:   {user_id_spaces}  - externalId: {external_id}'
             add_to_full_report(report)
 
             return user_id

@@ -6,9 +6,6 @@ from functions.general_functions    import add_spaces, initialize_count_variable
 
 def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: int):
 
-    # print(get_directory_path())
-    # exit()
-
     for pag in range(pag_begin, pag_end):
 
         date_today = shell_interface.date.today()
@@ -30,11 +27,6 @@ def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: in
 
         file_name = f'{dirpath}/data/temporary_files/pure_get_uuid_metadata.json'
         open(file_name, 'wb').write(response.content)
-
-        # if response.status_code >= 300:
-        #     add_to_full_report(response.content)
-        #     shell_interface.time.sleep(180)
-        #     continue
 
         # Load json response
         resp_json = shell_interface.json.loads(response.content)
