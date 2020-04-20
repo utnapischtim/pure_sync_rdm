@@ -1,12 +1,8 @@
-from setup                          import *
+# from setup                          import *
 from functions.general_functions    import rdm_get_metadata_by_query, add_spaces, add_to_full_report, too_many_rdm_requests_check
 
 def rdm_versioning (shell_interface: object, uuid: str):
     response = rdm_get_metadata_by_query(shell_interface, uuid)
-
-    # if response.status_code == 429:
-    #     shell_interface.time.sleep(wait_429)
-    #     return False
 
     # If the status_code is 429 (too many requests) then it will wait for some minutes
     if not too_many_rdm_requests_check(response):
@@ -43,8 +39,13 @@ def rdm_versioning (shell_interface: object, uuid: str):
             if 'metadataVersion' in rdm_metadata and not metadata_version:
                 metadata_version = rdm_metadata['metadataVersion']
                 continue
-
-        message += f'Current ver.:{add_spaces(metadata_version)}  - New version: {metadata_version + 1}'        
+        
+        # In case the record has no metadataVersion
+        if not metadata_version:
+            message += f'Vers. not specified - New metadata version: 1'
+            metadata_version = 1
+        else:
+            message += f'Current ver.:{add_spaces(metadata_version)}  - New version: {metadata_version + 1}'        
 
     add_to_full_report(message)
 

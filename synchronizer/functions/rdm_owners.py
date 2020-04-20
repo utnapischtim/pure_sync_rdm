@@ -1,7 +1,8 @@
 from setup                          import pure_rest_api_url, dirpath, rdm_api_url_records, token_rdm
-from functions.general_functions    import rdm_get_metadata_verified, rdm_get_metadata, add_to_full_report, initialize_count_variables, rdm_get_recid, rdm_get_recid_metadata, update_rdm_record, db_query, add_spaces
+from functions.general_functions    import rdm_get_metadata_verified, rdm_get_metadata, add_to_full_report, initialize_count_variables, rdm_get_recid, rdm_get_recid_metadata, update_rdm_record, add_spaces
 from functions.rdm_push_record      import create_invenio_data
 from functions.rdm_push_record      import rdm_push_record
+from functions.rdm_database         import RdmDatabase
 
 
 #   ---         ---         ---
@@ -197,7 +198,10 @@ def pure_get_user_uuid(shell_interface: object, key_name: str, key_value: str):
 def rdm_get_user_id(shell_interface: object):
     """ Gets the ID and IP of the logged in user """
 
-    response = db_query(shell_interface, f"SELECT user_id, ip FROM accounts_user_session_activity")
+    # Creates an instane of rdm database
+    rdm_db = RdmDatabase()
+
+    response = rdm_db.db_query(f"SELECT user_id, ip FROM accounts_user_session_activity")
 
     if not response:
         add_to_full_report('\n- accounts_user_session_activity: No user is logged in -\n')

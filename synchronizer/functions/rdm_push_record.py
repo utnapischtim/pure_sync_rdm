@@ -1,7 +1,8 @@
 from setup                          import *
 from functions.get_put_file         import rdm_add_file, get_file_from_pure
 from functions.general_functions    import *
-from functions.rdm_groups           import rdm_create_group, rdm_add_user_to_group
+# from functions.rdm_groups           import rdm_create_group, rdm_add_user_to_group
+from functions.rdm_groups           import RdmGroups
 from functions.rdm_versioning       import rdm_versioning
 
 #   ---         ---         ---
@@ -441,13 +442,9 @@ def post_to_rdm(shell_interface: object):
     file_name = f'{dirpath}/reports/{shell_interface.date.today()}_records.log'
     open(file_name, "a").write(report)
 
-    # if response.status_code == 429:
-    #     add_to_full_report('Waiting 15 min')
-    #     shell_interface.time.sleep(wait_429)                     # 429 too many requests, wait 15 min
-
     # If the status_code is 429 (too many requests) then it will wait for some minutes
     too_many_rdm_requests_check(response)
-    
+
     
     # In case of SUCCESSFUL TRANSMISSION
     if response.status_code < 300:

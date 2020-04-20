@@ -48,11 +48,6 @@ def rdm_get_all_recods(shell_interface):
         # If the status_code is 429 (too many requests) then it will wait for some minutes
         too_many_rdm_requests_check(response)
 
-        # if response.status_code == 429:
-        #     add_to_full_report('\nToo many RDM requests.. wait {wait_429 / 60} minutes\n')
-        #     # If too many requests are submitted to RDM (more then 5000 / hour)
-        #     shell_interface.time.sleep(wait_429)
-
         if response.status_code >= 300:
             add_to_full_report(response.content)
             return False

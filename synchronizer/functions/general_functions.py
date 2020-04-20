@@ -1,8 +1,8 @@
-from setup                          import *
-from functions.delete_record        import delete_from_list, delete_record
-from datetime                       import date
+from setup                   import dirpath, token_rdm, rdm_api_url_records, pure_rest_api_url, versioning_running, \
+                                    pure_api_key, wait_429
+from functions.delete_record import delete_from_list, delete_record
+from datetime                import date
 import time
-import psycopg2
 import requests
 import json
 import os
@@ -92,10 +92,7 @@ def rdm_get_recid(shell_interface: object, uuid: str):
 
     response = rdm_get_metadata_by_query(shell_interface, uuid)
 
-
-    # if response.status_code == 429:
-    #     shell_interface.time.sleep(wait_429)
-    #     return False
+    # If the status_code is 429 (too many requests) then it will wait for some minutes
     if not too_many_rdm_requests_check(response):
         return False
 
@@ -153,26 +150,6 @@ def initialize_count_variables(shell_interface):
     shell_interface.count_successful_record_delete    = 0
     shell_interface.count_abstracts                   = 0
     shell_interface.count_orcids                      = 0
-
-
-#   ---         ---         ---
-def db_connect(shell_interface):
-    connection = psycopg2.connect(f"""\
-        host={db_host} \
-        dbname={db_name} \
-        user={db_user} \
-        password={db_password} \
-        """)
-    shell_interface.cursor = connection.cursor()
-
-
-#   ---         ---         ---
-def db_query(shell_interface, query):
-    
-    shell_interface.cursor.execute(query)
-    if shell_interface.cursor.rowcount > 0:
-        return shell_interface.cursor.fetchall()
-    return False
 
 
 #   ---         ---         ---
@@ -293,3 +270,20 @@ def too_many_rdm_requests_check(response: int):
         time.sleep(wait_429)
         return False
     return True
+
+from setup                   import db_host, db_name, db_user, db_password
+import psycopg2
+def db_connect(self):
+    connection = psycopg2.connect(f"""\
+        host={db_host} \
+        dbname={db_name} \
+        user={db_user} \
+        password={db_password} \
+        """)
+    self.cursor = connection.cursor()
+
+def db_query(self, query):
+    self.cursor.execute(query)
+    if self.cursor.rowcount > 0:
+        return self.cursor.fetchall()
+    return False

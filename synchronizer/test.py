@@ -1,6 +1,7 @@
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
 
-if arguments['test1']:
-    docopt_instance.test1(arguments['AAA'])
-
-elif arguments['test2']:
-    docopt_instance.test2(arguments['BBB'])
+    def myfunc(self):
+        print("Hello my name is " + self.name)
