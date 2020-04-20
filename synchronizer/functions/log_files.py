@@ -1,4 +1,4 @@
-from setup import *
+from setup import dirpath, days_to_keep_log_files, lines_successful_changes
 from functions.general_functions    import add_to_full_report
 from datetime                       import datetime
 

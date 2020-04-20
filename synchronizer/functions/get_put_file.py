@@ -46,7 +46,7 @@ def rdm_add_file(shell_interface, file_name: str, recid: str, uuid: str):
     file_records = f'{dirpath}/reports/{shell_interface.date.today()}_records.log'
     open(file_records, "a").write(report)
 
-    shell_interface.time.sleep(0.2)
+    # shell_interface.time.sleep(0.2)
     
     return response.status_code
 
@@ -93,7 +93,7 @@ def get_file_from_pure(shell_interface, electronic_version: str):
     else:
         add_to_full_report(f'Error downloading file from pure ({file_url})')
 
-    shell_interface.time.sleep(0.2)
+    # shell_interface.time.sleep(0.2)
     return
 
 

@@ -4,6 +4,7 @@ from functions.rdm_push_record      import create_invenio_data
 from functions.rdm_push_record      import rdm_push_record
 from functions.rdm_database         import RdmDatabase
 
+rdm_db = RdmDatabase()
 
 #   ---         ---         ---
 def rdm_owners(shell_interface: object):
@@ -116,7 +117,7 @@ def get_owner_records(shell_interface, user_id, user_uuid):
             else:
                 # Checks if the owner is already in RDM record metadata
 
-                shell_interface.time.sleep(0.5)
+                # shell_interface.time.sleep(0.5)
                 
                 # Get metadata from RDM
                 response = rdm_get_recid_metadata(shell_interface, recid)
@@ -198,9 +199,6 @@ def pure_get_user_uuid(shell_interface: object, key_name: str, key_value: str):
 def rdm_get_user_id(shell_interface: object):
     """ Gets the ID and IP of the logged in user """
 
-    # Creates an instane of rdm database
-    rdm_db = RdmDatabase()
-
     response = rdm_db.db_query(f"SELECT user_id, ip FROM accounts_user_session_activity")
 
     if not response:
@@ -278,7 +276,7 @@ def get_rdm_record_owners(shell_interface: object):
             go_on = False
         
         pag += 1
-        shell_interface.time.sleep(0.5)
+        # shell_interface.time.sleep(0.5)
 
     add_to_full_report('Owner  Records')
 

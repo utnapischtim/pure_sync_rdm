@@ -3,6 +3,7 @@ import psycopg2
 
 class RdmDatabase:
 
+    # def db_connect(self):
     def __init__(self):
         connection = psycopg2.connect(f"""\
             host={db_host} \

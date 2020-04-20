@@ -1,4 +1,4 @@
-from setup                          import *
+from setup                          import dirpath
 from functions.rdm_push_record      import rdm_push_record
 from functions.general_functions    import initialize_count_variables
 from functions.general_functions    import add_to_full_report

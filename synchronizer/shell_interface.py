@@ -44,9 +44,9 @@ from functions.rdm_duplicates           import rdm_duplicates
 from functions.delete_all_records       import delete_all_records
 from functions.rdm_push_by_uuid         import rdm_push_by_uuid
 from functions.delete_record            import delete_record, delete_from_list
-from functions.general_functions        import db_connect
+# from functions.general_functions        import db_connect
 from functions.rdm_owners               import rdm_owners, get_rdm_record_owners, rdm_owners_by_orcid
-from functions.rdm_groups               import RdmGroups
+from functions.rdm_groups               import rdm_group_split, rdm_group_merge
 
 
 class shell_interface:
@@ -60,7 +60,7 @@ class shell_interface:
         self.datetime = datetime
         self.timedelta = timedelta
         self.rdm_record_owner = None
-        db_connect(self)
+        # db_connect(self)
 
 
     def changes(self):
@@ -105,15 +105,11 @@ class shell_interface:
 
     def rdm_group_split(self, old_id, new_ids):
         """ Split a single group into moltiple ones """
-        # rdm_group_split(self, old_id, new_ids)
-        rdm_group = RdmGroups()
-        rdm_group.rdm_group_split(old_id, new_ids)
+        rdm_group_split(self, old_id, new_ids)
 
     def rdm_group_merge(self, old_ids, new_id):
         """ Merges multiple groups into a single one """
-        # rdm_group_merge(self, old_ids, new_id)
-        rdm_group = RdmGroups()
-        rdm_group.rdm_group_merge(old_ids, new_id)
+        rdm_group_merge(self, old_ids, new_id)
 
 
 if __name__ == '__main__':
