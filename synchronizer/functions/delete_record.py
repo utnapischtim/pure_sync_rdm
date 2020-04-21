@@ -1,10 +1,10 @@
-from setup                          import dirpath, token_rdm, rdm_api_url_records
-# from functions.general_functions    import too_many_rdm_requests_check
+from setup                              import dirpath, token_rdm, rdm_api_url_records
+from functions.general_functions        import add_to_full_report
+from functions.rdm_general_functions    import too_many_rdm_requests_check
+
 
 def delete_from_list(shell_interface):
 
-    from functions.general_functions    import add_to_full_report
-    
     # NOTE: the user ACCOUNT related to the used TOKEN must be ADMIN
     
     count_success = 0
@@ -47,8 +47,6 @@ def delete_from_list(shell_interface):
 
 #   DELETE_RECORD
 def delete_record(shell_interface, recid: str):
-
-    from functions.general_functions    import add_to_full_report, too_many_rdm_requests_check
     
     #   REQUEST
     headers = {

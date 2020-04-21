@@ -1,5 +1,6 @@
 from setup                          import pure_rest_api_url, dirpath, rdm_api_url_records, token_rdm
-from functions.general_functions    import rdm_get_metadata_verified, rdm_get_metadata, add_to_full_report, initialize_count_variables, rdm_get_recid, rdm_get_recid_metadata, update_rdm_record, add_spaces
+from functions.general_functions    import add_to_full_report, initialize_count_variables, add_spaces
+from functions.rdm_general_functions        import rdm_get_metadata_verified, rdm_get_metadata, rdm_get_recid_metadata, rdm_get_recid, update_rdm_record
 from functions.rdm_push_record      import create_invenio_data
 from functions.rdm_push_record      import rdm_push_record
 from functions.rdm_database         import RdmDatabase

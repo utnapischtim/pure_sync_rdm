@@ -1,5 +1,6 @@
 from setup                              import dirpath, pure_rest_api_url, upload_percent_accept
-from functions.general_functions        import rdm_get_metadata_verified, add_to_full_report, initialize_count_variables, rdm_get_recid, add_spaces
+from functions.general_functions        import add_to_full_report, initialize_count_variables, add_spaces
+from functions.rdm_general_functions    import rdm_get_metadata_verified
 from functions.delete_record            import delete_record, delete_from_list
 from functions.rdm_push_by_uuid         import rdm_push_by_uuid
 from functions.rdm_push_record          import rdm_push_record

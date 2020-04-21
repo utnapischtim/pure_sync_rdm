@@ -1,6 +1,7 @@
 from setup                          import *
 from requests.auth                  import HTTPBasicAuth
-from functions.general_functions    import add_to_full_report, rdm_put_file
+from functions.general_functions    import add_to_full_report
+from functions.rdm_general_functions        import rdm_put_file
 import smtplib
 
 #   ---     ---     ---

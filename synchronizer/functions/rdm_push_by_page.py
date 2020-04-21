@@ -1,7 +1,8 @@
 from setup                          import dirpath, pure_rest_api_url
 from functions.rdm_push_record      import create_invenio_data
 from functions.rdm_push_by_uuid     import rdm_push_by_uuid
-from functions.general_functions    import add_spaces, initialize_count_variables, add_to_full_report, rdm_get_metadata_verified
+from functions.general_functions    import add_spaces, initialize_count_variables, add_to_full_report
+from functions.rdm_general_functions        import rdm_get_metadata_verified
 
 
 def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: int):

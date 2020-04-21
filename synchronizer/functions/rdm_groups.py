@@ -1,6 +1,6 @@
 from setup                          import dirpath, rdm_api_url_records, pure_rest_api_url
-from functions.general_functions    import add_spaces, update_rdm_record, rdm_get_metadata_by_query, add_to_full_report, rdm_get_metadata_verified
-
+from functions.general_functions    import add_spaces, add_to_full_report
+from functions.rdm_general_functions        import rdm_get_metadata_verified, update_rdm_record, rdm_get_metadata_by_query
 from functions.rdm_database         import RdmDatabase
 
 rdm_db = RdmDatabase()

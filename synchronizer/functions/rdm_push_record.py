@@ -1,15 +1,18 @@
-from setup                          import dirpath, versioning_running, rdm_api_url_records, \
+from setup                              import dirpath, versioning_running, rdm_api_url_records, \
     applied_restrictions_possible_values, push_dist_sec, pure_rest_api_url
 
-from functions.general_functions    import pure_get_uuid_metadata, add_to_full_report, \
-    get_rdm_userid_from_list_by_externalid, rdm_get_metadata, rdm_post_metadata, \
-        too_many_rdm_requests_check, rdm_get_recid, rdm_get_metadata_verified 
+from functions.general_functions        import add_to_full_report
 
-from functions.get_put_file         import rdm_add_file, get_file_from_pure
-from functions.rdm_groups           import rdm_create_group, rdm_add_user_to_group
-from functions.rdm_versioning       import rdm_versioning
+from functions.pure_general_functions   import pure_get_uuid_metadata
 
-from functions.rdm_database         import RdmDatabase
+from functions.rdm_general_functions    import rdm_get_metadata_verified, rdm_get_metadata, rdm_post_metadata, \
+    rdm_get_recid, get_rdm_userid_from_list_by_externalid, too_many_rdm_requests_check
+
+from functions.get_put_file             import rdm_add_file, get_file_from_pure
+from functions.rdm_groups               import rdm_create_group, rdm_add_user_to_group
+from functions.rdm_versioning           import rdm_versioning
+
+from functions.rdm_database             import RdmDatabase
 
 #   ---         ---         ---
 def rdm_push_record(shell_interface: object, uuid: str):
