@@ -79,30 +79,36 @@ Number of items in response: {resp_json["count"]}
     add_to_full_report(report_intro)
 
     #   ---     DELETE      ---
-    for item in resp_json['items']:
+    # for item in resp_json['items']:
 
-        if 'changeType' not in item or 'uuid' not in item:
-            continue
-        elif item['familySystemName'] != 'ResearchOutput':
-            continue
-        elif item['changeType'] != 'DELETE':
-            continue
+    #     if 'changeType' not in item or 'uuid' not in item:
+    #         continue
+    #     elif item['familySystemName'] != 'ResearchOutput':
+    #         continue
+    #     elif item['changeType'] != 'DELETE':
+    #         continue
 
-        count_delete += 1
-        uuid = item['uuid']
+    #     count_delete += 1
+    #     uuid = item['uuid']
 
-        report = f"\n{count_delete} - {item['changeType']} - {uuid}"
-        add_to_full_report(report)
+    #     report = f"\n{count_delete} - {item['changeType']} - {uuid}"
+    #     add_to_full_report(report)
 
-        duplicated_uuid.append(uuid)         
+    #     duplicated_uuid.append(uuid)         
 
-        # Gets the record recid
-        recid = rdm_get_recid(shell_interface, uuid)
+    #     # Gets the record recid
+    #     recid = rdm_get_recid(shell_interface, uuid)
 
-        if recid != False:
-            delete_record(shell_interface, recid)
-        else:
-            shell_interface.count_successful_record_delete += 1   # the record is not in RDM
+    #     if recid != False:
+    #         delete_record(shell_interface, recid)
+    #     else:
+    #         shell_interface.count_successful_record_delete += 1   # the record is not in RDM
+
+    #   ---     DELETE      ---
+    response = process_delete_changes(shell_interface, resp_json, count_delete, duplicated_uuid)
+    count_delete    = response[0]
+    duplicated_uuid = response[1]
+
 
     #   ---     CREATE / ADD / UPDATE      ---
     count = 0
@@ -140,9 +146,11 @@ Number of items in response: {resp_json["count"]}
         rdm_push_record(shell_interface, uuid)
         #   ---       ---       ---
 
+
+
     # If there are no changes
     if shell_interface.count_total == 0:
-        nothing_to_transfer(shell_interface, report_intro, file_changes)
+        open(file_changes, "a").write(f'{report_intro}Nothing to transfer.\n\n')
         return
 
     # Calculates if the process was successful
@@ -186,13 +194,37 @@ Incomplete: {count_incomplete} - Duplicated: {count_duplicated} - Irrelevant:{co
     # CHANGES.LOG
     open(file_changes, "a").write(report_intro + report)
     return
-    
+
 
 #       ---     ---     ---
-def nothing_to_transfer(shell_interface, report_intro, file_changes):
+def process_delete_changes(shell_interface: object, resp_json: dict, count_delete: int, duplicated_uuid: list):
 
-    open(file_changes, "a").write(report_intro + 'Nothing to transfer.\n\n')
-    return
+    for item in resp_json['items']:
+
+        if 'changeType' not in item or 'uuid' not in item:
+            continue
+        elif item['familySystemName'] != 'ResearchOutput':
+            continue
+        elif item['changeType'] != 'DELETE':
+            continue
+
+        count_delete += 1
+        uuid = item['uuid']
+
+        report = f"\n{count_delete} - {item['changeType']} - {uuid}"
+        add_to_full_report(report)
+
+        duplicated_uuid.append(uuid)         
+
+        # Gets the record recid
+        recid = rdm_get_recid(shell_interface, uuid)
+
+        if recid != False:
+            delete_record(shell_interface, recid)
+        else:
+            shell_interface.count_successful_record_delete += 1   # the record is not in RDM
+
+    return [count_delete, duplicated_uuid]
 
 
 #       ---     ---     ---

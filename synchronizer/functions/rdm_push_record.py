@@ -15,7 +15,10 @@ from functions.rdm_database         import RdmDatabase
 def rdm_push_record(shell_interface: object, uuid: str):
     
     # Gets from Pure the metadata of the given uuid
-    pure_get_uuid_metadata(shell_interface, uuid)
+    response = pure_get_uuid_metadata(shell_interface, uuid)
+    if not response:
+        add_to_full_report(f'\tMetadata not found in Pure for record {uuid}')
+        return False
 
     return create_invenio_data(shell_interface)
 

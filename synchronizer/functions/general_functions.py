@@ -27,7 +27,7 @@ def pure_get_uuid_metadata(shell_interface: object, uuid: str):
 
     # Check response
     if response.status_code >= 300:
-        add_to_full_report(response.content)
+        add_to_full_report(f'\n{response.content}\n')
 
         file_records = f'{dirpath}/reports/{shell_interface.date.today()}_records.log'
         report = f'Get Pure metadata      - {response.content}\n'
@@ -37,6 +37,7 @@ def pure_get_uuid_metadata(shell_interface: object, uuid: str):
 
     # Load json
     shell_interface.item = shell_interface.json.loads(response.content)
+    return True
 
 
 
@@ -190,71 +191,56 @@ def add_to_full_report(report: str):
     file_records = f'{dirpath}/reports/{date.today()}_records_full.log'
     open(file_records, "a").write(f'{report}\n')
     print(report)
+    
 
+def rdm_request_headers(parameters):
+    headers = {}
+    if 'content_type' in parameters:
+        headers['Content-Type'] = 'application/json'
+    if 'file' in parameters:
+        headers['Content-Type'] = 'application/octet-stream'
+    if 'accept' in parameters:
+        headers['Accept'] = 'application/json'
+    if 'token' in parameters:
+        headers['Authorization'] = f'Bearer {token_rdm}'
+    if 'api_key' in parameters:
+        headers['api-key'] = pure_api_key
+    return headers
 
-#   ---         ---         ---
-def rdm_get_metadata(url: str):
-    headers = {
-        'Authorization': f'Bearer {token_rdm}',
-        'Content-Type': 'application/json',
-    }
+def rdm_request_params():
     params = (
         ('prettyprint', '1'),
     )
-    response = requests.get(url, headers=headers, params=params, verify=False)
-    return response
+    return params
 
+def rdm_get_metadata(url: str):
+    headers = rdm_request_headers(['content_type', 'token'])
+    params  = rdm_request_params()
+    return requests.get(url, headers=headers, params=params, verify=False)
 
-#   ---         ---         ---
 def rdm_get_metadata_verified(url: str):
-    headers = {
-        'Accept': 'application/json',
-        'api-key': pure_api_key,
-    }
-    params = (
-        # ('apiKey', pure_api_key),
-    )
-    response = requests.get(url, headers=headers, params=params)
-    return response
+    headers = rdm_request_headers(['accept', 'api_key'])
+    return requests.get(url, headers=headers)
 
-
-#   ---         ---         ---
 def rdm_post_metadata(url: str, data: str):
     """ Used to create a new record """
-    headers = {
-        'Content-Type': 'application/json',
-    }
-    params = (
-        ('prettyprint', '1'),
-    )
+    headers = rdm_request_headers(['content_type'])
+    params  = rdm_request_params()
     data_utf8 = data.encode('utf-8')
     return requests.post(url, headers=headers, params=params, data=data_utf8, verify=False)
 
-
-#   ---         ---         ---
 def rdm_put_metadata(url: str, data: str):
     """ Used to update an existing record """
-    headers = {
-        'Authorization': f'Bearer {token_rdm}',
-        'Content-Type': 'application/json',
-    }
-    params = (
-        ('prettyprint', '1'),
-    )
+    headers = rdm_request_headers(['content_type', 'token'])
+    params  = rdm_request_params()
     data_utf8 = data.encode('utf-8')
-    response = requests.put(url, headers=headers, params=params, data=data_utf8, verify=False)
-    return response
+    return requests.put(url, headers=headers, params=params, data=data_utf8, verify=False)
 
-
-#   ---         ---         ---
 def rdm_put_file(url: str, file_path_name: str):
-    headers = {
-        'Authorization': f'Bearer {token_rdm}',
-        'Content-Type': 'application/octet-stream',
-    }
-    data = open(file_path_name, 'rb').read()
-    response = requests.put(url, headers=headers, data=data, verify=False)
-    return response
+    headers = rdm_request_headers(['file', 'token'])
+    data    = open(file_path_name, 'rb').read()
+    return requests.put(url, headers=headers, data=data, verify=False)
+
 
 
 #   ---         ---         ---
