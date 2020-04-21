@@ -1,6 +1,9 @@
-from setup                          import dirpath, pure_rest_api_url
-from functions.general_functions    import add_to_full_report
+from setup                              import dirpath, pure_rest_api_url
+from functions.general_functions        import add_to_full_report
 from functions.rdm_general_functions    import rdm_get_metadata_verified
+
+from datetime                           import date, datetime
+import json
 
 #   ---         ---         ---
 def pure_get_uuid_metadata(shell_interface: object, uuid: str):
@@ -20,12 +23,12 @@ def pure_get_uuid_metadata(shell_interface: object, uuid: str):
     if response.status_code >= 300:
         add_to_full_report(f'\n{response.content}\n')
 
-        file_records = f'{dirpath}/reports/{shell_interface.date.today()}_records.log'
+        file_records = f'{dirpath}/reports/{date.today()}_records.log'
         report = f'Get Pure metadata      - {response.content}\n'
         open(file_records, "a").write(report)
 
         return False
 
     # Load json
-    shell_interface.item = shell_interface.json.loads(response.content)
+    shell_interface.item = json.loads(response.content)
     return True

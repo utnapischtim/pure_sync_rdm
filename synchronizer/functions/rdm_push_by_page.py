@@ -1,16 +1,17 @@
-from setup                          import dirpath, pure_rest_api_url
-from functions.rdm_push_record      import create_invenio_data
-from functions.rdm_push_by_uuid     import rdm_push_by_uuid
-from functions.general_functions    import add_spaces, initialize_count_variables, add_to_full_report
-from functions.rdm_general_functions        import rdm_get_metadata_verified
-
+from setup                              import dirpath, pure_rest_api_url
+from functions.rdm_push_record          import create_invenio_data
+from functions.rdm_push_by_uuid         import rdm_push_by_uuid
+from functions.general_functions        import add_spaces, initialize_count_variables, add_to_full_report
+from functions.rdm_general_functions    import rdm_get_metadata_verified
+from datetime                           import date, datetime
+import json
 
 def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: int):
 
     for pag in range(pag_begin, pag_end):
 
-        date_today = shell_interface.date.today()
-        current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
+        date_today = date.today()
+        current_time = datetime.now().strftime("%H:%M:%S")
         shell_interface.count_http_responses = {}
 
         initialize_count_variables(shell_interface)
@@ -30,7 +31,7 @@ def get_pure_by_page(shell_interface, pag_begin: int, pag_end: int, pag_size: in
         open(file_name, 'wb').write(response.content)
 
         # Load json response
-        resp_json = shell_interface.json.loads(response.content)
+        resp_json = json.loads(response.content)
 
         #       ---         ---         ---
         # Creates data to push to RDM

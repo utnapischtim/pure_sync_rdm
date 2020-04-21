@@ -1,9 +1,13 @@
 from setup                              import dirpath, pure_rest_api_url, upload_percent_accept
 from functions.general_functions        import add_to_full_report, initialize_count_variables, add_spaces
-from functions.rdm_general_functions    import rdm_get_metadata_verified
+from functions.rdm_general_functions    import rdm_get_metadata_verified, rdm_get_recid
 from functions.delete_record            import delete_record, delete_from_list
 from functions.rdm_push_by_uuid         import rdm_push_by_uuid
 from functions.rdm_push_record          import rdm_push_record
+
+from datetime                           import date, datetime, timedelta
+
+import json
 
 # To execute preferably between 22:30 and 23:30
 
@@ -30,11 +34,11 @@ def pure_get_changes(shell_interface):
 #       ---     ---     ---
 def pure_get_changes_by_date(shell_interface, changes_date: str):
 
-    current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
+    current_time = datetime.now().strftime("%H:%M:%S")
     shell_interface.count_http_responses = {}
     
-    file_records = f'{dirpath}/reports/{shell_interface.date.today()}_records.log'
-    file_changes = f'{dirpath}/reports/{shell_interface.date.today()}_changes.log'
+    file_records = f'{dirpath}/reports/{date.today()}_records.log'
+    file_changes = f'{dirpath}/reports/{date.today()}_changes.log'
 
     page = 'page=1'
     size = 'pageSize=100'
@@ -52,7 +56,7 @@ def pure_get_changes_by_date(shell_interface, changes_date: str):
         add_to_full_report(response.content)
 
     # Load response json
-    resp_json = shell_interface.json.loads(response.content)
+    resp_json = json.loads(response.content)
 
     initialize_count_variables(shell_interface)
 
@@ -238,15 +242,15 @@ def get_missing_updates(shell_interface):
     count = 0
     days_span = 7
 
-    date_today = str(shell_interface.datetime.today().strftime('%Y-%m-%d'))
-    date_check = shell_interface.datetime.strptime(date_today, "%Y-%m-%d").date()
+    date_today = str(datetime.today().strftime('%Y-%m-%d'))
+    date_check = datetime.strptime(date_today, "%Y-%m-%d").date()
 
     while count < days_span:
 
         if str(date_check) not in open(file_name, 'r').read():
             missing_updates.append(str(date_check))        
 
-        date_check = date_check - shell_interface.timedelta(days=1)
+        date_check = date_check - timedelta(days=1)
         count += 1
 
     return missing_updates

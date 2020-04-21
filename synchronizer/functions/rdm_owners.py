@@ -5,6 +5,8 @@ from functions.rdm_push_record      import create_invenio_data
 from functions.rdm_push_record      import rdm_push_record
 from functions.rdm_database         import RdmDatabase
 
+import json
+
 rdm_db = RdmDatabase()
 
 #   ---         ---         ---
@@ -86,7 +88,7 @@ def get_owner_records(shell_interface, user_id, user_uuid):
             return False
 
         # Load response json
-        resp_json = shell_interface.json.loads(response.content)
+        resp_json = json.loads(response.content)
 
         total_items = resp_json['count']
         add_to_full_report(f'\nGet person records - {response} - Page {page} (size {page_size})    - Total records: {total_items}')
@@ -119,7 +121,7 @@ def get_owner_records(shell_interface, user_id, user_uuid):
                 # Checks if the owner is already in RDM record metadata
                 # Get metadata from RDM
                 response = rdm_get_recid_metadata(shell_interface, recid)
-                record_json = shell_interface.json.loads(response.content)['metadata']
+                record_json = json.loads(response.content)['metadata']
 
                 add_to_full_report(f"\tRDM get metadata      - {response} - Current owners:     - {record_json['owners']}")
 
@@ -129,7 +131,7 @@ def get_owner_records(shell_interface, user_id, user_uuid):
                     record_json['owners'].append(user_id)
                     add_to_full_report(f"\t+   Adding owner      -               - New owners:         - {record_json['owners']}")
 
-                    record_json = shell_interface.json.dumps(record_json)
+                    record_json = json.dumps(record_json)
 
                     file_name = f'{dirpath}/data/temporary_files/rdm_record_update.json'
                     open(file_name, 'a').write(record_json)
@@ -160,7 +162,7 @@ def pure_get_user_uuid(shell_interface: object, key_name: str, key_value: str):
             return False
 
         open(f'{dirpath}/data/temporary_files/pure_get_user_uuid.json', "wb").write(response.content)
-        record_json = shell_interface.json.loads(response.content)
+        record_json = json.loads(response.content)
 
         total_items = record_json['count']
 
@@ -242,7 +244,7 @@ def get_rdm_record_owners(shell_interface: object):
             add_to_full_report(response.content)
             break
 
-        resp_json = shell_interface.json.loads(response.content)
+        resp_json = json.loads(response.content)
         data = ''
 
         for item in resp_json['hits']['hits']:

@@ -118,7 +118,7 @@ def rdm_get_recid(shell_interface: object, uuid: str):
     if not too_many_rdm_requests_check(response):
         return False
 
-    resp_json = shell_interface.json.loads(response.content)
+    resp_json = json.loads(response.content)
 
     total_recids = resp_json['hits']['total']
     if total_recids == 0:

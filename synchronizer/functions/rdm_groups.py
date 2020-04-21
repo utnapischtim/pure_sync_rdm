@@ -1,10 +1,13 @@
-from setup                          import dirpath, rdm_api_url_records, pure_rest_api_url
-from functions.general_functions    import add_spaces, add_to_full_report
-from functions.rdm_general_functions        import rdm_get_metadata_verified, update_rdm_record, rdm_get_metadata_by_query
-from functions.rdm_database         import RdmDatabase
+from setup                              import dirpath, rdm_api_url_records, pure_rest_api_url
+from functions.general_functions        import add_spaces, add_to_full_report
+from functions.rdm_general_functions    import rdm_get_metadata_verified, update_rdm_record, rdm_get_metadata_by_query
+from functions.rdm_database             import RdmDatabase
 
+from datetime                           import date, datetime
+import json
+
+# Create instance of RDM database manager
 rdm_db = RdmDatabase()
-
 
 #   ---         ---         ---
 def rdm_create_group(shell_interface: object, group_externalId: str, group_name: str):
@@ -82,8 +85,8 @@ def rdm_group_split(shell_interface: object, old_group_externalId: str, new_grou
         . organisationUnits
     """
     # Report
-    current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
-    report_name = f'{dirpath}/reports/{shell_interface.date.today()}_groups.log'
+    current_time = datetime.now().strftime("%H:%M:%S")
+    report_name = f'{dirpath}/reports/{date.today()}_groups.log'
     shell_interface.report_name = report_name
     report = f"""
 
@@ -143,8 +146,8 @@ def rdm_group_merge(shell_interface: object, old_groups_externalId: list, new_gr
         . organisationUnits
     """
     # Report
-    current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
-    shell_interface.report_name = report_name = f'{dirpath}/reports/{shell_interface.date.today()}_groups.log'
+    current_time = datetime.now().strftime("%H:%M:%S")
+    shell_interface.report_name = report_name = f'{dirpath}/reports/{date.today()}_groups.log'
 
     report = f"\n\n--   --   --\n\n{current_time} - RDM GROUP MERGE -\n\n"
     open(report_name, "a").write(report)
@@ -160,11 +163,11 @@ def rdm_group_merge(shell_interface: object, old_groups_externalId: list, new_gr
     report = f"New group             - externalId: {add_spaces(new_group_externalId)}   - {new_group_data['name']}\n"
     open(report_name, "a").write(report)
 
-    # - - Create new group - -
+    # Create new group
     response = rdm_create_group(shell_interface, new_group_externalId, new_group_data['name'])
     open(report_name, "a").write(f'New group creation    - {response}\n')
 
-    # Removes users from old groups and adds to new group
+    # Adds users to new group and removes them from the old ones
     rdm_merge_users_from_old_to_new_group(shell_interface, old_groups_externalId, report_name, new_group_externalId)
 
     # Modify all related records
@@ -178,7 +181,7 @@ def rdm_split_modify_record(shell_interface, old_group_externalId, report_name, 
     # Get from RDM all old group's records
     response = rdm_get_metadata_by_query(shell_interface, old_group_externalId)
 
-    resp_json = shell_interface.json.loads(response.content)
+    resp_json = json.loads(response.content)
     total_items = resp_json['hits']['total']
 
     report = f"\nModify records - Group: {old_group_externalId} - Number records: {total_items}\n"
@@ -217,12 +220,12 @@ def rdm_split_modify_record(shell_interface, old_group_externalId, report_name, 
             item['managingOrganisationalUnit_uuid']       = new_groups_data[0]['uuid']
             item['managingOrganisationalUnit_externalId'] = new_groups_data[0]['externalId']
 
-        record_json = shell_interface.json.dumps(item)
+        record_json = json.dumps(item)
 
         # Update record
         response = update_rdm_record(shell_interface, record_json, recid)
 
-        current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
+        current_time = datetime.now().strftime("%H:%M:%S")
         open(report_name, "a").write(f'{current_time} - {response} - {url}\n')
 
     return True
@@ -275,10 +278,10 @@ def rdm_merge_modify_records(shell_interface, old_groups_externalId, report_name
         response = rdm_get_metadata_by_query(shell_interface, old_group_externalId)
 
 
-        resp_json = shell_interface.json.loads(response.content)
+        resp_json = json.loads(response.content)
         total_items = resp_json['hits']['total']
 
-        report = f"\n\tModify records - Group: {old_group_externalId} - Number records: {total_items}"
+        report = f"\nModify records - Group: {old_group_externalId} - Number records: {total_items}"
         open(report_name, "a").write(report)
         add_to_full_report(f'\t{report}')
 
@@ -320,12 +323,12 @@ def rdm_merge_modify_records(shell_interface, old_groups_externalId, report_name
                 item['managingOrganisationalUnit_uuid']       = new_group_data['uuid']
                 item['managingOrganisationalUnit_externalId'] = new_group_data['externalId']
 
-            record_json = shell_interface.json.dumps(item)
+            record_json = json.dumps(item)
 
             # Update record
             response = update_rdm_record(shell_interface, record_json, recid)
 
-            current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
+            current_time = datetime.now().strftime("%H:%M:%S")
             report = f'{current_time} - {response} - {url}\n'
             open(report_name, "a").write(report)
 
@@ -353,11 +356,12 @@ def rdm_merge_users_from_old_to_new_group(shell_interface, old_groups_externalId
         old_group_users = rdm_db.db_query(query)
 
         if not old_group_users:
+
             old_group_users = []
         
-        report = f"\tOld group (id {add_spaces(old_group_id)})  - Number users: {add_spaces(len(old_group_users))}\
+        report = f"Old group (id {add_spaces(old_group_id)})  - Number users: {add_spaces(len(old_group_users))}\
  - externalId:  {add_spaces(old_group_externalId)} - {old_group_name}"
-        open(report_name, "a").write(report)
+        open(report_name, "a").write(f'{report}\n')
         add_to_full_report(report)
         
         for i in old_group_users:
@@ -366,11 +370,11 @@ def rdm_merge_users_from_old_to_new_group(shell_interface, old_groups_externalId
             # Get user email
             user_email = get_user_email(shell_interface, user_id)
 
-            # - - Remove user from old group - -
-            response = group_remove_user(shell_interface, user_email, old_group_externalId)
-
             # - - Add user to new group - -
             group_add_user(shell_interface, user_email, new_group_externalId, user_id)
+
+            # - - Remove user from old group - -
+            response = group_remove_user(shell_interface, user_email, old_group_externalId)
 
         # Delete old group
 
@@ -396,7 +400,7 @@ def pure_get_organisationalUnit_data(shell_interface: object, externalId: str):
         return False
 
     # Load json
-    data = shell_interface.json.loads(response.content)
+    data = json.loads(response.content)
     data = data['items'][0]['organisationalUnits']
 
     for organisationalUnit in data:

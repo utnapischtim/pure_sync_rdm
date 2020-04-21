@@ -1,18 +1,17 @@
 from setup                              import dirpath, versioning_running, rdm_api_url_records, \
-    applied_restrictions_possible_values, push_dist_sec, pure_rest_api_url
-
+                                    applied_restrictions_possible_values, push_dist_sec, pure_rest_api_url
 from functions.general_functions        import add_to_full_report
-
 from functions.pure_general_functions   import pure_get_uuid_metadata
-
 from functions.rdm_general_functions    import rdm_get_metadata_verified, rdm_get_metadata, rdm_post_metadata, \
-    rdm_get_recid, get_rdm_userid_from_list_by_externalid, too_many_rdm_requests_check
-
+                                    rdm_get_recid, get_rdm_userid_from_list_by_externalid, too_many_rdm_requests_check
 from functions.get_put_file             import rdm_add_file, get_file_from_pure
 from functions.rdm_groups               import rdm_create_group, rdm_add_user_to_group
 from functions.rdm_versioning           import rdm_versioning
-
 from functions.rdm_database             import RdmDatabase
+
+from datetime                           import date, datetime
+import json
+import time
 
 #   ---         ---         ---
 def rdm_push_record(shell_interface: object, uuid: str):
@@ -213,7 +212,7 @@ def create_invenio_data(shell_interface: object):
     if 'abstracts' in item:
         shell_interface.count_abstracts += 1
 
-    shell_interface.data = shell_interface.json.dumps(shell_interface.data)
+    shell_interface.data = json.dumps(shell_interface.data)
     open(f'{dirpath}/data/temporary_files/lash_push.json', "w").write(shell_interface.data)
 
     # Calling post_to_rdm
@@ -297,7 +296,7 @@ def get_rdm_file_review(shell_interface: object):
     open(f'{dirpath}/data/temporary_files/rdm_get_recid.json', "wb").write(response.content)
 
     # Load response
-    resp_json = shell_interface.json.loads(response.content)
+    resp_json = json.loads(response.content)
 
     total_recids = resp_json['hits']['total']
     if total_recids == 0:
@@ -371,7 +370,7 @@ def language_conversion(shell_interface: object, pure_language: str):
         return False
     
     file_name = f'{dirpath}/data/iso6393.json'
-    resp_json = shell_interface.json.load(open(file_name, 'r'))
+    resp_json = json.load(open(file_name, 'r'))
     for i in resp_json:
         if i['name'] == pure_language:
             return i['iso6393']
@@ -418,7 +417,7 @@ def post_to_rdm(shell_interface: object):
     shell_interface.file_success     = None
 
     # RDM accepts 5000 records per hour (one record every ~ 1.4 sec.)
-    shell_interface.time.sleep(push_dist_sec)                        
+    time.sleep(push_dist_sec)                        
     
     # POST REQUEST metadata
     url = f'{rdm_api_url_records}api/records/'
@@ -435,7 +434,7 @@ def post_to_rdm(shell_interface: object):
 
     open(f'{dirpath}/data/temporary_files/rdm_post_metadata_response.json', "wb").write(response.content)
     
-    current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
+    current_time = datetime.now().strftime("%H:%M:%S")
     report = f'{current_time} - metadata_to_rdm - {str(response)} - {uuid} - {shell_interface.item["title"]}\n'
 
     # RESPONSE CHECK
@@ -453,7 +452,7 @@ def post_to_rdm(shell_interface: object):
         # Add record to to_transfer.txt to be re pushed afterwards
         open(f'{dirpath}/data/to_transfer.txt', "a").write(f'{uuid}\n')
 
-    file_name = f'{dirpath}/reports/{shell_interface.date.today()}_records.log'
+    file_name = f'{dirpath}/reports/{date.today()}_records.log'
     open(file_name, "a").write(report)
 
     # If the status_code is 429 (too many requests) then it will wait for some minutes
@@ -469,7 +468,7 @@ def post_to_rdm(shell_interface: object):
         shell_interface.metadata_success = True
 
         # After pushing the record's metadata to RDM needs about a second to be able to get its recid from RDM
-        shell_interface.time.sleep(1)
+        time.sleep(1)
 
         # Gets recid from RDM
             #   - to check if there are duplicates
@@ -517,13 +516,13 @@ def get_orcid(shell_interface: object, person_uuid: str, name: str):
     response = rdm_get_metadata_verified(url)
     
     open(f'{dirpath}/data/temporary_files/resp_pure_persons.json', 'wb').write(response.content)
-    # shell_interface.time.sleep(0.1)
+    # time.sleep(0.1)
     
     if response.status_code >= 300:
         add_to_full_report(response.content)
         return False
 
-    resp_json = shell_interface.json.loads(response.content)
+    resp_json = json.loads(response.content)
 
     message = f'\tPure get orcid        - {response} - '
 
@@ -534,7 +533,7 @@ def get_orcid(shell_interface: object, person_uuid: str, name: str):
         message += f'{orcid} - {name}'
         add_to_full_report(message)
 
-        # file_records = f'{dirpath}/reports/{shell_interface.date.today()}_records.log'
+        # file_records = f'{dirpath}/reports/{date.today()}_records.log'
         # report = f'         - orcid: {orcid}         - {person_uuid} - {name}\n'
         # open(file_records, "a").write(report)
 

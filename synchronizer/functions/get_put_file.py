@@ -1,8 +1,15 @@
-from setup                          import *
-from requests.auth                  import HTTPBasicAuth
-from functions.general_functions    import add_to_full_report
-from functions.rdm_general_functions        import rdm_put_file
+from setup                              import dirpath, rdm_api_url_records, pure_username, pure_password, \
+                                                email_receiver, email_sender, email_sender_password, \
+                                                email_smtp_server, email_smtp_port, email_subject, email_message
+from requests.auth                      import HTTPBasicAuth
+from functions.general_functions        import add_to_full_report
+from functions.rdm_general_functions    import rdm_put_file
+
+from datetime                           import date, datetime
+import requests
 import smtplib
+import os
+
 
 #   ---     ---     ---
 def rdm_add_file(shell_interface, file_name: str, recid: str, uuid: str):
@@ -10,20 +17,13 @@ def rdm_add_file(shell_interface, file_name: str, recid: str, uuid: str):
     file_path_name = f'{dirpath}/data/temporary_files/{file_name}'
     url = f'{rdm_api_url_records}api/records/{recid}/files/{file_name}'
 
-    # # - PUT FILE TO RDM -
-    # headers = {
-    #     'Authorization': f'Bearer {token_rdm}',
-    #     'Content-Type': 'application/octet-stream',
-    # }
-    # data = open(file_path_name, 'rb').read()
-    # response = shell_interface.requests.put(url, headers=headers, data=data, verify=False)
-
+    # PUT FILE TO RDM
     response = rdm_put_file(url, file_path_name)
 
     # Report
     add_to_full_report(f'\tRDM put file          - {response}')
 
-    current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
+    current_time = datetime.now().strftime("%H:%M:%S")
     report = f'{current_time} - file_put_to_rdm - {response} - {recid}\n'
 
     if response.status_code >= 300:
@@ -39,16 +39,14 @@ def rdm_add_file(shell_interface, file_name: str, recid: str, uuid: str):
         shell_interface.file_success = True
 
         # if the upload was successful then delete file from /reports/temporary_files
-        shell_interface.os.remove(file_path_name) 
+        os.remove(file_path_name) 
 
         # # Sends email to remove record from Pure
         # send_email(uuid, file_name)               # - # - SEND EMAIL - # - #
 
-    file_records = f'{dirpath}/reports/{shell_interface.date.today()}_records.log'
+    file_records = f'{dirpath}/reports/{date.today()}_records.log'
     open(file_records, "a").write(report)
 
-    # shell_interface.time.sleep(0.2)
-    
     return response.status_code
 
 
@@ -60,7 +58,7 @@ def get_file_from_pure(shell_interface, electronic_version: str):
     file_url  = electronic_version['file']['fileURL']
 
     # Get request to Pure
-    response = shell_interface.requests.get(file_url, auth=HTTPBasicAuth(pure_username, pure_password))
+    response = requests.get(file_url, auth=HTTPBasicAuth(pure_username, pure_password))
 
     # If the file is not in RDM
     if len(shell_interface.pure_rdm_file_match) == 0:

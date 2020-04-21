@@ -52,13 +52,13 @@ from functions.rdm_groups               import rdm_group_split, rdm_group_merge
 class shell_interface:
     
     def __init__(self):
-        self.json = json
-        self.requests = requests
-        self.os = os
-        self.time = time
-        self.date = date
-        self.datetime = datetime
-        self.timedelta = timedelta
+        # self.json = json
+        # self.requests = requests
+        # self.os = os
+        # self.time = time
+        # self.date = date
+        # self.datetime = datetime
+        # self.timedelta = timedelta
         self.rdm_record_owner = None
         # db_connect(self)
 

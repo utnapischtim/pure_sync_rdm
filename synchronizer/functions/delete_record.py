@@ -2,6 +2,8 @@ from setup                              import dirpath, token_rdm, rdm_api_url_r
 from functions.general_functions        import add_to_full_report
 from functions.rdm_general_functions    import too_many_rdm_requests_check
 
+from datetime                           import date, datetime
+import requests
 
 def delete_from_list(shell_interface):
 
@@ -54,17 +56,17 @@ def delete_record(shell_interface, recid: str):
         'Content-Type': 'application/json',
     }
     url = f'{rdm_api_url_records}api/records/{recid}'
-    response = shell_interface.requests.delete(url, headers=headers, verify=False)
+    response = requests.delete(url, headers=headers, verify=False)
     #   ---
     
     report = f'\tRDM delete record     - {response} - Deleted recid:        {recid}'
     add_to_full_report(report)
 
     # Append to yyyy-mm-dd_records.log
-    current_time = shell_interface.datetime.now().strftime("%H:%M:%S")
+    current_time = datetime.now().strftime("%H:%M:%S")
     report_line = f'{current_time} - delete_from_rdm - {response} - {recid}\n'
     
-    file_name = f'{dirpath}/reports/{shell_interface.date.today()}_records.log'
+    file_name = f'{dirpath}/reports/{date.today()}_records.log'
     open(file_name, "a").write(report_line)
 
     # If the status_code is 429 (too many requests) then it will wait for some minutes
