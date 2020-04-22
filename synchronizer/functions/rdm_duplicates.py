@@ -1,9 +1,10 @@
-from functions.delete_record            import delete_record
-from functions.general_functions        import add_to_full_report
+from setup                          import dirpath
+from functions.delete_record        import delete_record
+from functions.general_functions    import add_to_full_report
 
-def rdm_duplicates(shell_interface):
+def rdm_duplicates():
 
-    file_name = f'{shell_interface.dirpath}/data/all_rdm_records.txt'
+    file_name = f'{dirpath}/data/all_rdm_records.txt'
     all_records = open(file_name, 'r').readlines()                       
 
     temp_arr = []
@@ -17,7 +18,7 @@ def rdm_duplicates(shell_interface):
 
         if uuid in temp_arr:
             count_deleted += 1
-            delete_record(shell_interface, recid)
+            delete_record(recid)
             continue
 
         temp_arr.append(uuid)

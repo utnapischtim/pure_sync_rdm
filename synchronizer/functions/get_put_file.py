@@ -27,15 +27,12 @@ def rdm_add_file(shell_interface, file_name: str, recid: str, uuid: str):
     report = f'{current_time} - file_put_to_rdm - {response} - {recid}\n'
 
     if response.status_code >= 300:
-
-        shell_interface.count_errors_put_file += 1
         shell_interface.file_success = False
 
         report += f'{response.content}\n'
         add_to_full_report(response.content)
 
     else:
-        shell_interface.count_successful_push_file += 1
         shell_interface.file_success = True
 
         # if the upload was successful then delete file from /reports/temporary_files
@@ -47,7 +44,7 @@ def rdm_add_file(shell_interface, file_name: str, recid: str, uuid: str):
     file_records = f'{dirpath}/reports/{date.today()}_records.log'
     open(file_records, "a").write(report)
 
-    return response.status_code
+    return response
 
 
 
@@ -74,7 +71,7 @@ def get_file_from_pure(shell_interface, electronic_version: str):
         if shell_interface.pure_rdm_file_match[1]:
             match_review = 'Match: T, Review: T'
     
-    report = f'\tPure get file         - {response} - {match_review} - {file_name}'
+    report = f'\tPure get file         - {response} - {match_review} - {file_name[0:55]}...'
     add_to_full_report(report)
     
     if response.status_code < 300:

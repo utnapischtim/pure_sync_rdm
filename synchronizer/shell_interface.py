@@ -8,8 +8,8 @@ Usage:
     shell_interface.py uuid
     shell_interface.py duplicates
     shell_interface.py delete_all
-    shell_interface.py owners
-    shell_interface.py owners_orcid
+    shell_interface.py owner
+    shell_interface.py owner_orcid
     shell_interface.py owners_list
     shell_interface.py group_split      (OLD_GROUP) (NEW_GROUPS)
     shell_interface.py group_merge      (OLD_GROUPS) (NEW_GROUP)
@@ -26,90 +26,83 @@ Arguments:
 Options:
     -h --help     Show this screen.
     --version     Show version.
-
 """
-import requests
-import json
-import os
-import time
-from datetime                           import date, datetime, timedelta
-
 from docopt                             import docopt
 from main                               import method_call
 from functions.pure_get_changes         import pure_get_changes
-from functions.rdm_push_by_page         import get_pure_by_page
-from functions.rdm_push_record          import create_invenio_data
+from functions.rdm_push_by_page         import RunPages
 from functions.log_files                import delete_old_log_files
 from functions.rdm_duplicates           import rdm_duplicates
 from functions.delete_all_records       import delete_all_records
-from functions.rdm_push_by_uuid         import rdm_push_by_uuid
+from functions.rdm_push_by_uuid         import AddFromUuidList
 from functions.delete_record            import delete_record, delete_from_list
-# from functions.general_functions        import db_connect
-from functions.rdm_owners               import rdm_owners, get_rdm_record_owners, rdm_owners_by_orcid
-from functions.rdm_groups               import rdm_group_split, rdm_group_merge
-
+from functions.rdm_owners               import RdmOwners, get_rdm_record_owners
+from functions.rdm_groups               import RdmGroups
 
 class shell_interface:
     
     def __init__(self):
-        # self.json = json
-        # self.requests = requests
-        # self.os = os
-        # self.time = time
-        # self.date = date
-        # self.datetime = datetime
-        # self.timedelta = timedelta
         self.rdm_record_owner = None
-        # db_connect(self)
-
 
     def changes(self):
-        """ Gets from Pure API endpoint 'changes' all the records that have been created, modified and deleted.
-        Next updates accordingly RDM records """
-        pure_get_changes(self)
+        """ Gets from Pure API endpoint 'changes' all the records that have been 
+        created, modified and deleted. Next updates accordingly RDM records """
+        pure_get_changes()
 
     def pages(self, page_start, page_end, page_size):
         """ Push to RDM records from Pure by page """
-        get_pure_by_page(self, page_start, page_end, page_size)
+        # get_pure_by_page(self, page_start, page_end, page_size)
+        run_pages = RunPages()
+        run_pages.get_pure_by_page(page_start, page_end, page_size)
 
     def logs(self):
         """ Delete old log files """
-        delete_old_log_files(self)
+        delete_old_log_files()
 
     def delete(self):
         """ Delete RDM records by recid (to_delete.log) """
-        delete_from_list(self)
+        delete_from_list()
 
     def uuid(self):
         """ Push to RDM all uuids that are in to_transfer.log """
-        rdm_push_by_uuid(self)
+        add_uuids = AddFromUuidList()
+        add_uuids.add_from_uuid_list()
 
     def duplicates(self):
         """ Find and delete RDM duplicate records """
-        rdm_duplicates(self)
+        rdm_duplicates()
 
     def delete_all(self):
-        delete_all_records(self)
+        """ Delete all RDM records """
+        delete_all_records()
 
-    def owners(self):
-        """ Gets from pure all the records related to a certain user,
+    def owner(self):
+        """ Gets from pure all the records related to a certain user recid,
             afterwards it modifies/create RDM records accordingly."""
-        rdm_owners(self)
+        rdm_owners = RdmOwners()
+        rdm_owners.rdm_owner_check()
 
-    def owners_orcid(self):
-        rdm_owners_by_orcid(self)
+    def owner_orcid(self):
+        """ Gets from pure all the records related to a certain user orcid,
+            afterwards it modifies/create RDM records accordingly."""
+        rdm_owners = RdmOwners()
+        rdm_owners.rdm_owner_by_orcid()
 
     def owners_list(self):
         """ Gets from RDM all record uuids, recids and owners """
-        get_rdm_record_owners(self)
+        get_rdm_record_owners()
 
     def rdm_group_split(self, old_id, new_ids):
         """ Split a single group into moltiple ones """
-        rdm_group_split(self, old_id, new_ids)
+        # rdm_group_split(self, old_id, new_ids)
+        rdm_groups = RdmGroups()
+        rdm_groups.rdm_group_split(old_id, new_ids)
 
     def rdm_group_merge(self, old_ids, new_id):
         """ Merges multiple groups into a single one """
-        rdm_group_merge(self, old_ids, new_id)
+        # rdm_group_merge(self, old_ids, new_id)
+        rdm_groups = RdmGroups()
+        rdm_groups.rdm_group_merge(old_ids, new_id)
 
 
 if __name__ == '__main__':

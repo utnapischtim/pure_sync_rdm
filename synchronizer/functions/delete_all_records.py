@@ -1,20 +1,23 @@
-from functions.delete_record        import delete_record
-from functions.general_functions    import add_to_full_report
-from functions.rdm_general_functions    import too_many_rdm_requests_check
-from setup                          import dirpath, token_rdm, rdm_api_url_records, wait_429
+from functions.delete_record            import delete_record
+from functions.general_functions        import add_to_full_report
+from functions.rdm_general_functions    import too_many_rdm_requests_check, rdm_get_metadata
+from setup                              import dirpath, token_rdm, rdm_api_url_records, wait_429
+import json
 
-def delete_all_records(shell_interface):
+def delete_all_records():
 
-    rdm_get_all_recods(shell_interface)
+    rdm_get_all_recods()
+
+    exit()
 
     file_data = open(f'{dirpath}/data/all_rdm_records.txt').readlines()
     for line in file_data:
         recid = line.split(' ')[1].strip('\n')
-        delete_record(shell_interface, recid)
+        delete_record(recid)
 
 
 # -- GET FROM RDM --
-def rdm_get_all_recods(shell_interface):
+def rdm_get_all_recods():
     pag = 1
     pag_size = 1000
 
@@ -32,16 +35,8 @@ def rdm_get_all_recods(shell_interface):
 
     while go_on == True:
 
-        # REQUEST to RDM
-        headers = {
-            'Authorization': f'Bearer {token_rdm}',
-            'Content-Type': 'application/json',
-        }
-        params = (
-            ('prettyprint', '1'),
-            )
         url = f'{rdm_api_url_records}api/records/?sort=mostrecent&size={pag_size}&page={pag}'
-        response = shell_interface.requests.get(url, headers=headers, params=params, verify=False)
+        response = rdm_get_metadata(url)
 
         add_to_full_report(response)
         open(f"{dirpath}/data/temporary_files/resp_rdm.json", 'wb').write(response.content)
@@ -54,7 +49,7 @@ def rdm_get_all_recods(shell_interface):
             return False
 
         else:
-            resp_json = shell_interface.json.loads(response.content)
+            resp_json = json.loads(response.content)
 
             for i in resp_json['hits']['hits']:
                 data_ur += f"{i['metadata']['uuid']} {i['metadata']['recid']}\n"
@@ -66,7 +61,6 @@ def rdm_get_all_recods(shell_interface):
         if 'next' not in resp_json['links']:
             go_on = False
         
-        # shell_interface.time.sleep(3)
         pag += 1
         
     add_to_full_report(f'\n- Tot items: {count} -')

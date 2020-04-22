@@ -26,11 +26,11 @@ def method_call(docopt_instance: object, arguments: dict):
     elif arguments['delete_all']:
         docopt_instance.delete_all()
 
-    elif arguments['owners']:
-        docopt_instance.owners()
+    elif arguments['owner']:
+        docopt_instance.owner()
 
-    elif arguments['owners_orcid']:
-        docopt_instance.owners_orcid()
+    elif arguments['owner_orcid']:
+        docopt_instance.owner_orcid()
 
     elif arguments['owners_list']:
         docopt_instance.owners_list()

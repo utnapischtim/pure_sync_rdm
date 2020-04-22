@@ -1,19 +1,25 @@
-from setup                              import dirpath, pure_rest_api_url
+from setup                              import dirpath, pure_rest_api_url, pure_api_key
 from functions.general_functions        import add_to_full_report
-from functions.rdm_general_functions    import rdm_get_metadata_verified
-
 from datetime                           import date, datetime
 import json
+import requests
 
 #   ---         ---         ---
-def pure_get_uuid_metadata(shell_interface: object, uuid: str):
+def pure_get_uuid_metadata(uuid: str):
     """ Method used to get from Pure record's metadata """
 
     # PURE REQUEST
     url = f'{pure_rest_api_url}research-outputs/{uuid}'
-    response = rdm_get_metadata_verified(url)
+    response = pure_get_metadata(url)
 
-    add_to_full_report(f'\n\tPure get metadata     - {response}')
+    report = f'\tPure get metadata     - {response}'
+    if response.status_code == 404:
+        report += f' - Metadata not found in Pure for record {uuid}'
+    elif response.status_code >= 300:
+        report += f' - Error: {response.content}'
+    else:
+        report += f' - {uuid}'
+    add_to_full_report(report)
 
     # Add response content to pure_get_uuid_metadata.json
     file_response = f'{dirpath}/data/temporary_files/pure_get_uuid_metadata.json'
@@ -30,5 +36,14 @@ def pure_get_uuid_metadata(shell_interface: object, uuid: str):
         return False
 
     # Load json
-    shell_interface.item = json.loads(response.content)
-    return True
+    return json.loads(response.content)
+
+
+
+def pure_get_metadata(url: str):
+    headers = {
+        'api-key': pure_api_key,
+        'Accept': 'application/json',
+    }
+    # print(url)
+    return requests.get(url, headers=headers)

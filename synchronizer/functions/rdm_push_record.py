@@ -1,8 +1,8 @@
 from setup                              import dirpath, versioning_running, rdm_api_url_records, \
                                     applied_restrictions_possible_values, push_dist_sec, pure_rest_api_url
 from functions.general_functions        import add_to_full_report
-from functions.pure_general_functions   import pure_get_uuid_metadata
-from functions.rdm_general_functions    import rdm_get_metadata_verified, rdm_get_metadata, rdm_post_metadata, \
+from functions.pure_general_functions   import pure_get_uuid_metadata, pure_get_metadata
+from functions.rdm_general_functions    import rdm_get_metadata, rdm_post_metadata, \
                                     rdm_get_recid, get_rdm_userid_from_list_by_externalid, too_many_rdm_requests_check
 from functions.get_put_file             import rdm_add_file, get_file_from_pure
 from functions.rdm_groups               import rdm_create_group, rdm_add_user_to_group
@@ -26,16 +26,16 @@ def rdm_push_record(shell_interface: object, uuid: str):
 
 
 #   ---         ---         ---
-def create_invenio_data(shell_interface: object):
+def create_invenio_data(shell_interface: object, item):
     """ Reads pure metadata and creates the json that will be pushed to RDM """
-
+    
     # counts all records
     shell_interface.count_total += 1      
 
     shell_interface.record_files    = []
     shell_interface.rdm_file_review = []
 
-    item = shell_interface.item
+    # item = shell_interface.item
     shell_interface.uuid = item['uuid']
 
     shell_interface.data = {}

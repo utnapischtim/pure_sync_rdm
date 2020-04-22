@@ -1,18 +1,15 @@
 from setup                              import dirpath, token_rdm, rdm_api_url_records
 from functions.general_functions        import add_to_full_report
-from functions.rdm_general_functions    import too_many_rdm_requests_check
-
+from functions.rdm_general_functions    import too_many_rdm_requests_check, rdm_delete_metadata
 from datetime                           import date, datetime
 import requests
 
-def delete_from_list(shell_interface):
-
-    # NOTE: the user ACCOUNT related to the used TOKEN must be ADMIN
+def delete_from_list():
     
-    count_success = 0
-    count_total = 0
-    shell_interface.count_errors_record_delete        = 0
-    shell_interface.count_successful_record_delete    = 0
+    count_success                  = 0
+    count_total                    = 0
+    count_errors_record_delete     = 0
+    count_successful_record_delete = 0
 
     file_name = f'{dirpath}/data/to_delete.txt'
     recids = open(file_name, 'r').readlines()
@@ -36,29 +33,26 @@ def delete_from_list(shell_interface):
             continue
         
         # -- REQUEST --
-        response = delete_record(shell_interface, recid)
+        response = delete_record(recid)
 
         # 410 -> "PID has been deleted"
         if response.status_code < 300 or response.status_code == 410:
             count_success += 1
-            shell_interface.count_successful_record_delete += 1
+            count_successful_record_delete += 1
         else:
-            shell_interface.count_errors_record_delete += 1
+            count_errors_record_delete += 1
 
 
 
-#   DELETE_RECORD
-def delete_record(shell_interface, recid: str):
+#       ---     ---     ---
+def delete_record(recid: str):
     
-    #   REQUEST
-    headers = {
-        'Authorization': f'Bearer {token_rdm}',
-        'Content-Type': 'application/json',
-    }
+    # NOTE: the user ACCOUNT related to the used TOKEN must be ADMIN
+
+    # Delete record request
     url = f'{rdm_api_url_records}api/records/{recid}'
-    response = requests.delete(url, headers=headers, verify=False)
-    #   ---
-    
+    response = rdm_delete_metadata(url, recid)
+
     report = f'\tRDM delete record     - {response} - Deleted recid:        {recid}'
     add_to_full_report(report)
 
@@ -78,7 +72,7 @@ def delete_record(shell_interface, recid: str):
         return False
 
     # remove deleted recid from to_delete.log
-    file_name = dirpath + "/data/to_delete.txt"
+    file_name = f"{dirpath}/data/to_delete.txt"
     with open(file_name, "r") as f:
         lines = f.readlines()
     with open(file_name, "w") as f:
@@ -87,7 +81,7 @@ def delete_record(shell_interface, recid: str):
                 f.write(line)
 
     # remove record from all_rdm_records.log
-    file_name = dirpath + "/data/all_rdm_records.txt"
+    file_name = f"{dirpath}/data/all_rdm_records.txt"
     with open(file_name, "r") as f:
         lines = f.readlines()
     with open(file_name, "w") as f:

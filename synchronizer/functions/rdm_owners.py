@@ -1,221 +1,250 @@
-from setup                          import pure_rest_api_url, dirpath, rdm_api_url_records, token_rdm
-from functions.general_functions    import add_to_full_report, initialize_count_variables, add_spaces
-from functions.rdm_general_functions        import rdm_get_metadata_verified, rdm_get_metadata, rdm_get_recid_metadata, rdm_get_recid, update_rdm_record
-from functions.rdm_push_record      import create_invenio_data
-from functions.rdm_push_record      import rdm_push_record
-from functions.rdm_database         import RdmDatabase
-
+from setup                              import pure_rest_api_url, dirpath, rdm_api_url_records, token_rdm
+from functions.general_functions        import add_to_full_report, itinialize_counters, add_spaces
+from functions.rdm_general_functions    import rdm_get_metadata, rdm_get_recid_metadata, rdm_get_recid, update_rdm_record
+from functions.pure_general_functions   import pure_get_metadata
+from functions.rdm_push_record          import create_invenio_data, rdm_push_record
+from functions.rdm_add_record           import RdmAddRecord
+from functions.rdm_database             import RdmDatabase
 import json
 
 rdm_db = RdmDatabase()
 
-#   ---         ---         ---
-def rdm_owners(shell_interface: object):
-    """ Gets from pure all the records related to a certain user,
-        afterwards it modifies/create RDM records accordingly. """
+class RdmOwners:
 
-    external_id = '56038' # TEMP
+    #   ---         ---         ---
+    def rdm_owner_check(self):
+        """ Gets from pure all the records related to a certain user,
+            afterwards it modifies/create RDM records accordingly. """
 
-    add_to_full_report(f'\nUser external_id: {external_id}\n')
+        # self.external_id = '56038' # TEMP
+        self.external_id = '3261' # TEMP
 
-    # Gets the ID of the logged in user
-    user_id = rdm_get_user_id(shell_interface)
+        add_to_full_report(f'\nUser external_id: {self.external_id}\n')
 
-    # If the user was not found in RDM then there is no owner to add to the record.
-    if not user_id:
-        return
+        # Gets the ID of the logged in user
+        self.user_id = self.rdm_get_user_id()
 
-    # Get from pure user_uuid
-    user_uuid = pure_get_user_uuid(shell_interface, 'externalId', external_id)
-    
-    if not user_uuid:
-        return False
+        # If the user was not found in RDM then there is no owner to add to the record.
+        if not self.user_id:
+            return
 
-    # Add user to user_ids_match table
-    add_user_ids_match(shell_interface, user_id, user_uuid, external_id)
-
-    get_owner_records(shell_interface, user_id, user_uuid)
-
-
-#   ---         ---         ---
-def rdm_owners_by_orcid(shell_interface: object):
-
-    orcid = '0000-0002-4154-6945'  # TEMP
-
-    add_to_full_report(f'\norcid: {orcid}\n')
-
-    if len(orcid) != 19:
-        add_to_full_report('Warning - Orcid length it is not 19\n')
-
-    # Gets the ID and IP of the logged in user
-    user_id = rdm_get_user_id(shell_interface)
-
-    # If the user was not found in RDM then there is no owner to add to the record.
-    if not user_id:
-        return
-
-    # Get from pure user_uuid
-    user_uuid = pure_get_user_uuid(shell_interface, 'orcid', orcid)
-    
-    if not user_uuid:
-        return False
-
-    get_owner_records(shell_interface, user_id, user_uuid)
-    
-
-#   ---         ---         ---
-def get_owner_records(shell_interface, user_id, user_uuid):
-    
-    initialize_count_variables(shell_interface)
-    shell_interface.count_http_responses = {}
-
-    page      = 1
-    page_size = 25
-    go_on     = True
-    count     = 0
-
-    while go_on:
-
-        url = f'{pure_rest_api_url}persons/{user_uuid}/research-outputs?page={page}&pageSize={page_size}'
-        response = rdm_get_metadata_verified(url)
-
-        # Write data into pure_get_person_records
-        file_name = f'{dirpath}/data/temporary_files/pure_get_person_records.json'
-        open(file_name, 'wb').write(response.content)
-
-        if response.status_code >= 300:
-            add_to_full_report(response.content)
-            return False
-
-        # Load response json
-        resp_json = json.loads(response.content)
-
-        total_items = resp_json['count']
-        add_to_full_report(f'\nGet person records - {response} - Page {page} (size {page_size})    - Total records: {total_items}')
-
-        if total_items == 0:
-            if page == 1:
-                add_to_full_report('\nThe user has no records - End task\n')
-            return True
-
-        for item in resp_json['items']:
+        # Get from pure user_uuid
+        self.user_uuid = self.pure_get_user_uuid('externalId', self.external_id)
         
-            uuid  = item['uuid']
-            title = item['title']
-            count += 1
-            
-            add_to_full_report(f'\n\tRecord uuid           - {uuid}   - {title[0:55]}...')
-
-            # Get from RDM the recid
-            recid = rdm_get_recid(shell_interface, uuid)
-
-            # If the record is not in RDM, it is added
-            if recid == False:
-                item['owners'] = [user_id]
-                shell_interface.item = item
-
-                add_to_full_report('\t+ Create record    +')
-                create_invenio_data(shell_interface)
-
-            else:
-                # Checks if the owner is already in RDM record metadata
-                # Get metadata from RDM
-                response = rdm_get_recid_metadata(shell_interface, recid)
-                record_json = json.loads(response.content)['metadata']
-
-                add_to_full_report(f"\tRDM get metadata      - {response} - Current owners:     - {record_json['owners']}")
-
-                # If the owner is not among metadata owners
-                if user_id and user_id not in record_json['owners']:
-
-                    record_json['owners'].append(user_id)
-                    add_to_full_report(f"\t+   Adding owner      -               - New owners:         - {record_json['owners']}")
-
-                    record_json = json.dumps(record_json)
-
-                    file_name = f'{dirpath}/data/temporary_files/rdm_record_update.json'
-                    open(file_name, 'a').write(record_json)
-
-                    # Add owner to the record
-                    update_rdm_record(shell_interface, record_json, recid)
-                else:
-                    add_to_full_report('\t+ Owner in record  +')
-
-        page += 1
-
-
-#   ---         ---         ---
-def pure_get_user_uuid(shell_interface: object, key_name: str, key_value: str):
-    """ PURE get person records """
-
-    keep_searching = True
-    page_size = 250
-    page = 1
-
-    while keep_searching:
-
-        url = f'{pure_rest_api_url}persons?page={page}&pageSize={page_size}&q=' + f'"{key_value}"'
-        response = rdm_get_metadata_verified(url)
-
-        if response.status_code >= 300:
-            add_to_full_report(response.content)
+        if not self.user_uuid:
             return False
 
-        open(f'{dirpath}/data/temporary_files/pure_get_user_uuid.json', "wb").write(response.content)
-        record_json = json.loads(response.content)
+        # Add user to user_ids_match table
+        self.add_user_ids_match()
 
-        total_items = record_json['count']
+        # Gets from pure all records related to the user
+        self.get_owner_records()
 
-        add_to_full_report(f'Pure get user uuid - {response} - Total items: {total_items}')
 
-        for item in record_json['items']:
+    #   ---         ---         ---
+    def rdm_owner_by_orcid(self):
 
-            if item[key_name] == key_value:
+        orcid = '0000-0002-4154-6945'  # TEMP
 
-                first_name  = item['name']['firstName']
-                lastName    = item['name']['lastName']
-                uuid        = item['uuid']
+        add_to_full_report(f'\norcid: {orcid}\n')
 
-                add_to_full_report(f'User uuid          - {first_name} {lastName}  -  {uuid}')
+        if len(orcid) != 19:
+            add_to_full_report('Warning - Orcid length it is not 19\n')
 
-                if len(uuid) != 36:
-                    add_to_full_report('\n- Warning! Incorrect user_uuid length -\n')
-                    return False
+        # Gets the ID and IP of the logged in user
+        self.user_id = self.rdm_get_user_id()
 
-                return uuid
+        # If the user was not found in RDM then there is no owner to add to the record.
+        if not self.user_id:
+            return
 
-        if 'navigationLinks' in record_json:
+        # Get from pure user_uuid
+        self.user_uuid = self.pure_get_user_uuid('orcid', orcid)
+        
+        if not self.user_uuid:
+            return False
+
+        self.get_owner_records()
+        
+
+    #   ---         ---         ---
+    def get_owner_records(self):
+        
+        self.global_counters = itinialize_counters()
+
+        rdm_add_record = RdmAddRecord()
+
+        page      = 1
+        page_size = 25
+        go_on     = True
+        count     = 0
+
+        while go_on:
+
+            url = f'{pure_rest_api_url}persons/{self.user_uuid}/research-outputs?page={page}&pageSize={page_size}'
+            response = pure_get_metadata(url)
+
+            if response.status_code >= 300:
+                return False
+
+            # Load response json
+            resp_json = json.loads(response.content)
+
+            total_items = resp_json['count']
+            add_to_full_report(f'\nGet person records - {response} - Page {page} (size {page_size})    - Total records: {total_items}')
+
+            if total_items == 0 and page == 1:
+                add_to_full_report('\nThe user has no records - End task\n')
+                return True
+
+            for item in resp_json['items']:
+            
+                uuid  = item['uuid']
+                title = item['title']
+                count += 1
+                
+                add_to_full_report(f'\n\tRecord uuid           - {uuid}   - {title[0:55]}...')
+
+                # Get from RDM the recid
+                recid = rdm_get_recid(uuid)
+
+                # If the record is not in RDM, it is added
+                if recid == False:
+                    item['owners'] = [self.user_id]
+
+                    add_to_full_report('\t+ Create record    +')
+                    rdm_add_record.create_invenio_data(self.global_counters, item)
+
+                else:
+                    # Checks if the owner is already in RDM record metadata
+                    # Get metadata from RDM
+                    response = rdm_get_recid_metadata(recid)
+                    record_json = json.loads(response.content)['metadata']
+
+                    add_to_full_report(f"\tRDM get metadata      - {response} - Current owners:     - {record_json['owners']}")
+
+                    # If the owner is not among metadata owners
+                    if self.user_id and self.user_id not in record_json['owners']:
+
+                        record_json['owners'].append(self.user_id)
+                        add_to_full_report(f"\t+   Adding owner      -                  - New owners:         - {record_json['owners']}")
+
+                        record_json = json.dumps(record_json)
+
+                        file_name = f'{dirpath}/data/temporary_files/rdm_record_update.json'
+                        open(file_name, 'a').write(record_json)
+
+                        # Add owner to the record
+                        update_rdm_record(record_json, recid)
+                    else:
+                        add_to_full_report('\t+ Owner in record  +')
+
             page += 1
-        else:
-            keep_searching = False
 
-    add_to_full_report(f'\nUser uuid not found - Exit task\n')
-    return False
+
+    #   ---         ---         ---
+    def pure_get_user_uuid(self, key_name: str, key_value: str):
+        """ PURE get person records """
+
+        keep_searching = True
+        page_size = 250
+        page = 1
+
+        while keep_searching:
+
+            url = f'{pure_rest_api_url}persons?page={page}&pageSize={page_size}&q=' + f'"{key_value}"'
+            response = pure_get_metadata(url)
+
+            if response.status_code >= 300:
+                add_to_full_report(response.content)
+                return False
+
+            open(f'{dirpath}/data/temporary_files/pure_get_user_uuid.json', "wb").write(response.content)
+            record_json = json.loads(response.content)
+
+            total_items = record_json['count']
+
+            add_to_full_report(f'Pure get user uuid - {response} - Total items: {total_items}')
+
+            for item in record_json['items']:
+
+                if item[key_name] == key_value:
+
+                    first_name  = item['name']['firstName']
+                    lastName    = item['name']['lastName']
+                    uuid        = item['uuid']
+
+                    add_to_full_report(f'User uuid          - {first_name} {lastName}  -  {uuid}')
+
+                    if len(uuid) != 36:
+                        add_to_full_report('\n- Warning! Incorrect user_uuid length -\n')
+                        return False
+
+                    return uuid
+
+            if 'navigationLinks' in record_json:
+                page += 1
+            else:
+                keep_searching = False
+
+        add_to_full_report(f'\nUser uuid not found - Exit task\n')
+        return False
+
+
+    #   ---         ---         ---
+    def rdm_get_user_id(self):
+        """ Gets the ID and IP of the logged in user """
+
+        response = rdm_db.db_query(f"SELECT user_id, ip FROM accounts_user_session_activity")
+
+        if not response:
+            add_to_full_report('\n- accounts_user_session_activity: No user is logged in -\n')
+            return False
+
+        elif len(response) > 1:
+            add_to_full_report('\n- accounts_user_session_activity: Multiple users in \n')
+            return False
+
+        add_to_full_report(f'user IP: {response[0][1]} - user_id: {response[0][0]}')
+
+        self.rdm_record_owner = response[0][0]
+
+        return self.rdm_record_owner
+
+
+    def add_user_ids_match(self):
+
+        file_name = f"{dirpath}/data/user_ids_match.txt"
+
+        needs_to_add = self.check_user_ids_match(file_name)
+
+        if needs_to_add:
+            open(file_name, 'a').write(f'{self.user_id} {self.user_uuid} {self.external_id}\n')
+            add_to_full_report(f'user_ids_match     - Adding id toList - {self.user_id}, {self.user_uuid}, {self.external_id}')
+
+
+    def check_user_ids_match(self, file_name: str):
+
+        file_data = open(file_name).readlines()
+        for line in file_data:
+            line = line.split('\n')[0]
+            line = line.split(' ')
+
+            # Checks if at least one of the ids match
+            if str(self.user_id) == line[0] or self.user_uuid == line[1] or self.external_id == line[2]:
+                
+                if line == [str(self.user_id), self.user_uuid, self.external_id]:
+                    add_to_full_report('user_ids_match     - full match')
+                    return False
+        
+        return True
+
+
+
 
 
 #   ---         ---         ---
-def rdm_get_user_id(shell_interface: object):
-    """ Gets the ID and IP of the logged in user """
-
-    response = rdm_db.db_query(f"SELECT user_id, ip FROM accounts_user_session_activity")
-
-    if not response:
-        add_to_full_report('\n- accounts_user_session_activity: No user is logged in -\n')
-        return False
-
-    elif len(response) > 1:
-        add_to_full_report('\n- accounts_user_session_activity: Multiple users in \n')
-        return False
-
-    add_to_full_report(f'user IP: {response[0][1]} - user_id: {response[0][0]}')
-
-    shell_interface.rdm_record_owner = response[0][0]
-
-    return shell_interface.rdm_record_owner
-
-
-#   ---         ---         ---
-def get_rdm_record_owners(shell_interface: object):
+def get_rdm_record_owners():
             
     pag = 1
     pag_size = 250
@@ -287,32 +316,3 @@ def get_rdm_record_owners(shell_interface: object):
     open(file_all_records_list, 'w').close()
     # Add all records to file
     open(file_all_records_list, 'a').write(all_records_list)
-
-
-
-def add_user_ids_match(shell_interface: object, user_id: int, user_uuid: str, external_id: str):
-
-    file_name = f"{dirpath}/data/user_ids_match.txt"
-
-    needs_to_add = check_user_ids_match(shell_interface, user_id, user_uuid, external_id, file_name)
-
-    if needs_to_add:
-        open(file_name, 'a').write(f'{user_id} {user_uuid} {external_id}\n')
-        add_to_full_report(f'user_ids_match     - Adding id toList - {user_id}, {user_uuid}, {external_id}')
-
-
-def check_user_ids_match(shell_interface: object, user_id: int, user_uuid: str, external_id: str, file_name: str):
-
-    file_data = open(file_name).readlines()
-    for line in file_data:
-        line = line.split('\n')[0]
-        line = line.split(' ')
-
-        # Checks if at least one of the ids match
-        if str(user_id) == line[0] or user_uuid == line[1] or external_id == line[2]:
-            
-            if line == [str(user_id), user_uuid, external_id]:
-                add_to_full_report('user_ids_match     - full match')
-                return False
-    
-    return True
