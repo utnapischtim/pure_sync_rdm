@@ -15,7 +15,7 @@ wait_429            = 900
 
 # LOG FILES
 days_to_keep_log_files   = 2      # Deletes log files after x days (shorten_logfiles.py)
-lines_successful_changes = 30     # Reduce the number of lines in successful_changes.txt
+lines_successful_changes = 90     # Reduce the number of lines in successful_changes.txt
 
 # Percentage of updated items to considere the upload task successful
 upload_percent_accept = 90
