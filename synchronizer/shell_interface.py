@@ -27,17 +27,17 @@ Options:
     -h --help     Show this screen.
     --version     Show version.
 """
-from docopt                             import docopt
-from main                               import method_call
-from functions.pure_get_changes         import pure_get_changes
-from functions.rdm_push_by_page         import RunPages
-from functions.log_manager              import delete_old_log_files
-from functions.rdm_duplicates           import rdm_duplicates
-from functions.delete_all_records       import delete_all_records
-from functions.rdm_push_by_uuid         import AddFromUuidList
-from functions.delete_record            import delete_record, delete_from_list
-from functions.rdm_owners               import RdmOwners, get_rdm_record_owners
-from functions.rdm_groups               import RdmGroups
+from docopt                         import docopt
+from main                           import method_call
+from source.pure.get_changes        import pure_get_changes
+from source.rdm.push_by_page        import RunPages
+from source.log_manager             import delete_old_log_files
+from source.rdm.duplicates          import rdm_duplicates
+from source.rdm.delete_all_records  import delete_all_records
+from source.rdm.push_by_uuid        import AddFromUuidList
+from source.rdm.delete_record       import delete_from_list
+from source.rdm.owners              import RdmOwners, get_rdm_record_owners
+from source.rdm.groups              import RdmGroups
 
 class shell_interface:
     
@@ -51,7 +51,6 @@ class shell_interface:
 
     def pages(self, page_start, page_end, page_size):
         """ Push to RDM records from Pure by page """
-        # get_pure_by_page(self, page_start, page_end, page_size)
         run_pages = RunPages()
         run_pages.get_pure_by_page(page_start, page_end, page_size)
 

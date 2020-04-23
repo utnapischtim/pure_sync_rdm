@@ -1,16 +1,16 @@
-from setup                              import dirpath, versioning_running, rdm_api_url_records, push_dist_sec, \
-                                               applied_restrictions_possible_values, pure_rest_api_url
-from functions.rdm_general_functions    import rdm_get_metadata, rdm_post_metadata, \
-                                               rdm_get_recid, get_rdm_userid_from_list_by_externalid, too_many_rdm_requests_check
-from functions.general_functions        import add_to_full_report
-from functions.pure_general_functions   import pure_get_uuid_metadata, pure_get_metadata
-from functions.get_put_file             import rdm_add_file, get_file_from_pure
-from functions.rdm_groups               import rdm_create_group
-from functions.rdm_versioning           import rdm_versioning
-from functions.rdm_database             import RdmDatabase
-from datetime                           import date, datetime
 import json
 import time
+from datetime                       import date, datetime
+from setup                          import dirpath, versioning_running, rdm_api_url_records, push_dist_sec, \
+                                               applied_restrictions_possible_values, pure_rest_api_url
+from source.rdm.general_functions   import rdm_get_metadata, rdm_post_metadata, \
+                                               rdm_get_recid, get_rdm_userid_from_list_by_externalid, too_many_rdm_requests_check
+from source.general_functions       import add_to_full_report
+from source.get_put_file            import rdm_add_file, get_file_from_pure
+from source.pure.general_functions  import pure_get_uuid_metadata, pure_get_metadata
+from source.rdm.groups              import rdm_create_group
+from source.rdm.versioning          import rdm_versioning
+from source.rdm.database            import RdmDatabase
 
 class RdmAddRecord:
 
@@ -82,12 +82,12 @@ class RdmAddRecord:
         self.add_field(item, 'journalTitle',                ['info', 'journalAssociation', 'title', 'value'])
         self.add_field(item, 'journalNumber',               ['info', 'journalNumber'])
         self.add_field(item, 'pureId',                      ['pureId'])
-        self.add_field(item, 'type_p',                      ['types', 0, 'value'])    
+        self.add_field(item, 'recordType',                  ['types', 0, 'value'])    
         self.add_field(item, 'category',                    ['categories', 0, 'value'])  
         self.add_field(item, 'peerReview',                  ['peerReview'])    
         self.add_field(item, 'publicationStatus',           ['publicationStatuses', 0, 'publicationStatuses', 0, 'value'])
         self.add_field(item, 'language',                    ['languages', 0, 'value'])
-        self.add_field(item, 'totalNumberOfAuthors',        ['totalNumberOfAuthors'])
+        self.add_field(item, 'numberOfAuthors',             ['totalNumberOfAuthors'])
         self.add_field(item, 'workflow',                    ['workflows', 0, 'value'])
         self.add_field(item, 'confidential',                ['confidential'])
         self.add_field(item, 'publisherName',               ['publisher', 'names', 0, 'value'])

@@ -1,11 +1,11 @@
-from setup                              import pure_rest_api_url, dirpath, rdm_api_url_records, token_rdm
-from functions.general_functions        import add_to_full_report, itinialize_counters, add_spaces
-from functions.rdm_general_functions    import rdm_get_metadata, rdm_get_recid_metadata, rdm_get_recid, update_rdm_record
-from functions.pure_general_functions   import pure_get_metadata
-from functions.rdm_push_record          import create_invenio_data, rdm_push_record
-from functions.rdm_add_record           import RdmAddRecord
-from functions.rdm_database             import RdmDatabase
 import json
+from setup                          import pure_rest_api_url, dirpath, rdm_api_url_records, token_rdm
+from source.general_functions       import add_to_full_report, itinialize_counters, add_spaces
+from source.pure.general_functions  import pure_get_metadata
+from source.rdm.general_functions   import rdm_get_metadata, rdm_get_recid_metadata, rdm_get_recid, update_rdm_record
+from source.rdm.push_record         import create_invenio_data, rdm_push_record
+from source.rdm.add_record          import RdmAddRecord
+from source.rdm.database            import RdmDatabase
 
 rdm_db = RdmDatabase()
 

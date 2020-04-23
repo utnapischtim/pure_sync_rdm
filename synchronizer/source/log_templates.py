@@ -1,5 +1,5 @@
-from functions.general_functions        import dirpath
-from datetime                           import date, datetime
+from datetime                   import date, datetime
+from source.general_functions   import dirpath
 
 date_today = str(datetime.today().strftime('%Y-%m-%d'))
 

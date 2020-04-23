@@ -1,7 +1,7 @@
-from setup import dirpath, days_to_keep_log_files, lines_successful_changes
-from functions.general_functions    import add_to_full_report
-from datetime                       import date, datetime, timedelta
 import os
+from datetime                   import date, datetime, timedelta
+from setup                      import dirpath, days_to_keep_log_files, lines_successful_changes
+from source.general_functions   import add_to_full_report
 
 def delete_old_log_files():
     

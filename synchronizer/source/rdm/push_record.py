@@ -1,17 +1,17 @@
-from setup                              import dirpath, versioning_running, rdm_api_url_records, \
-                                    applied_restrictions_possible_values, push_dist_sec, pure_rest_api_url
-from functions.general_functions        import add_to_full_report
-from functions.pure_general_functions   import pure_get_uuid_metadata, pure_get_metadata
-from functions.rdm_general_functions    import rdm_get_metadata, rdm_post_metadata, \
-                                    rdm_get_recid, get_rdm_userid_from_list_by_externalid, too_many_rdm_requests_check
-from functions.get_put_file             import rdm_add_file, get_file_from_pure
-from functions.rdm_groups               import rdm_create_group, rdm_add_user_to_group
-from functions.rdm_versioning           import rdm_versioning
-from functions.rdm_database             import RdmDatabase
-
-from datetime                           import date, datetime
 import json
 import time
+from datetime                       import date, datetime
+from setup                          import dirpath, versioning_running, rdm_api_url_records, push_dist_sec, \
+                                           applied_restrictions_possible_values, pure_rest_api_url
+from source.general_functions       import add_to_full_report
+from source.get_put_file            import rdm_add_file, get_file_from_pure
+from source.pure.general_functions  import pure_get_uuid_metadata, pure_get_metadata
+from source.rdm.general_functions   import rdm_get_metadata, rdm_post_metadata, rdm_get_recid, \
+                                           get_rdm_userid_from_list_by_externalid, too_many_rdm_requests_check
+from source.rdm.groups              import rdm_create_group, rdm_add_user_to_group
+from source.rdm.versioning          import rdm_versioning
+from source.rdm.database            import RdmDatabase
+
 
 #   ---         ---         ---
 def rdm_push_record(shell_interface: object, uuid: str):

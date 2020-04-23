@@ -1,5 +1,5 @@
-from setup                   import db_host, db_name, db_user, db_password
 import psycopg2
+from setup          import db_host, db_name, db_user, db_password
 
 class RdmDatabase:
 

@@ -1,8 +1,8 @@
-from functions.delete_record            import delete_record
-from functions.general_functions        import add_to_full_report
-from functions.rdm_general_functions    import too_many_rdm_requests_check, rdm_get_metadata
-from setup                              import dirpath, token_rdm, rdm_api_url_records, wait_429
 import json
+from setup                          import dirpath, token_rdm, rdm_api_url_records, wait_429
+from source.rdm.delete_record       import delete_record
+from source.general_functions       import add_to_full_report
+from source.rdm.general_functions   import too_many_rdm_requests_check, rdm_get_metadata
 
 def delete_all_records():
 

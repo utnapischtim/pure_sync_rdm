@@ -1,10 +1,10 @@
-from setup                              import pure_rest_api_url
-from functions.rdm_push_record          import create_invenio_data
-from functions.general_functions        import dirpath, add_spaces, add_to_full_report, itinialize_counters
-from functions.pure_general_functions   import pure_get_metadata
-from functions.rdm_add_record           import RdmAddRecord
-from datetime                           import date, datetime
 import json
+from datetime                       import date, datetime
+from setup                          import pure_rest_api_url
+from source.general_functions       import dirpath, add_spaces, add_to_full_report, itinialize_counters
+from source.pure.general_functions  import pure_get_metadata
+from source.rdm.push_record         import create_invenio_data
+from source.rdm.add_record          import RdmAddRecord
 
 class RunPages:
         

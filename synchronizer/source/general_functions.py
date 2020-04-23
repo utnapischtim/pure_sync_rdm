@@ -1,5 +1,5 @@
-from datetime                           import date
 import os
+from datetime       import date
 
 dirpath = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
 

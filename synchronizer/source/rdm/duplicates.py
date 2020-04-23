@@ -1,6 +1,6 @@
-from setup                          import dirpath
-from functions.delete_record        import delete_record
-from functions.general_functions    import add_to_full_report
+from setup                      import dirpath
+from source.general_functions   import add_to_full_report
+from source.rdm.delete_record   import delete_record
 
 def rdm_duplicates():
 

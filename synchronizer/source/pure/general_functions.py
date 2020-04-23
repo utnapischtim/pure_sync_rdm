@@ -1,8 +1,8 @@
-from setup                              import dirpath, pure_rest_api_url, pure_api_key
-from functions.general_functions        import add_to_full_report
-from datetime                           import date, datetime
 import json
 import requests
+from datetime                   import date, datetime
+from setup                      import dirpath, pure_rest_api_url, pure_api_key
+from source.general_functions   import add_to_full_report
 
 #   ---         ---         ---
 def pure_get_uuid_metadata(uuid: str):

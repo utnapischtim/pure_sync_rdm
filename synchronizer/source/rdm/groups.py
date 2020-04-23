@@ -1,11 +1,11 @@
-from setup                              import dirpath, rdm_api_url_records, pure_rest_api_url
-from functions.general_functions        import add_spaces, add_to_full_report
-from functions.rdm_general_functions    import update_rdm_record, rdm_get_metadata_by_query
-from functions.pure_general_functions   import pure_get_metadata
-from functions.rdm_database             import RdmDatabase
-from datetime                           import date, datetime
 import json
 import os
+from datetime                       import date, datetime
+from setup                          import dirpath, rdm_api_url_records, pure_rest_api_url
+from source.general_functions       import add_spaces, add_to_full_report
+from source.pure.general_functions  import pure_get_metadata
+from source.rdm.general_functions   import update_rdm_record, rdm_get_metadata_by_query
+from source.rdm.database            import RdmDatabase
 
 # Create instance of RDM database manager
 rdm_db = RdmDatabase()

@@ -1,15 +1,13 @@
-from setup                              import dirpath, rdm_api_url_records, pure_username, pure_password, \
-                                                email_receiver, email_sender, email_sender_password, \
-                                                email_smtp_server, email_smtp_port, email_subject, email_message
-from requests.auth                      import HTTPBasicAuth
-from functions.general_functions        import add_to_full_report
-from functions.rdm_general_functions    import rdm_put_file
-
-from datetime                           import date, datetime
 import requests
 import smtplib
 import os
-
+from datetime                       import date, datetime
+from setup                          import dirpath, rdm_api_url_records, pure_username, pure_password, \
+                                                email_receiver, email_sender, email_sender_password, \
+                                                email_smtp_server, email_smtp_port, email_subject, email_message
+from requests.auth                  import HTTPBasicAuth
+from source.general_functions       import add_to_full_report
+from source.rdm.general_functions   import rdm_put_file
 
 #   ---     ---     ---
 def rdm_add_file(shell_interface, file_name: str, recid: str, uuid: str):

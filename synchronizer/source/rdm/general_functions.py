@@ -1,11 +1,10 @@
-from setup                              import dirpath, token_rdm, rdm_api_url_records, pure_rest_api_url, versioning_running, pure_api_key, wait_429
-from functions.general_functions        import add_to_full_report, add_spaces
-import requests
-from datetime                           import date
-import time
 import requests
 import json
 import os
+import time
+from datetime                   import date
+from setup                      import dirpath, token_rdm, rdm_api_url_records, pure_rest_api_url, versioning_running, pure_api_key, wait_429
+from source.general_functions   import add_to_full_report, add_spaces
 
 
 def rdm_get_recid_metadata(recid: str):
@@ -56,7 +55,7 @@ def rdm_get_recid(uuid: str):
     """
 
     # The following function needs to be imported localy to avoid 'circular imports'
-    from functions.delete_record            import delete_record
+    from source.rdm.delete_record            import delete_record
 
     """ KNOWN ISSUE: if the applied restriction in invenio_records_permissions (for admin users)
                      do not allow to read the record then it will not be listed """

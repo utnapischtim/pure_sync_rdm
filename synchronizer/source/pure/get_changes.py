@@ -1,11 +1,11 @@
-from setup                              import pure_rest_api_url, upload_percent_accept
-from functions.general_functions        import add_to_full_report, add_spaces, itinialize_counters, dirpath
-from functions.rdm_general_functions    import rdm_get_recid
-from functions.pure_general_functions   import pure_get_metadata
-from functions.delete_record            import delete_record, delete_from_list
-from functions.rdm_add_record           import RdmAddRecord
-from datetime                           import date, datetime, timedelta
 import json
+from datetime                       import date, datetime, timedelta
+from setup                          import pure_rest_api_url, upload_percent_accept
+from source.general_functions       import add_to_full_report, add_spaces, itinialize_counters, dirpath
+from source.pure.general_functions  import pure_get_metadata
+from source.rdm.general_functions   import rdm_get_recid
+from source.rdm.delete_record       import delete_record, delete_from_list
+from source.rdm.add_record          import RdmAddRecord
 
 # To execute preferably between 22:30 and 23:30
 
