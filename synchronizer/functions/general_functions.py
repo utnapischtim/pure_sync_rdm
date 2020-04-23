@@ -1,7 +1,7 @@
-from setup                              import dirpath
 from datetime                           import date
+import os
 
-
+dirpath = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
 
 def add_spaces(value: str):
     max_length = 5                              # 5 is the maximum length of the given value

@@ -17,7 +17,8 @@ class RdmOwners:
             afterwards it modifies/create RDM records accordingly. """
 
         # self.external_id = '56038' # TEMP
-        self.external_id = '3261' # TEMP
+        # self.external_id = '3261' # TEMP
+        self.external_id = '30' # TEMP
 
         add_to_full_report(f'\nUser external_id: {self.external_id}\n')
 
@@ -74,9 +75,9 @@ class RdmOwners:
 
         rdm_add_record = RdmAddRecord()
 
-        page      = 1
-        page_size = 25
         go_on     = True
+        page      = 1
+        page_size = 5
         count     = 0
 
         while go_on:
@@ -96,6 +97,8 @@ class RdmOwners:
             if total_items == 0 and page == 1:
                 add_to_full_report('\nThe user has no records - End task\n')
                 return True
+
+            go_on = self.is_there_a_next_page(resp_json, page)
 
             for item in resp_json['items']:
             
@@ -140,6 +143,19 @@ class RdmOwners:
                         add_to_full_report('\t+ Owner in record  +')
 
             page += 1
+
+
+    def is_there_a_next_page(self, resp_json, page):
+            
+        if 'navigationLinks' not in resp_json:
+            return False
+        elif page == 1:
+            if 'next' not in resp_json['navigationLinks'][0]['ref']:
+                return False
+        else:
+            if 'next' not in resp_json['navigationLinks'][1]['ref']:
+                return False
+        return True
 
 
     #   ---         ---         ---

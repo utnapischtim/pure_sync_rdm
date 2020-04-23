@@ -1,5 +1,5 @@
-from setup                              import dirpath, pure_rest_api_url, upload_percent_accept
-from functions.general_functions        import add_to_full_report, add_spaces, itinialize_counters
+from setup                              import pure_rest_api_url, upload_percent_accept
+from functions.general_functions        import add_to_full_report, add_spaces, itinialize_counters, dirpath
 from functions.rdm_general_functions    import rdm_get_recid
 from functions.pure_general_functions   import pure_get_metadata
 from functions.delete_record            import delete_record, delete_from_list
@@ -16,7 +16,7 @@ def pure_get_changes():
     
     # Get date of last update
     missing_updates = get_missing_updates()
-    # missing_updates = ['2020-04-22']      # TEMPORARY !!!!!!!!!!!!!!!
+    # missing_updates = ['2020-04-22']      # TEMPORARY !!!!!
     
     if missing_updates == []:
         add_to_full_report('\nNothing to update.\n')

@@ -31,7 +31,7 @@ from docopt                             import docopt
 from main                               import method_call
 from functions.pure_get_changes         import pure_get_changes
 from functions.rdm_push_by_page         import RunPages
-from functions.log_files                import delete_old_log_files
+from functions.log_manager              import delete_old_log_files
 from functions.rdm_duplicates           import rdm_duplicates
 from functions.delete_all_records       import delete_all_records
 from functions.rdm_push_by_uuid         import AddFromUuidList
