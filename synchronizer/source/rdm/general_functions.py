@@ -3,13 +3,12 @@ import json
 import os
 import time
 from datetime                   import date
-from setup                          import rdm_host_url
-from setup                      import dirpath, token_rdm, pure_rest_api_url, versioning_running, pure_api_key, wait_429
+from setup                      import dirpath, token_rdm, pure_rest_api_url, versioning_running, pure_api_key, wait_429, rdm_host_url
 from source.general_functions   import add_to_full_report, add_spaces
 from source.rdm.requests        import rdm_get_metadata, rdm_put_metadata
 
 
-def rdm_get_recid_metadata(recid: str):
+def get_metadata_by_recid(recid: str):
     """ Having the record recid gets from RDM its metadata """
     if len(recid) != 11:
         report = f'\nERROR - The recid must have 11 characters. Given: {recid}\n'
@@ -17,7 +16,6 @@ def rdm_get_recid_metadata(recid: str):
         return False
 
     # RDM request
-    # url = f'{rdm_host_url}api/records/{recid}'
     response = rdm_get_metadata({}, recid)
 
     if response.status_code >= 300:
@@ -28,7 +26,7 @@ def rdm_get_recid_metadata(recid: str):
 
 
 #   ---         ---         ---
-def rdm_get_metadata_by_query(query_value: str):
+def get_metadata_by_query(query_value: str):
     """ Applying a query get RDM record metadata """
 
     params = {
@@ -47,7 +45,7 @@ def rdm_get_metadata_by_query(query_value: str):
     
 
 #   ---         ---         ---
-def rdm_get_recid(uuid: str):
+def get_recid(uuid: str):
     """
     1 - to check if there are duplicates
     2 - to delete duplicates
@@ -61,7 +59,7 @@ def rdm_get_recid(uuid: str):
     """ KNOWN ISSUE: if the applied restriction in invenio_records_permissions (for admin users)
                      do not allow to read the record then it will not be listed """
 
-    response = rdm_get_metadata_by_query(uuid)
+    response = get_metadata_by_query(uuid)
 
     # If the status_code is 429 (too many requests) then it will wait for some minutes
     if not too_many_rdm_requests_check(response):
@@ -101,7 +99,7 @@ def rdm_get_recid(uuid: str):
 
 
 #   ---         ---         ---
-def get_rdm_userid_from_list_by_externalid(external_id: str, file_data: list):
+def get_userid_from_list_by_externalid(external_id: str, file_data: list):
 
     for line in file_data:
         line = line.split('\n')[0]

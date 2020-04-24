@@ -4,7 +4,7 @@ from datetime                       import date, datetime
 from setup                          import rdm_host_url
 from setup                          import dirpath, versioning_running, push_dist_sec, \
                                                applied_restrictions_possible_values, pure_rest_api_url
-from source.rdm.general_functions   import rdm_get_recid, get_rdm_userid_from_list_by_externalid, too_many_rdm_requests_check
+from source.rdm.general_functions   import get_recid, get_userid_from_list_by_externalid, too_many_rdm_requests_check
 from source.rdm.requests            import rdm_get_metadata, rdm_post_metadata
 from source.general_functions       import add_to_full_report
 from source.get_put_file            import rdm_add_file, get_file_from_pure
@@ -15,7 +15,7 @@ from source.rdm.database            import RdmDatabase
 
 class RdmAddRecord:
 
-    def rdm_push_record_by_uuid(self, global_counters, uuid):
+    def push_record_by_uuid(self, global_counters, uuid):
         
         # Gets from Pure the metadata of the given uuid
         item = pure_get_uuid_metadata(uuid)
@@ -146,7 +146,7 @@ class RdmAddRecord:
                 
                 # Checks if the record owner is available in user_ids_match.txt
                 person_external_id = self.get_value(i, ['person', 'externalId'])
-                owner = get_rdm_userid_from_list_by_externalid(person_external_id, file_data)
+                owner = get_userid_from_list_by_externalid(person_external_id, file_data)
 
                 if owner and owner not in self.data['owners']: 
                     self.data['owners'].append(int(owner))
@@ -193,7 +193,7 @@ class RdmAddRecord:
         open(f'{dirpath}/data/temporary_files/lash_push.json', "w").write(self.data)
 
         # Post request to RDM
-        return self.post_to_rdm()
+        return self.post_metadata()
 
 
 
@@ -316,8 +316,6 @@ class RdmAddRecord:
             add_to_full_report(response.content)
 
             return False
-
-        open(f'{dirpath}/data/temporary_files/rdm_get_recid.json', "wb").write(response.content)
 
         # Load response
         resp_json = json.loads(response.content)
@@ -442,7 +440,7 @@ class RdmAddRecord:
 
 
     #   ---         ---         ---
-    def post_to_rdm(self):
+    def post_metadata(self):
 
         self.metadata_success = None
         self.file_success     = None
@@ -500,7 +498,7 @@ class RdmAddRecord:
             time.sleep(1)
 
             # Gets recid from RDM
-            recid = rdm_get_recid(uuid)
+            recid = get_recid(uuid)
             if not recid:
                 return False
 

@@ -4,7 +4,7 @@ from datetime                       import date, datetime
 from setup                          import dirpath, rdm_host_url, pure_rest_api_url
 from source.general_functions       import add_spaces, add_to_full_report
 from source.pure.general_functions  import pure_get_metadata
-from source.rdm.general_functions   import update_rdm_record, rdm_get_metadata_by_query
+from source.rdm.general_functions   import update_rdm_record, get_metadata_by_query
 from source.rdm.database            import RdmDatabase
 
 # Create instance of RDM database manager
@@ -118,7 +118,7 @@ class RdmGroups:
     def rdm_split_modify_record(self, old_group_externalId, report_name, new_groups_data, new_groups_externalIds):
 
         # Get from RDM all old group's records
-        response = rdm_get_metadata_by_query(old_group_externalId)
+        response = get_metadata_by_query(old_group_externalId)
 
         resp_json = json.loads(response.content)
         total_items = resp_json['hits']['total']
@@ -212,7 +212,7 @@ class RdmGroups:
         for old_group_externalId in old_groups_externalId:
             
             # Get record metadata
-            response = rdm_get_metadata_by_query(old_group_externalId)
+            response = get_metadata_by_query(old_group_externalId)
 
 
             resp_json = json.loads(response.content)

@@ -79,7 +79,7 @@ class shell_interface:
         """ Gets from pure all the records related to a certain user orcid,
             afterwards it modifies/create RDM records accordingly."""
         rdm_owners = RdmOwners()
-        rdm_owners.rdm_owner_by_orcid()
+        rdm_owners.rdm_owner_check_by_orcid()
 
     def owners_list(self):
         """ Gets from RDM all record uuids, recids and owners """

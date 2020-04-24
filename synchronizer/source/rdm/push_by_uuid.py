@@ -24,5 +24,5 @@ class AddFromUuidList:
                 add_to_full_report('Invalid uuid lenght.')
                 continue
             
-            rdm_add_record.rdm_push_record_by_uuid(self.global_counters, uuid)
+            rdm_add_record.push_record_by_uuid(self.global_counters, uuid)
         return

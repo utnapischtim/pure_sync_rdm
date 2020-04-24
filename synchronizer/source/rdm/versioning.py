@@ -1,9 +1,9 @@
 import json
 from source.general_functions        import add_spaces, add_to_full_report
-from source.rdm.general_functions    import rdm_get_metadata_by_query, too_many_rdm_requests_check
+from source.rdm.general_functions    import get_metadata_by_query, too_many_rdm_requests_check
 
 def rdm_versioning (uuid: str):
-    response = rdm_get_metadata_by_query(uuid)
+    response = get_metadata_by_query(uuid)
 
     # If the status_code is 429 (too many requests) then it will wait for some minutes
     if not too_many_rdm_requests_check(response):

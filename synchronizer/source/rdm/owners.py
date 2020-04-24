@@ -2,7 +2,7 @@ import json
 from setup                          import pure_rest_api_url, dirpath, rdm_host_url, token_rdm
 from source.general_functions       import add_to_full_report, itinialize_counters, add_spaces
 from source.pure.general_functions  import pure_get_metadata
-from source.rdm.general_functions   import rdm_get_recid_metadata, rdm_get_recid, update_rdm_record
+from source.rdm.general_functions   import get_metadata_by_recid, get_recid, update_rdm_record
 from source.rdm.requests            import rdm_get_metadata
 from source.rdm.add_record          import RdmAddRecord
 from source.rdm.database            import RdmDatabase
@@ -43,7 +43,7 @@ class RdmOwners:
 
 
     #   ---         ---         ---
-    def rdm_owner_by_orcid(self):
+    def rdm_owner_check_by_orcid(self):
 
         orcid = '0000-0002-4154-6945'  # TEMP
 
@@ -109,7 +109,7 @@ class RdmOwners:
                 add_to_full_report(f'\n\tRecord uuid           - {uuid}   - {title[0:55]}...')
 
                 # Get from RDM the recid
-                recid = rdm_get_recid(uuid)
+                recid = get_recid(uuid)
 
                 # If the record is not in RDM, it is added
                 if recid == False:
@@ -121,7 +121,7 @@ class RdmOwners:
                 else:
                     # Checks if the owner is already in RDM record metadata
                     # Get metadata from RDM
-                    response = rdm_get_recid_metadata(recid)
+                    response = get_metadata_by_recid(recid)
                     record_json = json.loads(response.content)['metadata']
 
                     add_to_full_report(f"\tRDM get metadata      - {response} - Current owners:     - {record_json['owners']}")

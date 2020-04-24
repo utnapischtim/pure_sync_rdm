@@ -3,7 +3,7 @@ from datetime                       import date, datetime, timedelta
 from setup                          import pure_rest_api_url, upload_percent_accept
 from source.general_functions       import add_to_full_report, add_spaces, itinialize_counters, dirpath
 from source.pure.general_functions  import pure_get_metadata
-from source.rdm.general_functions   import rdm_get_recid
+from source.rdm.general_functions   import get_recid
 from source.rdm.delete_record       import delete_record, delete_from_list
 from source.rdm.add_record          import RdmAddRecord
 
@@ -109,7 +109,7 @@ class PureChangesByDate:
         response = self.delete_records(json_response)
 
         #   ---     CREATE / ADD / UPDATE      ---
-        self.create_add_update_records(json_response)
+        self.update_records_for_pure_changes(json_response)
 
         # If there are no changes
         if self.global_counters['count_total'] == 0:
@@ -183,7 +183,7 @@ class PureChangesByDate:
             add_to_full_report(report)
       
             # Gets the record recid
-            recid = rdm_get_recid(uuid)
+            recid = get_recid(uuid)
 
             if recid:
                 # Deletes the record from RDM
@@ -195,7 +195,7 @@ class PureChangesByDate:
         return True
 
 
-    def create_add_update_records(self, json_response):
+    def update_records_for_pure_changes(self, json_response):
 
         rdm_add_record = RdmAddRecord()
         
@@ -230,6 +230,6 @@ class PureChangesByDate:
             self.duplicated_uuid.append(uuid)
 
             #   ---       ---       ---
-            rdm_add_record.rdm_push_record_by_uuid(self.global_counters, uuid)
+            rdm_add_record.push_record_by_uuid(self.global_counters, uuid)
             #   ---       ---       ---
 
