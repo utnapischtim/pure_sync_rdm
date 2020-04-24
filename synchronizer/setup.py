@@ -1,5 +1,5 @@
-import os
-dirpath = os.path.dirname(os.path.abspath(__file__))
+from datetime                   import date
+from source.general_functions   import dirpath
 
 # Pure REST API references
 pure_rest_api_url   = open(f'{dirpath}/data_setup/pure_rest_api_url.txt', 'r').readline()
@@ -44,3 +44,14 @@ applied_restrictions_possible_values = ['groups', 'owners', 'ip_ranges', 'ip_sin
 
 # VERSIONING
 versioning_running = False
+
+# REPORT LOGS
+log_files_name = {
+    'successful changes':   f'{dirpath}/data/successful_changes.txt',
+    'user_ids_match':       f'{dirpath}/data/user_ids_match.txt',
+    'groups':               f'{dirpath}/reports/{date.today()}_groups.log',
+    'pages':                f'{dirpath}/reports/{date.today()}_pages.log',
+    'records':              f'{dirpath}/reports/{date.today()}_records.log',
+    'records_full':         f'{dirpath}/reports/{date.today()}_records_full.log',
+    'changes':              f'{dirpath}/reports/{date.today()}_changes.log',
+}

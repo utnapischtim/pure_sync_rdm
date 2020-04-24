@@ -1,15 +1,14 @@
 import json
 import time
 from datetime                       import date, datetime
-from setup                          import rdm_host_url
-from setup                          import dirpath, versioning_running, push_dist_sec, \
+from setup                          import versioning_running, push_dist_sec, log_files_name, rdm_host_url, \
                                                applied_restrictions_possible_values, pure_rest_api_url
 from source.rdm.general_functions   import get_recid, get_userid_from_list_by_externalid, too_many_rdm_requests_check
 from source.rdm.requests            import rdm_get_metadata, rdm_post_metadata
-from source.general_functions       import add_to_full_report
+from source.general_functions       import add_to_full_report, dirpath
 from source.get_put_file            import rdm_add_file, get_file_from_pure
 from source.pure.general_functions  import pure_get_uuid_metadata, pure_get_metadata
-from source.rdm.groups              import rdm_create_group
+from source.rdm.groups              import RdmGroups
 from source.rdm.versioning          import rdm_versioning
 from source.rdm.database            import RdmDatabase
 
@@ -119,7 +118,8 @@ class RdmAddRecord:
             self.data['contributors'] = []
 
             # Used to get, when available, the contributor's RDM userid
-            file_data = open(f"{dirpath}/data/user_ids_match.txt").readlines()
+            file_name = log_files_name['user_ids_match']
+            file_data = open(file_name).readlines()
 
             for i in item['personAssociations']:
 
@@ -161,6 +161,9 @@ class RdmAddRecord:
 
         # --- organisationalUnits ---
         if 'organisationalUnits' in item:
+
+            rdm_groups = RdmGroups()
+
             self.data['organisationalUnits'] = []
             self.data['groupRestrictions']   = []
 
@@ -181,7 +184,7 @@ class RdmAddRecord:
                 self.data['groupRestrictions'].append(organisational_unit_externalId)
 
                 # Create group
-                rdm_create_group(organisational_unit_externalId, organisational_unit_name)
+                rdm_groups.rdm_create_group(organisational_unit_externalId, organisational_unit_name)
 
         # --- Abstract ---  
         if 'abstracts' in item:

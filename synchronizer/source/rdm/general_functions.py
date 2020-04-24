@@ -3,7 +3,7 @@ import json
 import os
 import time
 from datetime                   import date
-from setup                      import dirpath, token_rdm, pure_rest_api_url, versioning_running, pure_api_key, wait_429, rdm_host_url
+from setup                      import token_rdm, pure_rest_api_url, versioning_running, pure_api_key, wait_429, rdm_host_url
 from source.general_functions   import add_to_full_report, add_spaces
 from source.rdm.requests        import rdm_get_metadata, rdm_put_metadata
 

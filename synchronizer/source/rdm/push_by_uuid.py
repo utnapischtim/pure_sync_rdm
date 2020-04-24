@@ -1,5 +1,4 @@
-from setup                      import dirpath
-from source.general_functions   import itinialize_counters, add_to_full_report
+from source.general_functions   import itinialize_counters, add_to_full_report, dirpath
 from source.rdm.add_record      import RdmAddRecord
 
 class AddFromUuidList:

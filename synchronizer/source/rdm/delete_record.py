@@ -1,10 +1,11 @@
 import requests
 from datetime                       import date, datetime
-from setup                          import rdm_host_url
-from setup                          import dirpath, token_rdm
-from source.general_functions       import add_to_full_report
+from setup                          import rdm_host_url, token_rdm
+from setup                          import dirpath
+from source.general_functions       import add_to_full_report, dirpath
 from source.rdm.general_functions   import too_many_rdm_requests_check
 from source.rdm.requests            import rdm_delete_metadata
+from source.reports                 import Reports
 
 def delete_from_list():
     

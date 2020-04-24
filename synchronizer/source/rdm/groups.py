@@ -1,17 +1,21 @@
 import json
 import os
 from datetime                       import date, datetime
-from setup                          import dirpath, rdm_host_url, pure_rest_api_url
-from source.general_functions       import add_spaces, add_to_full_report
+from setup                          import rdm_host_url, pure_rest_api_url
+from source.general_functions       import add_spaces, add_to_full_report, dirpath
 from source.pure.general_functions  import pure_get_metadata
 from source.rdm.general_functions   import update_rdm_record, get_metadata_by_query
 from source.rdm.database            import RdmDatabase
-
-# Create instance of RDM database manager
-rdm_db = RdmDatabase()
+from source.reports                 import Reports
 
 
 class RdmGroups:
+
+    def __init__(self):
+        # Create instance of RDM database manager
+        self.rdm_db = RdmDatabase()
+        self.reports = Reports()
+
     
     def rdm_group_split(self, old_group_externalId: str, new_groups_externalIds: list):
         """ 
@@ -57,12 +61,12 @@ class RdmGroups:
             open(report_name, "a").write(report)
 
             # Create new group
-            response = rdm_create_group(externalId, response['name'])
+            response = self.rdm_create_group(externalId, response['name'])
             open(report_name, "a").write(f'New group creation    - {response}\n')
 
         # Get group id
         query = f"SELECT id FROM accounts_role WHERE name = '{old_group_externalId}';"
-        old_group_id = rdm_db.db_query(query)[0][0]
+        old_group_id = self.rdm_db.db_query(query)[0][0]
         full_report = f'\tOld group             - Id:        {add_spaces(old_group_id)}'
         add_to_full_report(full_report)
 
@@ -104,7 +108,7 @@ class RdmGroups:
         open(report_name, "a").write(report)
 
         # Create new group
-        response = rdm_create_group(new_group_externalId, new_group_data['name'])
+        response = self.rdm_create_group(new_group_externalId, new_group_data['name'])
         open(report_name, "a").write(f'New group creation    - {response}\n')
 
         # Adds users to new group and removes them from the old ones
@@ -174,7 +178,7 @@ class RdmGroups:
     def rdm_split_users_from_old_to_new_group(self, old_group_id, report_name, old_group_externalId, new_groups_externalIds):
         # Get all users in old group
         query = f"SELECT user_id FROM accounts_userrole WHERE role_id = {old_group_id};"
-        response = rdm_db.db_query(query)
+        response = self.rdm_db.db_query(query)
 
         report = 'Old group             - Num. of users: '
         if not response:
@@ -195,10 +199,10 @@ class RdmGroups:
                 
                 for new_group_externalId in new_groups_externalIds:
                     # Add user to new groups
-                    group_add_user(user_email, new_group_externalId, user_id)
+                    self.group_add_user(user_email, new_group_externalId, user_id)
 
                 # Remove user from old group
-                response = group_remove_user(user_email, old_group_externalId)
+                response = self.group_remove_user(user_email, old_group_externalId)
 
         # Delete old group
 
@@ -277,7 +281,7 @@ class RdmGroups:
 
             # Get group id
             query          = f"SELECT id, description FROM accounts_role WHERE name = '{old_group_externalId}';"
-            response       = rdm_db.db_query(query)
+            response       = self.rdm_db.db_query(query)
 
             if not response:
                 add_to_full_report('\nWarning - Old group ({old_groups_externalId}) not in database - Abort task\n')
@@ -288,7 +292,7 @@ class RdmGroups:
 
             # Get all users id that are in this group
             query = f"SELECT user_id FROM accounts_userrole WHERE role_id = {old_group_id};"
-            old_group_users = rdm_db.db_query(query)
+            old_group_users = self.rdm_db.db_query(query)
 
             if not old_group_users:
 
@@ -306,10 +310,10 @@ class RdmGroups:
                 user_email = self.get_user_email(user_id)
 
                 # - - Add user to new group - -
-                group_add_user(user_email, new_group_externalId, user_id)
+                self.group_add_user(user_email, new_group_externalId, user_id)
 
                 # - - Remove user from old group - -
-                response = group_remove_user(user_email, old_group_externalId)
+                response = self.group_remove_user(user_email, old_group_externalId)
 
             # Delete old group
 
@@ -352,7 +356,7 @@ class RdmGroups:
     def get_user_email(self, user_id):
         # Get user email
         query      = f"SELECT email FROM accounts_user WHERE id = {user_id};"
-        user_email = rdm_db.db_query(query)[0][0]
+        user_email = self.rdm_db.db_query(query)[0][0]
 
         report     = f'\tChange user groups    - User id:      {add_spaces(user_id)} - Email: {user_email}'
         add_to_full_report(report)
@@ -360,134 +364,132 @@ class RdmGroups:
         return user_email
 
 
-#   ---     CLASS END       ---
+    #   ---         ---         ---
+    def rdm_create_group(self, group_externalId: str, group_name: str):
+        response = self.rdm_db.db_query(f"SELECT * FROM accounts_role WHERE name = '{group_externalId}'")
+        message   = f'\tRDM search group      -  ExtId:   {add_spaces(group_externalId)}  -'
+        message_2 = f'          - {group_name[0:40]}'
 
-#   ---         ---         ---
-def rdm_create_group(group_externalId: str, group_name: str):
-    response = rdm_db.db_query(f"SELECT * FROM accounts_role WHERE name = '{group_externalId}'")
-    message   = f'\tRDM search group      -  ExtId:   {add_spaces(group_externalId)}  -'
-    message_2 = f'          - {group_name[0:40]}'
+        # If the group has already been created
+        if response:
+            report = f'{message} Found     {message_2}'
+            add_to_full_report(report)
+            return 'Already exists'
 
-    # If the group has already been created
-    if response:
-        report = f'{message} Found     {message_2}'
+        report = f'{message} Not found {message_2}'
         add_to_full_report(report)
-        return 'Already exists'
 
-    report = f'{message} Not found {message_2}'
-    add_to_full_report(report)
+        group_name = group_name.replace('(', '\(')
+        group_name = group_name.replace(')', '\)')
+        group_name = group_name.replace(' ', '_')
+        command = f'pipenv run invenio roles create {group_externalId} -d {group_name}'
+        response = os.system(command)
 
-    group_name = group_name.replace('(', '\(')
-    group_name = group_name.replace(')', '\)')
-    group_name = group_name.replace(' ', '_')
-    command = f'pipenv run invenio roles create {group_externalId} -d {group_name}'
-    response = os.system(command)
+        if response != 0:
+            add_to_full_report(f'\tWarning - Creating group response: {response}')
+            return f'Error: {response}'
 
-    if response != 0:
-        add_to_full_report(f'\tWarning - Creating group response: {response}')
-        return f'Error: {response}'
-
-    return 'Success'
+        return 'Success'
 
 
-#   ---         ---         ---
-def rdm_add_user_to_group(user_id: int, group_externalId: str, group_name: str):
+    #   ---         ---         ---
+    def rdm_add_user_to_group(self, user_id: int, group_externalId: str, group_name: str):
 
-    # Get user's rdm email
-    user_email = rdm_db.db_query(f"SELECT email FROM accounts_user WHERE id = {user_id}")[0][0]
+        # Get user's rdm email
+        user_email = self.rdm_db.db_query(f"SELECT email FROM accounts_user WHERE id = {user_id}")[0][0]
 
-    # Get group id
-    query = f"SELECT id FROM accounts_role WHERE name = '{group_externalId}'"
-    response = rdm_db.db_query(query)
+        # Get group id
+        query = f"SELECT id FROM accounts_role WHERE name = '{group_externalId}'"
+        response = self.rdm_db.db_query(query)
 
-    if not response:
-        # If the group does not exist then creates it
-        rdm_create_group(group_externalId, group_name)
-        # Repeats the query to get the group id
-        group_id = rdm_db.db_query(query)
+        if not response:
+            # If the group does not exist then creates it
+            self.rdm_create_group(group_externalId, group_name)
+            # Repeats the query to get the group id
+            group_id = self.rdm_db.db_query(query)
 
-    group_id = response[0][0]
+        group_id = response[0][0]
 
-    # Checks if match already exists
-    response = rdm_db.db_query(f"SELECT * FROM accounts_userrole WHERE user_id = {user_id} AND role_id = {group_id}")
+        # Checks if match already exists
+        response = self.rdm_db.db_query(f"SELECT * FROM accounts_userrole WHERE user_id = {user_id} AND role_id = {group_id}")
 
-    if response:
-        report = f'\tRDM user in group  - User id: {add_spaces(user_id)}   -                     - Already belongs to group {group_externalId} (id {group_id})'
-        add_to_full_report(report)
+        if response:
+            report = f'\tRDM user in group  - User id: {add_spaces(user_id)}   -                     - Already belongs to group {group_externalId} (id {group_id})'
+            add_to_full_report(report)
+            return True
+
+        # Adds user to group
+        command = f'pipenv run invenio roles add {user_email} {group_externalId}'
+        response = os.system(command)
+        if response != 0:
+            add_to_full_report(f'Warning - Creating group response: {response}')
+
+
+    #   ---         ---         ---
+    def group_add_user(self, user_email, new_group_externalId, user_id):
+        
+        # Get group id
+        query = f"SELECT id FROM accounts_role WHERE name = '{new_group_externalId}';"
+        group_id = self.rdm_db.db_query(query)[0][0]
+        
+        # Check if the user is already in the group
+        query = f"SELECT * FROM accounts_userrole WHERE user_id = {user_id} AND role_id = {group_id};"
+        response = self.rdm_db.db_query(query)
+
+        report =  f'Add to group          - User id:      {add_spaces(user_id)} - Group:       {add_spaces(new_group_externalId)}'
+
+        if response:
+            return True
+
+        # Add user to new groups
+        full_report  = f'\t                     - Adding user to group {new_group_externalId}'
+        full_report += '\t                      - Remove user from old group'
+        add_to_full_report(full_report)
+
+        command = f'pipenv run invenio roles add {user_email} {new_group_externalId}'
+        response = os.system(command)
+
+        if response != 0:
+            # add_to_full_report(f'Warning - Creating group response: {response}')
+            # open(shell_interface.report_name, "a").write(f'{report} - Error: {response}\n')
+            return False
+
+        # open(shell_interface.report_name, "a").write(f'{report} - Success\n')
         return True
 
-    # Adds user to group
-    command = f'pipenv run invenio roles add {user_email} {group_externalId}'
-    response = os.system(command)
-    if response != 0:
-        add_to_full_report(f'Warning - Creating group response: {response}')
 
+    #   ---         ---         ---
+    def group_remove_user(self, user_email, group_name):
+        
+        # Get user id
+        query = f"SELECT id FROM accounts_user WHERE email = '{user_email}';"
+        user_id = self.rdm_db.db_query(query)[0][0]
+        
+        # Get group id
+        query = f"SELECT id FROM accounts_role WHERE name = '{group_name}';"
+        group_id = self.rdm_db.db_query(query)[0][0]
+        
+        # Check if the user is already in the group
+        query = f"SELECT * FROM accounts_userrole WHERE user_id = {user_id} AND role_id = {group_id};"
+        response = self.rdm_db.db_query(query)
 
-#   ---         ---         ---
-def group_add_user(user_email, new_group_externalId, user_id):
-    
-    # Get group id
-    query = f"SELECT id FROM accounts_role WHERE name = '{new_group_externalId}';"
-    group_id = rdm_db.db_query(query)[0][0]
-    
-    # Check if the user is already in the group
-    query = f"SELECT * FROM accounts_userrole WHERE user_id = {user_id} AND role_id = {group_id};"
-    response = rdm_db.db_query(query)
+        report =  f'Remove from group     - User id:      {add_spaces(user_id)} - Group:       {add_spaces(group_name)}'
 
-    report =  f'Add to group          - User id:      {add_spaces(user_id)} - Group:       {add_spaces(new_group_externalId)}'
+        if not response:
+            # open(shell_interface.report_name, "a").write(f'{report} - Already removed from group\n')
+            return True
 
-    if response:
+        # Remove user from old group
+        full_report = '\t                      - Remove user from old group'
+        add_to_full_report(full_report)
+
+        command = f'pipenv run invenio roles remove {user_email} {group_name}'
+        response = os.system(command)
+
+        if response != 0:
+            add_to_full_report(f'Warning - Creating group response: {response}')
+            # open(shell_interface.report_name, "a").write(f'{report} - Error: {response}\n')
+            return False
+
+        # open(shell_interface.report_name, "a").write(f'{report} - Success\n')
         return True
-
-    # Add user to new groups
-    full_report  = f'\t                     - Adding user to group {new_group_externalId}'
-    full_report += '\t                      - Remove user from old group'
-    add_to_full_report(full_report)
-
-    command = f'pipenv run invenio roles add {user_email} {new_group_externalId}'
-    response = os.system(command)
-
-    if response != 0:
-        # add_to_full_report(f'Warning - Creating group response: {response}')
-        # open(shell_interface.report_name, "a").write(f'{report} - Error: {response}\n')
-        return False
-
-    # open(shell_interface.report_name, "a").write(f'{report} - Success\n')
-    return True
-
-
-#   ---         ---         ---
-def group_remove_user(self, user_email, group_name):
-    
-    # Get user id
-    query = f"SELECT id FROM accounts_user WHERE email = '{user_email}';"
-    user_id = rdm_db.db_query(query)[0][0]
-    
-    # Get group id
-    query = f"SELECT id FROM accounts_role WHERE name = '{group_name}';"
-    group_id = rdm_db.db_query(query)[0][0]
-    
-    # Check if the user is already in the group
-    query = f"SELECT * FROM accounts_userrole WHERE user_id = {user_id} AND role_id = {group_id};"
-    response = rdm_db.db_query(query)
-
-    report =  f'Remove from group     - User id:      {add_spaces(user_id)} - Group:       {add_spaces(group_name)}'
-
-    if not response:
-        # open(shell_interface.report_name, "a").write(f'{report} - Already removed from group\n')
-        return True
-
-    # Remove user from old group
-    full_report = '\t                      - Remove user from old group'
-    add_to_full_report(full_report)
-
-    command = f'pipenv run invenio roles remove {user_email} {group_name}'
-    response = os.system(command)
-
-    if response != 0:
-        add_to_full_report(f'Warning - Creating group response: {response}')
-        # open(shell_interface.report_name, "a").write(f'{report} - Error: {response}\n')
-        return False
-
-    # open(shell_interface.report_name, "a").write(f'{report} - Success\n')
-    return True

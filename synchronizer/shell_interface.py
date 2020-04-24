@@ -35,8 +35,6 @@ from cli                            import ShellInterface, method_call
 
 if __name__ == '__main__':
     arguments = docopt(__doc__, version='Pure synchronizer 1.0')
-    # print(arguments)
-
     # Create new instance
     docopt_instance = ShellInterface()
 
