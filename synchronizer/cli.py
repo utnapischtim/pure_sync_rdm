@@ -76,9 +76,9 @@ def method_call(docopt_instance: object, arguments: dict):
         docopt_instance.changes()
 
     elif arguments['pages']:
-        page_start = int(arguments['PAGE_START'])
-        page_end   = int(arguments['PAGE_END'])
-        page_size  = int(arguments['PAGE_SIZE'])
+        page_start = int(arguments['--pageStart'])
+        page_end   = int(arguments['--pageEnd'])
+        page_size  = int(arguments['--pageSize'])
         docopt_instance.pages(page_start, page_end, page_size)
 
     elif arguments['logs']:
@@ -103,12 +103,12 @@ def method_call(docopt_instance: object, arguments: dict):
         docopt_instance.owners_list()
 
     elif arguments['group_split']:
-        old_id  = arguments['OLD_GROUP']
-        new_ids = arguments['NEW_GROUPS'].split(' ')
+        old_id  = arguments['--oldGroup']
+        new_ids = arguments['--newGroups'].split(' ')
         docopt_instance.rdm_group_split(old_id, new_ids)
 
     elif arguments['group_merge']:
-        old_ids = arguments['OLD_GROUPS'].split(' ')
-        new_id  = arguments['NEW_GROUP']
+        old_ids = arguments['--oldGroups'].split(' ')
+        new_id  = arguments['--newGroup']
         docopt_instance.rdm_group_merge(old_ids, new_id)
 
