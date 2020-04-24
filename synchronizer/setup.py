@@ -8,10 +8,11 @@ pure_password       = open(f'{dirpath}/data_setup/pure_password.txt', 'r').readl
 pure_username       = open(f'{dirpath}/data_setup/pure_username.txt', 'r').readline()
 
 # RDM
-rdm_api_url_records = open(f'{dirpath}/data_setup/rdm_api_url_records.txt', 'r').readline()
+rdm_host_url        = open(f'{dirpath}/data_setup/rdm_host_url.txt', 'r').readline()
 token_rdm           = open(f'{dirpath}/data_setup/rdm_token.txt', 'r').readline()
+rdm_records_url     = f'{rdm_host_url}api/records/'
 push_dist_sec       = 0.5
-wait_429            = 900
+wait_429            = 900   # Too many requests sent to the server (waits 15 minutes)
 
 # LOG FILES
 days_to_keep_log_files   = 2      # Deletes log files after x days (shorten_logfiles.py)

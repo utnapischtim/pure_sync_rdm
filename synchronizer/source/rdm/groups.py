@@ -1,7 +1,7 @@
 import json
 import os
 from datetime                       import date, datetime
-from setup                          import dirpath, rdm_api_url_records, pure_rest_api_url
+from setup                          import dirpath, rdm_host_url, pure_rest_api_url
 from source.general_functions       import add_spaces, add_to_full_report
 from source.pure.general_functions  import pure_get_metadata
 from source.rdm.general_functions   import update_rdm_record, rdm_get_metadata_by_query
@@ -135,7 +135,7 @@ class RdmGroups:
             item = item['metadata']
 
             recid = item['recid']
-            url = f'{rdm_api_url_records}api/records/{recid}'
+            url = f'{rdm_host_url}api/records/{recid}'
             add_to_full_report(f'\tRecid:               {url}')
 
             # Removes old organisationalUnit from organisationalUnits
@@ -231,7 +231,7 @@ class RdmGroups:
                 item = item['metadata']
                 recid = item['recid']
 
-                url = f'{rdm_api_url_records}api/records/{recid}'
+                url = f'{rdm_host_url}api/records/{recid}'
                 add_to_full_report(f"\tRecid:               {url}")
 
                 # + Organisational units +

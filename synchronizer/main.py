@@ -23,9 +23,6 @@ def method_call(docopt_instance: object, arguments: dict):
     elif arguments['duplicates']:
         docopt_instance.duplicates()
 
-    elif arguments['delete_all']:
-        docopt_instance.delete_all()
-
     elif arguments['owner']:
         docopt_instance.owner()
 

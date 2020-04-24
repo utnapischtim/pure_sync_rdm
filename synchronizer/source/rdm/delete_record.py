@@ -1,8 +1,10 @@
 import requests
 from datetime                       import date, datetime
-from setup                          import dirpath, token_rdm, rdm_api_url_records
+from setup                          import rdm_host_url
+from setup                          import dirpath, token_rdm
 from source.general_functions       import add_to_full_report
-from source.rdm.general_functions   import too_many_rdm_requests_check, rdm_delete_metadata
+from source.rdm.general_functions   import too_many_rdm_requests_check
+from source.rdm.requests            import rdm_delete_metadata
 
 def delete_from_list():
     
@@ -50,8 +52,8 @@ def delete_record(recid: str):
     # NOTE: the user ACCOUNT related to the used TOKEN must be ADMIN
 
     # Delete record request
-    url = f'{rdm_api_url_records}api/records/{recid}'
-    response = rdm_delete_metadata(url, recid)
+    # url = f'{rdm_host_url}api/records/{recid}'
+    response = rdm_delete_metadata(recid)
 
     report = f'\tRDM delete record     - {response} - Deleted recid:        {recid}'
     add_to_full_report(report)

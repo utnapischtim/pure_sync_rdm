@@ -1,10 +1,11 @@
 import json
 import time
 from datetime                       import date, datetime
-from setup                          import dirpath, versioning_running, rdm_api_url_records, push_dist_sec, \
+from setup                          import rdm_host_url
+from setup                          import dirpath, versioning_running, push_dist_sec, \
                                                applied_restrictions_possible_values, pure_rest_api_url
-from source.rdm.general_functions   import rdm_get_metadata, rdm_post_metadata, \
-                                               rdm_get_recid, get_rdm_userid_from_list_by_externalid, too_many_rdm_requests_check
+from source.rdm.general_functions   import rdm_get_recid, get_rdm_userid_from_list_by_externalid, too_many_rdm_requests_check
+from source.rdm.requests            import rdm_get_metadata, rdm_post_metadata
 from source.general_functions       import add_to_full_report
 from source.get_put_file            import rdm_add_file, get_file_from_pure
 from source.pure.general_functions  import pure_get_uuid_metadata, pure_get_metadata
@@ -294,13 +295,20 @@ class RdmAddRecord:
         If the size is not the same, then it will be uploaded to RDM and a new internal review will be required. """
 
         # --- Get file size and internalReview from RDM ---
-        sort  = 'sort=mostrecent'
-        size  = 'size=100'
-        page  = 'page=1'
-        query = f'q="{self.uuid}"'
 
-        url = f'{rdm_api_url_records}api/records/?{sort}&{query}&{size}&{page}'
-        response = rdm_get_metadata(url)
+        # sort  = 'sort=mostrecent'
+        # size  = 'size=100'
+        # page  = 'page=1'
+        # query = f'q="{self.uuid}"'
+        # url = f'{rdm_host_url}api/records/?{sort}&{query}&{size}&{page}'
+
+        params = {
+            'sort': 'mostrecent',
+            'size': '100',
+            'page': '1',
+            'q': self.uuid,
+        }
+        response = rdm_get_metadata(params)
 
         if response.status_code >= 300:
             report = f'\nget_rdm_file_size - {self.uuid} - {response}'
@@ -443,8 +451,8 @@ class RdmAddRecord:
         time.sleep(push_dist_sec)                        
         
         # POST REQUEST metadata
-        url = f'{rdm_api_url_records}api/records/'
-        response = rdm_post_metadata(url, self.data)
+        # url = f'{rdm_host_url}api/records/'
+        response = rdm_post_metadata(self.data)
 
         # Count http responses 
         # if response.status_code not in self.count_http_responses:

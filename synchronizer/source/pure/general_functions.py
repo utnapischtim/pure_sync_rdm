@@ -45,5 +45,4 @@ def pure_get_metadata(url: str):
         'api-key': pure_api_key,
         'Accept': 'application/json',
     }
-    # print(url)
     return requests.get(url, headers=headers)

@@ -3,8 +3,10 @@ import json
 import os
 import time
 from datetime                   import date
-from setup                      import dirpath, token_rdm, rdm_api_url_records, pure_rest_api_url, versioning_running, pure_api_key, wait_429
+from setup                          import rdm_host_url
+from setup                      import dirpath, token_rdm, pure_rest_api_url, versioning_running, pure_api_key, wait_429
 from source.general_functions   import add_to_full_report, add_spaces
+from source.rdm.requests        import rdm_get_metadata, rdm_put_metadata
 
 
 def rdm_get_recid_metadata(recid: str):
@@ -15,8 +17,8 @@ def rdm_get_recid_metadata(recid: str):
         return False
 
     # RDM request
-    url = f'{rdm_api_url_records}api/records/{recid}'
-    response = rdm_get_metadata(url)
+    # url = f'{rdm_host_url}api/records/{recid}'
+    response = rdm_get_metadata({}, recid)
 
     if response.status_code >= 300:
         add_to_full_report(f'\n{recid} - {response}')
@@ -29,14 +31,13 @@ def rdm_get_recid_metadata(recid: str):
 def rdm_get_metadata_by_query(query_value: str):
     """ Applying a query get RDM record metadata """
 
-    # GET request RDM
-    sort  = 'sort=mostrecent'
-    size  = 'size=100'
-    page  = 'page=1'
-    query = f'q="{query_value}"'
-
-    url = f'{rdm_api_url_records}api/records/?{sort}&{query}&{size}&{page}'
-    response = rdm_get_metadata(url)
+    params = {
+        'sort': 'mostrecent',
+        'size': 100,
+        'page': 1,
+        'q': f'"{query_value}"'
+    }
+    response = rdm_get_metadata(params)
 
     if response.status_code >= 300:
         add_to_full_report(f'\n{query_value} - {response}')
@@ -83,8 +84,8 @@ def rdm_get_recid(uuid: str):
         
         if count == 1:
             # URLs to be transmitted to Pure if the record is successfuly added in RDM      # TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
-            api_url             = f'{rdm_api_url_records}api/records/{recid}'
-            landing_page_url    = f'{rdm_api_url_records}records/{recid}'
+            api_url             = f'{rdm_host_url}api/records/{recid}'
+            landing_page_url    = f'{rdm_host_url}records/{recid}'
             newest_recid = recid
 
             report = f'\tRDM get recid         - {response} - Total:       {add_spaces(total_recids)}  - {api_url}'
@@ -120,8 +121,7 @@ def get_rdm_userid_from_list_by_externalid(external_id: str, file_data: list):
 #   ---         ---         ---
 def update_rdm_record(data: str, recid: str):
 
-    url = f'{rdm_api_url_records}api/records/{recid}'
-    response = rdm_put_metadata(url, data)
+    response = rdm_put_metadata(recid, data)
 
     add_to_full_report(f'\tRecord update         - {response}')
 
@@ -140,46 +140,3 @@ def too_many_rdm_requests_check(response: int):
         time.sleep(wait_429)
         return False
     return True
-
-
-#   ---         ---         ---
-def rdm_request_headers(parameters):
-    headers = {}
-    if 'content_type' in parameters:
-        headers['Content-Type'] = 'application/json'
-    if 'file' in parameters:
-        headers['Content-Type'] = 'application/octet-stream'
-    if 'token' in parameters:
-        headers['Authorization'] = f'Bearer {token_rdm}'
-    return headers
-
-def rdm_request_params():
-    return (('prettyprint', '1'),)
-
-def rdm_get_metadata(url: str):
-    headers = rdm_request_headers(['content_type', 'token'])
-    params  = rdm_request_params()
-    return requests.get(url, headers=headers, params=params, verify=False)
-
-def rdm_post_metadata(url: str, data: str):
-    """ Used to create a new record """
-    headers = rdm_request_headers(['content_type'])
-    params  = rdm_request_params()
-    data_utf8 = data.encode('utf-8')
-    return requests.post(url, headers=headers, params=params, data=data_utf8, verify=False)
-
-def rdm_put_metadata(url: str, data: str):
-    """ Used to update an existing record """
-    headers = rdm_request_headers(['content_type', 'token'])
-    params  = rdm_request_params()
-    data_utf8 = data.encode('utf-8')
-    return requests.put(url, headers=headers, params=params, data=data_utf8, verify=False)
-
-def rdm_put_file(url: str, file_path_name: str):
-    headers = rdm_request_headers(['file', 'token'])
-    data    = open(file_path_name, 'rb').read()
-    return requests.put(url, headers=headers, data=data, verify=False)
-
-def rdm_delete_metadata(url: str, recid: str):
-    headers = rdm_request_headers(['content_type', 'token'])
-    return requests.delete(url, headers=headers, verify=False)

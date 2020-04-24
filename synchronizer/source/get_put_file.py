@@ -2,21 +2,22 @@ import requests
 import smtplib
 import os
 from datetime                       import date, datetime
-from setup                          import dirpath, rdm_api_url_records, pure_username, pure_password, \
+from setup                          import rdm_host_url
+from setup                          import dirpath, pure_username, pure_password, \
                                                 email_receiver, email_sender, email_sender_password, \
                                                 email_smtp_server, email_smtp_port, email_subject, email_message
 from requests.auth                  import HTTPBasicAuth
 from source.general_functions       import add_to_full_report
-from source.rdm.general_functions   import rdm_put_file
+from source.rdm.requests            import rdm_put_file
 
 #   ---     ---     ---
 def rdm_add_file(shell_interface, file_name: str, recid: str, uuid: str):
     
     file_path_name = f'{dirpath}/data/temporary_files/{file_name}'
-    url = f'{rdm_api_url_records}api/records/{recid}/files/{file_name}'
+    # url = f'{rdm_host_url}api/records/{recid}/files/{file_name}'
 
     # PUT FILE TO RDM
-    response = rdm_put_file(url, file_path_name)
+    response = rdm_put_file(file_path_name, recid)
 
     # Report
     add_to_full_report(f'\tRDM put file          - {response}')

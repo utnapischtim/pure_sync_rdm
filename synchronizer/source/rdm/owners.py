@@ -1,9 +1,9 @@
 import json
-from setup                          import pure_rest_api_url, dirpath, rdm_api_url_records, token_rdm
+from setup                          import pure_rest_api_url, dirpath, rdm_host_url, token_rdm
 from source.general_functions       import add_to_full_report, itinialize_counters, add_spaces
 from source.pure.general_functions  import pure_get_metadata
-from source.rdm.general_functions   import rdm_get_metadata, rdm_get_recid_metadata, rdm_get_recid, update_rdm_record
-from source.rdm.push_record         import create_invenio_data, rdm_push_record
+from source.rdm.general_functions   import rdm_get_recid_metadata, rdm_get_recid, update_rdm_record
+from source.rdm.requests            import rdm_get_metadata
 from source.rdm.add_record          import RdmAddRecord
 from source.rdm.database            import RdmDatabase
 
@@ -277,8 +277,13 @@ def get_rdm_record_owners():
     while go_on == True:
 
         # REQUEST to RDM
-        url = f'{rdm_api_url_records}api/records/?sort=mostrecent&size={pag_size}&page={pag}'
-        response = rdm_get_metadata(url)
+        # url = f'{rdm_host_url}api/records/?sort=mostrecent&size={pag_size}&page={pag}'
+        params = {
+            'sort': 'mostrecent',
+            'size': pag_size,
+            'page': pag
+        }
+        response = rdm_get_metadata(params)
 
         add_to_full_report(f'\n{response}\n')
         

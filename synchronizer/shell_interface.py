@@ -7,7 +7,6 @@ Usage:
     shell_interface.py delete
     shell_interface.py uuid
     shell_interface.py duplicates
-    shell_interface.py delete_all
     shell_interface.py owner
     shell_interface.py owner_orcid
     shell_interface.py owners_list
@@ -29,11 +28,10 @@ Options:
 """
 from docopt                         import docopt
 from main                           import method_call
-from source.pure.get_changes        import pure_get_changes
+from source.rdm.push_by_changes     import pure_get_changes
 from source.rdm.push_by_page        import RunPages
 from source.log_manager             import delete_old_log_files
-from source.rdm.duplicates          import rdm_duplicates
-from source.rdm.delete_all_records  import delete_all_records
+from source.rdm.duplicate_records   import rdm_duplicate_records
 from source.rdm.push_by_uuid        import AddFromUuidList
 from source.rdm.delete_record       import delete_from_list
 from source.rdm.owners              import RdmOwners, get_rdm_record_owners
@@ -69,11 +67,7 @@ class shell_interface:
 
     def duplicates(self):
         """ Find and delete RDM duplicate records """
-        rdm_duplicates()
-
-    def delete_all(self):
-        """ Delete all RDM records """
-        delete_all_records()
+        rdm_duplicate_records()
 
     def owner(self):
         """ Gets from pure all the records related to a certain user recid,
