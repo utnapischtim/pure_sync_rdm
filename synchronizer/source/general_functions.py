@@ -16,18 +16,18 @@ def add_to_full_report(report: str):
     print(report)
 
 
-def itinialize_counters():
+def initialize_counters():
     """ Initialize variables that will count through the whole task the success of each process """
     global_counters = {
-        'count_total': 0,
-        'count_errors_push_metadata': 0,
-        'count_errors_put_file': 0,
-        'count_errors_record_delete': 0,
-        'count_successful_push_metadata': 0,
-        'count_successful_push_file': 0,
-        'count_successful_record_delete': 0,
-        'count_abstracts': 0,
-        'count_orcids': 0,
-        'count_http_responses': {}
+        'total': 0,
+        'errors_push_metadata': 0,
+        'errors_put_file': 0,
+        'errors_record_delete': 0,
+        'successful_push_metadata': 0,
+        'successful_push_file': 0,
+        'successful_record_delete': 0,
+        'abstracts': 0,
+        'orcids': 0,
+        'http_responses': {}
     }
     return global_counters

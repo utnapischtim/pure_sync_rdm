@@ -16,6 +16,8 @@ class RdmGroups:
         self.rdm_db = RdmDatabase()
         self.reports = Reports()
 
+        self.report_name = 'groups'
+
     
     def rdm_group_split(self, old_group_externalId: str, new_groups_externalIds: list):
         """ 
@@ -28,10 +30,10 @@ class RdmGroups:
             . managingOrganisationUnit (if necessary)
             . organisationUnits
         """
-        # Report
+
         current_time = datetime.now().strftime("%H:%M:%S")
-        report_name = f'{dirpath}/reports/{date.today()}_groups.log'
-        self.report_name = report_name
+
+        # Report
         report = f"""
 
     --   --   --
@@ -40,7 +42,8 @@ class RdmGroups:
 
     Old group             - externalId: {old_group_externalId}
     """
-        open(report_name, "a").write(report)
+        self.reports.add_to_report(self.report_name, report)
+
         report = f'\nOld group: {old_group_externalId} - New groups: {new_groups_externalIds}\n'
         add_to_full_report(report)
 
@@ -58,11 +61,13 @@ class RdmGroups:
             new_groups_data.append(response)
 
             report = f"\nNew group             - externalId: {externalId}   - {response['uuid']} - {response['name']}\n"
-            open(report_name, "a").write(report)
+            self.reports.add_to_report(self.report_name, report)
 
             # Create new group
             response = self.rdm_create_group(externalId, response['name'])
-            open(report_name, "a").write(f'New group creation    - {response}\n')
+            
+            report = f'New group creation    - {response}\n'
+            self.reports.add_to_report(self.report_name, report)
 
         # Get group id
         query = f"SELECT id FROM accounts_role WHERE name = '{old_group_externalId}';"

@@ -1,7 +1,7 @@
 import json
 from datetime                       import date, datetime, timedelta
 from setup                          import pure_rest_api_url, upload_percent_accept
-from source.general_functions       import add_to_full_report, add_spaces, itinialize_counters, dirpath
+from source.general_functions       import add_to_full_report, add_spaces, initialize_counters, dirpath
 from source.pure.general_functions  import pure_get_metadata
 from source.rdm.general_functions   import get_recid
 from source.rdm.delete_record       import delete_record, delete_from_list
@@ -59,7 +59,7 @@ class PureChangesByDate:
     def run_process(self, changes_date: str):
 
         # Initialize global counters
-        self.global_counters = itinialize_counters()
+        self.global_counters = initialize_counters()
         
         file_records = f'{dirpath}/reports/{date.today()}_records.log'
         file_changes = f'{dirpath}/reports/{date.today()}_changes.log'
@@ -82,12 +82,12 @@ class PureChangesByDate:
         self.duplicated_uuid  = []
         
         self.local_counters = {
-            'count_delete': 0,
-            'count_update': 0,
-            'count_create': 0,
-            'count_incomplete': 0,
-            'count_duplicated': 0,
-            'count_not_ResearchOutput': 0,
+            'delete': 0,
+            'update': 0,
+            'create': 0,
+            'incomplete': 0,
+            'duplicated': 0,
+            'not_ResearchOutput': 0,
         }
         current_time = datetime.now().strftime("%H:%M:%S")
 
@@ -112,12 +112,12 @@ class PureChangesByDate:
         self.update_records_for_pure_changes(json_response)
 
         # If there are no changes
-        if self.global_counters['count_total'] == 0:
+        if self.global_counters['total'] == 0:
             open(file_changes, "a").write(f'{report_intro}Nothing to transfer.\n\n')
             return
 
         # Calculates if the process was successful
-        percent_success = self.global_counters['count_successful_push_metadata'] * 100 / self.global_counters['count_total']
+        percent_success = self.global_counters['successful_push_metadata'] * 100 / self.global_counters['total']
         data = f'{changes_date}\n'
         
         # If the percentage of successfully transmitted records is higher then the limit specified in setup.py
@@ -128,21 +128,21 @@ class PureChangesByDate:
             file_success = f'{dirpath}/data/successful_changes.txt'
             open(file_success, "a").write(data)
 
-        metadata_succs              = add_spaces(self.global_counters['count_successful_push_metadata'])
-        metadata_error              = add_spaces(self.global_counters['count_errors_push_metadata'])
-        file_succs                  = add_spaces(self.global_counters['count_successful_push_file'])
-        file_error                  = add_spaces(self.global_counters['count_errors_put_file'])
-        delete_succs                = add_spaces(self.global_counters['count_successful_record_delete'])
-        delete_error                = add_spaces(self.global_counters['count_errors_record_delete'])
-        count_delete                = add_spaces(self.local_counters['count_delete'])
-        count_update                = add_spaces(self.local_counters['count_update'])
-        count_create                = add_spaces(self.local_counters['count_create'])
+        metadata_succs              = add_spaces(self.global_counters['successful_push_metadata'])
+        metadata_error              = add_spaces(self.global_counters['errors_push_metadata'])
+        file_succs                  = add_spaces(self.global_counters['successful_push_file'])
+        file_error                  = add_spaces(self.global_counters['errors_put_file'])
+        delete_succs                = add_spaces(self.global_counters['successful_record_delete'])
+        delete_error                = add_spaces(self.global_counters['errors_record_delete'])
+        count_delete                = add_spaces(self.local_counters['delete'])
+        count_update                = add_spaces(self.local_counters['update'])
+        count_create                = add_spaces(self.local_counters['create'])
         # Incomplete:  when the uuid or changeType are not specified
-        count_incomplete            = add_spaces(self.local_counters['count_incomplete'])
+        count_incomplete            = add_spaces(self.local_counters['incomplete'])
         # Duplicated:  e.g. when a record has been modified twice in a day        
-        count_duplicated            = add_spaces(self.local_counters['count_duplicated'])
+        count_duplicated            = add_spaces(self.local_counters['duplicated'])
         # Irrelevant:  when familySystemName is not ResearchOutput
-        count_not_ResearchOutput    = add_spaces(self.local_counters['count_not_ResearchOutput'])
+        count_not_ResearchOutput    = add_spaces(self.local_counters['not_ResearchOutput'])
 
         report = f"""
     Metadata         ->  successful: {metadata_succs} - errors:   {metadata_error}
@@ -177,9 +177,9 @@ class PureChangesByDate:
 
             uuid = item['uuid']
             self.duplicated_uuid.append(uuid)   
-            self.local_counters['count_delete'] += 1
+            self.local_counters['delete'] += 1
 
-            report = f"\n{self.local_counters['count_delete']} - {item['changeType']}"
+            report = f"\n{self.local_counters['delete']} - {item['changeType']}"
             add_to_full_report(report)
       
             # Gets the record recid
@@ -190,7 +190,7 @@ class PureChangesByDate:
                 delete_record(recid)
             else:
                 # The record is not in RDM
-                self.global_counters['count_successful_record_delete'] += 1
+                self.global_counters['successful_record_delete'] += 1
 
         return True
 
@@ -203,17 +203,17 @@ class PureChangesByDate:
         for item in json_response['items']:
             
             if 'changeType' not in item or 'uuid' not in item:
-                self.local_counters['count_incomplete'] += 1
+                self.local_counters['incomplete'] += 1
                 continue
             elif item['familySystemName'] != 'ResearchOutput':
-                self.local_counters['count_not_ResearchOutput'] += 1
+                self.local_counters['not_ResearchOutput'] += 1
                 continue
             elif item['changeType'] == 'DELETE':
                 continue
 
             uuid = item['uuid']
             if uuid in self.duplicated_uuid:
-                self.local_counters['count_duplicated'] += 1
+                self.local_counters['duplicated'] += 1
                 continue
             
             count += 1
@@ -221,10 +221,10 @@ class PureChangesByDate:
             add_to_full_report(report)
 
             if item['changeType'] == 'ADD' or item['changeType'] == 'CREATE':
-                self.local_counters['count_create'] += 1
+                self.local_counters['create'] += 1
 
             if item['changeType'] == 'UPDATE':
-                self.local_counters['count_update'] += 1
+                self.local_counters['update'] += 1
             
             # Checks if this uuid has already been created / updated / deleted
             self.duplicated_uuid.append(uuid)

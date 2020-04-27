@@ -1,6 +1,6 @@
 import json
 from setup                          import pure_rest_api_url, rdm_host_url, token_rdm
-from source.general_functions       import add_to_full_report, itinialize_counters, add_spaces, dirpath
+from source.general_functions       import add_to_full_report, initialize_counters, add_spaces, dirpath
 from source.pure.general_functions  import pure_get_metadata
 from source.rdm.general_functions   import get_metadata_by_recid, get_recid, update_rdm_record
 from source.rdm.requests            import rdm_get_metadata
@@ -71,7 +71,7 @@ class RdmOwners:
     #   ---         ---         ---
     def get_owner_records(self):
         
-        self.global_counters = itinialize_counters()
+        self.global_counters = initialize_counters()
 
         rdm_add_record = RdmAddRecord()
 

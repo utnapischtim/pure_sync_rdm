@@ -28,7 +28,7 @@ class RdmAddRecord:
         """ Reads pure metadata and creates the json that will be pushed to RDM """
 
         self.global_counters = global_counters
-        self.global_counters['count_total'] += 1      
+        self.global_counters['total'] += 1      
 
         self.record_files = []
         self.uuid = item['uuid']
@@ -188,7 +188,7 @@ class RdmAddRecord:
 
         # --- Abstract ---  
         if 'abstracts' in item:
-            self.count_abstracts += 1
+            self.global_counters['abstracts'] += 1    
 
         self.applied_restrictions_check()
 
@@ -429,7 +429,7 @@ class RdmAddRecord:
 
 
         if 'orcid' in resp_json:
-            self.global_counters['count_orcids'] += 1
+            self.global_counters['orcids'] += 1
             orcid = resp_json['orcid']
 
             message += f'{orcid} - {name}'
@@ -457,9 +457,9 @@ class RdmAddRecord:
 
         # Count http responses 
         # if response.status_code not in self.count_http_responses:
-        if response.status_code not in self.global_counters['count_http_responses']:
-            self.global_counters['count_http_responses'][response.status_code] = 0
-        self.global_counters['count_http_responses'][response.status_code] += 1
+        if response.status_code not in self.global_counters['http_responses']:
+            self.global_counters['http_responses'][response.status_code] = 0
+        self.global_counters['http_responses'][response.status_code] += 1
 
         uuid = self.item['uuid']
         report = f"\tRDM post metadata     - {response} - Uuid:                 {uuid}"
@@ -492,7 +492,7 @@ class RdmAddRecord:
         
         # In case of SUCCESSFUL TRANSMISSION
         if response.status_code < 300:
-            self.global_counters['count_successful_push_metadata'] += 1
+            self.global_counters['successful_push_metadata'] += 1
 
             # metadata transmission success flag
             self.metadata_success = True
@@ -509,9 +509,9 @@ class RdmAddRecord:
             for file_name in self.record_files:
                 response = rdm_add_file(self, file_name, recid, uuid)
                 if response.status_code >= 300:
-                    self.global_counters['count_errors_put_file'] += 1
+                    self.global_counters['errors_put_file'] += 1
                 else:
-                    self.global_counters['count_successful_push_file'] += 1
+                    self.global_counters['successful_push_file'] += 1
                         
             if recid:
                 # add record to all_rdm_records

@@ -1,11 +1,11 @@
-from source.general_functions   import itinialize_counters, add_to_full_report, dirpath
+from source.general_functions   import initialize_counters, add_to_full_report, dirpath
 from source.rdm.add_record      import RdmAddRecord
 
 class AddFromUuidList:
 
     def add_from_uuid_list(self):
 
-        self.global_counters = itinialize_counters()
+        self.global_counters = initialize_counters()
 
         # read to_transfer.log
         file_name = f'{dirpath}/data/to_transfer.txt'

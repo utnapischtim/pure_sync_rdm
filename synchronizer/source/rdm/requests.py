@@ -1,5 +1,6 @@
 import requests
-from setup          import token_rdm, rdm_records_url
+from setup                      import token_rdm, rdm_records_url
+from source.general_functions   import dirpath
 
 def rdm_request_headers(parameters):
     headers = {}
@@ -37,6 +38,8 @@ def rdm_get_metadata(additional_parameters: str, recid = ''):
 
 def rdm_post_metadata(data: str):
     """ Used to create a new record """
+
+    open(f'{dirpath}/data/temporary_files/rdm_post_metadata.json', "w").write(data)
 
     headers = rdm_request_headers(['content_type'])
     params  = rdm_request_params()

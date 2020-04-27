@@ -1,7 +1,7 @@
 import json
 from datetime                       import date, datetime
 from setup                          import pure_rest_api_url
-from source.general_functions       import dirpath, add_spaces, add_to_full_report, itinialize_counters
+from source.general_functions       import dirpath, add_spaces, add_to_full_report, initialize_counters
 from source.pure.general_functions  import pure_get_metadata
 from source.rdm.add_record          import RdmAddRecord
 
@@ -16,7 +16,7 @@ class RunPages:
             date_today = date.today()
             current_time = datetime.now().strftime("%H:%M:%S")
 
-            self.global_counters = itinialize_counters()
+            self.global_counters = initialize_counters()
 
             # add page to report file  
             report  = f'\n\n--   --   --\n\nPag {str(pag)} - pag_size {str(pag_size)}\n\n'
@@ -44,16 +44,16 @@ class RunPages:
             #       ---         ---         ---
 
             http_response_str = 'HTTP responses -> '
-            for key in self.global_counters['count_http_responses']:
-                http_response_str += f"{key}: {self.global_counters['count_http_responses'][key]}, "
+            for key in self.global_counters['http_responses']:
+                http_response_str += f"{key}: {self.global_counters['http_responses'][key]}, "
             http_response_str = http_response_str[:-2]
 
-            metadata_success  = add_spaces(self.global_counters['count_successful_push_metadata'])
-            metadata_error    = add_spaces(self.global_counters['count_errors_push_metadata'])
-            file_success      = add_spaces(self.global_counters['count_successful_push_file'])
-            file_error        = add_spaces(self.global_counters['count_errors_put_file'])
-            count_abstracts   = add_spaces(self.global_counters['count_abstracts'])
-            count_orcids      = add_spaces(self.global_counters['count_orcids'])
+            metadata_success  = add_spaces(self.global_counters['successful_push_metadata'])
+            metadata_error    = add_spaces(self.global_counters['errors_push_metadata'])
+            file_success      = add_spaces(self.global_counters['successful_push_file'])
+            file_error        = add_spaces(self.global_counters['errors_put_file'])
+            count_abstracts   = add_spaces(self.global_counters['abstracts'])
+            count_orcids      = add_spaces(self.global_counters['orcids'])
             pag_log           = add_spaces(pag)
             pag_size_log      = add_spaces(pag_size)
 
