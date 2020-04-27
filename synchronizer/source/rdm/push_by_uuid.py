@@ -7,7 +7,7 @@ class AddFromUuidList:
 
         self.global_counters = initialize_counters()
 
-        # read to_transfer.log
+        # read to_transfer.txt
         file_name = f'{dirpath}/data/to_transfer.txt'
         uuids = open(file_name, 'r').readlines()
 

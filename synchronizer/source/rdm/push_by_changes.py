@@ -1,6 +1,6 @@
 import json
 from datetime                       import date, datetime, timedelta
-from setup                          import pure_rest_api_url, upload_percent_accept
+from setup                          import pure_rest_api_url, upload_percent_accept, log_files_name
 from source.general_functions       import add_to_full_report, add_spaces, initialize_counters, dirpath
 from source.pure.general_functions  import pure_get_metadata
 from source.rdm.general_functions   import get_recid
@@ -61,15 +61,18 @@ class PureChangesByDate:
         # Initialize global counters
         self.global_counters = initialize_counters()
         
-        file_records = f'{dirpath}/reports/{date.today()}_records.log'
-        file_changes = f'{dirpath}/reports/{date.today()}_changes.log'
+        # file_records = f'{dirpath}/reports/{date.today()}_records.log'
+        # file_changes = f'{dirpath}/reports/{date.today()}_changes.log'
 
-        page = 'page=1'
-        size = 'pageSize=100'
+        file_records = log_files_name['records']
+        file_changes = log_files_name['changes']
 
         # Get from pure all changes of a certain date
-        url = f'{pure_rest_api_url}changes/{changes_date}?{size}&{page}'
-        response = pure_get_metadata(url)
+        params = {
+            'pageSize': 100,
+            'page': 1
+        }
+        response = pure_get_metadata('changes', changes_date, params)
 
         if response.status_code >= 300:
             # add_to_full_report(response.content)

@@ -50,6 +50,7 @@ log_files_name = {
     'successful changes':   f'{dirpath}/data/successful_changes.txt',
     'user_ids_match':       f'{dirpath}/data/user_ids_match.txt',
     'groups':               f'{dirpath}/reports/{date.today()}_groups.log',
+    'groups':               f'{dirpath}/reports/{date.today()}_owners.log',
     'pages':                f'{dirpath}/reports/{date.today()}_pages.log',
     'records':              f'{dirpath}/reports/{date.today()}_records.log',
     'records_full':         f'{dirpath}/reports/{date.today()}_records_full.log',

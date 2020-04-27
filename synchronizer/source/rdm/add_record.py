@@ -410,9 +410,8 @@ class RdmAddRecord:
     #   ---         ---         ---
     def get_orcid(self, person_uuid: str, name: str):
 
-        url = f'{pure_rest_api_url}/persons/{person_uuid}'
-        
-        response = pure_get_metadata(url)
+        # url = f'{pure_rest_api_url}/persons/{person_uuid}'
+        response = pure_get_metadata('persons', person_uuid, {})
         message = f'\tPure get orcid        - {response} - '
 
         if response.status_code == 404:
@@ -483,7 +482,7 @@ class RdmAddRecord:
             # Add record to to_transfer.txt to be re pushed afterwards
             open(f'{dirpath}/data/to_transfer.txt', "a").write(f'{uuid}\n')
 
-        file_name = f'{dirpath}/reports/{date.today()}_records.log'
+        file_name = log_files_name['records']
         open(file_name, "a").write(report)
 
         # If the status_code is 429 (too many requests) then it will wait for some minutes

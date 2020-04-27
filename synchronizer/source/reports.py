@@ -1,23 +1,31 @@
-from datetime                   import date, datetime
-from setup                      import log_files_name
-from source.general_functions   import dirpath
-
-date_today = str(datetime.today().strftime('%Y-%m-%d'))
+from datetime                       import date, datetime
+from setup                          import log_files_name
 
 class Reports:
 
     def add_to_report(self, file, report):
-
+        if file == 'records_full':
+            print(report)
         file_name = log_files_name[file]
         open(file_name, "a").write(f'{report}\n')
 
 
-# log_files_name = {
-#     'successful changes':   f'{dirpath}/data/successful_changes.txt',
-#     'user_ids_match':       f'{dirpath}/data/user_ids_match.txt',
-#     'groups':               f'{dirpath}/reports/{date.today()}_groups.log',
-#     'pages':                f'{dirpath}/reports/{date.today()}_pages.log',
-#     'records':              f'{dirpath}/reports/{date.today()}_records.log',
-#     'records_full':         f'{dirpath}/reports/{date.today()}_records_full.log',
-#     'changes':              f'{dirpath}/reports/{date.today()}_changes.log',
-# }
+    def get_report_template(self, report_files, template, arguments):
+    
+        report = report_templates[template].format(*arguments)
+
+        for report_file in report_files:
+            self.add_to_report(report_file, report)
+
+
+
+report_templates = {
+
+    'intro_title': """
+
+--   --   --
+
+{} -- {} --""",
+
+    'page_and_size': 'Page: {} - page size: {}'
+}

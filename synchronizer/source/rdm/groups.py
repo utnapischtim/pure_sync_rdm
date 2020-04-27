@@ -1,7 +1,7 @@
 import json
 import os
 from datetime                       import date, datetime
-from setup                          import rdm_host_url, pure_rest_api_url
+from setup                          import rdm_host_url, pure_rest_api_url, log_files_name
 from source.general_functions       import add_spaces, add_to_full_report, dirpath
 from source.pure.general_functions  import pure_get_metadata
 from source.rdm.general_functions   import update_rdm_record, get_metadata_by_query
@@ -32,7 +32,8 @@ class RdmGroups:
         """
 
         current_time = datetime.now().strftime("%H:%M:%S")
-
+        report_name = log_files_name['groups']
+        
         # Report
         report = f"""
 
@@ -96,7 +97,7 @@ class RdmGroups:
         """
         # Report
         current_time = datetime.now().strftime("%H:%M:%S")
-        self.report_name = report_name = f'{dirpath}/reports/{date.today()}_groups.log'
+        self.report_name = report_name = log_files_name['groups']
 
         report = f"\n\n--   --   --\n\n{current_time} - RDM GROUP MERGE -\n\n"
         open(report_name, "a").write(report)
@@ -327,11 +328,13 @@ class RdmGroups:
     def pure_get_organisationalUnit_data(self, externalId: str):
         """ Get organisationalUnit name and uuid """
 
-        # # PURE REQUEST
-        page = 'page=1'
-        size = 'pageSize=100'
-        url = f'{pure_rest_api_url}organisational-units/{externalId}/research-outputs?{size}&{page}'
-        response = pure_get_metadata(url)
+        # url = f'{pure_rest_api_url}organisational-units/{externalId}/research-outputs?{size}&{page}'
+        # PURE REQUEST
+        params = {
+            'page': 1,
+            'pageSize': 100
+        }
+        response = pure_get_metadata('organisational-units', f'{externalId}/research-outputs', params)
 
         # Add response content to pure_get_uuid_metadata.json
         file_response = f'{dirpath}/data/temporary_files/pure_get_uuid_metadata.json'

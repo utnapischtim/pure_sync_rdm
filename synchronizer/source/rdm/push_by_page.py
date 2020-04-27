@@ -1,36 +1,41 @@
 import json
 from datetime                       import date, datetime
-from setup                          import pure_rest_api_url
+from setup                          import pure_rest_api_url, log_files_name
 from source.general_functions       import dirpath, add_spaces, add_to_full_report, initialize_counters
 from source.pure.general_functions  import pure_get_metadata
 from source.rdm.add_record          import RdmAddRecord
+from source.reports                 import Reports
+
+# reports = Reports()
+# reports.get_report_template('intro_title', 'some tittttle')
 
 class RunPages:
+
+    def __init__(self):
+        self.reports = Reports()
+
         
     def get_pure_by_page(self, pag_begin: int, pag_end: int, pag_size: int):
 
         rdm_add_record = RdmAddRecord()
 
         for pag in range(pag_begin, pag_end):
-
-            date_today = date.today()
-            current_time = datetime.now().strftime("%H:%M:%S")
-
+    
             self.global_counters = initialize_counters()
 
-            # add page to report file  
-            report  = f'\n\n--   --   --\n\nPag {str(pag)} - pag_size {str(pag_size)}\n\n'
-            file_records = f'{dirpath}/reports/{date_today}_records.log'
-            open(file_records, "a").write(report)
+            current_time = datetime.now().strftime("%H:%M:%S")
 
-            add_to_full_report(f'--   --   --\n\nPag {str(pag)} - pag_size {str(pag_size)} - {current_time}')
+            # Report intro
+            self.reports.get_report_template(['records', 'records_full'], 'intro_title', [current_time, 'PAGES'])
+            self.reports.get_report_template(['records', 'records_full'], 'page_and_size', [pag, pag_size])
 
-            # PURE GET REQUEST
-            url = f'{pure_rest_api_url}research-outputs?pageSize={pag_size}&page={pag}'
-            response = pure_get_metadata(url)
-
-            file_name = f'{dirpath}/data/temporary_files/pure_get_uuid_metadata.json'
-            open(file_name, 'wb').write(response.content)
+            # Pure get request
+            # url = f'{pure_rest_api_url}research-outputs?pageSize={pag_size}&page={pag}'
+            params = {
+                'page': pag,
+                'pageSize': pag_size
+            }
+            response = pure_get_metadata('research-outputs', '', params)
 
             # Load json response
             resp_json = json.loads(response.content)
@@ -65,7 +70,7 @@ File (ok{file_success}, error{file_error}) - \
 Abstracts:{count_abstracts} - Orcids:{count_orcids} - \
 {http_response_str}\
 """
-            file_pages = f'{dirpath}/reports/{date_today}_pages.log'
+            file_pages = log_files_name['pages']
             open(file_pages, "a").write(report)
 
             # Summary added to records.log
@@ -75,7 +80,7 @@ Files success:    {file_success}, files errors:    {file_error}
 Abstracts:        {count_abstracts}, Orcids:          {count_orcids}
 
 {http_response_str}"""
-            file_records = f'{dirpath}/reports/{date_today}_records.log'
+            file_records = log_files_name['records']
             open(file_records, "a").write(report)
 
             add_to_full_report(f'{report}\n')

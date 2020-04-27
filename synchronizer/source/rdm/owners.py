@@ -70,7 +70,6 @@ class RdmOwners:
 
     #   ---         ---         ---
     def get_owner_records(self):
-        
         self.global_counters = initialize_counters()
 
         rdm_add_record = RdmAddRecord()
@@ -82,10 +81,16 @@ class RdmOwners:
 
         while go_on:
 
-            url = f'{pure_rest_api_url}persons/{self.user_uuid}/research-outputs?page={page}&pageSize={page_size}'
-            response = pure_get_metadata(url)
+            # url = f'{pure_rest_api_url}persons/{self.user_uuid}/research-outputs?page={page}&pageSize={page_size}'
+            params = {
+                'sort': 'modified',
+                'page': page,
+                'pageSize': page_size
+            }
+            response = pure_get_metadata('persons', f'{self.user_uuid}/research-outputs', params)
 
             if response.status_code >= 300:
+                print(response.content)
                 return False
 
             # Load response json
@@ -163,13 +168,18 @@ class RdmOwners:
         """ PURE get person records """
 
         keep_searching = True
-        page_size = 250
+        page_size = 500
         page = 1
 
         while keep_searching:
 
-            url = f'{pure_rest_api_url}persons?page={page}&pageSize={page_size}&q=' + f'"{key_value}"'
-            response = pure_get_metadata(url)
+            # url = f'{pure_rest_api_url}persons?page={page}&pageSize={page_size}&q=' + f'"{key_value}"'
+            params = {
+                'page': page,
+                'pageSize': page_size,
+                'q': f'"{key_value}"' 
+            }
+            response = pure_get_metadata('persons', '', params)
 
             if response.status_code >= 300:
                 add_to_full_report(response.content)

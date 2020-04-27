@@ -9,8 +9,8 @@ def pure_get_uuid_metadata(uuid: str):
     """ Method used to get from Pure record's metadata """
 
     # PURE REQUEST
-    url = f'{pure_rest_api_url}research-outputs/{uuid}'
-    response = pure_get_metadata(url)
+    # url = f'{pure_rest_api_url}research-outputs/{uuid}'
+    response = pure_get_metadata('research-outputs', uuid)
 
     report = f'\tPure get metadata     - {response}'
     if response.status_code == 404:
@@ -39,9 +39,26 @@ def pure_get_uuid_metadata(uuid: str):
 
 
 
-def pure_get_metadata(url: str):
+def pure_get_metadata(endpoint, identifier = '', parameters = {}):
     headers = {
         'api-key': pure_api_key,
         'Accept': 'application/json',
     }
+
+    url = f'{pure_rest_api_url}{endpoint}/'
+
+    # Identifies a person, research_output or date
+    if len(identifier) > 0:
+        url += f'{identifier}/'
+
+    # Add parameters to url
+    if len(parameters) > 0:
+        url = url[:-1]                  # Remove last character
+        url += '?'
+        for key in parameters:
+            url += f'{key}={parameters[key]}&'
+
+    url = url[:-1]
+
+    # Sending request
     return requests.get(url, headers=headers)
