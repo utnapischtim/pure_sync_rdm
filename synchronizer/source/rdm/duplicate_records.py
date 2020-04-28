@@ -3,7 +3,7 @@ from source.rdm.delete_record   import delete_record
 
 def rdm_duplicate_records():
 
-    file_name = f'{dirpath}/data/all_rdm_records.txt'
+    file_name = data_files_name['all_rdm_records']
     all_records = open(file_name, 'r').readlines()                       
 
     temp_arr = []

@@ -5,18 +5,21 @@ import time
 from datetime                   import date
 from setup                      import token_rdm, pure_rest_api_url, versioning_running, pure_api_key, wait_429, rdm_host_url
 from source.general_functions   import add_to_full_report, add_spaces
-from source.rdm.requests        import rdm_get_metadata, rdm_put_metadata
+from source.rdm.requests        import Requests
 
 
 def get_metadata_by_recid(recid: str):
     """ Having the record recid gets from RDM its metadata """
+
+    rdm_requests = Requests()
+
     if len(recid) != 11:
         report = f'\nERROR - The recid must have 11 characters. Given: {recid}\n'
         add_to_full_report(report)
         return False
 
     # RDM request
-    response = rdm_get_metadata({}, recid)
+    response = rdm_requests.rdm_get_metadata({}, recid)
 
     if response.status_code >= 300:
         add_to_full_report(f'\n{recid} - {response}')
@@ -28,6 +31,8 @@ def get_metadata_by_recid(recid: str):
 #   ---         ---         ---
 def get_metadata_by_query(query_value: str):
     """ Applying a query get RDM record metadata """
+    
+    rdm_requests = Requests()
 
     params = {
         'sort': 'mostrecent',
@@ -35,7 +40,7 @@ def get_metadata_by_query(query_value: str):
         'page': 1,
         'q': f'"{query_value}"'
     }
-    response = rdm_get_metadata(params)
+    response = rdm_requests.rdm_get_metadata(params)
 
     if response.status_code >= 300:
         add_to_full_report(f'\n{query_value} - {response}')
@@ -118,8 +123,10 @@ def get_userid_from_list_by_externalid(external_id: str, file_data: list):
 
 #   ---         ---         ---
 def update_rdm_record(data: str, recid: str):
+    
+    rdm_requests = Requests()
 
-    response = rdm_put_metadata(recid, data)
+    response = rdm_requests.rdm_put_metadata(recid, data)
 
     add_to_full_report(f'\tRecord update         - {response}')
 

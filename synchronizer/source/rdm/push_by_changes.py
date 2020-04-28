@@ -1,6 +1,6 @@
 import json
 from datetime                       import date, datetime, timedelta
-from setup                          import pure_rest_api_url, upload_percent_accept, log_files_name
+from setup                          import pure_rest_api_url, upload_percent_accept, log_files_name, data_files_name
 from source.general_functions       import add_to_full_report, add_spaces, initialize_counters, dirpath
 from source.pure.general_functions  import pure_get_metadata
 from source.rdm.general_functions   import get_recid
@@ -34,7 +34,7 @@ def pure_get_changes():
 def get_missing_updates():
     """ Search for missing updates in the last 7 days """
 
-    file_name = f'{dirpath}/data/successful_changes.txt'
+    file_name = data_files_name['successful_changes']
 
     missing_updates = []
     count = 0
@@ -125,10 +125,10 @@ class PureChangesByDate:
         
         # If the percentage of successfully transmitted records is higher then the limit specified in setup.py
         # And changes_date is not in successful_changes.txt
-        file_name = f'{dirpath}/data/successful_changes.txt'
+        file_name = data_files_name['successful_changes']
         if (percent_success >= upload_percent_accept and data not in open(file_name, 'r').read()):
             
-            file_success = f'{dirpath}/data/successful_changes.txt'
+            file_success = data_files_name['successful_changes']
             open(file_success, "a").write(data)
 
         metadata_succs              = add_spaces(self.global_counters['successful_push_metadata'])

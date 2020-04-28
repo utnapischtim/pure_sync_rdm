@@ -1,15 +1,17 @@
 import json
-from setup                          import pure_rest_api_url, rdm_host_url, token_rdm
+from setup                          import pure_rest_api_url, rdm_host_url, token_rdm, data_files_name
 from source.general_functions       import add_to_full_report, initialize_counters, add_spaces, dirpath
 from source.pure.general_functions  import pure_get_metadata
 from source.rdm.general_functions   import get_metadata_by_recid, get_recid, update_rdm_record
-from source.rdm.requests            import rdm_get_metadata
 from source.rdm.add_record          import RdmAddRecord
 from source.rdm.database            import RdmDatabase
-
-rdm_db = RdmDatabase()
+from source.rdm.requests            import Requests
 
 class RdmOwners:
+
+    def __init__(self):
+        self.rdm_requests = Requests()
+        self.rdm_db = RdmDatabase()
 
     #   ---         ---         ---
     def rdm_owner_check(self):
@@ -23,14 +25,14 @@ class RdmOwners:
         add_to_full_report(f'\nUser external_id: {self.external_id}\n')
 
         # Gets the ID of the logged in user
-        self.user_id = self.rdm_get_user_id()
+        self.user_id = self.get_user_id_from_rdm()
 
         # If the user was not found in RDM then there is no owner to add to the record.
         if not self.user_id:
             return
 
         # Get from pure user_uuid
-        self.user_uuid = self.pure_get_user_uuid('externalId', self.external_id)
+        self.user_uuid = self.get_user_uuid_from_pure('externalId', self.external_id)
         
         if not self.user_uuid:
             return False
@@ -53,14 +55,14 @@ class RdmOwners:
             add_to_full_report('Warning - Orcid length it is not 19\n')
 
         # Gets the ID and IP of the logged in user
-        self.user_id = self.rdm_get_user_id()
+        self.user_id = self.get_user_id_from_rdm()
 
         # If the user was not found in RDM then there is no owner to add to the record.
         if not self.user_id:
             return
 
         # Get from pure user_uuid
-        self.user_uuid = self.pure_get_user_uuid('orcid', orcid)
+        self.user_uuid = self.get_user_uuid_from_pure('orcid', orcid)
         
         if not self.user_uuid:
             return False
@@ -81,7 +83,6 @@ class RdmOwners:
 
         while go_on:
 
-            # url = f'{pure_rest_api_url}persons/{self.user_uuid}/research-outputs?page={page}&pageSize={page_size}'
             params = {
                 'sort': 'modified',
                 'page': page,
@@ -164,16 +165,16 @@ class RdmOwners:
 
 
     #   ---         ---         ---
-    def pure_get_user_uuid(self, key_name: str, key_value: str):
+    def get_user_uuid_from_pure(self, key_name: str, key_value: str):
         """ PURE get person records """
 
-        keep_searching = True
-        page_size = 500
+        # If the uuid is not found in the first x items then it will continue with the next page
+        page_size = 25      
         page = 1
+        go_on = True
 
-        while keep_searching:
+        while go_on:
 
-            # url = f'{pure_rest_api_url}persons?page={page}&pageSize={page_size}&q=' + f'"{key_value}"'
             params = {
                 'page': page,
                 'pageSize': page_size,
@@ -185,7 +186,7 @@ class RdmOwners:
                 add_to_full_report(response.content)
                 return False
 
-            open(f'{dirpath}/data/temporary_files/pure_get_user_uuid.json', "wb").write(response.content)
+            open(f'{dirpath}/data/temporary_files/get_user_uuid_from_pure.json', "wb").write(response.content)
             record_json = json.loads(response.content)
 
             total_items = record_json['count']
@@ -211,24 +212,25 @@ class RdmOwners:
             if 'navigationLinks' in record_json:
                 page += 1
             else:
-                keep_searching = False
+                go_on = False
 
         add_to_full_report(f'\nUser uuid not found - Exit task\n')
         return False
 
 
     #   ---         ---         ---
-    def rdm_get_user_id(self):
+    def get_user_id_from_rdm(self):
         """ Gets the ID and IP of the logged in user """
 
-        response = rdm_db.db_query(f"SELECT user_id, ip FROM accounts_user_session_activity")
+        response = self.rdm_db.db_query(f"SELECT user_id, ip FROM accounts_user_session_activity")
+        # response = self.rdm_db.db_query2('logged_in_user_id')
 
         if not response:
             add_to_full_report('\n- accounts_user_session_activity: No user is logged in -\n')
             return False
 
         elif len(response) > 1:
-            add_to_full_report('\n- accounts_user_session_activity: Multiple users in \n')
+            add_to_full_report('\n- accounts_user_session_activity: Multiple users logged in \n')
             return False
 
         add_to_full_report(f'user IP: {response[0][1]} - user_id: {response[0][0]}')
@@ -240,7 +242,7 @@ class RdmOwners:
 
     def add_user_ids_match(self):
 
-        file_name = f"{dirpath}/data/user_ids_match.txt"
+        file_name = data_files_name['user_ids_match']
 
         needs_to_add = self.check_user_ids_match(file_name)
 
@@ -267,83 +269,80 @@ class RdmOwners:
 
 
 
+    def get_rdm_record_owners(self):
+                
+        pag = 1
+        pag_size = 250
 
+        count = 0
+        count_records_per_owner = {}
+        all_records_list = ''
+        go_on = True
 
-#   ---         ---         ---
-def get_rdm_record_owners():
+        # Empty file
+        file_owner = data_files_name['rdm_record_owners']
+        open(file_owner, 'w').close()
+
+        while go_on == True:
+
+            # REQUEST to RDM
+            # url = f'{rdm_host_url}api/records/?sort=mostrecent&size={pag_size}&page={pag}'
+            params = {
+                'sort': 'mostrecent',
+                'size': pag_size,
+                'page': pag
+            }
+            response = self.rdm_requests.rdm_get_metadata(params)
+
+            add_to_full_report(f'\n{response}\n')
             
-    pag = 1
-    pag_size = 250
+            file_name = f"{dirpath}/data/temporary_files/rdm_get_records.json"
+            open(file_name, 'wb').write(response.content)
 
-    count = 0
-    count_records_per_owner = {}
-    all_records_list = ''
-    go_on = True
+            if response.status_code >= 300:
+                add_to_full_report(response.content)
+                break
 
-    # Empty file
-    file_owner = f"{dirpath}/data/temporary_files/rdm_records_owner.txt"
-    open(file_owner, 'w').close()
+            resp_json = json.loads(response.content)
+            data = ''
 
-    while go_on == True:
+            for item in resp_json['hits']['hits']:
+                count += 1
 
-        # REQUEST to RDM
-        # url = f'{rdm_host_url}api/records/?sort=mostrecent&size={pag_size}&page={pag}'
-        params = {
-            'sort': 'mostrecent',
-            'size': pag_size,
-            'page': pag
-        }
-        response = rdm_get_metadata(params)
+                uuid   = item['metadata']['uuid']
+                recid  = item['metadata']['recid']
+                owners = item['metadata']['owners']
 
-        add_to_full_report(f'\n{response}\n')
-        
-        file_name = f"{dirpath}/data/temporary_files/rdm_get_records.json"
-        open(file_name, 'wb').write(response.content)
+                line = f'{uuid} - {recid} - {owners}'
+                add_to_full_report(line)
+                data += f'{line}\n'
+                
+                all_records_list += f'{uuid} {recid}\n'
 
-        if response.status_code >= 300:
-            add_to_full_report(response.content)
-            break
+                for i in owners:
+                    if i not in count_records_per_owner:
+                        count_records_per_owner[i] = 0
+                    count_records_per_owner[i] += 1
 
-        resp_json = json.loads(response.content)
-        data = ''
-
-        for item in resp_json['hits']['hits']:
-            count += 1
-
-            uuid   = item['metadata']['uuid']
-            recid  = item['metadata']['recid']
-            owners = item['metadata']['owners']
-
-            line = f'{uuid} - {recid} - {owners}'
-            add_to_full_report(line)
-            data += f'{line}\n'
+            add_to_full_report(f'\nPag {str(pag)} - Records {count}\n')
             
-            all_records_list += f'{uuid} {recid}\n'
+            open(file_owner, 'a').write(data)
 
-            for i in owners:
-                if i not in count_records_per_owner:
-                    count_records_per_owner[i] = 0
-                count_records_per_owner[i] += 1
+            if 'next' not in resp_json['links']:
+                go_on = False
+            
+            pag += 1
 
-        add_to_full_report(f'\nPag {str(pag)} - Records {count}\n')
+        add_to_full_report('Owner  Records')
+
+        for key in count_records_per_owner:
+            records = add_spaces(count_records_per_owner[key])
+            key     = add_spaces(key)
+            add_to_full_report(f'{key}    {records}')
         
-        open(file_owner, 'a').write(data)
-
-        if 'next' not in resp_json['links']:
-            go_on = False
-        
-        pag += 1
-
-    add_to_full_report('Owner  Records')
-
-    for key in count_records_per_owner:
-        records = add_spaces(count_records_per_owner[key])
-        key     = add_spaces(key)
-        add_to_full_report(f'{key}    {records}')
-    
-    # Updates content of all_rdm_records.txt file
-    file_all_records_list = f"{dirpath}/data/all_rdm_records.txt"
-    # Empty file
-    open(file_all_records_list, 'w').close()
-    # Add all records to file
-    open(file_all_records_list, 'a').write(all_records_list)
+        # Updates content of all_rdm_records.txt file
+        file_all_records_list = data_files_name['all_rdm_records']
+        # Empty file
+        open(file_all_records_list, 'w').close()
+        # Add all records to file
+        open(file_all_records_list, 'a').write(all_records_list)

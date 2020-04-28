@@ -30,7 +30,6 @@ class RunPages:
             self.reports.get_report_template(['records', 'records_full'], 'page_and_size', [pag, pag_size])
 
             # Pure get request
-            # url = f'{pure_rest_api_url}research-outputs?pageSize={pag_size}&page={pag}'
             params = {
                 'page': pag,
                 'pageSize': pag_size

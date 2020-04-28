@@ -2,17 +2,21 @@ import json
 import time
 from datetime                       import date, datetime
 from setup                          import versioning_running, push_dist_sec, log_files_name, rdm_host_url, \
-                                               applied_restrictions_possible_values, pure_rest_api_url
+                                               applied_restrictions_possible_values, pure_rest_api_url, data_files_name
 from source.rdm.general_functions   import get_recid, get_userid_from_list_by_externalid, too_many_rdm_requests_check
-from source.rdm.requests            import rdm_get_metadata, rdm_post_metadata
 from source.general_functions       import add_to_full_report, dirpath
 from source.get_put_file            import rdm_add_file, get_file_from_pure
 from source.pure.general_functions  import pure_get_uuid_metadata, pure_get_metadata
 from source.rdm.groups              import RdmGroups
 from source.rdm.versioning          import rdm_versioning
 from source.rdm.database            import RdmDatabase
+from source.rdm.requests            import Requests
+
 
 class RdmAddRecord:
+
+    def __init__(self):
+        self.rdm_requests = Requests()
 
     def push_record_by_uuid(self, global_counters, uuid):
         
@@ -118,7 +122,7 @@ class RdmAddRecord:
             self.data['contributors'] = []
 
             # Used to get, when available, the contributor's RDM userid
-            file_name = log_files_name['user_ids_match']
+            file_name = data_files_name['user_ids_match']
             file_data = open(file_name).readlines()
 
             for i in item['personAssociations']:
@@ -311,7 +315,7 @@ class RdmAddRecord:
             'page': '1',
             'q': self.uuid,
         }
-        response = rdm_get_metadata(params)
+        response = self.rdm_requests.rdm_get_metadata(params)
 
         if response.status_code >= 300:
             report = f'\nget_rdm_file_size - {self.uuid} - {response}'
@@ -410,7 +414,6 @@ class RdmAddRecord:
     #   ---         ---         ---
     def get_orcid(self, person_uuid: str, name: str):
 
-        # url = f'{pure_rest_api_url}/persons/{person_uuid}'
         response = pure_get_metadata('persons', person_uuid, {})
         message = f'\tPure get orcid        - {response} - '
 
@@ -452,7 +455,7 @@ class RdmAddRecord:
         
         # POST REQUEST metadata
         # url = f'{rdm_host_url}api/records/'
-        response = rdm_post_metadata(self.data)
+        response = self.rdm_requests.rdm_post_metadata(self.data)
 
         # Count http responses 
         # if response.status_code not in self.count_http_responses:
@@ -480,7 +483,7 @@ class RdmAddRecord:
             add_to_full_report(response.content)
 
             # Add record to to_transfer.txt to be re pushed afterwards
-            open(f'{dirpath}/data/to_transfer.txt', "a").write(f'{uuid}\n')
+            open(data_files_name['transfer_uuid_list'], "a").write(f'{uuid}\n')
 
         file_name = log_files_name['records']
         open(file_name, "a").write(report)
@@ -515,7 +518,7 @@ class RdmAddRecord:
             if recid:
                 # add record to all_rdm_records
                 uuid_recid_line = f'{uuid} {recid}\n'
-                open(f'{dirpath}/data/all_rdm_records.txt', "a").write(uuid_recid_line)
+                open(data_files_name['all_rdm_records'], "a").write(uuid_recid_line)
 
 
         # FINALL SUCCESS CHECK
@@ -527,7 +530,7 @@ class RdmAddRecord:
             # self.landing_page_url
 
             # if uuid in to_transfer then removes it
-            file_name = f'{dirpath}/data/to_transfer.txt'
+            file_name = data_files_name['transfer_uuid_list']
             with open(file_name, "r") as f:
                 lines = f.readlines()
             with open(file_name, "w") as f:

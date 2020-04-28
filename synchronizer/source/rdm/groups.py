@@ -53,7 +53,7 @@ class RdmGroups:
 
         for externalId in new_groups_externalIds:
             # Get group information
-            response = self.pure_get_organisationalUnit_data(externalId)
+            response = self.get_pure_organisationalUnit_metadata(externalId)
 
             if not response:
                 add_to_full_report(f'\nGroup {old_group_externalId} not found in Pure\n')
@@ -73,6 +73,8 @@ class RdmGroups:
         # Get group id
         query = f"SELECT id FROM accounts_role WHERE name = '{old_group_externalId}';"
         old_group_id = self.rdm_db.db_query(query)[0][0]
+        # old_group_id = self.rdm_db.db_query2('get_group_id', [old_group_externalId])[0][0]
+
         full_report = f'\tOld group             - Id:        {add_spaces(old_group_id)}'
         add_to_full_report(full_report)
 
@@ -105,7 +107,7 @@ class RdmGroups:
         add_to_full_report(f'{report}Old groups: {old_groups_externalId}\n')
 
         # Get name and uuid of new organisationalUnit
-        new_group_data = self.pure_get_organisationalUnit_data(new_group_externalId)
+        new_group_data = self.get_pure_organisationalUnit_metadata(new_group_externalId)
         if not new_group_data:
             add_to_full_report(f'\nWarning - New group ({new_group_externalId}) not in Pure - Abort task\n')
             return False
@@ -185,6 +187,7 @@ class RdmGroups:
         # Get all users in old group
         query = f"SELECT user_id FROM accounts_userrole WHERE role_id = {old_group_id};"
         response = self.rdm_db.db_query(query)
+        # response = self.rdm_db.db_query2('get_group_users', [old_group_id])
 
         report = 'Old group             - Num. of users: '
         if not response:
@@ -325,10 +328,9 @@ class RdmGroups:
 
 
     #   ---         ---         ---
-    def pure_get_organisationalUnit_data(self, externalId: str):
+    def get_pure_organisationalUnit_metadata(self, externalId: str):
         """ Get organisationalUnit name and uuid """
 
-        # url = f'{pure_rest_api_url}organisational-units/{externalId}/research-outputs?{size}&{page}'
         # PURE REQUEST
         params = {
             'page': 1,

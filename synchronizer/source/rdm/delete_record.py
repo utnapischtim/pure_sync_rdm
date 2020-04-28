@@ -1,11 +1,12 @@
 import requests
 from datetime                       import date, datetime
 from setup                          import rdm_host_url, token_rdm
-from setup                          import dirpath
+from setup                          import dirpath, data_files_name
 from source.general_functions       import add_to_full_report, dirpath
 from source.rdm.general_functions   import too_many_rdm_requests_check
-from source.rdm.requests            import rdm_delete_metadata
-from source.reports                 import Reports
+from source.rdm.requests            import Requests
+
+rdm_requests = Requests()
 
 def delete_from_list():
     
@@ -14,7 +15,7 @@ def delete_from_list():
     count_errors_record_delete     = 0
     count_successful_record_delete = 0
 
-    file_name = f'{dirpath}/data/to_delete.txt'
+    file_name = data_files_name['delete_recid_list']
     recids = open(file_name, 'r').readlines()
 
     if len(recids) == 0:
@@ -54,7 +55,7 @@ def delete_record(recid: str):
 
     # Delete record request
     # url = f'{rdm_host_url}api/records/{recid}'
-    response = rdm_delete_metadata(recid)
+    response = rdm_requests.rdm_delete_metadata(recid)
 
     report = f'\tRDM delete record     - {response} - Deleted recid:        {recid}'
     add_to_full_report(report)
@@ -75,7 +76,7 @@ def delete_record(recid: str):
         return False
 
     # remove deleted recid from to_delete.log
-    file_name = f"{dirpath}/data/to_delete.txt"
+    file_name = data_files_name['delete_recid_list']
     with open(file_name, "r") as f:
         lines = f.readlines()
     with open(file_name, "w") as f:
@@ -84,7 +85,7 @@ def delete_record(recid: str):
                 f.write(line)
 
     # remove record from all_rdm_records.log
-    file_name = f"{dirpath}/data/all_rdm_records.txt"
+    file_name = data_files_name['all_rdm_records']
     with open(file_name, "r") as f:
         lines = f.readlines()
     with open(file_name, "w") as f:

@@ -8,7 +8,9 @@ from setup                          import dirpath, pure_username, pure_password
                                                 email_smtp_server, email_smtp_port, email_subject, email_message
 from requests.auth                  import HTTPBasicAuth
 from source.general_functions       import add_to_full_report
-from source.rdm.requests            import rdm_put_file
+# from source.rdm.requests            import rdm_put_file
+from source.rdm.requests            import Requests
+rdm_requests = Requests()
 
 #   ---     ---     ---
 def rdm_add_file(shell_interface, file_name: str, recid: str, uuid: str):
@@ -17,7 +19,7 @@ def rdm_add_file(shell_interface, file_name: str, recid: str, uuid: str):
     # url = f'{rdm_host_url}api/records/{recid}/files/{file_name}'
 
     # PUT FILE TO RDM
-    response = rdm_put_file(file_path_name, recid)
+    response = rdm_requests.rdm_put_file(file_path_name, recid)
 
     # Report
     add_to_full_report(f'\tRDM put file          - {response}')

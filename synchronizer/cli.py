@@ -5,7 +5,7 @@ from source.log_manager             import delete_old_log_files
 from source.rdm.duplicate_records   import rdm_duplicate_records
 from source.rdm.push_by_uuid        import AddFromUuidList
 from source.rdm.delete_record       import delete_from_list
-from source.rdm.owners              import RdmOwners, get_rdm_record_owners
+from source.rdm.owners              import RdmOwners
 from source.rdm.groups              import RdmGroups
 
 class ShellInterface:
@@ -54,7 +54,8 @@ class ShellInterface:
 
     def owners_list(self):
         """ Gets from RDM all record uuids, recids and owners """
-        get_rdm_record_owners()
+        rdm_owners = RdmOwners()
+        rdm_owners.get_rdm_record_owners()
 
     def rdm_group_split(self, old_id, new_ids):
         """ Split a single group into moltiple ones """

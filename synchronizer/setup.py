@@ -47,12 +47,20 @@ versioning_running = False
 
 # REPORT LOGS
 log_files_name = {
-    'successful changes':   f'{dirpath}/data/successful_changes.txt',
-    'user_ids_match':       f'{dirpath}/data/user_ids_match.txt',
     'groups':               f'{dirpath}/reports/{date.today()}_groups.log',
     'groups':               f'{dirpath}/reports/{date.today()}_owners.log',
     'pages':                f'{dirpath}/reports/{date.today()}_pages.log',
     'records':              f'{dirpath}/reports/{date.today()}_records.log',
     'records_full':         f'{dirpath}/reports/{date.today()}_records_full.log',
     'changes':              f'{dirpath}/reports/{date.today()}_changes.log',
+}
+
+# DATA FILES NAME
+data_files_name = {
+    'successful_changes':   f'{dirpath}/data/successful_changes.txt',
+    'user_ids_match':       f'{dirpath}/data/user_ids_match.txt',
+    'all_rdm_records':      f'{dirpath}/data/all_rdm_records.txt',
+    'rdm_record_owners':    f'{dirpath}/data/rdm_record_owners.txt',
+    'transfer_uuid_list':   f'{dirpath}/data/to_transfer.txt',
+    'delete_recid_list':    f'{dirpath}/data/to_delete.txt',
 }
