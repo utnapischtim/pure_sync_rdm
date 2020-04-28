@@ -31,3 +31,4 @@ def initialize_counters():
         'http_responses': {}
     }
     return global_counters
+
