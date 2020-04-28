@@ -1,5 +1,5 @@
 
-from source.rdm.push_by_changes     import pure_get_changes
+from source.rdm.push_by_changes     import PureChangesByDate
 from source.rdm.push_by_page        import RunPages
 from source.log_manager             import delete_old_log_files
 from source.rdm.duplicate_records   import rdm_duplicate_records
@@ -16,7 +16,8 @@ class ShellInterface:
     def changes(self):
         """ Gets from Pure API endpoint 'changes' all the records that have been 
         created, modified and deleted. Next updates accordingly RDM records """
-        pure_get_changes()
+        pure_changes_by_date = PureChangesByDate()
+        pure_changes_by_date.pure_get_changes()
 
     def pages(self, page_start, page_end, page_size):
         """ Push to RDM records from Pure by page """

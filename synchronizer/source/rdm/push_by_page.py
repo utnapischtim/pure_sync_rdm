@@ -6,9 +6,6 @@ from source.pure.general_functions  import pure_get_metadata
 from source.rdm.add_record          import RdmAddRecord
 from source.reports                 import Reports
 
-# reports = Reports()
-# reports.get_report_template('intro_title', 'some tittttle')
-
 class RunPages:
 
     def __init__(self):
@@ -26,8 +23,8 @@ class RunPages:
             current_time = datetime.now().strftime("%H:%M:%S")
 
             # Report intro
-            self.reports.get_report_template(['records', 'records_full'], 'intro_title', [current_time, 'PAGES'])
-            self.reports.get_report_template(['records', 'records_full'], 'page_and_size', [pag, pag_size])
+            self.reports.add_template(['records', 'records_full'], ['general', 'title'], ['PAGES', current_time])
+            self.reports.add_template(['records', 'records_full'], ['pages', 'page_and_size'], [pag, pag_size])
 
             # Pure get request
             params = {

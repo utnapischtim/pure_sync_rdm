@@ -18,7 +18,7 @@ def pure_get_uuid_metadata(uuid: str):
     elif response.status_code >= 300:
         report += f' - Error: {response.content}'
     else:
-        report += f' - {uuid}'
+        report += f' -                     -  {uuid}'
     add_to_full_report(report)
 
     # Add response content to pure_get_uuid_metadata.json

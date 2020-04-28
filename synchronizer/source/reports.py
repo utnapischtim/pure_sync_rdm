@@ -3,29 +3,48 @@ from setup                          import log_files_name
 
 class Reports:
 
-    def add_to_report(self, file, report):
-        if file == 'records_full':
-            print(report)
-        file_name = log_files_name[file]
-        open(file_name, "a").write(f'{report}\n')
+    def add_template(self, files, template, arguments):
+        report = report_templates[template[0]][template[1]].format(*arguments)
+        self.add(files, report)
 
-
-    def get_report_template(self, report_files, template, arguments):
-    
-        report = report_templates[template].format(*arguments)
-
-        for report_file in report_files:
-            self.add_to_report(report_file, report)
+    def add(self, files, report):
+        for file in files:
+            if file == 'records_full':
+                print(report)
+            file_name = log_files_name[file]
+            open(file_name, "a").write(f'{report}\n')
 
 
 
 report_templates = {
 
-    'intro_title': """
+    # GENERAL
+    'general': {
+        # Intro                     Arguments -> title, current time
+        'title': """
 
 --   --   --
 
-{} -- {} --""",
+-- {} -- {}""",
 
-    'page_and_size': 'Page: {} - page size: {}'
+        },
+
+    # PAGES
+    'pages': {
+        'page_and_size': 'Page: {} - page size: {}',
+    },
+
+    # CHANGES
+    'changes': {
+        'summary': """
+Metadata         ->  successful: {} - errors:   {}
+File             ->  successful: {} - errors:   {}
+Delete           ->  successful: {} - errors:   {}
+
+Pure changes:
+Update:     {} - Create:     {} - Delete:    {}
+Incomplete: {} - Duplicated: {} - Irrelevant:{}
+"""
+    },
+
 }
