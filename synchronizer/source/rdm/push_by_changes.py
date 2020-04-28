@@ -1,7 +1,7 @@
 import json
 from datetime                       import date, datetime, timedelta
 from setup                          import pure_rest_api_url, upload_percent_accept, data_files_name
-from source.general_functions       import add_to_full_report, add_spaces, initialize_counters, dirpath
+from source.general_functions       import add_spaces, initialize_counters, dirpath
 from source.pure.general_functions  import pure_get_metadata
 from source.rdm.general_functions   import get_recid
 from source.rdm.delete_record       import delete_record, delete_from_list
@@ -13,7 +13,7 @@ from source.reports                 import Reports
 class PureChangesByDate:
 
     def __init__(self):
-        self.reports = Reports()
+        self.report = Reports()
 
 
     def pure_get_changes(self):
@@ -25,7 +25,7 @@ class PureChangesByDate:
         missing_updates = ['2020-04-28']      # TEMPORARY !!!!!
         
         if missing_updates == []:
-            add_to_full_report('\nNothing to update.\n')
+            self.report.add(['console'], '\nNothing to update.\n')
             return
 
         for date_to_update in reversed(missing_updates):
@@ -35,11 +35,11 @@ class PureChangesByDate:
 
     def run_process(self, changes_date: str):
         
-        self.all_report_files = ['records_full', 'records', 'changes']
+        self.all_report_files = ['console', 'records', 'changes']
 
         current_time = datetime.now().strftime("%H:%M:%S")
-        self.reports.add_template(self.all_report_files, ['general', 'title'], ['CHANGES', current_time])
-        self.reports.add(self.all_report_files, f'\nProcessed date: {changes_date}\n')
+        self.report.add_template(self.all_report_files, ['general', 'title'], ['CHANGES', current_time])
+        self.report.add(self.all_report_files, f'\nProcessed date: {changes_date}\n')
 
         # Initialize global counters
         self.global_counters = initialize_counters()
@@ -48,7 +48,7 @@ class PureChangesByDate:
         response = pure_get_metadata('changes', changes_date, {'pageSize': 100, 'page': 1})
 
         if response.status_code >= 300:
-            # add_to_full_report(response.content)
+            # self.report.add(['console'], response.content)
             return False
 
         # Load response json
@@ -56,11 +56,11 @@ class PureChangesByDate:
 
         number_records = json_response["count"]
         report_line = f'Pure get changes      - {response} - Number of items: {add_spaces(number_records)}'
-        self.reports.add(self.all_report_files, report_line)
+        self.report.add(self.all_report_files, report_line)
 
         # If there are no changes
         if number_records == 0:
-            self.reports.add(self.all_report_files, f'\n\nNothing to transfer.\n\n')
+            self.report.add(self.all_report_files, f'\n\nNothing to transfer.\n\n')
             return
 
         # used to check if there are doubled tasks (e.g. update uuid and delete same uuid)
@@ -126,7 +126,7 @@ class PureChangesByDate:
             self.local_counters['delete'] += 1
 
             report = f"\n{self.local_counters['delete']} - {item['changeType']}"
-            add_to_full_report(report)
+            self.report.add(['console'], report)
       
             # Gets the record recid
             recid = get_recid(uuid)
@@ -164,7 +164,7 @@ class PureChangesByDate:
             
             count += 1
             report = f"\n{count} - {item['changeType']}"
-            add_to_full_report(report)
+            self.report.add(['console'], report)
 
             if item['changeType'] == 'ADD' or item['changeType'] == 'CREATE':
                 self.local_counters['create'] += 1
@@ -206,7 +206,7 @@ class PureChangesByDate:
     def report_summary(self):
 
         # Global counters
-        self.reports.summary_global_counters(self.all_report_files, self.global_counters)
+        self.report.summary_global_counters(self.all_report_files, self.global_counters)
 
         # Local counters
         # Incomplete:  when the uuid or changeType are not specified
@@ -221,6 +221,6 @@ class PureChangesByDate:
         arguments.append(add_spaces(self.local_counters['duplicated']))
         arguments.append(add_spaces(self.local_counters['not_ResearchOutput']))
 
-        self.reports.add_template(self.all_report_files, ['changes', 'summary'], arguments)
+        self.report.add_template(self.all_report_files, ['changes', 'summary'], arguments)
 
         return

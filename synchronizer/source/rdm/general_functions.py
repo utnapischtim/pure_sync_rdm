@@ -4,9 +4,11 @@ import os
 import time
 from datetime                   import date
 from setup                      import token_rdm, pure_rest_api_url, versioning_running, pure_api_key, wait_429, rdm_host_url
-from source.general_functions   import add_to_full_report, add_spaces
+from source.general_functions   import add_spaces
 from source.rdm.requests        import Requests
+from source.reports                 import Reports
 
+reports = Reports()
 
 def get_metadata_by_recid(recid: str):
     """ Having the record recid gets from RDM its metadata """
@@ -15,14 +17,14 @@ def get_metadata_by_recid(recid: str):
 
     if len(recid) != 11:
         report = f'\nERROR - The recid must have 11 characters. Given: {recid}\n'
-        add_to_full_report(report)
+        reports.add(['console'], report)
         return False
 
     # RDM request
     response = rdm_requests.rdm_get_metadata({}, recid)
 
     if response.status_code >= 300:
-        add_to_full_report(f'\n{recid} - {response}')
+        reports.add(['console'], f'\n{recid} - {response}')
         return False
     
     return response
@@ -43,7 +45,7 @@ def get_metadata_by_query(query_value: str):
     response = rdm_requests.rdm_get_metadata(params)
 
     if response.status_code >= 300:
-        add_to_full_report(f'\n{query_value} - {response}')
+        reports.add(['console'], f'\n{query_value} - {response}')
         return False
     
     return response
@@ -92,7 +94,7 @@ def get_recid(uuid: str):
             newest_recid = recid
 
             report = f'\tRDM get recid         - {response} - Total:       {add_spaces(total_recids)}  - {api_url}'
-            add_to_full_report(report)
+            reports.add(['console'], report)
 
         else:
             # If versioning is running then it is not necessary to delete older versions of the record
@@ -116,7 +118,7 @@ def get_userid_from_list_by_externalid(external_id: str, file_data: list):
             user_id_spaces  = add_spaces(user_id)
 
             report = f'\tRDM owner list        -                  - User id:     {user_id_spaces}  - externalId: {external_id}'
-            add_to_full_report(report)
+            reports.add(['console'], report)
 
             return user_id
 
@@ -128,10 +130,10 @@ def update_rdm_record(data: str, recid: str):
 
     response = rdm_requests.rdm_put_metadata(recid, data)
 
-    add_to_full_report(f'\tRecord update         - {response}')
+    reports.add(['console'], f'\tRecord update         - {response}')
 
     if response.status_code >= 300:
-        add_to_full_report(response.content)
+        reports.add(['console'], response.content)
     return response
     
 
@@ -140,8 +142,8 @@ def too_many_rdm_requests_check(response: int):
     """ If too many requests are submitted to RDM (more then 5000 / hour) """
 
     if response.status_code == 429:
-        add_to_full_report(response.content)
-        add_to_full_report('\nToo many RDM requests.. wait {wait_429 / 60} minutes\n')
+        reports.add(['console'], response.content)
+        reports.add(['console'], '\nToo many RDM requests.. wait {wait_429 / 60} minutes\n')
         time.sleep(wait_429)
         return False
     return True

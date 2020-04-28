@@ -1,8 +1,12 @@
 from setup                      import data_files_name
-from source.general_functions   import initialize_counters, add_to_full_report, dirpath
+from source.general_functions   import initialize_counters, dirpath
 from source.rdm.add_record      import RdmAddRecord
+from source.reports                 import Reports
 
 class AddFromUuidList:
+    
+    def __init__(self):
+        self.reports = Reports()
 
     def add_from_uuid_list(self):
 
@@ -13,7 +17,7 @@ class AddFromUuidList:
         uuids = open(file_name, 'r').readlines()
 
         if len(uuids) == 0:
-            add_to_full_report('\nThere is nothing to transfer.\n')
+            self.report.add(['console'], '\nThere is nothing to transfer.\n')
             return
 
         rdm_add_record = RdmAddRecord()
@@ -21,7 +25,7 @@ class AddFromUuidList:
         for uuid in uuids:
             uuid = uuid.split('\n')[0]
             if (len(uuid) != 36):
-                add_to_full_report('Invalid uuid lenght.')
+                self.report.add(['console'], 'Invalid uuid lenght.')
                 continue
             
             rdm_add_record.push_record_by_uuid(self.global_counters, uuid)

@@ -1,0 +1,82 @@
+{
+    "owners": [
+        1
+    ],
+    "_access": {
+        "metadata_restricted": false,
+        "files_restricted": false
+    },
+    "title": "Empfehlungen für die Integration von Open Educational Resources an Hochschulen in Österreich",
+    "access_right": "open",
+    "uuid": "11111111-1111-1111-1111-111111111111",
+    "pureId": "33333",
+    "publicationDate": "2016",
+    "createdDate": "2016-05-17T21:09:41.613+0000",
+    "recordType": "Working paper",
+    "category": "Research",
+    "peerReview": "True",
+    "publicationStatus": "Published",
+    "numberOfAuthors": "4",
+    "workflow": "For validation",
+    "confidential": "False",
+    "publisherName": "Forum Neue Medien",
+    "abstract": "Dieses Dokument dient dazu, einerseits einen kurzen Überblick über freie Bildungsressourcen (Open Educational Resources, kurz: OER) generell und speziell in Österreich zu geben, sowie andererseits Empfehlungen für die österreichische Hochschullandschaft in Bezug auf eine nachhaltige Verankerung von OER in der Bildungslandschaft auszusprechen. Insbe- sondere wird betont, dass dafür ein Zusammenwirken aller Beteiligten von der Politik bis hin zu den Lehrenden notwendig ist",
+    "managingOrganisationalUnit_name": "Educational Technology (94090)",
+    "managingOrganisationalUnit_uuid": "11111111-1111-1111-1111-111111111111",
+    "managingOrganisationalUnit_externalId": "22222",
+    "versionFiles": [
+        {
+            "internalReview": false,
+            "name": "2016_fnma_OER_Empfehlungen_final.pdf",
+            "size": "1493299",
+            "mimeType": "application/pdf",
+            "digest": "F56057250DBD359F2FD7C54DAE69F0BEAA5A4901",
+            "digestAlgorithm": "SHA1",
+            "createdBy": "musterman",
+            "createdDate": "2016-05-17T21:09:41.610+0000",
+            "versionType": "Final published version",
+            "licenseType": "CC BY",
+            "accessType": "open"
+        }
+    ],
+    "contributors": [
+        {
+            "name": "Ebner, Martin",
+            "externalId": "44444",
+            "uuid": "11111111-1111-1111-1111-111111111111",
+            "personRole": "Author",
+            "organisationalUnit": "Institute of Interactive Systems and Data Science (7060)",
+            "orcid": "0000-0001-5789-5296"
+        },
+        {
+            "name": "Freisleben-Teutscher, Christian",
+            "personRole": "Author",
+            "type_p": "External person",
+            "uuid": "11111111-1111-1111-1111-111111111111"
+        },
+        {
+            "name": "Kopp, Michael",
+            "personRole": "Author",
+            "type_p": "External person",
+            "uuid": "11111111-1111-1111-1111-111111111111"
+        },
+        {
+            "name": "Rieck, Katharina",
+            "personRole": "Author",
+            "type_p": "External person",
+            "uuid": "11111111-1111-1111-1111-111111111111"
+        }
+    ],
+    "organisationalUnits": [
+        {
+            "name": "Institute of Interactive Systems and Data Science (7060)",
+            "uuid": "11111111-1111-1111-1111-111111111111",
+            "externalId": "5555"
+        },
+        {
+            "name": "Educational Technology (94090)",
+            "uuid": "11111111-1111-1111-1111-111111111111",
+            "externalId": "5555"
+        }
+    ]
+}

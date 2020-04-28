@@ -51,7 +51,7 @@ log_files_name = {
     'groups':               f'{dirpath}/reports/{date.today()}_owners.log',
     'pages':                f'{dirpath}/reports/{date.today()}_pages.log',
     'records':              f'{dirpath}/reports/{date.today()}_records.log',
-    'records_full':         f'{dirpath}/reports/{date.today()}_records_full.log',
+    'console':              f'{dirpath}/reports/{date.today()}_console.log',
     'changes':              f'{dirpath}/reports/{date.today()}_changes.log',
 }
 

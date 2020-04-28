@@ -7,10 +7,11 @@ from setup                          import dirpath, pure_username, pure_password
                                                 email_receiver, email_sender, email_sender_password, \
                                                 email_smtp_server, email_smtp_port, email_subject, email_message
 from requests.auth                  import HTTPBasicAuth
-from source.general_functions       import add_to_full_report
-# from source.rdm.requests            import rdm_put_file
 from source.rdm.requests            import Requests
+from source.reports                 import Reports
+
 rdm_requests = Requests()
+reports = Reports()
 
 #   ---     ---     ---
 def rdm_add_file(shell_interface, file_name: str, recid: str, uuid: str):
@@ -22,7 +23,7 @@ def rdm_add_file(shell_interface, file_name: str, recid: str, uuid: str):
     response = rdm_requests.rdm_put_file(file_path_name, recid)
 
     # Report
-    add_to_full_report(f'\tRDM put file          - {response}')
+    reports.add(['console'], f'\tRDM put file          - {response}')
 
     current_time = datetime.now().strftime("%H:%M:%S")
     report = f'{current_time} - file_put_to_rdm - {response} - {recid}\n'
@@ -31,7 +32,7 @@ def rdm_add_file(shell_interface, file_name: str, recid: str, uuid: str):
         shell_interface.file_success = False
 
         report += f'{response.content}\n'
-        add_to_full_report(response.content)
+        reports.add(['console'], response.content)
 
     else:
         shell_interface.file_success = True
@@ -73,7 +74,7 @@ def get_file_from_pure(shell_interface, electronic_version: str):
             match_review = 'Match: T, Review: T'
     
     report = f'\tPure get file         - {response} - {match_review} - {file_name[0:55]}...'
-    add_to_full_report(report)
+    reports.add(['console'], report)
     
     if response.status_code < 300:
         # Save file
@@ -85,10 +86,10 @@ def get_file_from_pure(shell_interface, electronic_version: str):
         file_extension = file_name.split('.')[file_name.count('.')]
         if file_extension == 'txt':
             report = '\n\tATTENTION, the file extension is txt - \tKnown issue -> jinja2.exceptions.UndefinedError: No first item, sequence was empty.\n'
-            add_to_full_report(report)
+            reports.add(['console'], report)
 
     else:
-        add_to_full_report(f'Error downloading file from pure ({file_url})')
+        reports.add(['console'], f'Error downloading file from pure ({file_url})')
 
     # shell_interface.time.sleep(0.2)
     return

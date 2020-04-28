@@ -2,7 +2,7 @@ import json
 import os
 from datetime                       import date, datetime
 from setup                          import rdm_host_url, pure_rest_api_url, log_files_name
-from source.general_functions       import add_spaces, add_to_full_report, dirpath
+from source.general_functions       import add_spaces, dirpath
 from source.pure.general_functions  import pure_get_metadata
 from source.rdm.general_functions   import update_rdm_record, get_metadata_by_query
 from source.rdm.database            import RdmDatabase
@@ -14,9 +14,9 @@ class RdmGroups:
     def __init__(self):
         # Create instance of RDM database manager
         self.rdm_db = RdmDatabase()
-        self.reports = Reports()
+        self.report = Reports()
 
-        self.report_name = 'groups'
+        self.file_name = ['groups']
 
     
     def rdm_group_split(self, old_group_externalId: str, new_groups_externalIds: list):
@@ -43,10 +43,10 @@ class RdmGroups:
 
     Old group             - externalId: {old_group_externalId}
     """
-        self.reports.add_to_report(self.report_name, report)
+        self.report.add(self.file_name, report)
 
         report = f'\nOld group: {old_group_externalId} - New groups: {new_groups_externalIds}\n'
-        add_to_full_report(report)
+        self.report.add(['console'], report)
 
         # Get name and uuid of new groups
         new_groups_data = []
@@ -56,19 +56,19 @@ class RdmGroups:
             response = self.get_pure_organisationalUnit_metadata(externalId)
 
             if not response:
-                add_to_full_report(f'\nGroup {old_group_externalId} not found in Pure\n')
+                self.report.add(['console'], f'\nGroup {old_group_externalId} not found in Pure\n')
                 return False
 
             new_groups_data.append(response)
 
             report = f"\nNew group             - externalId: {externalId}   - {response['uuid']} - {response['name']}\n"
-            self.reports.add_to_report(self.report_name, report)
+            self.report.add(self.file_name, report)
 
             # Create new group
             response = self.rdm_create_group(externalId, response['name'])
             
             report = f'New group creation    - {response}\n'
-            self.reports.add_to_report(self.report_name, report)
+            self.report.add(self.file_name, report)
 
         # Get group id
         query = f"SELECT id FROM accounts_role WHERE name = '{old_group_externalId}';"
@@ -76,13 +76,14 @@ class RdmGroups:
         # old_group_id = self.rdm_db.db_query2('get_group_id', [old_group_externalId])[0][0]
 
         full_report = f'\tOld group             - Id:        {add_spaces(old_group_id)}'
-        add_to_full_report(full_report)
+        self.report.add(['console'], full_report)
 
         # Removes users from old group and adds to new groups
         self.rdm_split_users_from_old_to_new_group(old_group_id, report_name, old_group_externalId, new_groups_externalIds)
 
         # Modify all related records
         self.rdm_split_modify_record(old_group_externalId, report_name, new_groups_data, new_groups_externalIds)
+
 
 
     #   ---         ---         ---
@@ -99,17 +100,17 @@ class RdmGroups:
         """
         # Report
         current_time = datetime.now().strftime("%H:%M:%S")
-        self.report_name = report_name = log_files_name['groups']
+        report_name = log_files_name['groups']
 
         report = f"\n\n--   --   --\n\n{current_time} - RDM GROUP MERGE -\n\n"
         open(report_name, "a").write(report)
 
-        add_to_full_report(f'{report}Old groups: {old_groups_externalId}\n')
+        self.report.add(['console'], f'{report}Old groups: {old_groups_externalId}\n')
 
         # Get name and uuid of new organisationalUnit
         new_group_data = self.get_pure_organisationalUnit_metadata(new_group_externalId)
         if not new_group_data:
-            add_to_full_report(f'\nWarning - New group ({new_group_externalId}) not in Pure - Abort task\n')
+            self.report.add(['console'], f'\nWarning - New group ({new_group_externalId}) not in Pure - Abort task\n')
             return False
 
         report = f"New group             - externalId: {add_spaces(new_group_externalId)}   - {new_group_data['name']}\n"
@@ -137,7 +138,7 @@ class RdmGroups:
 
         report = f"\nModify records - Group: {old_group_externalId} - Number records: {total_items}\n"
         open(report_name, "a").write(report)
-        add_to_full_report(f'\t{report}')
+        self.report.add(['console'], f'\t{report}')
 
         if total_items == 0:
             return True
@@ -148,7 +149,7 @@ class RdmGroups:
 
             recid = item['recid']
             url = f'{rdm_host_url}api/records/{recid}'
-            add_to_full_report(f'\tRecid:               {url}')
+            self.report.add(['console'], f'\tRecid:               {url}')
 
             # Removes old organisationalUnit from organisationalUnits
             for i in item['organisationalUnits']:
@@ -192,11 +193,11 @@ class RdmGroups:
         report = 'Old group             - Num. of users: '
         if not response:
             report += '0'
-            add_to_full_report(f'\t{report}')
+            self.report.add(['console'], f'\t{report}')
             open(report_name, "a").write(f'\n{report}\n')
         else:
             report += f'{len(response)}'
-            add_to_full_report(f'\t{report}')
+            self.report.add(['console'], f'\t{report}')
             open(report_name, "a").write(f'\n{report}\n')
 
             for i in response:
@@ -219,7 +220,7 @@ class RdmGroups:
     #   ---         ---         ---
     def rdm_merge_modify_records(self, old_groups_externalId, report_name, new_group_data, new_group_externalId):
 
-        add_to_full_report('\n- Modify records -')
+        self.report.add(['console'], '\n- Modify records -')
         
         # Get from RDM all records with old groups
         for old_group_externalId in old_groups_externalId:
@@ -233,7 +234,7 @@ class RdmGroups:
 
             report = f"\nModify records - Group: {old_group_externalId} - Number records: {total_items}"
             open(report_name, "a").write(report)
-            add_to_full_report(f'\t{report}')
+            self.report.add(['console'], f'\t{report}')
 
             if total_items == 0:
                 continue
@@ -245,7 +246,7 @@ class RdmGroups:
                 recid = item['recid']
 
                 url = f'{rdm_host_url}api/records/{recid}'
-                add_to_full_report(f"\tRecid:               {url}")
+                self.report.add(['console'], f"\tRecid:               {url}")
 
                 # + Organisational units +
                 new_organisationalUnits_data = [new_group_data]
@@ -293,7 +294,7 @@ class RdmGroups:
             response       = self.rdm_db.db_query(query)
 
             if not response:
-                add_to_full_report('\nWarning - Old group ({old_groups_externalId}) not in database - Abort task\n')
+                self.report.add(['console'], '\nWarning - Old group ({old_groups_externalId}) not in database - Abort task\n')
                 return False
 
             old_group_id   = response[0][0]
@@ -310,7 +311,7 @@ class RdmGroups:
             report = f"Old group (id {add_spaces(old_group_id)})  - Number users: {add_spaces(len(old_group_users))}\
     - externalId:  {add_spaces(old_group_externalId)} - {old_group_name}"
             open(report_name, "a").write(f'{report}\n')
-            add_to_full_report(report)
+            self.report.add(['console'], report)
             
             for i in old_group_users:
                 user_id = i[0]
@@ -344,7 +345,7 @@ class RdmGroups:
 
         # Check response
         if response.status_code >= 300:
-            add_to_full_report(response.content)
+            self.report.add(['console'], response.content)
             return False
 
         # Load json
@@ -369,7 +370,7 @@ class RdmGroups:
         user_email = self.rdm_db.db_query(query)[0][0]
 
         report     = f'\tChange user groups    - User id:      {add_spaces(user_id)} - Email: {user_email}'
-        add_to_full_report(report)
+        self.report.add(['console'], report)
 
         return user_email
 
@@ -383,11 +384,11 @@ class RdmGroups:
         # If the group has already been created
         if response:
             report = f'{message} Found     {message_2}'
-            add_to_full_report(report)
+            self.report.add(['console'], report)
             return 'Already exists'
 
         report = f'{message} Not found {message_2}'
-        add_to_full_report(report)
+        self.report.add(['console'], report)
 
         group_name = group_name.replace('(', '\(')
         group_name = group_name.replace(')', '\)')
@@ -396,7 +397,7 @@ class RdmGroups:
         response = os.system(command)
 
         if response != 0:
-            add_to_full_report(f'\tWarning - Creating group response: {response}')
+            self.report.add(['console'], f'\tWarning - Creating group response: {response}')
             return f'Error: {response}'
 
         return 'Success'
@@ -425,14 +426,14 @@ class RdmGroups:
 
         if response:
             report = f'\tRDM user in group  - User id: {add_spaces(user_id)}   -                     - Already belongs to group {group_externalId} (id {group_id})'
-            add_to_full_report(report)
+            self.report.add(['console'], report)
             return True
 
         # Adds user to group
         command = f'pipenv run invenio roles add {user_email} {group_externalId}'
         response = os.system(command)
         if response != 0:
-            add_to_full_report(f'Warning - Creating group response: {response}')
+            self.report.add(['console'], f'Warning - Creating group response: {response}')
 
 
     #   ---         ---         ---
@@ -454,13 +455,13 @@ class RdmGroups:
         # Add user to new groups
         full_report  = f'\t                     - Adding user to group {new_group_externalId}'
         full_report += '\t                      - Remove user from old group'
-        add_to_full_report(full_report)
+        self.report.add(['console'], full_report)
 
         command = f'pipenv run invenio roles add {user_email} {new_group_externalId}'
         response = os.system(command)
 
         if response != 0:
-            # add_to_full_report(f'Warning - Creating group response: {response}')
+            # self.report.add(['console'], f'Warning - Creating group response: {response}')
             # open(shell_interface.report_name, "a").write(f'{report} - Error: {response}\n')
             return False
 
@@ -491,13 +492,13 @@ class RdmGroups:
 
         # Remove user from old group
         full_report = '\t                      - Remove user from old group'
-        add_to_full_report(full_report)
+        self.report.add(['console'], full_report)
 
         command = f'pipenv run invenio roles remove {user_email} {group_name}'
         response = os.system(command)
 
         if response != 0:
-            add_to_full_report(f'Warning - Creating group response: {response}')
+            self.report.add(['console'], f'Warning - Creating group response: {response}')
             # open(shell_interface.report_name, "a").write(f'{report} - Error: {response}\n')
             return False
 

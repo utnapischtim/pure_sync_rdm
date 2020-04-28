@@ -1,6 +1,9 @@
 import json
-from source.general_functions        import add_spaces, add_to_full_report
+from source.general_functions        import add_spaces
 from source.rdm.general_functions    import get_metadata_by_query, too_many_rdm_requests_check
+from source.reports                 import Reports
+
+report = Reports()
 
 def rdm_versioning (uuid: str):
     response = get_metadata_by_query(uuid)
@@ -30,7 +33,7 @@ def rdm_versioning (uuid: str):
 
             # If a record has a differnt uuid than it will be ignored
             if uuid != rdm_metadata['uuid']:
-                add_to_full_report(f" VERSIONING - Different uuid {rdm_metadata['uuid']}")
+                report.add(['console'], f" VERSIONING - Different uuid {rdm_metadata['uuid']}")
                 continue
             
             # Add recid to listed versions
@@ -48,6 +51,6 @@ def rdm_versioning (uuid: str):
         else:
             message += f'Current ver.:{add_spaces(metadata_version)}  - New version: {metadata_version + 1}'        
 
-    add_to_full_report(message)
+    report.add(['console'], message)
 
     return [metadata_version, metadata_versions]

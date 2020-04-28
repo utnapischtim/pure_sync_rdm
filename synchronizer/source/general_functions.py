@@ -9,13 +9,6 @@ def add_spaces(value: str):
     return ''.ljust(spaces) + str(value)        # ljust -> adds spaces after a string
 
 
-
-def add_to_full_report(report: str):
-    file_records = f'{dirpath}/reports/{date.today()}_records_full.log'
-    open(file_records, "a").write(f'{report}\n')
-    print(report)
-
-
 def initialize_counters():
     """ Initialize variables that will count through the whole task the success of each process """
     global_counters = {

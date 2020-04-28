@@ -1,7 +1,10 @@
-from source.general_functions   import add_to_full_report, dirpath
-from source.rdm.delete_record   import delete_record
+from source.general_functions       import dirpath
+from source.rdm.delete_record       import delete_record
+from source.reports                 import Reports
 
 def rdm_duplicate_records():
+
+    report = Reports()
 
     file_name = data_files_name['all_rdm_records']
     all_records = open(file_name, 'r').readlines()                       
@@ -24,10 +27,10 @@ def rdm_duplicate_records():
 
     if count_deleted == 0:
         report = '\nThere are no duplicate records to delete\n'
-        add_to_full_report(report)
+        report.add(['console'], report)
 
     report = f'Total items: {len(all_records)}\nDeleted: {count_deleted}\n'
-    add_to_full_report(report)
+    report.add(['console'], report)
 
         
         

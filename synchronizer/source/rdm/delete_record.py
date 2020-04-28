@@ -2,11 +2,13 @@ import requests
 from datetime                       import date, datetime
 from setup                          import rdm_host_url, token_rdm
 from setup                          import dirpath, data_files_name
-from source.general_functions       import add_to_full_report, dirpath
+from source.general_functions       import dirpath
 from source.rdm.general_functions   import too_many_rdm_requests_check
 from source.rdm.requests            import Requests
+from source.reports                 import Reports
 
 rdm_requests = Requests()
+reports = Reports()
 
 def delete_from_list():
     
@@ -19,7 +21,7 @@ def delete_from_list():
     recids = open(file_name, 'r').readlines()
 
     if len(recids) == 0:
-        add_to_full_report('\nThere is nothing to delete.\n')
+        reports.add(['console'], '\nThere is nothing to delete.\n')
         return
 
     for recid in recids:
@@ -33,7 +35,7 @@ def delete_from_list():
         count_total += 1
 
         if len(recid) != 11:
-            add_to_full_report(f'\n{recid} -> Wrong recid lenght! \n')
+            reports.add(['console'], f'\n{recid} -> Wrong recid lenght! \n')
             continue
         
         # -- REQUEST --
@@ -58,7 +60,7 @@ def delete_record(recid: str):
     response = rdm_requests.rdm_delete_metadata(recid)
 
     report = f'\tRDM delete record     - {response} - Deleted recid:        {recid}'
-    add_to_full_report(report)
+    reports.add(['console'], report)
 
     # Append to yyyy-mm-dd_records.log
     current_time = datetime.now().strftime("%H:%M:%S")
@@ -72,7 +74,7 @@ def delete_record(recid: str):
 
     # 410 -> "PID has been deleted"
     if response.status_code >= 300 and response.status_code != 410:
-        add_to_full_report(response.content)
+        reports.add(['console'], response.content)
         return False
 
     # remove deleted recid from to_delete.log

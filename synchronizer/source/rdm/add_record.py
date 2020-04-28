@@ -4,19 +4,22 @@ from datetime                       import date, datetime
 from setup                          import versioning_running, push_dist_sec, log_files_name, rdm_host_url, \
                                                applied_restrictions_possible_values, pure_rest_api_url, data_files_name
 from source.rdm.general_functions   import get_recid, get_userid_from_list_by_externalid, too_many_rdm_requests_check
-from source.general_functions       import add_to_full_report, dirpath
+from source.general_functions       import dirpath
 from source.get_put_file            import rdm_add_file, get_file_from_pure
 from source.pure.general_functions  import pure_get_uuid_metadata, pure_get_metadata
 from source.rdm.groups              import RdmGroups
 from source.rdm.versioning          import rdm_versioning
 from source.rdm.database            import RdmDatabase
 from source.rdm.requests            import Requests
+from source.reports                 import Reports
 
 
 class RdmAddRecord:
 
     def __init__(self):
         self.rdm_requests = Requests()
+        self.report = Reports()
+        
 
     def push_record_by_uuid(self, global_counters, uuid):
         
@@ -63,7 +66,7 @@ class RdmAddRecord:
                 # One is the user id of the master user
                 self.data['owners'].append(1)
             report = f"\tOwners:               - {self.data['owners']}"
-            add_to_full_report(report)
+            self.report.add(['console'], report)
         else:
             # One is the user id of the master user
             self.data['owners'] = [1]
@@ -212,7 +215,7 @@ class RdmAddRecord:
         for i in self.data['appliedRestrictions']:
             if i not in applied_restrictions_possible_values:
                 report = f"Warning: the value '{i}' is not amont the accepted restrictions\n"
-                add_to_full_report(report)
+                self.report.add(['console'], report)
         return True
 
     #   ---         ---         ---
@@ -245,7 +248,7 @@ class RdmAddRecord:
         if pure_value in accessright_pure_to_rdm:
             return accessright_pure_to_rdm[pure_value]
         else:
-            add_to_full_report('\n--- new access_right ---> not in accessright_pure_to_rdmk array\n\n')
+            self.report.add(['console'], '\n--- new access_right ---> not in accessright_pure_to_rdmk array\n\n')
             return False
 
 
@@ -319,8 +322,8 @@ class RdmAddRecord:
 
         if response.status_code >= 300:
             report = f'\nget_rdm_file_size - {self.uuid} - {response}'
-            add_to_full_report(report)
-            add_to_full_report(response.content)
+            self.report.add(['console'], report)
+            self.report.add(['console'], response.content)
 
             return False
 
@@ -341,7 +344,7 @@ class RdmAddRecord:
 
                 self.rdm_file_review.append({'size': file_size, 'review': file_review, 'name': file_name})
 
-                # add_to_full_report(f'\tFile/s size   - {response} - Number files:  {total_recids}    - Size: {file_size} - Review: {file_review}')
+                # self.report.add(['console'], f'\tFile/s size   - {response} - Number files:  {total_recids}    - Size: {file_size} - Review: {file_review}')
         return
 
 
@@ -419,12 +422,12 @@ class RdmAddRecord:
 
         if response.status_code == 404:
             message += f'External person     - {person_uuid} - {name}'
-            add_to_full_report(message)
+            self.report.add(['console'], message)
             return False
 
         elif response.status_code >= 300:
             message += f'Error: {response.content}'
-            add_to_full_report(message)
+            self.report.add(['console'], message)
             return False
 
         resp_json = json.loads(response.content)
@@ -435,12 +438,12 @@ class RdmAddRecord:
             orcid = resp_json['orcid']
 
             message += f'{orcid} - {name}'
-            add_to_full_report(message)
+            self.report.add(['console'], message)
 
             return orcid
 
         message += f'Orcid not found     - {name}'
-        add_to_full_report(message)
+        self.report.add(['console'], message)
         return False
 
 
@@ -465,7 +468,7 @@ class RdmAddRecord:
 
         uuid = self.item['uuid']
         report = f"\tRDM post metadata     - {response} - Uuid:                 {uuid}"
-        add_to_full_report(report)
+        self.report.add(['console'], report)
         
         current_time = datetime.now().strftime("%H:%M:%S")
         report = f'{current_time} - metadata_to_rdm - {str(response)} - {uuid} - {self.item["title"]}\n'
@@ -480,7 +483,7 @@ class RdmAddRecord:
             
             # error description from invenioRDM
             report += f'{response.content}\n'
-            add_to_full_report(response.content)
+            self.report.add(['console'], response.content)
 
             # Add record to to_transfer.txt to be re pushed afterwards
             open(data_files_name['transfer_uuid_list'], "a").write(f'{uuid}\n')

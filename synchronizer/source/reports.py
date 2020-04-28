@@ -3,6 +3,11 @@ from setup                          import log_files_name
 from source.general_functions       import add_spaces
 
 class Reports:
+    
+    # def add_console(self, report):
+    #     open(log_files_name['console'], "a").write(f'{report}\n')
+    #     print(report)
+
 
     def add_template(self, files, template, arguments):
         report = report_templates[template[0]][template[1]].format(*arguments)
@@ -11,7 +16,7 @@ class Reports:
 
     def add(self, files, report):
         for file in files:
-            if file == 'records_full':
+            if file == 'console':
                 print(report)
             file_name = log_files_name[file]
             open(file_name, "a").write(f'{report}\n')
@@ -60,7 +65,7 @@ class Reports:
 
 report_templates = {
 
-    # GENERAL
+    # GENERAL       ***
     'general': {
         # Intro                     Arguments -> title, current time
         'title': """
@@ -79,7 +84,7 @@ Errors          -> metadata: {} - files: {} - delete: {}
 
 
 
-    # PAGES
+    # PAGES       ***
     'pages': {
         'page_and_size': '\nPage: {} - page size: {}',
 
@@ -94,7 +99,7 @@ Abstracts:{} - Orcids:{} - \
 
 
 
-    # CHANGES
+    # CHANGES       ***
     'changes': {
         'summary': """Pure changes:
 Update:     {} - Create:     {} - Delete:    {}
