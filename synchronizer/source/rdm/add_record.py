@@ -72,8 +72,8 @@ class RdmAddRecord:
             self.data['owners'] = [1]
 
         # TO REVIEW - TO REVIEW
-        # self.data['owners'].append(3)
-        self.data['appliedRestrictions'] = ['owners', 'ip_single']
+        self.data['owners'].append(3)
+        self.data['appliedRestrictions'] = ['owners', 'groups', 'ip_single', 'ip_range']
         self.data['_access'] = {'metadata_restricted': False, 'files_restricted': False}        # Default value for _access field
         # TO REVIEW - TO REVIEW
 

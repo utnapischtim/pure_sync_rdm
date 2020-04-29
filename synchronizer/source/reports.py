@@ -3,11 +3,6 @@ from setup                          import log_files_name
 from source.general_functions       import add_spaces
 
 class Reports:
-    
-    # def add_console(self, report):
-    #     open(log_files_name['console'], "a").write(f'{report}\n')
-    #     print(report)
-
 
     def add_template(self, files, template, arguments):
         report = report_templates[template[0]][template[1]].format(*arguments)
@@ -30,11 +25,11 @@ class Reports:
         arguments.append(add_spaces(global_counters['errors_push_metadata']))
         arguments.append(add_spaces(global_counters['errors_put_file']))
         arguments.append(add_spaces(global_counters['errors_record_delete']))
-
         self.add_template(report_files, ['general', 'summary'], arguments)
 
-        http_response_str = self.metadata_http_responses(global_counters)
-        self.add(report_files, http_response_str)
+        if global_counters['http_responses']:
+            http_response_str = self.metadata_http_responses(global_counters)
+            self.add(report_files, http_response_str)
 
 
     def pages_single_line(self, global_counters, pag, pag_size):
@@ -49,13 +44,17 @@ class Reports:
         arguments.append(add_spaces(global_counters['errors_put_file']))
         arguments.append(add_spaces(global_counters['abstracts']))
         arguments.append(add_spaces(global_counters['orcids']))
-        arguments.append(self.metadata_http_responses(global_counters))
+        if global_counters['http_responses']:
+            arguments.append(self.metadata_http_responses(global_counters))
 
         self.add_template(['pages'], ['pages', 'summary_single_line'], arguments)
         return
 
 
     def metadata_http_responses(self, global_counters):
+        if not global_counters['http_responses']:
+            return
+
         http_response_str = 'Metadata HTTP responses -> '
         for key in global_counters['http_responses']:
             http_response_str += f"{key}: {global_counters['http_responses'][key]}, "

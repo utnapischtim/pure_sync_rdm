@@ -40,7 +40,7 @@ db_user     = open(f'{dirpath}/data_setup/db_user.txt', 'r').readline()
 db_password = open(f'{dirpath}/data_setup/db_password.txt', 'r').readline()
 
 # RESTRICTIONS
-applied_restrictions_possible_values = ['groups', 'owners', 'ip_ranges', 'ip_single']
+applied_restrictions_possible_values = ['groups', 'owners', 'ip_range', 'ip_single']
 
 # VERSIONING
 versioning_running = False
@@ -48,7 +48,7 @@ versioning_running = False
 # REPORT LOGS
 log_files_name = {
     'groups':               f'{dirpath}/reports/{date.today()}_groups.log',
-    'groups':               f'{dirpath}/reports/{date.today()}_owners.log',
+    'owners':               f'{dirpath}/reports/{date.today()}_owners.log',
     'pages':                f'{dirpath}/reports/{date.today()}_pages.log',
     'records':              f'{dirpath}/reports/{date.today()}_records.log',
     'console':              f'{dirpath}/reports/{date.today()}_console.log',

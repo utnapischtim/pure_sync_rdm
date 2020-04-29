@@ -23,10 +23,6 @@ def pure_get_uuid_metadata(uuid: str):
         report += f' -                     -  {uuid}'
     reports.add(['console'], report)
 
-    # Add response content to pure_get_uuid_metadata.json
-    file_response = f'{dirpath}/data/temporary_files/pure_get_uuid_metadata.json'
-    open(file_response, 'wb').write(response.content)
-
     # Check response
     if response.status_code >= 300:
         reports.add(['console'], f'\n{response.content}\n')
@@ -46,7 +42,6 @@ def pure_get_metadata(endpoint, identifier = '', parameters = {}):
         'api-key': pure_api_key,
         'Accept': 'application/json',
     }
-
     url = f'{pure_rest_api_url}{endpoint}/'
 
     # Identifies a person, research_output or date
@@ -63,4 +58,10 @@ def pure_get_metadata(endpoint, identifier = '', parameters = {}):
     url = url[:-1]
 
     # Sending request
-    return requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers)
+
+    # Add response content to pure_get_uuid_metadata.json
+    file_response = f'{dirpath}/data/temporary_files/pure_response.json'
+    open(file_response, 'wb').write(response.content)
+
+    return response

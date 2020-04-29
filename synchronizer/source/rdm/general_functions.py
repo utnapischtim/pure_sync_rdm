@@ -140,7 +140,6 @@ def update_rdm_record(data: str, recid: str):
 #   ---         ---         ---
 def too_many_rdm_requests_check(response: int):
     """ If too many requests are submitted to RDM (more then 5000 / hour) """
-
     if response.status_code == 429:
         reports.add(['console'], response.content)
         reports.add(['console'], '\nToo many RDM requests.. wait {wait_429 / 60} minutes\n')

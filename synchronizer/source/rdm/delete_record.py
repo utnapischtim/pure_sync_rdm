@@ -1,7 +1,6 @@
 import requests
 from datetime                       import date, datetime
-from setup                          import rdm_host_url, token_rdm
-from setup                          import dirpath, data_files_name
+from setup                          import dirpath, rdm_host_url, token_rdm, data_files_name, log_files_name
 from source.general_functions       import dirpath
 from source.rdm.general_functions   import too_many_rdm_requests_check
 from source.rdm.requests            import Requests
@@ -66,7 +65,7 @@ def delete_record(recid: str):
     current_time = datetime.now().strftime("%H:%M:%S")
     report_line = f'{current_time} - delete_from_rdm - {response} - {recid}\n'
     
-    file_name = f'{dirpath}/reports/{date.today()}_records.log'
+    file_name = log_files_name['records']
     open(file_name, "a").write(report_line)
 
     # If the status_code is 429 (too many requests) then it will wait for some minutes
@@ -98,3 +97,12 @@ def delete_record(recid: str):
                 f.write(line)
 
     return response
+
+
+
+def delete_all_records():
+
+    file_data = open(data_files_name['all_rdm_records']).readlines()
+    for line in file_data:
+        recid = line.split(' ')[1].strip('\n')
+        delete_record(recid)
