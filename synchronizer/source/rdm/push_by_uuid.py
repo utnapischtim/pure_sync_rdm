@@ -1,15 +1,17 @@
-from setup                      import data_files_name
-from source.general_functions   import initialize_counters, dirpath
-from source.rdm.add_record      import RdmAddRecord
+from setup                          import data_files_name
+from source.general_functions       import initialize_counters, dirpath
+from source.rdm.add_record          import RdmAddRecord
+from source.general_functions       import current_time
 from source.reports                 import Reports
 
 class AddFromUuidList:
     
     def __init__(self):
-        self.reports = Reports()
+        self.report = Reports()
 
     def add_from_uuid_list(self):
 
+        self.report.add_template(['console'], ['general', 'title'], ['PUSH RECORDS FROM LIST', current_time() + '\n'])
         self.global_counters = initialize_counters()
 
         # read to_transfer.txt

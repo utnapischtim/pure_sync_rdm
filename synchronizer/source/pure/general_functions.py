@@ -20,7 +20,7 @@ def pure_get_uuid_metadata(uuid: str):
     elif response.status_code >= 300:
         report += f' - Error: {response.content}'
     else:
-        report += f' -                     -  {uuid}'
+        report += f'                       - {uuid}'
     reports.add(['console'], report)
 
     # Check response

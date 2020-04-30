@@ -1,7 +1,7 @@
 import json
 from datetime                       import date, datetime
 from setup                          import pure_rest_api_url, rdm_host_url, token_rdm, data_files_name
-from source.general_functions       import initialize_counters, add_spaces, dirpath
+from source.general_functions       import initialize_counters, add_spaces, dirpath, current_time
 from source.pure.general_functions  import pure_get_metadata
 from source.rdm.general_functions   import get_metadata_by_recid, get_recid, update_rdm_record
 from source.rdm.add_record          import RdmAddRecord
@@ -23,8 +23,7 @@ class RdmOwners:
         """ Gets from pure all the records related to a certain user,
             afterwards it modifies/create RDM records accordingly. """
 
-        current_time = datetime.now().strftime("%H:%M:%S")
-        self.report.add_template(self.report_files, ['general', 'title'], ['OWNERS', current_time])
+        self.report.add_template(self.report_files, ['general', 'title'], ['OWNERS', current_time()])
 
         # self.external_id = '56038' # TEMP
         # self.external_id = '3261' # TEMP
@@ -279,6 +278,8 @@ class RdmOwners:
 
 
     def get_rdm_record_owners(self):
+
+        self.report.add_template(self.report_files, ['general', 'title'], ['RECORDS OWNER', current_time()])
                 
         pag = 1
         pag_size = 250

@@ -17,7 +17,6 @@ reports = Reports()
 def rdm_add_file(shell_interface, file_name: str, recid: str, uuid: str):
     
     file_path_name = f'{dirpath}/data/temporary_files/{file_name}'
-    # url = f'{rdm_host_url}api/records/{recid}/files/{file_name}'
 
     # PUT FILE TO RDM
     response = rdm_requests.rdm_put_file(file_path_name, recid)

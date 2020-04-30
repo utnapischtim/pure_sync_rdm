@@ -130,7 +130,8 @@ def update_rdm_record(data: str, recid: str):
 
     response = rdm_requests.rdm_put_metadata(recid, data)
 
-    reports.add(['console'], f'\tRecord update         - {response}')
+    url = f'{rdm_host_url}api/records/{recid}'
+    reports.add(['console'], f'\tRecord update         - {response} - {url}')
 
     if response.status_code >= 300:
         reports.add(['console'], response.content)

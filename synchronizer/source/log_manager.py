@@ -1,17 +1,16 @@
 import os
 from datetime                   import date, datetime, timedelta
 from setup                      import dirpath, days_to_keep_log_files, lines_successful_changes, data_files_name
+from source.general_functions   import current_time
 from source.reports             import Reports
 
 reports = Reports()
 
 def delete_old_log_files():
-    
-    current_time = datetime.now().strftime("%H:%M:%S")
-    reports.add(['console'], f'\n - Delete old log files - {current_time}\n')
 
-# DELETE OLD LOG FILES
+    reports.add_template(['console'], ['general', 'title'], ['DELETE OLD LOGS', current_time() + '\n'])
 
+    # DELETE OLD LOG FILES
     date_limit = str(date.today() - timedelta(days=days_to_keep_log_files))
     reports_full_path = f'{dirpath}/reports/'
 
@@ -31,7 +30,7 @@ def delete_old_log_files():
             align_response(file_name, 'Keep')
 
 
-# SHORTEN SUCCESSFUL_CHANGES.TXT
+    # SHORTEN SUCCESSFUL_CHANGES.TXT
     file_path_name  = data_files_name['successful_changes']
     file_name       = file_path_name.split('/')[-1]
 

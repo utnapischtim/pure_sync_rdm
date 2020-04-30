@@ -1,5 +1,5 @@
 import os
-from datetime       import date
+from datetime       import date, datetime
 
 dirpath = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
 
@@ -25,3 +25,5 @@ def initialize_counters():
     }
     return global_counters
 
+def current_time():
+    return datetime.now().strftime("%H:%M:%S")
