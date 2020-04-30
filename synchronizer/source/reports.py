@@ -68,7 +68,6 @@ report_templates = {
     'general': {
         # Intro                     Arguments -> title, current time
         'title': """
-
 --   --   --
 
 -- {} -- {}""",

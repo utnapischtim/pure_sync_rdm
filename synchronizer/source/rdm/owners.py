@@ -23,7 +23,7 @@ class RdmOwners:
         """ Gets from pure all the records related to a certain user,
             afterwards it modifies/create RDM records accordingly. """
 
-        self.report.add_template(self.report_files, ['general', 'title'], ['OWNERS', current_time()])
+        self.report.add_template(self.report_files, ['general', 'title'], ['OWNERS CHECK (using externalId)', current_time()])
 
         # self.external_id = '56038' # TEMP
         # self.external_id = '3261' # TEMP
@@ -53,6 +53,8 @@ class RdmOwners:
 
     #   ---         ---         ---
     def rdm_owner_check_by_orcid(self):
+    
+        self.report.add_template(self.report_files, ['general', 'title'], ['OWNERS CHECK (using orcid)', current_time()])
 
         orcid = '0000-0002-4154-6945'  # TEMP
 
@@ -85,7 +87,7 @@ class RdmOwners:
 
         go_on     = True
         page      = 1
-        page_size = 2
+        page_size = 50
 
         while go_on:
 
@@ -160,7 +162,7 @@ class RdmOwners:
                         self.report.add(['console'], '\tRDM record status     -                  - Owner in record')
                         local_counters['in_record'] += 1
             
-            report = f"create: {local_counters['create']} - to_update: {local_counters['to_update']} - in_record:{local_counters['in_record']}"
+            report = f"\nCreate: {local_counters['create']} - To update: {local_counters['to_update']} - In record:{local_counters['in_record']}"
             self.report.add(['console', 'owners'], report)
             self.report.summary_global_counters(['console', 'owners'], self.global_counters)
             page += 1
@@ -230,8 +232,8 @@ class RdmOwners:
     def get_user_id_from_rdm(self):
         """ Gets the ID and IP of the logged in user """
 
-        response = self.rdm_db.db_query(f"SELECT user_id, ip FROM accounts_user_session_activity")
-        # response = self.rdm_db.db_query2('logged_in_user_id')
+        # response = self.rdm_db.db_query(f"SELECT user_id, ip FROM accounts_user_session_activity")
+        response = self.rdm_db.select_query('user_id, ip', 'accounts_user_session_activity')
 
         if not response:
             self.report.add(['console', 'owners'], '\n- accounts_user_session_activity: No user is logged in -\n')

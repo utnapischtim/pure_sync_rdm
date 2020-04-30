@@ -13,24 +13,26 @@ class RdmDatabase:
             """)
         self.cursor = connection.cursor()
 
-    def db_query(self, query):
+    # def db_query(self, query):
+    #     self.cursor.execute(query)
+    #     if self.cursor.rowcount > 0:
+    #         return self.cursor.fetchall()
+    #     return False
+
+    def select_query(self, fields: str, table: str, filters = {}):
+
+        # Filters
+        filters_str = ''
+        if filters:
+            filters_str += " WHERE"
+            for key in filters:
+                filters_str += f" {key} = {filters[key]} AND"
+            filters_str = filters_str[:-4]
+
+        # Query
+        query = f"SELECT {fields} FROM {table}{filters_str};"
+
         self.cursor.execute(query)
-        if self.cursor.rowcount > 0:
-            return self.cursor.fetchall()
-        return False
-
-    def db_query2(self, query, args = []):
-
-        queries = {
-            'logged_in_user_id':"SELECT user_id, ip FROM accounts_user_session_activity",
-            'get_group_id':     "SELECT id FROM accounts_role WHERE name = '{}';",
-            'get_group_users':  "SELECT user_id FROM accounts_userrole WHERE role_id = {};"
-        }
-
-        print(queries['query'].format())
-        exit()
-
-        self.cursor.execute(queries['query'])
         if self.cursor.rowcount == 0:
             return False
         return self.cursor.fetchall()

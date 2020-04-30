@@ -1,6 +1,7 @@
 from source.general_functions       import dirpath
 from source.rdm.delete_record       import delete_record
 from source.reports                 import Reports
+from setup                          import data_files_name
 
 def rdm_duplicate_records():
 
@@ -26,11 +27,10 @@ def rdm_duplicate_records():
         temp_arr.append(uuid)
 
     if count_deleted == 0:
-        report = '\nThere are no duplicate records to delete\n'
-        report.add(['console'], report)
+        report.add(['console'], '\nThere are no duplicate records to delete\n')
 
-    report = f'Total items: {len(all_records)}\nDeleted: {count_deleted}\n'
-    report.add(['console'], report)
+    line = f'Total items: {len(all_records)}\nDeleted: {count_deleted}\n'
+    report.add(['console'], line)
 
         
         

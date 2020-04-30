@@ -88,8 +88,8 @@ class RdmGroups:
 
 
     def get_rdm_group_id(self, externalId):
-        query = f"SELECT id, description FROM accounts_role WHERE name = '{externalId}';"
-        response    = self.rdm_db.db_query(query)
+        response = self.rdm_db.select_query('id, description', 'accounts_role', {'name': f"'{externalId}'"})
+
         group_id    = response[0][0]
         group_name  = response[0][1]
 
@@ -150,10 +150,9 @@ class RdmGroups:
 
     #   ---         ---         ---
     def rdm_split_users_from_old_to_new_group(self, old_group_id, old_group_externalId, new_groups_externalIds):
+
         # Get all users in old group
-        query = f"SELECT user_id FROM accounts_userrole WHERE role_id = {old_group_id};"
-        response = self.rdm_db.db_query(query)
-        # response = self.rdm_db.db_query2('get_group_users', [old_group_id])
+        response = self.rdm_db.select_query('user_id', 'accounts_userrole', {'role_id': old_group_id})
 
         report = 'Old group                                - Num. of users:  '
         if not response:
@@ -166,7 +165,7 @@ class RdmGroups:
                 user_id = i[0]
 
                 # Get user email
-                user_email = self.get_user_email(user_id)
+                user_email = self.rdm_db.select_query('email', 'accounts_user', {'id': user_id})[0][0]
                 
                 for new_group_externalId in new_groups_externalIds:
                     # Add user to new groups
@@ -244,8 +243,7 @@ class RdmGroups:
         for old_group_externalId in old_groups_externalId:
 
             # Get group id
-            query          = f"SELECT id, description FROM accounts_role WHERE name = '{old_group_externalId}';"
-            response       = self.rdm_db.db_query(query)
+            response = self.rdm_db.select_query('id, description', 'accounts_role', {'name': f"'{old_group_externalId}'"})
 
             if not response:
                 self.report.add(['console'], '\nWarning - Old group ({old_groups_externalId}) not in database - END TASK\n')
@@ -255,11 +253,9 @@ class RdmGroups:
             old_group_name = response[0][1]
 
             # Get all users id that are in this group
-            query = f"SELECT user_id FROM accounts_userrole WHERE role_id = {old_group_id};"
-            old_group_users = self.rdm_db.db_query(query)
+            old_group_users = self.rdm_db.select_query('user_id', 'accounts_userrole', {'role_id': old_group_id})
 
             if not old_group_users:
-
                 old_group_users = []
 	
             report = f"\tOld group             - ExtId:     {add_spaces(old_group_externalId)} - Num. users:  {add_spaces(len(old_group_users))} - {old_group_name}"
@@ -269,7 +265,7 @@ class RdmGroups:
                 user_id = i[0]
 
                 # Get user email
-                user_email = self.get_user_email(user_id)
+                user_email = self.rdm_db.select_query('email', 'accounts_user', {'id': user_id})[0][0]
 
                 # - - Add user to new group - -
                 self.group_add_user(user_email, new_group_externalId, user_id)
@@ -316,20 +312,10 @@ class RdmGroups:
         return False
 
 
-        
-    #   ---         ---         ---
-    def get_user_email(self, user_id):
-        # Get user email
-        query      = f"SELECT email FROM accounts_user WHERE id = {user_id};"
-        user_email = self.rdm_db.db_query(query)[0][0]
-
-        return user_email
-
-
     def rdm_check_if_group_exists(self, group_externalId):
         """ Checks if the group already exists"""
 
-        response = self.rdm_db.db_query(f"SELECT * FROM accounts_role WHERE name = '{group_externalId}'")
+        response = self.rdm_db.select_query('*', 'accounts_role', {'name': f"'{group_externalId}'"})
 
         if response:
             report = f'\tNew group creation    - ExtId:     {add_spaces(group_externalId)} - Already exists'
@@ -365,22 +351,21 @@ class RdmGroups:
     def rdm_add_user_to_group(self, user_id: int, group_externalId: str, group_name: str):
 
         # Get user's rdm email
-        user_email = self.rdm_db.db_query(f"SELECT email FROM accounts_user WHERE id = {user_id}")[0][0]
+        user_email = self.rdm_db.select_query('email', 'accounts_user', {'id': user_id})[0][0]
 
         # Get group id
-        query = f"SELECT id FROM accounts_role WHERE name = '{group_externalId}'"
-        response = self.rdm_db.db_query(query)
+        response = self.rdm_db.select_query('id', 'accounts_role', {'name': f"'{group_externalId}'"})
 
         if not response:
             # If the group does not exist then creates it
             self.rdm_create_group(group_externalId, group_name)
             # Repeats the query to get the group id
-            group_id = self.rdm_db.db_query(query)
+            response = self.rdm_db.select_query('id', 'accounts_role', {'name': f"'{group_externalId}'"})
 
         group_id = response[0][0]
 
         # Checks if match already exists
-        response = self.rdm_db.db_query(f"SELECT * FROM accounts_userrole WHERE user_id = {user_id} AND role_id = {group_id}")
+        response = self.rdm_db.select_query('*', 'accounts_userrole', {'user_id': user_id, 'role_id': group_id})
 
         if response:
             report = f'\tRDM user in group  - User id: {add_spaces(user_id)}   -                     - Already belongs to group {group_externalId} (id {group_id})'
@@ -398,12 +383,10 @@ class RdmGroups:
     def group_add_user(self, user_email, new_group_externalId, user_id):
         
         # Get group id
-        query = f"SELECT id FROM accounts_role WHERE name = '{new_group_externalId}';"
-        group_id = self.rdm_db.db_query(query)[0][0]
+        group_id = self.rdm_db.select_query('id', 'accounts_role', {'name': f"'{new_group_externalId}'"})[0][0]
         
         # Check if the user is already in the group
-        query = f"SELECT * FROM accounts_userrole WHERE user_id = {user_id} AND role_id = {group_id};"
-        response = self.rdm_db.db_query(query)
+        response = self.rdm_db.select_query('*', 'accounts_userrole', {'user_id': user_id, 'role_id': group_id})
 
         if response:
             return True
@@ -424,16 +407,13 @@ class RdmGroups:
     def group_remove_user(self, user_email, group_name):
         
         # Get user id
-        query = f"SELECT id FROM accounts_user WHERE email = '{user_email}';"
-        user_id = self.rdm_db.db_query(query)[0][0]
+        user_id = self.rdm_db.select_query('id', 'accounts_user', {'email': f"'{user_email}'"})[0][0]
         
         # Get group id
-        query = f"SELECT id FROM accounts_role WHERE name = '{group_name}';"
-        group_id = self.rdm_db.db_query(query)[0][0]
+        group_id = self.rdm_db.select_query('id', 'accounts_role', {'name': f"'{group_name}'"})[0][0]
         
         # Check if the user is already in the group
-        query = f"SELECT * FROM accounts_userrole WHERE user_id = {user_id} AND role_id = {group_id};"
-        response = self.rdm_db.db_query(query)
+        response = self.rdm_db.select_query('*', 'accounts_userrole', {'user_id': user_id, 'role_id': group_id})
 
         report =  f'Remove user fromGroup - ExtId:     {add_spaces(group_name)} - User id:     {add_spaces(user_id)}'
 
