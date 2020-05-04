@@ -32,23 +32,23 @@ class RdmOwners:
         self.report.add(self.report_files, f'\nUser external_id: {self.external_id}\n')
 
         # Gets the ID of the logged in user
-        self.user_id = self.get_user_id_from_rdm()
+        self.user_id = self.__get_user_id_from_rdm()
 
         # If the user was not found in RDM then there is no owner to add to the record.
         if not self.user_id:
             return
 
         # Get from pure user_uuid
-        self.user_uuid = self.get_user_uuid_from_pure('externalId', self.external_id)
+        self.user_uuid = self.__get_user_uuid_from_pure('externalId', self.external_id)
         
         if not self.user_uuid:
             return False
 
         # Add user to user_ids_match table
-        self.add_user_ids_match()
+        self.__add_user_ids_match()
 
         # Gets from pure all records related to the user
-        self.get_owner_records()
+        self.__get_owner_records()
 
 
     #   ---         ---         ---
@@ -64,26 +64,24 @@ class RdmOwners:
             self.report.add(['console'], 'Warning - Orcid length it is not 19\n')
 
         # Gets the ID and IP of the logged in user
-        self.user_id = self.get_user_id_from_rdm()
+        self.user_id = self.__get_user_id_from_rdm()
 
         # If the user was not found in RDM then there is no owner to add to the record.
         if not self.user_id:
             return
 
         # Get from pure user_uuid
-        self.user_uuid = self.get_user_uuid_from_pure('orcid', orcid)
+        self.user_uuid = self.__get_user_uuid_from_pure('orcid', orcid)
         
         if not self.user_uuid:
             return False
 
-        self.get_owner_records()
+        self.__get_owner_records()
         
 
     #   ---         ---         ---
-    def get_owner_records(self):
+    def __get_owner_records(self):
         self.global_counters = initialize_counters()
-
-        
 
         go_on     = True
         page      = 1
@@ -118,7 +116,7 @@ class RdmOwners:
             report = f'Get person records - {response} - Page {page} (size {page_size})'
             self.report.add(['console', 'owners'], report)
 
-            go_on = self.get_next_page(resp_json, page)
+            go_on = self.__get_next_page(resp_json, page)
 
             for item in resp_json['items']:
             
@@ -170,7 +168,7 @@ class RdmOwners:
             page += 1
 
 
-    def get_next_page(self, resp_json, page):
+    def __get_next_page(self, resp_json, page):
         
         if 'navigationLinks' in resp_json:
             if page == 1:
@@ -184,7 +182,7 @@ class RdmOwners:
 
 
     #   ---         ---         ---
-    def get_user_uuid_from_pure(self, key_name: str, key_value: str):
+    def __get_user_uuid_from_pure(self, key_name: str, key_value: str):
         """ PURE get person records """
 
         # If the uuid is not found in the first x items then it will continue with the next page
@@ -230,7 +228,7 @@ class RdmOwners:
 
 
     #   ---         ---         ---
-    def get_user_id_from_rdm(self):
+    def __get_user_id_from_rdm(self):
         """ Gets the ID and IP of the logged in user """
 
         response = self.rdm_db.select_query('user_id, ip', 'accounts_user_session_activity')
@@ -250,18 +248,18 @@ class RdmOwners:
         return self.rdm_record_owner
 
 
-    def add_user_ids_match(self):
+    def __add_user_ids_match(self):
 
         file_name = data_files_name['user_ids_match']
 
-        needs_to_add = self.check_user_ids_match(file_name)
+        needs_to_add = self.__check_user_ids_match(file_name)
 
         if needs_to_add:
             open(file_name, 'a').write(f'{self.user_id} {self.user_uuid} {self.external_id}\n')
             self.report.add(['console', 'owners'], f'user_ids_match     - Adding id toList - {self.user_id}, {self.user_uuid}, {self.external_id}')
 
 
-    def check_user_ids_match(self, file_name: str):
+    def __check_user_ids_match(self, file_name: str):
 
         file_data = open(file_name).readlines()
         for line in file_data:
