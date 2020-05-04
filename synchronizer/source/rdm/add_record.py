@@ -5,8 +5,8 @@ from setup                          import versioning_running, push_dist_sec, lo
                                                applied_restrictions_possible_values, pure_rest_api_url, data_files_name
 from source.rdm.general_functions   import get_recid, get_userid_from_list_by_externalid, too_many_rdm_requests_check
 from source.general_functions       import dirpath
-from source.get_put_file            import rdm_add_file, get_file_from_pure
-from source.pure.general_functions  import get_pure_record_metadata_by_uuid, get_pure_metadata
+from source.rdm.put_file            import rdm_add_file
+from source.pure.general_functions  import get_pure_record_metadata_by_uuid, get_pure_metadata, get_pure_file
 from source.rdm.groups              import RdmGroups
 from source.rdm.versioning          import rdm_versioning
 from source.rdm.database            import RdmDatabase
@@ -380,7 +380,7 @@ class RdmAddRecord:
         self.data['versionFiles'].append(sub_data)
 
         # Download file from Pure
-        get_file_from_pure(self, i)
+        get_pure_file(self, i)
         return
     
 
