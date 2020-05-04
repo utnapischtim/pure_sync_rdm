@@ -3,6 +3,7 @@ import os
 from datetime                       import datetime
 from setup                          import log_files_name, email_receiver, temporary_files_name, \
     email_sender, email_sender_password, email_smtp_server, email_smtp_port, email_message
+from source.general_functions       import current_time
 from source.rdm.requests            import Requests
 from source.reports                 import Reports
 
@@ -18,14 +19,11 @@ def rdm_add_file(shell_interface, file_name: str, recid: str, uuid: str):
     # Report
     reports.add(['console'], f'\tRDM put file          - {response}')
 
-    current_time = datetime.now().strftime("%H:%M:%S")
-    report = f'{current_time} - file_put_to_rdm - {response} - {recid}\n'
+    reports.add(['records'], f'{current_time()} - file_put_to_rdm - {response} - {recid}\n')
 
     if response.status_code >= 300:
         shell_interface.file_success = False
-
-        report += f'{response.content}\n'
-        reports.add(['console'], response.content)
+        reports.add(['console', 'records'], response.content)
 
     else:
         shell_interface.file_success = True
@@ -35,8 +33,6 @@ def rdm_add_file(shell_interface, file_name: str, recid: str, uuid: str):
 
         # # Sends email to remove record from Pure
         # send_email(uuid, file_name)               # - # - SEND EMAIL - # - #
-
-    open(log_files_name['records'], "a").write(report)
 
     return response
 

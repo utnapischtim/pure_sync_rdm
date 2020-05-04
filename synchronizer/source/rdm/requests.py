@@ -1,7 +1,11 @@
 import requests
 from setup                      import token_rdm, rdm_records_url, temporary_files_name
+from source.reports             import Reports
 
 class Requests:
+    
+    def __init__(self):
+        self.report = Reports()
 
     def __rdm_request_headers(self, parameters):
         headers = {}
@@ -48,8 +52,12 @@ class Requests:
         params  = self.__rdm_request_params()
 
         data_utf8 = data.encode('utf-8')
+        
+        response = requests.post(rdm_records_url, headers=headers, params=params, data=data_utf8, verify=False)
 
-        return requests.post(rdm_records_url, headers=headers, params=params, data=data_utf8, verify=False)
+        if response.status_code >= 300:
+            self.report.add(['console', 'records'], response.content)
+        return response
 
 
     def rdm_put_metadata(self, recid: str, data: str):

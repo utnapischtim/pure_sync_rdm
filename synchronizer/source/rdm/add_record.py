@@ -6,8 +6,9 @@ from setup                          import versioning_running, push_dist_sec, lo
 from source.rdm.general_functions   import get_recid, get_userid_from_list_by_externalid, too_many_rdm_requests_check
 from source.rdm.put_file            import rdm_add_file
 from source.pure.general_functions  import get_pure_record_metadata_by_uuid, get_pure_metadata, get_pure_file
-from source.rdm.groups              import RdmGroups
+from source.general_functions       import current_time
 from source.rdm.versioning          import rdm_versioning
+from source.rdm.groups              import RdmGroups
 from source.rdm.database            import RdmDatabase
 from source.rdm.requests            import Requests
 from source.reports                 import Reports
@@ -440,6 +441,7 @@ class RdmAddRecord:
 
         self.metadata_success = None
         self.file_success     = None
+        uuid = self.item['uuid']
 
         # RDM accepts 5000 records per hour (one record every ~ 1.4 sec.)
         time.sleep(push_dist_sec)                        
@@ -447,17 +449,11 @@ class RdmAddRecord:
         # POST REQUEST metadata
         response = self.rdm_requests.rdm_post_metadata(self.data)
 
-        # Count http responses 
-        if response.status_code not in self.global_counters['http_responses']:
-            self.global_counters['http_responses'][response.status_code] = 0
-        self.global_counters['http_responses'][response.status_code] += 1
+        # Count http responses
+        self.__http_response_counter(response.status_code)
 
-        uuid = self.item['uuid']
-        report = f"\tRDM post metadata     - {response} - Uuid:                 {uuid}"
-        self.report.add(['console'], report)
-        
-        current_time = datetime.now().strftime("%H:%M:%S")
-        report = f'{current_time} - metadata_to_rdm - {str(response)} - {uuid} - {self.item["title"]}\n'
+        self.report.add(['console'], f"\tRDM post metadata     - {response} - Uuid:                 {uuid}")
+        self.report.add(['records'], f'{current_time()} - metadata_to_rdm - {str(response)} - {uuid} - {self.item["title"]}\n')
 
         # RESPONSE CHECK
         if response.status_code >= 300:
@@ -467,20 +463,14 @@ class RdmAddRecord:
             # metadata transmission success flag
             self.metadata_success = False
             
-            # error description from invenioRDM
-            report += f'{response.content}\n'
-            self.report.add(['console'], response.content)
-
             # Add record to to_transmit.txt to be re-transmitted
             open(data_files_name['transfer_uuid_list'], "a").write(f'{uuid}\n')
 
-        file_name = log_files_name['records']
-        open(file_name, "a").write(report)
 
         # If the status_code is 429 (too many requests) then it will wait for some minutes
         too_many_rdm_requests_check(response)
 
-        # In case of SUCCESSFUL TRANSMISSION
+        # In case of successful transmission
         if response.status_code < 300:
             self.global_counters['metadata']['success'] += 1
 
@@ -509,7 +499,7 @@ class RdmAddRecord:
                 open(data_files_name['all_rdm_records'], "a").write(uuid_recid_line)
 
 
-        # FINALL SUCCESS CHECK
+        # FINAL SUCCESS CHECK
         if(self.metadata_success == False or self.file_success == False):
             return False
         else:
@@ -526,3 +516,10 @@ class RdmAddRecord:
                     if line.strip("\n") != uuid:
                         f.write(line)
         return True
+
+
+
+    def __http_response_counter(self, status_code):
+        if status_code not in self.global_counters['http_responses']:
+            self.global_counters['http_responses'][status_code] = 0
+        self.global_counters['http_responses'][status_code] += 1

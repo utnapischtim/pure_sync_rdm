@@ -22,7 +22,7 @@ class PureChangesByDate:
         
         # Get date of last update
         missing_updates = self.__get_missing_updates()
-        # missing_updates = ['2020-04-28']      # TEMPORARY !!!!!
+        missing_updates = ['2020-05-04']      # TEMPORARY !!!!!
         
         if missing_updates == []:
             self.report.add(['console'], '\nNothing to update.\n')
@@ -68,12 +68,12 @@ class PureChangesByDate:
         
         self.__initialize_local_counters()
 
-        #   ---     DELETE      ---
+        # - Delete - 
         # Iterates over all records that need to be deleted
-        response = self.__delete_records(json_response)
+        self.__delete_records(json_response)
 
-        #   ---     CREATE / ADD / UPDATE      ---
-        self.__update_records_for_pure_changes(json_response)
+        # - Create / Add / Update -
+        self.__update_records(json_response)
 
         # If the process was successful adds the date to successful_changes.txt
         self.__add_date_to_successful_changes_file(changes_date)
@@ -141,7 +141,7 @@ class PureChangesByDate:
 
 
     #       ---     ---     ---
-    def __update_records_for_pure_changes(self, json_response):
+    def __update_records(self, json_response):
 
         rdm_add_record = RdmAddRecord()
         
