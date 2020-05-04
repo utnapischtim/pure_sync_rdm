@@ -35,21 +35,21 @@ class RdmGroups:
 
         for externalId in new_groups_externalIds:
             # Get group information
-            group_name = self.get_pure_group_metadata(externalId)
+            group_name = self.__get_pure_group_metadata(externalId)
             if not group_name:
                 return False
 
             # Create new group
-            response = self.rdm_create_group(externalId, group_name)
+            response = self.__rdm_create_group(externalId, group_name)
 
         # Get old group id
-        old_group_id = self.get_rdm_group_id(old_group_externalId)
+        old_group_id = self.__get_rdm_group_id(old_group_externalId)
 
         # Removes users from old group and adds to new groups
-        self.rdm_split_users_from_old_to_new_group(old_group_id, old_group_externalId, new_groups_externalIds)
+        self.__rdm_split_users_from_old_to_new_group(old_group_id, old_group_externalId, new_groups_externalIds)
 
         # Modify all related records
-        self.rdm_split_modify_record(old_group_externalId, new_groups_externalIds)
+        self.__rdm_split_modify_record(old_group_externalId, new_groups_externalIds)
 
 
 
@@ -69,22 +69,22 @@ class RdmGroups:
 
         # Get new group information
         self.new_groups_data = []
-        group_name = self.get_pure_group_metadata(new_group_externalId)
+        group_name = self.__get_pure_group_metadata(new_group_externalId)
         if not group_name:
             return False
 
         # Create new group
-        response = self.rdm_create_group(new_group_externalId, group_name)
+        response = self.__rdm_create_group(new_group_externalId, group_name)
 
         # Adds users to new group and removes them from the old ones
-        self.rdm_merge_users_from_old_to_new_group(old_groups_externalId, new_group_externalId)
+        self.__rdm_merge_users_from_old_to_new_group(old_groups_externalId, new_group_externalId)
 
         # Modify all related records
-        self.rdm_merge_modify_records(old_groups_externalId, self.new_groups_data[0], new_group_externalId)
+        self.__rdm_merge_modify_records(old_groups_externalId, self.new_groups_data[0], new_group_externalId)
 
 
 
-    def get_rdm_group_id(self, externalId):
+    def __get_rdm_group_id(self, externalId):
         response = self.rdm_db.select_query('id, description', 'accounts_role', {'name': f"'{externalId}'"})
 
         group_id    = response[0][0]
@@ -96,7 +96,7 @@ class RdmGroups:
 
 
 
-    def rdm_split_modify_record(self, old_group_externalId, new_groups_externalIds):
+    def __rdm_split_modify_record(self, old_group_externalId, new_groups_externalIds):
 
         # Get from RDM all old group's records
         response = get_metadata_by_query(old_group_externalId)
@@ -146,7 +146,7 @@ class RdmGroups:
 
 
     #   ---         ---         ---
-    def rdm_split_users_from_old_to_new_group(self, old_group_id, old_group_externalId, new_groups_externalIds):
+    def __rdm_split_users_from_old_to_new_group(self, old_group_id, old_group_externalId, new_groups_externalIds):
 
         # Get all users in old group
         response = self.rdm_db.select_query('user_id', 'accounts_userrole', {'role_id': old_group_id})
@@ -166,21 +166,21 @@ class RdmGroups:
                 
                 for new_group_externalId in new_groups_externalIds:
                     # Add user to new groups
-                    self.group_add_user(user_email, new_group_externalId, user_id)
+                    self.__group_add_user(user_email, new_group_externalId, user_id)
 
                 # Remove user from old group
-                response = self.group_remove_user(user_email, old_group_externalId)
+                response = self.__group_remove_user(user_email, old_group_externalId)
 
         # Delete old group
 
 
     #   ---         ---         ---
-    def rdm_merge_modify_records(self, old_groups_externalId, new_group_data, new_group_externalId):
+    def __rdm_merge_modify_records(self, old_groups_externalId, new_group_data, new_group_externalId):
 
         # Get from RDM all records with old groups
         for old_group_externalId in old_groups_externalId:
 
-            self.rdm_check_if_group_exists(old_group_externalId)
+            self.__rdm_check_if_group_exists(old_group_externalId)
             
             # Get record metadata
             response = get_metadata_by_query(old_group_externalId)
@@ -235,7 +235,7 @@ class RdmGroups:
 
 
     #   ---         ---         ---
-    def rdm_merge_users_from_old_to_new_group(self, old_groups_externalId, new_group_externalId):
+    def __rdm_merge_users_from_old_to_new_group(self, old_groups_externalId, new_group_externalId):
         # Iterate over old groups
         for old_group_externalId in old_groups_externalId:
 
@@ -265,16 +265,16 @@ class RdmGroups:
                 user_email = self.rdm_db.select_query('email', 'accounts_user', {'id': user_id})[0][0]
 
                 # - - Add user to new group - -
-                self.group_add_user(user_email, new_group_externalId, user_id)
+                self.__group_add_user(user_email, new_group_externalId, user_id)
 
                 # - - Remove user from old group - -
-                response = self.group_remove_user(user_email, old_group_externalId)
+                response = self.__group_remove_user(user_email, old_group_externalId)
 
             # Delete old group
 
 
     #   ---         ---         ---
-    def get_pure_group_metadata(self, externalId: str):
+    def __get_pure_group_metadata(self, externalId: str):
         """ Get organisationalUnit name and uuid """
 
         # PURE REQUEST
@@ -309,7 +309,7 @@ class RdmGroups:
         return False
 
 
-    def rdm_check_if_group_exists(self, group_externalId):
+    def __rdm_check_if_group_exists(self, group_externalId):
         """ Checks if the group already exists"""
 
         response = self.rdm_db.select_query('*', 'accounts_role', {'name': f"'{group_externalId}'"})
@@ -321,10 +321,10 @@ class RdmGroups:
         return False
 
 
-    def rdm_create_group(self, externalId: str, group_name: str):
+    def __rdm_create_group(self, externalId: str, group_name: str):
 
         # Checks if the group already exists
-        response = self.rdm_check_if_group_exists(externalId)
+        response = self.__rdm_check_if_group_exists(externalId)
         if response:
             return True
 
@@ -345,7 +345,7 @@ class RdmGroups:
 
 
     #   ---         ---         ---
-    def rdm_add_user_to_group(self, user_id: int, group_externalId: str, group_name: str):
+    def __rdm_add_user_to_group(self, user_id: int, group_externalId: str, group_name: str):
 
         # Get user's rdm email
         user_email = self.rdm_db.select_query('email', 'accounts_user', {'id': user_id})[0][0]
@@ -355,7 +355,7 @@ class RdmGroups:
 
         if not response:
             # If the group does not exist then creates it
-            self.rdm_create_group(group_externalId, group_name)
+            self.__rdm_create_group(group_externalId, group_name)
             # Repeats the query to get the group id
             response = self.rdm_db.select_query('id', 'accounts_role', {'name': f"'{group_externalId}'"})
 
@@ -377,7 +377,7 @@ class RdmGroups:
 
 
     #   ---         ---         ---
-    def group_add_user(self, user_email, new_group_externalId, user_id):
+    def __group_add_user(self, user_email, new_group_externalId, user_id):
         
         # Get group id
         group_id = self.rdm_db.select_query('id', 'accounts_role', {'name': f"'{new_group_externalId}'"})[0][0]
@@ -401,7 +401,7 @@ class RdmGroups:
 
 
     #   ---         ---         ---
-    def group_remove_user(self, user_email, group_name):
+    def __group_remove_user(self, user_email, group_name):
         
         # Get user id
         user_id = self.rdm_db.select_query('id', 'accounts_user', {'email': f"'{user_email}'"})[0][0]
