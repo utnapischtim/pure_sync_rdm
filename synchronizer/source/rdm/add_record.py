@@ -55,8 +55,8 @@ class RdmAddRecord:
                 self.data['metadataVersion']       = metadata_version
                 self.data['metadataOlderVersions'] = older_metadata_versions
 
-                self.add_field(item, 'metadataModifBy',   ['info', 'modifiedBy'])
-                self.add_field(item, 'metadataModifDate', ['info', 'modifiedDate'])
+                self.__add_field(item, 'metadataModifBy',   ['info', 'modifiedBy'])
+                self.__add_field(item, 'metadataModifDate', ['info', 'modifiedDate'])
 
         # 'Owners' data not present in pure metadata
         # It is present instead when getting the record's metadata from RDM (for a record update for instance)
@@ -78,30 +78,30 @@ class RdmAddRecord:
         # TO REVIEW - TO REVIEW
 
                             # RDM field name                # PURE json path
-        self.add_field(item, 'title',                       ['title'])
-        self.add_field(item, 'access_right',                ['openAccessPermissions', 0, 'value'])
-        self.add_field(item, 'uuid',                        ['uuid'])
-        self.add_field(item, 'pureId',                      ['pureId'])
-        self.add_field(item, 'publicationDate',             ['publicationStatuses', 0, 'publicationDate', 'year'])
-        self.add_field(item, 'createdDate',                 ['info', 'createdDate'])
-        self.add_field(item, 'pages',                       ['info','pages'])   
-        self.add_field(item, 'volume',                      ['info','volume'])
-        self.add_field(item, 'journalTitle',                ['info', 'journalAssociation', 'title', 'value'])
-        self.add_field(item, 'journalNumber',               ['info', 'journalNumber'])
-        self.add_field(item, 'pureId',                      ['pureId'])
-        self.add_field(item, 'recordType',                  ['types', 0, 'value'])    
-        self.add_field(item, 'category',                    ['categories', 0, 'value'])  
-        self.add_field(item, 'peerReview',                  ['peerReview'])    
-        self.add_field(item, 'publicationStatus',           ['publicationStatuses', 0, 'publicationStatuses', 0, 'value'])
-        self.add_field(item, 'language',                    ['languages', 0, 'value'])
-        self.add_field(item, 'numberOfAuthors',             ['totalNumberOfAuthors'])
-        self.add_field(item, 'workflow',                    ['workflows', 0, 'value'])
-        self.add_field(item, 'confidential',                ['confidential'])
-        self.add_field(item, 'publisherName',               ['publisher', 'names', 0, 'value'])
-        self.add_field(item, 'abstract',                    ['abstracts', 0, 'value'])
-        self.add_field(item, 'managingOrganisationalUnit_name',       ['managingOrganisationalUnit', 'names', 0, 'value'])
-        self.add_field(item, 'managingOrganisationalUnit_uuid',       ['managingOrganisationalUnit', 'uuid'])
-        self.add_field(item, 'managingOrganisationalUnit_externalId', ['managingOrganisationalUnit', 'externalId'])
+        self.__add_field(item, 'title',                       ['title'])
+        self.__add_field(item, 'access_right',                ['openAccessPermissions', 0, 'value'])
+        self.__add_field(item, 'uuid',                        ['uuid'])
+        self.__add_field(item, 'pureId',                      ['pureId'])
+        self.__add_field(item, 'publicationDate',             ['publicationStatuses', 0, 'publicationDate', 'year'])
+        self.__add_field(item, 'createdDate',                 ['info', 'createdDate'])
+        self.__add_field(item, 'pages',                       ['info','pages'])   
+        self.__add_field(item, 'volume',                      ['info','volume'])
+        self.__add_field(item, 'journalTitle',                ['info', 'journalAssociation', 'title', 'value'])
+        self.__add_field(item, 'journalNumber',               ['info', 'journalNumber'])
+        self.__add_field(item, 'pureId',                      ['pureId'])
+        self.__add_field(item, 'recordType',                  ['types', 0, 'value'])    
+        self.__add_field(item, 'category',                    ['categories', 0, 'value'])  
+        self.__add_field(item, 'peerReview',                  ['peerReview'])    
+        self.__add_field(item, 'publicationStatus',           ['publicationStatuses', 0, 'publicationStatuses', 0, 'value'])
+        self.__add_field(item, 'language',                    ['languages', 0, 'value'])
+        self.__add_field(item, 'numberOfAuthors',             ['totalNumberOfAuthors'])
+        self.__add_field(item, 'workflow',                    ['workflows', 0, 'value'])
+        self.__add_field(item, 'confidential',                ['confidential'])
+        self.__add_field(item, 'publisherName',               ['publisher', 'names', 0, 'value'])
+        self.__add_field(item, 'abstract',                    ['abstracts', 0, 'value'])
+        self.__add_field(item, 'managingOrganisationalUnit_name',       ['managingOrganisationalUnit', 'names', 0, 'value'])
+        self.__add_field(item, 'managingOrganisationalUnit_uuid',       ['managingOrganisationalUnit', 'uuid'])
+        self.__add_field(item, 'managingOrganisationalUnit_externalId', ['managingOrganisationalUnit', 'externalId'])
     
         # --- Electronic Versions ---
         self.data['versionFiles'] = []
@@ -109,7 +109,7 @@ class RdmAddRecord:
 
         if 'electronicVersions' in item or 'additionalFiles' in item:
             # Checks if the file has been already uploaded to RDM and if it has been internally reviewed
-            self.get_rdm_file_review()
+            self.__get_rdm_file_review()
 
         if 'electronicVersions' in item:
             for i in item['electronicVersions']:
@@ -131,8 +131,8 @@ class RdmAddRecord:
             for i in item['personAssociations']:
 
                 sub_data = {}
-                first_name = self.get_value(i, ['name', 'firstName'])
-                last_name  = self.get_value(i, ['name', 'lastName'])
+                first_name = self.__get_value(i, ['name', 'firstName'])
+                last_name  = self.__get_value(i, ['name', 'lastName'])
 
                 if first_name and last_name:
                     sub_data['name'] = f'{last_name}, {first_name}'
@@ -142,16 +142,16 @@ class RdmAddRecord:
                     sub_data['name'] = f'(last name not specified), {first_name}'
 
                 # Standard fields
-                sub_data = self.add_to_var(sub_data, i, 'uuid',                   ['person', 'uuid'])
-                sub_data = self.add_to_var(sub_data, i, 'externalId',             ['person', 'externalId'])     # 'externalPerson' never have 'externalId'
-                sub_data = self.add_to_var(sub_data, i, 'authorCollaboratorName', ['authorCollaboration', 'names', 0, 'value'])   
-                sub_data = self.add_to_var(sub_data, i, 'personRole',             ['personRoles', 0, 'value'])    
-                sub_data = self.add_to_var(sub_data, i, 'organisationalUnit',     ['organisationalUnits', 0, 'names', 0, 'value']) # UnitS...
-                sub_data = self.add_to_var(sub_data, i, 'type_p',                 ['externalPerson', 'types', 0, 'value'])
-                sub_data = self.add_to_var(sub_data, i, 'uuid',                   ['externalPerson', 'uuid'])
+                sub_data = self.__add_to_var(sub_data, i, 'uuid',                   ['person', 'uuid'])
+                sub_data = self.__add_to_var(sub_data, i, 'externalId',             ['person', 'externalId'])     # 'externalPerson' never have 'externalId'
+                sub_data = self.__add_to_var(sub_data, i, 'authorCollaboratorName', ['authorCollaboration', 'names', 0, 'value'])   
+                sub_data = self.__add_to_var(sub_data, i, 'personRole',             ['personRoles', 0, 'value'])    
+                sub_data = self.__add_to_var(sub_data, i, 'organisationalUnit',     ['organisationalUnits', 0, 'names', 0, 'value']) # UnitS...
+                sub_data = self.__add_to_var(sub_data, i, 'type_p',                 ['externalPerson', 'types', 0, 'value'])
+                sub_data = self.__add_to_var(sub_data, i, 'uuid',                   ['externalPerson', 'uuid'])
                 
                 # Checks if the record owner is available in user_ids_match.txt
-                person_external_id = self.get_value(i, ['person', 'externalId'])
+                person_external_id = self.__get_value(i, ['person', 'externalId'])
                 owner = get_userid_from_list_by_externalid(person_external_id, file_data)
 
                 if owner and owner not in self.data['owners']: 
@@ -159,7 +159,7 @@ class RdmAddRecord:
 
                 # Get Orcid
                 if 'uuid' in sub_data:
-                    orcid = self.get_orcid(sub_data['uuid'], sub_data['name'])
+                    orcid = self.__get_orcid(sub_data['uuid'], sub_data['name'])
                     if orcid:
                         sub_data['orcid'] = orcid
 
@@ -176,9 +176,9 @@ class RdmAddRecord:
             for i in item['organisationalUnits']:
                 sub_data = {}
 
-                organisational_unit_name       = self.get_value(i, ['names', 0, 'value'])
-                organisational_unit_uuid       = self.get_value(i, ['uuid'])
-                organisational_unit_externalId = self.get_value(i, ['externalId'])
+                organisational_unit_name       = self.__get_value(i, ['names', 0, 'value'])
+                organisational_unit_uuid       = self.__get_value(i, ['uuid'])
+                organisational_unit_externalId = self.__get_value(i, ['externalId'])
 
                 sub_data['name']        = organisational_unit_name
                 sub_data['uuid']        = organisational_unit_uuid
@@ -196,18 +196,18 @@ class RdmAddRecord:
         if 'abstracts' in item:
             self.global_counters['abstracts'] += 1    
 
-        self.applied_restrictions_check()
+        self.__applied_restrictions_check()
 
         self.data = json.dumps(self.data)
         open(f'{dirpath}/data/temporary_files/lash_push.json', "w").write(self.data)
 
         # Post request to RDM
-        return self.post_metadata()
+        return self.__post_metadata()
 
 
 
     #   ---         ---         ---
-    def applied_restrictions_check(self):
+    def __applied_restrictions_check(self):
         if not 'appliedRestrictions' in self.data:
             return False
 
@@ -218,14 +218,14 @@ class RdmAddRecord:
         return True
 
     #   ---         ---         ---
-    def add_field(self, item: list, rdm_field: str, path: list):
+    def __add_field(self, item: list, rdm_field: str, path: list):
         """ Adds the field to the data json """
-        value = self.get_value(item, path)
+        value = self.__get_value(item, path)
 
         if rdm_field == 'language':
-            value = self.language_conversion(value)
+            value = self.__language_conversion(value)
         elif rdm_field == 'access_right':
-            value = self.accessright_conversion(value)
+            value = self.__accessright_conversion(value)
 
         if value:
             self.data[rdm_field] = value
@@ -233,7 +233,7 @@ class RdmAddRecord:
 
 
     #   ---         ---         ---
-    def accessright_conversion(self, pure_value: str):
+    def __accessright_conversion(self, pure_value: str):
         
         accessright_pure_to_rdm = {
             'Open':             'open',
@@ -252,7 +252,7 @@ class RdmAddRecord:
 
 
     #   ---         ---         ---
-    def language_conversion(self, pure_language: str):
+    def __language_conversion(self, pure_language: str):
         """ Converts from pure full language name to iso6393 (3 characters) """
 
         if pure_language == 'Undefined/Unknown':
@@ -269,7 +269,7 @@ class RdmAddRecord:
 
 
     #   ---         ---         ---
-    def get_value(self, item, path: list):
+    def __get_value(self, item, path: list):
         """ Goes through the json item to get the information of the specified path """
 
         child = item
@@ -299,7 +299,7 @@ class RdmAddRecord:
 
 
     #   ---         ---         ---
-    def get_rdm_file_review(self):
+    def __get_rdm_file_review(self):
         """ When a record is updated in Pure, there will be a check if the new file from Pure is the same as the old file in RDM.
         To do so it makes a comparison on the file size.
         If the size is not the same, then it will be uploaded to RDM and a new internal review will be required. """
@@ -344,8 +344,8 @@ class RdmAddRecord:
 
         internal_review = False     # Default value
 
-        pure_size   = self.get_value(i, ['file', 'size'])
-        pure_name   = self.get_value(i, ['file', 'fileName'])
+        pure_size   = self.__get_value(i, ['file', 'size'])
+        pure_name   = self.__get_value(i, ['file', 'fileName'])
 
         self.pure_rdm_file_match = []        # [file_match, internalReview]
 
@@ -365,16 +365,16 @@ class RdmAddRecord:
 
         sub_data['internalReview'] = internal_review
 
-        sub_data = self.add_to_var(sub_data, i, 'name',            ['file', 'fileName'])
-        sub_data = self.add_to_var(sub_data, i, 'size',            ['file', 'size'])
-        sub_data = self.add_to_var(sub_data, i, 'mimeType',        ['file', 'mimeType'])
-        sub_data = self.add_to_var(sub_data, i, 'digest',          ['file', 'digest'])
-        sub_data = self.add_to_var(sub_data, i, 'digestAlgorithm', ['file', 'digestAlgorithm'])
-        sub_data = self.add_to_var(sub_data, i, 'createdBy',       ['creator'])
-        sub_data = self.add_to_var(sub_data, i, 'createdDate',     ['created'])
-        sub_data = self.add_to_var(sub_data, i, 'versionType',     ['versionTypes', 0, 'value'])
-        sub_data = self.add_to_var(sub_data, i, 'licenseType',     ['licenseTypes', 0, 'value'])
-        sub_data = self.add_to_var(sub_data, i, 'accessType',      ['accessTypes', 0, 'value'])
+        sub_data = self.__add_to_var(sub_data, i, 'name',            ['file', 'fileName'])
+        sub_data = self.__add_to_var(sub_data, i, 'size',            ['file', 'size'])
+        sub_data = self.__add_to_var(sub_data, i, 'mimeType',        ['file', 'mimeType'])
+        sub_data = self.__add_to_var(sub_data, i, 'digest',          ['file', 'digest'])
+        sub_data = self.__add_to_var(sub_data, i, 'digestAlgorithm', ['file', 'digestAlgorithm'])
+        sub_data = self.__add_to_var(sub_data, i, 'createdBy',       ['creator'])
+        sub_data = self.__add_to_var(sub_data, i, 'createdDate',     ['created'])
+        sub_data = self.__add_to_var(sub_data, i, 'versionType',     ['versionTypes', 0, 'value'])
+        sub_data = self.__add_to_var(sub_data, i, 'licenseType',     ['licenseTypes', 0, 'value'])
+        sub_data = self.__add_to_var(sub_data, i, 'accessType',      ['accessTypes', 0, 'value'])
 
         # Append to sub_data to .data
         self.data['versionFiles'].append(sub_data)
@@ -385,12 +385,12 @@ class RdmAddRecord:
     
 
     #   ---         ---         ---
-    def add_to_var(self, sub_data: dict, item: list, rdm_field: str, path: list):
+    def __add_to_var(self, sub_data: dict, item: list, rdm_field: str, path: list):
         """ Adds the field to sub_data """
-        value = self.get_value(item, path)
+        value = self.__get_value(item, path)
 
         if rdm_field == 'accessType':
-            value = self.accessright_conversion(value)
+            value = self.__accessright_conversion(value)
 
         if value:
             sub_data[rdm_field] = value
@@ -398,7 +398,7 @@ class RdmAddRecord:
 
 
     #   ---         ---         ---
-    def get_orcid(self, person_uuid: str, name: str):
+    def __get_orcid(self, person_uuid: str, name: str):
 
         response = get_pure_metadata('persons', person_uuid, {})
         message = f'\tPure get orcid        - {response} - '
@@ -430,7 +430,7 @@ class RdmAddRecord:
 
 
     #   ---         ---         ---
-    def post_metadata(self):
+    def __post_metadata(self):
 
         self.metadata_success = None
         self.file_success     = None

@@ -1,11 +1,11 @@
 import json
 import requests
 from datetime                       import date, datetime
+from requests.auth                  import HTTPBasicAuth
 from setup                          import pure_username, pure_password
 from setup                          import pure_rest_api_url, pure_api_key, log_files_name, temporary_files_name
 from source.general_functions       import dirpath
 from source.reports                 import Reports
-from requests.auth                  import HTTPBasicAuth
 
 reports = Reports()
 
@@ -13,8 +13,7 @@ def get_pure_record_metadata_by_uuid(uuid: str):
     """ Method used to get from Pure record's metadata """
 
     # PURE REQUEST
-    # url = f'{pure_rest_api_url}research-outputs/{uuid}'
-    response = pure_get_metadata('research-outputs', uuid)
+    response = get_pure_metadata('research-outputs', uuid)
 
     report = f'\tPure get metadata     - {response}'
     if response.status_code == 404:
