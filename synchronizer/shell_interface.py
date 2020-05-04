@@ -17,7 +17,7 @@ class ShellInterface:
         """ Gets from Pure API endpoint 'changes' all the records that have been 
         created, modified and deleted. Next updates accordingly RDM records """
         pure_changes_by_date = PureChangesByDate()
-        pure_changes_by_date.pure_get_changes()
+        pure_changes_by_date.get_pure_changes()
 
     def pages(self, page_start, page_end, page_size):
         """ Push to RDM records from Pure by page """

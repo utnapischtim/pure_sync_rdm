@@ -40,7 +40,7 @@ class RdmGroups:
                 return False
 
             # Create new group
-            response = self.__rdm_create_group(externalId, group_name)
+            response = self.rdm_create_group(externalId, group_name)
 
         # Get old group id
         old_group_id = self.__get_rdm_group_id(old_group_externalId)
@@ -74,7 +74,7 @@ class RdmGroups:
             return False
 
         # Create new group
-        response = self.__rdm_create_group(new_group_externalId, group_name)
+        response = self.rdm_create_group(new_group_externalId, group_name)
 
         # Adds users to new group and removes them from the old ones
         self.__rdm_merge_users_from_old_to_new_group(old_groups_externalId, new_group_externalId)
@@ -321,7 +321,7 @@ class RdmGroups:
         return False
 
 
-    def __rdm_create_group(self, externalId: str, group_name: str):
+    def rdm_create_group(self, externalId: str, group_name: str):
 
         # Checks if the group already exists
         response = self.__rdm_check_if_group_exists(externalId)
@@ -355,7 +355,7 @@ class RdmGroups:
 
         if not response:
             # If the group does not exist then creates it
-            self.__rdm_create_group(group_externalId, group_name)
+            self.rdm_create_group(group_externalId, group_name)
             # Repeats the query to get the group id
             response = self.rdm_db.select_query('id', 'accounts_role', {'name': f"'{group_externalId}'"})
 
