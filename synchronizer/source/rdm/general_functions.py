@@ -88,7 +88,7 @@ def get_recid(uuid: str):
         recid = item['metadata']['recid']
         
         if count == 1:
-            # URLs to be transmitted to Pure if the record is successfuly added in RDM      # TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+            # URLs to be transmitted to Pure if the record is successfuly added in RDM      # TODO TODO TODO TODO TODO 
             api_url             = f'{rdm_host_url}api/records/{recid}'
             landing_page_url    = f'{rdm_host_url}records/{recid}'
             newest_recid = recid

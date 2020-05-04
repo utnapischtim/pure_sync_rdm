@@ -14,7 +14,7 @@ class AddFromUuidList:
         self.report.add_template(['console'], ['general', 'title'], ['PUSH RECORDS FROM LIST', current_time() + '\n'])
         self.global_counters = initialize_counters()
 
-        # read to_transfer.txt
+        # read to_transmit.txt
         file_name = data_files_name['transfer_uuid_list']
         uuids = open(file_name, 'r').readlines()
 

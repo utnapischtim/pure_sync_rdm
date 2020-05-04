@@ -2,7 +2,7 @@ import json
 from datetime                       import date, datetime
 from setup                          import pure_rest_api_url, log_files_name
 from source.general_functions       import dirpath, add_spaces, initialize_counters
-from source.pure.general_functions  import pure_get_metadata
+from source.pure.general_functions  import get_pure_metadata
 from source.rdm.add_record          import RdmAddRecord
 from source.reports                 import Reports
 
@@ -25,7 +25,7 @@ class RunPages:
             self.report.add_template(self.report_files, ['pages', 'page_and_size'], [pag, pag_size])
 
             # Pure get request
-            response = pure_get_metadata('research-outputs', '', {'page': pag, 'pageSize': pag_size})
+            response = get_pure_metadata('research-outputs', '', {'page': pag, 'pageSize': pag_size})
 
             # Load json response
             resp_json = json.loads(response.content)

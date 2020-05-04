@@ -2,7 +2,7 @@ import json
 from datetime                       import date, datetime
 from setup                          import pure_rest_api_url, rdm_host_url, token_rdm, data_files_name
 from source.general_functions       import initialize_counters, add_spaces, dirpath, current_time
-from source.pure.general_functions  import pure_get_metadata
+from source.pure.general_functions  import get_pure_metadata
 from source.rdm.general_functions   import get_metadata_by_recid, get_recid, update_rdm_record
 from source.rdm.add_record          import RdmAddRecord
 from source.rdm.database            import RdmDatabase
@@ -15,7 +15,7 @@ class RdmOwners:
         self.rdm_requests   = Requests()
         self.rdm_db         = RdmDatabase()
         self.report         = Reports()
-
+        self.rdm_add_record = RdmAddRecord()
         self.report_files = ['owners', 'records', 'console']
 
     #   ---         ---         ---
@@ -25,9 +25,9 @@ class RdmOwners:
 
         self.report.add_template(self.report_files, ['general', 'title'], ['OWNERS CHECK (using externalId)', current_time()])
 
-        # self.external_id = '56038' # TEMP
-        # self.external_id = '3261' # TEMP
-        self.external_id = '30' # TEMP
+        # self.external_id = '56038' # TEMPORARY
+        # self.external_id = '3261' # TEMPORARY
+        self.external_id = '30' # TEMPORARY
 
         self.report.add(self.report_files, f'\nUser external_id: {self.external_id}\n')
 
@@ -56,7 +56,7 @@ class RdmOwners:
     
         self.report.add_template(self.report_files, ['general', 'title'], ['OWNERS CHECK (using orcid)', current_time()])
 
-        orcid = '0000-0002-4154-6945'  # TEMP
+        orcid = '0000-0002-4154-6945'  # TEMPORARY
 
         self.report.add(['console'], f'\norcid: {orcid}\n')
 
@@ -83,7 +83,7 @@ class RdmOwners:
     def get_owner_records(self):
         self.global_counters = initialize_counters()
 
-        rdm_add_record = RdmAddRecord()
+        
 
         go_on     = True
         page      = 1
@@ -98,7 +98,7 @@ class RdmOwners:
             }
 
             params = {'sort': 'modified', 'page': page, 'pageSize': page_size}
-            response = pure_get_metadata('persons', f'{self.user_uuid}/research-outputs', params)
+            response = get_pure_metadata('persons', f'{self.user_uuid}/research-outputs', params)
 
             if response.status_code >= 300:
                 print(response.content)
@@ -135,8 +135,10 @@ class RdmOwners:
                     item['owners'] = [self.user_id]
 
                     self.report.add(['console'], '\t+ Create record    +')
-                    rdm_add_record.create_invenio_data(self.global_counters, item)
                     local_counters['create'] += 1
+
+                    # Creates record metadata and pushes it to RDM
+                    self.rdm_add_record.create_invenio_data(self.global_counters, item)
 
                 else:
                     # Checks if the owner is already in RDM record metadata
@@ -154,7 +156,7 @@ class RdmOwners:
                         report = f"\tRDM record status     - ADDING owner     - New owners:         - {record_json['owners']}"
                         self.report.add(['console'], report)
 
-                        # Add owner to the record
+                        # Add owner to an existing RDM record
                         update_rdm_record(json.dumps(record_json), recid)
 
                         local_counters['to_update'] += 1
@@ -193,13 +195,12 @@ class RdmOwners:
         while go_on:
 
             params = {'page': page, 'pageSize': page_size, 'q': f'"{key_value}"' }
-            response = pure_get_metadata('persons', '', params)
+            response = get_pure_metadata('persons', '', params)
 
             if response.status_code >= 300:
                 self.report.add(['console', 'owners'], response.content)
                 return False
 
-            open(f'{dirpath}/data/temporary_files/get_user_uuid_from_pure.json', "wb").write(response.content)
             record_json = json.loads(response.content)
 
             total_items = record_json['count']
@@ -232,7 +233,6 @@ class RdmOwners:
     def get_user_id_from_rdm(self):
         """ Gets the ID and IP of the logged in user """
 
-        # response = self.rdm_db.db_query(f"SELECT user_id, ip FROM accounts_user_session_activity")
         response = self.rdm_db.select_query('user_id, ip', 'accounts_user_session_activity')
 
         if not response:
@@ -302,9 +302,6 @@ class RdmOwners:
             response = self.rdm_requests.rdm_get_metadata(params)
 
             self.report.add(['console'], f'\n{response}\n')
-            
-            file_name = f"{dirpath}/data/temporary_files/rdm_get_records.json"
-            open(file_name, 'wb').write(response.content)
 
             if response.status_code >= 300:
                 self.report.add(['console'], response.content)

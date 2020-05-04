@@ -33,7 +33,6 @@ Subject: """ + email_subject + """
 Please remove from pure uuid {} the file {}."""
 
 # DATABASE
-# Get db info from  docker-services.yml -> db -> environment  ???????      REVIEW  REVIEW  REVIEW 
 db_host     = open(f'{dirpath}/data_setup/db_host.txt', 'r').readline()
 db_name     = open(f'{dirpath}/data_setup/db_name.txt', 'r').readline()
 db_user     = open(f'{dirpath}/data_setup/db_user.txt', 'r').readline()
@@ -46,21 +45,31 @@ applied_restrictions_possible_values = ['groups', 'owners', 'ip_range', 'ip_sing
 versioning_running = False
 
 # REPORT LOGS
+base_path = f'{dirpath}/reports/{date.today()}'
 log_files_name = {
-    'groups':               f'{dirpath}/reports/{date.today()}_groups.log',
-    'owners':               f'{dirpath}/reports/{date.today()}_owners.log',
-    'pages':                f'{dirpath}/reports/{date.today()}_pages.log',
-    'records':              f'{dirpath}/reports/{date.today()}_records.log',
-    'console':              f'{dirpath}/reports/{date.today()}_console.log',
-    'changes':              f'{dirpath}/reports/{date.today()}_changes.log',
+    'groups':               f'{base_path}_groups.log',
+    'owners':               f'{base_path}_owners.log',
+    'pages':                f'{base_path}_pages.log',
+    'records':              f'{base_path}_records.log',
+    'console':              f'{base_path}_console.log',
+    'changes':              f'{base_path}_changes.log',
 }
 
 # DATA FILES NAME
+base_path = f'{dirpath}/data'
 data_files_name = {
-    'successful_changes':   f'{dirpath}/data/successful_changes.txt',
-    'user_ids_match':       f'{dirpath}/data/user_ids_match.txt',
-    'all_rdm_records':      f'{dirpath}/data/all_rdm_records.txt',
-    'rdm_record_owners':    f'{dirpath}/data/rdm_record_owners.txt',
-    'transfer_uuid_list':   f'{dirpath}/data/to_transfer.txt',
-    'delete_recid_list':    f'{dirpath}/data/to_delete.txt',
+    'successful_changes':   f'{base_path}/successful_changes.txt',
+    'user_ids_match':       f'{base_path}/user_ids_match.txt',
+    'all_rdm_records':      f'{base_path}/all_rdm_records.txt',
+    'rdm_record_owners':    f'{base_path}/rdm_record_owners.txt',
+    'transfer_uuid_list':   f'{base_path}/to_transmit.txt',
+    'delete_recid_list':    f'{base_path}/to_delete.txt',
+}
+
+# TEMPORARY FILES (used to keep truck of the data received and transmitted)
+base_path = f'{dirpath}/data/temporary_files'
+temporary_files_name = {
+    'get_pure_metadata':    f'{base_path}/get_pure_metadata.json',
+    'get_rdm_metadata':     f'{base_path}/rdm_get_metadata.json',
+    'post_rdm_metadata':    f'{base_path}/rdm_post_metadata.json'
 }

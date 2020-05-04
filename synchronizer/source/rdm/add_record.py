@@ -6,7 +6,7 @@ from setup                          import versioning_running, push_dist_sec, lo
 from source.rdm.general_functions   import get_recid, get_userid_from_list_by_externalid, too_many_rdm_requests_check
 from source.general_functions       import dirpath
 from source.get_put_file            import rdm_add_file, get_file_from_pure
-from source.pure.general_functions  import pure_get_uuid_metadata, pure_get_metadata
+from source.pure.general_functions  import get_pure_record_metadata_by_uuid, get_pure_metadata
 from source.rdm.groups              import RdmGroups
 from source.rdm.versioning          import rdm_versioning
 from source.rdm.database            import RdmDatabase
@@ -24,7 +24,7 @@ class RdmAddRecord:
     def push_record_by_uuid(self, global_counters, uuid):
         
         # Gets from Pure the metadata of the given uuid
-        item = pure_get_uuid_metadata(uuid)
+        item = get_pure_record_metadata_by_uuid(uuid)
         if not item:
             return False
 
@@ -131,7 +131,6 @@ class RdmAddRecord:
             for i in item['personAssociations']:
 
                 sub_data = {}
-                # Name
                 first_name = self.get_value(i, ['name', 'firstName'])
                 last_name  = self.get_value(i, ['name', 'lastName'])
 
@@ -143,13 +142,13 @@ class RdmAddRecord:
                     sub_data['name'] = f'(last name not specified), {first_name}'
 
                 # Standard fields
-                sub_data = self.add_to_var(sub_data, i, 'externalId',               ['person', 'externalId'])     # 'externalPerson' never have 'externalId'
-                sub_data = self.add_to_var(sub_data, i, 'uuid',                     ['person', 'uuid'])
-                sub_data = self.add_to_var(sub_data, i, 'authorCollaboratorName',   ['authorCollaboration', 'names', 0, 'value'])   
-                sub_data = self.add_to_var(sub_data, i, 'personRole',               ['personRoles', 0, 'value'])    
-                sub_data = self.add_to_var(sub_data, i, 'organisationalUnit',       ['organisationalUnits', 0, 'names', 0, 'value']) # UnitS...
-                sub_data = self.add_to_var(sub_data, i, 'type_p',                   ['externalPerson', 'types', 0, 'value'])
-                sub_data = self.add_to_var(sub_data, i, 'uuid',                     ['externalPerson', 'uuid'])
+                sub_data = self.add_to_var(sub_data, i, 'uuid',                   ['person', 'uuid'])
+                sub_data = self.add_to_var(sub_data, i, 'externalId',             ['person', 'externalId'])     # 'externalPerson' never have 'externalId'
+                sub_data = self.add_to_var(sub_data, i, 'authorCollaboratorName', ['authorCollaboration', 'names', 0, 'value'])   
+                sub_data = self.add_to_var(sub_data, i, 'personRole',             ['personRoles', 0, 'value'])    
+                sub_data = self.add_to_var(sub_data, i, 'organisationalUnit',     ['organisationalUnits', 0, 'names', 0, 'value']) # UnitS...
+                sub_data = self.add_to_var(sub_data, i, 'type_p',                 ['externalPerson', 'types', 0, 'value'])
+                sub_data = self.add_to_var(sub_data, i, 'uuid',                   ['externalPerson', 'uuid'])
                 
                 # Checks if the record owner is available in user_ids_match.txt
                 person_external_id = self.get_value(i, ['person', 'externalId'])
@@ -254,6 +253,8 @@ class RdmAddRecord:
 
     #   ---         ---         ---
     def language_conversion(self, pure_language: str):
+        """ Converts from pure full language name to iso6393 (3 characters) """
+
         if pure_language == 'Undefined/Unknown':
             return False
         
@@ -294,7 +295,6 @@ class RdmAddRecord:
         element = element.replace('\\', '\\\\')     # adds \ before \
         element = element.replace('"', '\\"')       # adds \ before "
         element = element.replace('\n', '')         # removes new lines
-
         return element
 
 
@@ -304,27 +304,14 @@ class RdmAddRecord:
         To do so it makes a comparison on the file size.
         If the size is not the same, then it will be uploaded to RDM and a new internal review will be required. """
 
-        # --- Get file size and internalReview from RDM ---
-
-        # sort  = 'sort=mostrecent'
-        # size  = 'size=100'
-        # page  = 'page=1'
-        # query = f'q="{self.uuid}"'
-        # url = f'{rdm_host_url}api/records/?{sort}&{query}&{size}&{page}'
-
-        params = {
-            'sort': 'mostrecent',
-            'size': '100',
-            'page': '1',
-            'q': self.uuid,
-        }
+        # Get from RDM file size and internalReview
+        params = {'sort': 'mostrecent', 'size': '100', 'page': '1', 'q': self.uuid}
         response = self.rdm_requests.rdm_get_metadata(params)
 
         if response.status_code >= 300:
             report = f'\nget_rdm_file_size - {self.uuid} - {response}'
             self.report.add(['console'], report)
             self.report.add(['console'], response.content)
-
             return False
 
         # Load response
@@ -341,12 +328,8 @@ class RdmAddRecord:
                 file_size   = file['size']
                 file_name   = file['name']
                 file_review = file['internalReview']
-
                 self.rdm_file_review.append({'size': file_size, 'review': file_review, 'name': file_name})
-
-                # self.report.add(['console'], f'\tFile/s size   - {response} - Number files:  {total_recids}    - Size: {file_size} - Review: {file_review}')
         return
-
 
 
 
@@ -417,7 +400,7 @@ class RdmAddRecord:
     #   ---         ---         ---
     def get_orcid(self, person_uuid: str, name: str):
 
-        response = pure_get_metadata('persons', person_uuid, {})
+        response = get_pure_metadata('persons', person_uuid, {})
         message = f'\tPure get orcid        - {response} - '
 
         if response.status_code == 404:
@@ -431,7 +414,6 @@ class RdmAddRecord:
             return False
 
         resp_json = json.loads(response.content)
-
 
         if 'orcid' in resp_json:
             self.global_counters['orcids'] += 1
@@ -457,11 +439,9 @@ class RdmAddRecord:
         time.sleep(push_dist_sec)                        
         
         # POST REQUEST metadata
-        # url = f'{rdm_host_url}api/records/'
         response = self.rdm_requests.rdm_post_metadata(self.data)
 
         # Count http responses 
-        # if response.status_code not in self.count_http_responses:
         if response.status_code not in self.global_counters['http_responses']:
             self.global_counters['http_responses'][response.status_code] = 0
         self.global_counters['http_responses'][response.status_code] += 1
@@ -485,7 +465,7 @@ class RdmAddRecord:
             report += f'{response.content}\n'
             self.report.add(['console'], response.content)
 
-            # Add record to to_transfer.txt to be re pushed afterwards
+            # Add record to to_transmit.txt to be re-transmitted
             open(data_files_name['transfer_uuid_list'], "a").write(f'{uuid}\n')
 
         file_name = log_files_name['records']
@@ -494,7 +474,6 @@ class RdmAddRecord:
         # If the status_code is 429 (too many requests) then it will wait for some minutes
         too_many_rdm_requests_check(response)
 
-        
         # In case of SUCCESSFUL TRANSMISSION
         if response.status_code < 300:
             self.global_counters['successful_push_metadata'] += 1
@@ -502,7 +481,7 @@ class RdmAddRecord:
             # metadata transmission success flag
             self.metadata_success = True
 
-            # After pushing the record's metadata to RDM needs about a second to be able to get its recid from RDM
+            # After pushing a record's metadata to RDM it takes about one second to be able to get its recid
             time.sleep(1)
 
             # Gets recid from RDM
@@ -532,7 +511,7 @@ class RdmAddRecord:
             # self.api_url
             # self.landing_page_url
 
-            # if uuid in to_transfer then removes it
+            # if uuid in to_transmit then removes it
             file_name = data_files_name['transfer_uuid_list']
             with open(file_name, "r") as f:
                 lines = f.readlines()

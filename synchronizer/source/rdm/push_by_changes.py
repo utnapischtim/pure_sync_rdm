@@ -2,7 +2,7 @@ import json
 from datetime                       import date, datetime, timedelta
 from setup                          import pure_rest_api_url, upload_percent_accept, data_files_name
 from source.general_functions       import add_spaces, initialize_counters, dirpath
-from source.pure.general_functions  import pure_get_metadata
+from source.pure.general_functions  import get_pure_metadata
 from source.rdm.general_functions   import get_recid
 from source.rdm.delete_record       import delete_record, delete_from_list
 from source.rdm.add_record          import RdmAddRecord
@@ -45,7 +45,7 @@ class PureChangesByDate:
         self.global_counters = initialize_counters()
 
         # Get from pure all changes of a certain date
-        response = pure_get_metadata('changes', changes_date, {'pageSize': 100, 'page': 1})
+        response = get_pure_metadata('changes', changes_date, {'pageSize': 100, 'page': 1})
 
         if response.status_code >= 300:
             # self.report.add(['console'], response.content)

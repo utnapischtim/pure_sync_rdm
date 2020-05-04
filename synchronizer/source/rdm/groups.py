@@ -2,7 +2,7 @@ import json
 import os
 from setup                          import rdm_host_url, pure_rest_api_url, log_files_name
 from source.general_functions       import add_spaces, dirpath, current_time
-from source.pure.general_functions  import pure_get_metadata
+from source.pure.general_functions  import get_pure_metadata
 from source.rdm.general_functions   import update_rdm_record, get_metadata_by_query
 from source.rdm.database            import RdmDatabase
 from source.reports                 import Reports
@@ -11,12 +11,9 @@ from source.reports                 import Reports
 class RdmGroups:
 
     def __init__(self):
-        # Create instance of RDM database manager
         self.rdm_db = RdmDatabase()
         self.report = Reports()
-
         self.report_files = ['console', 'records', 'groups']
-        self.report_group_file = log_files_name['groups'] # TO REMOVE
 
     
     def rdm_group_split(self, old_group_externalId: str, new_groups_externalIds: list):
@@ -281,7 +278,7 @@ class RdmGroups:
         """ Get organisationalUnit name and uuid """
 
         # PURE REQUEST
-        response = pure_get_metadata('organisational-units', f'{externalId}/research-outputs', {'page': 1, 'pageSize': 100})
+        response = get_pure_metadata('organisational-units', f'{externalId}/research-outputs', {'page': 1, 'pageSize': 100})
 
         report = f'\tGroup information     - ExtId:     {add_spaces(externalId)} - '
 
@@ -318,7 +315,7 @@ class RdmGroups:
         response = self.rdm_db.select_query('*', 'accounts_role', {'name': f"'{group_externalId}'"})
 
         if response:
-            report = f'\tNew group creation    - ExtId:     {add_spaces(group_externalId)} - Already exists'
+            report = f'\tNew group creation                       - ExtId:        {add_spaces(group_externalId)} - Already exists'
             self.report.add(['console', 'groups'], report)
             return True
         return False
@@ -337,7 +334,7 @@ class RdmGroups:
         command = f'pipenv run invenio roles create {externalId} -d {group_name}'
         response = os.system(command)
 
-        report = f'\tNew group creation    -'
+        report = f'\tNew group creation                       -'
 
         if response != 0:
             self.report.add(['console'], f'{report} Error: {response}')

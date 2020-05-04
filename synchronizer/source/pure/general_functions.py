@@ -1,13 +1,13 @@
 import json
 import requests
 from datetime                       import date, datetime
-from setup                          import pure_rest_api_url, pure_api_key
+from setup                          import pure_rest_api_url, pure_api_key, log_files_name, temporary_files_name
 from source.general_functions       import dirpath
 from source.reports                 import Reports
 
 reports = Reports()
 
-def pure_get_uuid_metadata(uuid: str):
+def get_pure_record_metadata_by_uuid(uuid: str):
     """ Method used to get from Pure record's metadata """
 
     # PURE REQUEST
@@ -25,19 +25,15 @@ def pure_get_uuid_metadata(uuid: str):
 
     # Check response
     if response.status_code >= 300:
-        reports.add(['console'], f'\n{response.content}\n')
-
-        file_records = f'{dirpath}/reports/{date.today()}_records.log'
         report = f'Get Pure metadata      - {response.content}\n'
-        open(file_records, "a").write(report)
-
+        reports.add(['console', 'records'], report)
         return False
 
     return json.loads(response.content)
 
 
 
-def pure_get_metadata(endpoint, identifier = '', parameters = {}):
+def get_pure_metadata(endpoint, identifier = '', parameters = {}):
     headers = {
         'api-key': pure_api_key,
         'Accept': 'application/json',
@@ -61,7 +57,6 @@ def pure_get_metadata(endpoint, identifier = '', parameters = {}):
     response = requests.get(url, headers=headers)
 
     # Add response content to pure_get_uuid_metadata.json
-    file_response = f'{dirpath}/data/temporary_files/pure_response.json'
-    open(file_response, 'wb').write(response.content)
+    open(temporary_files_name['get_pure_metadata'], 'wb').write(response.content)
 
     return response
