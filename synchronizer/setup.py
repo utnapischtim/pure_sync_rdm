@@ -1,5 +1,6 @@
 from datetime                   import date
-from source.general_functions   import dirpath
+import os
+dirpath = os.path.dirname(os.path.abspath(__file__))
 
 # Pure REST API references
 pure_rest_api_url   = open(f'{dirpath}/data_setup/pure_rest_api_url.txt', 'r').readline()
@@ -20,6 +21,10 @@ lines_successful_changes = 90     # Reduce the number of lines in successful_cha
 
 # Percentage of updated items to considere the upload task successful
 upload_percent_accept = 90
+
+# OTHER
+iso6393_file_name = f'{dirpath}/data/iso6393.json'
+pure_uuid_length  = 36
 
 # EMAIL
 email_receiver        = open(f'{dirpath}/data_setup/email_receiver.txt', 'r').readline()
@@ -69,7 +74,9 @@ data_files_name = {
 # TEMPORARY FILES (used to keep truck of the data received and transmitted)
 base_path = f'{dirpath}/data/temporary_files'
 temporary_files_name = {
+    'base_path':            f'{base_path}',
     'get_pure_metadata':    f'{base_path}/get_pure_metadata.json',
     'get_rdm_metadata':     f'{base_path}/rdm_get_metadata.json',
-    'post_rdm_metadata':    f'{base_path}/rdm_post_metadata.json'
+    'post_rdm_metadata':    f'{base_path}/rdm_post_metadata.json',
 }
+

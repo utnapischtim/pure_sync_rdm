@@ -1,7 +1,7 @@
 import json
 import os
 from setup                          import rdm_host_url, pure_rest_api_url, log_files_name
-from source.general_functions       import add_spaces, dirpath, current_time
+from source.general_functions       import add_spaces, current_time
 from source.pure.general_functions  import get_pure_metadata
 from source.rdm.general_functions   import update_rdm_record, get_metadata_by_query
 from source.rdm.database            import RdmDatabase

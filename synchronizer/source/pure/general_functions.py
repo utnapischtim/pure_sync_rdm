@@ -2,9 +2,8 @@ import json
 import requests
 from datetime                       import date, datetime
 from requests.auth                  import HTTPBasicAuth
-from setup                          import pure_username, pure_password
-from setup                          import pure_rest_api_url, pure_api_key, log_files_name, temporary_files_name
-from source.general_functions       import dirpath
+from setup                          import pure_username, pure_password, temporary_files_name, \
+                                           pure_rest_api_url, pure_api_key, log_files_name
 from source.reports                 import Reports
 
 reports = Reports()
@@ -91,7 +90,8 @@ def get_pure_file(shell_interface, electronic_version: str):
     
     if response.status_code < 300:
         # Save file
-        open(f'{dirpath}/data/temporary_files/{file_name}', 'wb').write(response.content)
+        base_path = temporary_files_name['base_path']
+        open(f'{base_path}/{file_name}', 'wb').write(response.content)
 
         shell_interface.record_files.append(file_name)
 

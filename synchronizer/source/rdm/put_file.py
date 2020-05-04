@@ -1,20 +1,16 @@
 import smtplib
 import os
 from datetime                       import datetime
-from source.general_functions       import dirpath
-from setup                          import log_files_name, email_receiver, \
+from setup                          import log_files_name, email_receiver, temporary_files_name, \
     email_sender, email_sender_password, email_smtp_server, email_smtp_port, email_message
-                                                
 from source.rdm.requests            import Requests
 from source.reports                 import Reports
 
 rdm_requests = Requests()
 reports = Reports()
 
-
 def rdm_add_file(shell_interface, file_name: str, recid: str, uuid: str):
-    
-    file_path_name = f'{dirpath}/data/temporary_files/{file_name}'
+    file_path_name = f"{temporary_files_name['base_path']}/{file_name}"
 
     # PUT FILE TO RDM
     response = rdm_requests.rdm_put_file(file_path_name, recid)

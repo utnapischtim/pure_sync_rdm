@@ -1,8 +1,6 @@
-import requests
-from datetime                       import date, datetime
-from setup                          import dirpath, rdm_host_url, token_rdm, data_files_name, log_files_name
-from source.general_functions       import dirpath
+from setup                          import rdm_host_url, token_rdm, data_files_name, log_files_name
 from source.rdm.general_functions   import too_many_rdm_requests_check
+from source.general_functions       import current_time
 from source.rdm.requests            import Requests
 from source.reports                 import Reports
 
@@ -55,18 +53,13 @@ def delete_record(recid: str):
     # NOTE: the user ACCOUNT related to the used TOKEN must be ADMIN
 
     # Delete record request
-    # url = f'{rdm_host_url}api/records/{recid}'
     response = rdm_requests.rdm_delete_metadata(recid)
 
     report = f'\tRDM delete record     - {response} - Deleted recid:        {recid}'
     reports.add(['console'], report)
 
-    # Append to yyyy-mm-dd_records.log
-    current_time = datetime.now().strftime("%H:%M:%S")
-    report_line = f'{current_time} - delete_from_rdm - {response} - {recid}\n'
-    
-    file_name = log_files_name['records']
-    open(file_name, "a").write(report_line)
+    report_line = f'{current_time()} - delete_from_rdm - {response} - {recid}\n'
+    reports.add(['records'], report)
 
     # If the status_code is 429 (too many requests) then it will wait for some minutes
     too_many_rdm_requests_check(response)
@@ -76,7 +69,7 @@ def delete_record(recid: str):
         reports.add(['console'], response.content)
         return False
 
-    # remove deleted recid from to_delete.log
+    # Remove deleted recid from to_delete.txt
     file_name = data_files_name['delete_recid_list']
     with open(file_name, "r") as f:
         lines = f.readlines()
@@ -85,7 +78,7 @@ def delete_record(recid: str):
             if line.strip("\n") != recid:
                 f.write(line)
 
-    # remove record from all_rdm_records.log
+    # remove record from all_rdm_records.txt
     file_name = data_files_name['all_rdm_records']
     with open(file_name, "r") as f:
         lines = f.readlines()
@@ -95,8 +88,7 @@ def delete_record(recid: str):
             line_recid = line_recid.split(' ')[1]
             if line_recid != recid:
                 f.write(line)
-
-    return response
+    return True
 
 
 

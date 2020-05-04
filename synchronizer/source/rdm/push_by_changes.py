@@ -1,7 +1,7 @@
 import json
 from datetime                       import date, datetime, timedelta
 from setup                          import pure_rest_api_url, upload_percent_accept, data_files_name
-from source.general_functions       import add_spaces, initialize_counters, dirpath
+from source.general_functions       import add_spaces, initialize_counters
 from source.pure.general_functions  import get_pure_metadata
 from source.rdm.general_functions   import get_recid
 from source.rdm.delete_record       import delete_record, delete_from_list
@@ -45,10 +45,10 @@ class PureChangesByDate:
         self.global_counters = initialize_counters()
 
         # Get from pure all changes of a certain date
-        response = get_pure_metadata('changes', changes_date, {'pageSize': 100, 'page': 1})
+        response = get_pure_metadata('changes', changes_date, {'pageSize': 1000, 'page': 1})
 
         if response.status_code >= 300:
-            # self.report.add(['console'], response.content)
+            self.report.add(['console', 'changes'], response.content)
             return False
 
         # Load response json
@@ -97,7 +97,7 @@ class PureChangesByDate:
     def __add_date_to_successful_changes_file(self, changes_date):
     
         # Calculates if the process was successful
-        percent_success = self.global_counters['successful_push_metadata'] * 100 / self.global_counters['total']
+        percent_success = self.global_counters['metadata']['success'] * 100 / self.global_counters['total']
         data = f'{changes_date}\n'
         
         # If the percentage of successfully transmitted records is higher then the limit specified in setup.py
@@ -136,7 +136,7 @@ class PureChangesByDate:
                 delete_record(recid)
             else:
                 # The record is not in RDM
-                self.global_counters['successful_record_delete'] += 1
+                self.global_counters['delete']['success'] += 1
         return True
 
 

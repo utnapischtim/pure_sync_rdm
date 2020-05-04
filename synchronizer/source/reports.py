@@ -1,6 +1,6 @@
 from datetime                       import date, datetime
 from setup                          import log_files_name
-from source.general_functions       import add_spaces
+from source.general_functions       import add_spaces, check_if_directory_exists
 
 class Reports:
 
@@ -10,21 +10,28 @@ class Reports:
 
 
     def add(self, files, report):
+        
+        check_if_directory_exists('reports')
+        
+        # For each log file
         for file in files:
+            # Prints in console only when saving in console file
             if file == 'console':
                 print(report)
+            # Get file name
             file_name = log_files_name[file]
+            # Adds report to file
             open(file_name, "a").write(f'{report}\n')
 
 
     def summary_global_counters(self, report_files, global_counters):
         arguments = []
-        arguments.append(add_spaces(global_counters['successful_push_metadata']))
-        arguments.append(add_spaces(global_counters['successful_push_file']))
-        arguments.append(add_spaces(global_counters['successful_record_delete']))
-        arguments.append(add_spaces(global_counters['errors_push_metadata']))
-        arguments.append(add_spaces(global_counters['errors_put_file']))
-        arguments.append(add_spaces(global_counters['errors_record_delete']))
+        arguments.append(add_spaces(global_counters['metadata']['success']))
+        arguments.append(add_spaces(global_counters['file']['success']))
+        arguments.append(add_spaces(global_counters['delete']['success']))
+        arguments.append(add_spaces(global_counters['metadata']['error']))
+        arguments.append(add_spaces(global_counters['file']['error']))
+        arguments.append(add_spaces(global_counters['delete']['error']))
         self.add_template(report_files, ['general', 'summary'], arguments)
 
         if global_counters['http_responses']:
@@ -38,10 +45,10 @@ class Reports:
         arguments.append(add_spaces(current_time))
         arguments.append(add_spaces(pag))
         arguments.append(add_spaces(pag_size))
-        arguments.append(add_spaces(global_counters['successful_push_metadata']))
-        arguments.append(add_spaces(global_counters['errors_push_metadata']))
-        arguments.append(add_spaces(global_counters['successful_push_file']))
-        arguments.append(add_spaces(global_counters['errors_put_file']))
+        arguments.append(add_spaces(global_counters['metadata']['success']))
+        arguments.append(add_spaces(global_counters['metadata']['error']))
+        arguments.append(add_spaces(global_counters['file']['success']))
+        arguments.append(add_spaces(global_counters['file']['error']))
         arguments.append(add_spaces(global_counters['abstracts']))
         arguments.append(add_spaces(global_counters['orcids']))
         if global_counters['http_responses']:
@@ -58,7 +65,7 @@ class Reports:
         http_response_str = 'Metadata HTTP responses -> '
         for key in global_counters['http_responses']:
             http_response_str += f"{key}: {global_counters['http_responses'][key]}, "
-        return http_response_str[:-2] + '\n'
+        return http_response_str[:-2]
 
 
 
@@ -86,14 +93,12 @@ Errors          -> metadata: {} - files: {} - delete: {}
     'pages': {
         'page_and_size': '\nPage: {} - page size: {}',
 
-        'summary_single_line': """
+        'summary_single_line': """\
 {} - Page{} - Size{} - \
-Metadata (ok{},error {}) - \
+Metadata (ok{}, error {}) - \
 File (ok{}, error{}) - \
 Abstracts:{} - Orcids:{} - \
-{}\
-"""
-    },
+{}"""},
 
 
 

@@ -32,9 +32,11 @@ Options:
 """
 from docopt                         import docopt
 from shell_interface                import ShellInterface, method_call
+from source.general_functions       import check_if_directory_exists
 
 if __name__ == '__main__':
     arguments = docopt(__doc__, version='Pure synchronizer 1.0')
+    check_if_directory_exists('data/temporary_files')
     # Create new instance
     docopt_instance = ShellInterface()
 

@@ -2,9 +2,8 @@ import json
 import time
 from datetime                       import date, datetime
 from setup                          import versioning_running, push_dist_sec, log_files_name, rdm_host_url, \
-                                               applied_restrictions_possible_values, pure_rest_api_url, data_files_name
+                        applied_restrictions_possible_values, pure_rest_api_url, data_files_name, iso6393_file_name
 from source.rdm.general_functions   import get_recid, get_userid_from_list_by_externalid, too_many_rdm_requests_check
-from source.general_functions       import dirpath
 from source.rdm.put_file            import rdm_add_file
 from source.pure.general_functions  import get_pure_record_metadata_by_uuid, get_pure_metadata, get_pure_file
 from source.rdm.groups              import RdmGroups
@@ -19,15 +18,14 @@ class RdmAddRecord:
     def __init__(self):
         self.rdm_requests = Requests()
         self.report = Reports()
+        self.rdm_groups = RdmGroups()
         
 
     def push_record_by_uuid(self, global_counters, uuid):
-        
         # Gets from Pure the metadata of the given uuid
         item = get_pure_record_metadata_by_uuid(uuid)
         if not item:
             return False
-
         return self.create_invenio_data(global_counters, item)
 
 
@@ -37,46 +35,63 @@ class RdmAddRecord:
         self.global_counters = global_counters
         self.global_counters['total'] += 1      
 
-        self.record_files = []
         self.uuid = item['uuid']
         self.item = item
         self.data = {}
+        self.record_files = []
 
         # Versioning
-        if versioning_running:
+        self.__check_record_version()
 
-            # Get metadata version
-            response = rdm_versioning(self.uuid)
-
-            metadata_version        = response[0]
-            older_metadata_versions = response[1]
-
-            if response:
-                self.data['metadataVersion']       = metadata_version
-                self.data['metadataOlderVersions'] = older_metadata_versions
-
-                self.__add_field(item, 'metadataModifBy',   ['info', 'modifiedBy'])
-                self.__add_field(item, 'metadataModifDate', ['info', 'modifiedDate'])
-
-        # 'Owners' data not present in pure metadata
-        # It is present instead when getting the record's metadata from RDM (for a record update for instance)
-        if 'owners' in item:
-            self.data['owners'] = item['owners']
-            if 1 not in self.data['owners']:
-                # One is the user id of the master user
-                self.data['owners'].append(1)
-            report = f"\tOwners:               - {self.data['owners']}"
-            self.report.add(['console'], report)
-        else:
-            # One is the user id of the master user
-            self.data['owners'] = [1]
+        # Record owners
+        self.__check_record_owners()
 
         # TO REVIEW - TO REVIEW
-        self.data['owners'].append(3)
+        # self.data['owners'].append(3)
         self.data['appliedRestrictions'] = ['owners', 'groups', 'ip_single', 'ip_range']
         self.data['_access'] = {'metadata_restricted': False, 'files_restricted': False}        # Default value for _access field
         # TO REVIEW - TO REVIEW
 
+        # Process various general fields
+        self.__process_common_fields(item)
+    
+        # Electronic Versions
+        self.data['versionFiles'] = []
+        self.rdm_file_review = []
+
+        if 'electronicVersions' in item or 'additionalFiles' in item:
+            # Checks if the file has been already uploaded to RDM and if it has been internally reviewed
+            self.__get_rdm_file_review()
+
+        if 'electronicVersions' in item:
+            for i in item['electronicVersions']:
+                self.get_files_data(i)
+
+        # Additional Files
+        if 'additionalFiles' in item:
+            for i in item['additionalFiles']:
+                self.get_files_data(i)
+
+        # Person Associations
+        self.__process_person_associations()
+
+        # Organisational Units
+        self.__process_organisational_units()
+
+        # Abstract  
+        if 'abstracts' in item:
+            self.global_counters['abstracts'] += 1    
+
+        self.__applied_restrictions_check()
+
+        self.data = json.dumps(self.data)
+
+        # Post request to RDM
+        return self.__post_metadata()
+
+
+
+    def __process_common_fields(self, item):
                             # RDM field name                # PURE json path
         self.__add_field(item, 'title',                       ['title'])
         self.__add_field(item, 'access_right',                ['openAccessPermissions', 0, 'value'])
@@ -88,6 +103,8 @@ class RdmAddRecord:
         self.__add_field(item, 'volume',                      ['info','volume'])
         self.__add_field(item, 'journalTitle',                ['info', 'journalAssociation', 'title', 'value'])
         self.__add_field(item, 'journalNumber',               ['info', 'journalNumber'])
+        self.__add_field(item, 'metadataModifBy',             ['info', 'modifiedBy'])
+        self.__add_field(item, 'metadataModifDate',           ['info', 'modifiedDate'])
         self.__add_field(item, 'pureId',                      ['pureId'])
         self.__add_field(item, 'recordType',                  ['types', 0, 'value'])    
         self.__add_field(item, 'category',                    ['categories', 0, 'value'])  
@@ -103,32 +120,17 @@ class RdmAddRecord:
         self.__add_field(item, 'managingOrganisationalUnit_uuid',       ['managingOrganisationalUnit', 'uuid'])
         self.__add_field(item, 'managingOrganisationalUnit_externalId', ['managingOrganisationalUnit', 'externalId'])
     
-        # --- Electronic Versions ---
-        self.data['versionFiles'] = []
-        self.rdm_file_review = []
 
-        if 'electronicVersions' in item or 'additionalFiles' in item:
-            # Checks if the file has been already uploaded to RDM and if it has been internally reviewed
-            self.__get_rdm_file_review()
 
-        if 'electronicVersions' in item:
-            for i in item['electronicVersions']:
-                self.get_files_data(i)
-
-        # --- Additional Files ---
-        if 'additionalFiles' in item:
-            for i in item['additionalFiles']:
-                self.get_files_data(i)
-
-        # --- personAssociations ---
-        if 'personAssociations' in item:
+    def __process_person_associations(self):
+        if 'personAssociations' in self.item:
             self.data['contributors'] = []
 
             # Used to get, when available, the contributor's RDM userid
             file_name = data_files_name['user_ids_match']
             file_data = open(file_name).readlines()
 
-            for i in item['personAssociations']:
+            for i in self.item['personAssociations']:
 
                 sub_data = {}
                 first_name = self.__get_value(i, ['name', 'firstName'])
@@ -165,15 +167,15 @@ class RdmAddRecord:
 
                 self.data['contributors'].append(sub_data)
 
-        # --- organisationalUnits ---
-        if 'organisationalUnits' in item:
 
-            rdm_groups = RdmGroups()
+    def __process_organisational_units(self):
+        
+        if 'organisationalUnits' in self.item:
 
             self.data['organisationalUnits'] = []
             self.data['groupRestrictions']   = []
 
-            for i in item['organisationalUnits']:
+            for i in self.item['organisationalUnits']:
                 sub_data = {}
 
                 organisational_unit_name       = self.__get_value(i, ['names', 0, 'value'])
@@ -190,21 +192,26 @@ class RdmAddRecord:
                 self.data['groupRestrictions'].append(organisational_unit_externalId)
 
                 # Create group
-                rdm_groups.rdm_create_group(organisational_unit_externalId, organisational_unit_name)
-
-        # --- Abstract ---  
-        if 'abstracts' in item:
-            self.global_counters['abstracts'] += 1    
-
-        self.__applied_restrictions_check()
-
-        self.data = json.dumps(self.data)
-        open(f'{dirpath}/data/temporary_files/lash_push.json', "w").write(self.data)
-
-        # Post request to RDM
-        return self.__post_metadata()
+                self.rdm_groups.rdm_create_group(organisational_unit_externalId, organisational_unit_name)
 
 
+
+    def __check_record_version(self):
+        if versioning_running:
+            # Get metadata version
+            response = rdm_versioning(self.uuid)
+            if response:
+                self.data['metadataVersion']       = response[0]
+                self.data['metadataOlderVersions'] = response[1]
+
+
+    def __check_record_owners(self):
+        if 'owners' in self.item:
+            # Remove duplicate owners
+            self.data['owners'] = list(set(self.item['owners']))        
+            self.report.add(['console'], f"\tOwners:               - {self.data['owners']}")
+        else:
+            self.data['owners'] = [1]
 
     #   ---         ---         ---
     def __applied_restrictions_check(self):
@@ -258,8 +265,7 @@ class RdmAddRecord:
         if pure_language == 'Undefined/Unknown':
             return False
         
-        file_name = f'{dirpath}/data/iso6393.json'
-        resp_json = json.load(open(file_name, 'r'))
+        resp_json = json.load(open(iso6393_file_name, 'r'))
         for i in resp_json:
             if i['name'] == pure_language:
                 return i['iso6393']
@@ -456,7 +462,7 @@ class RdmAddRecord:
         # RESPONSE CHECK
         if response.status_code >= 300:
 
-            self.global_counters.count_errors_push_metadata += 1
+            self.global_counters['metadata']['error'] += 1
 
             # metadata transmission success flag
             self.metadata_success = False
@@ -476,7 +482,7 @@ class RdmAddRecord:
 
         # In case of SUCCESSFUL TRANSMISSION
         if response.status_code < 300:
-            self.global_counters['successful_push_metadata'] += 1
+            self.global_counters['metadata']['success'] += 1
 
             # metadata transmission success flag
             self.metadata_success = True
@@ -493,9 +499,9 @@ class RdmAddRecord:
             for file_name in self.record_files:
                 response = rdm_add_file(self, file_name, recid, uuid)
                 if response.status_code >= 300:
-                    self.global_counters['errors_put_file'] += 1
+                    self.global_counters['file']['error'] += 1
                 else:
-                    self.global_counters['successful_push_file'] += 1
+                    self.global_counters['file']['success'] += 1
                         
             if recid:
                 # add record to all_rdm_records

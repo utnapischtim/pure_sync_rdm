@@ -100,7 +100,13 @@ def get_recid(uuid: str):
             # If versioning is running then it is not necessary to delete older versions of the record
             if not versioning_running:
                 # Duplicate records are deleted
-                delete_record(recid)
+                response = delete_record(recid)
+
+                # if response:
+                #     global_counters['delete']['success'] += 1
+                # else:
+                #     global_counters['delete']['error'] += 1
+
 
     return newest_recid
 

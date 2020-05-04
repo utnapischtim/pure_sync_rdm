@@ -1,4 +1,3 @@
-from source.general_functions       import dirpath
 from source.rdm.delete_record       import delete_record
 from source.reports                 import Reports
 from setup                          import data_files_name

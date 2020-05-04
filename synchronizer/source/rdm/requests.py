@@ -1,6 +1,5 @@
 import requests
 from setup                      import token_rdm, rdm_records_url, temporary_files_name
-from source.general_functions   import dirpath
 
 class Requests:
 

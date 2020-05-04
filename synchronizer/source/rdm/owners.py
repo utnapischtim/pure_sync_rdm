@@ -1,7 +1,7 @@
 import json
 from datetime                       import date, datetime
 from setup                          import pure_rest_api_url, rdm_host_url, token_rdm, data_files_name
-from source.general_functions       import initialize_counters, add_spaces, dirpath, current_time
+from source.general_functions       import initialize_counters, add_spaces, current_time
 from source.pure.general_functions  import get_pure_metadata
 from source.rdm.general_functions   import get_metadata_by_recid, get_recid, update_rdm_record
 from source.rdm.add_record          import RdmAddRecord
