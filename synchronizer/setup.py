@@ -37,17 +37,28 @@ email_message         = """\
 Subject: """ + email_subject + """
 Please remove from pure uuid {} the file {}."""
 
-# DATABASE
-db_host     = open(f'{dirpath}/data_setup/db_host.txt', 'r').readline()
-db_name     = open(f'{dirpath}/data_setup/db_name.txt', 'r').readline()
-db_user     = open(f'{dirpath}/data_setup/db_user.txt', 'r').readline()
-db_password = open(f'{dirpath}/data_setup/db_password.txt', 'r').readline()
-
 # RESTRICTIONS
 applied_restrictions_possible_values = ['groups', 'owners', 'ip_range', 'ip_single']
 
 # VERSIONING
 versioning_running = False
+
+# ACCESS RIGHTS
+accessright_pure_to_rdm = {
+    'Open':             'open',
+    'Embargoed':        'embargoed',
+    'Restricted':       'restricted',
+    'Closed':           'closed',
+    'Unknown':          'closed',
+    'Indeterminate':    'closed',
+    'None':             'closed'
+}
+
+# DATABASE
+db_host     = open(f'{dirpath}/data_setup/db_host.txt', 'r').readline()
+db_name     = open(f'{dirpath}/data_setup/db_name.txt', 'r').readline()
+db_user     = open(f'{dirpath}/data_setup/db_user.txt', 'r').readline()
+db_password = open(f'{dirpath}/data_setup/db_password.txt', 'r').readline()
 
 # REPORT LOGS
 base_path = f'{dirpath}/reports/{date.today()}'
@@ -55,7 +66,6 @@ log_files_name = {
     'groups':               f'{base_path}_groups.log',
     'owners':               f'{base_path}_owners.log',
     'pages':                f'{base_path}_pages.log',
-    'records':              f'{base_path}_records.log',
     'console':              f'{base_path}_console.log',
     'changes':              f'{base_path}_changes.log',
 }

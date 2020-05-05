@@ -1,10 +1,11 @@
-from source.rdm.delete_record       import delete_record
+from source.rdm.delete_record       import Delete
 from source.reports                 import Reports
 from setup                          import data_files_name
 
 def rdm_duplicate_records():
 
     report = Reports()
+    delete = Delete()
 
     file_name = data_files_name['all_rdm_records']
     all_records = open(file_name, 'r').readlines()                       
@@ -20,7 +21,7 @@ def rdm_duplicate_records():
 
         if uuid in temp_arr:
             count_deleted += 1
-            delete_record(recid)
+            delete.record(recid)
             continue
 
         temp_arr.append(uuid)

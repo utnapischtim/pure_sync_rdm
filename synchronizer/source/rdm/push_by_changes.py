@@ -4,9 +4,10 @@ from setup                          import pure_rest_api_url, upload_percent_acc
 from source.general_functions       import add_spaces, initialize_counters, current_time
 from source.pure.general_functions  import get_pure_metadata
 from source.rdm.general_functions   import get_recid
-from source.rdm.delete_record       import delete_record, delete_from_list
+# from source.rdm.delete_record       import delete_record
 from source.rdm.add_record          import RdmAddRecord
 from source.reports                 import Reports
+from source.rdm.delete_record       import Delete
 
 # To execute preferably between 22:30 and 23:30, so to get all changes from that day
 
@@ -14,6 +15,7 @@ class PureChangesByDate:
 
     def __init__(self):
         self.report = Reports()
+        self.delete = Delete()
         
 
     def get_pure_changes(self):
@@ -138,7 +140,7 @@ class PureChangesByDate:
 
             if recid:
                 # Deletes the record from RDM
-                delete_record(recid)
+                self.delete.record(recid)
             else:
                 # The record is not in RDM
                 self.global_counters['delete']['success'] += 1

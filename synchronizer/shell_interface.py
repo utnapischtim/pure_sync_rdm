@@ -4,7 +4,7 @@ from source.rdm.push_by_page        import RunPages
 from source.log_manager             import delete_old_log_files
 from source.rdm.duplicate_records   import rdm_duplicate_records
 from source.rdm.push_by_uuid        import AddFromUuidList
-from source.rdm.delete_record       import delete_from_list
+from source.rdm.delete_record       import Delete
 from source.rdm.owners              import RdmOwners
 from source.rdm.groups              import RdmGroups
 
@@ -30,7 +30,8 @@ class ShellInterface:
 
     def delete(self):
         """ Delete RDM records by recid (to_delete.log) """
-        delete_from_list()
+        delete = Delete()
+        delete.from_list()
 
     def uuid(self):
         """ Push to RDM all uuids that are in to_transfer.log """

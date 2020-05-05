@@ -13,11 +13,6 @@ class RdmDatabase:
             """)
         self.cursor = connection.cursor()
 
-    # def db_query(self, query):
-    #     self.cursor.execute(query)
-    #     if self.cursor.rowcount > 0:
-    #         return self.cursor.fetchall()
-    #     return False
 
     def select_query(self, fields: str, table: str, filters = {}):
 

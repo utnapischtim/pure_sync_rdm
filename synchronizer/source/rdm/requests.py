@@ -8,7 +8,7 @@ class Requests:
     def __init__(self):
         self.report = Reports()
 
-    def __rdm_request_headers(self, parameters):
+    def _rdm_request_headers(self, parameters):
         headers = {}
         if 'content_type' in parameters:
             headers['Content-Type'] = 'application/json'
@@ -18,14 +18,14 @@ class Requests:
             headers['Authorization'] = f'Bearer {token_rdm}'
         return headers
 
-    def __rdm_request_params(self):
+    def _rdm_request_params(self):
         return (('prettyprint', '1'),)
 
 
     def rdm_get_metadata(self, additional_parameters: str, recid = ''):
 
-        headers = self.__rdm_request_headers(['content_type', 'token'])
-        params  = self.__rdm_request_params()
+        headers = self._rdm_request_headers(['content_type', 'token'])
+        params  = self._rdm_request_params()
 
         url = f'{rdm_records_url}{recid}'
 
@@ -50,8 +50,8 @@ class Requests:
 
         open(temporary_files_name['post_rdm_metadata'], "w").write(data)
 
-        headers = self.__rdm_request_headers(['content_type'])
-        params  = self.__rdm_request_params()
+        headers = self._rdm_request_headers(['content_type'])
+        params  = self._rdm_request_params()
 
         data_utf8 = data.encode('utf-8')
         
@@ -64,8 +64,8 @@ class Requests:
     def rdm_put_metadata(self, recid: str, data: str):
         """ Used to update an existing record """
 
-        headers = self.__rdm_request_headers(['content_type', 'token'])
-        params  = self.__rdm_request_params()
+        headers = self._rdm_request_headers(['content_type', 'token'])
+        params  = self._rdm_request_params()
 
         data_utf8 = data.encode('utf-8')
         url = f'{rdm_records_url}{recid}'
@@ -78,7 +78,7 @@ class Requests:
 
     def rdm_put_file(self, file_path_name: str, recid: str):
 
-        headers = self.__rdm_request_headers(['file', 'token'])
+        headers = self._rdm_request_headers(['file', 'token'])
         data    = open(file_path_name, 'rb').read()
 
         # Get only the file name
@@ -91,7 +91,7 @@ class Requests:
 
     def rdm_delete_metadata(self, recid: str):
 
-        headers = self.__rdm_request_headers(['content_type', 'token'])
+        headers = self._rdm_request_headers(['content_type', 'token'])
         url = f'{rdm_records_url}{recid}'
 
         response = requests.delete(url, headers=headers, verify=False)

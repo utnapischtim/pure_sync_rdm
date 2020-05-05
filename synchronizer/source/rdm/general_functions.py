@@ -5,13 +5,14 @@ from setup                          import token_rdm, pure_rest_api_url, version
 from source.general_functions       import add_spaces
 from source.rdm.requests            import Requests
 from source.reports                 import Reports
+from source.rdm.delete_record       import Delete
 
 reports = Reports()
+rdm_requests = Requests()
+delete = Delete()
 
 def get_metadata_by_recid(recid: str):
     """ Having the record recid gets from RDM its metadata """
-
-    rdm_requests = Requests()
 
     if len(recid) != 11:
         report = f'\nERROR - The recid must have 11 characters. Given: {recid}\n'
@@ -31,8 +32,6 @@ def get_metadata_by_recid(recid: str):
 #   ---         ---         ---
 def get_metadata_by_query(query_value: str):
     """ Applying a query get RDM record metadata """
-    
-    rdm_requests = Requests()
 
     params = {'sort': 'mostrecent', 'size': 100, 'page': 1, 'q': f'"{query_value}"'}
     response = rdm_requests.rdm_get_metadata(params)
@@ -53,8 +52,8 @@ def get_recid(uuid: str):
     4 - gets the last metadata_version
     """
 
-    # The following function needs to be imported localy to avoid 'circular imports'
-    from source.rdm.delete_record            import delete_record
+    # # The following function needs to be imported localy to avoid 'circular imports'
+    # from source.rdm.delete_record            import delete_record
 
     """ KNOWN ISSUE: if the applied restriction in invenio_records_permissions (for admin users)
                      do not allow to read the record then it will not be listed """
@@ -90,7 +89,7 @@ def get_recid(uuid: str):
             # If versioning is running then it is not necessary to delete older versions of the record
             if not versioning_running:
                 # Duplicate records are deleted
-                response = delete_record(recid)
+                response = delete.record(recid)
 
                 # if response:
                 #     global_counters['delete']['success'] += 1
@@ -121,8 +120,6 @@ def get_userid_from_list_by_externalid(external_id: str, file_data: list):
 
 #   ---         ---         ---
 def update_rdm_record(data: str, recid: str):
-    
-    rdm_requests = Requests()
 
     response = rdm_requests.rdm_put_metadata(recid, data)
 
