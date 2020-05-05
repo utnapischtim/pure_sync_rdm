@@ -34,21 +34,21 @@ class PureChangesByDate:
 
 
     def _decorator(func):
-        def magic(self, changes_date) :
+        def _wrapper(self, changes_date) :
 
             # Initialize global counters
             self.global_counters = initialize_counters()
-            self.all_report_files = ['console', 'records', 'changes']
 
+            self.all_report_files = ['console', 'records', 'changes']
+            
             self.report.add_template(self.all_report_files, ['general', 'title'], ['CHANGES', current_time()])
             self.report.add(self.all_report_files, f'\nProcessed date: {changes_date}\n')
 
             # Decorated function
             func(self, changes_date)
 
-            # After
             self._report_summary()
-        return magic
+        return _wrapper
 
     @_decorator
     def _changes_by_date(self, changes_date: str):

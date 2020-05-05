@@ -11,25 +11,12 @@ def add_spaces(value: str):
 
 def initialize_counters():
     """ Initialize variables that will count through the whole task the success of each process """
-    # global_counters = {
-    #     'errors_push_metadata': 0,
-    #     'errors_put_file': 0,
-    #     'errors_record_delete': 0,
-    #     'successful_push_metadata': 0,
-    #     'successful_push_file': 0,
-    #     'successful_record_delete': 0,
-    #     'total': 0,
-    #     'abstracts': 0,
-    #     'orcids': 0,
-    #     'http_responses': {}
-    # }
+    
     global_counters = {
         'metadata': { 'success':  0, 'error':    0, },
         'file':     { 'success':  0, 'error':    0, },
         'delete':   { 'success':  0, 'error':    0, },
         'total': 0,
-        'abstracts': 0,
-        'orcids': 0,
         'http_responses': {}
     }
     return global_counters

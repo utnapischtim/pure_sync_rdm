@@ -49,8 +49,6 @@ class Reports:
         arguments.append(add_spaces(global_counters['metadata']['error']))
         arguments.append(add_spaces(global_counters['file']['success']))
         arguments.append(add_spaces(global_counters['file']['error']))
-        arguments.append(add_spaces(global_counters['abstracts']))
-        arguments.append(add_spaces(global_counters['orcids']))
         if global_counters['http_responses']:
             arguments.append(self.metadata_http_responses(global_counters))
 
@@ -97,7 +95,6 @@ Errors          -> metadata: {} - files: {} - delete: {}
 {} - Page{} - Size{} - \
 Metadata (ok{}, error {}) - \
 File (ok{}, error{}) - \
-Abstracts:{} - Orcids:{} - \
 {}"""},
 
 
