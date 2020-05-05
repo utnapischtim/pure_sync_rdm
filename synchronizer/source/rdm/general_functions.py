@@ -1,11 +1,9 @@
 import requests
 import json
 import os
-import time
-from datetime                   import date
-from setup                      import token_rdm, pure_rest_api_url, versioning_running, pure_api_key, wait_429, rdm_host_url
-from source.general_functions   import add_spaces
-from source.rdm.requests        import Requests
+from setup                          import token_rdm, pure_rest_api_url, versioning_running, pure_api_key, rdm_host_url
+from source.general_functions       import add_spaces
+from source.rdm.requests            import Requests
 from source.reports                 import Reports
 
 reports = Reports()
@@ -36,12 +34,7 @@ def get_metadata_by_query(query_value: str):
     
     rdm_requests = Requests()
 
-    params = {
-        'sort': 'mostrecent',
-        'size': 100,
-        'page': 1,
-        'q': f'"{query_value}"'
-    }
+    params = {'sort': 'mostrecent', 'size': 100, 'page': 1, 'q': f'"{query_value}"'}
     response = rdm_requests.rdm_get_metadata(params)
 
     if response.status_code >= 300:
@@ -68,9 +61,6 @@ def get_recid(uuid: str):
 
     response = get_metadata_by_query(uuid)
 
-    # If the status_code is 429 (too many requests) then it will wait for some minutes
-    if not too_many_rdm_requests_check(response):
-        return False
 
     resp_json = json.loads(response.content)
 
@@ -142,15 +132,4 @@ def update_rdm_record(data: str, recid: str):
     if response.status_code >= 300:
         reports.add(['console'], response.content)
     return response
-    
-
-#   ---         ---         ---
-def too_many_rdm_requests_check(response: int):
-    """ If too many requests are submitted to RDM (more then 5000 / hour) """
-    if response.status_code == 429:
-        reports.add(['console'], response.content)
-        reports.add(['console'], '\nToo many RDM requests.. wait {wait_429 / 60} minutes\n')
-        time.sleep(wait_429)
-        return False
-    return True
 

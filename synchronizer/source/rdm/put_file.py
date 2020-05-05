@@ -10,7 +10,7 @@ from source.reports                 import Reports
 rdm_requests = Requests()
 reports = Reports()
 
-def rdm_add_file(shell_interface, file_name: str, recid: str, uuid: str):
+def rdm_add_file(file_name: str, recid: str, uuid: str):
     file_path_name = f"{temporary_files_name['base_path']}/{file_name}"
 
     # PUT FILE TO RDM
@@ -18,23 +18,20 @@ def rdm_add_file(shell_interface, file_name: str, recid: str, uuid: str):
 
     # Report
     reports.add(['console'], f'\tRDM put file          - {response}')
-
     reports.add(['records'], f'{current_time()} - file_put_to_rdm - {response} - {recid}\n')
 
     if response.status_code >= 300:
-        shell_interface.file_success = False
         reports.add(['console', 'records'], response.content)
+        return False
 
     else:
-        shell_interface.file_success = True
-
         # if the upload was successful then delete file from /reports/temporary_files
         os.remove(file_path_name) 
 
         # # Sends email to remove record from Pure
         # send_email(uuid, file_name)               # - # - SEND EMAIL - # - #
 
-    return response
+        return True
 
 
 def send_email(uuid: str, file_name: str):

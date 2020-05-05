@@ -1,6 +1,7 @@
 import requests
-from setup                      import token_rdm, rdm_records_url, temporary_files_name
-from source.reports             import Reports
+import time
+from setup                          import token_rdm, rdm_records_url, temporary_files_name, wait_429
+from source.reports                 import Reports
 
 class Requests:
     
@@ -40,6 +41,7 @@ class Requests:
         response = requests.get(url, headers=headers, params=params, verify=False)
         open(temporary_files_name['get_rdm_metadata'], "wb").write(response.content)
 
+        self.__check_response(response)
         return response
 
 
@@ -55,8 +57,7 @@ class Requests:
         
         response = requests.post(rdm_records_url, headers=headers, params=params, data=data_utf8, verify=False)
 
-        if response.status_code >= 300:
-            self.report.add(['console', 'records'], response.content)
+        self.__check_response(response)
         return response
 
 
@@ -69,7 +70,10 @@ class Requests:
         data_utf8 = data.encode('utf-8')
         url = f'{rdm_records_url}{recid}'
 
-        return requests.put(url, headers=headers, params=params, data=data_utf8, verify=False)
+        response = requests.put(url, headers=headers, params=params, data=data_utf8, verify=False)
+
+        self.__check_response(response)
+        return response
 
 
     def rdm_put_file(self, file_path_name: str, recid: str):
@@ -90,4 +94,22 @@ class Requests:
         headers = self.__rdm_request_headers(['content_type', 'token'])
         url = f'{rdm_records_url}{recid}'
 
-        return requests.delete(url, headers=headers, verify=False)
+        response = requests.delete(url, headers=headers, verify=False)
+
+        self.__check_response(response)
+        return response
+
+    
+    def __check_response(self, response):
+        http_code = response.status_code
+        if http_code >= 300 and http_code != 429:
+            self.report.add(['console'], response.content)
+            return False
+
+        # Checks if too many requests are submitted to RDM (more then 5000 / hour)
+        if response.status_code == 429:
+            report = f'{response.content}\nToo many RDM requests.. wait {wait_429 / 60} minutes\n'
+            self.report.add(['console'], report)
+            time.sleep(wait_429)
+            return False
+        return True

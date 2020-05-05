@@ -3,7 +3,7 @@ import time
 from datetime                       import date, datetime
 from setup                          import versioning_running, push_dist_sec, log_files_name, rdm_host_url, \
                         applied_restrictions_possible_values, pure_rest_api_url, data_files_name, iso6393_file_name
-from source.rdm.general_functions   import get_recid, get_userid_from_list_by_externalid, too_many_rdm_requests_check
+from source.rdm.general_functions   import get_recid, get_userid_from_list_by_externalid
 from source.rdm.put_file            import rdm_add_file
 from source.pure.general_functions  import get_pure_record_metadata_by_uuid, get_pure_metadata, get_pure_file
 from source.general_functions       import current_time
@@ -17,9 +17,9 @@ from source.reports                 import Reports
 class RdmAddRecord:
 
     def __init__(self):
-        self.rdm_requests = Requests()
+        self.requests = Requests()
         self.report = Reports()
-        self.rdm_groups = RdmGroups()
+        self.groups = RdmGroups()
         
 
     def push_record_by_uuid(self, global_counters, uuid):
@@ -193,7 +193,7 @@ class RdmAddRecord:
                 self.data['groupRestrictions'].append(organisational_unit_externalId)
 
                 # Create group
-                self.rdm_groups.rdm_create_group(organisational_unit_externalId, organisational_unit_name)
+                self.groups.rdm_create_group(organisational_unit_externalId, organisational_unit_name)
 
 
 
@@ -313,7 +313,7 @@ class RdmAddRecord:
 
         # Get from RDM file size and internalReview
         params = {'sort': 'mostrecent', 'size': '100', 'page': '1', 'q': self.uuid}
-        response = self.rdm_requests.rdm_get_metadata(params)
+        response = self.requests.rdm_get_metadata(params)
 
         if response.status_code >= 300:
             report = f'\nget_rdm_file_size - {self.uuid} - {response}'
@@ -439,15 +439,15 @@ class RdmAddRecord:
     #   ---         ---         ---
     def __post_metadata(self):
 
-        self.metadata_success = None
-        self.file_success     = None
+        metadata_success = None
+        file_success     = None
         uuid = self.item['uuid']
 
         # RDM accepts 5000 records per hour (one record every ~ 1.4 sec.)
         time.sleep(push_dist_sec)                        
         
         # POST REQUEST metadata
-        response = self.rdm_requests.rdm_post_metadata(self.data)
+        response = self.requests.rdm_post_metadata(self.data)
 
         # Count http responses
         self.__http_response_counter(response.status_code)
@@ -461,21 +461,15 @@ class RdmAddRecord:
             self.global_counters['metadata']['error'] += 1
 
             # metadata transmission success flag
-            self.metadata_success = False
-            
-            # Add record to to_transmit.txt to be re-transmitted
-            open(data_files_name['transfer_uuid_list'], "a").write(f'{uuid}\n')
+            metadata_success = False
 
-
-        # If the status_code is 429 (too many requests) then it will wait for some minutes
-        too_many_rdm_requests_check(response)
 
         # In case of successful transmission
         if response.status_code < 300:
             self.global_counters['metadata']['success'] += 1
 
             # metadata transmission success flag
-            self.metadata_success = True
+            metadata_success = True
 
             # After pushing a record's metadata to RDM it takes about one second to be able to get its recid
             time.sleep(1)
@@ -487,11 +481,13 @@ class RdmAddRecord:
 
             # - Upload record FILES to RDM -
             for file_name in self.record_files:
-                response = rdm_add_file(self, file_name, recid, uuid)
-                if response.status_code >= 300:
-                    self.global_counters['file']['error'] += 1
-                else:
+                response = rdm_add_file(file_name, recid, uuid)
+                if response:
                     self.global_counters['file']['success'] += 1
+                    file_success = True
+                else:
+                    self.global_counters['file']['error'] += 1
+                    file_success = False
                         
             if recid:
                 # add record to all_rdm_records
@@ -500,21 +496,18 @@ class RdmAddRecord:
 
 
         # FINAL SUCCESS CHECK
-        if(self.metadata_success == False or self.file_success == False):
+        if(metadata_success == False or file_success == False):
+            
+            # Add uuid to to_transmit.txt to be re-transmitted
+            open(data_files_name['transfer_uuid_list'], "a").write(f'{uuid}\n')
+            
             return False
         else:
             # # Push RDM record link to Pure                                # TODO
-            # self.api_url
-            # self.landing_page_url
+            # self.api_url      # self.landing_page_url
 
-            # if uuid in to_transmit then removes it
-            file_name = data_files_name['transfer_uuid_list']
-            with open(file_name, "r") as f:
-                lines = f.readlines()
-            with open(file_name, "w") as f:
-                for line in lines:
-                    if line.strip("\n") != uuid:
-                        f.write(line)
+            # Remove uuid from to_transmit.txt
+            self.__remove_uuid_from_list(uuid, data_files_name['transfer_uuid_list'])
         return True
 
 
@@ -523,3 +516,13 @@ class RdmAddRecord:
         if status_code not in self.global_counters['http_responses']:
             self.global_counters['http_responses'][status_code] = 0
         self.global_counters['http_responses'][status_code] += 1
+
+
+    def __remove_uuid_from_list(self, uuid, file_name):
+        """ If the given uuid is in the given file then the line will be removed """
+        with open(file_name, "r") as f:
+            lines = f.readlines()
+        with open(file_name, "w") as f:
+            for line in lines:
+                if line.strip("\n") != uuid:
+                    f.write(line)

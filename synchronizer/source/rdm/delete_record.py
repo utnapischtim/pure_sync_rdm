@@ -1,5 +1,4 @@
 from setup                          import rdm_host_url, token_rdm, data_files_name, log_files_name
-from source.rdm.general_functions   import too_many_rdm_requests_check
 from source.general_functions       import current_time
 from source.rdm.requests            import Requests
 from source.reports                 import Reports
@@ -61,12 +60,8 @@ def delete_record(recid: str):
     report_line = f'{current_time()} - delete_from_rdm - {response} - {recid}\n'
     reports.add(['records'], report)
 
-    # If the status_code is 429 (too many requests) then it will wait for some minutes
-    too_many_rdm_requests_check(response)
-
     # 410 -> "PID has been deleted"
     if response.status_code >= 300 and response.status_code != 410:
-        reports.add(['console'], response.content)
         return False
 
     # Remove deleted recid from to_delete.txt
