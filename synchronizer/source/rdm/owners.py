@@ -16,7 +16,7 @@ class RdmOwners:
         self.rdm_db         = RdmDatabase()
         self.report         = Reports()
         self.rdm_add_record = RdmAddRecord()
-        self.report_files = ['owners', 'records', 'console']
+        self.report_files = ['owners', 'console']
 
     #   ---         ---         ---
     def rdm_owner_check(self):

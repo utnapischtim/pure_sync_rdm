@@ -1,4 +1,4 @@
-from setup                          import rdm_host_url, token_rdm, data_files_name, log_files_name
+from setup                          import rdm_host_url, token_rdm, data_files_name
 from source.general_functions       import current_time
 from source.rdm.requests            import Requests
 from source.reports                 import Reports
@@ -46,7 +46,6 @@ def delete_from_list():
 
 
 
-#       ---     ---     ---
 def delete_record(recid: str):
     
     # NOTE: the user ACCOUNT related to the used TOKEN must be ADMIN
@@ -56,9 +55,6 @@ def delete_record(recid: str):
 
     report = f'\tRDM delete record     - {response} - Deleted recid:        {recid}'
     reports.add(['console'], report)
-
-    report_line = f'{current_time()} - delete_from_rdm - {response} - {recid}\n'
-    reports.add(['records'], report)
 
     # 410 -> "PID has been deleted"
     if response.status_code >= 300 and response.status_code != 410:

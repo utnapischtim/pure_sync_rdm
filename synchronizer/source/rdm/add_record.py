@@ -457,7 +457,6 @@ class RdmAddRecord:
         self._http_response_counter(response.status_code)
 
         self.report.add(['console'], f"\tRDM post metadata     - {response} - Uuid:                 {uuid}")
-        self.report.add(['records'], f'{current_time()} - metadata_to_rdm - {str(response)} - {uuid} - {self.item["title"]}\n')
 
         if response.status_code >= 300:
             self.global_counters['metadata']['error'] += 1

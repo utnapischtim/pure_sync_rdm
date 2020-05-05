@@ -15,10 +15,9 @@ def rdm_add_file(file_name: str, recid: str):
 
     # Report
     reports.add(['console'], f'\tRDM put file          - {response}')
-    reports.add(['records'], f'{current_time()} - file_put_to_rdm - {response} - {recid}\n')
 
     if response.status_code >= 300:
-        reports.add(['console', 'records'], response.content)
+        reports.add(['console'], response.content)
         return False
 
     else:

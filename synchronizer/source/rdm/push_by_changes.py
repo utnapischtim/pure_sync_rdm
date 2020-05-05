@@ -39,7 +39,7 @@ class PureChangesByDate:
             # Initialize global counters
             self.global_counters = initialize_counters()
 
-            self.all_report_files = ['console', 'records', 'changes']
+            self.all_report_files = ['console', 'changes']
             
             self.report.add_template(self.all_report_files, ['general', 'title'], ['CHANGES', current_time()])
             self.report.add(self.all_report_files, f'\nProcessed date: {changes_date}\n')

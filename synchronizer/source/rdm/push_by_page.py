@@ -1,6 +1,6 @@
 import json
 from datetime                       import date, datetime
-from setup                          import pure_rest_api_url, log_files_name
+from setup                          import pure_rest_api_url
 from source.general_functions       import add_spaces, initialize_counters
 from source.pure.general_functions  import get_pure_metadata
 from source.rdm.add_record          import RdmAddRecord
@@ -11,7 +11,7 @@ class RunPages:
     def __init__(self):
         self.report = Reports()
         self.rdm_add_record = RdmAddRecord()
-        self.report_files = ['console', 'records']
+        self.report_files = ['console']
         
     def get_pure_by_page(self, pag_begin: int, pag_end: int, pag_size: int):
 
