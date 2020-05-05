@@ -7,7 +7,8 @@ from source.rdm.general_functions   import get_recid, get_userid_from_list_by_ex
 from source.rdm.put_file            import rdm_add_file
 from source.pure.general_functions  import get_pure_record_metadata_by_uuid, get_pure_metadata, get_pure_file
 from source.general_functions       import current_time
-from source.rdm.versioning          import rdm_versioning
+from source.rdm.versioning          import rdm_versioning 
+from source.rdm.emails              import send_email
 from source.rdm.groups              import RdmGroups
 from source.rdm.database            import RdmDatabase
 from source.rdm.requests            import Requests
@@ -439,9 +440,12 @@ class RdmAddRecord:
     #   ---         ---         ---
     def __post_metadata(self):
 
-        metadata_success = None
-        file_success     = None
+        file_success     = False
         uuid = self.item['uuid']
+        success_check = {
+            'metadata': False,
+            'file': False
+        }
 
         # RDM accepts 5000 records per hour (one record every ~ 1.4 sec.)
         time.sleep(push_dist_sec)                        
@@ -455,49 +459,50 @@ class RdmAddRecord:
         self.report.add(['console'], f"\tRDM post metadata     - {response} - Uuid:                 {uuid}")
         self.report.add(['records'], f'{current_time()} - metadata_to_rdm - {str(response)} - {uuid} - {self.item["title"]}\n')
 
-        # RESPONSE CHECK
         if response.status_code >= 300:
-
             self.global_counters['metadata']['error'] += 1
+            return False
 
-            # metadata transmission success flag
-            metadata_success = False
+        self.global_counters['metadata']['success'] += 1
+        success_check['metadata'] = True
+
+        # After pushing a record's metadata to RDM it takes about one second to be able to get its recid
+        time.sleep(1)
+
+        # Gets recid from RDM
+        recid = get_recid(uuid)
+        if not recid:
+            return False
+
+        # add record to all_rdm_records.txt
+        uuid_recid_line = f'{uuid} {recid}\n'
+        open(data_files_name['all_rdm_records'], "a").write(uuid_recid_line)
+
+        # Upload record files to RDM
+        for file_name in self.record_files:
+        
+            # Send request
+            response = rdm_add_file(file_name, recid)
+
+            if response:
+                self.global_counters['file']['success'] += 1
+                success_check['file'] = True
+
+                # # Sends email to remove record from Pure
+                # send_email(uuid, file_name)
+            else:
+                self.global_counters['file']['error'] += 1
+        
+        # Checks if both metadata and files were correctly transmitted
+        self.__metadata_and_file_submission_check(success_check)
 
 
-        # In case of successful transmission
-        if response.status_code < 300:
-            self.global_counters['metadata']['success'] += 1
 
-            # metadata transmission success flag
-            metadata_success = True
+    def __metadata_and_file_submission_check(self, success_check):
 
-            # After pushing a record's metadata to RDM it takes about one second to be able to get its recid
-            time.sleep(1)
+        uuid = self.item['uuid']
 
-            # Gets recid from RDM
-            recid = get_recid(uuid)
-            if not recid:
-                return False
-
-            # - Upload record FILES to RDM -
-            for file_name in self.record_files:
-                response = rdm_add_file(file_name, recid, uuid)
-                if response:
-                    self.global_counters['file']['success'] += 1
-                    file_success = True
-                else:
-                    self.global_counters['file']['error'] += 1
-                    file_success = False
-                        
-            if recid:
-                # add record to all_rdm_records
-                uuid_recid_line = f'{uuid} {recid}\n'
-                open(data_files_name['all_rdm_records'], "a").write(uuid_recid_line)
-
-
-        # FINAL SUCCESS CHECK
-        if(metadata_success == False or file_success == False):
-            
+        if(success_check['metadata'] == False or success_check['file'] == False):
             # Add uuid to to_transmit.txt to be re-transmitted
             open(data_files_name['transfer_uuid_list'], "a").write(f'{uuid}\n')
             
@@ -508,7 +513,7 @@ class RdmAddRecord:
 
             # Remove uuid from to_transmit.txt
             self.__remove_uuid_from_list(uuid, data_files_name['transfer_uuid_list'])
-        return True
+        return True            
 
 
 
