@@ -1,7 +1,7 @@
 import json
 from datetime                       import date, datetime, timedelta
 from setup                          import pure_rest_api_url, upload_percent_accept, data_files_name
-from source.general_functions       import add_spaces, initialize_counters
+from source.general_functions       import add_spaces, initialize_counters, current_time
 from source.pure.general_functions  import get_pure_metadata
 from source.rdm.general_functions   import get_recid
 from source.rdm.delete_record       import delete_record, delete_from_list
@@ -14,35 +14,44 @@ class PureChangesByDate:
 
     def __init__(self):
         self.report = Reports()
-
+        
 
     def get_pure_changes(self):
         """ Gets from Pure API all changes that took place of a certain date
             and modifies accordingly the RDM repository """
         
         # Get date of last update
-        missing_updates = self.__get_missing_updates()
-        missing_updates = ['2020-05-04']      # TEMPORARY !!!!!
+        missing_updates = self._get_missing_updates()
+        missing_updates = ['2020-05-05']      # TEMPORARY !!!!!
         
         if missing_updates == []:
             self.report.add(['console'], '\nNothing to update.\n')
             return
 
         for date_to_update in reversed(missing_updates):
-            self.__changes_by_date(date_to_update)
+            self._changes_by_date(date_to_update)
         return
 
 
-    def __changes_by_date(self, changes_date: str):
-        
-        self.all_report_files = ['console', 'records', 'changes']
+    def _decorator(func):
+        def magic(self, changes_date) :
 
-        current_time = datetime.now().strftime("%H:%M:%S")
-        self.report.add_template(self.all_report_files, ['general', 'title'], ['CHANGES', current_time])
-        self.report.add(self.all_report_files, f'\nProcessed date: {changes_date}\n')
+            # Initialize global counters
+            self.global_counters = initialize_counters()
+            self.all_report_files = ['console', 'records', 'changes']
 
-        # Initialize global counters
-        self.global_counters = initialize_counters()
+            self.report.add_template(self.all_report_files, ['general', 'title'], ['CHANGES', current_time()])
+            self.report.add(self.all_report_files, f'\nProcessed date: {changes_date}\n')
+
+            # Decorated function
+            func(self, changes_date)
+
+            # After
+            self._report_summary()
+        return magic
+
+    @_decorator
+    def _changes_by_date(self, changes_date: str):
 
         # Get from pure all changes of a certain date
         response = get_pure_metadata('changes', changes_date, {'pageSize': 1000, 'page': 1})
@@ -66,24 +75,20 @@ class PureChangesByDate:
         # used to check if there are doubled tasks (e.g. update uuid and delete same uuid)
         self.duplicated_uuid  = []
         
-        self.__initialize_local_counters()
+        self._initialize_local_counters()
 
-        # - Delete - 
         # Iterates over all records that need to be deleted
-        self.__delete_records(json_response)
+        self._delete_records(json_response)
 
         # - Create / Add / Update -
-        self.__update_records(json_response)
+        self._update_records(json_response)
 
         # If the process was successful adds the date to successful_changes.txt
-        self.__add_date_to_successful_changes_file(changes_date)
-
-        self.__report_summary()
-
+        self._add_date_to_successful_changes_file(changes_date)
 
     
     #       ---     ---     ---
-    def __initialize_local_counters(self):
+    def _initialize_local_counters(self):
         self.local_counters = {
             'delete': 0,
             'update': 0,
@@ -94,7 +99,7 @@ class PureChangesByDate:
         }
     
     #       ---     ---     ---
-    def __add_date_to_successful_changes_file(self, changes_date):
+    def _add_date_to_successful_changes_file(self, changes_date):
     
         # Calculates if the process was successful
         percent_success = self.global_counters['metadata']['success'] * 100 / self.global_counters['total']
@@ -110,7 +115,7 @@ class PureChangesByDate:
 
 
     #       ---     ---     ---
-    def __delete_records(self, json_response: dict):
+    def _delete_records(self, json_response: dict):
 
         for item in json_response['items']:
 
@@ -141,11 +146,10 @@ class PureChangesByDate:
 
 
     #       ---     ---     ---
-    def __update_records(self, json_response):
+    def _update_records(self, json_response):
 
         rdm_add_record = RdmAddRecord()
         
-        count = 0
         for item in json_response['items']:
             
             if 'changeType' not in item or 'uuid' not in item:
@@ -162,9 +166,7 @@ class PureChangesByDate:
                 self.local_counters['duplicated'] += 1
                 continue
             
-            count += 1
-            report = f"\n{count} - {item['changeType']}"
-            self.report.add(['console'], report)
+            self.report.add(['console'], f"\n{item['changeType']}")
 
             if item['changeType'] == 'ADD' or item['changeType'] == 'CREATE':
                 self.local_counters['create'] += 1
@@ -180,7 +182,7 @@ class PureChangesByDate:
 
 
     #       ---     ---     ---
-    def __get_missing_updates(self):
+    def _get_missing_updates(self):
         """ Search for missing updates in the last 7 days """
 
         file_name = data_files_name['successful_changes']
@@ -203,7 +205,7 @@ class PureChangesByDate:
         return missing_updates
 
 
-    def __report_summary(self):
+    def _report_summary(self):
 
         # Global counters
         self.report.summary_global_counters(self.all_report_files, self.global_counters)
