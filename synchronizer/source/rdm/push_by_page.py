@@ -1,7 +1,6 @@
 import json
 from datetime                       import date, datetime
-from setup                          import pure_rest_api_url
-from source.general_functions       import add_spaces, initialize_counters
+from source.general_functions       import initialize_counters
 from source.pure.general_functions  import get_pure_metadata
 from source.rdm.add_record          import RdmAddRecord
 from source.reports                 import Reports
@@ -14,6 +13,7 @@ class RunPages:
         self.report_files = ['console']
         
     def get_pure_by_page(self, pag_begin: int, pag_end: int, pag_size: int):
+        """ Gets records from Pure 'research-outputs' endpoint by page and submit them to RDM. """
 
         for pag in range(pag_begin, pag_end):
     

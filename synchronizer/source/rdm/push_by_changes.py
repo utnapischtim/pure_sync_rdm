@@ -1,10 +1,9 @@
 import json
 from datetime                       import date, datetime, timedelta
-from setup                          import pure_rest_api_url, upload_percent_accept, data_files_name
+from setup                          import upload_percent_accept, data_files_name
 from source.general_functions       import add_spaces, initialize_counters, current_time
 from source.pure.general_functions  import get_pure_metadata
 from source.rdm.general_functions   import get_recid
-# from source.rdm.delete_record       import delete_record
 from source.rdm.add_record          import RdmAddRecord
 from source.reports                 import Reports
 from source.rdm.delete_record       import Delete
@@ -14,17 +13,18 @@ from source.rdm.delete_record       import Delete
 class PureChangesByDate:
 
     def __init__(self):
+        self.add_record = RdmAddRecord()
         self.report = Reports()
         self.delete = Delete()
         
 
     def get_pure_changes(self):
-        """ Gets from Pure API all changes that took place of a certain date
-            and modifies accordingly the RDM repository """
+        """ Gets from Pure 'changes' endpoint all records that have been created / updated / deleted 
+            and modifies accordingly the relative RDM records """
         
         # Get date of last update
         missing_updates = self._get_missing_updates()
-        missing_updates = ['2020-05-05']      # TEMPORARY !!!!!
+        missing_updates = ['2020-01-05']      # TEMPORARY !!!!!
         
         if missing_updates == []:
             self.report.add(['console'], '\nNothing to update.\n')
@@ -54,6 +54,7 @@ class PureChangesByDate:
 
     @_decorator
     def _changes_by_date(self, changes_date: str):
+        """ Gets from Pure all changes that took place in a certain date """
 
         # Get from pure all changes of a certain date
         response = get_pure_metadata('changes', changes_date, {'pageSize': 1000, 'page': 1})
@@ -85,8 +86,8 @@ class PureChangesByDate:
         # - Create / Add / Update -
         self._update_records(json_response)
 
-        # If the process was successful adds the date to successful_changes.txt
-        self._add_date_to_successful_changes_file(changes_date)
+        # Adds the date to successful_changes.txt
+        open(data_files_name['successful_changes'], "a").write(f'{changes_date}\n')
 
     
     #       ---     ---     ---
@@ -99,25 +100,11 @@ class PureChangesByDate:
             'duplicated': 0,
             'not_ResearchOutput': 0,
         }
-    
-    #       ---     ---     ---
-    def _add_date_to_successful_changes_file(self, changes_date):
-    
-        # Calculates if the process was successful
-        percent_success = self.global_counters['metadata']['success'] * 100 / self.global_counters['total']
-        data = f'{changes_date}\n'
-        
-        # If the percentage of successfully transmitted records is higher then the limit specified in setup.py
-        # And changes_date is not in successful_changes.txt
-        file_name = data_files_name['successful_changes']
-        if (percent_success >= upload_percent_accept and data not in open(file_name, 'r').read()):
-            
-            file_success = data_files_name['successful_changes']
-            open(file_success, "a").write(data)
 
 
     #       ---     ---     ---
     def _delete_records(self, json_response: dict):
+        """ Iterates over the Pure response and process all records that need to be deleted """
 
         for item in json_response['items']:
 
@@ -149,8 +136,7 @@ class PureChangesByDate:
 
     #       ---     ---     ---
     def _update_records(self, json_response):
-
-        rdm_add_record = RdmAddRecord()
+        """ Iterates over the Pure response and process all records that need to be created/updated """
         
         for item in json_response['items']:
             
@@ -180,12 +166,13 @@ class PureChangesByDate:
             self.duplicated_uuid.append(uuid)
 
             # Adds record to RDM
-            rdm_add_record.push_record_by_uuid(self.global_counters, uuid)
+            self.add_record.push_record_by_uuid(self.global_counters, uuid)
 
 
-    #       ---     ---     ---
+
     def _get_missing_updates(self):
-        """ Search for missing updates in the last 7 days """
+        """ Reading successful_changes.txt gets the dates in 
+            which Pure changes have not been processed """
 
         file_name = data_files_name['successful_changes']
 

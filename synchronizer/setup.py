@@ -61,7 +61,8 @@ db_user     = open(f'{dirpath}/data_setup/db_user.txt', 'r').readline()
 db_password = open(f'{dirpath}/data_setup/db_password.txt', 'r').readline()
 
 # REPORT LOGS
-base_path = f'{dirpath}/reports/{date.today()}'
+reports_full_path = f'{dirpath}/reports/'
+base_path = f'{reports_full_path}{date.today()}'
 log_files_name = {
     'groups':               f'{base_path}_groups.log',
     'owners':               f'{base_path}_owners.log',

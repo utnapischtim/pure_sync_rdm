@@ -1,6 +1,7 @@
 import os
 from datetime                   import date, datetime, timedelta
-from setup                      import dirpath, days_to_keep_log_files, lines_successful_changes, data_files_name
+from setup                      import dirpath, days_to_keep_log_files, lines_successful_changes, \
+                                       data_files_name, reports_full_path
 from source.general_functions   import current_time
 from source.reports             import Reports
 
@@ -12,7 +13,6 @@ def delete_old_log_files():
 
     # DELETE OLD LOG FILES
     date_limit = str(date.today() - timedelta(days=days_to_keep_log_files))
-    reports_full_path = f'{dirpath}/reports/'
 
     # Get file names from directory
     isfile = os.path.isfile
@@ -52,8 +52,8 @@ def delete_old_log_files():
 
         action = f'Reduced from {num_lines} to {lines_successful_changes} lines\n'
         align_response(file_name, action)
-    else:
-        align_response(file_name, f'{num_lines} lines - ok')
+        return
+    align_response(file_name, f'{num_lines} lines - ok')
 
 
 def align_response(file_name, action):
@@ -61,5 +61,4 @@ def align_response(file_name, action):
     max_length = 35
     spaces = max_length - len(str(file_name))
     file_with_spaces = str(file_name) + ''.ljust(spaces)
-
     reports.add(['console'], f'{file_with_spaces}{action}')

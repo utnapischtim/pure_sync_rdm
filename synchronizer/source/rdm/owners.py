@@ -2,7 +2,7 @@ import json
 from datetime                       import date, datetime
 from setup                          import pure_rest_api_url, rdm_host_url, token_rdm, data_files_name
 from source.general_functions       import initialize_counters, add_spaces, current_time
-from source.pure.general_functions  import get_pure_metadata
+from source.pure.general_functions  import get_pure_metadata, get_next_page
 from source.rdm.general_functions   import get_metadata_by_recid, get_recid, update_rdm_record
 from source.rdm.add_record          import RdmAddRecord
 from source.rdm.database            import RdmDatabase
@@ -20,7 +20,7 @@ class RdmOwners:
 
     #   ---         ---         ---
     def rdm_owner_check(self):
-        """ Gets from pure all the records related to a certain user,
+        """ Gets from pure all the records related to a certain user (based on externalId),
             afterwards it modifies/create RDM records accordingly. """
 
         self.report.add_template(self.report_files, ['general', 'title'], ['OWNERS CHECK (using externalId)', current_time()])
@@ -53,6 +53,8 @@ class RdmOwners:
 
     #   ---         ---         ---
     def rdm_owner_check_by_orcid(self):
+        """ Gets from pure all the records related to a certain user (based on orcid),
+            afterwards it modifies/create RDM records accordingly. """
     
         self.report.add_template(self.report_files, ['general', 'title'], ['OWNERS CHECK (using orcid)', current_time()])
 
@@ -85,15 +87,11 @@ class RdmOwners:
 
         go_on     = True
         page      = 1
-        page_size = 50
+        page_size = 2
 
         while go_on:
 
-            local_counters = {
-                'create':    0,
-                'in_record': 0,
-                'to_update': 0
-            }
+            local_counters = {'create':    0, 'in_record': 0, 'to_update': 0}
 
             params = {'sort': 'modified', 'page': page, 'pageSize': page_size}
             response = get_pure_metadata('persons', f'{self.user_uuid}/research-outputs', params)
@@ -116,8 +114,10 @@ class RdmOwners:
             report = f'Get person records - {response} - Page {page} (size {page_size})'
             self.report.add(['console', 'owners'], report)
 
-            go_on = self._get_next_page(resp_json, page)
+            # Checks if there is a 'next' page to be processed
+            go_on = get_next_page(resp_json, page)
 
+            # Iterates over all items in the page
             for item in resp_json['items']:
             
                 uuid  = item['uuid']
@@ -167,18 +167,6 @@ class RdmOwners:
             self.report.summary_global_counters(['console', 'owners'], self.global_counters)
             page += 1
 
-
-    def _get_next_page(self, resp_json, page):
-        
-        if 'navigationLinks' in resp_json:
-            if page == 1:
-                if 'next' in resp_json['navigationLinks'][0]['ref']:
-                    return True
-            else:
-                if len(resp_json['navigationLinks']) > 1:
-                    if 'next' in resp_json['navigationLinks'][1]['ref']:
-                        return True
-        return False
 
 
     #   ---         ---         ---

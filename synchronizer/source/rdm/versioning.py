@@ -6,6 +6,9 @@ from source.reports                 import Reports
 report = Reports()
 
 def rdm_versioning (uuid: str):
+    """ Gives the version to use for a new record and old versions of the same uuid """
+    
+    # Request
     response = get_metadata_by_query(uuid)
 
     resp_json = json.loads(response.content)

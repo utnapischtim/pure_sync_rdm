@@ -41,7 +41,7 @@ class Requests:
         response = requests.get(url, headers=headers, params=params, verify=False)
         open(temporary_files_name['get_rdm_metadata'], "wb").write(response.content)
 
-        self.__check_response(response)
+        self._check_response(response)
         return response
 
 
@@ -57,7 +57,7 @@ class Requests:
         
         response = requests.post(rdm_records_url, headers=headers, params=params, data=data_utf8, verify=False)
 
-        self.__check_response(response)
+        self._check_response(response)
         return response
 
 
@@ -72,7 +72,7 @@ class Requests:
 
         response = requests.put(url, headers=headers, params=params, data=data_utf8, verify=False)
 
-        self.__check_response(response)
+        self._check_response(response)
         return response
 
 
@@ -96,11 +96,11 @@ class Requests:
 
         response = requests.delete(url, headers=headers, verify=False)
 
-        self.__check_response(response)
+        self._check_response(response)
         return response
 
     
-    def __check_response(self, response):
+    def _check_response(self, response):
         http_code = response.status_code
         if http_code >= 300 and http_code != 429:
             self.report.add(['console'], response.content)

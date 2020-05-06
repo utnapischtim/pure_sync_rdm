@@ -25,8 +25,7 @@ class Delete:
 
         # Remove deleted recid from to_delete.txt
         file_name = data_files_name['delete_recid_list']
-        with open(file_name, "r") as f:
-            lines = f.readlines()
+        lines = open(file_name, "r").readlines()
         with open(file_name, "w") as f:
             for line in lines:
                 if line.strip("\n") != recid:
@@ -34,20 +33,16 @@ class Delete:
 
         # remove record from all_rdm_records.txt
         file_name = data_files_name['all_rdm_records']
-        with open(file_name, "r") as f:
-            lines = f.readlines()
+        lines = open(file_name, "r").readlines()
         with open(file_name, "w") as f:
             for line in lines:
-                line_recid = line.strip("\n")
-                line_recid = line_recid.split(' ')[1]
-                if line_recid != recid:
+                if line.strip("\n").split(' ')[1] != recid:
                     f.write(line)
         return True
 
 
 
     def from_list(self):
-        
         count_success                  = 0
         count_total                    = 0
         count_errors_record_delete     = 0

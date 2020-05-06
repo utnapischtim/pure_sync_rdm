@@ -8,6 +8,19 @@ from source.reports                 import Reports
 
 reports = Reports()
 
+
+def get_next_page(resp_json, page):
+    
+    if 'navigationLinks' in resp_json:
+        if 'next' in resp_json['navigationLinks'][0]['ref']:
+            return resp_json['navigationLinks'][0]['href']
+        else:
+            if len(resp_json['navigationLinks']) == 2:
+                if 'next' in resp_json['navigationLinks'][1]['ref']:
+                    return resp_json['navigationLinks'][1]['href']
+    return False
+
+
 def get_pure_record_metadata_by_uuid(uuid: str):
     """ Method used to get from Pure record's metadata """
 

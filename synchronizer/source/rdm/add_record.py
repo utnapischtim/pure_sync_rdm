@@ -31,7 +31,6 @@ class RdmAddRecord:
         return self.create_invenio_data(global_counters, item)
 
 
-
     def _decorator(func):
         def _wrapper(self, global_counters, item) :
     

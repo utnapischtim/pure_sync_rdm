@@ -5,10 +5,11 @@ from source.general_functions       import current_time, check_uuid_authenticity
 from source.reports                 import Reports
 
 class AddFromUuidList:
-    
+    """ Reads from a txt file a list of record uuids and submit them to RDM """
+
     def __init__(self):
         self.report = Reports()
-        self.rdm_add_record = RdmAddRecord()
+        self.add_record = RdmAddRecord()
 
     def add_from_uuid_list(self):
 
@@ -31,5 +32,5 @@ class AddFromUuidList:
                 self.report.add(['console'], 'Invalid uuid lenght.')
                 continue
             
-            self.rdm_add_record.push_record_by_uuid(self.global_counters, uuid)
+            self.add_record.push_record_by_uuid(self.global_counters, uuid)
         return

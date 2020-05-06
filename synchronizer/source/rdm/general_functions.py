@@ -1,15 +1,14 @@
 import requests
 import json
-import os
-from setup                          import token_rdm, pure_rest_api_url, versioning_running, pure_api_key, rdm_host_url
+from setup                          import versioning_running, rdm_host_url
 from source.general_functions       import add_spaces
 from source.rdm.requests            import Requests
 from source.reports                 import Reports
 from source.rdm.delete_record       import Delete
 
-reports = Reports()
 rdm_requests = Requests()
-delete = Delete()
+reports = Reports()
+delete  = Delete()
 
 def get_metadata_by_recid(recid: str):
     """ Having the record recid gets from RDM its metadata """
@@ -95,7 +94,6 @@ def get_recid(uuid: str):
                 #     global_counters['delete']['success'] += 1
                 # else:
                 #     global_counters['delete']['error'] += 1
-
 
     return newest_recid
 
