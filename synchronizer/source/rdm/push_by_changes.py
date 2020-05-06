@@ -2,7 +2,7 @@ import json
 from datetime                       import date, datetime, timedelta
 from setup                          import upload_percent_accept, data_files_name
 from source.general_functions       import add_spaces, initialize_counters, current_time
-from source.pure.general_functions  import get_pure_metadata
+from source.pure.general_functions  import get_pure_metadata, get_next_page
 from source.rdm.general_functions   import get_recid
 from source.rdm.add_record          import RdmAddRecord
 from source.reports                 import Reports
@@ -44,7 +44,7 @@ class PureChangesByDate:
             self.all_report_files = ['console', 'changes']
             
             self.report.add_template(self.all_report_files, ['general', 'title'], ['CHANGES', current_time()])
-            self.report.add(self.all_report_files, f'\nProcessed date: {changes_date}\n')
+            self.report.add(self.all_report_files, f'\nProcessed date: {changes_date}')
 
             # Decorated function
             func(self, changes_date)
@@ -56,35 +56,43 @@ class PureChangesByDate:
     def _changes_by_date(self, changes_date: str):
         """ Gets from Pure all changes that took place in a certain date """
 
-        # Get from pure all changes of a certain date
-        response = get_pure_metadata('changes', changes_date, {'pageSize': 1000, 'page': 1})
+        reference = changes_date
+        count = 0
 
-        if response.status_code >= 300:
-            self.report.add(['console', 'changes'], response.content)
-            return False
+        while reference:
+            count += 1
+            # Get from pure all changes of a certain date
+            response = get_pure_metadata('changes', reference, {})
 
-        # Load response json
-        json_response = json.loads(response.content)
+            if response.status_code >= 300:
+                self.report.add(['console', 'changes'], response.content)
+                return False
 
-        number_records = json_response["count"]
-        report_line = f'Pure get changes      - {response} - Number of items: {add_spaces(number_records)}'
-        self.report.add(self.all_report_files, report_line)
+            # Load response json
+            json_response = json.loads(response.content)
 
-        # If there are no changes
-        if number_records == 0:
-            self.report.add(self.all_report_files, f'\n\nNothing to transfer.\n\n')
-            return
+            number_records = json_response["count"]
+            report_line = f'\nPag{add_spaces(count)} - Pure get changes   - {response} - Number of items: {add_spaces(number_records)}'
+            self.report.add(self.all_report_files, report_line)
 
-        # used to check if there are doubled tasks (e.g. update uuid and delete same uuid)
-        self.duplicated_uuid  = []
-        
-        self._initialize_local_counters()
+            # Gets the reference code of the next page
+            reference = get_next_page(json_response).split('/')[-1]
 
-        # Iterates over all records that need to be deleted
-        self._delete_records(json_response)
+            # If there are no changes
+            if number_records == 0:
+                self.report.add(self.all_report_files, f'\n\nNothing to transfer.\n\n')
+                return
 
-        # - Create / Add / Update -
-        self._update_records(json_response)
+            # used to check if there are doubled tasks (e.g. update uuid and delete same uuid)
+            self.duplicated_uuid  = []
+            
+            self._initialize_local_counters()
+
+            # Iterates over all records that need to be deleted
+            self._delete_records(json_response)
+
+            # - Create / Add / Update -
+            self._update_records(json_response)
 
         # Adds the date to successful_changes.txt
         open(data_files_name['successful_changes'], "a").write(f'{changes_date}\n')
@@ -154,7 +162,7 @@ class PureChangesByDate:
                 self.local_counters['duplicated'] += 1
                 continue
             
-            self.report.add(['console'], f"\n{item['changeType']}")
+            self.report.add(['console'], f"\n\tChange type           - {item['changeType']}")
 
             if item['changeType'] == 'ADD' or item['changeType'] == 'CREATE':
                 self.local_counters['create'] += 1

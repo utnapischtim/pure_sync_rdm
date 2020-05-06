@@ -115,7 +115,7 @@ class RdmOwners:
             self.report.add(['console', 'owners'], report)
 
             # Checks if there is a 'next' page to be processed
-            go_on = get_next_page(resp_json, page)
+            go_on = get_next_page(resp_json)
 
             # Iterates over all items in the page
             for item in resp_json['items']:

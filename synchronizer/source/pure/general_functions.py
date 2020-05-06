@@ -9,7 +9,7 @@ from source.reports                 import Reports
 reports = Reports()
 
 
-def get_next_page(resp_json, page):
+def get_next_page(resp_json):
     
     if 'navigationLinks' in resp_json:
         if 'next' in resp_json['navigationLinks'][0]['ref']:
@@ -59,16 +59,15 @@ def get_pure_metadata(endpoint, identifier = '', parameters = {}):
 
     # Add parameters to url
     if len(parameters) > 0:
-        url = url[:-1]                  # Remove last character
+        url = url[:-1]                  # Removes the last character
         url += '?'
         for key in parameters:
             url += f'{key}={parameters[key]}&'
-
+    
+    # Removes the last character
     url = url[:-1]
-
     # Sending request
     response = requests.get(url, headers=headers)
-
     # Add response content to pure_get_uuid_metadata.json
     open(temporary_files_name['get_pure_metadata'], 'wb').write(response.content)
 
