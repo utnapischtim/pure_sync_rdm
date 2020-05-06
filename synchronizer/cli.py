@@ -7,17 +7,10 @@ Usage:
     shell_interface.py delete
     shell_interface.py uuid
     shell_interface.py duplicates
-    shell_interface.py owner
-    shell_interface.py owner_orcid
+    shell_interface.py owner        [--identifier=<value>]
     shell_interface.py owners_list
     shell_interface.py group_split [--oldGroup=<recid>, --newGroups=<recid>]
     shell_interface.py group_merge [--oldGroups=<recid>, --newGroup=<recid>]
-
-Arguments:
-    OLD_GROUP       Old group externalId (str)
-    NEW_GROUPS      List of new groups externalIds separated by a space(str)
-    OLD_GROUPS      List of old groups externalIds separated by a space (str)
-    NEW_GROUP       New group externalId (str)
 
 Options:
     --pageStart=<page>      Initial page [default:  1].
@@ -27,6 +20,7 @@ Options:
     --newGroups=<recid>     List of new groups externalIds separated by a space.
     --oldGroups=<recid>     List of old groups externalIds separated by a space.
     --newGroup=<recid>      New group externalId.
+    --identifier=<value>    Run process identifying the user with externalId or orcid
     -h --help               Show this screen.
     --version               Show version.
 """

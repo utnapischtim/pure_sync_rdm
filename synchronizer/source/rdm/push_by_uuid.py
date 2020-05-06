@@ -1,7 +1,7 @@
 from setup                          import data_files_name
 from source.general_functions       import initialize_counters
 from source.rdm.add_record          import RdmAddRecord
-from source.general_functions       import current_time, check_uuid_authenticity
+from source.general_functions       import check_uuid_authenticity
 from source.reports                 import Reports
 
 class AddFromUuidList:
@@ -13,7 +13,7 @@ class AddFromUuidList:
 
     def add_from_uuid_list(self):
 
-        self.report.add_template(['console'], ['general', 'title'], ['PUSH RECORDS FROM LIST', current_time() + '\n'])
+        self.report.add_template(['console'], ['general', 'title'], ['PUSH RECORDS FROM LIST'])
         self.global_counters = initialize_counters()
 
         # read to_transmit.txt

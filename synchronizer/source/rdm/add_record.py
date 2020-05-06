@@ -6,7 +6,6 @@ from setup                          import versioning_running, applied_restricti
 from source.rdm.general_functions   import get_recid, get_userid_from_list_by_externalid
 from source.rdm.put_file            import rdm_add_file
 from source.pure.general_functions  import get_pure_record_metadata_by_uuid, get_pure_metadata, get_pure_file
-from source.general_functions       import current_time
 from source.rdm.versioning          import rdm_versioning 
 from source.rdm.emails              import send_email
 from source.rdm.groups              import RdmGroups

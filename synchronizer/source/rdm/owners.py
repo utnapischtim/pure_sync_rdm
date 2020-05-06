@@ -1,7 +1,7 @@
 import json
 from datetime                       import date, datetime
 from setup                          import pure_rest_api_url, rdm_host_url, token_rdm, data_files_name
-from source.general_functions       import initialize_counters, add_spaces, current_time
+from source.general_functions       import initialize_counters, add_spaces
 from source.pure.general_functions  import get_pure_metadata, get_next_page
 from source.rdm.general_functions   import get_metadata_by_recid, get_recid, update_rdm_record
 from source.rdm.add_record          import RdmAddRecord
@@ -16,54 +16,29 @@ class RdmOwners:
         self.rdm_db         = RdmDatabase()
         self.report         = Reports()
         self.rdm_add_record = RdmAddRecord()
-        self.report_files = ['owners', 'console']
 
-    #   ---         ---         ---
-    def rdm_owner_check(self):
-        """ Gets from pure all the records related to a certain user (based on externalId),
+    def _decorator(func):
+        def _wrapper(self, identifier) :
+
+            self.report.add_template(['console'], ['general', 'title'], ['OWNERS CHECK'])
+            self.global_counters = initialize_counters()
+
+            # Decorated function
+            func(self, identifier)
+
+        return _wrapper
+
+    @_decorator
+    def run_owners(self, identifier):
+        """ Gets from pure all the records related to a certain user (based on orcid or externalId),
             afterwards it modifies/create RDM records accordingly. """
 
-        self.report.add_template(self.report_files, ['general', 'title'], ['OWNERS CHECK (using externalId)', current_time()])
-
-        # self.external_id = '56038' # TEMPORARY
-        # self.external_id = '3261' # TEMPORARY
-        self.external_id = '30' # TEMPORARY
-
-        self.report.add(self.report_files, f'\nUser external_id: {self.external_id}\n')
-
-        # Gets the ID of the logged in user
-        self.user_id = self._get_user_id_from_rdm()
-
-        # If the user was not found in RDM then there is no owner to add to the record.
-        if not self.user_id:
-            return
-
-        # Get from pure user_uuid
-        self.user_uuid = self._get_user_uuid_from_pure('externalId', self.external_id)
+        identifier_value = '0000-0002-4154-6945'      # TEMPORARY
+        if identifier == 'externalId':                  # TEMPORARY
+            # identifier_value = '3261'                 # TEMPORARY
+            identifier_value = '30'                     # TEMPORARY
         
-        if not self.user_uuid:
-            return False
-
-        # Add user to user_ids_match table
-        self._add_user_ids_match()
-
-        # Gets from pure all records related to the user
-        self._get_owner_records()
-
-
-    #   ---         ---         ---
-    def rdm_owner_check_by_orcid(self):
-        """ Gets from pure all the records related to a certain user (based on orcid),
-            afterwards it modifies/create RDM records accordingly. """
-    
-        self.report.add_template(self.report_files, ['general', 'title'], ['OWNERS CHECK (using orcid)', current_time()])
-
-        orcid = '0000-0002-4154-6945'  # TEMPORARY
-
-        self.report.add(['console'], f'\norcid: {orcid}\n')
-
-        if len(orcid) != 19:
-            self.report.add(['console'], 'Warning - Orcid length it is not 19\n')
+        self.report.add([], f'\n{identifier}: {identifier_value}\n')
 
         # Gets the ID and IP of the logged in user
         self.user_id = self._get_user_id_from_rdm()
@@ -73,49 +48,45 @@ class RdmOwners:
             return
 
         # Get from pure user_uuid
-        self.user_uuid = self._get_user_uuid_from_pure('orcid', orcid)
+        self.user_uuid = self._get_user_uuid_from_pure(identifier, identifier_value)
         
         if not self.user_uuid:
             return False
 
-        self._get_owner_records()
-        
+        if identifier == 'externalId':
+            # Add user to user_ids_match table
+            self._add_user_ids_match(identifier_value)
 
-    #   ---         ---         ---
-    def _get_owner_records(self):
-        self.global_counters = initialize_counters()
-
-        go_on     = True
+        next_page = True
         page      = 1
         page_size = 2
 
-        while go_on:
+        local_counters = {'create': 0, 'in_record': 0, 'to_update': 0}
 
-            local_counters = {'create':    0, 'in_record': 0, 'to_update': 0}
+        while next_page:
 
             params = {'sort': 'modified', 'page': page, 'pageSize': page_size}
             response = get_pure_metadata('persons', f'{self.user_uuid}/research-outputs', params)
 
             if response.status_code >= 300:
-                print(response.content)
                 return False
 
             # Load response json
             resp_json = json.loads(response.content)
 
             total_items = resp_json['count']
-            if page == 1:
-                if total_items == 0:
-                    self.report.add(['console'], '\nThe user has no records - End task\n')
-                    return True
-                else:
-                    self.report.add(['console', 'owners'], f'Total records: {total_items}')
 
-            report = f'Get person records - {response} - Page {page} (size {page_size})'
-            self.report.add(['console', 'owners'], report)
+            if page == 1:
+                self.report.add([], f'Total records: {total_items}')
+
+            if page == 1 and total_items == 0:
+                self.report.add([], '\nThe user has no records - End task\n')
+                return True
+
+            self.report.add([], f'\nPag {page} - Get person records    - {response} - (size {page_size})')
 
             # Checks if there is a 'next' page to be processed
-            go_on = get_next_page(resp_json)
+            next_page = get_next_page(resp_json)
 
             # Iterates over all items in the page
             for item in resp_json['items']:
@@ -123,7 +94,7 @@ class RdmOwners:
                 uuid  = item['uuid']
                 title = item['title']
                 
-                self.report.add(['console'], f'\n\tRecord uuid           - {uuid}   - {title[0:55]}...')
+                self.report.add([], f'\n\tRecord uuid           - {uuid}   - {title[0:55]}...')
 
                 # Get from RDM the recid
                 recid = get_recid(uuid)
@@ -132,53 +103,56 @@ class RdmOwners:
                 if recid == False:
                     item['owners'] = [self.user_id]
 
-                    self.report.add(['console'], '\t+ Create record    +')
+                    self.report.add([], '\t+ Create record    +')
                     local_counters['create'] += 1
 
                     # Creates record metadata and pushes it to RDM
                     self.rdm_add_record.create_invenio_data(self.global_counters, item)
+                    continue
 
+                # Checks if the owner is already in RDM record metadata
+                # Get metadata from RDM
+                response = get_metadata_by_recid(recid)
+                record_json = json.loads(response.content)['metadata']
+
+                report = f"\tRDM get metadata      - {response} - Current owners:     - {record_json['owners']}"
+                self.report.add([], report)
+
+                # If the owner is not among metadata owners
+                if self.user_id and self.user_id not in record_json['owners']:
+
+                    # Adds the current logged in user as record owner
+                    record_json['owners'].append(self.user_id)
+
+                    report = f"\tRDM record status     - ADDING owner     - New owners:         - {record_json['owners']}"
+                    self.report.add([], report)
+
+                    # Add owner to an existing RDM record
+                    update_rdm_record(json.dumps(record_json), recid)
+
+                    local_counters['to_update'] += 1
                 else:
-                    # Checks if the owner is already in RDM record metadata
-                    # Get metadata from RDM
-                    response = get_metadata_by_recid(recid)
-                    record_json = json.loads(response.content)['metadata']
-
-                    report = f"\tRDM get metadata      - {response} - Current owners:     - {record_json['owners']}"
-                    self.report.add(['console'], report)
-
-                    # If the owner is not among metadata owners
-                    if self.user_id and self.user_id not in record_json['owners']:
-
-                        record_json['owners'].append(self.user_id)
-                        report = f"\tRDM record status     - ADDING owner     - New owners:         - {record_json['owners']}"
-                        self.report.add(['console'], report)
-
-                        # Add owner to an existing RDM record
-                        update_rdm_record(json.dumps(record_json), recid)
-
-                        local_counters['to_update'] += 1
-                    else:
-                        self.report.add(['console'], '\tRDM record status     -                  - Owner in record')
-                        local_counters['in_record'] += 1
+                    self.report.add([], '\tRDM record status     -                  - Owner in record')
+                    local_counters['in_record'] += 1
             
-            report = f"\nCreate: {local_counters['create']} - To update: {local_counters['to_update']} - In record:{local_counters['in_record']}"
-            self.report.add(['console', 'owners'], report)
-            self.report.summary_global_counters(['console', 'owners'], self.global_counters)
             page += 1
+            
+        # Final report
+        report = f"\nCreate: {local_counters['create']} - To update: {local_counters['to_update']} - In record:{local_counters['in_record']}"
+        self.report.add(['console', 'owners'], report)
+        self.report.summary_global_counters(['console', 'owners'], self.global_counters)
 
 
 
-    #   ---         ---         ---
     def _get_user_uuid_from_pure(self, key_name: str, key_value: str):
         """ PURE get person records """
 
         # If the uuid is not found in the first x items then it will continue with the next page
-        page_size = 25      
         page = 1
-        go_on = True
+        page_size = 10
+        next_page = True
 
-        while go_on:
+        while next_page:
 
             params = {'page': page, 'pageSize': page_size, 'q': f'"{key_value}"' }
             response = get_pure_metadata('persons', '', params)
@@ -203,13 +177,12 @@ class RdmOwners:
                     if len(uuid) != 36:
                         self.report.add(['console', 'owners'], '\n- Warning! Incorrect user_uuid length -\n')
                         return False
-
                     return uuid
 
-            if 'navigationLinks' in record_json:
-                page += 1
-            else:
-                go_on = False
+            # Checks if there is a 'next' page to be processed
+            next_page = get_next_page(record_json)
+            
+            page += 1
 
         self.report.add(['console', 'owners'], f'Pure get user uuid - {response} - NOT FOUND - End task\n')
         return False
@@ -236,18 +209,19 @@ class RdmOwners:
         return self.rdm_record_owner
 
 
-    def _add_user_ids_match(self):
+    def _add_user_ids_match(self, external_id):
 
         file_name = data_files_name['user_ids_match']
 
-        needs_to_add = self._check_user_ids_match(file_name)
+        needs_to_add = self._check_user_ids_match(file_name, external_id)
 
         if needs_to_add:
-            open(file_name, 'a').write(f'{self.user_id} {self.user_uuid} {self.external_id}\n')
-            self.report.add(['console', 'owners'], f'user_ids_match     - Adding id toList - {self.user_id}, {self.user_uuid}, {self.external_id}')
+            open(file_name, 'a').write(f'{self.user_id} {self.user_uuid} {external_id}\n')
+            report = f'user_ids_match     - Adding id toList - {self.user_id}, {self.user_uuid}, {external_id}'
+            self.report.add(['console', 'owners'], report)
 
 
-    def _check_user_ids_match(self, file_name: str):
+    def _check_user_ids_match(self, file_name: str, external_id):
 
         file_data = open(file_name).readlines()
         for line in file_data:
@@ -255,19 +229,18 @@ class RdmOwners:
             line = line.split(' ')
 
             # Checks if at least one of the ids match
-            if str(self.user_id) == line[0] or self.user_uuid == line[1] or self.external_id == line[2]:
+            if str(self.user_id) == line[0] or self.user_uuid == line[1] or external_id == line[2]:
                 
-                if line == [str(self.user_id), self.user_uuid, self.external_id]:
+                if line == [str(self.user_id), self.user_uuid, external_id]:
                     self.report.add(['console', 'owners'], 'user_ids_match     - full match')
                     return False
-        
         return True
 
 
 
     def get_rdm_record_owners(self):
 
-        self.report.add_template(self.report_files, ['general', 'title'], ['RECORDS OWNER', current_time()])
+        self.report.add_template(['console'], ['general', 'title'], ['RECORDS OWNER'])
                 
         pag = 1
         pag_size = 250
@@ -275,22 +248,22 @@ class RdmOwners:
         count = 0
         count_records_per_owner = {}
         all_records_list = ''
-        go_on = True
+        next_page = True
 
         # Empty file
         file_owner = data_files_name['rdm_record_owners']
         open(file_owner, 'w').close()
 
-        while go_on == True:
+        while next_page == True:
 
             # REQUEST to RDM
             params = {'sort': 'mostrecent', 'size': pag_size, 'page': pag}
             response = self.rdm_requests.rdm_get_metadata(params)
 
-            self.report.add(['console'], f'\n{response}\n')
+            self.report.add([], f'\n{response}\n')
 
             if response.status_code >= 300:
-                self.report.add(['console'], response.content)
+                self.report.add([], response.content)
                 break
 
             resp_json = json.loads(response.content)
@@ -304,7 +277,7 @@ class RdmOwners:
                 owners = item['metadata']['owners']
 
                 line = f'{uuid} - {recid} - {owners}'
-                self.report.add(['console'], line)
+                self.report.add([], line)
                 data += f'{line}\n'
                 
                 all_records_list += f'{uuid} {recid}\n'
@@ -314,21 +287,21 @@ class RdmOwners:
                         count_records_per_owner[i] = 0
                     count_records_per_owner[i] += 1
 
-            self.report.add(['console'], f'\nPag {str(pag)} - Records {count}\n')
+            self.report.add([], f'\nPag {str(pag)} - Records {count}\n')
             
             open(file_owner, 'a').write(data)
 
             if 'next' not in resp_json['links']:
-                go_on = False
+                next_page = False
             
             pag += 1
 
-        self.report.add(['console'], 'Owner  Records')
+        self.report.add([], 'Owner  Records')
 
         for key in count_records_per_owner:
             records = add_spaces(count_records_per_owner[key])
             key     = add_spaces(key)
-            self.report.add(['console'], f'{key}    {records}')
+            self.report.add([], f'{key}    {records}')
         
         # Updates content of all_rdm_records.txt file
         file_all_records_list = data_files_name['all_rdm_records']

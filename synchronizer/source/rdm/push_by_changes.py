@@ -1,7 +1,7 @@
 import json
 from datetime                       import date, datetime, timedelta
 from setup                          import upload_percent_accept, data_files_name
-from source.general_functions       import add_spaces, initialize_counters, current_time
+from source.general_functions       import add_spaces, initialize_counters
 from source.pure.general_functions  import get_pure_metadata, get_next_page
 from source.rdm.general_functions   import get_recid
 from source.rdm.add_record          import RdmAddRecord
@@ -43,7 +43,7 @@ class PureChangesByDate:
 
             self.all_report_files = ['console', 'changes']
             
-            self.report.add_template(self.all_report_files, ['general', 'title'], ['CHANGES', current_time()])
+            self.report.add_template(self.all_report_files, ['general', 'title'], ['CHANGES'])
             self.report.add(self.all_report_files, f'\nProcessed date: {changes_date}')
 
             # Decorated function
@@ -57,10 +57,10 @@ class PureChangesByDate:
         """ Gets from Pure all changes that took place in a certain date """
 
         reference = changes_date
-        count = 0
+        page = 0
 
         while reference:
-            count += 1
+            page += 1
             # Get from pure all changes of a certain date
             response = get_pure_metadata('changes', reference, {})
 
@@ -72,7 +72,7 @@ class PureChangesByDate:
             json_response = json.loads(response.content)
 
             number_records = json_response["count"]
-            report_line = f'\nPag{add_spaces(count)} - Pure get changes   - {response} - Number of items: {add_spaces(number_records)}'
+            report_line = f'\nPag{add_spaces(page)} - Pure get changes   - {response} - Number of items: {add_spaces(number_records)}'
             self.report.add(self.all_report_files, report_line)
 
             # Gets the reference code of the next page
@@ -162,7 +162,7 @@ class PureChangesByDate:
                 self.local_counters['duplicated'] += 1
                 continue
             
-            self.report.add(['console'], f"\n\tChange type           - {item['changeType']}")
+            self.report.add(['console'], f"\n{add_spaces(self.global_counters['total'] + 1)} - Change type           - {item['changeType']}")
 
             if item['changeType'] == 'ADD' or item['changeType'] == 'CREATE':
                 self.local_counters['create'] += 1

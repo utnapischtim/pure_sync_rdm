@@ -21,7 +21,7 @@ class Delete:
 
         # 410 -> "PID has been deleted"
         if response.status_code >= 300 and response.status_code != 410:
-            return False
+            return response
 
         # Remove deleted recid from to_delete.txt
         file_name = data_files_name['delete_recid_list']
@@ -38,7 +38,7 @@ class Delete:
             for line in lines:
                 if line.strip("\n").split(' ')[1] != recid:
                     f.write(line)
-        return True
+        return response
 
 
 

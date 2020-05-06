@@ -1,10 +1,12 @@
 from datetime                       import date, datetime
 from setup                          import log_files_name
-from source.general_functions       import add_spaces, check_if_directory_exists
+from source.general_functions       import add_spaces, check_if_directory_exists, current_time
 
 class Reports:
 
     def add_template(self, files, template, arguments):
+        if template == ['general', 'title']:
+            arguments.append(current_time())
         report = report_templates[template[0]][template[1]].format(*arguments)
         self.add(files, report)
 
@@ -13,6 +15,9 @@ class Reports:
         
         check_if_directory_exists('reports')
         
+        if files == []:
+            files = ['console']
+
         # For each log file
         for file in files:
             # Prints in console only when saving in console file

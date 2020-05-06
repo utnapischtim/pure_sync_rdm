@@ -1,6 +1,6 @@
 import json
 import os
-from source.general_functions       import add_spaces, current_time
+from source.general_functions       import add_spaces
 from source.pure.general_functions  import get_pure_metadata
 from source.rdm.general_functions   import update_rdm_record, get_metadata_by_query
 from source.rdm.database            import RdmDatabase
@@ -15,6 +15,20 @@ class RdmGroups:
         self.report_files = ['console', 'groups']
 
     
+
+    def _decorator_split(func):
+        def _wrapper(self, old_group_externalId, new_groups_externalIds) :
+            self.report.add_template(self.report_files, ['general', 'title'], ['GROUP SPLIT'])
+            self.report.add(self.report_files, f'\nOld group: {old_group_externalId} - New groups: {new_groups_externalIds}\n')
+
+            # Get name and uuid of new groups
+            self.new_groups_data = []
+
+            # Decorated function
+            func(self, old_group_externalId, new_groups_externalIds)
+        return _wrapper
+
+    @_decorator_split
     def rdm_group_split(self, old_group_externalId: str, new_groups_externalIds: list):
         """ 
         1 - Create new groups
@@ -26,12 +40,6 @@ class RdmGroups:
             . managingOrganisationUnit (if necessary)
             . organisationUnits
         """
-        self.report.add_template(self.report_files, ['general', 'title'], ['GROUP SPLIT', current_time()])
-        self.report.add(self.report_files, f'\nOld group: {old_group_externalId} - New groups: {new_groups_externalIds}\n')
-
-        # Get name and uuid of new groups
-        self.new_groups_data = []
-
         for externalId in new_groups_externalIds:
             # Get group information
             group_name = self._get_pure_group_metadata(externalId)
@@ -52,6 +60,19 @@ class RdmGroups:
 
 
 
+    def _decorator_merge(func):
+        def _wrapper(self, old_groups_externalId, new_group_externalId) :
+            self.report.add_template(self.report_files, ['general', 'title'], ['GROUP MERGE'])
+            self.report.add(self.report_files, f'\nOld groups: {old_groups_externalId} - New group: {new_group_externalId}\n')
+
+            # Get new group information
+            self.new_groups_data = []
+
+            # Decorated function
+            func(self, old_groups_externalId, new_group_externalId)
+        return _wrapper
+
+    @_decorator_merge
     def rdm_group_merge(self, old_groups_externalId: list, new_group_externalId: str):
         """ 
         1 - Create new group
@@ -63,11 +84,6 @@ class RdmGroups:
             . managingOrganisationUnit (if necessary)
             . organisationUnits
         """
-        self.report.add_template(self.report_files, ['general', 'title'], ['GROUP MERGE', current_time()])
-        self.report.add(self.report_files, f'\nOld groups: {old_groups_externalId} - New group: {new_group_externalId}\n')
-
-        # Get new group information
-        self.new_groups_data = []
         group_name = self._get_pure_group_metadata(new_group_externalId)
         if not group_name:
             return False

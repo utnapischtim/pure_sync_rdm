@@ -1,5 +1,4 @@
 import json
-from datetime                       import date, datetime
 from source.general_functions       import initialize_counters
 from source.pure.general_functions  import get_pure_metadata
 from source.rdm.add_record          import RdmAddRecord
@@ -20,8 +19,7 @@ class RunPages:
             self.global_counters = initialize_counters()
 
             # Report intro
-            current_time = datetime.now().strftime("%H:%M:%S")
-            self.report.add_template(self.report_files, ['general', 'title'], ['PAGES', current_time])
+            self.report.add_template(self.report_files, ['general', 'title'], ['PAGES'])
             self.report.add_template(self.report_files, ['pages', 'page_and_size'], [pag, pag_size])
 
             # Pure get request

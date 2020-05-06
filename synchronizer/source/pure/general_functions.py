@@ -8,7 +8,6 @@ from source.reports                 import Reports
 
 reports = Reports()
 
-
 def get_next_page(resp_json):
     
     if 'navigationLinks' in resp_json:
@@ -66,8 +65,13 @@ def get_pure_metadata(endpoint, identifier = '', parameters = {}):
     
     # Removes the last character
     url = url[:-1]
+    
     # Sending request
     response = requests.get(url, headers=headers)
+
+    if response.status_code >= 300:
+        reports.add(['console'], response.content)
+
     # Add response content to pure_get_uuid_metadata.json
     open(temporary_files_name['get_pure_metadata'], 'wb').write(response.content)
 
