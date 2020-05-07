@@ -2,7 +2,8 @@ import json
 from datetime                       import date, datetime, timedelta
 from setup                          import upload_percent_accept, data_files_name
 from source.general_functions       import add_spaces, initialize_counters
-from source.pure.general_functions  import get_pure_metadata, get_next_page
+from source.pure.general_functions  import get_next_page
+from source.pure.requests           import get_pure_metadata
 from source.rdm.general_functions   import get_recid
 from source.rdm.add_record          import RdmAddRecord
 from source.reports                 import Reports

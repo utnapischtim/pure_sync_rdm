@@ -42,3 +42,10 @@ def check_uuid_authenticity(uuid: str):
     return True
 
 
+def shorten_file_name(name: str):
+    
+    max_length = 60
+    if len(name) > max_length:
+        return name[0:max_length] + '...'
+
+    return name

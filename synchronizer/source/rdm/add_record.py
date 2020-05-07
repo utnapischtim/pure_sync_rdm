@@ -3,9 +3,11 @@ import time
 from datetime                       import date
 from setup                          import versioning_running, possible_record_restrictions, \
                                            data_files_name, iso6393_file_name, push_dist_sec, accessright_pure_to_rdm
+from source.general_functions       import shorten_file_name
+from source.pure.general_functions  import get_pure_record_metadata_by_uuid, get_pure_file
+from source.pure.requests           import get_pure_metadata
 from source.rdm.general_functions   import get_recid, get_userid_from_list_by_externalid
 from source.rdm.put_file            import rdm_add_file
-from source.pure.general_functions  import get_pure_record_metadata_by_uuid, get_pure_metadata, get_pure_file
 from source.rdm.versioning          import rdm_versioning 
 from source.rdm.emails              import send_email
 from source.rdm.groups              import RdmGroups
@@ -39,7 +41,9 @@ class RdmAddRecord:
             self.uuid = item['uuid']
             self.item = item
             self.data = {}
-            self.record_files = []
+            # Stores the name of the record files
+            # Necessary because we need first to create the record and then to put the files
+            self.record_files = []      
 
             # Decorated function
             func(self, global_counters, item)
@@ -432,18 +436,19 @@ class RdmAddRecord:
 
         internal_review = False     # Default value
 
-        pure_size   = self._get_value(item, ['file', 'size'])
-        pure_name   = self._get_value(item, ['file', 'fileName'])
+        pure_file_size  = self._get_value(item, ['file', 'size'])
+        file_name       = self._get_value(item, ['file', 'fileName'])
+        file_url        = self._get_value(item, ['file', 'fileURL'])
 
         self.pure_rdm_file_match = []        # [file_match, internalReview]
 
-        # Checks if pure_size and pure_name are the same as any of the files in RDM with the same uuid
+        # Checks if pure_file_size and file_name are the same as any of the files in RDM with the same uuid
         for rdm_file in self.rdm_file_review:
 
-            rdm_size   = str(rdm_file['size'])
-            rdm_review = rdm_file['review']
+            rdm_file_size   = str(rdm_file['size'])
+            rdm_review      = rdm_file['review']
 
-            if pure_size == rdm_size and pure_name == rdm_file['name']:
+            if pure_file_size == rdm_file_size and file_name == rdm_file['name']:
                 self.pure_rdm_file_match.append(True)            # Do the old and new file match?
                 self.pure_rdm_file_match.append(rdm_review)      # Was the old file reviewed?
                 internal_review = rdm_review       # The new uploaded file will have the same review value as in RDM
@@ -467,9 +472,10 @@ class RdmAddRecord:
         self.data['versionFiles'].append(sub_data)
 
         # Download file from Pure
-        get_pure_file(self, item)
-        return
-    
+        response = get_pure_file(self, file_url, file_name)
+        # Checks if the file is already in RDM, and if it has already been reviewed
+        self._process_file_response(response, file_name)
+        
 
 
     def _add_subdata(self, sub_data: dict, item: list, rdm_field: str, path: list):
@@ -482,6 +488,30 @@ class RdmAddRecord:
         if value:
             sub_data[rdm_field] = value
         return sub_data
+
+
+
+    def _process_file_response(self, response, file_name):
+        # If the file is not in RDM
+        if len(self.pure_rdm_file_match) == 0:
+            match_review = 'File not in RDM    '
+
+        # If the file in pure is different from the one in RDM
+        elif self.pure_rdm_file_match[0] == False:
+            match_review = 'Match: F, Review: -'
+
+        # If the file is the same, checks if the one in RDM has been reviewed by internal stuff
+        else:
+            match_review = 'Match: T, Review: F'
+            if self.pure_rdm_file_match[1]:
+                match_review = 'Match: T, Review: T'
+        
+        file_name_report = shorten_file_name(file_name)
+
+        report = f'\tPure get file         - {response} - {match_review} - {file_name_report}'
+        self.report.add(['console'], report)
+
+        self.record_files.append(file_name)
 
 
 
