@@ -38,7 +38,7 @@ Subject: """ + email_subject + """
 Please remove from pure uuid {} the file {}."""
 
 # RESTRICTIONS
-applied_restrictions_possible_values = ['groups', 'owners', 'ip_range', 'ip_single']
+possible_record_restrictions = ['groups', 'owners', 'ip_range', 'ip_single']
 
 # VERSIONING
 versioning_running = False

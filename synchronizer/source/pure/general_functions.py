@@ -45,7 +45,7 @@ def get_pure_record_metadata_by_uuid(uuid: str):
 
 
 
-def get_pure_metadata(endpoint, identifier = '', parameters = {}):
+def get_pure_metadata(endpoint, identifier = '', parameters = {}, review = True):
     headers = {
         'api-key': pure_api_key,
         'Accept': 'application/json',
@@ -69,7 +69,7 @@ def get_pure_metadata(endpoint, identifier = '', parameters = {}):
     # Sending request
     response = requests.get(url, headers=headers)
 
-    if response.status_code >= 300:
+    if response.status_code >= 300 and review:
         reports.add(['console'], response.content)
 
     # Add response content to pure_get_uuid_metadata.json

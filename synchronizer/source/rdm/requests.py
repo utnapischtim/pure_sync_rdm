@@ -8,7 +8,7 @@ class Requests:
     def __init__(self):
         self.report = Reports()
 
-    def _rdm_request_headers(self, parameters):
+    def _request_headers(self, parameters: list):
         headers = {}
         if 'content_type' in parameters:
             headers['Content-Type'] = 'application/json'
@@ -18,14 +18,14 @@ class Requests:
             headers['Authorization'] = f'Bearer {token_rdm}'
         return headers
 
-    def _rdm_request_params(self):
+    def _request_params(self):
         return (('prettyprint', '1'),)
 
 
     def rdm_get_metadata(self, additional_parameters: str, recid = ''):
 
-        headers = self._rdm_request_headers(['content_type', 'token'])
-        params  = self._rdm_request_params()
+        headers = self._request_headers(['content_type', 'token'])
+        params  = self._request_params()
 
         url = f'{rdm_records_url}{recid}'
 
@@ -50,8 +50,8 @@ class Requests:
 
         open(temporary_files_name['post_rdm_metadata'], "w").write(data)
 
-        headers = self._rdm_request_headers(['content_type'])
-        params  = self._rdm_request_params()
+        headers = self._request_headers(['content_type'])
+        params  = self._request_params()
 
         data_utf8 = data.encode('utf-8')
         
@@ -64,8 +64,8 @@ class Requests:
     def rdm_put_metadata(self, recid: str, data: str):
         """ Used to update an existing record """
 
-        headers = self._rdm_request_headers(['content_type', 'token'])
-        params  = self._rdm_request_params()
+        headers = self._request_headers(['content_type', 'token'])
+        params  = self._request_params()
 
         data_utf8 = data.encode('utf-8')
         url = f'{rdm_records_url}{recid}'
@@ -78,7 +78,7 @@ class Requests:
 
     def rdm_put_file(self, file_path_name: str, recid: str):
 
-        headers = self._rdm_request_headers(['file', 'token'])
+        headers = self._request_headers(['file', 'token'])
         data    = open(file_path_name, 'rb').read()
 
         # Get only the file name
@@ -91,7 +91,7 @@ class Requests:
 
     def rdm_delete_metadata(self, recid: str):
 
-        headers = self._rdm_request_headers(['content_type', 'token'])
+        headers = self._request_headers(['content_type', 'token'])
         url = f'{rdm_records_url}{recid}'
 
         response = requests.delete(url, headers=headers, verify=False)
@@ -113,3 +113,28 @@ class Requests:
             time.sleep(wait_429)
             return False
         return True
+
+
+    def get_rdm_metadata_by_query(self, query_value: str):
+        """ Query RDM record metadata """
+
+        params = {'sort': 'mostrecent', 'size': 250, 'page': 1, 'q': f'"{query_value}"'}
+        response = self.rdm_get_metadata(params)
+
+        self._check_response(response)
+        return response
+
+
+    def get_metadata_by_recid(self, recid: str):
+        """ Having the record recid gets from RDM its metadata """
+
+        if len(recid) != 11:
+            report = f'\nERROR - The recid must have 11 characters. Given: {recid}\n'
+            self.report.add(['console'], report)
+            return False
+
+        # RDM request
+        response = self.rdm_get_metadata({}, recid)
+        
+        self._check_response(response)
+        return response

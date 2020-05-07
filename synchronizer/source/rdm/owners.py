@@ -3,7 +3,7 @@ from datetime                       import date, datetime
 from setup                          import pure_rest_api_url, rdm_host_url, token_rdm, data_files_name
 from source.general_functions       import initialize_counters, add_spaces
 from source.pure.general_functions  import get_pure_metadata, get_next_page
-from source.rdm.general_functions   import get_metadata_by_recid, get_recid, update_rdm_record
+from source.rdm.general_functions   import get_recid, update_rdm_record
 from source.rdm.add_record          import RdmAddRecord
 from source.rdm.database            import RdmDatabase
 from source.rdm.requests            import Requests
@@ -29,7 +29,7 @@ class RdmOwners:
         return _wrapper
 
     @_decorator
-    def run_owners(self, identifier):
+    def run_owners(self, identifier: str):
         """ Gets from pure all the records related to a certain user (based on orcid or externalId),
             afterwards it modifies/create RDM records accordingly. """
 
@@ -59,7 +59,7 @@ class RdmOwners:
 
         next_page = True
         page      = 1
-        page_size = 2
+        page_size = 100
 
         local_counters = {'create': 0, 'in_record': 0, 'to_update': 0}
 
@@ -112,7 +112,7 @@ class RdmOwners:
 
                 # Checks if the owner is already in RDM record metadata
                 # Get metadata from RDM
-                response = get_metadata_by_recid(recid)
+                response = self.rdm_requests.get_metadata_by_recid(recid)
                 record_json = json.loads(response.content)['metadata']
 
                 report = f"\tRDM get metadata      - {response} - Current owners:     - {record_json['owners']}"
@@ -209,7 +209,7 @@ class RdmOwners:
         return self.rdm_record_owner
 
 
-    def _add_user_ids_match(self, external_id):
+    def _add_user_ids_match(self, external_id: str):
 
         file_name = data_files_name['user_ids_match']
 
@@ -221,7 +221,7 @@ class RdmOwners:
             self.report.add(['console', 'owners'], report)
 
 
-    def _check_user_ids_match(self, file_name: str, external_id):
+    def _check_user_ids_match(self, file_name: str, external_id: str):
 
         file_data = open(file_name).readlines()
         for line in file_data:

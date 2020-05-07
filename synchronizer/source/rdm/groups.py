@@ -2,8 +2,9 @@ import json
 import os
 from source.general_functions       import add_spaces
 from source.pure.general_functions  import get_pure_metadata
-from source.rdm.general_functions   import update_rdm_record, get_metadata_by_query
+from source.rdm.general_functions   import update_rdm_record
 from source.rdm.database            import RdmDatabase
+from source.rdm.requests            import Requests
 from source.reports                 import Reports
 
 
@@ -12,6 +13,7 @@ class RdmGroups:
     def __init__(self):
         self.rdm_db = RdmDatabase()
         self.report = Reports()
+        self.request = Requests()
         self.report_files = ['console', 'groups']
 
     
@@ -99,7 +101,7 @@ class RdmGroups:
 
 
 
-    def _get_rdm_group_id(self, externalId):
+    def _get_rdm_group_id(self, externalId: str):
         response = self.rdm_db.select_query('id, description', 'accounts_role', {'name': f"'{externalId}'"})
 
         group_id    = response[0][0]
@@ -111,10 +113,10 @@ class RdmGroups:
 
 
 
-    def _rdm_split_modify_record(self, old_group_externalId, new_groups_externalIds):
+    def _rdm_split_modify_record(self, old_group_externalId: str, new_groups_externalIds: list):
 
         # Get from RDM all old group's records
-        response = get_metadata_by_query(old_group_externalId)
+        response = self.request.get_rdm_metadata_by_query(old_group_externalId)
 
         resp_json = json.loads(response.content)
         total_items = resp_json['hits']['total']
@@ -161,7 +163,7 @@ class RdmGroups:
 
 
 
-    def _rdm_split_users_from_old_to_new_group(self, old_group_id, old_group_externalId, new_groups_externalIds):
+    def _rdm_split_users_from_old_to_new_group(self, old_group_id: str, old_group_externalId: str, new_groups_externalIds: list):
 
         # Get all users in old group
         response = self.rdm_db.select_query('user_id', 'accounts_userrole', {'role_id': old_group_id})
@@ -188,7 +190,7 @@ class RdmGroups:
 
 
 
-    def _rdm_merge_modify_records(self, old_groups_externalId, new_group_data, new_group_externalId):
+    def _rdm_merge_modify_records(self, old_groups_externalId: list, new_group_data: dict, new_group_externalId: str):
 
         # Get from RDM all records with old groups
         for old_group_externalId in old_groups_externalId:
@@ -196,7 +198,7 @@ class RdmGroups:
             self._rdm_check_if_group_exists(old_group_externalId)
             
             # Get record metadata
-            response = get_metadata_by_query(old_group_externalId)
+            response = self.request.get_rdm_metadata_by_query(old_group_externalId)
 
 
             resp_json = json.loads(response.content)
@@ -248,7 +250,7 @@ class RdmGroups:
 
 
 
-    def _merge_users_from_old_to_new_group(self, old_groups_externalId, new_group_externalId):
+    def _merge_users_from_old_to_new_group(self, old_groups_externalId: list, new_group_externalId: str):
         # Iterate over old groups
         for old_group_externalId in old_groups_externalId:
 
@@ -323,7 +325,7 @@ class RdmGroups:
 
 
 
-    def _rdm_check_if_group_exists(self, group_externalId):
+    def _rdm_check_if_group_exists(self, group_externalId: str):
         """ Checks if the group already exists"""
 
         response = self.rdm_db.select_query('*', 'accounts_role', {'name': f"'{group_externalId}'"})
@@ -392,7 +394,7 @@ class RdmGroups:
 
 
 
-    def _group_add_user(self, user_email, new_group_externalId, user_id):
+    def _group_add_user(self, user_email: str, new_group_externalId: str, user_id: str):
         
         # Get group id
         group_id = self.rdm_db.select_query('id', 'accounts_role', {'name': f"'{new_group_externalId}'"})[0][0]
@@ -416,7 +418,7 @@ class RdmGroups:
 
 
 
-    def _group_remove_user(self, user_email, group_name):
+    def _group_remove_user(self, user_email: str, group_name: str):
         
         # Get user id
         user_id = self.rdm_db.select_query('id', 'accounts_user', {'email': f"'{user_email}'"})[0][0]

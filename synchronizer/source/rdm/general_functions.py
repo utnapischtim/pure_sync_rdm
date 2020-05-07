@@ -9,40 +9,8 @@ from source.rdm.delete_record       import Delete
 rdm_requests = Requests()
 reports = Reports()
 delete  = Delete()
-
-def get_metadata_by_recid(recid: str):
-    """ Having the record recid gets from RDM its metadata """
-
-    if len(recid) != 11:
-        report = f'\nERROR - The recid must have 11 characters. Given: {recid}\n'
-        reports.add(['console'], report)
-        return False
-
-    # RDM request
-    response = rdm_requests.rdm_get_metadata({}, recid)
-
-    if response.status_code >= 300:
-        reports.add(['console'], f'\n{recid} - {response}')
-        return False
-    
-    return response
-
-
-#   ---         ---         ---
-def get_metadata_by_query(query_value: str):
-    """ Applying a query get RDM record metadata """
-
-    params = {'sort': 'mostrecent', 'size': 100, 'page': 1, 'q': f'"{query_value}"'}
-    response = rdm_requests.rdm_get_metadata(params)
-
-    if response.status_code >= 300:
-        reports.add(['console'], f'\n{query_value} - {response}')
-        return False
-    
-    return response
     
 
-#   ---         ---         ---
 def get_recid(uuid: str):
     """
     1 - to check if there are duplicates
@@ -57,8 +25,7 @@ def get_recid(uuid: str):
     """ KNOWN ISSUE: if the applied restriction in invenio_records_permissions (for admin users)
                      do not allow to read the record then it will not be listed """
 
-    response = get_metadata_by_query(uuid)
-
+    response = rdm_requests.get_rdm_metadata_by_query(uuid)
 
     resp_json = json.loads(response.content)
 

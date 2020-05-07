@@ -1,15 +1,16 @@
 import json
-from source.general_functions        import add_spaces
-from source.rdm.general_functions    import get_metadata_by_query
+from source.general_functions       import add_spaces
 from source.reports                 import Reports
+from source.rdm.requests            import Requests
 
-report = Reports()
+report   = Reports()
+requests = Requests()
 
 def rdm_versioning (uuid: str):
     """ Gives the version to use for a new record and old versions of the same uuid """
     
     # Request
-    response = get_metadata_by_query(uuid)
+    response = requests.get_rdm_metadata_by_query(uuid)
 
     resp_json = json.loads(response.content)
     

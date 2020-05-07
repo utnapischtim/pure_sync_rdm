@@ -36,7 +36,7 @@ class PureChangesByDate:
 
 
     def _decorator(func):
-        def _wrapper(self, changes_date) :
+        def _wrapper(self, changes_date: str) :
 
             # Initialize global counters
             self.global_counters = initialize_counters()
@@ -143,7 +143,7 @@ class PureChangesByDate:
 
 
     #       ---     ---     ---
-    def _update_records(self, json_response):
+    def _update_records(self, json_response: dict):
         """ Iterates over the Pure response and process all records that need to be created/updated """
         
         for item in json_response['items']:
