@@ -104,7 +104,6 @@ class RdmAddRecord:
         if 'owners' in self.item:
             # Remove duplicate owners
             self.data['owners'] = list(set(self.item['owners']))        
-            self.report.add(['console'], f"\tOwners:               - {self.data['owners']}")
         else:
             self.data['owners'] = [1]
 
