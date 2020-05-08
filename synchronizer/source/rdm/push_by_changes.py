@@ -25,7 +25,7 @@ class PureChangesByDate:
         
         # Get date of last update
         missing_updates = self._get_missing_updates()
-        missing_updates = ['2020-01-05']      # TEMPORARY !!!!!
+        # missing_updates = ['2020-01-05']      # TEMPORARY !!!!!
         
         if missing_updates == []:
             self.report.add(['console'], '\nNothing to update.\n')

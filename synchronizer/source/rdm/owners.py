@@ -1,7 +1,7 @@
 import json
 from datetime                       import date, datetime
 from setup                          import pure_rest_api_url, rdm_host_url, token_rdm, data_files_name
-from source.general_functions       import initialize_counters, add_spaces
+from source.general_functions       import initialize_counters, add_spaces, shorten_file_name
 from source.pure.general_functions  import get_next_page
 from source.pure.requests           import get_pure_metadata
 from source.rdm.general_functions   import get_recid, update_rdm_record
@@ -85,7 +85,7 @@ class RdmOwners:
                 uuid  = item['uuid']
                 title = item['title']
                 
-                self.report.add([], f'\n\tRecord uuid           - {uuid}   - {title[0:55]}...')
+                self.report.add([], f'\n\tRecord uuid           - {uuid}   - {shorten_file_name(title)}')
 
                 # Get from RDM the recid
                 recid = get_recid(uuid)

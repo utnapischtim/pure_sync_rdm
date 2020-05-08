@@ -67,10 +67,10 @@ class RdmAddRecord:
         self.data['_access'] = {'metadata_restricted': False, 'files_restricted': False}
         # TO REVIEW - TO REVIEW
 
-        # Process various general fields
-        self._process_common_fields(item)
+        # Process various single fields
+        self._process_single_fields(item)
     
-        # Electronic Versions
+        # Electronic Versions (files)
         self._process_electronic_versions()
 
         # Additional Files
@@ -109,14 +109,13 @@ class RdmAddRecord:
             # Remove duplicate owners
             self.data['owners'] = list(set(self.item['owners']))        
         else:
-            self.data['owners'] = [1]
+            self.data['owners'] = list(set([1]))
 
 
 
-    def _process_common_fields(self, item: dict):
+    def _process_single_fields(self, item: dict):
                             # RDM field name                # PURE json path
         self._add_field(item, 'title',                       ['title'])
-        self._add_field(item, 'access_right',                ['openAccessPermissions', 0, 'value'])
         self._add_field(item, 'uuid',                        ['uuid'])
         self._add_field(item, 'pureId',                      ['pureId'])
         self._add_field(item, 'publicationDate',             ['publicationStatuses', 0, 'publicationDate', 'year'])
@@ -132,7 +131,6 @@ class RdmAddRecord:
         self._add_field(item, 'category',                    ['categories', 0, 'value'])  
         self._add_field(item, 'peerReview',                  ['peerReview'])    
         self._add_field(item, 'publicationStatus',           ['publicationStatuses', 0, 'publicationStatuses', 0, 'value'])
-        self._add_field(item, 'language',                    ['languages', 0, 'value'])
         self._add_field(item, 'numberOfAuthors',             ['totalNumberOfAuthors'])
         self._add_field(item, 'workflow',                    ['workflows', 0, 'value'])
         self._add_field(item, 'confidential',                ['confidential'])
@@ -141,6 +139,14 @@ class RdmAddRecord:
         self._add_field(item, 'managingOrganisationalUnit_name',       ['managingOrganisationalUnit', 'names', 0, 'value'])
         self._add_field(item, 'managingOrganisationalUnit_uuid',       ['managingOrganisationalUnit', 'uuid'])
         self._add_field(item, 'managingOrganisationalUnit_externalId', ['managingOrganisationalUnit', 'externalId'])
+
+        # Access right
+        value = self._get_value(item, ['openAccessPermissions', 0, 'value'])
+        self.data['access_right'] = self._accessright_conversion(value)
+
+        # Language
+        value = self._get_value(item, ['languages', 0, 'value'])
+        self.data['language'] = self._language_conversion(value)
 
 
 
@@ -174,7 +180,7 @@ class RdmAddRecord:
 
         for i in self.item['personAssociations']:
 
-            sdata = {}      # sub_data -> data relative to the contributor
+            subdata = {}
 
             first_name = self._get_value(i, ['name', 'firstName'])
             last_name  = self._get_value(i, ['name', 'lastName'])
@@ -184,31 +190,30 @@ class RdmAddRecord:
             if not last_name:
                 first_name = '(last name not specified)'
 
-            sdata['name'] = f'{last_name}, {first_name}'
+            subdata['name'] = f'{last_name}, {first_name}'
 
-            # Standard fields
-            sdata = self._add_subdata(sdata, i, 'uuid',                   ['person', 'uuid'])
-            sdata = self._add_subdata(sdata, i, 'externalId',             ['person', 'externalId'])
-            sdata = self._add_subdata(sdata, i, 'authorCollaboratorName', ['authorCollaboration', 'names', 0, 'value'])   
-            sdata = self._add_subdata(sdata, i, 'personRole',             ['personRoles', 0, 'value'])    
-            sdata = self._add_subdata(sdata, i, 'organisationalUnit',     ['organisationalUnits', 0, 'names', 0, 'value'])
-            sdata = self._add_subdata(sdata, i, 'type_p',                 ['externalPerson', 'types', 0, 'value'])
-            sdata = self._add_subdata(sdata, i, 'uuid',                   ['externalPerson', 'uuid'])
+            subdata = self._add_subdata(subdata, i, 'uuid',                   ['person', 'uuid'])
+            subdata = self._add_subdata(subdata, i, 'externalId',             ['person', 'externalId'])
+            subdata = self._add_subdata(subdata, i, 'authorCollaboratorName', ['authorCollaboration', 'names', 0, 'value'])   
+            subdata = self._add_subdata(subdata, i, 'personRole',             ['personRoles', 0, 'value'])    
+            subdata = self._add_subdata(subdata, i, 'organisationalUnit',     ['organisationalUnits', 0, 'names', 0, 'value'])
+            subdata = self._add_subdata(subdata, i, 'type_p',                 ['externalPerson', 'types', 0, 'value'])
+            subdata = self._add_subdata(subdata, i, 'uuid',                   ['externalPerson', 'uuid'])
             
             # Checks if the record owner is available in user_ids_match.txt
             person_external_id = self._get_value(i, ['person', 'externalId'])
             owner = get_userid_from_list_by_externalid(person_external_id, file_data)
-
-            if owner and owner not in self.data['owners']: 
+                
+            if owner and int(owner) not in self.data['owners']:
                 self.data['owners'].append(int(owner))
 
             # Get Orcid
-            if 'uuid' in sdata:
-                orcid = self._get_orcid(sdata['uuid'], sdata['name'])
+            if 'uuid' in subdata:
+                orcid = self._get_orcid(subdata['uuid'], subdata['name'])
                 if orcid:
-                    sdata['orcid'] = orcid
+                    subdata['orcid'] = orcid
 
-            self.data['contributors'].append(sdata)
+            self.data['contributors'].append(subdata)
 
 
     def _process_organisational_units(self):
@@ -287,9 +292,8 @@ class RdmAddRecord:
             return False
 
         # add record to all_rdm_records.txt
-        uuid_recid_line = f'{uuid} {recid}\n'
-        open(data_files_name['all_rdm_records'], "a").write(uuid_recid_line)
-
+        open(data_files_name['all_rdm_records'], "a").write(f'{uuid} {recid}\n')
+        
         # Upload record files to RDM
         for file_name in self.record_files:
         
@@ -304,6 +308,9 @@ class RdmAddRecord:
                 # send_email(uuid, file_name)
             else:
                 self.global_counters['file']['error'] += 1
+
+        if not self.record_files:
+            success_check['file'] = True
         
         # Checks if both metadata and files were correctly transmitted
         self._metadata_and_file_submission_check(success_check)
@@ -311,29 +318,34 @@ class RdmAddRecord:
 
 
     def _metadata_and_file_submission_check(self, success_check: dict):
-
-        if(success_check['metadata'] == False or success_check['file'] == False):
+    
+        if (success_check['metadata'] == True and success_check['file'] == True):
+            # Remove uuid from to_transmit.txt
+            self._remove_uuid_from_list(self.uuid, data_files_name['transfer_uuid_list'])
+        else:
             # Add uuid to to_transmit.txt to be re-transmitted
             open(data_files_name['transfer_uuid_list'], "a").write(f'{self.uuid}\n')
             return False
-        else:
-            # Remove uuid from to_transmit.txt
-            self._remove_uuid_from_list(self, data_files_name['transfer_uuid_list'])
-            # # Push RDM record link to Pure                                # TODO TODO
-            # self.api_url      # self.landing_page_url
-        return True    
+        return True  
+
+
+
+    def _remove_uuid_from_list(self, uuid: str, file_name: str):
+        """ If the given uuid is in the given file then the line will be removed """
+
+        with open(file_name, "r") as f:
+            lines = f.readlines()
+        with open(file_name, "w") as f:
+            for line in lines:
+                if line.strip("\n") != uuid:
+                    f.write(line)
 
 
 
     def _add_field(self, item: list, rdm_field: str, path: list):
         """ Adds the field to the data json """
+
         value = self._get_value(item, path)
-
-        if rdm_field == 'language':
-            value = self._language_conversion(value)
-        elif rdm_field == 'access_right':
-            value = self._accessright_conversion(value)
-
         if value:
             self.data[rdm_field] = value
         return
@@ -551,14 +563,3 @@ class RdmAddRecord:
         if status_code not in self.global_counters['http_responses']:
             self.global_counters['http_responses'][status_code] = 0
         self.global_counters['http_responses'][status_code] += 1
-
-
-
-    def _remove_uuid_from_list(self, uuid: str, file_name: str):
-        """ If the given uuid is in the given file then the line will be removed """
-        with open(file_name, "r") as f:
-            lines = f.readlines()
-        with open(file_name, "w") as f:
-            for line in lines:
-                if line.strip("\n") != uuid:
-                    f.write(line)

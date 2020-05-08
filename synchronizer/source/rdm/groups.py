@@ -331,7 +331,7 @@ class RdmGroups:
         response = self.rdm_db.select_query('*', 'accounts_role', {'name': f"'{group_externalId}'"})
 
         if response:
-            report = f'\tNew group creation                       - ExtId:        {add_spaces(group_externalId)} - Already exists'
+            report = f'\tNew group creation    - ExtId:        {add_spaces(group_externalId)} - Already exists'
             self.report.add(['console', 'groups'], report)
             return True
         return False
