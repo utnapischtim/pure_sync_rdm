@@ -12,7 +12,7 @@ pure_username       = open(f'{dirpath}/data_setup/pure_username.txt', 'r').readl
 rdm_host_url        = open(f'{dirpath}/data_setup/rdm_host_url.txt', 'r').readline()
 token_rdm           = open(f'{dirpath}/data_setup/rdm_token.txt', 'r').readline()
 rdm_records_url     = f'{rdm_host_url}api/records/'
-push_dist_sec       = 0.5
+push_dist_sec       = 0.5   # Time gap between RDM push requests
 wait_429            = 900   # Too many requests sent to the server (waits 15 minutes)
 
 # LOG FILES

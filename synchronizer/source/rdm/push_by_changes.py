@@ -25,7 +25,7 @@ class PureChangesByDate:
         
         # Get date of last update
         missing_updates = self._get_missing_updates()
-        # missing_updates = ['2020-01-05']      # TEMPORARY !!!!!
+        missing_updates = ['2020-05-07']      # TEMPORARY !!!!!
         
         if missing_updates == []:
             self.report.add(['console'], '\nNothing to update.\n')
@@ -58,10 +58,9 @@ class PureChangesByDate:
         """ Gets from Pure all changes that took place in a certain date """
 
         reference = changes_date
-        page = 0
+        page = 1
 
         while reference:
-            page += 1
             # Get from pure all changes of a certain date
             response = get_pure_metadata('changes', reference, {})
 
@@ -69,22 +68,14 @@ class PureChangesByDate:
                 self.report.add(['console', 'changes'], response.content)
                 return False
 
-            # Load response json
-            json_response = json.loads(response.content)
+            # Check if there are records in the response from pure
+            json_response = self._records_to_process(response, page, changes_date)
+            
+            # If there are no records to process
+            if not json_response:
+                return True
 
-            number_records = json_response["count"]
-            report_line = f'\nPag{add_spaces(page)} - Pure get changes   - {response} - Number of items: {add_spaces(number_records)}'
-            self.report.add(self.all_report_files, report_line)
-
-            # Gets the reference code of the next page
-            reference = get_next_page(json_response).split('/')[-1]
-
-            # If there are no changes
-            if number_records == 0:
-                self.report.add(self.all_report_files, f'\n\nNothing to transfer.\n\n')
-                return
-
-            # used to check if there are doubled tasks (e.g. update uuid and delete same uuid)
+            # Used to check if there are doubled tasks (e.g. update uuid and delete same uuid)
             self.duplicated_uuid  = []
             
             self._initialize_local_counters()
@@ -92,14 +83,37 @@ class PureChangesByDate:
             # Iterates over all records that need to be deleted
             self._delete_records(json_response)
 
-            # - Create / Add / Update -
+            # Create / Add / Update
             self._update_records(json_response)
 
-        # Adds the date to successful_changes.txt
-        open(data_files_name['successful_changes'], "a").write(f'{changes_date}\n')
+            # Gets the reference code of the next page
+            reference = get_next_page(json_response).split('/')[-1]
+
+            page += 1
+
+
+    def _records_to_process(self, response: object, page: int, changes_date: str):
+
+            # Load response json
+            json_response = json.loads(response.content)
+
+            number_records = json_response["count"]
+            
+            if number_records == 0:
+                # Adds the date to successful_changes.txt
+                open(data_files_name['successful_changes'], "a").write(f'{changes_date}\n')
+
+                if page == 1:
+                    # If there are no changes at all
+                    self.report.add(self.all_report_files, f'\n\nNothing to transfer.\n\n')
+                return False
+
+            report_line = f'\nPag{add_spaces(page)} - Pure get changes   - {response} - Number of items: {add_spaces(number_records)}'
+            self.report.add(self.all_report_files, report_line)
+            
+            return json_response
 
     
-    #       ---     ---     ---
     def _initialize_local_counters(self):
         self.local_counters = {
             'delete': 0,
@@ -111,7 +125,7 @@ class PureChangesByDate:
         }
 
 
-    #       ---     ---     ---
+    
     def _delete_records(self, json_response: dict):
         """ Iterates over the Pure response and process all records that need to be deleted """
 
@@ -143,7 +157,7 @@ class PureChangesByDate:
         return True
 
 
-    #       ---     ---     ---
+    
     def _update_records(self, json_response: dict):
         """ Iterates over the Pure response and process all records that need to be created/updated """
         

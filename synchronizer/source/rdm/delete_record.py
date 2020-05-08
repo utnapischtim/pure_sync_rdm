@@ -1,4 +1,5 @@
-from setup                          import rdm_host_url, token_rdm, data_files_name
+import time
+from setup                          import rdm_host_url, token_rdm, data_files_name, push_dist_sec
 from source.general_functions       import current_time
 from source.rdm.requests            import Requests
 from source.reports                 import Reports
@@ -78,6 +79,8 @@ class Delete:
                 count_successful_record_delete += 1
             else:
                 count_errors_record_delete += 1
+
+            time.sleep(push_dist_sec)
 
 
 

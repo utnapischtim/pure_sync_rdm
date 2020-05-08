@@ -104,7 +104,8 @@ File (ok{}, error{}) - \
 
     # CHANGES       ***
     'changes': {
-        'summary': """Pure changes:
+        'summary': """
+Pure changes:
 Update:     {} - Create:     {} - Delete:    {}
 Incomplete: {} - Duplicated: {} - Irrelevant:{}
 """

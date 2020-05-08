@@ -367,13 +367,15 @@ class RdmAddRecord:
         if pure_language == 'Undefined/Unknown':
             return False
         
+        # Read iso6393 json file
         resp_json = json.load(open(iso6393_file_name, 'r'))
+
         for i in resp_json:
             if i['name'] == pure_language:
                 return i['iso6393']
 
-            # in case there is no match (e.g. spelling mistake in Pure) ignore field
-            return False
+        # in case there is no match (e.g. spelling mistake in Pure) ignore field
+        return False
 
 
     def _get_value(self, item, path: list):
@@ -394,14 +396,14 @@ class RdmAddRecord:
         if len(path) != count:
             return False
 
-        element = str(child)
+        value = str(child)
 
         # REPLACEMENTS
-        element = element.replace('\t', ' ')        # replace \t with ' '
-        element = element.replace('\\', '\\\\')     # adds \ before \
-        element = element.replace('"', '\\"')       # adds \ before "
-        element = element.replace('\n', '')         # removes new lines
-        return element
+        value = value.replace('\t', ' ')        # replace \t with ' '
+        value = value.replace('\\', '\\\\')     # adds \ before \
+        value = value.replace('"', '\\"')       # adds \ before "
+        value = value.replace('\n', '')         # removes new lines
+        return value
 
 
 
