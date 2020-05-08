@@ -1,6 +1,6 @@
 import requests
 import time
-from setup                          import token_rdm, rdm_records_url, temporary_files_name, wait_429
+from setup                          import token_rdm, rdm_records_url, temporary_files_name, wait_429, push_dist_sec
 from source.reports                 import Reports
 
 class Requests:
@@ -112,6 +112,10 @@ class Requests:
             self.report.add(['console'], report)
             time.sleep(wait_429)
             return False
+
+        # RDM accepts 5000 records per hour (one record every ~ 1.4 sec.)
+        time.sleep(push_dist_sec)  
+
         return True
 
 

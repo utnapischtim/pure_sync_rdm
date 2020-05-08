@@ -107,7 +107,7 @@ class RdmGroups:
         group_id    = response[0][0]
         group_name  = response[0][1]
 
-        report = f'\tOld group             - ExtId:     {add_spaces(externalId)} - RDM id:      {add_spaces(group_id)} - {group_name}'
+        report = f'\tOld group information - ExtId:     {add_spaces(externalId)} - RDM id:      {add_spaces(group_id)} - {group_name}'
         self.report.add(['console', 'groups'], report)
         return group_id
 
@@ -331,8 +331,8 @@ class RdmGroups:
         response = self.rdm_db.select_query('*', 'accounts_role', {'name': f"'{group_externalId}'"})
 
         if response:
-            report = f'\tNew group creation    - ExtId:        {add_spaces(group_externalId)} - Already exists'
-            self.report.add(['console', 'groups'], report)
+            report = f'\tNew group creation    - ExtId:     {add_spaces(group_externalId)} - Already exists'
+            self.report.add(['console'], report)
             return True
         return False
 
@@ -348,6 +348,8 @@ class RdmGroups:
         group_name = group_name.replace('(', '\(')
         group_name = group_name.replace(')', '\)')
         group_name = group_name.replace(' ', '_')
+
+        # Run command
         command = f'pipenv run invenio roles create {externalId} -d {group_name}'
         response = os.system(command)
 

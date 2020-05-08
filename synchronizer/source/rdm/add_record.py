@@ -178,42 +178,41 @@ class RdmAddRecord:
         file_name = data_files_name['user_ids_match']
         file_data = open(file_name).readlines()
 
-        for i in self.item['personAssociations']:
+        for item in self.item['personAssociations']:
 
-            subdata = {}
-
-            first_name = self._get_value(i, ['name', 'firstName'])
-            last_name  = self._get_value(i, ['name', 'lastName'])
+            first_name = self._get_value(item, ['name', 'firstName'])
+            last_name  = self._get_value(item, ['name', 'lastName'])
 
             if not first_name:
                 first_name = '(first name not specified)'
             if not last_name:
                 first_name = '(last name not specified)'
 
-            subdata['name'] = f'{last_name}, {first_name}'
+            self.sub_data = {}
+            self.sub_data['name'] = f'{last_name}, {first_name}'
 
-            subdata = self._add_subdata(subdata, i, 'uuid',                   ['person', 'uuid'])
-            subdata = self._add_subdata(subdata, i, 'externalId',             ['person', 'externalId'])
-            subdata = self._add_subdata(subdata, i, 'authorCollaboratorName', ['authorCollaboration', 'names', 0, 'value'])   
-            subdata = self._add_subdata(subdata, i, 'personRole',             ['personRoles', 0, 'value'])    
-            subdata = self._add_subdata(subdata, i, 'organisationalUnit',     ['organisationalUnits', 0, 'names', 0, 'value'])
-            subdata = self._add_subdata(subdata, i, 'type_p',                 ['externalPerson', 'types', 0, 'value'])
-            subdata = self._add_subdata(subdata, i, 'uuid',                   ['externalPerson', 'uuid'])
+            self._add_subdata(item, 'uuid',                   ['person', 'uuid'])
+            self._add_subdata(item, 'externalId',             ['person', 'externalId'])
+            self._add_subdata(item, 'authorCollaboratorName', ['authorCollaboration', 'names', 0, 'value'])   
+            self._add_subdata(item, 'personRole',             ['personRoles', 0, 'value'])    
+            self._add_subdata(item, 'organisationalUnit',     ['organisationalUnits', 0, 'names', 0, 'value'])
+            self._add_subdata(item, 'type_p',                 ['externalPerson', 'types', 0, 'value'])
+            self._add_subdata(item, 'uuid',                   ['externalPerson', 'uuid'])
             
             # Checks if the record owner is available in user_ids_match.txt
-            person_external_id = self._get_value(i, ['person', 'externalId'])
+            person_external_id = self._get_value(item, ['person', 'externalId'])
             owner = get_userid_from_list_by_externalid(person_external_id, file_data)
                 
             if owner and int(owner) not in self.data['owners']:
                 self.data['owners'].append(int(owner))
 
             # Get Orcid
-            if 'uuid' in subdata:
-                orcid = self._get_orcid(subdata['uuid'], subdata['name'])
+            if 'uuid' in self.sub_data:
+                orcid = self._get_orcid(self.sub_data['uuid'], self.sub_data['name'])
                 if orcid:
-                    subdata['orcid'] = orcid
+                    self.sub_data['orcid'] = orcid
 
-            self.data['contributors'].append(subdata)
+            self.data['contributors'].append(self.sub_data)
 
 
     def _process_organisational_units(self):
@@ -264,10 +263,7 @@ class RdmAddRecord:
         success_check = {
             'metadata': False,
             'file': False
-        }
-        # RDM accepts 5000 records per hour (one record every ~ 1.4 sec.)
-        time.sleep(push_dist_sec)                        
-        
+        }                      
         # POST REQUEST metadata
         response = self.requests.rdm_post_metadata(self.data)
 
@@ -431,10 +427,11 @@ class RdmAddRecord:
 
         if 'versionFiles' in record:
             for file in record['versionFiles']:
-                file_size   = file['size']
-                file_name   = file['name']
-                file_review = file['internalReview']
-                self.rdm_file_review.append({'size': file_size, 'review': file_review, 'name': file_name})
+                if 'size' in file and 'internalReview' in file and 'name' in file:
+                    file_size   = file['size']
+                    file_review = file['internalReview']
+                    file_name   = file['name']
+                    self.rdm_file_review.append({'size': file_size, 'review': file_review, 'name': file_name})
         return
 
 
@@ -454,7 +451,7 @@ class RdmAddRecord:
         file_name       = self._get_value(item, ['file', 'fileName'])
         file_url        = self._get_value(item, ['file', 'fileURL'])
 
-        self.pure_rdm_file_match = []        # [file_match, internalReview]
+        self.pure_rdm_file_match = []
 
         # Checks if pure_file_size and file_name are the same as any of the files in RDM with the same uuid
         for rdm_file in self.rdm_file_review:
@@ -468,22 +465,25 @@ class RdmAddRecord:
                 internal_review = rdm_review       # The new uploaded file will have the same review value as in RDM
                 break
 
-        sub_data = {}
-        sub_data['internalReview'] = internal_review
+        self.sub_data = {}
+        self.sub_data['internalReview'] = internal_review
 
-        sub_data = self._add_subdata(sub_data, item, 'name',            ['file', 'fileName'])
-        sub_data = self._add_subdata(sub_data, item, 'size',            ['file', 'size'])
-        sub_data = self._add_subdata(sub_data, item, 'mimeType',        ['file', 'mimeType'])
-        sub_data = self._add_subdata(sub_data, item, 'digest',          ['file', 'digest'])
-        sub_data = self._add_subdata(sub_data, item, 'digestAlgorithm', ['file', 'digestAlgorithm'])
-        sub_data = self._add_subdata(sub_data, item, 'createdBy',       ['creator'])
-        sub_data = self._add_subdata(sub_data, item, 'createdDate',     ['created'])
-        sub_data = self._add_subdata(sub_data, item, 'versionType',     ['versionTypes', 0, 'value'])
-        sub_data = self._add_subdata(sub_data, item, 'licenseType',     ['licenseTypes', 0, 'value'])
-        sub_data = self._add_subdata(sub_data, item, 'accessType',      ['accessTypes', 0, 'value'])
+        self._add_subdata(item, 'name',            ['file', 'fileName'])
+        self._add_subdata(item, 'size',            ['file', 'size'])
+        self._add_subdata(item, 'mimeType',        ['file', 'mimeType'])
+        self._add_subdata(item, 'digest',          ['file', 'digest'])
+        self._add_subdata(item, 'digestAlgorithm', ['file', 'digestAlgorithm'])
+        self._add_subdata(item, 'createdBy',       ['creator'])
+        self._add_subdata(item, 'createdDate',     ['created'])
+        self._add_subdata(item, 'versionType',     ['versionTypes', 0, 'value'])
+        self._add_subdata(item, 'licenseType',     ['licenseTypes', 0, 'value'])
+
+        # Access type
+        value = self._get_value(item, ['accessTypes', 0, 'value'])
+        self.sub_data['accessType'] = self._accessright_conversion(value)
 
         # Append to sub_data to .data
-        self.data['versionFiles'].append(sub_data)
+        self.data['versionFiles'].append(self.sub_data)
 
         # Download file from Pure
         response = get_pure_file(self, file_url, file_name)
@@ -492,16 +492,11 @@ class RdmAddRecord:
         
 
 
-    def _add_subdata(self, sub_data: dict, item: list, rdm_field: str, path: list):
+    def _add_subdata(self, item: list, rdm_field: str, path: list):
         """ Adds the field to sub_data """
         value = self._get_value(item, path)
-
-        if rdm_field == 'accessType':
-            value = self._accessright_conversion(value)
-
         if value:
-            sub_data[rdm_field] = value
-        return sub_data
+            self.sub_data[rdm_field] = value
 
 
 
