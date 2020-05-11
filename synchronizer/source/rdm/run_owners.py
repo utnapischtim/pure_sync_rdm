@@ -4,7 +4,7 @@ from setup                          import pure_rest_api_url, rdm_host_url, toke
 from source.general_functions       import initialize_counters, add_spaces, shorten_file_name
 from source.pure.general_functions  import get_next_page
 from source.pure.requests           import get_pure_metadata
-from source.rdm.general_functions   import get_recid, update_rdm_record
+from source.rdm.general_functions   import GeneralFunctions
 from source.rdm.add_record          import RdmAddRecord
 from source.rdm.database            import RdmDatabase
 from source.rdm.requests            import Requests
@@ -13,10 +13,11 @@ from source.reports                 import Reports
 class RdmOwners:
 
     def __init__(self):
-        self.rdm_requests   = Requests()
-        self.rdm_db         = RdmDatabase()
-        self.report         = Reports()
-        self.rdm_add_record = RdmAddRecord()
+        self.rdm_requests      = Requests()
+        self.rdm_db            = RdmDatabase()
+        self.report            = Reports()
+        self.rdm_add_record    = RdmAddRecord()
+        self.general_functions = GeneralFunctions()
 
     def _decorator(func):
         def _wrapper(self, identifier) :
@@ -88,7 +89,7 @@ class RdmOwners:
                 self.report.add([], f'\n\tRecord uuid           - {uuid}   - {shorten_file_name(title)}')
 
                 # Get from RDM the recid
-                recid = get_recid(uuid)
+                recid = self.general_functions.get_recid(uuid)
 
                 # Record NOT in RDM, create it
                 if recid == False:
@@ -123,7 +124,7 @@ class RdmOwners:
         self.report.add([], f"\tRDM record status     - ADDING owner     - New owners:         - {rdm_json['owners']}")
 
         # Add owner to an existing RDM record
-        update_rdm_record(json.dumps(rdm_json), recid)
+        self.general_functions.update_rdm_record(json.dumps(rdm_json), recid)
 
         self.local_counters['to_update'] += 1
 

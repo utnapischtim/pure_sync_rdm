@@ -4,7 +4,7 @@ from setup                          import data_files_name
 from source.general_functions       import add_spaces, initialize_counters
 from source.pure.general_functions  import get_next_page
 from source.pure.requests           import get_pure_metadata
-from source.rdm.general_functions   import get_recid
+from source.rdm.general_functions   import GeneralFunctions
 from source.rdm.add_record          import RdmAddRecord
 from source.reports                 import Reports
 from source.rdm.delete_record       import Delete
@@ -17,6 +17,7 @@ class PureChangesByDate:
         self.add_record = RdmAddRecord()
         self.report = Reports()
         self.delete = Delete()
+        self.general_functions = GeneralFunctions()
         
 
     def get_pure_changes(self):
@@ -25,7 +26,7 @@ class PureChangesByDate:
         
         # Get date of last update
         missing_updates = self._get_missing_updates()
-        missing_updates = ['2020-05-10']      # TEMPORARY !!!!!
+        missing_updates = ['2020-05-11']      # TEMPORARY !!!!!
         
         if missing_updates == []:
             self.report.add(['console'], '\nNothing to update.\n')
@@ -136,7 +137,7 @@ class PureChangesByDate:
             self.report.add(['console'], report)
       
             # Gets the record recid
-            recid = get_recid(uuid)
+            recid = self.general_functions.get_recid(uuid)
 
             if recid:
                 # Deletes the record from RDM

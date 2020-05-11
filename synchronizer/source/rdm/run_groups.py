@@ -2,7 +2,7 @@ import json
 import os
 from source.general_functions       import add_spaces
 from source.pure.requests           import get_pure_metadata
-from source.rdm.general_functions   import update_rdm_record
+from source.rdm.general_functions   import GeneralFunctions
 from source.rdm.database            import RdmDatabase
 from source.rdm.requests            import Requests
 from source.reports                 import Reports
@@ -14,6 +14,7 @@ class RdmGroups:
         self.rdm_db = RdmDatabase()
         self.report = Reports()
         self.request = Requests()
+        self.general_functions = GeneralFunctions()
         self.report_files = ['console', 'groups']
 
     
@@ -157,7 +158,7 @@ class RdmGroups:
 
             # Update record
             recid = item['recid']
-            response = update_rdm_record(record_json, recid)
+            response = self.general_functions.update_rdm_record(record_json, recid)
 
         return True
 
@@ -245,7 +246,7 @@ class RdmGroups:
 
                 # Update record
                 recid = item['recid']
-                response = update_rdm_record(record_json, recid)
+                response = self.general_functions.update_rdm_record(record_json, recid)
 
 
 

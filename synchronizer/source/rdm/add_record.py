@@ -6,7 +6,7 @@ from setup                          import versioning_running, possible_record_r
 from source.general_functions       import shorten_file_name
 from source.pure.general_functions  import get_pure_record_metadata_by_uuid, get_pure_file
 from source.pure.requests           import get_pure_metadata
-from source.rdm.general_functions   import get_recid, get_userid_from_list_by_externalid
+from source.rdm.general_functions   import GeneralFunctions
 from source.rdm.put_file            import rdm_add_file
 from source.rdm.versioning          import rdm_versioning 
 from source.rdm.emails              import send_email
@@ -22,6 +22,7 @@ class RdmAddRecord:
         self.requests = Requests()
         self.report = Reports()
         self.groups = RdmGroups()
+        self.general_functions = GeneralFunctions()
         
 
     def push_record_by_uuid(self, global_counters: dict, uuid: str):
@@ -201,7 +202,7 @@ class RdmAddRecord:
             
             # Checks if the record owner is available in user_ids_match.txt
             person_external_id = self._get_value(item, ['person', 'externalId'])
-            owner = get_userid_from_list_by_externalid(person_external_id, file_data)
+            owner = self.general_functions.get_userid_from_list_by_externalid(person_external_id, file_data)
                 
             if owner and int(owner) not in self.data['owners']:
                 self.data['owners'].append(int(owner))
@@ -291,7 +292,7 @@ class RdmAddRecord:
         time.sleep(1)
 
         # Gets recid from RDM
-        recid = get_recid(uuid)
+        recid = self.general_functions.get_recid(uuid)
         if not recid:
             return False
 
