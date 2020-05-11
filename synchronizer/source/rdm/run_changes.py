@@ -137,7 +137,7 @@ class PureChangesByDate:
             self.report.add(['console'], report)
       
             # Gets the record recid
-            recid = self.general_functions.get_recid(uuid)
+            recid = self.general_functions.get_recid(uuid, self.global_counters)
 
             if recid:
                 # Deletes the record from RDM

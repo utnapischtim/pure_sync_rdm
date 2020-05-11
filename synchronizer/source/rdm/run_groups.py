@@ -361,7 +361,7 @@ class RdmGroups:
             self.report.add(['console'], f'{report} Error: {response}')
             return False
         
-        self.report.add(['console'], f'{report} Group CREATED       - External id: {externalId}')
+        self.report.add(['console'], f'{report} Group created       - External id: {externalId}')
         return True
 
 

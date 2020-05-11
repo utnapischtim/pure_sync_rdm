@@ -64,7 +64,6 @@ class Reports:
     def metadata_http_responses(self, global_counters):
         if not global_counters['http_responses']:
             return
-
         http_response_str = 'Metadata HTTP responses -> '
         for key in global_counters['http_responses']:
             http_response_str += f"{key}: {global_counters['http_responses'][key]}, "
@@ -93,7 +92,7 @@ Errors          -> metadata: {} - files: {} - delete: {}
     # PAGES       ***
     'pages': {
         'page_and_size': '\nPage: {} - page size: {}',
-
+    #   --      --
         'summary_single_line': """\
 {} - Page{} - Size{} - \
 Metadata (ok{}, error {}) - \

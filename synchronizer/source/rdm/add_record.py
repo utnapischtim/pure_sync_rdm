@@ -292,7 +292,7 @@ class RdmAddRecord:
         time.sleep(1)
 
         # Gets recid from RDM
-        recid = self.general_functions.get_recid(uuid)
+        recid = self.general_functions.get_recid(uuid, self.global_counters)
         if not recid:
             return False
 

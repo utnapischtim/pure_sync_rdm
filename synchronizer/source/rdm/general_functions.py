@@ -6,29 +6,20 @@ from source.rdm.requests            import Requests
 from source.reports                 import Reports
 from source.rdm.delete_record       import Delete
 
-    
 class GeneralFunctions:
 
     def __init__(self):
-
         self.rdm_requests = Requests()
         self.reports = Reports()
         self.delete  = Delete()
 
-
-    def get_recid(self, uuid: str):
+    def get_recid(self, uuid: str, global_counters: object):
         """
         1 - to check if there are duplicates
         2 - to delete duplicates
         3 - to add the record uuid and recid to all_rdm_records.txt
         4 - gets the last metadata_version
         """
-
-        # # The following function needs to be imported localy to avoid 'circular imports'
-        # from source.rdm.delete_record            import delete_record
-
-        """ KNOWN ISSUE: if the applied restriction in invenio_records_permissions (for admin users)
-                        do not allow to read the record then it will not be listed """
 
         response = self.rdm_requests.get_rdm_metadata_by_query(uuid)
 
@@ -62,10 +53,10 @@ class GeneralFunctions:
                     # Duplicate records are deleted
                     response = self.delete.record(recid)
 
-                    # if response:
-                    #     global_counters['delete']['success'] += 1
-                    # else:
-                    #     global_counters['delete']['error'] += 1
+                    if response:
+                        global_counters['delete']['success'] += 1
+                    else:
+                        global_counters['delete']['error'] += 1
 
         return newest_recid
 

@@ -3,11 +3,12 @@ from source.general_functions       import add_spaces
 from source.reports                 import Reports
 from source.rdm.requests            import Requests
 
-report   = Reports()
-requests = Requests()
 
 def rdm_versioning (uuid: str):
     """ Gives the version to use for a new record and old versions of the same uuid """
+    
+    report   = Reports()
+    requests = Requests()
     
     # Request
     response = requests.get_rdm_metadata_by_query(uuid)

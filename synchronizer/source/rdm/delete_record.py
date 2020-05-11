@@ -8,7 +8,7 @@ from source.reports                 import Reports
 class Delete:
     def __init__(self):
         self.request = Requests()
-        self.reports = Reports()
+        self.report = Reports()
 
     def record(self, recid: str):
         
@@ -18,7 +18,7 @@ class Delete:
         response = self.request.rdm_delete_metadata(recid)
 
         report = f'\tRDM delete record     - {response} - Deleted recid:        {recid}'
-        self.reports.add(['console'], report)
+        self.report.add(['console'], report)
 
         # 410 -> "PID has been deleted"
         if response.status_code >= 300 and response.status_code != 410:
@@ -43,17 +43,27 @@ class Delete:
 
 
 
+
+    def _decorator(func):
+        def _wrapper(self) :
+            self.report.add_template(['console'], ['general', 'title'], ["DELETE FROM LIST"])
+            self.counters= {
+                'total': 0,
+                'success': 0,
+                'error': 0
+            }
+            # Decorated function
+            func(self)
+
+            report = f"\nTotal: {self.counters['total']} - Success: {self.counters['success']} - Error: {self.counters['error']}"
+            self.report.add(['console'], report)
+        return _wrapper
+
+    @_decorator
     def from_list(self):
-        count_success                  = 0
-        count_total                    = 0
-        count_errors_record_delete     = 0
-        count_successful_record_delete = 0
 
-        file_name = data_files_name['delete_recid_list']
-        recids = open(file_name, 'r').readlines()
-
-        if len(recids) == 0:
-            self.reports.add(['console'], '\nThere is nothing to delete.\n')
+        recids = self._read_file_recids()
+        if not recids:
             return
 
         for recid in recids:
@@ -64,10 +74,10 @@ class Delete:
             if len(recid) == 0:
                 continue
 
-            count_total += 1
+            self.counters['total'] += 1
 
             if len(recid) != 11:
-                self.reports.add(['console'], f'\n{recid} -> Wrong recid lenght! \n')
+                self.report.add(['console'], f'\n{recid} -> Wrong recid lenght! \n')
                 continue
             
             # -- REQUEST --
@@ -75,13 +85,19 @@ class Delete:
 
             # 410 -> "PID has been deleted"
             if response.status_code < 300 or response.status_code == 410:
-                count_success += 1
-                count_successful_record_delete += 1
+                self.counters['success'] += 1
             else:
-                count_errors_record_delete += 1
+                self.counters['error'] += 1
 
-            time.sleep(push_dist_sec)
 
+    def _read_file_recids(self):
+        file_name = data_files_name['delete_recid_list']
+        recids = open(file_name, 'r').readlines()
+
+        if len(recids) == 0:
+            self.report.add(['console'], '\nNothing to delete.\n')
+            return False
+        return recids
 
 
     def all_records(self):

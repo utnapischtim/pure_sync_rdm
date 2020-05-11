@@ -18,6 +18,7 @@ class RdmOwners:
         self.report            = Reports()
         self.rdm_add_record    = RdmAddRecord()
         self.general_functions = GeneralFunctions()
+        self.report_files      = ['console', 'owners']
 
     def _decorator(func):
         def _wrapper(self, identifier) :
@@ -89,7 +90,7 @@ class RdmOwners:
                 self.report.add([], f'\n\tRecord uuid           - {uuid}   - {shorten_file_name(title)}')
 
                 # Get from RDM the recid
-                recid = self.general_functions.get_recid(uuid)
+                recid = self.general_functions.get_recid(uuid, self.global_counters)
 
                 # Record NOT in RDM, create it
                 if recid == False:
@@ -142,9 +143,12 @@ class RdmOwners:
 
     def _final_report(self):
         # Final report
-        report = f"\nCreate: {self.local_counters['create']} - To update: {self.local_counters['to_update']} - In record:{self.local_counters['in_record']}"
-        self.report.add(['console', 'owners'], report)
-        self.report.summary_global_counters(['console', 'owners'], self.global_counters)
+        create = self.local_counters['create']
+        update = self.local_counters['to_update']
+        in_rec = self.local_counters['in_record']
+        report = f"\nCreate: {create} - To update: {update} - In record:{in_rec}"
+        self.report.add(self.report_files, report)
+        self.report.summary_global_counters(self.report_files, self.global_counters)
 
 
     def _response_first_process(self, response: object, page: int, page_size: int):
@@ -167,7 +171,7 @@ class RdmOwners:
 
 
     def _get_user_uuid_from_pure(self, key_name: str, key_value: str):
-        """ PURE get person records """
+        """ Given the user's external id it return the relative user uuid  """
 
         # If the uuid is not found in the first x items then it will continue with the next page
         page = 1
@@ -180,7 +184,7 @@ class RdmOwners:
             response = get_pure_metadata('persons', '', params)
 
             if response.status_code >= 300:
-                self.report.add(['console', 'owners'], response.content)
+                self.report.add(self.report_files, response.content)
                 return False
 
             record_json = json.loads(response.content)
@@ -194,10 +198,10 @@ class RdmOwners:
                     lastName    = item['name']['lastName']
                     uuid        = item['uuid']
 
-                    self.report.add(['console', 'owners'], f'Pure get user uuid - {response} - {first_name} {lastName}  -  {uuid}')
+                    self.report.add(self.report_files, f'Pure get user uuid - {response} - {first_name} {lastName}  -  {uuid}')
 
                     if len(uuid) != 36:
-                        self.report.add(['console', 'owners'], '\n- Warning! Incorrect user_uuid length -\n')
+                        self.report.add(self.report_files, '\n- Warning! Incorrect user_uuid length -\n')
                         return False
                     return uuid
 
@@ -206,7 +210,7 @@ class RdmOwners:
             
             page += 1
 
-        self.report.add(['console', 'owners'], f'Pure get user uuid - {response} - NOT FOUND - End task\n')
+        self.report.add(self.report_files, f'Pure get user uuid - {response} - NOT FOUND - End task\n')
         return False
 
 
@@ -214,21 +218,22 @@ class RdmOwners:
     def _get_user_id_from_rdm(self):
         """ Gets the ID and IP of the logged in user """
 
-        response = self.rdm_db.select_query('user_id, ip', 'accounts_user_session_activity')
+        table_name = 'accounts_user_session_activity'
+        
+        # SQL query
+        response = self.rdm_db.select_query('user_id, ip', table_name)
 
         if not response:
-            self.report.add(['console', 'owners'], '\n- accounts_user_session_activity: No user is logged in -\n')
+            self.report.add(self.report_files, f'\n- {table_name}: No user is logged in -\n')
             return False
 
         elif len(response) > 1:
-            self.report.add(['console', 'owners'], '\n- accounts_user_session_activity: Multiple users logged in \n')
+            self.report.add(self.report_files, f'\n- {table_name}: Multiple users logged in \n')
             return False
 
-        self.report.add(['console', 'owners'], f'user IP: {response[0][1]} - user_id: {response[0][0]}')
+        self.report.add(self.report_files, f'user IP: {response[0][1]} - user_id: {response[0][0]}')
 
-        self.rdm_record_owner = response[0][0]
-
-        return self.rdm_record_owner
+        return response[0][0]
 
 
     def _add_user_ids_match(self, external_id: str):
@@ -241,7 +246,7 @@ class RdmOwners:
         if needs_to_add:
             open(file_name, 'a').write(f'{self.user_id} {self.user_uuid} {external_id}\n')
             report = f'user_ids_match     - Adding id toList - {self.user_id}, {self.user_uuid}, {external_id}'
-            self.report.add(['console', 'owners'], report)
+            self.report.add(self.report_files, report)
 
 
     def _check_user_ids_match(self, file_name: str, external_id: str):
@@ -255,17 +260,32 @@ class RdmOwners:
             if str(self.user_id) == line[0] or self.user_uuid == line[1] or external_id == line[2]:
                 
                 if line == [str(self.user_id), self.user_uuid, external_id]:
-                    self.report.add(['console', 'owners'], 'user_ids_match     - full match')
+                    self.report.add(self.report_files, 'user_ids_match     - full match')
                     return False
         return True
 
 
 
+
+
+    def _decorator(func):
+        def _wrapper(self) :
+    
+            self.report.add_template(['console'], ['general', 'title'], ['RECORDS OWNER'])
+
+            # Empty file rdm_reocrds_owner.txt
+            file_owner = data_files_name['rdm_record_owners']
+            open(file_owner, 'w').close()
+
+            # Decorated function
+            func(self)
+
+        return _wrapper
+
+    @_decorator
     def get_rdm_record_owners(self):
         """ Gets all records from RDM and counts how many records belong to each user.
             It also updates the content of all_rdm_records.txt """
-
-        self.report.add_template(['console'], ['general', 'title'], ['RECORDS OWNER'])
                 
         pag = 1
         pag_size = 250
@@ -274,10 +294,6 @@ class RdmOwners:
         count_records_per_owner = {}
         all_records_list = ''
         next_page = True
-
-        # Empty file
-        file_owner = data_files_name['rdm_record_owners']
-        open(file_owner, 'w').close()
 
         while next_page == True:
 
@@ -314,12 +330,21 @@ class RdmOwners:
 
             self.report.add([], f'\nPag {str(pag)} - Records {count}\n')
             
-            open(file_owner, 'a').write(data)
+            open(data_files_name['rdm_record_owners'], 'a').write(data)
 
             if 'next' not in resp_json['links']:
                 next_page = False
             
             pag += 1
+        
+        # Counts how many records have each owner
+        self._count_records_per_owner(count_records_per_owner)
+
+        # Update all_rdm_records.txt file
+        self._update_all_rdm_records_file(all_records_list)
+
+
+    def _count_records_per_owner(self, count_records_per_owner):
 
         self.report.add([], 'Owner  Records')
 
@@ -327,6 +352,8 @@ class RdmOwners:
             records = add_spaces(count_records_per_owner[key])
             key     = add_spaces(key)
             self.report.add([], f'{key}    {records}')
+
+    def _update_all_rdm_records_file(self, all_records_list):
         
         # Updates content of all_rdm_records.txt file
         file_all_records_list = data_files_name['all_rdm_records']
