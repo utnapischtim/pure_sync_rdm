@@ -6,7 +6,7 @@ from source.rdm.requests            import Requests
 
 def rdm_versioning (uuid: str):
     """ Gives the version to use for a new record and old versions of the same uuid """
-    
+
     report   = Reports()
     requests = Requests()
     
@@ -18,15 +18,15 @@ def rdm_versioning (uuid: str):
     message = f'\tRDM metadata version  - {response} - '
 
     total_recids = resp_json['hits']['total']
-    metadata_versions = []
+    metadata_old_versions = []
 
     if total_recids == 0:
         # If there are no records with the same uuid means it is the first one (version 1)
-        metadata_version = 1
+        new_version = 1
         message += f'Record NOT found    - Metadata version: 1'
 
     else:
-        metadata_version = None
+        new_version = None
         
         # Iterates over all records in response
         for item in resp_json['hits']['hits']:
@@ -37,21 +37,26 @@ def rdm_versioning (uuid: str):
                 report.add(['console'], f" VERSIONING - Different uuid {rdm_metadata['uuid']}")
                 continue
             
-            # Add recid to listed versions
-            metadata_versions.append(item['id'])
+            # Add recid to listed versions (old versions)
+            recid           = item['id']
+            creation_date   = item['created'].split('T')[0]
+            old_version     = str(rdm_metadata['metadataVersion'])
+            metadata_old_versions.append([recid, old_version, creation_date])
 
             # Get the latest version
-            if 'metadataVersion' in rdm_metadata and not metadata_version:
-                metadata_version = rdm_metadata['metadataVersion']
+            if 'metadataVersion' in rdm_metadata and not new_version:
+                new_version = rdm_metadata['metadataVersion'] + 1
                 continue
         
         # In case the record has no metadataVersion
-        if not metadata_version:
+        if not new_version:
             message += f'Vers. not specified - New metadata version: 1'
-            metadata_version = 1
+            new_version = 1
         else:
-            message += f'Current ver.:{add_spaces(metadata_version)}  - New version: {metadata_version + 1}'        
+            message += f'Current ver.:{add_spaces(new_version)}  - New version: {new_version}'        
 
     report.add(['console'], message)
 
-    return [metadata_version, metadata_versions]
+    print(metadata_old_versions)
+
+    return [new_version, metadata_old_versions]

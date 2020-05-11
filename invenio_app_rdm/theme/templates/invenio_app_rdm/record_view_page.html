@@ -112,7 +112,8 @@
           <b>--------------------------  {{ version }}</b>
 
         {%- else -%}
-          <a href="https://127.0.0.1:5000/api/records/{{ version }}"> API </a>, <a href="https://127.0.0.1:5000/records/{{ version }}"> Landing page </a> <- {{ version }}
+
+          <a href="https://127.0.0.1:5000/api/records/{{ version[0] }}"> Version {{ version[1] }} </a> -> {{ version[2] }}
 
         {%- endif -%}
 

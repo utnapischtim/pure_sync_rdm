@@ -61,6 +61,7 @@ class RdmAddRecord:
         # Record owners
         self._check_record_owners()
 
+        # self.data['metadataOlderVersions'] = [['1', ''], ['2', '']]
         # self.data['owners'].append(3)     # TEMPORARY
 
         # TO REVIEW - TO REVIEW
