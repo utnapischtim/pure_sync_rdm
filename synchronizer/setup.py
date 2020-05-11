@@ -12,7 +12,7 @@ pure_username       = open(f'{dirpath}/data_setup/pure_username.txt', 'r').readl
 rdm_host_url        = open(f'{dirpath}/data_setup/rdm_host_url.txt', 'r').readline()
 token_rdm           = open(f'{dirpath}/data_setup/rdm_token.txt', 'r').readline()
 rdm_records_url     = f'{rdm_host_url}api/records/'
-push_dist_sec       = 1     # Time gap between RDM push requests
+push_dist_sec       = 0.8     # Time gap between RDM push requests
 wait_429            = 900   # Too many requests sent to the server (waits 15 minutes)
 
 # LOG FILES
@@ -32,10 +32,8 @@ email_sender          = open(f'{dirpath}/data_setup/email_sender.txt', 'r').read
 email_sender_password = open(f'{dirpath}/data_setup/email_sender_password.txt', 'r').readline()
 email_smtp_server     = 'smtp.gmail.com'
 email_smtp_port       = 587
-email_subject         = 'Pure file delete 2'
-email_message         = """\
-Subject: """ + email_subject + """
-Please remove from pure uuid {} the file {}."""
+email_subject         = 'Delete Pure file'
+email_message         = """Subject: """ + email_subject + """Please remove from pure uuid {} the file {}."""
 
 # RESTRICTIONS
 possible_record_restrictions = ['groups', 'owners', 'ip_range', 'ip_single']

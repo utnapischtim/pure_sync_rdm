@@ -1,6 +1,6 @@
 import json
 from datetime                       import date, datetime, timedelta
-from setup                          import upload_percent_accept, data_files_name
+from setup                          import data_files_name
 from source.general_functions       import add_spaces, initialize_counters
 from source.pure.general_functions  import get_next_page
 from source.pure.requests           import get_pure_metadata
@@ -25,7 +25,7 @@ class PureChangesByDate:
         
         # Get date of last update
         missing_updates = self._get_missing_updates()
-        missing_updates = ['2020-05-07']      # TEMPORARY !!!!!
+        missing_updates = ['2020-05-10']      # TEMPORARY !!!!!
         
         if missing_updates == []:
             self.report.add(['console'], '\nNothing to update.\n')
@@ -93,7 +93,8 @@ class PureChangesByDate:
 
 
     def _records_to_process(self, response: object, page: int, changes_date: str):
-
+            """ Check if there are records in the response from pure """
+            
             # Load response json
             json_response = json.loads(response.content)
 
@@ -112,17 +113,6 @@ class PureChangesByDate:
             self.report.add(self.all_report_files, report_line)
             
             return json_response
-
-    
-    def _initialize_local_counters(self):
-        self.local_counters = {
-            'delete': 0,
-            'update': 0,
-            'create': 0,
-            'incomplete': 0,
-            'duplicated': 0,
-            'not_ResearchOutput': 0,
-        }
 
 
     
@@ -222,19 +212,24 @@ class PureChangesByDate:
         # Global counters
         self.report.summary_global_counters(self.all_report_files, self.global_counters)
 
-        # Local counters
+        arguments = []
+        for i in self.local_counters:
+            arguments.append(add_spaces(self.local_counters[i]))
+        self.report.add_template(self.all_report_files, ['changes', 'summary'], arguments)
+        return
+
+    
+    def _initialize_local_counters(self):
+
         # Incomplete:  when the uuid or changeType are not specified
         # Duplicated:  e.g. when a record has been modified twice in a day  
         # Irrelevant:  when familySystemName is not ResearchOutput
 
-        arguments = []
-        arguments.append(add_spaces(self.local_counters['update']))
-        arguments.append(add_spaces(self.local_counters['create']))
-        arguments.append(add_spaces(self.local_counters['delete']))
-        arguments.append(add_spaces(self.local_counters['incomplete']))
-        arguments.append(add_spaces(self.local_counters['duplicated']))
-        arguments.append(add_spaces(self.local_counters['not_ResearchOutput']))
-
-        self.report.add_template(self.all_report_files, ['changes', 'summary'], arguments)
-
-        return
+        self.local_counters = {
+            'delete': 0,
+            'update': 0,
+            'create': 0,
+            'incomplete': 0,
+            'duplicated': 0,
+            'not_ResearchOutput': 0,
+        }

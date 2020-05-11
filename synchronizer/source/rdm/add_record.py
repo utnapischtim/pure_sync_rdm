@@ -10,7 +10,7 @@ from source.rdm.general_functions   import get_recid, get_userid_from_list_by_ex
 from source.rdm.put_file            import rdm_add_file
 from source.rdm.versioning          import rdm_versioning 
 from source.rdm.emails              import send_email
-from source.rdm.groups              import RdmGroups
+from source.rdm.run_groups          import RdmGroups
 from source.rdm.database            import RdmDatabase
 from source.rdm.requests            import Requests
 from source.reports                 import Reports
@@ -25,7 +25,7 @@ class RdmAddRecord:
         
 
     def push_record_by_uuid(self, global_counters: dict, uuid: str):
-        # Gets from Pure the metadata of the given uuid
+        """ Gets from Pure the metadata of a given uuid """
         item = get_pure_record_metadata_by_uuid(uuid)
         if not item:
             return False
@@ -206,17 +206,25 @@ class RdmAddRecord:
             if owner and int(owner) not in self.data['owners']:
                 self.data['owners'].append(int(owner))
 
-            # Get Orcid
+            # ORCID
             if 'uuid' in self.sub_data:
-                orcid = self._get_orcid(self.sub_data['uuid'], self.sub_data['name'])
-                if orcid:
-                    self.sub_data['orcid'] = orcid
+                person_uuid = self.sub_data['uuid']
+                person_name = self.sub_data['name']
+                
+                # External persons are not present in 'persons' Pure API endpoint
+                if 'type_p' in self.sub_data and self.sub_data['type_p'] == 'External person':
+                    report = f'\tPure get orcid                           - External person     - {person_uuid} - {person_name}'
+                    self.report.add(['console'], report)
+                else:
+                    orcid = self._get_orcid(person_uuid, person_name)
+                    if orcid:
+                        self.sub_data['orcid'] = orcid
 
             self.data['contributors'].append(self.sub_data)
 
 
     def _process_organisational_units(self):
-        
+        """ Process the metadata relative to the organisational units """
         if 'organisationalUnits' in self.item:
             self.data['organisationalUnits'] = []
             self.data['groupRestrictions']   = []
@@ -313,19 +321,6 @@ class RdmAddRecord:
 
 
 
-    def _metadata_and_file_submission_check(self, success_check: dict):
-    
-        if (success_check['metadata'] == True and success_check['file'] == True):
-            # Remove uuid from to_transmit.txt
-            self._remove_uuid_from_list(self.uuid, data_files_name['transfer_uuid_list'])
-        else:
-            # Add uuid to to_transmit.txt to be re-transmitted
-            open(data_files_name['transfer_uuid_list'], "a").write(f'{self.uuid}\n')
-            return False
-        return True  
-
-
-
     def _remove_uuid_from_list(self, uuid: str, file_name: str):
         """ If the given uuid is in the given file then the line will be removed """
 
@@ -349,6 +344,7 @@ class RdmAddRecord:
 
 
     def _accessright_conversion(self, pure_value: str):
+        """ Converts the Pure access right to the corresponding RDM value """
 
         if pure_value in accessright_pure_to_rdm:
             return accessright_pure_to_rdm[pure_value]
@@ -501,6 +497,7 @@ class RdmAddRecord:
 
 
     def _process_file_response(self, response, file_name):
+        """ Checks if the file is already in RDM, and if it has already been reviewed """
         # If the file is not in RDM
         if len(self.pure_rdm_file_match) == 0:
             match_review = 'File not in RDM    '
@@ -525,19 +522,14 @@ class RdmAddRecord:
 
 
     def _get_orcid(self, person_uuid: str, name: str):
-
+        """ Gets from pure a person orcid """
         # Pure request
         response = get_pure_metadata('persons', person_uuid, {}, False)
 
         message = f'\tPure get orcid        - {response} -'
 
-        # External person
-        if response.status_code == 404:
-            self.report.add(['console'], f'{message} External person     - {person_uuid} - {name}')
-            return False
-
         # Error
-        elif response.status_code >= 300:
+        if response.status_code >= 300:
             self.report.add(['console'], f'{message} Error: {response.content}')
             return False
 
@@ -547,16 +539,32 @@ class RdmAddRecord:
         # Read orcid
         if 'orcid' in resp_json:
             orcid = resp_json['orcid']
-            self.report.add(['console'], f'{message} {orcid} - {name}')
+            self.report.add(['console'], f'{message} {orcid} - {person_uuid} - {name}')
             return orcid
 
         # Not found
-        self.report.add(['console'], f'{message} Orcid not found     - {name}')
-        return False        
+        self.report.add(['console'], f'{message} Orcid not found     - {person_uuid} - {name}')
+        return False
+
+
+
+    def _metadata_and_file_submission_check(self, success_check: dict):
+        """ Checks if both metadata and files were correctly transmitted """
+    
+        if (success_check['metadata'] == True and success_check['file'] == True):
+            # Remove uuid from to_transmit.txt
+            self._remove_uuid_from_list(self.uuid, data_files_name['transfer_uuid_list'])
+        else:
+            # Add uuid to to_transmit.txt to be re-transmitted
+            open(data_files_name['transfer_uuid_list'], "a").write(f'{self.uuid}\n')
+            return False
+        return True  
 
 
 
     def _http_response_counter(self, status_code: int):
+        """ According to the given http status code 
+            creates a new object element or increaes an existing one  """
         if status_code not in self.global_counters['http_responses']:
             self.global_counters['http_responses'][status_code] = 0
         self.global_counters['http_responses'][status_code] += 1

@@ -36,8 +36,8 @@ class RdmOwners:
 
         identifier_value = '0000-0002-4154-6945'      # TEMPORARY
         if identifier == 'externalId':                # TEMPORARY
-            identifier_value = '3261'                 # TEMPORARY
-            # identifier_value = '30'                   # TEMPORARY
+            # identifier_value = '3261'                 # TEMPORARY
+            identifier_value = '30'                   # TEMPORARY
         
         self.report.add([], f'\n{identifier}: {identifier_value}\n')
 
@@ -116,7 +116,8 @@ class RdmOwners:
     
 
     def _add_user_as_owner(self, rdm_json, recid):
-        # Adds the current logged in user as record owner
+        """ Adds the current logged in user as record owner """
+
         rdm_json['owners'].append(self.user_id)
 
         self.report.add([], f"\tRDM record status     - ADDING owner     - New owners:         - {rdm_json['owners']}")
@@ -128,6 +129,7 @@ class RdmOwners:
 
 
     def _create_rdm_record(self, item: dict):
+        """ If a record of the processed user is not in RDM creates it """
         item['owners'] = [self.user_id]
 
         self.report.add([], '\tRDM record status     -                  - CREATE record')
@@ -145,6 +147,7 @@ class RdmOwners:
 
 
     def _response_first_process(self, response: object, page: int, page_size: int):
+        """ Checks if there are records to process """
 
         # Load response json
         resp_json = json.loads(response.content)
@@ -158,7 +161,7 @@ class RdmOwners:
             self.report.add([], '\nThe user has no records - End task\n')
             return False
 
-        self.report.add([], f'\nPag {page} - Get person records    - {response} - (size {page_size})')
+        self.report.add([], f'\nPag {page} - Get person records    - {response}')
         return resp_json
 
 
