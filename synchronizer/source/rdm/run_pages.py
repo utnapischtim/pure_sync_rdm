@@ -9,7 +9,7 @@ class RunPages:
     def __init__(self):
         self.report = Reports()
         self.rdm_add_record = RdmAddRecord()
-        self.report_files = ['console']
+
         
     def get_pure_by_page(self, pag_begin: int, pag_end: int, pag_size: int):
         """ Gets records from Pure 'research-outputs' endpoint by page and submit them to RDM. """
@@ -19,8 +19,8 @@ class RunPages:
             self.global_counters = initialize_counters()
 
             # Report intro
-            self.report.add_template(self.report_files, ['general', 'title'], ['PAGES'])
-            self.report.add_template(self.report_files, ['pages', 'page_and_size'], [pag, pag_size])
+            self.report.add_template(['console'], ['general', 'title'], ['PAGES'])
+            self.report.add_template(['console'], ['pages', 'page_and_size'], [pag, pag_size])
 
             # Pure get request
             response = get_pure_metadata('research-outputs', '', {'page': pag, 'pageSize': pag_size})
@@ -38,6 +38,6 @@ class RunPages:
 
     def report_summary(self, pag, pag_size):
         # Global counters
-        self.report.summary_global_counters(self.report_files, self.global_counters)
+        self.report.summary_global_counters(['console'], self.global_counters)
         # Summary pages.log
         self.report.pages_single_line(self.global_counters, pag, pag_size)

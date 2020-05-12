@@ -299,7 +299,7 @@ class RdmOwners:
 
             # REQUEST to RDM
             params = {'sort': 'mostrecent', 'size': pag_size, 'page': pag}
-            response = self.rdm_requests.rdm_get_metadata(params)
+            response = self.rdm_requests.get_metadata(params)
 
             self.report.add([], f'\n{response}\n')
 

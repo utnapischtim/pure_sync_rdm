@@ -22,7 +22,7 @@ class Requests:
         return (('prettyprint', '1'),)
 
 
-    def rdm_get_metadata(self, additional_parameters: str, recid = ''):
+    def get_metadata(self, additional_parameters: str, recid = ''):
 
         headers = self._request_headers(['content_type', 'token'])
         params  = self._request_params()
@@ -45,7 +45,7 @@ class Requests:
         return response
 
 
-    def rdm_post_metadata(self, data: str):
+    def post_metadata(self, data: str):
         """ Used to create a new record """
 
         open(temporary_files_name['post_rdm_metadata'], "w").write(data)
@@ -61,7 +61,7 @@ class Requests:
         return response
 
 
-    def rdm_put_metadata(self, recid: str, data: str):
+    def put_metadata(self, recid: str, data: str):
         """ Used to update an existing record """
 
         headers = self._request_headers(['content_type', 'token'])
@@ -76,7 +76,7 @@ class Requests:
         return response
 
 
-    def rdm_put_file(self, file_path_name: str, recid: str):
+    def put_file(self, file_path_name: str, recid: str):
 
         headers = self._request_headers(['file', 'token'])
         data    = open(file_path_name, 'rb').read()
@@ -89,7 +89,7 @@ class Requests:
         return requests.put(url, headers=headers, data=data, verify=False)
 
 
-    def rdm_delete_metadata(self, recid: str):
+    def delete_metadata(self, recid: str):
 
         headers = self._request_headers(['content_type', 'token'])
         url = f'{rdm_records_url}{recid}'
@@ -119,11 +119,11 @@ class Requests:
         return True
 
 
-    def get_rdm_metadata_by_query(self, query_value: str):
+    def get_metadata_by_query(self, query_value: str):
         """ Query RDM record metadata """
 
         params = {'sort': 'mostrecent', 'size': 250, 'page': 1, 'q': f'"{query_value}"'}
-        response = self.rdm_get_metadata(params)
+        response = self.get_metadata(params)
 
         self._check_response(response)
         return response
@@ -138,7 +138,7 @@ class Requests:
             return False
 
         # RDM request
-        response = self.rdm_get_metadata({}, recid)
+        response = self.get_metadata({}, recid)
         
         self._check_response(response)
         return response

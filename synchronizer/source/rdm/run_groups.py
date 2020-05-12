@@ -13,11 +13,10 @@ class RdmGroups:
     def __init__(self):
         self.rdm_db = RdmDatabase()
         self.report = Reports()
-        self.request = Requests()
+        self.rdm_requests = Requests()
         self.general_functions = GeneralFunctions()
         self.report_files = ['console', 'groups']
 
-    
 
     def _decorator_split(func):
         def _wrapper(self, old_group_externalId, new_groups_externalIds) :
@@ -117,7 +116,7 @@ class RdmGroups:
     def _rdm_split_modify_record(self, old_group_externalId: str, new_groups_externalIds: list):
 
         # Get from RDM all old group's records
-        response = self.request.get_rdm_metadata_by_query(old_group_externalId)
+        response = self.rdm_requests.get_metadata_by_query(old_group_externalId)
 
         resp_json = json.loads(response.content)
         total_items = resp_json['hits']['total']
@@ -199,7 +198,7 @@ class RdmGroups:
             self._rdm_check_if_group_exists(old_group_externalId)
             
             # Get record metadata
-            response = self.request.get_rdm_metadata_by_query(old_group_externalId)
+            response = self.rdm_requests.get_metadata_by_query(old_group_externalId)
 
 
             resp_json = json.loads(response.content)

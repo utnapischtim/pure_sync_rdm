@@ -19,10 +19,10 @@ from source.reports                 import Reports
 class RdmAddRecord:
 
     def __init__(self):
-        self.requests = Requests()
-        self.report = Reports()
-        self.groups = RdmGroups()
-        self.general_functions = GeneralFunctions()
+        self.rdm_requests       = Requests()
+        self.report             = Reports()
+        self.groups             = RdmGroups()
+        self.general_functions  = GeneralFunctions()
         
 
     def push_record_by_uuid(self, global_counters: dict, uuid: str):
@@ -275,7 +275,7 @@ class RdmAddRecord:
             'file': False
         }                      
         # POST REQUEST metadata
-        response = self.requests.rdm_post_metadata(self.data)
+        response = self.rdm_requests.post_metadata(self.data)
 
         # Count http responses
         self._http_response_counter(response.status_code)
@@ -408,7 +408,7 @@ class RdmAddRecord:
 
         # Get from RDM file size and internalReview
         params = {'sort': 'mostrecent', 'size': '100', 'page': '1', 'q': self.uuid}
-        response = self.requests.rdm_get_metadata(params)
+        response = self.rdm_requests.get_metadata(params)
 
         if response.status_code >= 300:
             self.report.add(['console'], f'\nget_rdm_file_size - {self.uuid} - {response}')

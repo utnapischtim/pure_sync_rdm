@@ -102,23 +102,23 @@
       {%- endif -%}
       <br><br>
       
-      
-      <b>Older versions:</b></br>
-      
-      {%- for version in record.metadataOlderVersions -%}
-        </br>
-
-        {%- if version == '6zhv3-t8t95' %}
-          <b>--------------------------  {{ version }}</b>
-
-        {%- else -%}
-
-          <a href="https://127.0.0.1:5000/api/records/{{ version[0] }}"> Version {{ version[1] }} </a> -> {{ version[2] }}
-
-        {%- endif -%}
-
-      {%- endfor -%}
-
+      <table style="width:50%">
+        <tr>
+          <th>Versions:</th>
+        </tr>
+        <tr>
+          <td>{{ record.publication_date }}</td>
+          <td><b>Version {{ record.metadataVersion }}</b></td>
+        </tr>
+        
+        {%- for version in record.metadataOlderVersions -%}
+          <tr>
+            <td>{{ version[2] }}</td>
+            <td><u><a href="https://127.0.0.1:5000/records/{{ version[0] }}"> Version {{ version[1] }} </a></u></td>
+            <td><u><a href="https://127.0.0.1:5000/api/records/{{ version[0] }}"> api </a></u></td>
+          </tr>
+        {%- endfor -%}
+      </table>
 
       {# files #}
       {%- if record.files and record|can_list_files %}

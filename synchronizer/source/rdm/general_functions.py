@@ -21,7 +21,7 @@ class GeneralFunctions:
         4 - gets the last metadata_version
         """
 
-        response = self.rdm_requests.get_rdm_metadata_by_query(uuid)
+        response = self.rdm_requests.get_metadata_by_query(uuid)
 
         resp_json = json.loads(response.content)
 
@@ -82,7 +82,7 @@ class GeneralFunctions:
     #   ---         ---         ---
     def update_rdm_record(self, data: str, recid: str):
 
-        response = self.rdm_requests.rdm_put_metadata(recid, data)
+        response = self.rdm_requests.put_metadata(recid, data)
 
         url = f'{rdm_host_url}api/records/{recid}'
         self.reports.add(['console'], f'\tRecord update         - {response} - {url}')

@@ -7,7 +7,7 @@ from source.reports                 import Reports
 
 class Delete:
     def __init__(self):
-        self.request = Requests()
+        self.rdm_requests = Requests()
         self.report = Reports()
 
     def record(self, recid: str):
@@ -15,7 +15,7 @@ class Delete:
         # NOTE: the user ACCOUNT related to the used TOKEN must be ADMIN
 
         # Delete record request
-        response = self.request.rdm_delete_metadata(recid)
+        response = self.rdm_requests.delete_metadata(recid)
 
         report = f'\tRDM delete record     - {response} - Deleted recid:        {recid}'
         self.report.add(['console'], report)
@@ -40,8 +40,6 @@ class Delete:
                 if line.strip("\n").split(' ')[1] != recid:
                     f.write(line)
         return response
-
-
 
 
     def _decorator(func):
@@ -91,9 +89,9 @@ class Delete:
 
 
     def _read_file_recids(self):
+        """ Reads from to_delete.txt all recids to be deleted """
         file_name = data_files_name['delete_recid_list']
         recids = open(file_name, 'r').readlines()
-
         if len(recids) == 0:
             self.report.add(['console'], '\nNothing to delete.\n')
             return False
@@ -101,7 +99,7 @@ class Delete:
 
 
     def all_records(self):
-
+        """ Delete all RDM records """
         file_data = open(data_files_name['all_rdm_records']).readlines()
         for line in file_data:
             recid = line.split(' ')[1].strip('\n')

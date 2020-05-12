@@ -45,6 +45,7 @@ class Reports:
 
 
     def pages_single_line(self, global_counters, pag, pag_size):
+        """ Adds to pages report log a summary of the page submission to RDM """
         current_time = datetime.now().strftime("%H:%M:%S")
         arguments = []
         arguments.append(add_spaces(current_time))

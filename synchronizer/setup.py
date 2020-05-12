@@ -39,7 +39,7 @@ email_message         = """Subject: """ + email_subject + """Please remove from 
 possible_record_restrictions = ['groups', 'owners', 'ip_range', 'ip_single']
 
 # VERSIONING
-versioning_running = True
+versioning_running = False
 
 # ACCESS RIGHTS
 accessright_pure_to_rdm = {
