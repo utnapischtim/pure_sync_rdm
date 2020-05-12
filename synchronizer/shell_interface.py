@@ -1,19 +1,10 @@
 
-# from source.rdm.push_by_changes     import PureChangesByDate
-# from source.rdm.push_by_page        import RunPages
-# from source.log_manager             import delete_old_log_files
-# from source.rdm.duplicate_records   import rdm_duplicate_records
-# from source.rdm.push_by_uuid        import AddFromUuidList
-# from source.rdm.delete_record       import Delete
-# from source.rdm.owners              import RdmOwners
-# from source.rdm.groups              import RdmGroups
-
-from source.rdm.run_changes     import PureChangesByDate
-from source.rdm.run_pages        import RunPages
-from source.log_manager             import delete_old_log_files
+from source.rdm.run_changes             import PureChangesByDate
+from source.rdm.run_pages               import RunPages
+from source.log_manager                 import delete_old_log_files
 from source.rdm.run_duplicate_records   import rdm_duplicate_records
-from source.rdm.run_uuid        import AddFromUuidList
-from source.rdm.delete_record       import Delete
+from source.rdm.run_uuid                import AddFromUuidList
+from source.rdm.delete_record           import Delete
 from source.rdm.run_owners              import RdmOwners
 from source.rdm.run_groups              import RdmGroups
 

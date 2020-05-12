@@ -101,20 +101,39 @@
         <h3>No abstract available.</h3><br>
       {%- endif -%}
       <br><br>
-      
-      <table style="width:50%">
+
+      <style>
+      th {
+        padding: 15px;
+      }
+      td {
+        padding: 8px;
+      }
+      table {
+        width: 40%; 
+        background-color:  #ecf0f1; 
+        color:  #2f2f2f;
+        border-radius: 10px;
+        float: right;
+        margin-bottom: 20px;
+      }
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+      </style>
+      <table>
         <tr>
           <th>Versions:</th>
         </tr>
-        <tr>
-          <td>{{ record.publication_date }}</td>
-          <td><b>Version {{ record.metadataVersion }}</b></td>
-        </tr>
         
-        {%- for version in record.metadataOlderVersions -%}
+        {%- for version in record.metadataOtherVersions -%}
           <tr>
             <td>{{ version[2] }}</td>
-            <td><u><a href="https://127.0.0.1:5000/records/{{ version[0] }}"> Version {{ version[1] }} </a></u></td>
+            {%- if record.recid != version[0] -%}
+              <td><u><a href="https://127.0.0.1:5000/records/{{ version[0] }}"> Version {{ version[1] }} </a></u></td>
+              {%- else -%}
+              <td><b> Version {{ version[1] }} </b></td>
+            {%- endif -%}
             <td><u><a href="https://127.0.0.1:5000/api/records/{{ version[0] }}"> api </a></u></td>
           </tr>
         {%- endfor -%}

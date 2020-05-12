@@ -8,8 +8,8 @@ from source.pure.general_functions  import get_pure_record_metadata_by_uuid, get
 from source.pure.requests           import get_pure_metadata
 from source.rdm.general_functions   import GeneralFunctions
 from source.rdm.put_file            import rdm_add_file
-from source.rdm.versioning          import rdm_versioning 
 from source.rdm.emails              import send_email
+from source.rdm.versioning          import Versioning 
 from source.rdm.run_groups          import RdmGroups
 from source.rdm.database            import RdmDatabase
 from source.rdm.requests            import Requests
@@ -23,6 +23,7 @@ class RdmAddRecord:
         self.report             = Reports()
         self.groups             = RdmGroups()
         self.general_functions  = GeneralFunctions()
+        self.versioning         = Versioning()
         
 
     def push_record_by_uuid(self, global_counters: dict, uuid: str):
@@ -61,7 +62,7 @@ class RdmAddRecord:
         # Record owners
         self._check_record_owners()
 
-        # self.data['metadataOlderVersions'] = [['1', ''], ['2', '']]
+        # self.data['metadataOtherVersions'] = [['1', ''], ['2', '']]
         # self.data['owners'].append(3)     # TEMPORARY
 
         # TO REVIEW - TO REVIEW
@@ -99,10 +100,10 @@ class RdmAddRecord:
     def _check_record_version(self):
         if versioning_running:
             # Get metadata version
-            response = rdm_versioning(self.uuid)
+            response = self.versioning.get_uuid_version(self.uuid)
             if response:
                 self.data['metadataVersion']       = response[0]
-                self.data['metadataOlderVersions'] = response[1]
+                self.data['metadataOtherVersions'] = response[1]
 
 
 
