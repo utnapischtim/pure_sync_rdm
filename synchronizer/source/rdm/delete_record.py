@@ -18,7 +18,7 @@ class Delete:
         # Delete record request
         response = self.rdm_requests.delete_metadata(recid)
 
-        report = f'\tRDM delete record     - {response} - Deleted recid:        {recid}'
+        report = f'\tRDM delete record @ {response} @ Deleted recid:        {recid}'
         self.report.add(['console'], report)
 
         # 410 -> "PID has been deleted"
@@ -54,7 +54,7 @@ class Delete:
             # Decorated function
             func(self)
 
-            report = f"\nTotal: {self.counters['total']} - Success: {self.counters['success']} - Error: {self.counters['error']}"
+            report = f"\nTotal: {self.counters['total']} @ Success: {self.counters['success']} @ Error: {self.counters['error']}"
             self.report.add(['console'], report)
         return _wrapper
 

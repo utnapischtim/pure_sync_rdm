@@ -84,7 +84,7 @@ class Versioning:
             version         = str(item['metadata']['metadataVersion'])
             all_metadata_versions.append([recid, version, creation_date])
 
-        self.report.add(['console'], f'Total versions: {len(all_metadata_versions)}')
+        self.report.add(['console'], f'\tUpdate uuid versions')
 
         for item in resp_json['hits']['hits']:
 
@@ -92,7 +92,7 @@ class Versioning:
             item = item['metadata']
 
             if item['metadataOtherVersions'] == all_metadata_versions:
-                self.report.add(['console'], f'\tRecord update         - Up to date       - {recid}')
+                self.report.add(['console'], f'\tRecord update @ Up to date @ {recid}')
                 continue
 
             item['metadataOtherVersions'] = all_metadata_versions

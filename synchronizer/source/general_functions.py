@@ -3,9 +3,11 @@ from pathlib            import Path
 from datetime           import date, datetime
 from setup              import pure_uuid_length
 
-def add_spaces(value: str):
-    max_length = 5                              # 5 is the maximum length of the given value
+def add_spaces(value: str, max_length = 5):
+    # 5 is the standard maximum length of the given value
     spaces = max_length - len(str(value))
+    if max_length > 5:
+        return str(value) + ''.ljust(spaces)
     return ''.ljust(spaces) + str(value)        # ljust -> adds spaces after a string
 
 

@@ -110,7 +110,7 @@ class PureChangesByDate:
                     self.report.add(self.all_report_files, f'\n\nNothing to transfer.\n\n')
                 return False
 
-            report_line = f'\nPag{add_spaces(page)} - Pure get changes   - {response} - Number of items: {add_spaces(number_records)}'
+            report_line = f'\nPag{add_spaces(page)} @ Pure get changes @ {response} @ Number of items: {add_spaces(number_records)}'
             self.report.add(self.all_report_files, report_line)
             
             return json_response
@@ -133,7 +133,7 @@ class PureChangesByDate:
             self.duplicated_uuid.append(uuid)   
             self.local_counters['delete'] += 1
 
-            report = f"\n{self.local_counters['delete']} - {item['changeType']}"
+            report = f"\n{self.local_counters['delete']} @ {item['changeType']}"
             self.report.add(['console'], report)
       
             # Gets the record recid
@@ -167,8 +167,10 @@ class PureChangesByDate:
             if uuid in self.duplicated_uuid:
                 self.local_counters['duplicated'] += 1
                 continue
-            
-            self.report.add(['console'], f"\n{add_spaces(self.global_counters['total'] + 1)} - Change type           - {item['changeType']}")
+
+            record_number = add_spaces(self.global_counters['total'] + 1)
+            report = f"\n{record_number} - Change type           - {item['changeType']}"
+            self.report.add(['console'], report)
 
             if item['changeType'] == 'ADD' or item['changeType'] == 'CREATE':
                 self.local_counters['create'] += 1

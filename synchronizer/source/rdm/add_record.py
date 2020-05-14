@@ -93,7 +93,10 @@ class RdmAddRecord:
         self.data = json.dumps(self.data)
 
         # Post request to RDM
-        return self._post_metadata()
+        self._post_metadata()
+
+        # Updates the versioning data of all records with the same uuid
+        self._update_all_uuid_versions()
 
 
 
@@ -105,6 +108,12 @@ class RdmAddRecord:
             if response:
                 self.data['metadataVersion']       = response[0]
                 self.data['metadataOtherVersions'] = response[1]
+
+
+    def _update_all_uuid_versions(self):
+        """ Updates the versioning data of all records with the same uuid """
+        if versioning_running:
+            self.versioning.update_all_uuid_versions(self.uuid)
 
 
 
@@ -217,7 +226,7 @@ class RdmAddRecord:
                 
                 # External persons are not present in 'persons' Pure API endpoint
                 if 'type_p' in self.sub_data and self.sub_data['type_p'] == 'External person':
-                    report = f'\tPure get orcid                           - External person     - {person_uuid} - {person_name}'
+                    report = f'\tPure get orcid @@ External person @ {person_uuid} @ {person_name}'
                     self.report.add(['console'], report)
                 else:
                     orcid = self._get_orcid(person_uuid, person_name)
@@ -282,7 +291,7 @@ class RdmAddRecord:
         # Count http responses
         self._http_response_counter(response.status_code)
 
-        self.report.add(['console'], f"\tRDM post metadata     - {response} - Uuid:                 {uuid}")
+        self.report.add(['console'], f"\tRDM post metadata @ {response} @ Uuid:                 {uuid}")
 
         if response.status_code >= 300:
             self.global_counters['metadata']['error'] += 1
@@ -413,7 +422,7 @@ class RdmAddRecord:
         response = self.rdm_requests.get_metadata(params)
 
         if response.status_code >= 300:
-            self.report.add(['console'], f'\nget_rdm_file_size - {self.uuid} - {response}')
+            self.report.add(['console'], f'\nget_rdm_file_size @ {self.uuid} @ {response}')
             return False
 
         # Load response
@@ -518,7 +527,7 @@ class RdmAddRecord:
         
         file_name_report = shorten_file_name(file_name)
 
-        report = f'\tPure get file         - {response} - {match_review} - {file_name_report}'
+        report = f'\tPure get file @ {response} @ {match_review} @ {file_name_report}'
         self.report.add(['console'], report)
 
         self.record_files.append(file_name)
@@ -530,7 +539,7 @@ class RdmAddRecord:
         # Pure request
         response = get_pure_metadata('persons', person_uuid, {}, False)
 
-        message = f'\tPure get orcid        - {response} -'
+        message = f'\tPure get orcid @ {response} @'
 
         # Error
         if response.status_code >= 300:
@@ -543,11 +552,11 @@ class RdmAddRecord:
         # Read orcid
         if 'orcid' in resp_json:
             orcid = resp_json['orcid']
-            self.report.add(['console'], f'{message} {orcid} - {person_uuid} - {name}')
+            self.report.add(['console'], f'{message} {orcid} @ {person_uuid} @ {name}')
             return orcid
 
         # Not found
-        self.report.add(['console'], f'{message} Orcid not found     - {person_uuid} - {name}')
+        self.report.add(['console'], f'{message} Orcid not found @ {person_uuid} @ {name}')
         return False
 
 

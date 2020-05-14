@@ -44,7 +44,7 @@ class GeneralFunctions:
                 landing_page_url    = f'{rdm_host_url}records/{recid}'
                 newest_recid = recid
 
-                report = f'\tRDM get recid         - {response} - Total:       {add_spaces(total_recids)}  - {api_url}'
+                report = f'\tRDM get recid @ {response} @ Total: {add_spaces(total_recids)} @ {api_url}'
                 self.reports.add(['console'], report)
 
             else:
@@ -73,7 +73,7 @@ class GeneralFunctions:
                 user_id         = line[0]
                 user_id_spaces  = add_spaces(user_id)
 
-                report = f'\tRDM owner list        -                  - User id:     {user_id_spaces}  - externalId: {external_id}'
+                report = f'\tRDM owner list @@ User id:     {user_id_spaces} @ externalId: {external_id}'
                 self.reports.add(['console'], report)
 
                 return user_id
@@ -85,7 +85,7 @@ class GeneralFunctions:
         response = self.rdm_requests.put_metadata(recid, data)
 
         url = f'{rdm_host_url}api/records/{recid}'
-        self.reports.add(['console'], f'\tRecord update         - {response} - {url}')
+        self.reports.add(['console'], f'\tRecord update @ {response} @ {url}')
 
         return response
 

@@ -34,5 +34,5 @@ if __name__ == '__main__':
     # Create new instance
     docopt_instance = ShellInterface()
 
-# Calls the method given in the arguments
-method_call(docopt_instance, arguments)
+    # Calls the method given in the arguments
+    method_call(docopt_instance, arguments)
