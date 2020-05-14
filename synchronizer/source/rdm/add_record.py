@@ -98,6 +98,7 @@ class RdmAddRecord:
 
 
     def _check_record_version(self):
+        """ Checks if there are in RDM other versions of the same uuid """
         if versioning_running:
             # Get metadata version
             response = self.versioning.get_uuid_version(self.uuid)
@@ -108,8 +109,8 @@ class RdmAddRecord:
 
 
     def _check_record_owners(self):
+        """ Removes duplicate owners """
         if 'owners' in self.item:
-            # Remove duplicate owners
             self.data['owners'] = list(set(self.item['owners']))        
         else:
             self.data['owners'] = list(set([1]))
