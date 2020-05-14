@@ -63,7 +63,7 @@ class GeneralFunctions:
 
     #   ---         ---         ---
     def get_userid_from_list_by_externalid(self, external_id: str, file_data: list):
-
+        """  """
         for line in file_data:
             line = line.split('\n')[0]
             line = line.split(' ')

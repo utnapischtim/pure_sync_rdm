@@ -11,6 +11,7 @@ class Delete:
         self.report = Reports()
 
     def record(self, recid: str):
+        """ Deletes record from RDM """
         
         # NOTE: the user ACCOUNT related to the used TOKEN must be ADMIN
 
@@ -59,6 +60,7 @@ class Delete:
 
     @_decorator
     def from_list(self):
+        """ Deletes all recids that are listed into data/to_delete.txt """
 
         recids = self._read_file_recids()
         if not recids:
