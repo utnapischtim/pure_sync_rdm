@@ -96,5 +96,6 @@ class Versioning:
                 continue
 
             item['metadataOtherVersions'] = all_metadata_versions
-            item = json.dumps(item)
-            self.general_functions.update_rdm_record(item, recid)
+
+            # Update record
+            self.general_functions.update_rdm_record(recid, item)

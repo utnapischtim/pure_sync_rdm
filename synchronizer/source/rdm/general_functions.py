@@ -80,7 +80,7 @@ class GeneralFunctions:
 
 
     #   ---         ---         ---
-    def update_rdm_record(self, data: str, recid: str):
+    def update_rdm_record(self, recid: str, data: object):
 
         response = self.rdm_requests.put_metadata(recid, data)
 

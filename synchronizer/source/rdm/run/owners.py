@@ -117,15 +117,15 @@ class RdmOwners:
 
     
 
-    def _add_user_as_owner(self, rdm_json, recid):
+    def _add_user_as_owner(self, data, recid):
         """ Adds the current logged in user as record owner """
 
-        rdm_json['owners'].append(self.user_id)
+        data['owners'].append(self.user_id)
 
-        self.report.add(f"\tRDM record status @ ADDING owner @ New owners: @ {rdm_json['owners']}")
+        self.report.add(f"\tRDM record status @ ADDING owner @ New owners: @ {data['owners']}")
 
         # Add owner to an existing RDM record
-        self.general_functions.update_rdm_record(json.dumps(rdm_json), recid)
+        self.general_functions.update_rdm_record(recid, data)
 
         self.local_counters['to_update'] += 1
 

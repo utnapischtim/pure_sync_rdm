@@ -1,6 +1,7 @@
 import requests
 import time
-from setup                          import token_rdm, rdm_records_url, temporary_files_name, wait_429, push_dist_sec
+import json
+from setup                          import token_rdm, rdm_host_url, rdm_records_url, temporary_files_name, wait_429, push_dist_sec
 from source.reports                 import Reports
 
 class Requests:
@@ -61,16 +62,17 @@ class Requests:
         return response
 
 
-    def put_metadata(self, recid: str, data: str):
+    def put_metadata(self, recid: str, data: object):
         """ Used to update an existing record """
+
+        data = json.dumps(data).encode('utf-8')
 
         headers = self._request_headers(['content_type', 'token'])
         params  = self._request_params()
 
-        data_utf8 = data.encode('utf-8')
         url = f'{rdm_records_url}{recid}'
 
-        response = requests.put(url, headers=headers, params=params, data=data_utf8, verify=False)
+        response = requests.put(url, headers=headers, params=params, data=data, verify=False)
 
         self._check_response(response)
         return response

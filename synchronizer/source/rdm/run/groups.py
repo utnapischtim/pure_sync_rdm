@@ -151,11 +151,9 @@ class RdmGroups:
             # Change managingOrganisationalUnit
             item = self._process_managing_organisational_unit(item, old_group_externalId)
 
-            record_json = json.dumps(item)
-
             # Update record
             recid = item['recid']
-            response = self.general_functions.update_rdm_record(record_json, recid)
+            response = self.general_functions.update_rdm_record(recid, item)
 
         return True
 
@@ -232,11 +230,9 @@ class RdmGroups:
                     item['managingOrganisationalUnit_uuid']       = new_group_data['uuid']
                     item['managingOrganisationalUnit_externalId'] = new_group_data['externalId']
 
-                record_json = json.dumps(item)
-
                 # Update record
                 recid = item['recid']
-                response = self.general_functions.update_rdm_record(record_json, recid)
+                response = self.general_functions.update_rdm_record(recid, item)
 
 
     def _process_organisational_units(self, item, new_group_data, old_groups_externalId):
