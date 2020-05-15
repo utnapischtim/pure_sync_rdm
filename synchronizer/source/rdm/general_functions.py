@@ -45,7 +45,7 @@ class GeneralFunctions:
                 newest_recid = recid
 
                 report = f'\tRDM get recid @ {response} @ Total: {add_spaces(total_recids)} @ {api_url}'
-                self.reports.add(['console'], report)
+                self.reports.add(report)
 
             else:
                 # If versioning is running then it is not necessary to delete older versions of the record
@@ -74,7 +74,7 @@ class GeneralFunctions:
                 user_id_spaces  = add_spaces(user_id)
 
                 report = f'\tRDM owner list @@ User id:     {user_id_spaces} @ externalId: {external_id}'
-                self.reports.add(['console'], report)
+                self.reports.add(report)
 
                 return user_id
 
@@ -85,7 +85,7 @@ class GeneralFunctions:
         response = self.rdm_requests.put_metadata(recid, data)
 
         url = f'{rdm_host_url}api/records/{recid}'
-        self.reports.add(['console'], f'\tRecord update @ {response} @ {url}')
+        self.reports.add(f'\tRecord update @ {response} @ {url}')
 
         return response
 

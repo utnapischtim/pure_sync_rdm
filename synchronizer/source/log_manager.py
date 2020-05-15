@@ -61,4 +61,4 @@ def align_response(file_name, action):
     max_length = 35
     spaces = max_length - len(str(file_name))
     file_with_spaces = str(file_name) + ''.ljust(spaces)
-    reports.add(['console'], f'{file_with_spaces}{action}')
+    reports.add(f'{file_with_spaces}{action}')

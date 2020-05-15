@@ -33,7 +33,7 @@ def get_pure_metadata(endpoint, identifier = '', parameters = {}, review = True)
     response = requests.get(url, headers=headers)
 
     if response.status_code >= 300 and review:
-        reports.add(['console'], response.content)
+        reports.add(response.content)
 
     # Add response content to pure_get_uuid_metadata.json
     open(temporary_files_name['get_pure_metadata'], 'wb').write(response.content)

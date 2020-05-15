@@ -103,13 +103,13 @@ class Requests:
     def _check_response(self, response):
         http_code = response.status_code
         if http_code >= 300 and http_code != 429:
-            self.report.add(['console'], response.content)
+            self.report.add(response.content)
             return False
 
         # Checks if too many requests are submitted to RDM (more then 5000 / hour)
         if response.status_code == 429:
             report = f'{response.content}\nToo many RDM requests.. wait {wait_429 / 60} minutes\n'
-            self.report.add(['console'], report)
+            self.report.add(report)
             time.sleep(wait_429)
             return False
 
@@ -134,7 +134,7 @@ class Requests:
 
         if len(recid) != 11:
             report = f'\nERROR - The recid must have 11 characters. Given: {recid}\n'
-            self.report.add(['console'], report)
+            self.report.add(report)
             return False
 
         # RDM request

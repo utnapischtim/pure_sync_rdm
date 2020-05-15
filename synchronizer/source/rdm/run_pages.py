@@ -29,7 +29,7 @@ class RunPages:
 
             # Creates data to push to RDM
             for item in resp_json['items']:
-                self.report.add(['console'], '')          # adds new line in the console
+                self.report.add('')          # adds new line in the console
                 self.rdm_add_record.create_invenio_data(self.global_counters, item)
 
             self.report_summary(page, page_size)

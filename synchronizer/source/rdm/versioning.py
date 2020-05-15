@@ -28,7 +28,7 @@ class Versioning:
         if total_recids == 0:
             # If there are no records with the same uuid means it is the first one (version 1)
             new_version = 1
-            self.report.add(['console'], f'{message}Record NOT found    - Metadata version: 1')
+            self.report.add(f'{message}Record NOT found    - Metadata version: 1')
             return [new_version, all_metadata_versions]
 
         new_version = None
@@ -39,7 +39,7 @@ class Versioning:
 
             # If a record has a differnt uuid than it will be ignored
             if uuid != rdm_metadata['uuid']:
-                self.report.add(['console'], f" VERSIONING - Different uuid {rdm_metadata['uuid']}")
+                self.report.add(f" VERSIONING - Different uuid {rdm_metadata['uuid']}")
                 continue
 
             # Get the latest version
@@ -60,7 +60,7 @@ class Versioning:
             count_old_versions = add_spaces(len(all_metadata_versions))
             message += f'Older versions{count_old_versions} - New version: {new_version}'        
 
-        self.report.add(['console'], message)
+        self.report.add(message)
 
         return [new_version, all_metadata_versions]
 
@@ -73,7 +73,7 @@ class Versioning:
         total_recids = resp_json['hits']['total']
 
         if total_recids == 0:
-            self.report.add(['console'], 'There are no records with this uuid')
+            self.report.add('There are no records with this uuid')
             return
 
         all_metadata_versions = []
@@ -84,7 +84,7 @@ class Versioning:
             version         = str(item['metadata']['metadataVersion'])
             all_metadata_versions.append([recid, version, creation_date])
 
-        self.report.add(['console'], f'\tUpdate uuid versions')
+        self.report.add(f'\tUpdate uuid versions')
 
         for item in resp_json['hits']['hits']:
 
@@ -92,7 +92,7 @@ class Versioning:
             item = item['metadata']
 
             if item['metadataOtherVersions'] == all_metadata_versions:
-                self.report.add(['console'], f'\tRecord update @ Up to date @ {recid}')
+                self.report.add(f'\tRecord update @ Up to date @ {recid}')
                 continue
 
             item['metadataOtherVersions'] = all_metadata_versions

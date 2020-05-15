@@ -26,10 +26,10 @@ class PureChangesByDate:
         
         # Get date of last update
         missing_updates = self._get_missing_updates()
-        missing_updates = ['2020-05-12']      # TEMPORARY !!!!!
+        missing_updates = ['2020-05-15']      # TEMPORARY !!!!!
         
         if missing_updates == []:
-            self.report.add(['console'], '\nNothing to update.\n')
+            self.report.add('\nNothing to update.\n')
             return
 
         for date_to_update in reversed(missing_updates):
@@ -43,10 +43,10 @@ class PureChangesByDate:
             # Initialize global counters
             self.global_counters = initialize_counters()
 
-            self.all_report_files = ['console', 'changes']
+            self.report_files = ['console', 'changes']
             
-            self.report.add_template(self.all_report_files, ['general', 'title'], ['CHANGES'])
-            self.report.add(self.all_report_files, f'\nProcessed date: {changes_date}')
+            self.report.add_template(self.report_files, ['general', 'title'], ['CHANGES'])
+            self.report.add(f'\nProcessed date: {changes_date}', self.report_files)
 
             # Decorated function
             func(self, changes_date)
@@ -66,7 +66,7 @@ class PureChangesByDate:
             response = get_pure_metadata('changes', reference, {})
 
             if response.status_code >= 300:
-                self.report.add(['console', 'changes'], response.content)
+                self.report.add(response.content, self.report_files)
                 return False
 
             # Check if there are records in the response from pure
@@ -107,11 +107,11 @@ class PureChangesByDate:
 
                 if page == 1:
                     # If there are no changes at all
-                    self.report.add(self.all_report_files, f'\n\nNothing to transfer.\n\n')
+                    self.report.add(f'\n\nNothing to transfer.\n\n', self.report_files)
                 return False
 
             report_line = f'\nPag{add_spaces(page)} @ Pure get changes @ {response} @ Number of items: {add_spaces(number_records)}'
-            self.report.add(self.all_report_files, report_line)
+            self.report.add(report_line, self.report_files)
             
             return json_response
 
@@ -134,7 +134,7 @@ class PureChangesByDate:
             self.local_counters['delete'] += 1
 
             report = f"\n{self.local_counters['delete']} @ {item['changeType']}"
-            self.report.add(['console'], report)
+            self.report.add(report)
       
             # Gets the record recid
             recid = self.general_functions.get_recid(uuid, self.global_counters)
@@ -170,7 +170,7 @@ class PureChangesByDate:
 
             record_number = add_spaces(self.global_counters['total'] + 1)
             report = f"\n{record_number} - Change type           - {item['changeType']}"
-            self.report.add(['console'], report)
+            self.report.add(report)
 
             if item['changeType'] == 'ADD' or item['changeType'] == 'CREATE':
                 self.local_counters['create'] += 1
@@ -213,12 +213,12 @@ class PureChangesByDate:
     def _report_summary(self):
 
         # Global counters
-        self.report.summary_global_counters(self.all_report_files, self.global_counters)
+        self.report.summary_global_counters(self.report_files, self.global_counters)
 
         arguments = []
         for i in self.local_counters:
             arguments.append(add_spaces(self.local_counters[i]))
-        self.report.add_template(self.all_report_files, ['changes', 'summary'], arguments)
+        self.report.add_template(self.report_files, ['changes', 'summary'], arguments)
         return
 
     

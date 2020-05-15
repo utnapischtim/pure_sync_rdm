@@ -19,7 +19,7 @@ class Delete:
         response = self.rdm_requests.delete_metadata(recid)
 
         report = f'\tRDM delete record @ {response} @ Deleted recid:        {recid}'
-        self.report.add(['console'], report)
+        self.report.add(report)
 
         # 410 -> "PID has been deleted"
         if response.status_code >= 300 and response.status_code != 410:
@@ -55,7 +55,7 @@ class Delete:
             func(self)
 
             report = f"\nTotal: {self.counters['total']} @ Success: {self.counters['success']} @ Error: {self.counters['error']}"
-            self.report.add(['console'], report)
+            self.report.add(report)
         return _wrapper
 
     @_decorator
@@ -77,7 +77,7 @@ class Delete:
             self.counters['total'] += 1
 
             if len(recid) != 11:
-                self.report.add(['console'], f'\n{recid} -> Wrong recid lenght! \n')
+                self.report.add(f'\n{recid} -> Wrong recid lenght! \n')
                 continue
             
             # -- REQUEST --
@@ -95,7 +95,7 @@ class Delete:
         file_name = data_files_name['delete_recid_list']
         recids = open(file_name, 'r').readlines()
         if len(recids) == 0:
-            self.report.add(['console'], '\nNothing to delete.\n')
+            self.report.add('\nNothing to delete.\n')
             return False
         return recids
 

@@ -29,9 +29,9 @@ def rdm_duplicate_records():
         temp_arr.append(uuid)
 
     if count_deleted == 0:
-        report.add(['console'], '\nThere are no duplicate records to delete\n')
+        report.add('\nThere are no duplicate records to delete\n')
 
-    report.add(['console'], f'Total items: {len(all_records)}\nDeleted: {count_deleted}\n')
+    report.add(f'Total items: {len(all_records)}\nDeleted: {count_deleted}\n')
 
         
         

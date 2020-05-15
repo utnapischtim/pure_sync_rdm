@@ -14,10 +14,10 @@ def rdm_add_file(file_name: str, recid: str):
     response = rdm_requests.put_file(file_path_name, recid)
 
     # Report
-    reports.add(['console'], f'\tRDM put file @ {response} @ {file_name}')
+    reports.add(f'\tRDM put file @ {response} @ {file_name}')
 
     if response.status_code >= 300:
-        reports.add(['console'], response.content)
+        reports.add(response.content)
         return False
 
     else:

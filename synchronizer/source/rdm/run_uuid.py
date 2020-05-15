@@ -33,7 +33,7 @@ class AddFromUuidList:
 
             # Checks if lenght of the uuid is correct
             if not check_uuid_authenticity(uuid):
-                self.report.add(['console'], 'Invalid uuid lenght.')
+                self.report.add('Invalid uuid lenght.')
                 continue
             
             self.add_record.push_record_by_uuid(self.global_counters, uuid)
@@ -47,7 +47,7 @@ class AddFromUuidList:
         uuids = open(file_name, 'r').readlines()
 
         if len(uuids) == 0:
-            self.report.add(['console'], '\nThere is nothing to transfer.\n')
+            self.report.add('\nThere is nothing to transfer.\n')
             return False
 
         return uuids

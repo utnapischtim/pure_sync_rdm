@@ -227,7 +227,7 @@ class RdmAddRecord:
                 # External persons are not present in 'persons' Pure API endpoint
                 if 'type_p' in self.sub_data and self.sub_data['type_p'] == 'External person':
                     report = f'\tPure get orcid @@ External person @ {person_uuid} @ {person_name}'
-                    self.report.add(['console'], report)
+                    self.report.add(report)
                 else:
                     orcid = self._get_orcid(person_uuid, person_name)
                     if orcid:
@@ -272,7 +272,7 @@ class RdmAddRecord:
         for i in self.data['appliedRestrictions']:
             if i not in possible_record_restrictions:
                 report = f"Warning: the value '{i}' is not amont the accepted restrictions\n"
-                self.report.add(['console'], report)
+                self.report.add(report)
         return True
 
 
@@ -291,7 +291,7 @@ class RdmAddRecord:
         # Count http responses
         self._http_response_counter(response.status_code)
 
-        self.report.add(['console'], f"\tRDM post metadata @ {response} @ Uuid:                 {uuid}")
+        self.report.add(f"\tRDM post metadata @ {response} @ Uuid:                 {uuid}")
 
         if response.status_code >= 300:
             self.global_counters['metadata']['error'] += 1
@@ -362,7 +362,7 @@ class RdmAddRecord:
         if pure_value in accessright_pure_to_rdm:
             return accessright_pure_to_rdm[pure_value]
 
-        self.report.add(['console'], '\n--- new access_right ---> not in accessright_pure_to_rdmk array\n\n')
+        self.report.add('\n--- new access_right ---> not in accessright_pure_to_rdmk array\n\n')
         return False
 
 
@@ -422,7 +422,7 @@ class RdmAddRecord:
         response = self.rdm_requests.get_metadata(params)
 
         if response.status_code >= 300:
-            self.report.add(['console'], f'\nget_rdm_file_size @ {self.uuid} @ {response}')
+            self.report.add(f'\nget_rdm_file_size @ {self.uuid} @ {response}')
             return False
 
         # Load response
@@ -528,7 +528,7 @@ class RdmAddRecord:
         file_name_report = shorten_file_name(file_name)
 
         report = f'\tPure get file @ {response} @ {match_review} @ {file_name_report}'
-        self.report.add(['console'], report)
+        self.report.add(report)
 
         self.record_files.append(file_name)
 
@@ -543,7 +543,7 @@ class RdmAddRecord:
 
         # Error
         if response.status_code >= 300:
-            self.report.add(['console'], f'{message} Error: {response.content}')
+            self.report.add(f'{message} Error: {response.content}')
             return False
 
         # Load json
@@ -552,11 +552,11 @@ class RdmAddRecord:
         # Read orcid
         if 'orcid' in resp_json:
             orcid = resp_json['orcid']
-            self.report.add(['console'], f'{message} {orcid} @ {person_uuid} @ {name}')
+            self.report.add(f'{message} {orcid} @ {person_uuid} @ {name}')
             return orcid
 
         # Not found
-        self.report.add(['console'], f'{message} Orcid not found @ {person_uuid} @ {name}')
+        self.report.add(f'{message} Orcid not found @ {person_uuid} @ {name}')
         return False
 
 

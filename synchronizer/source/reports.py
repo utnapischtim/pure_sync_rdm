@@ -50,17 +50,14 @@ class Reports:
         if template == ['general', 'title']:
             arguments.append(current_time())
         report = report_templates[template[0]][template[1]].format(*arguments)
-        self.add(files, report)
+        self.add(report, files)
 
 
-    def add(self, files, report):
+    def add(self, report, files = ['console']):
         
         report = self._report_columns_spaces(report)
 
         check_if_directory_exists('reports')
-        
-        if files == []:
-            files = ['console']
 
         # For each log file
         for file in files:
@@ -118,7 +115,7 @@ class Reports:
 
         if global_counters['http_responses']:
             http_response_str = self.metadata_http_responses(global_counters)
-            self.add(report_files, http_response_str)
+            self.add(http_response_str, report_files)
 
 
     def pages_single_line(self, global_counters, pag, pag_size):

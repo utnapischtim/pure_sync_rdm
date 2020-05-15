@@ -34,12 +34,12 @@ def get_pure_record_metadata_by_uuid(uuid: str):
         report += f' - Error: {response.content}'
     else:
         report += f'                       - {uuid}'
-    reports.add(['console'], report)
+    reports.add(report)
 
     # Check response
     if response.status_code >= 300:
         report = f'Get Pure metadata      - {response.content}\n'
-        reports.add(['console', 'records'], report)
+        reports.add(report['console', 'records'])
         return False
 
     return json.loads(response.content)
@@ -52,7 +52,7 @@ def get_pure_file(shell_interface, file_url: str, file_name: str):
     response = requests.get(file_url, auth=HTTPBasicAuth(pure_username, pure_password))
 
     if response.status_code >= 300:
-        reports.add(['console'], f'Error getting the file {file_url} from Pure')
+        reports.add(f'Error getting the file {file_url} from Pure')
         return False
 
     # Save file
