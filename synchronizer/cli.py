@@ -32,7 +32,7 @@ if __name__ == '__main__':
     arguments = docopt(__doc__, version='Pure synchronizer 1.0')
     check_if_directory_exists('data/temporary_files')
     # Create new instance
-    docopt_instance = ShellInterface()
+    shell_interface = ShellInterface()
 
     # Calls the method given in the arguments
-    method_call(docopt_instance, arguments)
+    method_call(shell_interface, arguments)
