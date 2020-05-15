@@ -20,7 +20,7 @@ class RdmOwners:
         self.general_functions = GeneralFunctions()
         self.report_files      = ['console', 'owners']
 
-    def _decorator(func):
+    def _set_counters_and_title(func):
         def _wrapper(self, identifier) :
 
             self.report.add_template(['console'], ['general', 'title'], ['OWNERS CHECK'])
@@ -31,7 +31,7 @@ class RdmOwners:
 
         return _wrapper
 
-    @_decorator
+    @_set_counters_and_title
     def run_owners(self, identifier: str):
         """ Gets from pure all the records related to a certain user (based on orcid or externalId),
             afterwards it modifies/create RDM records accordingly. """
@@ -268,7 +268,7 @@ class RdmOwners:
 
 
 
-    def _decorator(func):
+    def _initalizing_method(func):
         def _wrapper(self) :
     
             self.report.add_template(['console'], ['general', 'title'], ['RECORDS OWNER'])
@@ -282,7 +282,7 @@ class RdmOwners:
 
         return _wrapper
 
-    @_decorator
+    @_initalizing_method
     def get_rdm_record_owners(self):
         """ Gets all records from RDM and counts how many records belong to each user.
             It also updates the content of all_rdm_records.txt """

@@ -12,7 +12,7 @@ class AddFromUuidList:
         self.add_record = RdmAddRecord()
 
 
-    def _introduction_report(func):
+    def _set_counters_and_title(func):
         def _wrapper(self):
             self.report.add_template(['console'], ['general', 'title'], ['PUSH RECORDS FROM LIST'])
             self.global_counters = initialize_counters()
@@ -20,7 +20,7 @@ class AddFromUuidList:
             func(self)
         return _wrapper
 
-    @_introduction_report
+    @_set_counters_and_title
     def add_from_uuid_list(self):
         """ Submits to RDM all uuids in list (data/to_transfer.txt) """
 

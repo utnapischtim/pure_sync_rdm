@@ -43,7 +43,7 @@ class Delete:
         return response
 
 
-    def _decorator(func):
+    def _set_counters_and_title(func):
         def _wrapper(self) :
             self.report.add_template(['console'], ['general', 'title'], ["DELETE FROM LIST"])
             self.counters= {
@@ -58,7 +58,7 @@ class Delete:
             self.report.add(report)
         return _wrapper
 
-    @_decorator
+    @_set_counters_and_title
     def from_list(self):
         """ Deletes all recids that are listed into data/to_delete.txt """
 

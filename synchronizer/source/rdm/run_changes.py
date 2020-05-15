@@ -37,7 +37,7 @@ class PureChangesByDate:
         return
 
 
-    def _decorator(func):
+    def _set_counters_and_title(func):
         def _wrapper(self, changes_date: str) :
 
             # Initialize global counters
@@ -54,7 +54,7 @@ class PureChangesByDate:
             self._report_summary()
         return _wrapper
 
-    @_decorator
+    @_set_counters_and_title
     def _changes_by_date(self, changes_date: str):
         """ Gets from Pure all changes that took place in a certain date """
 

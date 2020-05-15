@@ -18,7 +18,7 @@ class RdmGroups:
         self.report_files = ['console', 'groups']
 
 
-    def _decorator_split(func):
+    def _general_report_and_variables(func):
         def _wrapper(self, old_group_externalId, new_groups_externalIds) :
             self.report.add_template(self.report_files, ['general', 'title'], ['GROUP SPLIT'])
             self.report.add(f'\nOld group: {old_group_externalId} @ New groups: {new_groups_externalIds}\n', self.report_files)
@@ -30,7 +30,7 @@ class RdmGroups:
             func(self, old_group_externalId, new_groups_externalIds)
         return _wrapper
 
-    @_decorator_split
+    @_general_report_and_variables
     def rdm_group_split(self, old_group_externalId: str, new_groups_externalIds: list):
         """ 
         1 - Create new groups
@@ -62,7 +62,7 @@ class RdmGroups:
 
 
 
-    def _decorator_merge(func):
+    def _general_report_and_variables(func):
         def _wrapper(self, old_groups_externalId, new_group_externalId) :
             self.report.add_template(self.report_files, ['general', 'title'], ['GROUP MERGE'])
             report = f'\nOld groups: {old_groups_externalId} @ New group: {new_group_externalId}\n'
@@ -75,7 +75,7 @@ class RdmGroups:
             func(self, old_groups_externalId, new_group_externalId)
         return _wrapper
 
-    @_decorator_merge
+    @_general_report_and_variables
     def rdm_group_merge(self, old_groups_externalId: list, new_group_externalId: str):
         """ 
         1 - Create new group

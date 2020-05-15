@@ -34,7 +34,7 @@ class RdmAddRecord:
         return self.create_invenio_data(global_counters, item)
 
 
-    def _decorator(func):
+    def _set_initial_variables(func):
         def _wrapper(self, global_counters, item) :
     
             self.global_counters = global_counters
@@ -52,7 +52,7 @@ class RdmAddRecord:
 
         return _wrapper
 
-    @_decorator
+    @_set_initial_variables
     def create_invenio_data(self, global_counters: dict, item: dict):
         """ Process the data received from Pure and submits it to RDM """
 
