@@ -26,20 +26,11 @@ class Delete:
             return response
 
         # Remove deleted recid from to_delete.txt
-        file_name = data_files_name['delete_recid_list']
-        lines = open(file_name, "r").readlines()
-        with open(file_name, "w") as f:
-            for line in lines:
-                if line.strip("\n") != recid:
-                    f.write(line)
+        self._remove_recid_from_delete_list(recid)
 
         # remove record from all_rdm_records.txt
-        file_name = data_files_name['all_rdm_records']
-        lines = open(file_name, "r").readlines()
-        with open(file_name, "w") as f:
-            for line in lines:
-                if line.strip("\n").split(' ')[1] != recid:
-                    f.write(line)
+        self._remove_recid_from_records_list(recid)
+        
         return response
 
 
@@ -90,6 +81,14 @@ class Delete:
                 self.counters['error'] += 1
 
 
+    def all_records(self):
+        """ Delete all RDM records """
+        file_data = open(data_files_name['all_rdm_records']).readlines()
+        for line in file_data:
+            recid = line.split(' ')[1].strip('\n')
+            self.record(recid)
+
+
     def _read_file_recids(self):
         """ Reads from to_delete.txt all recids to be deleted """
         file_name = data_files_name['delete_recid_list']
@@ -99,10 +98,20 @@ class Delete:
             return False
         return recids
 
+    
+    def _remove_recid_from_delete_list(self, recid):
+        file_name = data_files_name['delete_recid_list']
+        lines = open(file_name, "r").readlines()
+        with open(file_name, "w") as f:
+            for line in lines:
+                if line.strip("\n") != recid:
+                    f.write(line)
 
-    def all_records(self):
-        """ Delete all RDM records """
-        file_data = open(data_files_name['all_rdm_records']).readlines()
-        for line in file_data:
-            recid = line.split(' ')[1].strip('\n')
-            self.record(recid)
+    
+    def _remove_recid_from_records_list(self, recid):
+        file_name = data_files_name['all_rdm_records']
+        lines = open(file_name, "r").readlines()
+        with open(file_name, "w") as f:
+            for line in lines:
+                if line.strip("\n").split(' ')[1] != recid:
+                    f.write(line)
