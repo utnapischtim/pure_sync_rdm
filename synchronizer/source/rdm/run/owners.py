@@ -60,20 +60,18 @@ class RdmOwners:
 
         next_page = True
         page      = 1
-        page_size = 100
-
         self.local_counters = {'create': 0, 'in_record': 0, 'to_update': 0}
 
         while next_page:
 
             # Pure request
-            params = {'sort': 'modified', 'page': page, 'pageSize': page_size}
+            params = {'sort': 'modified', 'page': page, 'pageSize': 100}
             response = get_pure_metadata('persons', f'{self.user_uuid}/research-outputs', params)
             if response.status_code >= 300:
                 return False
 
             # Initial response proceses and json load
-            pure_json = self._response_first_process(response, page, page_size)
+            pure_json = self._process_response(response, page)
             # In case the user has no records
             if not pure_json:
                 return True
@@ -85,9 +83,9 @@ class RdmOwners:
             for item in pure_json['items']:
             
                 uuid  = item['uuid']
-                title = item['title']
+                title = shorten_file_name(item['title'])
                 
-                self.report.add(f'\n\tRecord uuid  @ {uuid} @ {shorten_file_name(title)}')
+                self.report.add(f"\n\tRecord uuid  @ {uuid} @ {title}")
 
                 # Get from RDM the recid
                 recid = self.general_functions.get_recid(uuid, self.global_counters)
@@ -97,24 +95,29 @@ class RdmOwners:
                     self._create_rdm_record(item)
                     continue
 
-                # Gets recid metadata from RDM and checks if the user is already a record owner
-                response = self.rdm_requests.get_metadata_by_recid(recid)
-                rdm_json = json.loads(response.content)['metadata']
-
-                self.report.add(f"\tRDM get metadata @ {response} @ Current owners: @ {rdm_json['owners']}")
-
-                if self.user_id not in rdm_json['owners']:
-                    # The record is in RDM but the logged in user is not among the recod owners
-                    self._add_user_as_owner(rdm_json, recid)
-                else:
-                    # The record is in RDM and the user is an owner
-                    self.report.add('\tRDM record status @@ Owner IN record')
-                    self.local_counters['in_record'] += 1
+                # Gets record metadata from RDM and checks if the user is already a record owner
+                self._process_record_owners(recid)
             
             page += 1
 
         self._final_report()
 
+
+    def _process_record_owners(self, recid):
+        """ Gets record metadata from RDM and checks if the user is already a record owner """
+        
+        response = self.rdm_requests.get_metadata_by_recid(recid)
+        rdm_json = json.loads(response.content)['metadata']
+
+        self.report.add(f"\tRDM get metadata @ {response} @ Current owners: @ {rdm_json['owners']}")
+
+        if self.user_id not in rdm_json['owners']:
+            # The record is in RDM but the logged in user is not among the recod owners
+            self._add_user_as_owner(rdm_json, recid)
+        else:
+            # The record is in RDM and the user is an owner
+            self.report.add('\tRDM record status @@ Owner IN record')
+            self.local_counters['in_record'] += 1
     
 
     def _add_user_as_owner(self, data, recid):
@@ -151,7 +154,7 @@ class RdmOwners:
         self.report.summary_global_counters(self.report_files, self.global_counters)
 
 
-    def _response_first_process(self, response: object, page: int, page_size: int):
+    def _process_response(self, response: object, page: int):
         """ Checks if there are records to process """
 
         # Load response json
