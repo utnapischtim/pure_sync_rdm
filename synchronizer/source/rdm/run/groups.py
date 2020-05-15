@@ -108,7 +108,7 @@ class RdmGroups:
         group_id    = response[0][0]
         group_name  = response[0][1]
 
-        report = f'\tOld group info @ ExtId:     {add_spaces(externalId)} @ RDM id:      {add_spaces(group_id)} @ {group_name}'
+        report = f'\tOld group info @ ExtId: {add_spaces(externalId)} @ RDM id: {add_spaces(group_id)} @ {group_name}'
         self.report.add(report, self.report_files)
         return group_id
 
@@ -122,7 +122,7 @@ class RdmGroups:
         resp_json = json.loads(response.content)
         total_items = resp_json['hits']['total']
 
-        report = f"\tModify old g. records @ ExtId:     {add_spaces(old_group_externalId)} @ Num. of records: {total_items}"
+        report = f"\tModify old g. records @ ExtId: {add_spaces(old_group_externalId)} @ Num. of records: {total_items}"
         self.report.add(report, self.report_files)
 
         if total_items == 0:
@@ -149,10 +149,7 @@ class RdmGroups:
                 item['groupRestrictions'].append(i)
 
             # Change managingOrganisationalUnit
-            if item['managingOrganisationalUnit_externalId'] == old_group_externalId:
-                item['managingOrganisationalUnit_name']       = self.new_groups_data[0]['name']
-                item['managingOrganisationalUnit_uuid']       = self.new_groups_data[0]['uuid']
-                item['managingOrganisationalUnit_externalId'] = self.new_groups_data[0]['externalId']
+            item = self._process_managing_organisational_unit(item, old_group_externalId)
 
             record_json = json.dumps(item)
 
@@ -162,6 +159,13 @@ class RdmGroups:
 
         return True
 
+
+    def _process_managing_organisational_unit(self, item: object, old_group_externalId: str):
+        if item['managingOrganisationalUnit_externalId'] == old_group_externalId:
+            item['managingOrganisationalUnit_name']       = self.new_groups_data[0]['name']
+            item['managingOrganisationalUnit_uuid']       = self.new_groups_data[0]['uuid']
+            item['managingOrganisationalUnit_externalId'] = self.new_groups_data[0]['externalId']
+        return item
 
 
     def _rdm_split_users_from_old_to_new_group(self, old_group_id: str, old_group_externalId: str, new_groups_externalIds: list):
@@ -205,7 +209,7 @@ class RdmGroups:
             resp_json = json.loads(response.content)
             total_items = resp_json['hits']['total']
 
-            report = f"\tModify records @ Group:     {add_spaces(old_group_externalId)} @ Num. of records: {total_items}"
+            report = f"\tModify records @ Group: {add_spaces(old_group_externalId)} @ Num. of records: {total_items}"
             self.report.add(report, self.report_files)
 
             if total_items == 0:
@@ -216,27 +220,13 @@ class RdmGroups:
 
                 item = item['metadata']
 
-                # + Organisational units +
-                new_organisationalUnits_data = [new_group_data]
+                # Organisational units
+                item = self._process_organisational_units(item, new_group_data, old_groups_externalId)
 
-                for i in item['organisationalUnits']:
-                    if (i['externalId'] in old_groups_externalId or 
-                        i['externalId'] == new_group_data['externalId']):
-                        continue
-                    
-                    new_organisationalUnits_data.append(i)
+                # Group restrictions
+                self._process_group_restrictions(item, old_group_externalId, new_group_externalId)
 
-                item['organisationalUnits'] = new_organisationalUnits_data
-
-                # + Group restrictions +
-                # Remove old group
-                if old_group_externalId in item['groupRestrictions']:
-                    item['groupRestrictions'].remove(old_group_externalId)
-                # Add new group
-                if new_group_externalId not in item['groupRestrictions']:
-                    item['groupRestrictions'].append(new_group_externalId)
-
-                # + Managing Organisational Unit +
+                # Managing Organisational Unit
                 if item['managingOrganisationalUnit_externalId'] == old_group_externalId:
                     item['managingOrganisationalUnit_name']       = new_group_data['name']
                     item['managingOrganisationalUnit_uuid']       = new_group_data['uuid']
@@ -249,6 +239,28 @@ class RdmGroups:
                 response = self.general_functions.update_rdm_record(record_json, recid)
 
 
+    def _process_organisational_units(self, item, new_group_data, old_groups_externalId):
+        new_organisationalUnits_data = [new_group_data]
+
+        for i in item['organisationalUnits']:
+            if (i['externalId'] in old_groups_externalId or 
+                i['externalId'] == new_group_data['externalId']):
+                continue
+            
+            new_organisationalUnits_data.append(i)
+
+        item['organisationalUnits'] = new_organisationalUnits_data
+        return item
+
+
+    def _process_group_restrictions(self, item, old_group_externalId, new_group_externalId):
+        # Remove old group
+        if old_group_externalId in item['groupRestrictions']:
+            item['groupRestrictions'].remove(old_group_externalId)
+        # Add new group
+        if new_group_externalId not in item['groupRestrictions']:
+            item['groupRestrictions'].append(new_group_externalId)
+        return item
 
 
     def _merge_users_from_old_to_new_group(self, old_groups_externalId: list, new_group_externalId: str):
