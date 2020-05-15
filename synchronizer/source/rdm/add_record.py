@@ -65,10 +65,9 @@ class RdmAddRecord:
         # self.data['metadataOtherVersions'] = [['1', ''], ['2', '']]
         # self.data['owners'].append(3)     # TEMPORARY
 
-        # TO REVIEW - TO REVIEW
-        self.data['appliedRestrictions'] = ['owners', 'groups', 'ip_single', 'ip_range']
-        self.data['_access'] = {'metadata_restricted': False, 'files_restricted': False}
-        # TO REVIEW - TO REVIEW
+        # Restrictions
+        self.data['appliedRestrictions'] = ['owners', 'groups', 'ip_single', 'ip_range']    # TO REVIEW - TO REVIEW
+        self.data['_access'] = {'metadata_restricted': False, 'files_restricted': False}    # TO REVIEW - TO REVIEW
 
         # Process various single fields
         self._process_single_fields(item)
@@ -193,16 +192,8 @@ class RdmAddRecord:
 
         for item in self.item['personAssociations']:
 
-            first_name = self._get_value(item, ['name', 'firstName'])
-            last_name  = self._get_value(item, ['name', 'lastName'])
-
-            if not first_name:
-                first_name = '(first name not specified)'
-            if not last_name:
-                first_name = '(last name not specified)'
-
             self.sub_data = {}
-            self.sub_data['name'] = f'{last_name}, {first_name}'
+            self._get_contributor_name(item)
 
             self._add_subdata(item, 'uuid',                   ['person', 'uuid'])
             self._add_subdata(item, 'externalId',             ['person', 'externalId'])
@@ -220,20 +211,36 @@ class RdmAddRecord:
                 self.data['owners'].append(int(owner))
 
             # ORCID
-            if 'uuid' in self.sub_data:
-                person_uuid = self.sub_data['uuid']
-                person_name = self.sub_data['name']
-                
-                # External persons are not present in 'persons' Pure API endpoint
-                if 'type_p' in self.sub_data and self.sub_data['type_p'] == 'External person':
-                    report = f'\tPure get orcid @@ External person @ {person_uuid} @ {person_name}'
-                    self.report.add(report)
-                else:
-                    orcid = self._get_orcid(person_uuid, person_name)
-                    if orcid:
-                        self.sub_data['orcid'] = orcid
+            self._process_contributor_orcid()
 
             self.data['contributors'].append(self.sub_data)
+
+
+    def _get_contributor_name(self, item: object):
+        first_name = self._get_value(item, ['name', 'firstName'])
+        last_name  = self._get_value(item, ['name', 'lastName'])
+
+        if not first_name:
+            first_name = '(first name not specified)'
+        if not last_name:
+            first_name = '(last name not specified)'
+
+        self.sub_data['name'] = f'{last_name}, {first_name}'
+
+
+    def _process_contributor_orcid(self):
+        if 'uuid' in self.sub_data:
+            person_uuid = self.sub_data['uuid']
+            person_name = self.sub_data['name']
+            
+            # External persons are not present in 'persons' Pure API endpoint
+            if 'type_p' in self.sub_data and self.sub_data['type_p'] == 'External person':
+                report = f'\tPure get orcid @@ External person @ {person_uuid} @ {person_name}'
+                self.report.add(report)
+            else:
+                orcid = self._get_orcid(person_uuid, person_name)
+                if orcid:
+                    self.sub_data['orcid'] = orcid
 
 
     def _process_organisational_units(self):
@@ -281,24 +288,12 @@ class RdmAddRecord:
         """ Submits the created json to RDM """
 
         uuid = self.item['uuid']
-        success_check = {
-            'metadata': False,
-            'file': False
-        }                      
+        success_check = { 'metadata': False, 'file': False }
+
         # POST REQUEST metadata
         response = self.rdm_requests.post_metadata(self.data)
 
-        # Count http responses
-        self._http_response_counter(response.status_code)
-
-        self.report.add(f"\tRDM post metadata @ {response} @ Uuid:                 {uuid}")
-
-        if response.status_code >= 300:
-            self.global_counters['metadata']['error'] += 1
-            return False
-
-        self.global_counters['metadata']['success'] += 1
-        success_check['metadata'] = True
+        self._process_post_response(response, uuid)
 
         # After pushing a record's metadata to RDM it takes about one second to be able to get its recid
         time.sleep(1)
@@ -311,20 +306,17 @@ class RdmAddRecord:
         # add record to all_rdm_records.txt
         open(data_files_name['all_rdm_records'], "a").write(f'{uuid} {recid}\n')
         
-        # Upload record files to RDM
+        # Submit record FILES
         for file_name in self.record_files:
         
-            # Send request
+            # Submit request
             response = rdm_add_file(file_name, recid)
+            # Process response
+            successful = self._process_file_response(response)
 
-            if response:
-                self.global_counters['file']['success'] += 1
-                success_check['file'] = True
-
+            # if successful:
                 # # Sends email to remove record from Pure
                 # send_email(uuid, file_name)
-            else:
-                self.global_counters['file']['error'] += 1
 
         if not self.record_files:
             success_check['file'] = True
@@ -332,6 +324,29 @@ class RdmAddRecord:
         # Checks if both metadata and files were correctly transmitted
         self._metadata_and_file_submission_check(success_check)
 
+
+    def _process_post_response(self, response: object, uuid: str):
+    
+        # Count http responses
+        self._http_response_counter(response.status_code)
+
+        self.report.add(f"\tRDM post metadata @ {response} @ Uuid:                 {uuid}")
+
+        if response.status_code >= 300:
+            self.global_counters['metadata']['error'] += 1
+            return False
+
+        self.global_counters['metadata']['success'] += 1
+        success_check['metadata'] = True
+
+
+    def _process_file_response(self, response):
+        if response:
+            self.global_counters['file']['success'] += 1
+            success_check['file'] = True
+
+        else:
+            self.global_counters['file']['error'] += 1
 
 
     def _remove_uuid_from_list(self, uuid: str, file_name: str):
