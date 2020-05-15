@@ -293,7 +293,11 @@ class RdmAddRecord:
         # POST REQUEST metadata
         response = self.rdm_requests.post_metadata(self.data)
 
-        self._process_post_response(response, uuid)
+        # Process response
+        if not self._process_post_response(response, uuid):
+            return False
+
+        success_check['metadata'] = True
 
         # After pushing a record's metadata to RDM it takes about one second to be able to get its recid
         time.sleep(1)
@@ -312,7 +316,7 @@ class RdmAddRecord:
             # Submit request
             response = rdm_add_file(file_name, recid)
             # Process response
-            successful = self._process_file_response(response)
+            successful = self._process_file_response(response, success_check)
 
             # if successful:
                 # # Sends email to remove record from Pure
@@ -337,10 +341,10 @@ class RdmAddRecord:
             return False
 
         self.global_counters['metadata']['success'] += 1
-        success_check['metadata'] = True
+        return True
 
 
-    def _process_file_response(self, response):
+    def _process_file_response(self, response: object, success_check: object):
         if response:
             self.global_counters['file']['success'] += 1
             success_check['file'] = True
@@ -512,7 +516,7 @@ class RdmAddRecord:
         # Download file from Pure
         response = get_pure_file(self, file_url, file_name)
         # Checks if the file is already in RDM, and if it has already been reviewed
-        self._process_file_response(response, file_name)
+        self._process_file_download_response(response, file_name)
         
 
 
@@ -524,7 +528,7 @@ class RdmAddRecord:
 
 
 
-    def _process_file_response(self, response, file_name):
+    def _process_file_download_response(self, response, file_name):
         """ Checks if the file is already in RDM, and if it has already been reviewed """
         # If the file is not in RDM
         if len(self.pure_rdm_file_match) == 0:
