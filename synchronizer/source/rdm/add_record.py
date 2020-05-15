@@ -10,7 +10,7 @@ from source.rdm.general_functions   import GeneralFunctions
 from source.rdm.put_file            import rdm_add_file
 from source.rdm.emails              import send_email
 from source.rdm.versioning          import Versioning 
-from source.rdm.run_groups          import RdmGroups
+from source.rdm.run.groups          import RdmGroups
 from source.rdm.database            import RdmDatabase
 from source.rdm.requests            import Requests
 from source.reports                 import Reports

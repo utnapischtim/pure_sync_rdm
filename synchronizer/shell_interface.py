@@ -1,17 +1,14 @@
 
-from source.rdm.run_changes             import PureChangesByDate
-from source.rdm.run_pages               import RunPages
 from source.log_manager                 import delete_old_log_files
-from source.rdm.run_duplicate_records   import rdm_duplicate_records
-from source.rdm.run_uuid                import AddFromUuidList
+from source.rdm.run.changes             import PureChangesByDate
+from source.rdm.run.pages               import RunPages
+from source.rdm.run.duplicate_records   import rdm_duplicate_records
+from source.rdm.run.uuid                import AddFromUuidList
+from source.rdm.run.owners              import RdmOwners
+from source.rdm.run.groups              import RdmGroups
 from source.rdm.delete_record           import Delete
-from source.rdm.run_owners              import RdmOwners
-from source.rdm.run_groups              import RdmGroups
 
 class ShellInterface:
-    
-    def __init__(self):
-        self.rdm_record_owner = None
 
     def changes(self):
         """ Gets from Pure API endpoint 'changes' all the records that have been 
