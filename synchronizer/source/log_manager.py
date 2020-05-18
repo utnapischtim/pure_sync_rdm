@@ -2,7 +2,7 @@ import os
 from datetime                   import date, datetime, timedelta
 from setup                      import dirpath, days_to_keep_log_files, lines_successful_changes, \
                                        data_files_name, reports_full_path
-from source.general_functions   import current_time
+from source.general_functions   import current_time, check_if_file_exists
 from source.reports             import Reports
 
 reports = Reports()
@@ -33,6 +33,8 @@ def delete_old_log_files():
     # SHORTEN SUCCESSFUL_CHANGES.TXT
     file_path_name  = data_files_name['successful_changes']
     file_name       = file_path_name.split('/')[-1]
+
+    check_if_file_exists(file_path_name)
 
     # Count file lines
     file_data = open(file_path_name)

@@ -1,6 +1,6 @@
 import time
 from setup                          import rdm_host_url, token_rdm, data_files_name, push_dist_sec
-from source.general_functions       import current_time
+from source.general_functions       import current_time, file_read_lines
 from source.rdm.requests            import Requests
 from source.reports                 import Reports
 
@@ -99,19 +99,19 @@ class Delete:
         return recids
 
     
-    def _remove_recid_from_delete_list(self, recid):
-        file_name = data_files_name['delete_recid_list']
-        lines = open(file_name, "r").readlines()
-        with open(file_name, "w") as f:
+    def _remove_recid_from_delete_list(self, recid):                    
+        file_name = 'delete_recid_list'
+        lines = file_read_lines(file_name)
+        with open(data_files_name[file_name], "w") as f:
             for line in lines:
                 if line.strip("\n") != recid:
                     f.write(line)
 
     
     def _remove_recid_from_records_list(self, recid):
-        file_name = data_files_name['all_rdm_records']
-        lines = open(file_name, "r").readlines()
-        with open(file_name, "w") as f:
+        file_name = 'all_rdm_records'
+        lines = file_read_lines(file_name)
+        with open(data_files_name[file_name], "w") as f:
             for line in lines:
                 if line.strip("\n").split(' ')[1] != recid:
                     f.write(line)

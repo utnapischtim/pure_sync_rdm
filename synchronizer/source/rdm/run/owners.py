@@ -1,7 +1,7 @@
 import json
 from datetime                       import date, datetime
 from setup                          import pure_rest_api_url, rdm_host_url, token_rdm, data_files_name
-from source.general_functions       import initialize_counters, add_spaces, shorten_file_name
+from source.general_functions       import initialize_counters, add_spaces, shorten_file_name, file_read_lines
 from source.pure.general_functions  import get_next_page
 from source.pure.requests           import get_pure_metadata
 from source.rdm.general_functions   import GeneralFunctions
@@ -244,7 +244,7 @@ class RdmOwners:
             rdm_user_id, user_uuid and user_external_id """
         file_name = data_files_name['user_ids_match']
 
-        needs_to_add = self._check_user_ids_match(file_name, external_id)
+        needs_to_add = self._check_user_ids_match('user_ids_match', external_id)
 
         if needs_to_add:
             open(file_name, 'a').write(f'{self.user_id} {self.user_uuid} {external_id}\n')
@@ -254,8 +254,8 @@ class RdmOwners:
 
     def _check_user_ids_match(self, file_name: str, external_id: str):
     
-        file_data = open(file_name).readlines()
-        for line in file_data:
+        lines = file_read_lines(file_name)
+        for line in lines:
             line = line.split('\n')[0]
             line = line.split(' ')
 

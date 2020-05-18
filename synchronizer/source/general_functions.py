@@ -1,7 +1,7 @@
 import os
 from pathlib            import Path
 from datetime           import date, datetime
-from setup              import pure_uuid_length
+from setup              import pure_uuid_length, data_files_name
 
 def add_spaces(value: str, max_length = 5):
     # 5 is the standard maximum length of the given value
@@ -35,6 +35,25 @@ def check_if_directory_exists(directory_name: str):
 
     # If full_path does not exist creates the folder
     Path(full_path).mkdir(parents=True, exist_ok=True)
+
+
+def check_if_file_exists(file_name: str):
+    if not os.path.isfile(file_name):
+        open(file_name, "a")
+
+
+def file_read_lines(file_name: str):
+    
+    file_full_name = data_files_name[file_name]
+    # It creates the directory if it does not exist
+    check_if_directory_exists(file_full_name)
+
+    # Checks if file exists
+    check_if_file_exists(file_full_name)
+
+    # Used to get, when available, the contributor's RDM userid
+    return open(file_full_name).readlines()
+
 
 
 def check_uuid_authenticity(uuid: str):

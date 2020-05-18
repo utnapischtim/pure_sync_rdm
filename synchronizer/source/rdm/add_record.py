@@ -1,9 +1,10 @@
 import json
 import time
+import os.path
 from datetime                       import date
 from setup                          import versioning_running, possible_record_restrictions, \
                                            data_files_name, iso6393_file_name, push_dist_sec, accessright_pure_to_rdm
-from source.general_functions       import shorten_file_name
+from source.general_functions       import shorten_file_name, file_read_lines, check_if_file_exists
 from source.pure.general_functions  import get_pure_record_metadata_by_uuid, get_pure_file
 from source.pure.requests           import get_pure_metadata
 from source.rdm.general_functions   import GeneralFunctions
@@ -191,9 +192,7 @@ class RdmAddRecord:
             
         self.data['contributors'] = []
 
-        # Used to get, when available, the contributor's RDM userid
-        file_name = data_files_name['user_ids_match']
-        file_data = open(file_name).readlines()
+        file_data = file_read_lines('user_ids_match')
 
         for item in self.item['personAssociations']:
 
@@ -220,6 +219,7 @@ class RdmAddRecord:
 
             self.data['contributors'].append(self.sub_data)
 
+        
 
     def _get_contributor_name(self, item: object):
         first_name = self._get_value(item, ['name', 'firstName'])
@@ -361,6 +361,8 @@ class RdmAddRecord:
     def _remove_uuid_from_list(self, uuid: str, file_name: str):
         """ If the given uuid is in the given file then the line will be removed """
 
+        check_if_file_exists(file_name)
+        
         with open(file_name, "r") as f:
             lines = f.readlines()
         with open(file_name, "w") as f:

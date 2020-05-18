@@ -1,7 +1,7 @@
 import json
 from datetime                       import date, datetime, timedelta
 from setup                          import data_files_name
-from source.general_functions       import add_spaces, initialize_counters
+from source.general_functions       import add_spaces, initialize_counters, check_if_file_exists
 from source.pure.general_functions  import get_next_page
 from source.pure.requests           import get_pure_metadata
 from source.rdm.general_functions   import GeneralFunctions
@@ -191,6 +191,7 @@ class PureChangesByDate:
             which Pure changes have not been processed """
 
         file_name = data_files_name['successful_changes']
+        check_if_file_exists(file_name)
 
         missing_updates = []
         count = 0
