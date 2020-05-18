@@ -98,21 +98,26 @@ class RdmAddRecord:
         self._update_all_uuid_versions()
 
 
+    def _versioning_required(func):
+        def _wrapper(self) :
+            if not versioning_running:
+                return
+            func(self)
+        return _wrapper
 
+    @_versioning_required
     def _check_record_version(self):
         """ Checks if there are in RDM other versions of the same uuid """
-        if versioning_running:
-            # Get metadata version
-            response = self.versioning.get_uuid_version(self.uuid)
-            if response:
-                self.data['metadataVersion']       = response[0]
-                self.data['metadataOtherVersions'] = response[1]
+        # Get metadata version
+        response = self.versioning.get_uuid_version(self.uuid)
+        if response:
+            self.data['metadataVersion']       = response[0]
+            self.data['metadataOtherVersions'] = response[1]
 
-
+    @_versioning_required
     def _update_all_uuid_versions(self):
         """ Updates the versioning data of all records with the same uuid """
-        if versioning_running:
-            self.versioning.update_all_uuid_versions(self.uuid)
+        self.versioning.update_all_uuid_versions(self.uuid)
 
 
 
