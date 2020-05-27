@@ -7,8 +7,14 @@ from source.rdm.run.uuid                import AddFromUuidList
 from source.rdm.run.owners              import RdmOwners
 from source.rdm.run.groups              import RdmGroups
 from source.rdm.delete_record           import Delete
+from source.pure.import_records         import ImportRecords
 
 class ShellInterface:
+    
+    def pure_import(self):
+        """  """
+        pure_import_records = ImportRecords()
+        pure_import_records.run_import()
 
     def changes(self):
         """ Gets from Pure API endpoint 'changes' all the records that have been 
@@ -65,6 +71,9 @@ class ShellInterface:
         
 
 def method_call(docopt_instance: object, arguments: dict):
+    
+    if arguments['pure_import']:
+        docopt_instance.pure_import()
 
     if arguments['changes']:
         docopt_instance.changes()

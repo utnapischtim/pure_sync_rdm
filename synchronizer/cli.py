@@ -11,6 +11,7 @@ Usage:
     shell_interface.py owners_list
     shell_interface.py group_split [--oldGroup=<recid>, --newGroups=<recid>]
     shell_interface.py group_merge [--oldGroups=<recid>, --newGroup=<recid>]
+    shell_interface.py pure_import
 
 Options:
     --pageStart=<page>      Initial page [default:  1].

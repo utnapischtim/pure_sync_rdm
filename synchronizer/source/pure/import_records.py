@@ -1,6 +1,6 @@
-from source.rdm.requests    import Requests
+from source.rdm.requests                 import Requests
 
-class importRecords:
+class ImportRecords:
     def __init__(self):
         self.rdm_requests = Requests()
 
@@ -10,11 +10,3 @@ class importRecords:
         
 
 
-
-
-
-
-
-
-import_records = importRecords()
-import_records.run_import()
