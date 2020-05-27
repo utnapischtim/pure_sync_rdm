@@ -18,7 +18,6 @@ class GeneralFunctions:
         1 - to check if there are duplicates
         2 - to delete duplicates
         3 - to add the record uuid and recid to all_rdm_records.txt
-        4 - gets the last metadata_version
         """
 
         response = self.rdm_requests.get_metadata_by_query(uuid)

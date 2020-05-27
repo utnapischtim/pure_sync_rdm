@@ -144,7 +144,6 @@ class RdmAddRecord:
         self._add_field(item, 'journalNumber',               ['info', 'journalNumber'])
         self._add_field(item, 'metadataModifBy',             ['info', 'modifiedBy'])
         self._add_field(item, 'metadataModifDate',           ['info', 'modifiedDate'])
-        self._add_field(item, 'pureId',                      ['pureId'])
         self._add_field(item, 'recordType',                  ['types', 0, 'value'])    
         self._add_field(item, 'category',                    ['categories', 0, 'value'])  
         self._add_field(item, 'peerReview',                  ['peerReview'])    

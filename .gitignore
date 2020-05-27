@@ -8,6 +8,7 @@ synchronizer/backup_restrictions/
 synchronizer/test*
 synchronizer/test.py
 synchronizer/test2.py
+tests/test 0.12.0
 
 
 

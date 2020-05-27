@@ -105,7 +105,7 @@ class Requests:
     def _check_response(self, response):
         http_code = response.status_code
         if http_code >= 300 and http_code != 429:
-            self.report.add(response.content)
+            self.report.add(str(response.content))
             return False
 
         # Checks if too many requests are submitted to RDM (more then 5000 / hour)
