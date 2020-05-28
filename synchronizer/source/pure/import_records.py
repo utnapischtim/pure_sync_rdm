@@ -2,6 +2,7 @@ import json
 from xml.etree                  import ElementTree as ET
 from xml.dom                    import minidom
 from source.rdm.requests        import Requests
+from source.general_functions   import get_value
 
 class ImportRecords:
     def __init__(self):
@@ -13,8 +14,8 @@ class ImportRecords:
         item = self._get_rdm_record_metadata('9zs2w-cj227')
         self._create_xml(item)
 
-        item = self._get_rdm_record_metadata('05qm8-ats84')
-        self._create_xml(item)
+        # item = self._get_rdm_record_metadata('05qm8-ats84')
+        # self._create_xml(item)
 
 
     def _create_xml(self, item):
@@ -41,18 +42,22 @@ class ImportRecords:
 
         # Persons
         persons = self._sub_element(body, ns_dataset, 'persons')
-        attributes = [['id', ['contributors', 0, 'uuid']], ['contactPerson', 'true']]
+        attributes = [['contactPerson', 'true']]
         self._add_attribute(item, persons, attributes)
 
-        person = self._sub_element(persons, ns_dataset, 'person')
-        attributes = [['lookupId', ['contributors', 0, 'externalId']]]
-        self._add_attribute(item, person, attributes)
+        for person_data in item['contributors']:
+            person_id = self._sub_element(persons, ns_dataset, 'person')
+            attributes = [['lookupId', ['externalId']]]
+            self._add_attribute(person_data, person_id, attributes)
 
-        role = self._sub_element(persons, ns_dataset, 'role')
-        self._add_text(item, role, ['contributors', 0, 'personRole'])
+            role = self._sub_element(persons, ns_dataset, 'role')
+            self._add_text(person_data, role, ['personRole'])
 
-        start_date = self._sub_element(persons, ns_dataset, 'associationStartDate')    # REVIEW!!!!
-        self._add_text(item, start_date, 'not in rdm - ???')
+            role = self._sub_element(persons, ns_dataset, 'name')
+            self._add_text(person_data, role, ['name'])
+
+            start_date = self._sub_element(persons, ns_dataset, 'associationStartDate')    # REVIEW!!!!
+            self._add_text(person_data, start_date, 'not in rdm - ???')
 
         # Available date
         date = self._sub_element(body, ns_dataset, 'availableDate')
@@ -65,18 +70,23 @@ class ImportRecords:
         self._sub_element(publisher, ns_dataset, 'name')
         self._sub_element(publisher, ns_dataset, 'type')
 
+        #       ---         ---         ---
+        # pure                          -   rdm
+        # descriptions, description     -   abstract
+        # physicalDatas, physicalData ??
+        # links, link
+        #       ---         ---         ---
+
         # Wrap it in an ElementTree instance and save as XML
         xml_str = minidom.parseString(ET.tostring(root)).toprettyxml(indent="   ")
         open(self.file_name, "w").write(xml_str)
 
 
     def _sub_element(self, element: object, namespace: str, sub_element_name: str):
-
         return ET.SubElement(element, "{%s}%s" % (namespace, sub_element_name))
 
 
     def _add_attribute(self, item, sub_element, attributes):
-    
         for attribute in attributes:
             value = self._check_and_get_value(item, attribute[1])
             if value:
@@ -84,9 +94,7 @@ class ImportRecords:
 
 
     def _add_text(self, item, sub_element, path):
-        
         sub_element.text = self._check_and_get_value(item, path)
-
 
 
     def _check_and_get_value(self, item, path):
@@ -94,35 +102,35 @@ class ImportRecords:
         if type(path) == str:
             return path
         else:
-            return self._get_value(item, path)
+            return get_value(item, path)
 
 
-    def _get_value(self, item, path: list):
-        """ Gets field value from a given path """
-        child = item
-        count = 0
-        # Iterates over the given path
-        for i in path:
-            # If the child (step in path) exists or is equal to zero
-            if i in child or i == 0:
-                # Counts if the iteration took place over every path element
-                count += 1
-                child = child[i]
-            else:
-                return False
+    # def _get_value(self, item, path: list):
+    #     """ Gets field value from a given path """
+    #     child = item
+    #     count = 0
+    #     # Iterates over the given path
+    #     for i in path:
+    #         # If the child (step in path) exists or is equal to zero
+    #         if i in child or i == 0:
+    #             # Counts if the iteration took place over every path element
+    #             count += 1
+    #             child = child[i]
+    #         else:
+    #             return False
 
-        # If the full path is not available (missing field)
-        if len(path) != count:
-            return False
+    #     # If the full path is not available (missing field)
+    #     if len(path) != count:
+    #         return False
 
-        value = str(child)
+    #     value = str(child)
 
-        # REPLACEMENTS
-        value = value.replace('\t', ' ')        # replace \t with ' '
-        value = value.replace('\\', '\\\\')     # adds \ before \
-        value = value.replace('"', '\\"')       # adds \ before "
-        value = value.replace('\n', '')         # removes new lines
-        return value
+    #     # REPLACEMENTS
+    #     value = value.replace('\t', ' ')        # replace \t with ' '
+    #     value = value.replace('\\', '\\\\')     # adds \ before \
+    #     value = value.replace('"', '\\"')       # adds \ before "
+    #     value = value.replace('\n', '')         # removes new lines
+    #     return value
 
 
     def _get_rdm_record_metadata(self, recid):
