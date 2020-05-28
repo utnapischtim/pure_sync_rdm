@@ -4,7 +4,7 @@ import os.path
 from datetime                       import date
 from setup                          import versioning_running, possible_record_restrictions, \
                                            data_files_name, iso6393_file_name, push_dist_sec, accessright_pure_to_rdm
-from source.general_functions       import shorten_file_name, file_read_lines, check_if_file_exists
+from source.general_functions       import shorten_file_name, file_read_lines, check_if_file_exists, get_value
 from source.pure.general_functions  import get_pure_record_metadata_by_uuid, get_pure_file
 from source.pure.requests           import get_pure_metadata
 from source.rdm.general_functions   import GeneralFunctions
@@ -158,11 +158,11 @@ class RdmAddRecord:
         self._add_field(item, 'managingOrganisationalUnit_externalId', ['managingOrganisationalUnit', 'externalId'])
 
         # Access right
-        value = self._get_value(item, ['openAccessPermissions', 0, 'value'])
+        value = get_value(item, ['openAccessPermissions', 0, 'value'])
         self.data['access_right'] = self._accessright_conversion(value)
 
         # Language
-        value = self._get_value(item, ['languages', 0, 'value'])
+        value = get_value(item, ['languages', 0, 'value'])
         self.data['language'] = self._language_conversion(value)
 
 
@@ -207,7 +207,7 @@ class RdmAddRecord:
             self._add_subdata(item, 'uuid',                   ['externalPerson', 'uuid'])
             
             # Checks if the record owner is available in user_ids_match.txt
-            person_external_id = self._get_value(item, ['person', 'externalId'])
+            person_external_id = get_value(item, ['person', 'externalId'])
             owner = self.general_functions.get_userid_from_list_by_externalid(person_external_id, file_data)
                 
             if owner and int(owner) not in self.data['owners']:
@@ -221,8 +221,8 @@ class RdmAddRecord:
         
 
     def _get_contributor_name(self, item: object):
-        first_name = self._get_value(item, ['name', 'firstName'])
-        last_name  = self._get_value(item, ['name', 'lastName'])
+        first_name = get_value(item, ['name', 'firstName'])
+        last_name  = get_value(item, ['name', 'lastName'])
 
         if not first_name:
             first_name = '(first name not specified)'
@@ -256,9 +256,9 @@ class RdmAddRecord:
             for i in self.item['organisationalUnits']:
                 sub_data = {}
 
-                organisational_unit_name       = self._get_value(i, ['names', 0, 'value'])
-                organisational_unit_uuid       = self._get_value(i, ['uuid'])
-                organisational_unit_externalId = self._get_value(i, ['externalId'])
+                organisational_unit_name       = get_value(i, ['names', 0, 'value'])
+                organisational_unit_uuid       = get_value(i, ['uuid'])
+                organisational_unit_externalId = get_value(i, ['externalId'])
 
                 sub_data['name']        = organisational_unit_name
                 sub_data['uuid']        = organisational_unit_uuid
@@ -374,7 +374,7 @@ class RdmAddRecord:
     def _add_field(self, item: list, rdm_field: str, path: list):
         """ Adds the field to the data json """
 
-        value = self._get_value(item, path)
+        value = get_value(item, path)
         if value:
             self.data[rdm_field] = value
         return
@@ -406,34 +406,6 @@ class RdmAddRecord:
 
         # in case there is no match (e.g. spelling mistake in Pure) ignore field
         return False
-
-
-    def _get_value(self, item, path: list):
-        """ Goes through the json item to get the information of the specified path """
-        child = item
-        count = 0
-        # Iterates over the given path
-        for i in path:
-            # If the child (step in path) exists or is equal to zero
-            if i in child or i == 0:
-                # Counts if the iteration took place over every path element
-                count += 1
-                child = child[i]
-            else:
-                return False
-
-        # If the full path is not available (missing field)
-        if len(path) != count:
-            return False
-
-        value = str(child)
-
-        # REPLACEMENTS
-        value = value.replace('\t', ' ')        # replace \t with ' '
-        value = value.replace('\\', '\\\\')     # adds \ before \
-        value = value.replace('"', '\\"')       # adds \ before "
-        value = value.replace('\n', '')         # removes new lines
-        return value
 
 
 
@@ -481,9 +453,9 @@ class RdmAddRecord:
 
         internal_review = False     # Default value
 
-        pure_file_size  = self._get_value(item, ['file', 'size'])
-        file_name       = self._get_value(item, ['file', 'fileName'])
-        file_url        = self._get_value(item, ['file', 'fileURL'])
+        pure_file_size  = get_value(item, ['file', 'size'])
+        file_name       = get_value(item, ['file', 'fileName'])
+        file_url        = get_value(item, ['file', 'fileURL'])
 
         self.pure_rdm_file_match = []
 
@@ -513,7 +485,7 @@ class RdmAddRecord:
         self._add_subdata(item, 'licenseType',     ['licenseTypes', 0, 'value'])
 
         # Access type
-        value = self._get_value(item, ['accessTypes', 0, 'value'])
+        value = get_value(item, ['accessTypes', 0, 'value'])
         self.sub_data['accessType'] = self._accessright_conversion(value)
 
         # Append to sub_data to .data
@@ -528,7 +500,7 @@ class RdmAddRecord:
 
     def _add_subdata(self, item: list, rdm_field: str, path: list):
         """ Adds the field to sub_data """
-        value = self._get_value(item, path)
+        value = get_value(item, path)
         if value:
             self.sub_data[rdm_field] = value
 
