@@ -26,6 +26,9 @@ def initialize_counters():
 def current_time():
     return datetime.now().strftime("%H:%M:%S")
 
+def current_date():
+    return datetime.today().strftime('%Y-%m-%d')
+
 
 def check_if_directory_exists(directory_name: str):
     

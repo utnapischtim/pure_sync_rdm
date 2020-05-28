@@ -2,27 +2,42 @@ import json
 from xml.etree                  import ElementTree as ET
 from xml.dom                    import minidom
 from source.rdm.requests        import Requests
-from source.general_functions   import get_value
+from source.general_functions   import get_value, current_date
 
 class ImportRecords:
+    
     def __init__(self):
         self.rdm_requests = Requests()
         self.file_name = "/home/bootcamp/src/pure_sync_rdm/synchronizer/data/temporary_files/test.xml"
 
+
     def run_import(self):
+        page = 1
+        next_page = True
 
-        item = self._get_rdm_record_metadata('t0s1d-2x040')
-        if not item:
-            print('\nNo metadata..\n')
-            return
-        self._create_xml(item)
+        while next_page:
+            print(f'\nPage: {page}')
+            data = self._get_rdm_records_metadata(page)
 
-        # item = self._get_rdm_record_metadata('05qm8-ats84')
-        # self._create_xml(item)
+            for item in data:
+                if not self._check_date(item):
+                    next_page = False
+                    continue
 
+                self._create_xml(item['metadata'])
+            page += 1
+
+
+    def _check_date(self, item):
+        if item['created'] > current_date():
+            print(f"{item['id']} -> created today")
+            return True
+        else:
+            print(f"{item['id']} -> old")
+            return False
+            
 
     def _create_xml(self, item):
-
         ns_dataset = 'v1.dataset.pure.atira.dk'     # Name Space dataset
         ns_commons = 'v3.commons.pure.atira.dk'     # Name Space commons
 
@@ -59,9 +74,6 @@ class ImportRecords:
             role = self._sub_element(persons, ns_dataset, 'name')
             self._add_text(person_data, role, ['name'])
 
-            start_date = self._sub_element(persons, ns_dataset, 'associationStartDate')    # REVIEW!!!!
-            self._add_text(person_data, start_date, 'not in rdm - ???')
-
         # Available date
         date = self._sub_element(body, ns_dataset, 'availableDate')
 
@@ -70,7 +82,7 @@ class ImportRecords:
 
         # Publisher
         publisher = self._sub_element(body, ns_dataset, 'publisher')    # REVIEW!!!!
-        self._sub_element(publisher, ns_dataset, 'name')
+        self._sub_element(publisher, ns_dataset, 'name')           # No publisher data available
         self._sub_element(publisher, ns_dataset, 'type')
 
         #       ---         ---         ---
@@ -108,11 +120,13 @@ class ImportRecords:
             return get_value(item, path)
 
 
-    def _get_rdm_record_metadata(self, recid):
-        response = self.rdm_requests.get_metadata('', recid)
+    def _get_rdm_records_metadata(self, page):
+
+        params = {'sort': 'mostrecent', 'size': '2', 'page': page}
+        response = self.rdm_requests.get_metadata(params)
 
         if response.status_code >= 300:
             return False
 
         # Load response
-        return json.loads(response.content)['metadata']
+        return json.loads(response.content)['hits']['hits']
