@@ -1,11 +1,12 @@
 import json
-from xml.etree                  import ElementTree as ET
-from xml.dom                    import minidom
-from source.rdm.requests        import Requests
-from source.general_functions   import get_value, current_date
+from xml.etree                      import ElementTree as ET
+from xml.dom                        import minidom
+from source.rdm.requests            import Requests
+from source.general_functions       import get_value, current_date
+from source.pure.general_functions  import get_pure_record_metadata_by_uuid
 
 class ImportRecords:
-    
+
     def __init__(self):
         self.rdm_requests = Requests()
         self.file_name = "/home/bootcamp/src/pure_sync_rdm/synchronizer/data/temporary_files/test.xml"
@@ -20,13 +21,29 @@ class ImportRecords:
             data = self._get_rdm_records_metadata(page)
 
             for item in data:
+                
+                item_metadata = item['metadata']
+
+                # Checks if the record was created today
                 if not self._check_date(item):
                     next_page = False
                     continue
 
-                self._create_xml(item['metadata'])
+                # Checks if the record has a uuid
+                if not self._check_uuid(item_metadata):
+                    continue
+
+                self._create_xml(item_metadata)
             page += 1
 
+
+    def _check_uuid(self, item):
+        """ If a uuid is specified in the RDM record means that it was imported
+            from Pure. In this case, the record will be ignored """
+        print(item['uuid'])
+        if 'uuid' in item:
+            return False
+        return True
 
     def _check_date(self, item):
         if item['created'] > current_date():
@@ -122,7 +139,7 @@ class ImportRecords:
 
     def _get_rdm_records_metadata(self, page):
 
-        params = {'sort': 'mostrecent', 'size': '2', 'page': page}
+        params = {'sort': 'mostrecent', 'size': '20', 'page': page}
         response = self.rdm_requests.get_metadata(params)
 
         if response.status_code >= 300:
