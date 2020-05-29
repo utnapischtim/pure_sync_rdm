@@ -100,33 +100,37 @@ class ImportRecords:
         self._add_attribute(item, persons, attributes)
 
         for person_data in item['contributors']:
+            # External id
             person_id = self._sub_element(persons, ns_dataset, 'person')
             attributes = [['lookupId', ['externalId']]]
             self._add_attribute(person_data, person_id, attributes)
-
+            # Role
             role = self._sub_element(persons, ns_dataset, 'role')
             self._add_text(person_data, role, ['personRole'])
-
+            # Name
             role = self._sub_element(persons, ns_dataset, 'name')
             self._add_text(person_data, role, ['name'])
 
         # Available date
         date = self._sub_element(body, ns_dataset, 'availableDate')
-
         sub_date = self._sub_element(date, ns_commons, 'year')
         self._add_text(item, sub_date, ['publication_date'])
 
         # Publisher
         publisher = self._sub_element(body, ns_dataset, 'publisher')    # REVIEW!!!!
-        self._sub_element(publisher, ns_dataset, 'name')                # No publisher data available
-        self._sub_element(publisher, ns_dataset, 'type')
+        self._sub_element(publisher, ns_dataset, 'name')                # Data not in rdm
+        self._sub_element(publisher, ns_dataset, 'type')                # Data not in rdm
 
-        #       ---         ---         ---
-        # pure                          -   rdm
-        # descriptions, description     -   abstract
-        # physicalDatas, physicalData ??
-        # links, link
-        #       ---         ---         ---
+        # Description
+        descriptions = self._sub_element(body, ns_dataset, 'descriptions')
+        description = self._sub_element(descriptions, ns_commons, 'description')
+        self._add_text(item, description, ['abstract'])
+
+        # # Links
+        # links = self._sub_element(body, ns_dataset, 'links')
+        # link = self._sub_element(descriptions, ns_commons, 'link')
+        # self._add_attribute(person_data, person_id, attributes)
+        # self._add_text(item, description, ['abstract'])
 
         # Wrap it in an ElementTree instance and save as XML
         xml_str = minidom.parseString(ET.tostring(root)).toprettyxml(indent="   ")
@@ -146,7 +150,7 @@ class ImportRecords:
                 sub_element.set(attribute[0], value)
 
 
-    def _add_text(self, item: object, sub_element, path):
+    def _add_text(self, item: object, sub_element: object, path):
         """ Gets from the rdm response a value and adds it as text to a given xml element """
         sub_element.text = self._check_and_get_value(item, path)
 
