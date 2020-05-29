@@ -2,37 +2,52 @@ import json
 from xml.etree                      import ElementTree as ET
 from xml.dom                        import minidom
 from source.rdm.requests            import Requests
-from source.general_functions       import get_value, current_date
+from source.general_functions       import get_value, current_date, add_spaces
 from source.pure.general_functions  import get_pure_record_metadata_by_uuid
+from source.reports                 import Reports
 
 class ImportRecords:
 
     def __init__(self):
         self.rdm_requests = Requests()
+        self.report = Reports()
         self.file_name = "/home/bootcamp/src/pure_sync_rdm/synchronizer/data/temporary_files/test.xml"
 
 
     def run_import(self):
-        page = 1
+
+        # Report title
+        self.report.add_template(['console'], ['general', 'title'], ['PURE IMPORT'])
+
+        page      = 1
+        page_size = 20
         next_page = True
 
+        # Get RDM records by page
         while next_page:
-            print(f'\nPage: {page}')
-            data = self._get_rdm_records_metadata(page)
+
+            self.report.add_template(['console'], ['pages', 'page_and_size'], [page, page_size])
+            self.report.add('') # adds empty line
+
+            data = self._get_rdm_records_metadata(page, page_size)
+            count = 0
 
             for item in data:
                 
+                count += 1
+                self.report_base = f"{add_spaces(count)} - {item['id']} -"
                 item_metadata = item['metadata']
 
                 # Checks if the record was created today
                 if not self._check_date(item):
                     next_page = False
-                    continue
+                    break
 
                 # Checks if the record has a uuid
                 if not self._check_uuid(item_metadata):
                     continue
 
+                self.report.add(f"{self.report_base} Adding")
                 self._create_xml(item_metadata)
             page += 1
 
@@ -40,17 +55,19 @@ class ImportRecords:
     def _check_uuid(self, item):
         """ If a uuid is specified in the RDM record means that it was imported
             from Pure. In this case, the record will be ignored """
-        print(item['uuid'])
+        
         if 'uuid' in item:
+            self.report.add(f"{self.report_base} Has uuid")
             return False
         return True
 
+
     def _check_date(self, item):
         if item['created'] > current_date():
-            print(f"{item['id']} -> created today")
             return True
         else:
-            print(f"{item['id']} -> old")
+            date = item['created'].split('T')[0]
+            self.report.add(f"{self.report_base} Too old: {date}")
             return False
             
 
@@ -137,9 +154,9 @@ class ImportRecords:
             return get_value(item, path)
 
 
-    def _get_rdm_records_metadata(self, page):
+    def _get_rdm_records_metadata(self, page, page_size):
 
-        params = {'sort': 'mostrecent', 'size': '20', 'page': page}
+        params = {'sort': 'mostrecent', 'size': page_size, 'page': page}
         response = self.rdm_requests.get_metadata(params)
 
         if response.status_code >= 300:
