@@ -91,19 +91,16 @@ class ImportRecords:
 
         # Managing organisation
         organisational_unit = self._sub_element(body, ns_dataset, 'managingOrganisation')
-        attributes = [['lookupId', ['managingOrganisationalUnit_externalId']]]
-        self._add_attribute(item, organisational_unit, attributes)
+        self._add_attribute(item, organisational_unit, 'lookupId', ['managingOrganisationalUnit_externalId'])
 
         # Persons
         persons = self._sub_element(body, ns_dataset, 'persons')
-        attributes = [['contactPerson', 'true']]
-        self._add_attribute(item, persons, attributes)
+        self._add_attribute(item, persons, 'contactPerson', 'true')
 
         for person_data in item['contributors']:
             # External id
             person_id = self._sub_element(persons, ns_dataset, 'person')
-            attributes = [['lookupId', ['externalId']]]
-            self._add_attribute(person_data, person_id, attributes)
+            self._add_attribute(person_data, person_id, 'lookupId', ['externalId'])
             # Role
             role = self._sub_element(persons, ns_dataset, 'role')
             self._add_text(person_data, role, ['personRole'])
@@ -142,12 +139,11 @@ class ImportRecords:
         return ET.SubElement(element, "{%s}%s" % (namespace, sub_element_name))
 
 
-    def _add_attribute(self, item: object, sub_element: object, attributes: list):
+    def _add_attribute(self, item: object, sub_element: object, attribute: str, value_path: list):
         """ Gets from the rdm response a value and adds it as attribute to a given xml element """
-        for attribute in attributes:
-            value = self._check_and_get_value(item, attribute[1])
-            if value:
-                sub_element.set(attribute[0], value)
+        value = self._check_and_get_value(item, value_path)
+        if value:
+            sub_element.set(attribute, value)
 
 
     def _add_text(self, item: object, sub_element: object, path):
