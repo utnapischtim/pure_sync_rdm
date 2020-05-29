@@ -40,6 +40,7 @@ class ImportRecords:
 
                 # Checks if the record was created today
                 if not self._check_date(item):
+                    self.report.add("\n\tEnd task\n")
                     next_page = False
                     break
 
@@ -55,7 +56,6 @@ class ImportRecords:
     def _check_uuid(self, item):
         """ If a uuid is specified in the RDM record means that it was imported
             from Pure. In this case, the record will be ignored """
-        
         if 'uuid' in item:
             self.report.add(f"{self.report_base} Has uuid")
             return False
@@ -63,6 +63,7 @@ class ImportRecords:
 
 
     def _check_date(self, item):
+        """ Checks if the record was created today """
         if item['created'] > current_date():
             return True
         else:
@@ -72,6 +73,7 @@ class ImportRecords:
             
 
     def _create_xml(self, item):
+        """ Creates the xml file that will be imported in pure """
         ns_dataset = 'v1.dataset.pure.atira.dk'     # Name Space dataset
         ns_commons = 'v3.commons.pure.atira.dk'     # Name Space commons
 
@@ -81,7 +83,7 @@ class ImportRecords:
         root = ET.Element("{%s}datasets" % ns_dataset)
 
         body = ET.SubElement(root, "{%s}dataset" % ns_dataset, 
-                                id=item['uuid'],
+                                # id=item['uuid'],
                                 type='dataset')
         # Title
         title = self._sub_element(body, ns_dataset, 'title')
@@ -116,7 +118,7 @@ class ImportRecords:
 
         # Publisher
         publisher = self._sub_element(body, ns_dataset, 'publisher')    # REVIEW!!!!
-        self._sub_element(publisher, ns_dataset, 'name')           # No publisher data available
+        self._sub_element(publisher, ns_dataset, 'name')                # No publisher data available
         self._sub_element(publisher, ns_dataset, 'type')
 
         #       ---         ---         ---
@@ -132,35 +134,36 @@ class ImportRecords:
 
 
     def _sub_element(self, element: object, namespace: str, sub_element_name: str):
+        """ Adds the the xml a sub element """
         return ET.SubElement(element, "{%s}%s" % (namespace, sub_element_name))
 
 
-    def _add_attribute(self, item, sub_element, attributes):
+    def _add_attribute(self, item: object, sub_element: object, attributes: list):
+        """ Gets from the rdm response a value and adds it as attribute to a given xml element """
         for attribute in attributes:
             value = self._check_and_get_value(item, attribute[1])
             if value:
                 sub_element.set(attribute[0], value)
 
 
-    def _add_text(self, item, sub_element, path):
+    def _add_text(self, item: object, sub_element, path):
+        """ Gets from the rdm response a value and adds it as text to a given xml element """
         sub_element.text = self._check_and_get_value(item, path)
 
 
-    def _check_and_get_value(self, item, path):
-        
+    def _check_and_get_value(self, item: object, path):
+        """ If a string is given as 'path' returns it as value """
         if type(path) == str:
             return path
         else:
             return get_value(item, path)
 
 
-    def _get_rdm_records_metadata(self, page, page_size):
-
+    def _get_rdm_records_metadata(self, page: int, page_size: int):
+        """ Requests to rdm records metadata by page """
         params = {'sort': 'mostrecent', 'size': page_size, 'page': page}
         response = self.rdm_requests.get_metadata(params)
-
         if response.status_code >= 300:
             return False
-
         # Load response
         return json.loads(response.content)['hits']['hits']
