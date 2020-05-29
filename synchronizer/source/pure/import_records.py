@@ -86,13 +86,14 @@ class ImportRecords:
         self._populate_xml(item, root, ns_dataset, ns_commons)
 
     def _populate_xml(self, item, root, ns_dataset, ns_commons):
+        print(item)
         # Dataset element
         body = ET.SubElement(root, "{%s}dataset" % ns_dataset)
-        self._add_attribute(item, body, 'type', 'dataset')
+        body.set('type', 'dataset')
 
         # Title
         title = self._sub_element(body, ns_dataset, 'title')
-        self._add_text(item, title, ['title'])
+        title.text = get_value(item, ['title'])
 
         # Managing organisation
         organisational_unit = self._sub_element(body, ns_dataset, 'managingOrganisation')
@@ -100,7 +101,7 @@ class ImportRecords:
 
         # Persons
         persons = self._sub_element(body, ns_dataset, 'persons')
-        self._add_attribute(item, persons, 'contactPerson', 'true')
+        persons.set('contactPerson', 'true')
 
         for person_data in item['contributors']:
             # External id
@@ -108,15 +109,15 @@ class ImportRecords:
             self._add_attribute(person_data, person_id, 'lookupId', ['externalId'])
             # Role
             role = self._sub_element(persons, ns_dataset, 'role')
-            self._add_text(person_data, role, ['personRole'])
+            role.text = get_value(person_data, ['personRole'])
             # Name
-            role = self._sub_element(persons, ns_dataset, 'name')
-            self._add_text(person_data, role, ['name'])
+            name = self._sub_element(persons, ns_dataset, 'name')
+            name.text = get_value(person_data, ['name'])
 
         # Available date
         date = self._sub_element(body, ns_dataset, 'availableDate')
         sub_date = self._sub_element(date, ns_commons, 'year')
-        self._add_text(item, sub_date, ['publication_date'])
+        sub_date.text = get_value(item, ['publication_date'])
 
         # Publisher
         publisher = self._sub_element(body, ns_dataset, 'publisher')    # REVIEW!!!!
@@ -126,18 +127,18 @@ class ImportRecords:
         # Description
         descriptions = self._sub_element(body, ns_dataset, 'descriptions')
         description = self._sub_element(descriptions, ns_commons, 'description')
-        self._add_text(item, description, ['abstract'])
+        description.text = get_value(item, ['abstract'])
 
         # Links
-        links = self._sub_element(body, ns_dataset, 'links')
+        links = self._sub_element(body, ns_dataset, 'links')    # Review
         # Files
         link = self._sub_element(links, ns_commons, 'link')
-        self._add_attribute({}, link, 'type', 'files')
-        self._add_text(self.full_item, link, ['links', 'files'])    # Review
+        link.set('type', 'files')
+        link.text = get_value(self.full_item, ['links', 'files'])
         # Self
         link = self._sub_element(links, ns_commons, 'link')
-        self._add_attribute({}, link, 'type', 'self')    # Review
-        self._add_text(self.full_item, link, ['links', 'self'])
+        link.set('type', 'self')
+        link.text = get_value(self.full_item, ['links', 'self'])
 
         self._end_xml(root)
 
@@ -146,26 +147,19 @@ class ImportRecords:
         xml_str = minidom.parseString(ET.tostring(root)).toprettyxml(indent="   ")
         open(self.file_name, "w").write(xml_str)
 
-    def _sub_element(self, element: object, namespace: str, sub_element_name: str):
+    def _sub_element(self, element, namespace: str, sub_element_name: str):
         """ Adds the the xml a sub element """
         return ET.SubElement(element, "{%s}%s" % (namespace, sub_element_name))
 
-    def _add_attribute(self, item: object, sub_element: object, attribute: str, value_path: list):
+    def _add_attribute(self, item: object, sub_element, attribute: str, value_path: list):
         """ Gets from the rdm response a value and adds it as attribute to a given xml element """
-        value = self._check_and_get_value(item, value_path)
+        value = get_value(item, value_path)
         if value:
             sub_element.set(attribute, value)
 
     def _add_text(self, item: object, sub_element: object, path):
         """ Gets from the rdm response a value and adds it as text to a given xml element """
-        sub_element.text = self._check_and_get_value(item, path)
-
-    def _check_and_get_value(self, item: object, path):
-        """ If a string is given as 'path' returns it as value """
-        if type(path) == str:
-            return path
-        else:
-            return get_value(item, path)
+        sub_element.text = get_value(item, path)
 
     def _get_rdm_records_metadata(self, page: int, page_size: int):
         """ Requests to rdm records metadata by page """
