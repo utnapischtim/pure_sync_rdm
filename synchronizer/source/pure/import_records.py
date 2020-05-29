@@ -50,7 +50,9 @@ class ImportRecords:
                     continue
 
                 self.report.add(f"{self.report_base} Adding")
+
                 self._create_xml(item_metadata)
+
             page += 1
 
     def _check_uuid(self, item):
@@ -81,6 +83,9 @@ class ImportRecords:
         # Build a tree structure
         root = ET.Element("{%s}datasets" % ns_dataset)
 
+        self._populate_xml(item, root, ns_dataset, ns_commons)
+
+    def _populate_xml(self, item, root, ns_dataset, ns_commons):
         # Dataset element
         body = ET.SubElement(root, "{%s}dataset" % ns_dataset)
         self._add_attribute(item, body, 'type', 'dataset')
@@ -125,13 +130,18 @@ class ImportRecords:
 
         # Links
         links = self._sub_element(body, ns_dataset, 'links')
+        # Files
         link = self._sub_element(links, ns_commons, 'link')
         self._add_attribute({}, link, 'type', 'files')
-        self._add_text(self.full_item, link, ['links', 'files'])
+        self._add_text(self.full_item, link, ['links', 'files'])    # Review
+        # Self
         link = self._sub_element(links, ns_commons, 'link')
-        self._add_attribute({}, link, 'type', 'self')
+        self._add_attribute({}, link, 'type', 'self')    # Review
         self._add_text(self.full_item, link, ['links', 'self'])
 
+        self._end_xml(root)
+
+    def _end_xml(self, root):
         # Wrap it in an ElementTree instance and save as XML
         xml_str = minidom.parseString(ET.tostring(root)).toprettyxml(indent="   ")
         open(self.file_name, "w").write(xml_str)
