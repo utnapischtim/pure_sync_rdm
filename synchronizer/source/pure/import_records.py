@@ -55,15 +55,17 @@ class ImportRecords:
 
     def _create_xml(self, data):
         """ Creates the xml file that will be imported in pure """
-                
-        ns_dataset = 'v1.dataset.pure.atira.dk'     # Name Space dataset
-        ns_commons = 'v3.commons.pure.atira.dk'     # Name Space commons
 
-        ET.register_namespace('v1', ns_dataset)
-        ET.register_namespace('v3', ns_commons)
+        name_space = {
+            'dataset': 'v1.dataset.pure.atira.dk',
+            'commons': 'v3.commons.pure.atira.dk',
+        }
+
+        ET.register_namespace('v1', name_space['dataset'])
+        ET.register_namespace('v3', name_space['commons'])
 
         # Build a tree structure
-        self.root = ET.Element("{%s}datasets" % ns_dataset)
+        self.root = ET.Element("{%s}datasets" % name_space['dataset'])
     
         count = 0
 
@@ -80,70 +82,71 @@ class ImportRecords:
             #     next_page = False
             #     break
 
-            # Checks if the record has a uuid
+            # If the rdm record has a uuid means that it was imported from pure
             if not self._check_uuid(item_metadata):
                 continue
 
             self.report.add(f"{self.report_base} Adding")
 
-            self._populate_xml(item_metadata, ns_dataset, ns_commons)
+            # Adds fields to the created xml element
+            self._populate_xml(item_metadata, name_space)
 
-        self._end_xml()
+        self._parse_xml()
 
 
 
-    def _populate_xml(self, item, ns_dataset, ns_commons):
+    def _populate_xml(self, item, name_space):
 
         # Dataset element
-        body = ET.SubElement(self.root, "{%s}dataset" % ns_dataset)
+        body = ET.SubElement(self.root, "{%s}dataset" % name_space['dataset'])
         body.set('type', 'dataset')
 
         # Title
-        title = self._sub_element(body, ns_dataset, 'title')
+        title = self._sub_element(body, name_space['dataset'], 'title')
         title.text = get_value(item, ['title'])
 
         # Managing organisation
-        organisational_unit = self._sub_element(body, ns_dataset, 'managingOrganisation')
+        organisational_unit = self._sub_element(body, name_space['dataset'], 'managingOrganisation')
         self._add_attribute(item, organisational_unit, 'lookupId', ['managingOrganisationalUnit_externalId'])
 
         # Persons
-        persons = self._sub_element(body, ns_dataset, 'persons')
+        persons = self._sub_element(body, name_space['dataset'], 'persons')
         persons.set('contactPerson', 'true')
 
         for person_data in item['contributors']:
             # External id
-            person_id = self._sub_element(persons, ns_dataset, 'person')
+            person_id = self._sub_element(persons, name_space['dataset'], 'person')
             self._add_attribute(person_data, person_id, 'lookupId', ['externalId'])
             # Role
-            role = self._sub_element(persons, ns_dataset, 'role')
+            role = self._sub_element(persons, name_space['dataset'], 'role')
             role.text = get_value(person_data, ['personRole'])
             # Name
-            name = self._sub_element(persons, ns_dataset, 'name')
+            name = self._sub_element(persons, name_space['dataset'], 'name')
             name.text = get_value(person_data, ['name'])
 
         # Available date
-        date = self._sub_element(body, ns_dataset, 'availableDate')
-        sub_date = self._sub_element(date, ns_commons, 'year')
+        date = self._sub_element(body, name_space['dataset'], 'availableDate')
+        sub_date = self._sub_element(date, name_space['commons'], 'year')
         sub_date.text = get_value(item, ['publication_date'])
 
         # Publisher
-        publisher = self._sub_element(body, ns_dataset, 'publisher')    # REVIEW!!!!
-        self._sub_element(publisher, ns_dataset, 'name')                # Data not in rdm
-        self._sub_element(publisher, ns_dataset, 'type')                # Data not in rdm
+        publisher = self._sub_element(body, name_space['dataset'], 'publisher')    # REVIEW!!!!
+        self._sub_element(publisher, name_space['dataset'], 'name')                # Data not in rdm
+        self._sub_element(publisher, name_space['dataset'], 'type')                # Data not in rdm
 
         # Description
-        descriptions = self._sub_element(body, ns_dataset, 'descriptions')
-        description = self._sub_element(descriptions, ns_dataset, 'description')
+        descriptions = self._sub_element(body, name_space['dataset'], 'descriptions')
+        description = self._sub_element(descriptions, name_space['dataset'], 'description')
         description.text = get_value(item, ['abstract'])
 
         # Links
-        links = self._sub_element(body, ns_dataset, 'links')    # Review
+        links = self._sub_element(body, name_space['dataset'], 'links')    # Review
         # Files
-        link = self._sub_element(links, ns_dataset, 'link')
+        link = self._sub_element(links, name_space['dataset'], 'link')
         link.set('type', 'files')
         link.text = get_value(self.full_item, ['links', 'files'])
         # Self
-        link = self._sub_element(links, ns_commons, 'link')
+        link = self._sub_element(links, name_space['dataset'], 'link')
         link.set('type', 'self')
         link.text = get_value(self.full_item, ['links', 'self'])
 
@@ -162,7 +165,7 @@ class ImportRecords:
         # journalNumber             ['info', 'journalNumber']
 
 
-    def _end_xml(self):
+    def _parse_xml(self):
         # Wrap it in an ElementTree instance and save as XML
         xml_str = minidom.parseString(ET.tostring(self.root)).toprettyxml(indent="   ")
         open(self.file_name, "w").write(xml_str)
