@@ -26,10 +26,14 @@ class ImportRecords:
         # Get RDM records by page
         while next_page:
 
+            data = self._get_rdm_records_metadata(page, page_size)
+            if not data:
+                self.report.add("\n\tEnd task\n")
+                return
+
             self.report.add_template(['console'], ['pages', 'page_and_size'], [page, page_size])
             self.report.add('')  # adds empty line
 
-            data = self._get_rdm_records_metadata(page, page_size)
             count = 0
 
             for item in data:
@@ -39,11 +43,11 @@ class ImportRecords:
                 self.report_base = f"{add_spaces(count)} - {item['id']} -"
                 item_metadata = item['metadata']
 
-                # Checks if the record was created today
-                if not self._check_date(item):
-                    self.report.add("\n\tEnd task\n")
-                    next_page = False
-                    break
+                # # Checks if the record was created today
+                # if not self._check_date(item):
+                #     self.report.add("\n\tEnd task\n")
+                #     next_page = False
+                #     break
 
                 # Checks if the record has a uuid
                 if not self._check_uuid(item_metadata):
@@ -59,7 +63,7 @@ class ImportRecords:
         """ If a uuid is specified in the RDM record means that it was imported
             from Pure. In this case, the record will be ignored """
         if 'uuid' in item:
-            self.report.add(f"{self.report_base} Has uuid")
+            self.report.add(f"{self.report_base} Already in Pure")
             return False
         return True
 
@@ -86,7 +90,7 @@ class ImportRecords:
         self._populate_xml(item, root, ns_dataset, ns_commons)
 
     def _populate_xml(self, item, root, ns_dataset, ns_commons):
-        print(item)
+
         # Dataset element
         body = ET.SubElement(root, "{%s}dataset" % ns_dataset)
         body.set('type', 'dataset')
@@ -126,13 +130,13 @@ class ImportRecords:
 
         # Description
         descriptions = self._sub_element(body, ns_dataset, 'descriptions')
-        description = self._sub_element(descriptions, ns_commons, 'description')
+        description = self._sub_element(descriptions, ns_dataset, 'description')
         description.text = get_value(item, ['abstract'])
 
         # Links
         links = self._sub_element(body, ns_dataset, 'links')    # Review
         # Files
-        link = self._sub_element(links, ns_commons, 'link')
+        link = self._sub_element(links, ns_dataset, 'link')
         link.set('type', 'files')
         link.text = get_value(self.full_item, ['links', 'files'])
         # Self
@@ -168,4 +172,10 @@ class ImportRecords:
         if response.status_code >= 300:
             return False
         # Load response
-        return json.loads(response.content)['hits']['hits']
+        json_data = json.loads(response.content)['hits']['hits']
+
+        # Checks if any record is listed
+        if not json_data:
+            return False
+
+        return json_data
