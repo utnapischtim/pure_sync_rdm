@@ -27,6 +27,7 @@ class ImportRecords:
         while next_page:
 
             data = self._get_rdm_records_metadata(page, page_size)
+
             if not data:
                 self.report.add("\n\tEnd task\n")
                 return
@@ -143,6 +144,20 @@ class ImportRecords:
         link = self._sub_element(links, ns_commons, 'link')
         link.set('type', 'self')
         link.text = get_value(self.full_item, ['links', 'self'])
+
+        # FIELDS THAT ARE NOT IN DATASET XSD - NEEDS REVIEW:
+        # language
+        # organisationalUnits       ['personAssociations' ...]
+        # peerReview                ['peerReview']
+        # createdDate               ['info', 'createdDate']
+        # publicationDate           ['publicationStatuses', 0, 'publicationDate', 'year']
+        # publicationStatus         ['publicationStatuses', 0, 'publicationStatuses', 0, 'value']
+        # recordType                ['types', 0, 'value']
+        # workflow                  ['workflows', 0, 'value']
+        # pages                     ['info','pages']
+        # volume                    ['info','volume']
+        # journalTitle              ['info', 'journalAssociation', 'title', 'value']
+        # journalNumber             ['info', 'journalNumber']
 
         self._end_xml(root)
 
