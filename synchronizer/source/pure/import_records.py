@@ -32,31 +32,7 @@ class ImportRecords:
                 self.report.add("\n\tEnd task\n")
                 return
 
-            self.report.add_template(['console'], ['pages', 'page_and_size'], [page, page_size])
-            self.report.add('')  # adds empty line
-
-            count = 0
-
-            for item in data:
-
-                count += 1
-                self.full_item = item
-                self.report_base = f"{add_spaces(count)} - {item['id']} -"
-                item_metadata = item['metadata']
-
-                # # Checks if the record was created today
-                # if not self._check_date(item):
-                #     self.report.add("\n\tEnd task\n")
-                #     next_page = False
-                #     break
-
-                # Checks if the record has a uuid
-                if not self._check_uuid(item_metadata):
-                    continue
-
-                self.report.add(f"{self.report_base} Adding")
-
-                self._create_xml(item_metadata)
+            self._create_xml(data)
 
             page += 1
 
@@ -77,8 +53,9 @@ class ImportRecords:
             self.report.add(f"{self.report_base} Too old: {date}")
             return False
 
-    def _create_xml(self, item):
+    def _create_xml(self, data):
         """ Creates the xml file that will be imported in pure """
+                
         ns_dataset = 'v1.dataset.pure.atira.dk'     # Name Space dataset
         ns_commons = 'v3.commons.pure.atira.dk'     # Name Space commons
 
@@ -86,14 +63,39 @@ class ImportRecords:
         ET.register_namespace('v3', ns_commons)
 
         # Build a tree structure
-        root = ET.Element("{%s}datasets" % ns_dataset)
+        self.root = ET.Element("{%s}datasets" % ns_dataset)
+    
+        count = 0
 
-        self._populate_xml(item, root, ns_dataset, ns_commons)
+        for item in data:
 
-    def _populate_xml(self, item, root, ns_dataset, ns_commons):
+            count += 1
+            self.full_item = item
+            self.report_base = f"{add_spaces(count)} - {item['id']} -"
+            item_metadata = item['metadata']
+
+            # # Checks if the record was created today
+            # if not self._check_date(item):
+            #     self.report.add("\n\tEnd task\n")
+            #     next_page = False
+            #     break
+
+            # Checks if the record has a uuid
+            if not self._check_uuid(item_metadata):
+                continue
+
+            self.report.add(f"{self.report_base} Adding")
+
+            self._populate_xml(item_metadata, ns_dataset, ns_commons)
+
+        self._end_xml()
+
+
+
+    def _populate_xml(self, item, ns_dataset, ns_commons):
 
         # Dataset element
-        body = ET.SubElement(root, "{%s}dataset" % ns_dataset)
+        body = ET.SubElement(self.root, "{%s}dataset" % ns_dataset)
         body.set('type', 'dataset')
 
         # Title
@@ -146,7 +148,7 @@ class ImportRecords:
         link.text = get_value(self.full_item, ['links', 'self'])
 
         # FIELDS THAT ARE NOT IN DATASET XSD - NEEDS REVIEW:
-        # language
+        # language                  ['languages', 0, 'value']
         # organisationalUnits       ['personAssociations' ...]
         # peerReview                ['peerReview']
         # createdDate               ['info', 'createdDate']
@@ -159,12 +161,12 @@ class ImportRecords:
         # journalTitle              ['info', 'journalAssociation', 'title', 'value']
         # journalNumber             ['info', 'journalNumber']
 
-        self._end_xml(root)
 
-    def _end_xml(self, root):
+    def _end_xml(self):
         # Wrap it in an ElementTree instance and save as XML
-        xml_str = minidom.parseString(ET.tostring(root)).toprettyxml(indent="   ")
+        xml_str = minidom.parseString(ET.tostring(self.root)).toprettyxml(indent="   ")
         open(self.file_name, "w").write(xml_str)
+
 
     def _sub_element(self, element, namespace: str, sub_element_name: str):
         """ Adds the the xml a sub element """
@@ -182,8 +184,10 @@ class ImportRecords:
 
     def _get_rdm_records_metadata(self, page: int, page_size: int):
         """ Requests to rdm records metadata by page """
+
         params = {'sort': 'mostrecent', 'size': page_size, 'page': page}
         response = self.rdm_requests.get_metadata(params)
+
         if response.status_code >= 300:
             return False
         # Load response
@@ -192,5 +196,8 @@ class ImportRecords:
         # Checks if any record is listed
         if not json_data:
             return False
+
+        self.report.add_template(['console'], ['pages', 'page_and_size'], [page, page_size])
+        self.report.add('')  # adds empty line
 
         return json_data
