@@ -176,16 +176,21 @@ class ImportRecords:
         """ Adds relative links for RDM files and api """
         link_files = get_value(self.full_item, ['links', 'files'])
         link_self  = get_value(self.full_item, ['links', 'self'])
+        recid  = get_value(self.full_item, ['id'])
         if link_files or link_self:
-            links = self._sub_element(body, name_space['dataset'], 'links')    # Review
+            links = self._sub_element(body, name_space['dataset'], 'links')
             # Files
             if link_files:
                 link = self._sub_element(links, name_space['dataset'], 'link')
-                link.text = link_files
+                link.set('id', recid)        # REVIEW - which id?
+                self._sub_element(link, name_space['dataset'], 'url').text = link_files
+                self._sub_element(link, name_space['dataset'], 'description').text = 'Link to record files'
             # Self
             if link_self:
                 link = self._sub_element(links, name_space['dataset'], 'link')
-                link.text = link_self
+                link.set('id', recid)        # REVIEW - which id?
+                url = self._sub_element(link, name_space['dataset'], 'url').text = link_self
+                self._sub_element(link, name_space['dataset'], 'description').text = 'Link to record API'
 
 
     def _parse_xml(self):
