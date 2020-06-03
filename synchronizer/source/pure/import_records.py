@@ -127,6 +127,7 @@ class ImportRecords:
 
         # Description
         value = get_value(item, ['abstract'])
+        value = 'test description'
         if value:
             descriptions = self._sub_element(body, name_space['dataset'], 'descriptions')
             description = self._sub_element(descriptions, name_space['dataset'], 'description')
@@ -135,6 +136,9 @@ class ImportRecords:
 
         # Links
         self._add_links(body, name_space)
+
+        # Organisations
+        self._add_organisations(body, name_space, item)
 
         # FIELDS THAT ARE NOT IN DATASET XSD - NEEDS REVIEW:
         # language                  ['languages', 0, 'value']
@@ -150,6 +154,54 @@ class ImportRecords:
         # journalTitle              ['info', 'journalAssociation', 'title', 'value']
         # journalNumber             ['info', 'journalNumber']
 
+        # PURE RESPONSE
+        # cvc-complex-type.2.4.b: The content of element 'v1:dataset' is not complete.
+        # One of '{
+        # "v1.dataset.pure.atira.dk":translatedTitles, 
+        # "v1.dataset.pure.atira.dk":description, 
+        # "v1.dataset.pure.atira.dk":ids, 
+        # "v1.dataset.pure.atira.dk":additionalDescriptions, 
+        # "v1.dataset.pure.atira.dk":temporalCoverage, 
+        # "v1.dataset.pure.atira.dk":productionDate, 
+        # "v1.dataset.pure.atira.dk":geoLocation, 
+        # "v1.dataset.pure.atira.dk":organisations, 
+        # "v1.dataset.pure.atira.dk":DOI, 
+        # "v1.dataset.pure.atira.dk":physicalDatas, 
+        # "v1.dataset.pure.atira.dk":publisher, 
+        # "v1.dataset.pure.atira.dk":openAccess, 
+        # "v1.dataset.pure.atira.dk":embargoPeriod, 
+        # "v1.dataset.pure.atira.dk":constraints, 
+        # "v1.dataset.pure.atira.dk":keywords, 
+        # "v1.dataset.pure.atira.dk":links, 
+        # "v1.dataset.pure.atira.dk":documents, 
+        # "v1.dataset.pure.atira.dk":relatedProjects, 
+        # "v1.dataset.pure.atira.dk":relatedEquipments, 
+        # "v1.dataset.pure.atira.dk":relatedStudentThesis,
+        # "v1.dataset.pure.atira.dk":relatedPublications, 
+        # "v1.dataset.pure.atira.dk":relatedActivities, 
+        # "v1.dataset.pure.atira.dk":relatedDatasets, 
+        # "v1.dataset.pure.atira.dk":visibility, 
+        # "v1.dataset.pure.atira.dk":workflow
+        # }' is expected.
+
+
+
+    def _add_organisations(self, body, name_space, item):
+        organisations = self._sub_element(body, name_space['dataset'], 'organisations')
+
+        for unit_data in item['organisationalUnits']:
+
+            # Pure dataset documentation:
+            # Can be both an internal and external organisation, use origin to enforce either internal or external.
+            # If the organisation is an internal organisation in Pure, then the lookupId attribute must be used. 
+            # If the organisation is an external organisation and id is given matching will be done on the id, 
+            # if not found mathching will be done on name, if still not found then an external 
+            # organisation with the specified id and organisation will be created.
+
+            organisation = self._sub_element(organisations, name_space['dataset'], 'organisation')
+            self._add_attribute(unit_data, organisation, 'lookupId', ['externalId'])
+            name = self._sub_element(organisation, name_space['dataset'], 'name')
+            name.text = get_value(unit_data, ['name'])
 
 
     def _add_persons(self, body, name_space, item):
