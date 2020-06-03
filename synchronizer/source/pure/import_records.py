@@ -128,12 +128,9 @@ class ImportRecords:
         value = get_value(item, ['abstract'])
         if value:
             descriptions = self._sub_element(body, name_space['dataset'], 'descriptions')
-            self._sub_element(descriptions, name_space['dataset'], 'description').text = value
-
-        # <v1:additionalDescriptions>
-        #     <v1:description type="datasetdescription" lang="de">DataSet Desecription - Deutsch</v1:description>
-        #     <v1:description type="additionaldescription">Additional description</v1:description>
-        # </v1:additionalDescriptions>
+            description = self._sub_element(descriptions, name_space['dataset'], 'description')
+            description.set('type', 'datasetdescription')
+            description.text = value
 
         # Links
         self._add_links(body, name_space)
