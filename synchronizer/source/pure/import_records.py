@@ -82,9 +82,9 @@ class ImportRecords:
             #     next_page = False
             #     break
 
-            # If the rdm record has a uuid means that it was imported from pure
-            if not self._check_uuid(item_metadata):
-                continue
+            # # If the rdm record has a uuid means that it was imported from pure
+            # if not self._check_uuid(item_metadata):
+            #     continue
 
             self.report.add(f"{self.report_base} Adding")
 
@@ -101,54 +101,42 @@ class ImportRecords:
         body = ET.SubElement(self.root, "{%s}dataset" % name_space['dataset'])
         body.set('type', 'dataset')
 
-        # Title
-        title = self._sub_element(body, name_space['dataset'], 'title')
-        title.text = get_value(item, ['title'])
+        # Title                     (mandatory field)
+        value = get_value(item, ['title'])
+        if not value:
+            return False
+        self._sub_element(body, name_space['dataset'], 'title').text = value
 
-        # Managing organisation
+        # Managing organisation     (mandatory field)
         organisational_unit = self._sub_element(body, name_space['dataset'], 'managingOrganisation')
         self._add_attribute(item, organisational_unit, 'lookupId', ['managingOrganisationalUnit_externalId'])
 
-        # Persons
-        persons = self._sub_element(body, name_space['dataset'], 'persons')
-        persons.set('contactPerson', 'true')
+        # Persons                   (mandatory field)
+        self._add_persons(body, name_space, item)
 
-        for person_data in item['contributors']:
-            # External id
-            person_id = self._sub_element(persons, name_space['dataset'], 'person')
-            self._add_attribute(person_data, person_id, 'lookupId', ['externalId'])
-            # Role
-            role = self._sub_element(persons, name_space['dataset'], 'role')
-            role.text = get_value(person_data, ['personRole'])
-            # Name
-            name = self._sub_element(persons, name_space['dataset'], 'name')
-            name.text = get_value(person_data, ['name'])
-
-        # Available date
+        # Available date            (mandatory field)
         date = self._sub_element(body, name_space['dataset'], 'availableDate')
         sub_date = self._sub_element(date, name_space['commons'], 'year')
         sub_date.text = get_value(item, ['publication_date'])
 
-        # Publisher
+        # Publisher                 (mandatory field)
         publisher = self._sub_element(body, name_space['dataset'], 'publisher')    # REVIEW!!!!
         self._sub_element(publisher, name_space['dataset'], 'name')                # Data not in rdm
         self._sub_element(publisher, name_space['dataset'], 'type')                # Data not in rdm
 
         # Description
-        descriptions = self._sub_element(body, name_space['dataset'], 'descriptions')
-        description = self._sub_element(descriptions, name_space['dataset'], 'description')
-        description.text = get_value(item, ['abstract'])
+        value = get_value(item, ['abstract'])
+        if value:
+            descriptions = self._sub_element(body, name_space['dataset'], 'descriptions')
+            self._sub_element(descriptions, name_space['dataset'], 'description').text = value
+
+        # <v1:additionalDescriptions>
+        #     <v1:description type="datasetdescription" lang="de">DataSet Desecription - Deutsch</v1:description>
+        #     <v1:description type="additionaldescription">Additional description</v1:description>
+        # </v1:additionalDescriptions>
 
         # Links
-        links = self._sub_element(body, name_space['dataset'], 'links')    # Review
-        # Files
-        link = self._sub_element(links, name_space['dataset'], 'link')
-        link.set('type', 'files')
-        link.text = get_value(self.full_item, ['links', 'files'])
-        # Self
-        link = self._sub_element(links, name_space['dataset'], 'link')
-        link.set('type', 'self')
-        link.text = get_value(self.full_item, ['links', 'self'])
+        self._add_links(body, name_space)
 
         # FIELDS THAT ARE NOT IN DATASET XSD - NEEDS REVIEW:
         # language                  ['languages', 0, 'value']
@@ -165,6 +153,41 @@ class ImportRecords:
         # journalNumber             ['info', 'journalNumber']
 
 
+
+    def _add_persons(self, body, name_space, item):
+        persons = self._sub_element(body, name_space['dataset'], 'persons')
+
+        for person_data in item['contributors']:
+            person = self._sub_element(persons, name_space['dataset'], 'person')
+            person.set('contactPerson', 'true')
+            self._add_attribute(person_data, person, 'id', ['uuid'])
+            # External id
+            person_id = self._sub_element(person, name_space['dataset'], 'person')
+            self._add_attribute(person_data, person_id, 'lookupId', ['externalId'])
+            # Role
+            role = self._sub_element(person, name_space['dataset'], 'role')
+            role.text = get_value(person_data, ['personRole'])
+            # Name
+            name = self._sub_element(person, name_space['dataset'], 'name')
+            name.text = get_value(person_data, ['name'])
+
+
+    def _add_links(self, body, name_space):
+        """ Adds relative links for RDM files and api """
+        link_files = get_value(self.full_item, ['links', 'files'])
+        link_self  = get_value(self.full_item, ['links', 'self'])
+        if link_files or link_self:
+            links = self._sub_element(body, name_space['dataset'], 'links')    # Review
+            # Files
+            if link_files:
+                link = self._sub_element(links, name_space['dataset'], 'link')
+                link.text = link_files
+            # Self
+            if link_self:
+                link = self._sub_element(links, name_space['dataset'], 'link')
+                link.text = link_self
+
+
     def _parse_xml(self):
         # Wrap it in an ElementTree instance and save as XML
         xml_str = minidom.parseString(ET.tostring(self.root)).toprettyxml(indent="   ")
@@ -175,15 +198,18 @@ class ImportRecords:
         """ Adds the the xml a sub element """
         return ET.SubElement(element, "{%s}%s" % (namespace, sub_element_name))
 
+
     def _add_attribute(self, item: object, sub_element, attribute: str, value_path: list):
         """ Gets from the rdm response a value and adds it as attribute to a given xml element """
         value = get_value(item, value_path)
         if value:
             sub_element.set(attribute, value)
 
+
     def _add_text(self, item: object, sub_element: object, path):
         """ Gets from the rdm response a value and adds it as text to a given xml element """
         sub_element.text = get_value(item, path)
+
 
     def _get_rdm_records_metadata(self, page: int, page_size: int):
         """ Requests to rdm records metadata by page """
