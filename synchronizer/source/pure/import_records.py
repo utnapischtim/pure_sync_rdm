@@ -120,9 +120,10 @@ class ImportRecords:
         sub_date.text = get_value(item, ['publication_date'])
 
         # Publisher                 (mandatory field)
-        publisher = self._sub_element(body, name_space['dataset'], 'publisher')    # REVIEW!!!!
-        self._sub_element(publisher, name_space['dataset'], 'name')                # Data not in rdm
-        self._sub_element(publisher, name_space['dataset'], 'type')                # Data not in rdm
+        publisher = self._sub_element(body, name_space['dataset'], 'publisher')               # REVIEW!!!!
+        publisher.set('lookupId', '45d22915-6545-4428-896a-8b8046191d5d')                     # Data not in rdm
+        self._sub_element(publisher, name_space['dataset'], 'name').text = 'Test publisher'   # Data not in rdm
+        self._sub_element(publisher, name_space['dataset'], 'type').text = 'publisher'        # Data not in rdm
 
         # Description
         value = get_value(item, ['abstract'])
