@@ -1,21 +1,21 @@
 {
-  "pureId" : 58297,
-  "externalId" : "337",
+  "pureId" : 60971,
+  "externalId" : "3261",
   "externalIdSource" : "synchronisedUnifiedPerson",
   "externallyManaged" : true,
-  "uuid" : "62c69306-3be1-4b92-8623-e1e5065ee4c0",
+  "uuid" : "1198b8c9-eea7-41dd-8861-30c8d066fb27",
   "name" : {
-    "firstName" : "Ernst",
-    "lastName" : "Kozeschnik"
+    "firstName" : "Franz",
+    "lastName" : "Leberl"
   },
-  "scopusHIndex" : 20,
-  "fte" : 0.0,
+  "scopusHIndex" : 17,
+  "fte" : 2.0,
   "info" : {
     "createdBy" : "sync_user",
-    "createdDate" : "2016-02-23T13:33:15.813+0000",
+    "createdDate" : "2016-02-23T13:34:19.780+0000",
     "modifiedBy" : "sync_user",
-    "modifiedDate" : "2020-01-04T22:00:10.767+0000",
-    "portalUrl" : "https://pure01.tugraz.at/portal/en/persons/ernst-kozeschnik(62c69306-3be1-4b92-8623-e1e5065ee4c0).html"
+    "modifiedDate" : "2020-04-20T11:46:21.569+0000",
+    "portalUrl" : "https://pure01.tugraz.at/portal/en/persons/franz-leberl(1198b8c9-eea7-41dd-8861-30c8d066fb27).html"
   },
   "nationalities" : [ {
     "locale" : "en_GB",
@@ -28,30 +28,10 @@
     "pureId" : 177,
     "uri" : "/dk/atira/pure/core/countries/at"
   } ],
-  "nameVariants" : [ {
-    "pureId" : 58299,
-    "externalId" : "f-337",
-    "externalIdSource" : "synchronisedUnifiedPerson",
-    "name" : {
-      "firstName" : "Ernst",
-      "lastName" : "Kozeschnik"
-    },
-    "classifications" : [ {
-      "locale" : "en_GB",
-      "value" : "Former name",
-      "pureId" : 17150,
-      "uri" : "/dk/atira/pure/person/names/former"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Früherer Nachname",
-      "pureId" : 17150,
-      "uri" : "/dk/atira/pure/person/names/former"
-    } ]
-  } ],
   "titles" : [ {
     "locale" : "en_GB",
-    "value" : "Univ.-Prof. Dipl.-Ing. Dr.techn.",
-    "pureId" : 58310,
+    "value" : "Em.Univ.-Prof. Dipl.-Ing. Dr.techn.",
+    "pureId" : 60986,
     "externalId" : "1",
     "externalIdSource" : "synchronisedUnifiedPerson",
     "externallyManaged" : true,
@@ -59,8 +39,8 @@
     "type" : "Title"
   }, {
     "locale" : "de_DE",
-    "value" : "Univ.-Prof. Dipl.-Ing. Dr.techn.",
-    "pureId" : 58310,
+    "value" : "Em.Univ.-Prof. Dipl.-Ing. Dr.techn.",
+    "pureId" : 60986,
     "externalId" : "1",
     "externalIdSource" : "synchronisedUnifiedPerson",
     "externallyManaged" : true,
@@ -68,11 +48,11 @@
     "type" : "Allgemeine Bezeichnung"
   } ],
   "links" : [ {
-    "pureId" : 58298,
-    "externalId" : "337-vk",
+    "pureId" : 60972,
+    "externalId" : "3261-vk",
     "externalIdSource" : "synchronisedUnifiedPerson",
     "externallyManaged" : true,
-    "url" : "https://qline.tugraz.at/QSYSTEM_TUG/visitenkarte.show_vcard?pPersonenId=5A023190F58C22B4&pPersonenGruppe=3",
+    "url" : "https://qline.tugraz.at/QSYSTEM_TUG/visitenkarte.show_vcard?pPersonenId=2170D83EB5F47EDF&pPersonenGruppe=3",
     "descriptions" : [ {
       "locale" : "en_GB",
       "value" : "More information on person"
@@ -93,124 +73,47 @@
     } ]
   } ],
   "staffOrganisationAssociations" : [ {
-    "pureId" : 58302,
-    "externalId" : "186900",
+    "pureId" : 60980,
+    "externalId" : "276013",
     "externalIdSource" : "synchronisedUnifiedPerson",
     "externallyManaged" : true,
     "person" : {
-      "uuid" : "62c69306-3be1-4b92-8623-e1e5065ee4c0",
+      "uuid" : "1198b8c9-eea7-41dd-8861-30c8d066fb27",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/persons/62c69306-3be1-4b92-8623-e1e5065ee4c0"
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/1198b8c9-eea7-41dd-8861-30c8d066fb27"
       },
-      "externalId" : "337",
+      "externalId" : "3261",
       "externalIdSource" : "synchronisedUnifiedPerson",
       "externallyManaged" : true,
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Ernst Kozeschnik"
+        "value" : "Franz Leberl"
       }, {
         "locale" : "de_DE",
-        "value" : "Ernst Kozeschnik"
+        "value" : "Franz Leberl"
       } ]
     },
     "period" : {
-      "startDate" : "2005-10-04T10:00:00.000+0000"
-    },
-    "isPrimaryAssociation" : false,
-    "organisationalUnit" : {
-      "uuid" : "f83c8643-c93d-4163-9196-574cafbcbede",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/f83c8643-c93d-4163-9196-574cafbcbede"
-      },
-      "externalId" : "2256",
-      "externalIdSource" : "synchronisedUnifiedOrganisation",
-      "externallyManaged" : true,
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "Institute of Materials Science, Joining and Forming (3030)"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Institut für Werkstoffkunde, Fügetechnik und Umformtechnik (3030)"
-      } ],
-      "types" : [ {
-        "locale" : "en_GB",
-        "value" : "Institute",
-        "pureId" : 5431,
-        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Institut",
-        "pureId" : 5431,
-        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
-      } ]
-    },
-    "staffTypes" : [ {
-      "locale" : "en_GB",
-      "value" : "Academic",
-      "pureId" : 17242,
-      "uri" : "/dk/atira/pure/person/personstafftype/academic"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Akademisch",
-      "pureId" : 17242,
-      "uri" : "/dk/atira/pure/person/personstafftype/academic"
-    } ],
-    "jobTitles" : [ {
-      "locale" : "en_GB",
-      "value" : "Universitätsdozent/in (Ohne TUG-Dienstverh.)",
-      "pureId" : 4866,
-      "uri" : "/dk/atira/pure/person/jobtitles/ve_4743"
-    }, {
-      "locale" : "de_DE",
-      "value" : "Universitätsdozent/in (Ohne TUG-Dienstverh.)",
-      "pureId" : 4866,
-      "uri" : "/dk/atira/pure/person/jobtitles/ve_4743"
-    } ]
-  }, {
-    "pureId" : 58300,
-    "externalId" : "194821",
-    "externalIdSource" : "synchronisedUnifiedPerson",
-    "externallyManaged" : true,
-    "person" : {
-      "uuid" : "62c69306-3be1-4b92-8623-e1e5065ee4c0",
-      "link" : {
-        "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/persons/62c69306-3be1-4b92-8623-e1e5065ee4c0"
-      },
-      "externalId" : "337",
-      "externalIdSource" : "synchronisedUnifiedPerson",
-      "externallyManaged" : true,
-      "names" : [ {
-        "locale" : "en_GB",
-        "value" : "Ernst Kozeschnik"
-      }, {
-        "locale" : "de_DE",
-        "value" : "Ernst Kozeschnik"
-      } ]
-    },
-    "period" : {
-      "startDate" : "2007-01-01T11:00:00.000+0000",
-      "endDate" : "2008-02-29T11:00:00.000+0000"
+      "startDate" : "2013-10-01T10:00:00.000+0000"
     },
     "isPrimaryAssociation" : false,
     "fte" : 1.0,
     "organisationalUnit" : {
-      "uuid" : "f83c8643-c93d-4163-9196-574cafbcbede",
+      "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/f83c8643-c93d-4163-9196-574cafbcbede"
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
       },
-      "externalId" : "2256",
+      "externalId" : "2376",
       "externalIdSource" : "synchronisedUnifiedOrganisation",
       "externallyManaged" : true,
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Institute of Materials Science, Joining and Forming (3030)"
+        "value" : "Institute of Computer Graphics and Vision (7100)"
       }, {
         "locale" : "de_DE",
-        "value" : "Institut für Werkstoffkunde, Fügetechnik und Umformtechnik (3030)"
+        "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
       } ],
       "types" : [ {
         "locale" : "en_GB",
@@ -234,60 +137,125 @@
       "value" : "Akademisch",
       "pureId" : 17242,
       "uri" : "/dk/atira/pure/person/personstafftype/academic"
-    } ],
-    "jobTitles" : [ {
-      "locale" : "en_GB",
-      "value" : "UniversitätsdozentIn nach Angestelltenrecht",
-      "pureId" : 4830,
-      "uri" : "/dk/atira/pure/person/jobtitles/ud_1"
-    }, {
-      "locale" : "de_DE",
-      "value" : "UniversitätsdozentIn nach Angestelltenrecht",
-      "pureId" : 4830,
-      "uri" : "/dk/atira/pure/person/jobtitles/ud_1"
     } ]
   }, {
-    "pureId" : 58303,
-    "externalId" : "153672",
+    "pureId" : 60983,
+    "externalId" : "168067",
     "externalIdSource" : "synchronisedUnifiedPerson",
     "externallyManaged" : true,
     "person" : {
-      "uuid" : "62c69306-3be1-4b92-8623-e1e5065ee4c0",
+      "uuid" : "1198b8c9-eea7-41dd-8861-30c8d066fb27",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/persons/62c69306-3be1-4b92-8623-e1e5065ee4c0"
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/1198b8c9-eea7-41dd-8861-30c8d066fb27"
       },
-      "externalId" : "337",
+      "externalId" : "3261",
       "externalIdSource" : "synchronisedUnifiedPerson",
       "externallyManaged" : true,
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Ernst Kozeschnik"
+        "value" : "Franz Leberl"
       }, {
         "locale" : "de_DE",
-        "value" : "Ernst Kozeschnik"
+        "value" : "Franz Leberl"
       } ]
     },
     "period" : {
-      "startDate" : "2002-10-01T10:00:00.000+0000",
-      "endDate" : "2003-03-31T10:00:00.000+0000"
+      "startDate" : "2000-01-01T11:00:00.000+0000"
+    },
+    "isPrimaryAssociation" : false,
+    "fte" : 1.0,
+    "organisationalUnit" : {
+      "uuid" : "710a8715-37b1-44d6-8e01-69766710899b",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/710a8715-37b1-44d6-8e01-69766710899b"
+      },
+      "externalId" : "13274",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "VRVis Research Center for Virtual Reality and Visualization, Ltd. (98840)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "K1 VRVis – Visualization, Rendering and Visual Analysis Research Center (98840)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Other Scientific Co-operations in Competence Centers and Competence Projects",
+        "pureId" : 5605,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_32077"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Kooperationen in Kompetenzzentren und K-Projekten",
+        "pureId" : 5605,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_32077"
+      } ]
+    },
+    "staffTypes" : [ {
+      "locale" : "en_GB",
+      "value" : "Academic",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Akademisch",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    } ],
+    "jobTitles" : [ {
+      "locale" : "en_GB",
+      "value" : "Drittmittelbeschäftigtes Personal",
+      "pureId" : 4746,
+      "uri" : "/dk/atira/pure/person/jobtitles/dp_4735"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Drittmittelbeschäftigtes Personal",
+      "pureId" : 4746,
+      "uri" : "/dk/atira/pure/person/jobtitles/dp_4735"
+    } ]
+  }, {
+    "pureId" : 60984,
+    "externalId" : "290527",
+    "externalIdSource" : "synchronisedUnifiedPerson",
+    "externallyManaged" : true,
+    "person" : {
+      "uuid" : "1198b8c9-eea7-41dd-8861-30c8d066fb27",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/1198b8c9-eea7-41dd-8861-30c8d066fb27"
+      },
+      "externalId" : "3261",
+      "externalIdSource" : "synchronisedUnifiedPerson",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Franz Leberl"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Franz Leberl"
+      } ]
+    },
+    "period" : {
+      "startDate" : "2015-01-01T11:00:00.000+0000"
     },
     "isPrimaryAssociation" : false,
     "organisationalUnit" : {
-      "uuid" : "f83c8643-c93d-4163-9196-574cafbcbede",
+      "uuid" : "c8dfc352-d637-43c8-aa7f-6c3a3997031d",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/f83c8643-c93d-4163-9196-574cafbcbede"
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/c8dfc352-d637-43c8-aa7f-6c3a3997031d"
       },
-      "externalId" : "2256",
+      "externalId" : "34102",
       "externalIdSource" : "synchronisedUnifiedOrganisation",
       "externallyManaged" : true,
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Institute of Materials Science, Joining and Forming (3030)"
+        "value" : "Institute of Geodesy (5220)"
       }, {
         "locale" : "de_DE",
-        "value" : "Institut für Werkstoffkunde, Fügetechnik und Umformtechnik (3030)"
+        "value" : "Institut für Geodäsie (5220)"
       } ],
       "types" : [ {
         "locale" : "en_GB",
@@ -314,57 +282,58 @@
     } ],
     "jobTitles" : [ {
       "locale" : "en_GB",
-      "value" : "Lehrbeauftragte/r",
-      "pureId" : 4770,
-      "uri" : "/dk/atira/pure/person/jobtitles/la_4740"
+      "value" : "Universitätsdozent/in (Ohne TUG-Dienstverh.)",
+      "pureId" : 4866,
+      "uri" : "/dk/atira/pure/person/jobtitles/ve_4743"
     }, {
       "locale" : "de_DE",
-      "value" : "Lehrbeauftragte/r",
-      "pureId" : 4770,
-      "uri" : "/dk/atira/pure/person/jobtitles/la_4740"
+      "value" : "Universitätsdozent/in (Ohne TUG-Dienstverh.)",
+      "pureId" : 4866,
+      "uri" : "/dk/atira/pure/person/jobtitles/ve_4743"
     } ]
   }, {
-    "pureId" : 58304,
-    "externalId" : "129258",
+    "pureId" : 60973,
+    "externalId" : "169155",
     "externalIdSource" : "synchronisedUnifiedPerson",
     "externallyManaged" : true,
     "person" : {
-      "uuid" : "62c69306-3be1-4b92-8623-e1e5065ee4c0",
+      "uuid" : "1198b8c9-eea7-41dd-8861-30c8d066fb27",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/persons/62c69306-3be1-4b92-8623-e1e5065ee4c0"
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/1198b8c9-eea7-41dd-8861-30c8d066fb27"
       },
-      "externalId" : "337",
+      "externalId" : "3261",
       "externalIdSource" : "synchronisedUnifiedPerson",
       "externallyManaged" : true,
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Ernst Kozeschnik"
+        "value" : "Franz Leberl"
       }, {
         "locale" : "de_DE",
-        "value" : "Ernst Kozeschnik"
+        "value" : "Franz Leberl"
       } ]
     },
     "period" : {
-      "startDate" : "2001-10-01T10:00:00.000+0000",
-      "endDate" : "2002-03-31T10:00:00.000+0000"
+      "startDate" : "2003-10-01T10:00:00.000+0000",
+      "endDate" : "2007-09-30T10:00:00.000+0000"
     },
     "isPrimaryAssociation" : false,
+    "fte" : 0.5,
     "organisationalUnit" : {
-      "uuid" : "f83c8643-c93d-4163-9196-574cafbcbede",
+      "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/f83c8643-c93d-4163-9196-574cafbcbede"
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
       },
-      "externalId" : "2256",
+      "externalId" : "2376",
       "externalIdSource" : "synchronisedUnifiedOrganisation",
       "externallyManaged" : true,
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Institute of Materials Science, Joining and Forming (3030)"
+        "value" : "Institute of Computer Graphics and Vision (7100)"
       }, {
         "locale" : "de_DE",
-        "value" : "Institut für Werkstoffkunde, Fügetechnik und Umformtechnik (3030)"
+        "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
       } ],
       "types" : [ {
         "locale" : "en_GB",
@@ -391,58 +360,370 @@
     } ],
     "jobTitles" : [ {
       "locale" : "en_GB",
-      "value" : "Lehrbeauftragte/r",
-      "pureId" : 4770,
-      "uri" : "/dk/atira/pure/person/jobtitles/la_4740"
+      "value" : "UniversitätsprofessorIn (Große Planstelle)",
+      "pureId" : 4842,
+      "uri" : "/dk/atira/pure/person/jobtitles/up_54447"
     }, {
       "locale" : "de_DE",
-      "value" : "Lehrbeauftragte/r",
-      "pureId" : 4770,
-      "uri" : "/dk/atira/pure/person/jobtitles/la_4740"
+      "value" : "UniversitätsprofessorIn (Große Planstelle)",
+      "pureId" : 4842,
+      "uri" : "/dk/atira/pure/person/jobtitles/up_54447"
     } ]
   }, {
-    "pureId" : 58306,
-    "externalId" : "146280",
+    "pureId" : 60974,
+    "externalId" : "168763",
     "externalIdSource" : "synchronisedUnifiedPerson",
     "externallyManaged" : true,
     "person" : {
-      "uuid" : "62c69306-3be1-4b92-8623-e1e5065ee4c0",
+      "uuid" : "1198b8c9-eea7-41dd-8861-30c8d066fb27",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/persons/62c69306-3be1-4b92-8623-e1e5065ee4c0"
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/1198b8c9-eea7-41dd-8861-30c8d066fb27"
       },
-      "externalId" : "337",
+      "externalId" : "3261",
       "externalIdSource" : "synchronisedUnifiedPerson",
       "externallyManaged" : true,
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Ernst Kozeschnik"
+        "value" : "Franz Leberl"
       }, {
         "locale" : "de_DE",
-        "value" : "Ernst Kozeschnik"
+        "value" : "Franz Leberl"
       } ]
     },
     "period" : {
-      "startDate" : "2000-03-01T11:00:00.000+0000",
+      "startDate" : "1980-10-01T11:00:00.000+0000",
+      "endDate" : "1984-07-31T10:00:00.000+0000"
+    },
+    "isPrimaryAssociation" : false,
+    "fte" : 1.0,
+    "organisationalUnit" : {
+      "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
+      },
+      "externalId" : "2376",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Computer Graphics and Vision (7100)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    },
+    "staffTypes" : [ {
+      "locale" : "en_GB",
+      "value" : "Academic",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Akademisch",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    } ],
+    "jobTitles" : [ {
+      "locale" : "en_GB",
+      "value" : "Ausserordentl. UniversitätsprofessorIn",
+      "pureId" : 4838,
+      "uri" : "/dk/atira/pure/person/jobtitles/up_4729"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Ausserordentl. UniversitätsprofessorIn",
+      "pureId" : 4838,
+      "uri" : "/dk/atira/pure/person/jobtitles/up_4729"
+    } ]
+  }, {
+    "pureId" : 60975,
+    "externalId" : "168762",
+    "externalIdSource" : "synchronisedUnifiedPerson",
+    "externallyManaged" : true,
+    "person" : {
+      "uuid" : "1198b8c9-eea7-41dd-8861-30c8d066fb27",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/1198b8c9-eea7-41dd-8861-30c8d066fb27"
+      },
+      "externalId" : "3261",
+      "externalIdSource" : "synchronisedUnifiedPerson",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Franz Leberl"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Franz Leberl"
+      } ]
+    },
+    "period" : {
+      "startDate" : "1976-09-01T11:00:00.000+0000",
+      "endDate" : "1980-09-30T11:00:00.000+0000"
+    },
+    "isPrimaryAssociation" : false,
+    "fte" : 1.0,
+    "organisationalUnit" : {
+      "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
+      },
+      "externalId" : "2376",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Computer Graphics and Vision (7100)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    },
+    "staffTypes" : [ {
+      "locale" : "en_GB",
+      "value" : "Academic",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Akademisch",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    } ],
+    "jobTitles" : [ {
+      "locale" : "en_GB",
+      "value" : "Universitätsassistent/in",
+      "pureId" : 4818,
+      "uri" : "/dk/atira/pure/person/jobtitles/ua_4750"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Universitätsassistent/in",
+      "pureId" : 4818,
+      "uri" : "/dk/atira/pure/person/jobtitles/ua_4750"
+    } ]
+  }, {
+    "pureId" : 60976,
+    "externalId" : "168761",
+    "externalIdSource" : "synchronisedUnifiedPerson",
+    "externallyManaged" : true,
+    "person" : {
+      "uuid" : "1198b8c9-eea7-41dd-8861-30c8d066fb27",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/1198b8c9-eea7-41dd-8861-30c8d066fb27"
+      },
+      "externalId" : "3261",
+      "externalIdSource" : "synchronisedUnifiedPerson",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Franz Leberl"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Franz Leberl"
+      } ]
+    },
+    "period" : {
+      "startDate" : "1978-03-02T11:00:00.000+0000",
+      "endDate" : "1980-09-30T11:00:00.000+0000"
+    },
+    "isPrimaryAssociation" : false,
+    "fte" : 1.0,
+    "organisationalUnit" : {
+      "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
+      },
+      "externalId" : "2376",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Computer Graphics and Vision (7100)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    },
+    "staffTypes" : [ {
+      "locale" : "en_GB",
+      "value" : "Academic",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Akademisch",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    } ],
+    "jobTitles" : [ {
+      "locale" : "en_GB",
+      "value" : "Universitätsassistent/in",
+      "pureId" : 4818,
+      "uri" : "/dk/atira/pure/person/jobtitles/ua_4750"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Universitätsassistent/in",
+      "pureId" : 4818,
+      "uri" : "/dk/atira/pure/person/jobtitles/ua_4750"
+    } ]
+  }, {
+    "pureId" : 60977,
+    "externalId" : "169156",
+    "externalIdSource" : "synchronisedUnifiedPerson",
+    "externallyManaged" : true,
+    "person" : {
+      "uuid" : "1198b8c9-eea7-41dd-8861-30c8d066fb27",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/1198b8c9-eea7-41dd-8861-30c8d066fb27"
+      },
+      "externalId" : "3261",
+      "externalIdSource" : "synchronisedUnifiedPerson",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Franz Leberl"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Franz Leberl"
+      } ]
+    },
+    "period" : {
+      "startDate" : "2007-10-01T10:00:00.000+0000",
+      "endDate" : "2008-12-31T11:00:00.000+0000"
+    },
+    "isPrimaryAssociation" : false,
+    "fte" : 1.0,
+    "organisationalUnit" : {
+      "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
+      },
+      "externalId" : "2376",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Computer Graphics and Vision (7100)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    },
+    "staffTypes" : [ {
+      "locale" : "en_GB",
+      "value" : "Academic",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Akademisch",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    } ],
+    "jobTitles" : [ {
+      "locale" : "en_GB",
+      "value" : "UniversitätsprofessorIn (Große Planstelle)",
+      "pureId" : 4842,
+      "uri" : "/dk/atira/pure/person/jobtitles/up_54447"
+    }, {
+      "locale" : "de_DE",
+      "value" : "UniversitätsprofessorIn (Große Planstelle)",
+      "pureId" : 4842,
+      "uri" : "/dk/atira/pure/person/jobtitles/up_54447"
+    } ]
+  }, {
+    "pureId" : 60978,
+    "externalId" : "56893",
+    "externalIdSource" : "synchronisedUnifiedPerson",
+    "externallyManaged" : true,
+    "person" : {
+      "uuid" : "1198b8c9-eea7-41dd-8861-30c8d066fb27",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/1198b8c9-eea7-41dd-8861-30c8d066fb27"
+      },
+      "externalId" : "3261",
+      "externalIdSource" : "synchronisedUnifiedPerson",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Franz Leberl"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Franz Leberl"
+      } ]
+    },
+    "period" : {
+      "startDate" : "1998-03-01T11:00:00.000+0000",
       "endDate" : "2003-09-30T10:00:00.000+0000"
     },
     "isPrimaryAssociation" : false,
     "fte" : 1.0,
     "organisationalUnit" : {
-      "uuid" : "f83c8643-c93d-4163-9196-574cafbcbede",
+      "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/f83c8643-c93d-4163-9196-574cafbcbede"
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
       },
-      "externalId" : "2256",
+      "externalId" : "2376",
       "externalIdSource" : "synchronisedUnifiedOrganisation",
       "externallyManaged" : true,
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Institute of Materials Science, Joining and Forming (3030)"
+        "value" : "Institute of Computer Graphics and Vision (7100)"
       }, {
         "locale" : "de_DE",
-        "value" : "Institut für Werkstoffkunde, Fügetechnik und Umformtechnik (3030)"
+        "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
       } ],
       "types" : [ {
         "locale" : "en_GB",
@@ -469,58 +750,58 @@
     } ],
     "jobTitles" : [ {
       "locale" : "en_GB",
-      "value" : "Drittmittelbeschäftigtes Personal",
-      "pureId" : 4746,
-      "uri" : "/dk/atira/pure/person/jobtitles/dp_4735"
+      "value" : "UniversitätsprofessorIn (Große Planstelle)",
+      "pureId" : 4842,
+      "uri" : "/dk/atira/pure/person/jobtitles/up_54447"
     }, {
       "locale" : "de_DE",
-      "value" : "Drittmittelbeschäftigtes Personal",
-      "pureId" : 4746,
-      "uri" : "/dk/atira/pure/person/jobtitles/dp_4735"
+      "value" : "UniversitätsprofessorIn (Große Planstelle)",
+      "pureId" : 4842,
+      "uri" : "/dk/atira/pure/person/jobtitles/up_54447"
     } ]
   }, {
-    "pureId" : 58307,
-    "externalId" : "170411",
+    "pureId" : 60979,
+    "externalId" : "4531",
     "externalIdSource" : "synchronisedUnifiedPerson",
     "externallyManaged" : true,
     "person" : {
-      "uuid" : "62c69306-3be1-4b92-8623-e1e5065ee4c0",
+      "uuid" : "1198b8c9-eea7-41dd-8861-30c8d066fb27",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/persons/62c69306-3be1-4b92-8623-e1e5065ee4c0"
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/1198b8c9-eea7-41dd-8861-30c8d066fb27"
       },
-      "externalId" : "337",
+      "externalId" : "3261",
       "externalIdSource" : "synchronisedUnifiedPerson",
       "externallyManaged" : true,
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Ernst Kozeschnik"
+        "value" : "Franz Leberl"
       }, {
         "locale" : "de_DE",
-        "value" : "Ernst Kozeschnik"
+        "value" : "Franz Leberl"
       } ]
     },
     "period" : {
-      "startDate" : "2003-10-01T10:00:00.000+0000",
-      "endDate" : "2006-12-31T11:00:00.000+0000"
+      "startDate" : "1992-10-01T11:00:00.000+0000",
+      "endDate" : "1998-02-28T11:00:00.000+0000"
     },
     "isPrimaryAssociation" : false,
     "fte" : 1.0,
     "organisationalUnit" : {
-      "uuid" : "f83c8643-c93d-4163-9196-574cafbcbede",
+      "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/f83c8643-c93d-4163-9196-574cafbcbede"
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
       },
-      "externalId" : "2256",
+      "externalId" : "2376",
       "externalIdSource" : "synchronisedUnifiedOrganisation",
       "externallyManaged" : true,
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Institute of Materials Science, Joining and Forming (3030)"
+        "value" : "Institute of Computer Graphics and Vision (7100)"
       }, {
         "locale" : "de_DE",
-        "value" : "Institut für Werkstoffkunde, Fügetechnik und Umformtechnik (3030)"
+        "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
       } ],
       "types" : [ {
         "locale" : "en_GB",
@@ -547,58 +828,58 @@
     } ],
     "jobTitles" : [ {
       "locale" : "en_GB",
-      "value" : "AssistentIn §49",
-      "pureId" : 4740,
-      "uri" : "/dk/atira/pure/person/jobtitles/as_63247"
+      "value" : "Ordentlicher UniversitätsprofessorIn",
+      "pureId" : 4840,
+      "uri" : "/dk/atira/pure/person/jobtitles/up_4745"
     }, {
       "locale" : "de_DE",
-      "value" : "AssistentIn §49",
-      "pureId" : 4740,
-      "uri" : "/dk/atira/pure/person/jobtitles/as_63247"
+      "value" : "Ordentlicher UniversitätsprofessorIn",
+      "pureId" : 4840,
+      "uri" : "/dk/atira/pure/person/jobtitles/up_4745"
     } ]
   }, {
-    "pureId" : 58308,
-    "externalId" : "55330",
+    "pureId" : 60981,
+    "externalId" : "227882",
     "externalIdSource" : "synchronisedUnifiedPerson",
     "externallyManaged" : true,
     "person" : {
-      "uuid" : "62c69306-3be1-4b92-8623-e1e5065ee4c0",
+      "uuid" : "1198b8c9-eea7-41dd-8861-30c8d066fb27",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/persons/62c69306-3be1-4b92-8623-e1e5065ee4c0"
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/1198b8c9-eea7-41dd-8861-30c8d066fb27"
       },
-      "externalId" : "337",
+      "externalId" : "3261",
       "externalIdSource" : "synchronisedUnifiedPerson",
       "externallyManaged" : true,
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Ernst Kozeschnik"
+        "value" : "Franz Leberl"
       }, {
         "locale" : "de_DE",
-        "value" : "Ernst Kozeschnik"
+        "value" : "Franz Leberl"
       } ]
     },
     "period" : {
-      "startDate" : "1993-07-01T10:00:00.000+0000",
-      "endDate" : "2000-02-28T11:00:00.000+0000"
+      "startDate" : "2010-01-01T11:00:00.000+0000",
+      "endDate" : "2013-09-30T10:00:00.000+0000"
     },
     "isPrimaryAssociation" : false,
     "fte" : 1.0,
     "organisationalUnit" : {
-      "uuid" : "f83c8643-c93d-4163-9196-574cafbcbede",
+      "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
       "link" : {
         "ref" : "content",
-        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/f83c8643-c93d-4163-9196-574cafbcbede"
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
       },
-      "externalId" : "2256",
+      "externalId" : "2376",
       "externalIdSource" : "synchronisedUnifiedOrganisation",
       "externallyManaged" : true,
       "names" : [ {
         "locale" : "en_GB",
-        "value" : "Institute of Materials Science, Joining and Forming (3030)"
+        "value" : "Institute of Computer Graphics and Vision (7100)"
       }, {
         "locale" : "de_DE",
-        "value" : "Institut für Werkstoffkunde, Fügetechnik und Umformtechnik (3030)"
+        "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
       } ],
       "types" : [ {
         "locale" : "en_GB",
@@ -625,14 +906,169 @@
     } ],
     "jobTitles" : [ {
       "locale" : "en_GB",
-      "value" : "Drittmittelbeschäftigtes Personal",
-      "pureId" : 4746,
-      "uri" : "/dk/atira/pure/person/jobtitles/dp_4735"
+      "value" : "UniversitätsprofessorIn (Große Planstelle)",
+      "pureId" : 4842,
+      "uri" : "/dk/atira/pure/person/jobtitles/up_54447"
     }, {
       "locale" : "de_DE",
-      "value" : "Drittmittelbeschäftigtes Personal",
-      "pureId" : 4746,
-      "uri" : "/dk/atira/pure/person/jobtitles/dp_4735"
+      "value" : "UniversitätsprofessorIn (Große Planstelle)",
+      "pureId" : 4842,
+      "uri" : "/dk/atira/pure/person/jobtitles/up_54447"
+    } ]
+  }, {
+    "pureId" : 60982,
+    "externalId" : "227881",
+    "externalIdSource" : "synchronisedUnifiedPerson",
+    "externallyManaged" : true,
+    "person" : {
+      "uuid" : "1198b8c9-eea7-41dd-8861-30c8d066fb27",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/1198b8c9-eea7-41dd-8861-30c8d066fb27"
+      },
+      "externalId" : "3261",
+      "externalIdSource" : "synchronisedUnifiedPerson",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Franz Leberl"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Franz Leberl"
+      } ]
+    },
+    "period" : {
+      "startDate" : "2009-01-01T11:00:00.000+0000",
+      "endDate" : "2009-12-31T11:00:00.000+0000"
+    },
+    "isPrimaryAssociation" : false,
+    "fte" : 0.8,
+    "organisationalUnit" : {
+      "uuid" : "b9faa490-bc9e-4c6e-b1de-fedcac9bca87",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
+      },
+      "externalId" : "2376",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Computer Graphics and Vision (7100)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Maschinelles Sehen und Darstellen (7100)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    },
+    "staffTypes" : [ {
+      "locale" : "en_GB",
+      "value" : "Academic",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Akademisch",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    } ],
+    "jobTitles" : [ {
+      "locale" : "en_GB",
+      "value" : "UniversitätsprofessorIn (Große Planstelle)",
+      "pureId" : 4842,
+      "uri" : "/dk/atira/pure/person/jobtitles/up_54447"
+    }, {
+      "locale" : "de_DE",
+      "value" : "UniversitätsprofessorIn (Große Planstelle)",
+      "pureId" : 4842,
+      "uri" : "/dk/atira/pure/person/jobtitles/up_54447"
+    } ]
+  }, {
+    "pureId" : 60985,
+    "externalId" : "143281",
+    "externalIdSource" : "synchronisedUnifiedPerson",
+    "externallyManaged" : true,
+    "person" : {
+      "uuid" : "1198b8c9-eea7-41dd-8861-30c8d066fb27",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/1198b8c9-eea7-41dd-8861-30c8d066fb27"
+      },
+      "externalId" : "3261",
+      "externalIdSource" : "synchronisedUnifiedPerson",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Franz Leberl"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Franz Leberl"
+      } ]
+    },
+    "period" : {
+      "startDate" : "1977-06-23T11:00:00.000+0000",
+      "endDate" : "2014-12-31T11:00:00.000+0000"
+    },
+    "isPrimaryAssociation" : false,
+    "organisationalUnit" : {
+      "uuid" : "d2231384-a301-4ee3-b0a0-3f4c95cf76f0",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/d2231384-a301-4ee3-b0a0-3f4c95cf76f0"
+      },
+      "externalId" : "34143",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Remote Sensing and Photogrammetry (5090)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Fernerkundung und Photogrammetrie (5090)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    },
+    "staffTypes" : [ {
+      "locale" : "en_GB",
+      "value" : "Academic",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Akademisch",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    } ],
+    "jobTitles" : [ {
+      "locale" : "en_GB",
+      "value" : "Universitätsdozent/in (Ohne TUG-Dienstverh.)",
+      "pureId" : 4866,
+      "uri" : "/dk/atira/pure/person/jobtitles/ve_4743"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Universitätsdozent/in (Ohne TUG-Dienstverh.)",
+      "pureId" : 4866,
+      "uri" : "/dk/atira/pure/person/jobtitles/ve_4743"
     } ]
   } ],
   "visibilities" : [ {

@@ -1,13 +1,13 @@
-# SYNCHRONIZER
-synchronizer/functions/other/
-synchronizer/reports/
-synchronizer/data_setup/
-synchronizer/data/
-synchronizer/backup_datamodel/
-synchronizer/backup_restrictions/
-synchronizer/test*
-synchronizer/test.py
-synchronizer/test2.py
+# invenio_pure_sync
+invenio_pure_sync/functions/other/
+invenio_pure_sync/reports/
+invenio_pure_sync/data_setup/
+invenio_pure_sync/data/
+invenio_pure_sync/backup_datamodel/
+invenio_pure_sync/backup_restrictions/
+invenio_pure_sync/test*
+invenio_pure_sync/test.py
+invenio_pure_sync/test2.py
 tests/test 0.12.0
 
 

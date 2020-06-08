@@ -3,11 +3,7 @@
     "access_right": {
       "buckets": [
         {
-          "doc_count": 5, 
-          "key": "closed"
-        }, 
-        {
-          "doc_count": 1, 
+          "doc_count": 2, 
           "key": "open"
         }
       ], 
@@ -23,267 +19,11 @@
   "hits": {
     "hits": [
       {
-        "created": "2020-06-08T07:33:24.439292+00:00", 
-        "id": "a04pd-ya079", 
+        "created": "2020-06-08T07:50:11.986322+00:00", 
+        "id": "7nmkg-hb029", 
         "links": {
-          "files": "https://127.0.0.1:5000/api/records/a04pd-ya079/files", 
-          "self": "https://127.0.0.1:5000/api/records/a04pd-ya079"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "appliedRestrictions": [
-            "owners", 
-            "groups", 
-            "ip_single", 
-            "ip_range"
-          ], 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "externalId": "53779", 
-              "name": "Wru\u00df, Maria", 
-              "organisationalUnit": "Administration (95021)", 
-              "personRole": "Author", 
-              "uuid": "f0f60b8b-a7cb-41e9-ad36-606d3e890a3b"
-            }
-          ], 
-          "createdDate": "2020-04-08T12:35:32.936+0000", 
-          "groupRestrictions": [
-            "1416"
-          ], 
-          "language": "eng", 
-          "managingOrganisationalUnit_externalId": "1416", 
-          "managingOrganisationalUnit_name": "Administration (95021)", 
-          "managingOrganisationalUnit_uuid": "650fb44b-f9dd-490c-b6e0-4b3e77b55c26", 
-          "metadataModifBy": "pure_wruss", 
-          "metadataModifDate": "2020-04-08T12:35:32.936+0000", 
-          "numberOfAuthors": 1, 
-          "organisationalUnits": [
-            {
-              "externalId": "1416", 
-              "name": "Administration (95021)", 
-              "uuid": "650fb44b-f9dd-490c-b6e0-4b3e77b55c26"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDate": "2020", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-06-08", 
-          "pureId": "19669355", 
-          "pure_link": "https://pure01.tugraz.at/portal/en/publications/test(0d3eb812-d860-4d09-a3ea-33e7cf894539).html", 
-          "recid": "a04pd-ya079", 
-          "recordType": "Article", 
-          "title": "test", 
-          "uuid": "0d3eb812-d860-4d09-a3ea-33e7cf894539", 
-          "versionFiles": [], 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-06-08T07:33:24.439300+00:00"
-      }, 
-      {
-        "created": "2020-06-08T07:33:13.007989+00:00", 
-        "id": "m92ph-e8z85", 
-        "links": {
-          "files": "https://127.0.0.1:5000/api/records/m92ph-e8z85/files", 
-          "self": "https://127.0.0.1:5000/api/records/m92ph-e8z85"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "appliedRestrictions": [
-            "owners", 
-            "groups", 
-            "ip_single", 
-            "ip_range"
-          ], 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "name": "berger, (first name not specified)", 
-              "personRole": "Author", 
-              "type_p": "External person", 
-              "uuid": "f1143bc6-dc71-466b-b3a2-38c476f376fd"
-            }
-          ], 
-          "createdDate": "2020-03-10T07:41:03.532+0000", 
-          "language": "eng", 
-          "managingOrganisationalUnit_externalId": "20353", 
-          "managingOrganisationalUnit_name": "A-sit - Secure Information Technology Centre Austria", 
-          "managingOrganisationalUnit_uuid": "f94561d4-a6c9-4274-931f-e6f86bbf02c7", 
-          "metadataModifBy": "ws_grosso", 
-          "metadataModifDate": "2020-03-11T10:22:35.041+0000", 
-          "numberOfAuthors": 1, 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDate": "2020", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-06-08", 
-          "pureId": "19660530", 
-          "pure_link": "https://pure01.tugraz.at/portal/en/publications/test-additional-file-and-signs(2d069037-7438-4464-a0fc-319c0ba13224).html", 
-          "recid": "m92ph-e8z85", 
-          "recordType": "Paper", 
-          "title": "test additional file\\\"\\\\## and signs", 
-          "uuid": "2d069037-7438-4464-a0fc-319c0ba13224", 
-          "versionFiles": [
-            {
-              "accessType": "open", 
-              "createdBy": "ws_grosso", 
-              "createdDate": "2020-03-10T07:44:03.917+0000", 
-              "digest": "F9E5371F22391C82877840714372CEFFEB41CB01", 
-              "digestAlgorithm": "SHA1", 
-              "internalReview": false, 
-              "mimeType": "image/jpeg", 
-              "name": "img4.jpg", 
-              "size": 471370
-            }, 
-            {
-              "accessType": "open", 
-              "createdBy": "ws_grosso", 
-              "createdDate": "2020-03-10T09:20:43.740+0000", 
-              "digest": "E18E5FAA0F5381BD320FB1DE6B82E7053292EC4C", 
-              "digestAlgorithm": "SHA1", 
-              "internalReview": false, 
-              "mimeType": "application/pdf", 
-              "name": "invenio_master.pdf", 
-              "size": 454420
-            }, 
-            {
-              "accessType": "open", 
-              "createdBy": "ws_grosso", 
-              "createdDate": "2020-03-10T07:45:22.897+0000", 
-              "digest": "05E07802BC598CDDB3C735D57E8EBAE70946FDA3", 
-              "digestAlgorithm": "SHA1", 
-              "internalReview": false, 
-              "mimeType": "application/pdf", 
-              "name": "valko_thesis.pdf", 
-              "size": 750484
-            }
-          ], 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-06-08T07:33:13.007998+00:00"
-      }, 
-      {
-        "created": "2020-06-08T07:32:53.028677+00:00", 
-        "id": "rd4ht-qv033", 
-        "links": {
-          "files": "https://127.0.0.1:5000/api/records/rd4ht-qv033/files", 
-          "self": "https://127.0.0.1:5000/api/records/rd4ht-qv033"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "appliedRestrictions": [
-            "owners", 
-            "groups", 
-            "ip_single", 
-            "ip_range"
-          ], 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "externalId": "24990", 
-              "name": "Ebner, Martin", 
-              "orcid": "0000-0001-5789-5296", 
-              "organisationalUnit": "Educational Technology (94090)", 
-              "personRole": "Author", 
-              "uuid": "c0a3f804-fb58-4bbb-9ee4-0a3f7276c0c8"
-            }, 
-            {
-              "externalId": "30", 
-              "name": "St\u00f6ckler-Penz, Christine", 
-              "organisationalUnit": "Life Long Learning (94070)", 
-              "personRole": "Author", 
-              "uuid": "cdc5cd7e-a6d4-4e2a-b258-d0cad657a1d1"
-            }, 
-            {
-              "name": "Gugler, J\u00fcrgen", 
-              "organisationalUnit": "Vehicle Safety Institute (3330)", 
-              "personRole": "Author"
-            }, 
-            {
-              "externalId": "28289", 
-              "name": "Hoschopf, Heinz", 
-              "organisationalUnit": "Vehicle Safety Institute (3330)", 
-              "personRole": "Author", 
-              "uuid": "427b649c-e57a-4d32-bcbf-01330edf30f3"
-            }
-          ], 
-          "createdDate": "2016-02-26T00:46:00.023+0000", 
-          "groupRestrictions": [
-            "20753", 
-            "19190", 
-            "14268"
-          ], 
-          "language": "deu", 
-          "managingOrganisationalUnit_externalId": "20753", 
-          "managingOrganisationalUnit_name": "Educational Technology (94090)", 
-          "managingOrganisationalUnit_uuid": "80abc23b-3e4c-4163-b2e2-db637b1c97a5", 
-          "metadataModifBy": "root", 
-          "metadataModifDate": "2018-09-06T07:38:47.657+0000", 
-          "numberOfAuthors": 4, 
-          "organisationalUnits": [
-            {
-              "externalId": "20753", 
-              "name": "Educational Technology (94090)", 
-              "uuid": "80abc23b-3e4c-4163-b2e2-db637b1c97a5"
-            }, 
-            {
-              "externalId": "19190", 
-              "name": "Life Long Learning (94070)", 
-              "uuid": "4527e872-2687-407e-a88b-8ea3292d98ee"
-            }, 
-            {
-              "externalId": "14268", 
-              "name": "Vehicle Safety Institute (3330)", 
-              "uuid": "24e3a479-e4f1-4882-8298-8c1966e3239f"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDate": "2007", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-06-08", 
-          "pureId": "1521156", 
-          "pure_link": "https://pure01.tugraz.at/portal/en/publications/podcasting--zukunftschance-fur-die-universitare-weiterbildung(4ad8ee86-13f0-4c9e-bb91-751da7ecbe31).html", 
-          "recid": "rd4ht-qv033", 
-          "recordType": "Article", 
-          "title": "Podcasting \u2013 Zukunftschance f\u00fcr die universit\u00e4re Weiterbildung?", 
-          "uuid": "4ad8ee86-13f0-4c9e-bb91-751da7ecbe31", 
-          "versionFiles": [], 
-          "workflow": "For validation"
-        }, 
-        "revision": 0, 
-        "updated": "2020-06-08T07:32:53.028685+00:00"
-      }, 
-      {
-        "created": "2020-06-08T07:25:33.597720+00:00", 
-        "id": "esmpp-6xj37", 
-        "links": {
-          "files": "https://127.0.0.1:5000/api/records/esmpp-6xj37/files", 
-          "self": "https://127.0.0.1:5000/api/records/esmpp-6xj37"
+          "files": "https://127.0.0.1:5000/api/records/7nmkg-hb029/files", 
+          "self": "https://127.0.0.1:5000/api/records/7nmkg-hb029"
         }, 
         "metadata": {
           "_access": {
@@ -335,7 +75,7 @@
           "publication_date": "2020-06-08", 
           "pureId": "1064589", 
           "pure_link": "https://pure01.tugraz.at/portal/en/publications/photogrammetric-interpolation(06f9e00f-ca16-4db5-bdf8-d13bb3235788).html", 
-          "recid": "esmpp-6xj37", 
+          "recid": "7nmkg-hb029", 
           "recordType": "Article", 
           "title": "Photogrammetric Interpolation", 
           "uuid": "06f9e00f-ca16-4db5-bdf8-d13bb3235788", 
@@ -356,21 +96,21 @@
           "workflow": "For validation"
         }, 
         "revision": 0, 
-        "updated": "2020-06-08T07:25:33.597734+00:00"
+        "updated": "2020-06-08T07:50:11.986329+00:00"
       }, 
       {
-        "created": "2020-06-08T07:25:26.489004+00:00", 
-        "id": "e9tk7-s4d44", 
+        "created": "2020-06-08T07:49:17.710663+00:00", 
+        "id": "d4282-xez83", 
         "links": {
-          "files": "https://127.0.0.1:5000/api/records/e9tk7-s4d44/files", 
-          "self": "https://127.0.0.1:5000/api/records/e9tk7-s4d44"
+          "files": "https://127.0.0.1:5000/api/records/d4282-xez83/files", 
+          "self": "https://127.0.0.1:5000/api/records/d4282-xez83"
         }, 
         "metadata": {
           "_access": {
             "files_restricted": false, 
             "metadata_restricted": false
           }, 
-          "access_right": "closed", 
+          "access_right": "open", 
           "appliedRestrictions": [
             "owners", 
             "groups", 
@@ -381,143 +121,67 @@
           "confidential": false, 
           "contributors": [
             {
-              "name": "Karl, J\u00fcrgen", 
-              "organisationalUnit": "Institute of Thermal Engineering (3070)", 
-              "personRole": "Author"
-            }, 
-            {
-              "name": "Kienberger, Thomas", 
-              "organisationalUnit": "Institute of Thermal Engineering (3070)", 
-              "personRole": "Author"
+              "externalId": "3261", 
+              "name": "Leberl, Franz", 
+              "organisationalUnit": "Institute of Computer Graphics and Vision (7100)", 
+              "personRole": "Author", 
+              "uuid": "1198b8c9-eea7-41dd-8861-30c8d066fb27"
             }
           ], 
-          "createdDate": "2016-02-25T21:48:16.553+0000", 
+          "createdDate": "2016-02-25T21:48:16.870+0000", 
           "groupRestrictions": [
-            "2267"
+            "2376"
           ], 
-          "language": "deu", 
-          "managingOrganisationalUnit_externalId": "2267", 
-          "managingOrganisationalUnit_name": "Institute of Thermal Engineering (3070)", 
-          "managingOrganisationalUnit_uuid": "3423acc4-ff55-4f0f-88bd-978d80bdeccf", 
-          "metadataModifBy": "sync_user", 
-          "metadataModifDate": "2020-01-05T00:00:28.690+0000", 
-          "numberOfAuthors": 2, 
-          "organisationalUnits": [
-            {
-              "externalId": "2267", 
-              "name": "Institute of Thermal Engineering (3070)", 
-              "uuid": "3423acc4-ff55-4f0f-88bd-978d80bdeccf"
-            }
-          ], 
-          "owners": [
-            1
-          ], 
-          "peerReview": false, 
-          "publicationDate": "2010", 
-          "publicationStatus": "Published", 
-          "publication_date": "2020-06-08", 
-          "pureId": "1064572", 
-          "pure_link": "https://pure01.tugraz.at/portal/en/publications/auf-dem-holzweg(1c74c1ef-9b61-4c4f-94ea-bbf2ea466b1a).html", 
-          "recid": "e9tk7-s4d44", 
-          "recordType": "Article", 
-          "title": "Auf dem Holzweg", 
-          "uuid": "1c74c1ef-9b61-4c4f-94ea-bbf2ea466b1a", 
-          "versionFiles": [], 
-          "workflow": "For validation"
-        }, 
-        "revision": 3, 
-        "updated": "2020-06-08T07:25:56.224720+00:00"
-      }, 
-      {
-        "created": "2020-06-08T07:25:11.088424+00:00", 
-        "id": "vjaws-byf62", 
-        "links": {
-          "files": "https://127.0.0.1:5000/api/records/vjaws-byf62/files", 
-          "self": "https://127.0.0.1:5000/api/records/vjaws-byf62"
-        }, 
-        "metadata": {
-          "_access": {
-            "files_restricted": false, 
-            "metadata_restricted": false
-          }, 
-          "access_right": "closed", 
-          "appliedRestrictions": [
-            "owners", 
-            "groups", 
-            "ip_single", 
-            "ip_range"
-          ], 
-          "category": "Research", 
-          "confidential": false, 
-          "contributors": [
-            {
-              "externalId": "948", 
-              "name": "Obernberger, Ingwald", 
-              "organisationalUnit": "Institute of Process and Particle Engineering (6690)", 
-              "personRole": "Author", 
-              "uuid": "5295ba8b-5bc3-48b7-b704-dfabceea4eab"
-            }, 
-            {
-              "name": "Widmann, Walter", 
-              "personRole": "Author", 
-              "type_p": "External person", 
-              "uuid": "221f7374-bfd1-4634-a6f3-17887c66cc99"
-            }, 
-            {
-              "name": "Wurst, Friedrich", 
-              "personRole": "Author", 
-              "type_p": "External person", 
-              "uuid": "842de480-f122-4d8b-aabf-677d5ea1b50b"
-            }, 
-            {
-              "name": "W\u00f6rgetter, Manfred", 
-              "personRole": "Author", 
-              "type_p": "External person", 
-              "uuid": "ecef45ac-084a-48e8-85ad-d71aa2312030"
-            }
-          ], 
-          "createdDate": "2016-02-25T21:47:56.410+0000", 
-          "groupRestrictions": [
-            "2267"
-          ], 
-          "language": "deu", 
-          "managingOrganisationalUnit_externalId": "2267", 
-          "managingOrganisationalUnit_name": "Institute of Thermal Engineering (3070)", 
-          "managingOrganisationalUnit_uuid": "3423acc4-ff55-4f0f-88bd-978d80bdeccf", 
+          "language": "eng", 
+          "managingOrganisationalUnit_externalId": "2376", 
+          "managingOrganisationalUnit_name": "Institute of Computer Graphics and Vision (7100)", 
+          "managingOrganisationalUnit_uuid": "b9faa490-bc9e-4c6e-b1de-fedcac9bca87", 
           "metadataModifBy": "root", 
-          "metadataModifDate": "2018-09-06T07:28:34.742+0000", 
-          "numberOfAuthors": 4, 
+          "metadataModifDate": "2018-09-06T07:28:36.251+0000", 
+          "numberOfAuthors": 1, 
           "organisationalUnits": [
             {
-              "externalId": "2267", 
-              "name": "Institute of Thermal Engineering (3070)", 
-              "uuid": "3423acc4-ff55-4f0f-88bd-978d80bdeccf"
+              "externalId": "2376", 
+              "name": "Institute of Computer Graphics and Vision (7100)", 
+              "uuid": "b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
             }
           ], 
           "owners": [
             1
           ], 
-          "peerReview": false, 
-          "publicationDate": "1997", 
+          "peerReview": true, 
+          "publicationDate": "1975", 
           "publicationStatus": "Published", 
           "publication_date": "2020-06-08", 
-          "publisherName": ".", 
-          "pureId": "1064125", 
-          "pure_link": "https://pure01.tugraz.at/portal/en/publications/beurteilung-der-umweltvertraglichkeit-des-einsatzes-von-einjahresganzpflanzen-und-stroh-zur-fernwarmeerzeugung-endbericht(4dabd5dc-2610-4b5a-b72c-83b480341998).html", 
-          "recid": "vjaws-byf62", 
-          "recordType": "Other report", 
-          "title": "Beurteilung der Umweltvertr\u00e4glichkeit des Einsatzes von Einjahresganzpflanzen und Stroh zur Fernw\u00e4rmeerzeugung, Endbericht", 
-          "uuid": "4dabd5dc-2610-4b5a-b72c-83b480341998", 
-          "versionFiles": [], 
+          "pureId": "1064589", 
+          "pure_link": "https://pure01.tugraz.at/portal/en/publications/photogrammetric-interpolation(06f9e00f-ca16-4db5-bdf8-d13bb3235788).html", 
+          "recid": "d4282-xez83", 
+          "recordType": "Article", 
+          "title": "Photogrammetric Interpolation", 
+          "uuid": "06f9e00f-ca16-4db5-bdf8-d13bb3235788", 
+          "versionFiles": [
+            {
+              "accessType": "open", 
+              "createdBy": "root", 
+              "createdDate": "2016-02-25T21:48:16.867+0000", 
+              "digest": "FF74800705D836C05E448FF046E3C83B1DEA56BF", 
+              "digestAlgorithm": "SHA1", 
+              "internalReview": false, 
+              "mimeType": "20 - Photogrammetric Interpolation, ITC-Journal 1975.pdf", 
+              "name": "20%20-%20Photogrammetric%20Interpolation,%20ITC-Journal%201975.pdf", 
+              "size": 885061, 
+              "versionType": "Final published version"
+            }
+          ], 
           "workflow": "For validation"
         }, 
-        "revision": 1, 
-        "updated": "2020-06-08T07:25:53.538094+00:00"
+        "revision": 0, 
+        "updated": "2020-06-08T07:49:17.710675+00:00"
       }
     ], 
-    "total": 6
+    "total": 2
   }, 
   "links": {
-    "self": "https://127.0.0.1:5000/api/records/?sort=mostrecent&size=20&page=1"
+    "self": "https://127.0.0.1:5000/api/records/?sort=mostrecent&q=%2206f9e00f-ca16-4db5-bdf8-d13bb3235788%22&size=250&page=1"
   }
 }
