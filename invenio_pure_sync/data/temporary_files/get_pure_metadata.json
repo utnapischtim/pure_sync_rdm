@@ -1,0 +1,647 @@
+{
+  "pureId" : 58297,
+  "externalId" : "337",
+  "externalIdSource" : "synchronisedUnifiedPerson",
+  "externallyManaged" : true,
+  "uuid" : "62c69306-3be1-4b92-8623-e1e5065ee4c0",
+  "name" : {
+    "firstName" : "Ernst",
+    "lastName" : "Kozeschnik"
+  },
+  "scopusHIndex" : 20,
+  "fte" : 0.0,
+  "info" : {
+    "createdBy" : "sync_user",
+    "createdDate" : "2016-02-23T13:33:15.813+0000",
+    "modifiedBy" : "sync_user",
+    "modifiedDate" : "2020-01-04T22:00:10.767+0000",
+    "portalUrl" : "https://pure01.tugraz.at/portal/en/persons/ernst-kozeschnik(62c69306-3be1-4b92-8623-e1e5065ee4c0).html"
+  },
+  "nationalities" : [ {
+    "locale" : "en_GB",
+    "value" : "Austria",
+    "pureId" : 177,
+    "uri" : "/dk/atira/pure/core/countries/at"
+  }, {
+    "locale" : "de_DE",
+    "value" : "Österreich",
+    "pureId" : 177,
+    "uri" : "/dk/atira/pure/core/countries/at"
+  } ],
+  "nameVariants" : [ {
+    "pureId" : 58299,
+    "externalId" : "f-337",
+    "externalIdSource" : "synchronisedUnifiedPerson",
+    "name" : {
+      "firstName" : "Ernst",
+      "lastName" : "Kozeschnik"
+    },
+    "classifications" : [ {
+      "locale" : "en_GB",
+      "value" : "Former name",
+      "pureId" : 17150,
+      "uri" : "/dk/atira/pure/person/names/former"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Früherer Nachname",
+      "pureId" : 17150,
+      "uri" : "/dk/atira/pure/person/names/former"
+    } ]
+  } ],
+  "titles" : [ {
+    "locale" : "en_GB",
+    "value" : "Univ.-Prof. Dipl.-Ing. Dr.techn.",
+    "pureId" : 58310,
+    "externalId" : "1",
+    "externalIdSource" : "synchronisedUnifiedPerson",
+    "externallyManaged" : true,
+    "typeUri" : "/dk/atira/pure/person/titles/generic",
+    "type" : "Title"
+  }, {
+    "locale" : "de_DE",
+    "value" : "Univ.-Prof. Dipl.-Ing. Dr.techn.",
+    "pureId" : 58310,
+    "externalId" : "1",
+    "externalIdSource" : "synchronisedUnifiedPerson",
+    "externallyManaged" : true,
+    "typeUri" : "/dk/atira/pure/person/titles/generic",
+    "type" : "Allgemeine Bezeichnung"
+  } ],
+  "links" : [ {
+    "pureId" : 58298,
+    "externalId" : "337-vk",
+    "externalIdSource" : "synchronisedUnifiedPerson",
+    "externallyManaged" : true,
+    "url" : "https://qline.tugraz.at/QSYSTEM_TUG/visitenkarte.show_vcard?pPersonenId=5A023190F58C22B4&pPersonenGruppe=3",
+    "descriptions" : [ {
+      "locale" : "en_GB",
+      "value" : "More information on person"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Mehr Informationen zur Person"
+    } ],
+    "linkTypes" : [ {
+      "locale" : "en_GB",
+      "value" : "Unspecified",
+      "pureId" : 821,
+      "uri" : "/dk/atira/pure/links/person/unspecified"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Nicht angegeben",
+      "pureId" : 821,
+      "uri" : "/dk/atira/pure/links/person/unspecified"
+    } ]
+  } ],
+  "staffOrganisationAssociations" : [ {
+    "pureId" : 58302,
+    "externalId" : "186900",
+    "externalIdSource" : "synchronisedUnifiedPerson",
+    "externallyManaged" : true,
+    "person" : {
+      "uuid" : "62c69306-3be1-4b92-8623-e1e5065ee4c0",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/62c69306-3be1-4b92-8623-e1e5065ee4c0"
+      },
+      "externalId" : "337",
+      "externalIdSource" : "synchronisedUnifiedPerson",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Ernst Kozeschnik"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Ernst Kozeschnik"
+      } ]
+    },
+    "period" : {
+      "startDate" : "2005-10-04T10:00:00.000+0000"
+    },
+    "isPrimaryAssociation" : false,
+    "organisationalUnit" : {
+      "uuid" : "f83c8643-c93d-4163-9196-574cafbcbede",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/f83c8643-c93d-4163-9196-574cafbcbede"
+      },
+      "externalId" : "2256",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Materials Science, Joining and Forming (3030)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Werkstoffkunde, Fügetechnik und Umformtechnik (3030)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    },
+    "staffTypes" : [ {
+      "locale" : "en_GB",
+      "value" : "Academic",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Akademisch",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    } ],
+    "jobTitles" : [ {
+      "locale" : "en_GB",
+      "value" : "Universitätsdozent/in (Ohne TUG-Dienstverh.)",
+      "pureId" : 4866,
+      "uri" : "/dk/atira/pure/person/jobtitles/ve_4743"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Universitätsdozent/in (Ohne TUG-Dienstverh.)",
+      "pureId" : 4866,
+      "uri" : "/dk/atira/pure/person/jobtitles/ve_4743"
+    } ]
+  }, {
+    "pureId" : 58300,
+    "externalId" : "194821",
+    "externalIdSource" : "synchronisedUnifiedPerson",
+    "externallyManaged" : true,
+    "person" : {
+      "uuid" : "62c69306-3be1-4b92-8623-e1e5065ee4c0",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/62c69306-3be1-4b92-8623-e1e5065ee4c0"
+      },
+      "externalId" : "337",
+      "externalIdSource" : "synchronisedUnifiedPerson",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Ernst Kozeschnik"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Ernst Kozeschnik"
+      } ]
+    },
+    "period" : {
+      "startDate" : "2007-01-01T11:00:00.000+0000",
+      "endDate" : "2008-02-29T11:00:00.000+0000"
+    },
+    "isPrimaryAssociation" : false,
+    "fte" : 1.0,
+    "organisationalUnit" : {
+      "uuid" : "f83c8643-c93d-4163-9196-574cafbcbede",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/f83c8643-c93d-4163-9196-574cafbcbede"
+      },
+      "externalId" : "2256",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Materials Science, Joining and Forming (3030)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Werkstoffkunde, Fügetechnik und Umformtechnik (3030)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    },
+    "staffTypes" : [ {
+      "locale" : "en_GB",
+      "value" : "Academic",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Akademisch",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    } ],
+    "jobTitles" : [ {
+      "locale" : "en_GB",
+      "value" : "UniversitätsdozentIn nach Angestelltenrecht",
+      "pureId" : 4830,
+      "uri" : "/dk/atira/pure/person/jobtitles/ud_1"
+    }, {
+      "locale" : "de_DE",
+      "value" : "UniversitätsdozentIn nach Angestelltenrecht",
+      "pureId" : 4830,
+      "uri" : "/dk/atira/pure/person/jobtitles/ud_1"
+    } ]
+  }, {
+    "pureId" : 58303,
+    "externalId" : "153672",
+    "externalIdSource" : "synchronisedUnifiedPerson",
+    "externallyManaged" : true,
+    "person" : {
+      "uuid" : "62c69306-3be1-4b92-8623-e1e5065ee4c0",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/62c69306-3be1-4b92-8623-e1e5065ee4c0"
+      },
+      "externalId" : "337",
+      "externalIdSource" : "synchronisedUnifiedPerson",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Ernst Kozeschnik"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Ernst Kozeschnik"
+      } ]
+    },
+    "period" : {
+      "startDate" : "2002-10-01T10:00:00.000+0000",
+      "endDate" : "2003-03-31T10:00:00.000+0000"
+    },
+    "isPrimaryAssociation" : false,
+    "organisationalUnit" : {
+      "uuid" : "f83c8643-c93d-4163-9196-574cafbcbede",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/f83c8643-c93d-4163-9196-574cafbcbede"
+      },
+      "externalId" : "2256",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Materials Science, Joining and Forming (3030)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Werkstoffkunde, Fügetechnik und Umformtechnik (3030)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    },
+    "staffTypes" : [ {
+      "locale" : "en_GB",
+      "value" : "Academic",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Akademisch",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    } ],
+    "jobTitles" : [ {
+      "locale" : "en_GB",
+      "value" : "Lehrbeauftragte/r",
+      "pureId" : 4770,
+      "uri" : "/dk/atira/pure/person/jobtitles/la_4740"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Lehrbeauftragte/r",
+      "pureId" : 4770,
+      "uri" : "/dk/atira/pure/person/jobtitles/la_4740"
+    } ]
+  }, {
+    "pureId" : 58304,
+    "externalId" : "129258",
+    "externalIdSource" : "synchronisedUnifiedPerson",
+    "externallyManaged" : true,
+    "person" : {
+      "uuid" : "62c69306-3be1-4b92-8623-e1e5065ee4c0",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/62c69306-3be1-4b92-8623-e1e5065ee4c0"
+      },
+      "externalId" : "337",
+      "externalIdSource" : "synchronisedUnifiedPerson",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Ernst Kozeschnik"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Ernst Kozeschnik"
+      } ]
+    },
+    "period" : {
+      "startDate" : "2001-10-01T10:00:00.000+0000",
+      "endDate" : "2002-03-31T10:00:00.000+0000"
+    },
+    "isPrimaryAssociation" : false,
+    "organisationalUnit" : {
+      "uuid" : "f83c8643-c93d-4163-9196-574cafbcbede",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/f83c8643-c93d-4163-9196-574cafbcbede"
+      },
+      "externalId" : "2256",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Materials Science, Joining and Forming (3030)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Werkstoffkunde, Fügetechnik und Umformtechnik (3030)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    },
+    "staffTypes" : [ {
+      "locale" : "en_GB",
+      "value" : "Academic",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Akademisch",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    } ],
+    "jobTitles" : [ {
+      "locale" : "en_GB",
+      "value" : "Lehrbeauftragte/r",
+      "pureId" : 4770,
+      "uri" : "/dk/atira/pure/person/jobtitles/la_4740"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Lehrbeauftragte/r",
+      "pureId" : 4770,
+      "uri" : "/dk/atira/pure/person/jobtitles/la_4740"
+    } ]
+  }, {
+    "pureId" : 58306,
+    "externalId" : "146280",
+    "externalIdSource" : "synchronisedUnifiedPerson",
+    "externallyManaged" : true,
+    "person" : {
+      "uuid" : "62c69306-3be1-4b92-8623-e1e5065ee4c0",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/62c69306-3be1-4b92-8623-e1e5065ee4c0"
+      },
+      "externalId" : "337",
+      "externalIdSource" : "synchronisedUnifiedPerson",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Ernst Kozeschnik"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Ernst Kozeschnik"
+      } ]
+    },
+    "period" : {
+      "startDate" : "2000-03-01T11:00:00.000+0000",
+      "endDate" : "2003-09-30T10:00:00.000+0000"
+    },
+    "isPrimaryAssociation" : false,
+    "fte" : 1.0,
+    "organisationalUnit" : {
+      "uuid" : "f83c8643-c93d-4163-9196-574cafbcbede",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/f83c8643-c93d-4163-9196-574cafbcbede"
+      },
+      "externalId" : "2256",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Materials Science, Joining and Forming (3030)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Werkstoffkunde, Fügetechnik und Umformtechnik (3030)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    },
+    "staffTypes" : [ {
+      "locale" : "en_GB",
+      "value" : "Academic",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Akademisch",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    } ],
+    "jobTitles" : [ {
+      "locale" : "en_GB",
+      "value" : "Drittmittelbeschäftigtes Personal",
+      "pureId" : 4746,
+      "uri" : "/dk/atira/pure/person/jobtitles/dp_4735"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Drittmittelbeschäftigtes Personal",
+      "pureId" : 4746,
+      "uri" : "/dk/atira/pure/person/jobtitles/dp_4735"
+    } ]
+  }, {
+    "pureId" : 58307,
+    "externalId" : "170411",
+    "externalIdSource" : "synchronisedUnifiedPerson",
+    "externallyManaged" : true,
+    "person" : {
+      "uuid" : "62c69306-3be1-4b92-8623-e1e5065ee4c0",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/62c69306-3be1-4b92-8623-e1e5065ee4c0"
+      },
+      "externalId" : "337",
+      "externalIdSource" : "synchronisedUnifiedPerson",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Ernst Kozeschnik"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Ernst Kozeschnik"
+      } ]
+    },
+    "period" : {
+      "startDate" : "2003-10-01T10:00:00.000+0000",
+      "endDate" : "2006-12-31T11:00:00.000+0000"
+    },
+    "isPrimaryAssociation" : false,
+    "fte" : 1.0,
+    "organisationalUnit" : {
+      "uuid" : "f83c8643-c93d-4163-9196-574cafbcbede",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/f83c8643-c93d-4163-9196-574cafbcbede"
+      },
+      "externalId" : "2256",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Materials Science, Joining and Forming (3030)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Werkstoffkunde, Fügetechnik und Umformtechnik (3030)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    },
+    "staffTypes" : [ {
+      "locale" : "en_GB",
+      "value" : "Academic",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Akademisch",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    } ],
+    "jobTitles" : [ {
+      "locale" : "en_GB",
+      "value" : "AssistentIn §49",
+      "pureId" : 4740,
+      "uri" : "/dk/atira/pure/person/jobtitles/as_63247"
+    }, {
+      "locale" : "de_DE",
+      "value" : "AssistentIn §49",
+      "pureId" : 4740,
+      "uri" : "/dk/atira/pure/person/jobtitles/as_63247"
+    } ]
+  }, {
+    "pureId" : 58308,
+    "externalId" : "55330",
+    "externalIdSource" : "synchronisedUnifiedPerson",
+    "externallyManaged" : true,
+    "person" : {
+      "uuid" : "62c69306-3be1-4b92-8623-e1e5065ee4c0",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/persons/62c69306-3be1-4b92-8623-e1e5065ee4c0"
+      },
+      "externalId" : "337",
+      "externalIdSource" : "synchronisedUnifiedPerson",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Ernst Kozeschnik"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Ernst Kozeschnik"
+      } ]
+    },
+    "period" : {
+      "startDate" : "1993-07-01T10:00:00.000+0000",
+      "endDate" : "2000-02-28T11:00:00.000+0000"
+    },
+    "isPrimaryAssociation" : false,
+    "fte" : 1.0,
+    "organisationalUnit" : {
+      "uuid" : "f83c8643-c93d-4163-9196-574cafbcbede",
+      "link" : {
+        "ref" : "content",
+        "href" : "https://pure01.tugraz.at/ws/api/514/organisational-units/f83c8643-c93d-4163-9196-574cafbcbede"
+      },
+      "externalId" : "2256",
+      "externalIdSource" : "synchronisedUnifiedOrganisation",
+      "externallyManaged" : true,
+      "names" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute of Materials Science, Joining and Forming (3030)"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut für Werkstoffkunde, Fügetechnik und Umformtechnik (3030)"
+      } ],
+      "types" : [ {
+        "locale" : "en_GB",
+        "value" : "Institute",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      }, {
+        "locale" : "de_DE",
+        "value" : "Institut",
+        "pureId" : 5431,
+        "uri" : "/dk/atira/pure/organisation/organisationtypes/organisation/orgtype_691"
+      } ]
+    },
+    "staffTypes" : [ {
+      "locale" : "en_GB",
+      "value" : "Academic",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Akademisch",
+      "pureId" : 17242,
+      "uri" : "/dk/atira/pure/person/personstafftype/academic"
+    } ],
+    "jobTitles" : [ {
+      "locale" : "en_GB",
+      "value" : "Drittmittelbeschäftigtes Personal",
+      "pureId" : 4746,
+      "uri" : "/dk/atira/pure/person/jobtitles/dp_4735"
+    }, {
+      "locale" : "de_DE",
+      "value" : "Drittmittelbeschäftigtes Personal",
+      "pureId" : 4746,
+      "uri" : "/dk/atira/pure/person/jobtitles/dp_4735"
+    } ]
+  } ],
+  "visibilities" : [ {
+    "locale" : "en_GB",
+    "value" : "Public - No restriction",
+    "key" : "FREE"
+  }, {
+    "locale" : "de_DE",
+    "value" : "Öffentlich - Keine Einschränkungen",
+    "key" : "FREE"
+  } ]
+}
