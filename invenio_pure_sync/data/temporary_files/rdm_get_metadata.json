@@ -1,0 +1,187 @@
+{
+  "aggregations": {
+    "access_right": {
+      "buckets": [
+        {
+          "doc_count": 2, 
+          "key": "open"
+        }
+      ], 
+      "doc_count_error_upper_bound": 0, 
+      "sum_other_doc_count": 0
+    }, 
+    "resource_type": {
+      "buckets": [], 
+      "doc_count_error_upper_bound": 0, 
+      "sum_other_doc_count": 0
+    }
+  }, 
+  "hits": {
+    "hits": [
+      {
+        "created": "2020-06-08T07:50:11.986322+00:00", 
+        "id": "7nmkg-hb029", 
+        "links": {
+          "files": "https://127.0.0.1:5000/api/records/7nmkg-hb029/files", 
+          "self": "https://127.0.0.1:5000/api/records/7nmkg-hb029"
+        }, 
+        "metadata": {
+          "_access": {
+            "files_restricted": false, 
+            "metadata_restricted": false
+          }, 
+          "access_right": "open", 
+          "appliedRestrictions": [
+            "owners", 
+            "groups", 
+            "ip_single", 
+            "ip_range"
+          ], 
+          "category": "Research", 
+          "confidential": false, 
+          "contributors": [
+            {
+              "externalId": "3261", 
+              "name": "Leberl, Franz", 
+              "organisationalUnit": "Institute of Computer Graphics and Vision (7100)", 
+              "personRole": "Author", 
+              "uuid": "1198b8c9-eea7-41dd-8861-30c8d066fb27"
+            }
+          ], 
+          "createdDate": "2016-02-25T21:48:16.870+0000", 
+          "groupRestrictions": [
+            "2376"
+          ], 
+          "language": "eng", 
+          "managingOrganisationalUnit_externalId": "2376", 
+          "managingOrganisationalUnit_name": "Institute of Computer Graphics and Vision (7100)", 
+          "managingOrganisationalUnit_uuid": "b9faa490-bc9e-4c6e-b1de-fedcac9bca87", 
+          "metadataModifBy": "root", 
+          "metadataModifDate": "2018-09-06T07:28:36.251+0000", 
+          "numberOfAuthors": 1, 
+          "organisationalUnits": [
+            {
+              "externalId": "2376", 
+              "name": "Institute of Computer Graphics and Vision (7100)", 
+              "uuid": "b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
+            }
+          ], 
+          "owners": [
+            1
+          ], 
+          "peerReview": true, 
+          "publicationDate": "1975", 
+          "publicationStatus": "Published", 
+          "publication_date": "2020-06-08", 
+          "pureId": "1064589", 
+          "pure_link": "https://pure01.tugraz.at/portal/en/publications/photogrammetric-interpolation(06f9e00f-ca16-4db5-bdf8-d13bb3235788).html", 
+          "recid": "7nmkg-hb029", 
+          "recordType": "Article", 
+          "title": "Photogrammetric Interpolation", 
+          "uuid": "06f9e00f-ca16-4db5-bdf8-d13bb3235788", 
+          "versionFiles": [
+            {
+              "accessType": "open", 
+              "createdBy": "root", 
+              "createdDate": "2016-02-25T21:48:16.867+0000", 
+              "digest": "FF74800705D836C05E448FF046E3C83B1DEA56BF", 
+              "digestAlgorithm": "SHA1", 
+              "internalReview": false, 
+              "mimeType": "20 - Photogrammetric Interpolation, ITC-Journal 1975.pdf", 
+              "name": "20%20-%20Photogrammetric%20Interpolation,%20ITC-Journal%201975.pdf", 
+              "size": 885061, 
+              "versionType": "Final published version"
+            }
+          ], 
+          "workflow": "For validation"
+        }, 
+        "revision": 0, 
+        "updated": "2020-06-08T07:50:11.986329+00:00"
+      }, 
+      {
+        "created": "2020-06-08T07:49:17.710663+00:00", 
+        "id": "d4282-xez83", 
+        "links": {
+          "files": "https://127.0.0.1:5000/api/records/d4282-xez83/files", 
+          "self": "https://127.0.0.1:5000/api/records/d4282-xez83"
+        }, 
+        "metadata": {
+          "_access": {
+            "files_restricted": false, 
+            "metadata_restricted": false
+          }, 
+          "access_right": "open", 
+          "appliedRestrictions": [
+            "owners", 
+            "groups", 
+            "ip_single", 
+            "ip_range"
+          ], 
+          "category": "Research", 
+          "confidential": false, 
+          "contributors": [
+            {
+              "externalId": "3261", 
+              "name": "Leberl, Franz", 
+              "organisationalUnit": "Institute of Computer Graphics and Vision (7100)", 
+              "personRole": "Author", 
+              "uuid": "1198b8c9-eea7-41dd-8861-30c8d066fb27"
+            }
+          ], 
+          "createdDate": "2016-02-25T21:48:16.870+0000", 
+          "groupRestrictions": [
+            "2376"
+          ], 
+          "language": "eng", 
+          "managingOrganisationalUnit_externalId": "2376", 
+          "managingOrganisationalUnit_name": "Institute of Computer Graphics and Vision (7100)", 
+          "managingOrganisationalUnit_uuid": "b9faa490-bc9e-4c6e-b1de-fedcac9bca87", 
+          "metadataModifBy": "root", 
+          "metadataModifDate": "2018-09-06T07:28:36.251+0000", 
+          "numberOfAuthors": 1, 
+          "organisationalUnits": [
+            {
+              "externalId": "2376", 
+              "name": "Institute of Computer Graphics and Vision (7100)", 
+              "uuid": "b9faa490-bc9e-4c6e-b1de-fedcac9bca87"
+            }
+          ], 
+          "owners": [
+            1
+          ], 
+          "peerReview": true, 
+          "publicationDate": "1975", 
+          "publicationStatus": "Published", 
+          "publication_date": "2020-06-08", 
+          "pureId": "1064589", 
+          "pure_link": "https://pure01.tugraz.at/portal/en/publications/photogrammetric-interpolation(06f9e00f-ca16-4db5-bdf8-d13bb3235788).html", 
+          "recid": "d4282-xez83", 
+          "recordType": "Article", 
+          "title": "Photogrammetric Interpolation", 
+          "uuid": "06f9e00f-ca16-4db5-bdf8-d13bb3235788", 
+          "versionFiles": [
+            {
+              "accessType": "open", 
+              "createdBy": "root", 
+              "createdDate": "2016-02-25T21:48:16.867+0000", 
+              "digest": "FF74800705D836C05E448FF046E3C83B1DEA56BF", 
+              "digestAlgorithm": "SHA1", 
+              "internalReview": false, 
+              "mimeType": "20 - Photogrammetric Interpolation, ITC-Journal 1975.pdf", 
+              "name": "20%20-%20Photogrammetric%20Interpolation,%20ITC-Journal%201975.pdf", 
+              "size": 885061, 
+              "versionType": "Final published version"
+            }
+          ], 
+          "workflow": "For validation"
+        }, 
+        "revision": 0, 
+        "updated": "2020-06-08T07:49:17.710675+00:00"
+      }
+    ], 
+    "total": 2
+  }, 
+  "links": {
+    "self": "https://127.0.0.1:5000/api/records/?sort=mostrecent&q=%2206f9e00f-ca16-4db5-bdf8-d13bb3235788%22&size=250&page=1"
+  }
+}
